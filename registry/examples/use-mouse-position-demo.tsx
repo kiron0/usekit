@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 import {
   useMousePosition,
   type Position,
-} from "registry/hooks/use-mouse-position";
+} from "registry/use-mouse-position/use-mouse-position";
 
 export default function UseMousePositionDemo() {
   const [mouse, ref] = useMousePosition<HTMLParagraphElement>();

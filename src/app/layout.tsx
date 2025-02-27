@@ -28,11 +28,11 @@ export const metadata: Metadata = {
   ],
   authors: [
     {
-      name: "strlrd-29",
-      url: "https://ouassim.tech",
+      name: "hashtagkiron",
+      url: "https://kiron.dev",
     },
   ],
-  creator: "strlrd-29",
+  creator: "hashtagkiron",
   openGraph: {
     type: "website",
     locale: "en_US",

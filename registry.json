@@ -26,6 +26,18 @@
           "type": "registry:hook"
         }
       ]
+    },
+    {
+      "name": "use-counter",
+      "type": "registry:hook",
+      "title": "Use Counter",
+      "description": "Manage a numeric state with useCounter, offering functions to increment, decrement, reset, and set a custom value.",
+      "files": [
+        {
+          "path": "registry/use-counter/use-counter.tsx",
+          "type": "registry:hook"
+        }
+      ]
     }
   ]
 }

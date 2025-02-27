@@ -6,7 +6,7 @@ interface GitHubIssueUrlParams {
 }
 
 export function getGitHubIssueUrl(params: GitHubIssueUrlParams): string {
-  const baseUrl = `https://github.com/strlrd-29/hooks/issues/new`;
+  const baseUrl = `https://github.com/kiron0/usekit/issues/new`;
   const urlParams = new URLSearchParams();
 
   Object.entries(params).forEach(([key, value]) => {

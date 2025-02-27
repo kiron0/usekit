@@ -26,12 +26,12 @@ export const Index: Record<string, any> = {
     registryDependencies: undefined,
     files: [
       {
-        path: "registry/hooks/use-toggle.tsx",
+        path: "registry/use-toggle/use-toggle.tsx",
         type: "registry:hook",
         target: "",
       },
     ],
-    component: React.lazy(() => import("registry/hooks/use-toggle")),
+    component: React.lazy(() => import("registry/use-toggle/use-toggle")),
     source: "",
   },
   "use-copy-to-clipboard": {
@@ -56,12 +56,12 @@ export const Index: Record<string, any> = {
     registryDependencies: undefined,
     files: [
       {
-        path: "registry/hooks/use-unmount.tsx",
+        path: "registry/use-unmount/use-unmount.tsx",
         type: "registry:hook",
         target: "",
       },
     ],
-    component: React.lazy(() => import("registry/hooks/use-unmount")),
+    component: React.lazy(() => import("registry/use-unmount/use-unmount")),
     source: "",
   },
   "use-debounce-callback": {
@@ -70,12 +70,14 @@ export const Index: Record<string, any> = {
     registryDependencies: ["http://localhost:3000/r/use-unmount"],
     files: [
       {
-        path: "registry/hooks/use-debounce-callback.tsx",
+        path: "registry/use-debounce-callback/use-debounce-callback.tsx",
         type: "registry:hook",
         target: "",
       },
     ],
-    component: React.lazy(() => import("registry/hooks/use-debounce-callback")),
+    component: React.lazy(
+      () => import("registry/use-debounce-callback/use-debounce-callback"),
+    ),
     source: "",
   },
   "use-isomorphic-layout-effect": {
@@ -84,13 +86,16 @@ export const Index: Record<string, any> = {
     registryDependencies: undefined,
     files: [
       {
-        path: "registry/hooks/use-isomorphic-layout-effect.tsx",
+        path: "registry/use-isomorphic-layout-effect/use-isomorphic-layout-effect.tsx",
         type: "registry:hook",
         target: "",
       },
     ],
     component: React.lazy(
-      () => import("registry/hooks/use-isomorphic-layout-effect"),
+      () =>
+        import(
+          "registry/use-isomorphic-layout-effect/use-isomorphic-layout-effect"
+        ),
     ),
     source: "",
   },
@@ -100,12 +105,12 @@ export const Index: Record<string, any> = {
     registryDependencies: undefined,
     files: [
       {
-        path: "registry/hooks/use-interval.tsx",
+        path: "registry/use-interval/use-interval.tsx",
         type: "registry:hook",
         target: "",
       },
     ],
-    component: React.lazy(() => import("registry/hooks/use-interval")),
+    component: React.lazy(() => import("registry/use-interval/use-interval")),
     source: "",
   },
   "use-timeout": {
@@ -114,12 +119,12 @@ export const Index: Record<string, any> = {
     registryDependencies: undefined,
     files: [
       {
-        path: "registry/hooks/use-timeout.tsx",
+        path: "registry/use-timeout/use-timeout.tsx",
         type: "registry:hook",
         target: "",
       },
     ],
-    component: React.lazy(() => import("registry/hooks/use-timeout")),
+    component: React.lazy(() => import("registry/use-timeout/use-timeout")),
     source: "",
   },
   "use-document-title": {
@@ -128,12 +133,14 @@ export const Index: Record<string, any> = {
     registryDependencies: undefined,
     files: [
       {
-        path: "registry/hooks/use-document-title.tsx",
+        path: "registry/use-document-title/use-document-title.tsx",
         type: "registry:hook",
         target: "",
       },
     ],
-    component: React.lazy(() => import("registry/hooks/use-document-title")),
+    component: React.lazy(
+      () => import("registry/use-document-title/use-document-title"),
+    ),
     source: "",
   },
   "use-counter": {
@@ -156,12 +163,14 @@ export const Index: Record<string, any> = {
     registryDependencies: undefined,
     files: [
       {
-        path: "registry/hooks/use-mouse-position.tsx",
+        path: "registry/use-mouse-position/use-mouse-position.tsx",
         type: "registry:hook",
         target: "",
       },
     ],
-    component: React.lazy(() => import("registry/hooks/use-mouse-position")),
+    component: React.lazy(
+      () => import("registry/use-mouse-position/use-mouse-position"),
+    ),
     source: "",
   },
   "use-copy-to-clipboard-demo": {

@@ -1,6 +1,6 @@
+import { UnistNode, UnistTree } from "@/types/unist";
 import fs from "fs";
 import path from "path";
-import { UnistNode, UnistTree } from "types/unist";
 import { u } from "unist-builder";
 import { visit } from "unist-util-visit";
 
@@ -51,7 +51,7 @@ export function rehypeComponent() {
           const filePath = src;
           let source = fs.readFileSync(filePath, "utf8");
 
-          source = source.replaceAll(`@/registry/hooks/`, "@/hooks/");
+          source = source.replace(/registry\/([^\/]+)\/\1/g, "@/hooks/$1");
           source = source.replaceAll("export default", "export");
 
           // Add code as children so that rehype can take over at build time.
@@ -96,7 +96,7 @@ export function rehypeComponent() {
           const filePath = src;
           let source = fs.readFileSync(filePath, "utf8");
 
-          source = source.replaceAll("@/registry/hooks/", "@/hooks/");
+          source = source.replace(/registry\/([^\/]+)\/\1/g, "@/hooks/$1");
           source = source.replaceAll("export default", "export");
 
           // Add code as children so that rehype can take over at build time.

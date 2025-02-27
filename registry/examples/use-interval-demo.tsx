@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { useInterval } from "registry/hooks/use-interval";
+import { useInterval } from "registry/use-interval/use-interval";
 
 export default function UseIntervalDemo() {
   const colors = React.useMemo(

@@ -3,7 +3,7 @@
 import debounce from "lodash.debounce";
 import * as React from "react";
 
-import { useUnmount } from "registry/hooks/use-unmount";
+import { useUnmount } from "registry/use-unmount/use-unmount";
 
 type DebounceOptions = {
   leading?: boolean;
