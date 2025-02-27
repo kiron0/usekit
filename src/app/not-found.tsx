@@ -12,13 +12,13 @@ export default function NotFound() {
   return (
     <div className="container mx-auto flex h-screen items-center px-6 py-12">
       <div className="mx-auto flex max-w-sm flex-col items-center text-center">
-        <p className="bg-muted rounded-full p-3 text-sm font-medium">
+        <p className="rounded-full bg-muted p-3 text-sm font-medium">
           <AlertTriangleIcon className="size-6" />
         </p>
         <h1 className="mt-3 text-2xl font-semibold md:text-3xl">
           Page not found
         </h1>
-        <p className="text-muted-foreground mt-4">
+        <p className="mt-4 text-muted-foreground">
           The page you are looking for doesn&apos;t exist.
         </p>
         <div className="mt-6 flex items-center gap-x-3">

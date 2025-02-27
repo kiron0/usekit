@@ -1,9 +1,9 @@
-"use client"
+"use client";
 
-import * as React from "react"
+import * as React from "react";
 
 export function useDocumentTitle(title: string) {
   React.useEffect(() => {
-    document.title = title
-  }, [title])
+    document.title = title;
+  }, [title]);
 }

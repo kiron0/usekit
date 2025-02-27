@@ -1,19 +1,31 @@
 {
-          "$schema": "https://ui.shadcn.com/schema/registry.json",
-          "name": "acme",
-          "homepage": "https://acme.com",
-          "items": [
-                    {
-                              "name": "use-boolean",
-                              "type": "registry:hook",
-                              "title": "Use Boolean",
-                              "description": "A simple hello world component.",
-                              "files": [
-                                {
-                                  "path": "registry/use-boolean/use-boolean.tsx",
-                                  "type": "registry:hook"
-                                }
-                              ]
-                            }
-          ]
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "usekit",
+  "homepage": "https://usekit.kiron.dev",
+  "items": [
+    {
+      "name": "use-boolean",
+      "type": "registry:hook",
+      "title": "Use Boolean",
+      "description": "Manage a boolean state with the useBoolean hook, providing methods to set it to true, false, or toggle between them",
+      "files": [
+        {
+          "path": "registry/use-boolean/use-boolean.tsx",
+          "type": "registry:hook"
         }
+      ]
+    },
+    {
+      "name": "use-copy-to-clipboard",
+      "type": "registry:hook",
+      "title": "Use Copy To Clipboard",
+      "description": "Use the useCopyToClipboard hook to copy text to the clipboard and track whether the copy action was successful, with an optional delay to reset the copied state.",
+      "files": [
+        {
+          "path": "registry/use-copy-to-clipboard/use-copy-to-clipboard.tsx",
+          "type": "registry:hook"
+        }
+      ]
+    }
+  ]
+}

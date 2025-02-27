@@ -12,7 +12,7 @@ export default function Home() {
       <div className="z-10 flex flex-col items-center space-y-6">
         <div className="space-y-1 text-center">
           <ChangingScrambleText />
-          <Balancer className="text-muted-foreground max-w-2xl px-4 text-sm md:text-lg">
+          <Balancer className="max-w-2xl px-4 text-sm text-muted-foreground md:text-lg">
             A collection of reusable react hooks that you can easily copy and
             paste into your apps or add directly through the shadcn CLI.
           </Balancer>
@@ -37,7 +37,7 @@ export default function Home() {
         ]}
         className={cn(
           "[mask-image:radial-gradient(500px_circle_at_center,white,transparent)]",
-          "inset-x-0 -inset-y-1/2 h-[200%] skew-y-12",
+          "-inset-y-1/2 inset-x-0 h-[200%] skew-y-12",
         )}
       />
     </div>

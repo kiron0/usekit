@@ -77,7 +77,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
     <html lang="en" suppressHydrationWarning>
       <body
         className={cn(
-          "bg-background min-h-svh overflow-x-hidden font-sans antialiased",
+          "min-h-svh overflow-x-hidden bg-background font-sans antialiased",
           fontSans.variable,
           fontMono.variable,
         )}
@@ -91,7 +91,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
           enableColorScheme
         >
           <TooltipProvider>
-            <div className="bg-background relative flex min-h-svh flex-col">
+            <div className="relative flex min-h-svh flex-col bg-background">
               {children}
             </div>
           </TooltipProvider>

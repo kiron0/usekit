@@ -12,12 +12,12 @@ export const Index: Record<string, any> = {
     registryDependencies: undefined,
     files: [
       {
-        path: "registry/hooks/use-boolean.tsx",
+        path: "registry/use-boolean/use-boolean.tsx",
         type: "registry:hook",
         target: "",
       },
     ],
-    component: React.lazy(() => import("registry/hooks/use-boolean")),
+    component: React.lazy(() => import("registry/use-boolean/use-boolean")),
     source: "",
   },
   "use-toggle": {
@@ -40,7 +40,7 @@ export const Index: Record<string, any> = {
     registryDependencies: undefined,
     files: [
       {
-        path: "registry/hooks/use-copy-to-clipboard.tsx",
+        path: "registry/use-copy-to-clipboard/use-copy-to-clipboard.tsx",
         type: "registry:hook",
         target: "",
       },
@@ -142,12 +142,12 @@ export const Index: Record<string, any> = {
     registryDependencies: undefined,
     files: [
       {
-        path: "registry/hooks/use-counter.tsx",
+        path: "registry/use-counter/use-counter.tsx",
         type: "registry:hook",
         target: "",
       },
     ],
-    component: React.lazy(() => import("registry/hooks/use-counter")),
+    component: React.lazy(() => import("registry/use-counter/use-counter")),
     source: "",
   },
   "use-mouse-position": {

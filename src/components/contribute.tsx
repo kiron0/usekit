@@ -1,24 +1,24 @@
-import * as React from "react"
-import Link from "next/link"
+import * as React from "react";
+import Link from "next/link";
 import {
   BugIcon,
   LightbulbIcon,
   PencilIcon,
   type LucideProps,
-} from "lucide-react"
+} from "lucide-react";
 
-import { getGithubFileUrl, getGitHubIssueUrl } from "@/lib/github"
+import { getGithubFileUrl, getGitHubIssueUrl } from "@/lib/github";
 
 interface ContributeProps {
-  slug: string
+  slug: string;
 }
 
 interface ContributeLink {
-  text: string
+  text: string;
   icon: React.ForwardRefExoticComponent<
     Omit<LucideProps, "ref"> & React.RefAttributes<SVGSVGElement>
-  >
-  href: string
+  >;
+  href: string;
 }
 
 export function Contribute({ slug }: ContributeProps) {
@@ -47,8 +47,8 @@ export function Contribute({ slug }: ContributeProps) {
         icon: PencilIcon,
         href: getGithubFileUrl(slug),
       },
-    ]
-  }, [slug])
+    ];
+  }, [slug]);
 
   return (
     <div className="space-y-2">
@@ -69,5 +69,5 @@ export function Contribute({ slug }: ContributeProps) {
         ))}
       </ul>
     </div>
-  )
+  );
 }
