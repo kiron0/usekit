@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "build:registry": "shadcn build --output ./public/k",
+    "build:registry": "shadcn build --output ./public/r/hooks",
     "format": "prettier --write --cache .",
     "format:check": "prettier --check --cache .",
     "upgrade": "bunx --bun ncu -x 'tailwindcss @shikijs/compat unist-builder' -u && bun install",

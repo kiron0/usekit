@@ -67,7 +67,7 @@ export const Index: Record<string, any> = {
   "use-debounce-callback": {
     name: "use-debounce-callback",
     type: "registry:hook",
-    registryDependencies: ["https://usekit.kiron.dev/k/use-unmount"],
+    registryDependencies: ["https://usekit.kiron.dev/r/use-unmount"],
     files: [
       {
         path: "registry/use-debounce-callback/use-debounce-callback.tsx",
