@@ -173,6 +173,48 @@ export const Index: Record<string, any> = {
     ),
     source: "",
   },
+  "use-battery": {
+    name: "use-battery",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/use-battery/use-battery.tsx",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(() => import("registry/use-battery/use-battery")),
+    source: "",
+  },
+  "use-fetch": {
+    name: "use-fetch",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/use-fetch/use-fetch.tsx",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(() => import("registry/examples/use-fetch-demo")),
+    source: "",
+  },
+  "use-fetch-demo": {
+    name: "use-fetch-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-fetch-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(() => import("registry/examples/use-fetch-demo")),
+    source: "",
+  },
   "use-copy-to-clipboard-demo": {
     name: "use-copy-to-clipboard-demo",
     type: "registry:example",

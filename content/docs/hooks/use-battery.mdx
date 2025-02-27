@@ -1,0 +1,76 @@
+---
+title: useBattery
+description: Track the battery status of a user's device with useBattery.
+---
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://usekit.kiron.dev/r/use-battery
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="use-battery" />
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+```tsx {1, 4}
+import { useBattery } from "@/hooks/use-battery"
+
+export function Component() {
+  const { loading, level, charging, chargingTime, dischargingTime } = useBattery()
+
+  return (
+    <>
+      <div className="wrapper">
+        <h1>useBattery</h1>
+        {!loading ? (
+          <Battery
+            level={level * 100}
+            charging={charging}
+            chargingTime={chargingTime}
+            dischargingTime={dischargingTime}
+          />
+        ) : (
+          <h2>Loading...</h2>
+        )}
+      </div>
+    </>
+  )
+}
+```
+
+## API Reference
+
+### Returns
+
+| Name              | Type      | Description                                                                                                                                                  |
+| ----------------- | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `supported`       | `boolean` | Indicates whether the Battery Status API is supported in the user's browser..                                                                                |
+| `loading`         | `boolean` | Represents the level of the system's battery. 0.0 means that the system's battery is completely discharged, and 1.0 means the battery is completely charged. |
+| `level`           | `number`  | Function to set the boolean state directly.                                                                                                                  |
+| `charging`        | `boolean` | Represents whether the system's battery is charging. `true` means the battery is charging, `false` means it's not.                                           |
+| `chargingTime`    | `number`  | Represents the time remaining in seconds until the system’s battery is fully charged.                                                                        |
+| `dischargingTime` | `number`  | Represents the time remaining in seconds until the system’s battery is completely discharged and the system is about to be suspended.                        |

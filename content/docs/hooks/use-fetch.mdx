@@ -1,0 +1,88 @@
+---
+title: useFetch
+description: Fetch data with accurate states, caching, and no stale responses using useFetch.
+---
+
+<ComponentPreview name="use-fetch-demo" />
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://usekit.kiron.dev/r/use-fetch
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="use-fetch" />
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+```tsx {3, 8, 10}
+import * as React from "react"
+
+import { useFetch } from "@/hooks/use-fetch"
+
+import Card from "./card"
+
+export function Component() {
+  const [count, setCount] = React.useState(1)
+
+  const { error, data, loading } = useFetch(`https://pokeapi.co/api/v2/pokemon/${count}`)
+
+  return (
+    <section>
+      <h1>useFetch</h1>
+      <button
+        disabled={count < 2}
+        className="link"
+        onClick={() => setCount((c) => c - 1)}
+      >
+        Prev
+      </button>
+      <button className="link" onClick={() => setCount((c) => c + 1)}>
+        Next
+      </button>
+      <Card loading={loading} error={error} data={data} />
+    </section>
+  )
+}
+```
+
+## API Reference
+
+### Parameters
+
+| Name       | Type     | Description                                                                   |
+| ---------- | -------- | ----------------------------------------------------------------------------- |
+| `url`      | `string` | The URL to fetch data from.                                                   |
+| `options?` | `object` | Additional options for the fetch request, such as headers or request methods. |
+
+### Returns
+
+| Name            | Type      | Description                                                    |
+| --------------- | --------- | -------------------------------------------------------------- |
+| `state`         | `object`  | The state object containing the fetched data and error status. |
+| `state.error`   | `error \| undefined`  | The error object if an error occurred during the fetch, otherwise `undefined`. |
+| `state.data`    | `any \| undefined`  | The fetched data if the fetch was successful, otherwise `undefined`.           |
+| `state.loading` | `boolean` | The loading state of the fetch request.                        |

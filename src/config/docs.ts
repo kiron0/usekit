@@ -75,6 +75,16 @@ export const docsConfig: DocsConfig = {
           href: "/docs/hooks/use-mouse-position",
           items: [],
         },
+        {
+          title: "useBattery",
+          href: "/docs/hooks/use-battery",
+          items: [],
+        },
+        {
+          title: "useFetch",
+          href: "/docs/hooks/use-fetch",
+          items: [],
+        },
       ],
     },
   ],

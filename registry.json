@@ -146,6 +146,30 @@
           "type": "registry:hook"
         }
       ]
+    },
+    {
+      "name": "use-battery",
+      "type": "registry:hook",
+      "title": "Use Battery",
+      "description": "Track the battery status of a user's device with useBattery.",
+      "files": [
+        {
+          "path": "registry/use-battery/use-battery.tsx",
+          "type": "registry:hook"
+        }
+      ]
+    },
+    {
+      "name": "use-fetch",
+      "type": "registry:hook",
+      "title": "Use Battery",
+      "description": "Fetch data with accurate states, caching, and no stale responses using useFetch.",
+      "files": [
+        {
+          "path": "registry/use-fetch/use-fetch.tsx",
+          "type": "registry:hook"
+        }
+      ]
     }
   ]
 }
