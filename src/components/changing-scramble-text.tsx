@@ -9,7 +9,7 @@ export function ChangingScrambleText() {
   const hooks = React.useMemo(() => {
     return docsConfig.sidebarNav
       .filter((nav) => nav.title.toLocaleLowerCase() === "hooks")[0]
-      .items.map((hook: any) => hook.title);
+      .items.map((hook) => hook.title);
   }, []);
 
   function getRandomInt(min: number, max: number) {

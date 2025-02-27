@@ -44,7 +44,7 @@ export const hooks: Registry = [
   {
     name: "use-debounce-callback",
     type: "registry:hook",
-    registryDependencies: ["https://hookcn.ouassim.tech/r/use-unmount"],
+    registryDependencies: ["https://usekit.kiron.dev/r/use-unmount"],
     dependencies: ["lodash.debounce"],
     devDependencies: ["@types/lodash.debounce"],
     files: [

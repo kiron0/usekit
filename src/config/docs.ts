@@ -1,8 +1,8 @@
-import type { MainNavItem, SidebarNavItem } from "@/types/nav"
+import type { MainNavItem, SidebarNavItem } from "@/types/nav";
 
 export interface DocsConfig {
-  mainNav: MainNavItem[]
-  sidebarNav: SidebarNavItem[]
+  mainNav: MainNavItem[];
+  sidebarNav: SidebarNavItem[];
 }
 
 export const docsConfig: DocsConfig = {
@@ -18,64 +18,64 @@ export const docsConfig: DocsConfig = {
   ],
   sidebarNav: [
     {
-      title: "Hooks",
+      title: "hooks",
       items: [
         {
-          title: "Use Boolean",
+          title: "useBoolean",
           href: "/docs/hooks/use-boolean",
           items: [],
         },
         {
-          title: "Use Toggle",
+          title: "useToggle",
           href: "/docs/hooks/use-toggle",
           items: [],
         },
         {
-          title: "Use CopyToClipboard",
+          title: "useCopyToClipboard",
           href: "/docs/hooks/use-copy-to-clipboard",
           items: [],
         },
         {
-          title: "Use Unmount",
+          title: "useUnmount",
           href: "/docs/hooks/use-unmount",
           items: [],
         },
         {
-          title: "Use DebounceCallback",
+          title: "useDebounceCallback",
           href: "/docs/hooks/use-debounce-callback",
           items: [],
         },
         {
-          title: "Use IsomorphicLayoutEffect",
+          title: "useIsomorphicLayoutEffect",
           href: "/docs/hooks/use-isomorphic-layout-effect",
           items: [],
         },
         {
-          title: "Use Interval",
+          title: "useInterval",
           href: "/docs/hooks/use-interval",
           items: [],
         },
         {
-          title: "Use Timeout",
+          title: "useTimeout",
           href: "/docs/hooks/use-timeout",
           items: [],
         },
         {
-          title: "Use DocumentTitle",
+          title: "useDocumentTitle",
           href: "/docs/hooks/use-document-title",
           items: [],
         },
         {
-          title: "Use Counter",
+          title: "useCounter",
           href: "/docs/hooks/use-counter",
           items: [],
         },
         {
-          title: "Use MousePosition",
+          title: "useMousePosition",
           href: "/docs/hooks/use-mouse-position",
           items: [],
         },
       ],
     },
   ],
-}
+};
