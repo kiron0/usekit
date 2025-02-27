@@ -9,7 +9,7 @@
     "lint": "next lint",
     "build:registry": "shadcn build --output ./public/k",
     "format": "prettier --write \"**/*.{ts,tsx,js,json,css}\"",
-    "upgrade": "bunx --bun ncu -x 'tailwindcss @shikijs/compat' -u && bun install",
+    "upgrade": "bunx --bun ncu -x 'tailwindcss @shikijs/compat unist-builder' -u && bun install",
     "push": "git add . && git commit -m 'update' && git push"
   },
   "dependencies": {
@@ -46,6 +46,7 @@
     "@eslint/eslintrc": "^3",
     "@shikijs/compat": "^1.24.2",
     "@tailwindcss/postcss": "^4",
+    "@types/lodash.debounce": "^4.0.9",
     "@types/node": "^22",
     "@types/react": "^19",
     "@types/react-dom": "^19",
@@ -63,7 +64,7 @@
     "rimraf": "^6.0.1",
     "tailwindcss": "^3.4.1",
     "typescript": "^5",
-    "unist-builder": "^4.0.0",
+    "unist-builder": "3.0.0",
     "unist-util-visit": "^5.0.0"
   }
 }
