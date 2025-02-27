@@ -1,21 +1,21 @@
-"use client";
+"use client"
 
-import { createPortal } from "react-dom";
-
-import { cn } from "@/lib/utils";
+import { createPortal } from "react-dom"
 import {
   useMousePosition,
   type Position,
-} from "registry/use-mouse-position/use-mouse-position";
+} from "registry/use-mouse-position/use-mouse-position"
+
+import { cn } from "@/lib/utils"
 
 export default function UseMousePositionDemo() {
-  const [mouse, ref] = useMousePosition<HTMLParagraphElement>();
+  const [mouse, ref] = useMousePosition<HTMLParagraphElement>()
 
   const xIntersecting =
-    mouse.elementX && mouse.elementX > 0 && mouse.elementX < 200;
+    mouse.elementX && mouse.elementX > 0 && mouse.elementX < 200
   const yIntersecting =
-    mouse.elementY && mouse.elementY > 0 && mouse.elementY < 200;
-  const isIntersecting = xIntersecting && yIntersecting;
+    mouse.elementY && mouse.elementY > 0 && mouse.elementY < 200
+  const isIntersecting = xIntersecting && yIntersecting
 
   return (
     <div>
@@ -25,7 +25,7 @@ export default function UseMousePositionDemo() {
           "grid size-[200px] place-items-center rounded-lg border border-dashed border-primary bg-muted/10 p-6 transition-all",
           {
             "bg-primary/10": isIntersecting,
-          },
+          }
         )}
       >
         <h2 className="text-center text-sm font-medium text-muted-foreground">
@@ -34,7 +34,7 @@ export default function UseMousePositionDemo() {
       </div>
       <Demo {...mouse} />
     </div>
-  );
+  )
 }
 
 function Demo(props: Position) {
@@ -78,9 +78,9 @@ function Demo(props: Position) {
           </tbody>
         </table>
       </dialog>,
-      document.body,
-    );
+      document.body
+    )
   }
 
-  return <></>;
+  return <></>
 }

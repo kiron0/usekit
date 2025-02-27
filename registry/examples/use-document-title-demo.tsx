@@ -1,12 +1,12 @@
-import * as React from "react";
+import * as React from "react"
+import { useDocumentTitle } from "registry/use-document-title/use-document-title"
 
-import { Button } from "@/components/ui/button";
-import { useDocumentTitle } from "registry/use-document-title/use-document-title";
+import { Button } from "@/components/ui/button"
 
 export default function UseDocumentTitleDemo() {
-  const [counter, setCounter] = React.useState(0);
+  const [counter, setCounter] = React.useState(0)
 
-  useDocumentTitle(`Clicked ${counter} times.`);
+  useDocumentTitle(`Clicked ${counter} times.`)
   return (
     <div className="flex flex-col items-center gap-4">
       <Button className="w-fit" onClick={() => setCounter(counter + 1)}>
@@ -17,5 +17,5 @@ export default function UseDocumentTitleDemo() {
         real-time!
       </p>
     </div>
-  );
+  )
 }

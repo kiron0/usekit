@@ -1,28 +1,28 @@
-"use client";
+"use client"
 
-import { RefreshCwIcon } from "lucide-react";
-import React from "react";
+import React from "react"
+import { RefreshCwIcon } from "lucide-react"
+import { useTimeout } from "registry/use-timeout/use-timeout"
 
-import { Button } from "@/components/ui/button";
-import { useTimeout } from "registry/use-timeout/use-timeout";
+import { Button } from "@/components/ui/button"
 
 export default function UseTimeoutDemo() {
-  const [hasDefused, setHasDefused] = React.useState(false);
-  const [hasExploded, setHasExploded] = React.useState(false);
+  const [hasDefused, setHasDefused] = React.useState(false)
+  const [hasExploded, setHasExploded] = React.useState(false)
 
   useTimeout(
     () => {
-      setHasExploded(!hasExploded);
+      setHasExploded(!hasExploded)
     },
-    hasDefused ? null : 1000,
-  );
+    hasDefused ? null : 1000
+  )
 
   return (
     <div className="flex flex-col items-center gap-8">
       <Button
         onClick={() => {
-          setHasDefused(false);
-          setHasExploded(false);
+          setHasDefused(false)
+          setHasExploded(false)
         }}
         disabled={!(hasDefused || hasExploded)}
       >
@@ -54,5 +54,5 @@ export default function UseTimeoutDemo() {
         </button>
       )}
     </div>
-  );
+  )
 }

@@ -1,11 +1,11 @@
-import { ClipboardCheckIcon, ClipboardIcon } from "lucide-react";
-import { toast } from "sonner";
+import { ClipboardCheckIcon, ClipboardIcon } from "lucide-react"
+import { useCopyToClipboard } from "registry/use-copy-to-clipboard/use-copy-to-clipboard"
+import { toast } from "sonner"
 
-import { Button } from "@/components/ui/button";
-import { useCopyToClipboard } from "registry/use-copy-to-clipboard/use-copy-to-clipboard";
+import { Button } from "@/components/ui/button"
 
 export default function UseCopyToClipboardDemo() {
-  const [copy, isCopied] = useCopyToClipboard();
+  const [copy, isCopied] = useCopyToClipboard()
 
   return (
     <Button
@@ -13,7 +13,7 @@ export default function UseCopyToClipboardDemo() {
       className="gap-2 text-sm"
       onClick={() =>
         copy("Hello world").then(() =>
-          toast("Text Copied to your clipboard 🎉."),
+          toast("Text Copied to your clipboard 🎉.")
         )
       }
     >
@@ -24,5 +24,5 @@ export default function UseCopyToClipboardDemo() {
         <ClipboardIcon size={10} />
       )}
     </Button>
-  );
+  )
 }

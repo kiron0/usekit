@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "build:registry": "shadcn build --output ./public/k",
-    "format": "prettier --write \"**/*.{ts,tsx,js,json,css}\"",
+    "format": "prettier --write --cache .",
+    "format:check": "prettier --check --cache .",
     "upgrade": "bunx --bun ncu -x 'tailwindcss @shikijs/compat unist-builder' -u && bun install",
     "push": "git add . && git commit -m 'update' && git push"
   },
@@ -44,6 +45,7 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
+    "@ianvs/prettier-plugin-sort-imports": "^4.4.1",
     "@shikijs/compat": "^1.24.2",
     "@tailwindcss/postcss": "^4",
     "@types/lodash.debounce": "^4.0.9",

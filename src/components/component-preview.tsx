@@ -1,19 +1,20 @@
-"use client";
+"use client"
 
-import * as React from "react";
-import { Index } from "../../__registry__";
+import * as React from "react"
 
-import { CopyButton } from "@/components/copy-button";
-import { Icons } from "@/components/icons";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/utils"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { CopyButton } from "@/components/copy-button"
+import { Icons } from "@/components/icons"
+
+import { Index } from "../../__registry__"
 
 interface ComponentPreviewProps extends React.HTMLAttributes<HTMLDivElement> {
-  name: string;
-  extractClassname?: boolean;
-  extractedClassNames?: string;
-  align?: "center" | "start" | "end";
-  hideCode?: boolean;
+  name: string
+  extractClassname?: boolean
+  extractedClassNames?: string
+  align?: "center" | "start" | "end"
+  hideCode?: boolean
 }
 
 export function ComponentPreview({
@@ -27,11 +28,11 @@ export function ComponentPreview({
   const Codes = React.Children.toArray(children) as React.ReactElement<
     any,
     string | React.JSXElementConstructor<any>
-  >[];
-  const Code = Codes[0];
+  >[]
+  const Code = Codes[0]
 
   const Preview = React.useMemo(() => {
-    const Component = Index[name]?.component;
+    const Component = Index[name]?.component
 
     if (!Component) {
       return (
@@ -42,20 +43,20 @@ export function ComponentPreview({
           </code>{" "}
           not found in registry.
         </p>
-      );
+      )
     }
 
-    return <Component />;
-  }, [name]);
+    return <Component />
+  }, [name])
 
   const codeString = React.useMemo(() => {
     if (typeof Code?.props["data-rehype-pretty-code-figure"] !== "undefined") {
       const [Button] = React.Children.toArray(
-        Code.props.children,
-      ) as React.ReactElement<any, string | React.JSXElementConstructor<any>>[];
-      return Button?.props?.value || Button?.props?.__rawstring__ || null;
+        Code.props.children
+      ) as React.ReactElement<any, string | React.JSXElementConstructor<any>>[]
+      return Button?.props?.value || Button?.props?.__rawstring__ || null
     }
-  }, [Code]);
+  }, [Code])
 
   return (
     <div
@@ -90,7 +91,7 @@ export function ComponentPreview({
                 "items-center": align === "center",
                 "items-start": align === "start",
                 "items-end": align === "end",
-              },
+              }
             )}
           >
             <React.Suspense
@@ -114,5 +115,5 @@ export function ComponentPreview({
         </TabsContent>
       </Tabs>
     </div>
-  );
+  )
 }

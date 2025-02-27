@@ -1,5 +1,5 @@
-import type { NextConfig } from "next";
-import { createContentlayerPlugin } from "next-contentlayer2";
+import type { NextConfig } from "next"
+import { createContentlayerPlugin } from "next-contentlayer2"
 
 const nextConfig: NextConfig = {
   experimental: {
@@ -19,10 +19,10 @@ const nextConfig: NextConfig = {
           },
         ],
       },
-    ];
+    ]
   },
-};
+}
 
-const withContentlayer = createContentlayerPlugin({});
+const withContentlayer = createContentlayerPlugin({})
 
-export default withContentlayer(nextConfig);
+export default withContentlayer(nextConfig)

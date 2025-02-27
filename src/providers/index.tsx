@@ -1,7 +1,7 @@
-import { ThemeProvider } from "./theme-provider";
+import { ThemeProvider } from "./theme-provider"
 
 interface ProvidersProps {
-  children: React.ReactNode;
+  children: React.ReactNode
 }
 
 export default function Providers({ children }: ProvidersProps) {
@@ -16,5 +16,5 @@ export default function Providers({ children }: ProvidersProps) {
         <main>{children}</main>
       </ThemeProvider>
     </>
-  );
+  )
 }

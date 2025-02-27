@@ -1,16 +1,16 @@
-import type { Metadata, Viewport } from "next";
-import { ThemeProvider } from "next-themes";
+import type { Metadata, Viewport } from "next"
+import { ThemeProvider } from "next-themes"
 
-import { TooltipProvider } from "@/components/ui/tooltip";
-import { THEMES } from "@/config/colors";
-import { META_THEME_COLORS, siteConfig } from "@/config/site";
-import { fontMono, fontSans } from "@/lib/fonts";
-import { cn } from "@/lib/utils";
+import { THEMES } from "@/config/colors"
+import { META_THEME_COLORS, siteConfig } from "@/config/site"
+import { fontMono, fontSans } from "@/lib/fonts"
+import { cn } from "@/lib/utils"
+import { TooltipProvider } from "@/components/ui/tooltip"
 
-import "@/styles/globals.css";
-import "@/styles/themes.css";
+import "@/styles/globals.css"
+import "@/styles/themes.css"
 
-import { Toaster } from "@/components/ui/sonner";
+import { Toaster } from "@/components/ui/sonner"
 
 export const metadata: Metadata = {
   title: {
@@ -62,14 +62,14 @@ export const metadata: Metadata = {
     apple: "/apple-touch-icon.png",
   },
   manifest: `${siteConfig.url}/site.webmanifest`,
-};
+}
 
 export const viewport: Viewport = {
   themeColor: META_THEME_COLORS.light,
-};
+}
 
 interface RootLayoutProps {
-  children: React.ReactNode;
+  children: React.ReactNode
 }
 
 export default function RootLayout({ children }: RootLayoutProps) {
@@ -79,7 +79,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         className={cn(
           "min-h-svh overflow-x-hidden bg-background font-sans antialiased",
           fontSans.variable,
-          fontMono.variable,
+          fontMono.variable
         )}
       >
         <ThemeProvider
@@ -99,5 +99,5 @@ export default function RootLayout({ children }: RootLayoutProps) {
         </ThemeProvider>
       </body>
     </html>
-  );
+  )
 }

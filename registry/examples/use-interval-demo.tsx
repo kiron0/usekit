@@ -1,6 +1,5 @@
-import * as React from "react";
-
-import { useInterval } from "registry/use-interval/use-interval";
+import * as React from "react"
+import { useInterval } from "registry/use-interval/use-interval"
 
 export default function UseIntervalDemo() {
   const colors = React.useMemo(
@@ -13,13 +12,13 @@ export default function UseIntervalDemo() {
       "0 72.2% 50.6%",
       "262.1 83.3% 57.8%",
     ],
-    [],
-  );
-  const [index, setIndex] = React.useState(0);
+    []
+  )
+  const [index, setIndex] = React.useState(0)
 
-  useInterval(() => setIndex((index) => index + 1), 1000);
+  useInterval(() => setIndex((index) => index + 1), 1000)
 
-  const color = colors[index % colors.length];
+  const color = colors[index % colors.length]
 
   return (
     <div
@@ -28,5 +27,5 @@ export default function UseIntervalDemo() {
         background: `hsl(${color})`,
       }}
     />
-  );
+  )
 }

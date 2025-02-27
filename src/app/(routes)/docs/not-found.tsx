@@ -1,13 +1,13 @@
-"use client";
+"use client"
 
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { AlertTriangleIcon, ChevronLeftIcon, HouseIcon } from "lucide-react";
+import Link from "next/link"
+import { useRouter } from "next/navigation"
+import { AlertTriangleIcon, ChevronLeftIcon, HouseIcon } from "lucide-react"
 
-import { Button, buttonVariants } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button"
 
 export default function NotFound() {
-  const router = useRouter();
+  const router = useRouter()
   return (
     <div className="container mx-auto flex h-full items-center px-6 py-12">
       <div className="mx-auto flex max-w-sm flex-col items-center text-center">
@@ -32,5 +32,5 @@ export default function NotFound() {
         </div>
       </div>
     </div>
-  );
+  )
 }

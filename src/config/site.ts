@@ -11,11 +11,11 @@ export const siteConfig = {
     twitter: "https://twitter.com/hashtagkiron",
     github: "https://github.com/kiron0/usekit",
   },
-};
+}
 
-export type SiteConfig = typeof siteConfig;
+export type SiteConfig = typeof siteConfig
 
 export const META_THEME_COLORS = {
   light: "#ffffff",
   dark: "#09090b",
-};
+}

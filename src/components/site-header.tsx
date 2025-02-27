@@ -1,13 +1,13 @@
-import Link from "next/link";
+import Link from "next/link"
 
-import { CommandMenu } from "@/components/command-menu";
-import { Icons } from "@/components/icons";
-import { MainNav } from "@/components/main-nav";
-import { MobileNav } from "@/components/mobile-nav";
-import { ThemeCustomizer } from "@/components/theme-customizer";
-import { buttonVariants } from "@/components/ui/button";
-import { siteConfig } from "@/config/site";
-import { cn } from "@/lib/utils";
+import { siteConfig } from "@/config/site"
+import { cn } from "@/lib/utils"
+import { buttonVariants } from "@/components/ui/button"
+import { CommandMenu } from "@/components/command-menu"
+import { Icons } from "@/components/icons"
+import { MainNav } from "@/components/main-nav"
+import { MobileNav } from "@/components/mobile-nav"
+import { ThemeCustomizer } from "@/components/theme-customizer"
 
 export function SiteHeader() {
   return (
@@ -27,7 +27,7 @@ export function SiteHeader() {
                 rel="noreferrer"
                 className={cn(
                   buttonVariants({ variant: "ghost", size: "icon" }),
-                  "size-8 px-0",
+                  "size-8 px-0"
                 )}
               >
                 <Icons.gitHub className="size-4" />
@@ -39,5 +39,5 @@ export function SiteHeader() {
         </div>
       </div>
     </header>
-  );
+  )
 }
