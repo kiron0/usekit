@@ -1,7 +1,7 @@
 export const siteConfig = {
   name: "usekit",
-  url: "http://localhost:3000/",
-  ogImage: "http://localhost:3000/og.png",
+  url: "https://usekit.kiron.dev",
+  ogImage: "https://usekit.kiron.dev/og.png",
   description:
     "A collection of reusable react hooks that you can copy and paste into your apps.",
   author: {
