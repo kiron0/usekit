@@ -9,7 +9,7 @@
     "lint": "next lint",
     "build:registry": "shadcn build --output ./public/k",
     "format": "prettier --write \"**/*.{ts,tsx,js,json,css}\"",
-    "upgrade": "bunx --bun ncu -x 'tailwindcss' -u && bun install",
+    "upgrade": "bunx --bun ncu -x 'tailwindcss @shikijs/compat' -u && bun install",
     "push": "git add . && git commit -m 'update' && git push"
   },
   "dependencies": {
@@ -25,7 +25,7 @@
     "@radix-ui/react-tooltip": "^1.1.8",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
-    "cmdk": "1.0.0",
+    "cmdk": "1.0.4",
     "jotai": "^2.12.1",
     "lucide-react": "^0.476.0",
     "next": "15.2.0",

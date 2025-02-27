@@ -2,11 +2,14 @@ import type { NextConfig } from "next";
 import { createContentlayerPlugin } from "next-contentlayer2";
 
 const nextConfig: NextConfig = {
+  experimental: {
+    turbo: {},
+  },
   async redirects() {
     return [
       {
-        source: "/r/:name((?!index\\.json|hooks/).*)",
-        destination: "/r/hooks/:name.json",
+        source: "/k/:name((?!index\\.json|hooks/).*)",
+        destination: "/k/hooks/:name.json",
         permanent: true,
         missing: [
           {
