@@ -1,0 +1,19 @@
+{
+          "$schema": "https://ui.shadcn.com/schema/registry.json",
+          "name": "acme",
+          "homepage": "https://acme.com",
+          "items": [
+                    {
+                              "name": "use-boolean",
+                              "type": "registry:hook",
+                              "title": "Use Boolean",
+                              "description": "A simple hello world component.",
+                              "files": [
+                                {
+                                  "path": "registry/use-boolean/use-boolean.tsx",
+                                  "type": "registry:hook"
+                                }
+                              ]
+                            }
+          ]
+        }

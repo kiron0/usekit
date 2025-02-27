@@ -28,7 +28,7 @@ export function MainNav() {
               : "text-foreground/80",
           )}
         >
-          {siteConfig.name}
+          Hooks
         </Link>
       </nav>
     </div>
