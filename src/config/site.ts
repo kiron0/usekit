@@ -1,15 +1,17 @@
 export const siteConfig = {
-  name: "usekit",
+  name: "useKit",
   url: "https://usekit.kiron.dev",
   ogImage: "https://usekit.kiron.dev/og.png",
   description:
     "A collection of reusable react hooks that you can copy and paste into your apps.",
+  slogan: "A collection of reusable react hooks",
   author: {
     name: "Toufiq Hasan Kiron",
   },
   links: {
+    portfolio: "https://toufiqhasankiron.com",
     twitter: "https://twitter.com/hashtagkiron",
-    github: "https://github.com/kiron0/usekit",
+    github: "https://github.com/kiron0",
   },
 }
 

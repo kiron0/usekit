@@ -1,3 +1,7 @@
+import { THEMES } from "@/config/colors"
+import { Toaster } from "@/components/ui/sonner"
+import { TooltipProvider } from "@/components/ui/tooltip"
+
 import { ThemeProvider } from "./theme-provider"
 
 interface ProvidersProps {
@@ -6,15 +10,20 @@ interface ProvidersProps {
 
 export default function Providers({ children }: ProvidersProps) {
   return (
-    <>
-      <ThemeProvider
-        attribute="class"
-        defaultTheme="system"
-        enableSystem
-        disableTransitionOnChange
-      >
-        <main>{children}</main>
-      </ThemeProvider>
-    </>
+    <ThemeProvider
+      themes={THEMES}
+      attribute="class"
+      defaultTheme="system"
+      enableSystem
+      disableTransitionOnChange
+      enableColorScheme
+    >
+      <TooltipProvider>
+        <div className="relative flex min-h-svh flex-col bg-background">
+          {children}
+        </div>
+      </TooltipProvider>
+      <Toaster />
+    </ThemeProvider>
   )
 }

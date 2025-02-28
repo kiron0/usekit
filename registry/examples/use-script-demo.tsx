@@ -3,6 +3,8 @@
 import * as React from "react"
 import { useScript } from "registry/use-script/use-script"
 
+import { Badge } from "@/components/ui/badge"
+
 declare global {
   interface Window {
     MooTools: {
@@ -44,26 +46,25 @@ export default function UseScriptDemo() {
 
   return (
     <section className="flex flex-col justify-center items-center gap-4">
-      <h1>useScript</h1>
-      <table className="table-auto border-collapse border border-gray-400">
+      <table className="table-auto">
         <thead>
           <tr>
-            <th className="border border-gray-300 px-4 py-2">Property</th>
-            <th className="border border-gray-300 px-4 py-2">Value</th>
+            <th className="border px-4 py-2">Property</th>
+            <th className="border px-4 py-2">Value</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td className="border border-gray-300 px-4 py-2">Status</td>
-            <td className="border border-gray-300 px-4 py-2">
-              {status?.status}
+            <td className="border px-4 py-2">Status</td>
+            <td className="border px-4 py-2 uppercase">
+              <Badge variant="secondary">{status?.status}</Badge>
             </td>
           </tr>
           <tr>
-            <td className="border border-gray-300 px-4 py-2">Build</td>
-            <td className="border border-gray-300 px-4 py-2">
+            <td className="border px-4 py-2">Build</td>
+            <td className="border px-4 py-2">
               {isReady ? (
-                <span className="text-green-500">
+                <span>
                   {status?.mooTools.build?.length > 20
                     ? `${status?.mooTools.build.slice(0, 20)}...`
                     : status?.mooTools.build}
@@ -74,12 +75,10 @@ export default function UseScriptDemo() {
             </td>
           </tr>
           <tr>
-            <td className="border border-gray-300 px-4 py-2">Version</td>
-            <td className="border border-gray-300 px-4 py-2">
+            <td className="border px-4 py-2">Version</td>
+            <td className="border px-4 py-2">
               {isReady ? (
-                <span className="text-green-500">
-                  {status?.mooTools.version}
-                </span>
+                <span>{status?.mooTools.version}</span>
               ) : (
                 <span className="text-red-500">Not Ready</span>
               )}

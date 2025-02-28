@@ -25,10 +25,7 @@ export default function UseFetchDemo() {
   )
 
   return (
-    <div
-      className="flex flex-col items-center justify-center"
-      style={{ gap: "2rem" }}
-    >
+    <div className="flex flex-col items-center justify-center gap-5">
       <div className="flex flex-col items-center justify-center gap-4">
         {loading ? (
           <p>Loading...</p>
