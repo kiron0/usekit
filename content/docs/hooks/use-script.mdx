@@ -1,0 +1,137 @@
+---
+title: useScript
+description: Load and manage external JavaScript scripts with useScript.
+---
+
+<ComponentPreview name="use-script-demo" />
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://usekit.kiron.dev/r/use-script
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="use-script" />
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+```tsx {3, 8, 9, 10}
+import * as React from "react"
+
+import { useScript } from "@/hooks/use-script"
+
+import ScriptMeta from "./script-meta"
+
+export function Component() {
+  const status = useScript(
+    "https://cdnjs.cloudflare.com/ajax/libs/mootools/1.6.0/mootools-core.js",
+    {
+      removeOnUnmount: false,
+    }
+  )
+
+  React.useEffect(() => {
+    if (typeof window.$$ !== "undefined") {
+      const id = document.id("moo")
+      id.setStyle("background-color", "var(--green)")
+    }
+  }, [status])
+
+  const isReady = status === "ready"
+
+  return (
+    <section>
+      <h1>useScript</h1>
+      <p>
+        <span id="moo" className={isReady ? "ready" : ""} />
+        <label>Status: {status}</label>
+      </p>
+      {status === "ready" && (
+        <ScriptMeta title="MooTools" status={status} meta={window.MooTools} />
+      )}
+    </section>
+  )
+}
+```
+
+## Status Definitions
+
+- `loading`: Script is currently being loaded
+- `ready`: Script successfully loaded
+- `error`: Failed to load script
+- `unknown`: Script already existed in DOM before hook initialization
+
+## Advanced Usage
+
+### Loading Multiple Scripts
+
+```tsx
+const stripeStatus = useScript("https://js.stripe.com/v3/")
+const analyticsStatus = useScript("https://analytics.example.com/sdk.js")
+```
+
+### Conditional Loading
+
+```tsx
+const needsPayment = useAppSelector((state) => state.checkout.needsPayment)
+const status = useScript(needsPayment ? PAYMENT_SCRIPT_URL : "")
+```
+
+### Error Handling
+
+```tsx
+const status = useScript("https://third-party-script.com/sdk.js")
+
+useEffect(() => {
+  if (status === "error") {
+    showErrorToast("Failed to load required components")
+  }
+}, [status])
+```
+
+## Best Practices
+
+1. Use `removeOnUnmount: true` for scripts that shouldn't persist between page navigations
+2. Combine with `React.Suspense` for better loading states
+3. Always handle `error` status to prevent UI freezes
+4. Use `unknown` status to detect existing script integrations
+5. Consider adding script integrity hashes through additional HTML attributes
+
+## API Reference
+
+### Parameters
+
+| Name                      | Type      | Description                                                         |
+| ------------------------- | --------- | ------------------------------------------------------------------- |
+| `src`                     | `string`  | URL source of the script to be loaded                               |
+| `options`                 | `object`  | Optional configuration object                                       |
+| `options.removeOnUnmount` | `boolean` | When true, removes script tag on component unmount (default: false) |
+
+### Return Value
+
+| Name     | Type           | Description                                                                                                                                                                                   |
+| -------- | -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `status` | `ScriptStatus` | This represents the status of the script load, `loading`, `ready`, `error`, or `unknown`. An unknown script is one that previously exists in the document, but was not added via `useScript`. |

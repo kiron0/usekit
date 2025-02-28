@@ -62,6 +62,12 @@ export const docsConfig: DocsConfig = {
           items: [],
         },
         {
+          title: "Use Battery",
+          href: "/docs/hooks/use-battery",
+          items: [],
+          label: "New",
+        },
+        {
           title: "Use Timeout",
           href: "/docs/hooks/use-timeout",
           items: [],
@@ -70,6 +76,12 @@ export const docsConfig: DocsConfig = {
           title: "Use Document Title",
           href: "/docs/hooks/use-document-title",
           items: [],
+        },
+        {
+          title: "Use Local Storage",
+          href: "/docs/hooks/use-local-storage",
+          items: [],
+          label: "New",
         },
         {
           title: "Use Counter",
@@ -82,20 +94,14 @@ export const docsConfig: DocsConfig = {
           items: [],
         },
         {
-          title: "Use Battery",
-          href: "/docs/hooks/use-battery",
-          items: [],
-          label: "New",
-        },
-        {
-          title: "Use Local Storage",
-          href: "/docs/hooks/use-local-storage",
-          items: [],
-          label: "New",
-        },
-        {
           title: "Use Session Storage",
           href: "/docs/hooks/use-session-storage",
+          items: [],
+          label: "New",
+        },
+        {
+          title: "Use Script",
+          href: "/docs/hooks/use-script",
           items: [],
           label: "New",
         },

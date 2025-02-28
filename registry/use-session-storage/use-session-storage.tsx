@@ -77,5 +77,3 @@ export function useSessionStorage<T>(
 
   return [storedValue, setValue]
 }
-
-export default useSessionStorage

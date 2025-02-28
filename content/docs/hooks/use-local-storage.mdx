@@ -49,12 +49,8 @@ export function Component() {
   return (
     <div>
       <p>Count: {count}</p>
-      <button onClick={() => setCount(c => c + 1)}>
-        Increment
-      </button>
-      <button onClick={() => setCount(0)}>
-        Reset
-      </button>
+      <button onClick={() => setCount((c) => c + 1)}>Increment</button>
+      <button onClick={() => setCount(0)}>Reset</button>
     </div>
   )
 }
@@ -70,28 +66,29 @@ interface UserSettings {
   notifications: boolean
 }
 
-const [settings, setSettings] = useLocalStorage<UserSettings>(
-  "user-settings",
-  { theme: "light", notifications: true }
-)
+const [settings, setSettings] = useLocalStorage<UserSettings>("user-settings", {
+  theme: "light",
+  notifications: true,
+})
 ```
 
 ### Lazy Initial State
 
 ```tsx
-const [authToken, setAuthToken] = useLocalStorage<string>(
-  "auth-token",
-  () => window.crypto.randomUUID()
+const [authToken, setAuthToken] = useLocalStorage<string>("auth-token", () =>
+  window.crypto.randomUUID()
 )
 ```
 
 ### Key Differences from `useSessionStorage`
 
 1. **Storage Lifetime**:
+
    - `sessionStorage` data is cleared when the page session ends (e.g., when the tab is closed).
    - `localStorage` persists even after the browser is closed and reopened.
 
 2. **Scope**:
+
    - `sessionStorage` is scoped to the current tab/window.
    - `localStorage` is shared across all tabs/windows of the same origin.
 
@@ -99,19 +96,18 @@ const [authToken, setAuthToken] = useLocalStorage<string>(
    - Use `useSessionStorage` for temporary data that should not persist beyond the current session.
    - Use `useLocalStorage` for persistent data that should remain available across sessions.
 
-
 ## API Reference
 
 ### Parameters
 
-| Name           | Type      | Description                                                                 |
-| -------------- | --------- | --------------------------------------------------------------------------- |
-| `key`          | `string`  | The key used to access the local storage value.                             |
-| `initialValue` | `T`       | The initial value to use if there is no item in the local storage with the provided key. |
+| Name           | Type     | Description                                                                              |
+| -------------- | -------- | ---------------------------------------------------------------------------------------- |
+| `key`          | `string` | The key used to access the local storage value.                                          |
+| `initialValue` | `T`      | The initial value to use if there is no item in the local storage with the provided key. |
 
 ### Returns
 
-| Name              | Type      | Description                                                                                                                                                  |
-| ----------------- | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `localState`      | `T`       | The current state of the value stored in local storage.                                                                                                      |
-| `handleSetState`  | `function`| A function to set the state of the value in the local storage. This function accepts a new value or a function that returns a new value. The value is also saved in the local storage under the provided key. |
+| Name             | Type       | Description                                                                                                                                                                                                   |
+| ---------------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `localState`     | `T`        | The current state of the value stored in local storage.                                                                                                                                                       |
+| `handleSetState` | `function` | A function to set the state of the value in the local storage. This function accepts a new value or a function that returns a new value. The value is also saved in the local storage under the provided key. |

@@ -233,6 +233,20 @@ export const Index: Record<string, any> = {
     component: React.lazy(() => import("registry/examples/use-fetch-demo")),
     source: "",
   },
+  "use-script": {
+    name: "use-script",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/use-script/use-script.tsx",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(() => import("registry/examples/use-script-demo")),
+    source: "",
+  },
   "use-fetch-demo": {
     name: "use-fetch-demo",
     type: "registry:example",
@@ -277,6 +291,20 @@ export const Index: Record<string, any> = {
     component: React.lazy(
       () => import("registry/examples/use-session-storage-demo")
     ),
+    source: "",
+  },
+  "use-script-demo": {
+    name: "use-script-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-script-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(() => import("registry/examples/use-script-demo")),
     source: "",
   },
   "use-copy-to-clipboard-demo": {
