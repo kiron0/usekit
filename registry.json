@@ -206,6 +206,18 @@
           "type": "registry:hook"
         }
       ]
+    },
+    {
+      "name": "use-scramble",
+      "type": "registry:hook",
+      "title": "Use Scramble",
+      "description": "Scramble text with the useScramble hook, providing methods to scramble, unscramble, and toggle between them.",
+      "files": [
+        {
+          "path": "registry/use-scramble/use-scramble.tsx",
+          "type": "registry:hook"
+        }
+      ]
     }
   ]
 }

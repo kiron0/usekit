@@ -1,0 +1,220 @@
+---
+title: useScramble
+description: Scramble text with the useScramble hook, providing methods to scramble, unscramble, and toggle between them.
+---
+
+<ComponentPreview name="use-scramble-demo" />
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://usekit.kiron.dev/r/use-scramble
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="use-scramble" />
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+### Basic Example
+
+```tsx {3, 6-20}
+import React from "react"
+
+import { useScramble } from "@/hooks/use-scramble"
+
+export default function ScrambleText() {
+  const { ref, replay } = useScramble({
+    text: "Hello, World!",
+    speed: 0.8,
+    tick: 1,
+    step: 1,
+    scramble: 4,
+    chance: 0.8,
+    seed: 2,
+    range: [65, 125],
+    overdrive: true,
+    overflow: true,
+    onAnimationStart: () => console.log("Animation started!"),
+    onAnimationEnd: () => console.log("Animation ended!"),
+    onAnimationFrame: (result) => console.log(result),
+  })
+
+  return (
+    <div>
+      <h1 ref={ref}></h1>
+      <button onClick={replay}>Replay</button>
+    </div>
+  )
+}
+```
+
+## Example
+
+### Replay programmatically
+
+```tsx
+const { ref, replay } = useScramble({
+  text: "1.21 gigawatts!",
+})
+
+// call replay manually
+return <a ref={ref} onMouseOver={replay} onFocus={replay} />
+```
+
+### Reduced Motion
+
+If the user has enabled reduced motion in their system preferences, the animation will automatically adjust to be less intrusive:
+
+```tsx
+export function ScrambleText() {
+  const { ref } = useScramble({
+    text: "Accessible Scramble",
+    speed: 1,
+    chance: 0.5,
+    ignore: [" ", "!"],
+  })
+
+  return <p ref={ref} />
+}
+```
+
+### Custom Range
+
+You can specify a custom range of Unicode characters for scrambling:
+
+```tsx
+const ScrambleText = () => {
+  const { ref } = useScramble({
+    text: "Custom Range",
+    range: [65, 90], // Only uppercase letters (A-Z)
+  })
+
+  return <h2 ref={ref} />
+}
+```
+
+### Overdrive
+
+Overdrive mode adds a special effect to the animation. You can enable it with a boolean or provide a specific Unicode code:
+
+```tsx
+const ScrambleText = () => {
+  const { ref } = useScramble({
+    text: "Overdrive Mode",
+    overdrive: 95, // Use underscore (_) for overdrive
+  })
+
+  return <h3 ref={ref} />
+}
+```
+
+## API Reference
+
+### Props
+
+| Name               | Type                       | Default Value | Description                                                                  |
+| ------------------ | -------------------------- | ------------- | ---------------------------------------------------------------------------- |
+| `playOnMount`      | `boolean`                  | `true`        | If `true`, the animation will play automatically when the component mounts.  |
+| `text`             | `string`                   | `''`          | The text to animate.                                                         |
+| `speed`            | `number`                   | `1`           | Animation speed (0-1). `1` is the fastest, `0` pauses the animation.         |
+| `tick`             | `number`                   | `1`           | How many frames to wait before moving the scramble controller forward.       |
+| `step`             | `number`                   | `1`           | How many characters to scramble on each tick.                                |
+| `chance`           | `number`                   | `1`           | Chance of scrambling a character (0-1). `1` means 100% chance.               |
+| `seed`             | `number`                   | `1`           | Number of characters to scramble randomly ahead of the scramble index.       |
+| `scramble`         | `number`                   | `1`           | How many times to scramble each character.                                   |
+| `ignore`           | `string[]`                 | `[' ']`       | Characters to avoid scrambling (e.g., spaces).                               |
+| `range`            | `RangeOrCharCodes`         | `[65, 125]`   | Unicode character range for scrambling.                                      |
+| `overdrive`        | `boolean` or `number`      | `true`        | Enables overdrive mode. If a number is provided, it sets the Unicode code.   |
+| `overflow`         | `boolean`                  | `true`        | If `true`, the animation starts from an empty string.                        |
+| `onAnimationStart` | `Function`                 | `undefined`   | Callback triggered when the animation starts.                                |
+| `onAnimationEnd`   | `Function`                 | `undefined`   | Callback triggered when the animation ends.                                  |
+| `onAnimationFrame` | `(result: string) => void` | `undefined`   | Callback triggered on every animation frame with the current scrambled text. |
+
+### Returns
+
+| Name     | Type                                  | Description                                              |
+| -------- | ------------------------------------- | -------------------------------------------------------- |
+| `ref`    | `React.RefObject<HTMLElement> \| any` | A ref to attach to the HTML element you want to animate. |
+| `replay` | `() => void`                          | A function to restart the animation.                     |
+
+## Type Definitions
+
+### `RangeOrCharCodes`
+
+This type defines the range of Unicode characters or specific character codes to use for scrambling. It can be:
+
+- A tuple of two numbers (e.g., `[65, 125]`) representing a range of Unicode codes.
+- An array of specific Unicode codes (e.g., `[65, 66, 67]`).
+
+```typescript
+type RangeOrCharCodes = {
+  0: number
+  1: number
+} & Array<number>
+```
+
+## Notes
+
+1. **Reduced Motion Support:**
+
+   - If the user has enabled reduced motion (`prefers-reduced-motion: reduce`), the animation will automatically adjust to be less intrusive by setting `step` to the length of the text and `chance` to `0`.
+
+2. **Type Safety:**
+
+   - The `ref` returned by the hook is typed as `HTMLElement | null`. You can cast it to a more specific type (e.g., `HTMLHeadingElement`, `HTMLParagraphElement`) when attaching it to an element.
+
+3. **Performance:**
+   - The animation uses `requestAnimationFrame` for smooth performance. Ensure the `speed` and `tick` values are optimized for your use case.
+
+## Example Use Cases
+
+1. **Animated Headings:**
+
+   - Use the hook to create eye-catching headings for landing pages or portfolios.
+
+2. **Loading Indicators:**
+
+   - Scramble text to indicate loading or processing states.
+
+3. **Interactive Text:**
+   - Combine the `replay` function with user interactions (e.g., button clicks) to create interactive animations.
+
+## Troubleshooting
+
+### Animation Doesn't Start
+
+- Ensure the `text` prop is provided and not an empty string.
+- Check if `playOnMount` is set to `true`.
+
+### Animation is Too Fast or Too Slow
+
+- Adjust the `speed` prop to control the animation speed.
+- Use the `tick` and `step` props to fine-tune the animation behavior.
+
+### Characters Are Not Scrambling
+
+- Verify that the `chance` prop is set to a value greater than `0`.
+- Ensure the `ignore` prop does not include characters you want to scramble.
