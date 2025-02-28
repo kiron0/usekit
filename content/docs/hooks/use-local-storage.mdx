@@ -1,0 +1,101 @@
+---
+title: useLocalStorage
+description: Store, retrieve, and synchronize data from the browser's localStorage API with useLocalStorage.
+links:
+  LocalStorage API: https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage
+---
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://usekit.kiron.dev/r/use-local-storage
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="use-local-storage" />
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+```tsx {1, 4}
+import { useLocalStorage } from "@/hooks/use-local-storage"
+
+export function Component() {
+  const [count, setCount] = useLocalStorage("count", 0)
+
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <button onClick={() => setCount(c => c + 1)}>
+        Increment
+      </button>
+      <button onClick={() => setCount(0)}>
+        Reset
+      </button>
+    </div>
+  )
+}
+```
+
+## Example
+
+### Complex Object Type
+
+```tsx
+interface UserSettings {
+  theme: "light" | "dark"
+  notifications: boolean
+}
+
+const [settings, setSettings] = useLocalStorage<UserSettings>(
+  "user-settings",
+  { theme: "light", notifications: true }
+)
+```
+
+### Lazy Initial State
+
+```tsx
+const [authToken, setAuthToken] = useLocalStorage<string>(
+  "auth-token",
+  () => window.crypto.randomUUID()
+)
+```
+
+
+## API Reference
+
+### Parameters
+
+| Name           | Type      | Description                                                                 |
+| -------------- | --------- | --------------------------------------------------------------------------- |
+| `key`          | `string`  | The key used to access the local storage value.                             |
+| `initialValue` | `T`       | The initial value to use if there is no item in the local storage with the provided key. |
+
+### Returns
+
+| Name              | Type      | Description                                                                                                                                                  |
+| ----------------- | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `localState`      | `T`       | The current state of the value stored in local storage.                                                                                                      |
+| `handleSetState`  | `function`| A function to set the state of the value in the local storage. This function accepts a new value or a function that returns a new value. The value is also saved in the local storage under the provided key. |

@@ -187,6 +187,22 @@ export const Index: Record<string, any> = {
     component: React.lazy(() => import("registry/use-battery/use-battery")),
     source: "",
   },
+  "use-local-storage": {
+    name: "use-local-storage",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/use-local-storage/use-local-storage.tsx",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/use-local-storage/use-local-storage")
+    ),
+    source: "",
+  },
   "use-fetch": {
     name: "use-fetch",
     type: "registry:hook",

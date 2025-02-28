@@ -36,8 +36,10 @@ npx shadcn@latest add https://usekit.kiron.dev/r/use-battery
 
 ## Usage
 
-```tsx {1, 4, 5}
+```tsx {1, 6, 7}
 import { useBattery } from "@/hooks/use-battery"
+
+import Battery from "./Battery";
 
 export function Component() {
   const { loading, level, charging, chargingTime, dischargingTime } =
