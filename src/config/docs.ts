@@ -93,6 +93,12 @@ export const docsConfig: DocsConfig = {
           items: [],
           label: "New",
         },
+        {
+          title: "Use Session Storage",
+          href: "/docs/hooks/use-session-storage",
+          items: [],
+          label: "New",
+        },
       ],
     },
   ],
