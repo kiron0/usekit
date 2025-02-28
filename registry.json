@@ -170,6 +170,42 @@
           "type": "registry:hook"
         }
       ]
+    },
+    {
+      "name": "use-local-storage",
+      "type": "registry:hook",
+      "title": "Use Local Storage",
+      "description": "Store, retrieve, and synchronize data from the browser's localStorage API with useLocalStorage.",
+      "files": [
+        {
+          "path": "registry/use-local-storage/use-local-storage.tsx",
+          "type": "registry:hook"
+        }
+      ]
+    },
+    {
+      "name": "use-session-storage",
+      "type": "registry:hook",
+      "title": "Use Session Storage",
+      "description": "Store, retrieve, and synchronize data from the browser's sessionStorage API with useSessionStorage.",
+      "files": [
+        {
+          "path": "registry/use-session-storage/use-session-storage.tsx",
+          "type": "registry:hook"
+        }
+      ]
+    },
+    {
+      "name": "use-script",
+      "type": "registry:hook",
+      "title": "Use Script",
+      "description": "Load and manage external JavaScript scripts with useScript.",
+      "files": [
+        {
+          "path": "registry/use-script/use-script.tsx",
+          "type": "registry:hook"
+        }
+      ]
     }
   ]
 }

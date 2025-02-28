@@ -32,7 +32,7 @@ export function ThemeCustomizer() {
             <PaletteIcon />
           </Button>
         </DrawerTrigger>
-        <DrawerContent>
+        <DrawerContent className="p-6">
           <DialogTitle className="sr-only">Theme Customizer</DialogTitle>
           <Customizer />
         </DrawerContent>

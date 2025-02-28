@@ -187,6 +187,38 @@ export const Index: Record<string, any> = {
     component: React.lazy(() => import("registry/use-battery/use-battery")),
     source: "",
   },
+  "use-local-storage": {
+    name: "use-local-storage",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/use-local-storage/use-local-storage.tsx",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-local-storage-demo")
+    ),
+    source: "",
+  },
+  "use-session-storage": {
+    name: "use-session-storage",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/use-session-storage/use-session-storage.tsx",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-session-storage-demo")
+    ),
+    source: "",
+  },
   "use-fetch": {
     name: "use-fetch",
     type: "registry:hook",
@@ -201,6 +233,20 @@ export const Index: Record<string, any> = {
     component: React.lazy(() => import("registry/examples/use-fetch-demo")),
     source: "",
   },
+  "use-script": {
+    name: "use-script",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/use-script/use-script.tsx",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(() => import("registry/examples/use-script-demo")),
+    source: "",
+  },
   "use-fetch-demo": {
     name: "use-fetch-demo",
     type: "registry:example",
@@ -213,6 +259,52 @@ export const Index: Record<string, any> = {
       },
     ],
     component: React.lazy(() => import("registry/examples/use-fetch-demo")),
+    source: "",
+  },
+  "use-local-storage-demo": {
+    name: "use-local-storage-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-local-storage-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-local-storage-demo")
+    ),
+    source: "",
+  },
+  "use-session-storage-demo": {
+    name: "use-session-storage-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-session-storage-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-session-storage-demo")
+    ),
+    source: "",
+  },
+  "use-script-demo": {
+    name: "use-script-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-script-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(() => import("registry/examples/use-script-demo")),
     source: "",
   },
   "use-copy-to-clipboard-demo": {

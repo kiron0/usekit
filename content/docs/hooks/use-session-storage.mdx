@@ -1,0 +1,113 @@
+---
+title: useSessionStorage
+description: Store, retrieve, and synchronize data from the browser’s sessionStorage API with useSessionStorage.
+links:
+  SessionStorage API: https://developer.mozilla.org/en-US/docs/Web/API/Window/sessionStorage
+---
+
+<ComponentPreview name="use-session-storage-demo" />
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://usekit.kiron.dev/r/use-session-storage
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="use-session-storage" />
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+```tsx {1, 4}
+import { useSessionStorage } from "@/hooks/use-session-storage"
+
+export function Component() {
+  const [count, setCount] = useSessionStorage("count", 0)
+
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <button onClick={() => setCount((c) => c + 1)}>Increment</button>
+      <button onClick={() => setCount(0)}>Reset</button>
+    </div>
+  )
+}
+```
+
+## Example
+
+### Complex Object Type
+
+```tsx
+interface UserSettings {
+  theme: "light" | "dark"
+  notifications: boolean
+}
+
+const [settings, setSettings] = useSessionStorage<UserSettings>(
+  "user-settings",
+  { theme: "light", notifications: true }
+)
+```
+
+### Lazy Initial State
+
+```tsx
+const [authToken, setAuthToken] = useSessionStorage<string>("auth-token", () =>
+  window.crypto.randomUUID()
+)
+```
+
+### Key Differences from `useLocalStorage`
+
+1. **Storage Lifetime**:
+
+   - `sessionStorage` data is cleared when the page session ends (e.g., when the tab is closed).
+   - `localStorage` persists even after the browser is closed and reopened.
+
+2. **Scope**:
+
+   - `sessionStorage` is scoped to the current tab/window.
+   - `localStorage` is shared across all tabs/windows of the same origin.
+
+3. **Use Cases**:
+   - Use `useSessionStorage` for temporary data that should not persist beyond the current session.
+   - Use `useLocalStorage` for persistent data that should remain available across sessions.
+
+## API Reference
+
+### Parameters
+
+| Name           | Type     | Description                                                                               |
+| -------------- | -------- | ----------------------------------------------------------------------------------------- |
+| `key`          | `string` | The key used to access the sessionStorage value.                                          |
+| `initialValue` | `T`      | The initial value to use if there is no item in the sessionStorage with the provided key. |
+
+### Returns
+
+| Name             | Type       | Description                                                                                                                                                                                                     |
+| ---------------- | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `sessionState`   | `T`        | The current state of the value stored in sessionStorage.                                                                                                                                                        |
+| `handleSetState` | `function` | A function to set the state of the value in the sessionStorage. This function accepts a new value or a function that returns a new value. The value is also saved in the sessionStorage under the provided key. |
