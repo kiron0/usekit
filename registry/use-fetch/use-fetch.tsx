@@ -25,6 +25,14 @@ export function useFetch<T = unknown>(
   const cache = React.useRef<Map<string, T>>(new Map())
 
   React.useEffect(() => {
+    const abortController = new AbortController()
+
+    setState({
+      data: undefined,
+      error: undefined,
+      loading: true,
+    })
+
     const fetchData = async () => {
       try {
         if (options?.cache && cache.current.has(url)) {
@@ -33,7 +41,10 @@ export function useFetch<T = unknown>(
           return
         }
 
-        const response = await fetch(url, options)
+        const response = await fetch(url, {
+          ...options,
+          signal: abortController.signal,
+        })
 
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`)
@@ -45,13 +56,25 @@ export function useFetch<T = unknown>(
           cache.current.set(url, data)
         }
 
-        setState({ data, error: undefined, loading: false })
-      } catch (error) {
-        setState({ data: undefined, error: error as Error, loading: false })
+        if (!abortController.signal.aborted) {
+          setState({ data, error: undefined, loading: false })
+        }
+      } catch (error: any) {
+        if (error.name === "AbortError") return
+
+        setState({
+          data: undefined,
+          error: error as Error,
+          loading: false,
+        })
       }
     }
 
     fetchData()
+
+    return () => {
+      abortController.abort()
+    }
   }, [url, options])
 
   return state

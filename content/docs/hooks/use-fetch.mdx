@@ -38,7 +38,7 @@ npx shadcn@latest add https://usekit.kiron.dev/r/use-fetch
 
 ## Usage
 
-```tsx {3, 8, 10}
+```tsx {3, 10, 11, 12}
 import * as React from "react"
 
 import { useFetch } from "@/hooks/use-fetch"
@@ -48,7 +48,9 @@ import Card from "./card"
 export function Component() {
   const [count, setCount] = React.useState(1)
 
-  const { error, data, loading } = useFetch(`https://pokeapi.co/api/v2/pokemon/${count}`)
+  const { error, data, loading } = useFetch(
+    `https://pokeapi.co/api/v2/pokemon/${count}`
+  )
 
   return (
     <section>
@@ -80,9 +82,9 @@ export function Component() {
 
 ### Returns
 
-| Name            | Type      | Description                                                    |
-| --------------- | --------- | -------------------------------------------------------------- |
-| `state`         | `object`  | The state object containing the fetched data and error status. |
-| `state.error`   | `error \| undefined`  | The error object if an error occurred during the fetch, otherwise `undefined`. |
-| `state.data`    | `any \| undefined`  | The fetched data if the fetch was successful, otherwise `undefined`.           |
-| `state.loading` | `boolean` | The loading state of the fetch request.                        |
+| Name            | Type                 | Description                                                                    |
+| --------------- | -------------------- | ------------------------------------------------------------------------------ |
+| `state`         | `object`             | The state object containing the fetched data and error status.                 |
+| `state.error`   | `error \| undefined` | The error object if an error occurred during the fetch, otherwise `undefined`. |
+| `state.data`    | `any \| undefined`   | The fetched data if the fetch was successful, otherwise `undefined`.           |
+| `state.loading` | `boolean`            | The loading state of the fetch request.                                        |
