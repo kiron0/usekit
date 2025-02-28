@@ -154,7 +154,7 @@ export const Index: Record<string, any> = {
         target: "",
       },
     ],
-    component: React.lazy(() => import("registry/use-counter/use-counter")),
+    component: React.lazy(() => import("registry/examples/use-counter-demo")),
     source: "",
   },
   "use-mouse-position": {
@@ -273,6 +273,20 @@ export const Index: Record<string, any> = {
       },
     ],
     component: React.lazy(() => import("registry/examples/use-scramble-demo")),
+    source: "",
+  },
+  "use-counter-demo": {
+    name: "use-counter-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-counter-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(() => import("registry/examples/use-counter-demo")),
     source: "",
   },
   "use-fetch-demo": {
