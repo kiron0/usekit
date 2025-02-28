@@ -125,7 +125,13 @@ const components = {
     ...props
   }: React.ImgHTMLAttributes<HTMLImageElement>) => (
     // eslint-disable-next-line @next/next/no-img-element
-    <img className={cn("rounded-md", className)} alt={alt} {...props} />
+    <img
+      className={cn("rounded-xl border select-none", className)}
+      alt={alt}
+      draggable={false}
+      onContextMenu={(e) => e.preventDefault()}
+      {...props}
+    />
   ),
   hr: ({ ...props }: React.HTMLAttributes<HTMLHRElement>) => (
     <hr className="my-4 md:my-8" {...props} />
