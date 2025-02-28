@@ -115,6 +115,12 @@ export const docsConfig: DocsConfig = {
           items: [],
           label: "New",
         },
+        {
+          title: "useScramble",
+          href: "/docs/hooks/use-scramble",
+          items: [],
+          label: "New",
+        },
       ],
     },
   ],

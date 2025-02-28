@@ -24,17 +24,12 @@ description: A collection of reusable react hooks that you can copy and paste in
 
 ```tsx {2, 5}
 // Example usage for a hypothetical useLocalStorage hook
-import { useLocalStorage } from '@/hooks/useLocalStorage';
+import { useLocalStorage } from "@/hooks/useLocalStorage"
 
 function DemoComponent() {
-  const [token, setToken] = useLocalStorage('authToken', '');
+  const [token, setToken] = useLocalStorage("authToken", "")
 
-  return (
-    <input
-      value={token}
-      onChange={(e) => setToken(e.target.value)}
-    />
-  );
+  return <input value={token} onChange={(e) => setToken(e.target.value)} />
 }
 ```
 

@@ -247,6 +247,34 @@ export const Index: Record<string, any> = {
     component: React.lazy(() => import("registry/examples/use-script-demo")),
     source: "",
   },
+  "use-scramble": {
+    name: "use-scramble",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/use-scramble/use-scramble.tsx",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(() => import("registry/examples/use-scramble-demo")),
+    source: "",
+  },
+  "use-scramble-demo": {
+    name: "use-scramble-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-scramble-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(() => import("registry/examples/use-scramble-demo")),
+    source: "",
+  },
   "use-fetch-demo": {
     name: "use-fetch-demo",
     type: "registry:example",
