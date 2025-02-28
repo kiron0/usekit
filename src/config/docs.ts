@@ -18,89 +18,99 @@ export const docsConfig: DocsConfig = {
   ],
   sidebarNav: [
     {
+      title: "Getting Started",
+      items: [
+        {
+          title: "Introduction",
+          href: "/docs",
+          items: [],
+        },
+      ],
+    },
+    {
       title: "hooks",
       items: [
         {
-          title: "Use Boolean",
+          title: "useBoolean",
           href: "/docs/hooks/use-boolean",
           items: [],
         },
         {
-          title: "Use Debounce Callback",
+          title: "useDebounceCallback",
           href: "/docs/hooks/use-debounce-callback",
           items: [],
         },
         {
-          title: "Use Fetch",
+          title: "useFetch",
           href: "/docs/hooks/use-fetch",
           items: [],
           label: "New",
         },
         {
-          title: "Use Copy To Clipboard",
+          title: "useCopyToClipboard",
           href: "/docs/hooks/use-copy-to-clipboard",
           items: [],
         },
         {
-          title: "Use Unmount",
+          title: "useUnmount",
           href: "/docs/hooks/use-unmount",
           items: [],
         },
         {
-          title: "Use Toggle",
+          title: "useToggle",
           href: "/docs/hooks/use-toggle",
           items: [],
         },
         {
-          title: "Use Isomorphic Layout Effect",
+          title: "useIsomorphicLayoutEffect",
           href: "/docs/hooks/use-isomorphic-layout-effect",
           items: [],
         },
         {
-          title: "Use Interval",
+          title: "useInterval",
           href: "/docs/hooks/use-interval",
           items: [],
         },
         {
-          title: "Use Battery",
+          title: "useBattery",
           href: "/docs/hooks/use-battery",
           items: [],
           label: "New",
         },
         {
-          title: "Use Timeout",
+          title: "useTimeout",
           href: "/docs/hooks/use-timeout",
           items: [],
         },
         {
-          title: "Use Document Title",
+          title: "useDocumentTitle",
           href: "/docs/hooks/use-document-title",
           items: [],
         },
         {
-          title: "Use Local Storage",
+          title: "useLocalStorage",
           href: "/docs/hooks/use-local-storage",
           items: [],
           label: "New",
         },
         {
-          title: "Use Counter",
+          title: "useCounter",
           href: "/docs/hooks/use-counter",
           items: [],
         },
         {
-          title: "Use Mouse Position",
+          title: "useMousePosition",
           href: "/docs/hooks/use-mouse-position",
           items: [],
         },
         {
-          title: "Use Session Storage",
+          title: "useSessionStorage",
           href: "/docs/hooks/use-session-storage",
           items: [],
           label: "New",
         },
         {
-          title: "Use Script",
+          title: "useScript",
           href: "/docs/hooks/use-script",
           items: [],
           label: "New",

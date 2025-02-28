@@ -67,14 +67,12 @@ export function Customizer() {
 
   return (
     <div className="w-full">
-      <div className="flex items-start pt-4 md:pt-0">
+      <div className="flex items-start py-4 md:pt-0">
         <div className="space-y-1 pr-2">
-          <div className="font-semibold leading-none tracking-tight">
-            Customize
-          </div>
-          <div className="text-xs text-muted-foreground">
+          <p className="font-semibold leading-none tracking-tight">Customize</p>
+          <p className="text-xs text-muted-foreground">
             Pick a style and color for the website.
-          </div>
+          </p>
         </div>
         <Button
           variant="ghost"

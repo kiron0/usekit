@@ -15,8 +15,8 @@ import "@/styles/mdx.css"
 import Link from "next/link"
 
 import { badgeVariants } from "@/components/ui/badge"
-import { Contribute } from "@/components/contribute"
 import { DocGridPattern } from "@/components/doc-grid-pattern"
+import { DocsPager } from "@/components/page"
 import { ScrambleText } from "@/components/scramble-text"
 
 interface DocPageProps {
@@ -139,12 +139,12 @@ export default async function DocPage(props: {
           <div className="pb-12 pt-8">
             <Mdx code={doc.body.code} />
           </div>
+          <DocsPager doc={doc} />
         </div>
         <div className="hidden text-sm xl:block">
           <div className="sticky top-20 -mt-6 h-[calc(100vh-3.5rem)] pt-4">
             <div className="no-scrollbar h-full space-y-4 overflow-auto pb-10">
               {doc.toc && <DashboardTableOfContents toc={toc} />}
-              <Contribute slug={doc.slug} />
             </div>
           </div>
         </div>

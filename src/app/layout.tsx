@@ -1,20 +1,16 @@
 import type { Metadata, Viewport } from "next"
-import { ThemeProvider } from "next-themes"
+import Providers from "@/providers"
 
-import { THEMES } from "@/config/colors"
 import { META_THEME_COLORS, siteConfig } from "@/config/site"
 import { fontMono, fontSans } from "@/lib/fonts"
 import { cn } from "@/lib/utils"
-import { TooltipProvider } from "@/components/ui/tooltip"
 
 import "@/styles/globals.css"
 import "@/styles/themes.css"
 
-import { Toaster } from "@/components/ui/sonner"
-
 export const metadata: Metadata = {
   title: {
-    default: siteConfig.name,
+    default: `${siteConfig.name} - ${siteConfig.slogan}`,
     template: `%s - ${siteConfig.name}`,
   },
   metadataBase: new URL(siteConfig.url),
@@ -28,11 +24,11 @@ export const metadata: Metadata = {
   ],
   authors: [
     {
-      name: "hashtagkiron",
-      url: "https://kiron.dev",
+      name: "toufiqhasankiron",
+      url: "https://toufiqhasankiron.com",
     },
   ],
-  creator: "hashtagkiron",
+  creator: "toufiqhasankiron",
   openGraph: {
     type: "website",
     locale: "en_US",
@@ -54,7 +50,7 @@ export const metadata: Metadata = {
     title: siteConfig.name,
     description: siteConfig.description,
     images: [siteConfig.ogImage],
-    creator: "@strlrd29",
+    creator: "@hashtagkiron",
   },
   icons: {
     icon: "/favicon.ico",
@@ -82,21 +78,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
           fontMono.variable
         )}
       >
-        <ThemeProvider
-          themes={THEMES}
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-          enableColorScheme
-        >
-          <TooltipProvider>
-            <div className="relative flex min-h-svh flex-col bg-background">
-              {children}
-            </div>
-          </TooltipProvider>
-          <Toaster />
-        </ThemeProvider>
+        <Providers>{children}</Providers>
       </body>
     </html>
   )
