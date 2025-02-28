@@ -155,10 +155,10 @@ const ScrambleText = () => {
 
 ### Returns
 
-| Name | Type                          | Description                                                                 |
-|----------|-------------------------------|-----------------------------------------------------------------------------|
-| `ref`    | `React.RefObject<HTMLElement>` | A ref to attach to the HTML element you want to animate.                    |
-| `replay` | `() => void`                  | A function to restart the animation.                                        |
+| Name     | Type                           | Description                                              |
+| -------- | ------------------------------ | -------------------------------------------------------- |
+| `ref`    | `React.RefObject<HTMLElement> \| any` | A ref to attach to the HTML element you want to animate. |
+| `replay` | `() => void`                   | A function to restart the animation.                     |
 
 ## Type Definitions
 
@@ -179,37 +179,42 @@ type RangeOrCharCodes = {
 ## Notes
 
 1. **Reduced Motion Support:**
+
    - If the user has enabled reduced motion (`prefers-reduced-motion: reduce`), the animation will automatically adjust to be less intrusive by setting `step` to the length of the text and `chance` to `0`.
 
 2. **Type Safety:**
+
    - The `ref` returned by the hook is typed as `HTMLElement | null`. You can cast it to a more specific type (e.g., `HTMLHeadingElement`, `HTMLParagraphElement`) when attaching it to an element.
 
 3. **Performance:**
    - The animation uses `requestAnimationFrame` for smooth performance. Ensure the `speed` and `tick` values are optimized for your use case.
 
-
 ## Example Use Cases
 
 1. **Animated Headings:**
+
    - Use the hook to create eye-catching headings for landing pages or portfolios.
 
 2. **Loading Indicators:**
+
    - Scramble text to indicate loading or processing states.
 
 3. **Interactive Text:**
    - Combine the `replay` function with user interactions (e.g., button clicks) to create interactive animations.
 
-
 ## Troubleshooting
 
 ### Animation Doesn't Start
+
 - Ensure the `text` prop is provided and not an empty string.
 - Check if `playOnMount` is set to `true`.
 
 ### Animation is Too Fast or Too Slow
+
 - Adjust the `speed` prop to control the animation speed.
 - Use the `tick` and `step` props to fine-tune the animation behavior.
 
 ### Characters Are Not Scrambling
+
 - Verify that the `chance` prop is set to a value greater than `0`.
 - Ensure the `ignore` prop does not include characters you want to scramble.
