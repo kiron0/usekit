@@ -139,6 +139,12 @@ export const docsConfig: DocsConfig = {
           items: [],
           label: "New",
         },
+        {
+          title: "useWindowSize",
+          href: "/docs/hooks/use-window-size",
+          items: [],
+          label: "New",
+        },
       ],
     },
   ],

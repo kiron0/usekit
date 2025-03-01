@@ -266,6 +266,19 @@ const hooks: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "use-window-size",
+    title: "Use Window Size",
+    description:
+      "Track the dimensions of the browser window with useWindowSize.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "hooks/use-window-size.tsx",
+        type: "registry:hook",
+      },
+    ],
+  },
 ]
 
 const hooksExamples: Registry["items"] = [
@@ -409,6 +422,16 @@ const hooksExamples: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "use-window-size-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "examples/use-window-size-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
 ]
 
 const registryItems = [...hooks, ...hooksExamples]
@@ -416,7 +439,7 @@ const registryItems = [...hooks, ...hooksExamples]
 const registry: Registry = {
   name: "useKit",
   homepage: "https://usekit.kiron.dev",
-  items: registryItems ?? [],
+  items: registryItems,
 } satisfies Registry
 
 async function buildRegistryIndex() {

@@ -245,6 +245,18 @@
           "path": "registry/hooks/use-orientation.tsx"
         }
       ]
+    },
+    {
+      "name": "use-window-size",
+      "title": "Use Window Size",
+      "description": "Track the dimensions of the browser window with useWindowSize.",
+      "type": "registry:hook",
+      "files": [
+        {
+          "type": "registry:hook",
+          "path": "registry/hooks/use-window-size.tsx"
+        }
+      ]
     }
   ]
 }
