@@ -3,8 +3,6 @@ import { promises as fs } from "fs"
 import path from "path"
 import { rimraf } from "rimraf"
 
-import { siteConfig } from "@/config/site"
-
 import { type Registry } from "../registry/schema"
 
 const hooks: Registry["items"] = [
@@ -347,8 +345,8 @@ const hooksExamples: Registry["items"] = [
 const registryItems = [...hooks, ...hooksExamples]
 
 const registry: Registry = {
-  name: siteConfig.name,
-  homepage: siteConfig.url,
+  name: "useKit",
+  homepage: "https://usekit.kiron.dev",
   items: registryItems ?? [],
 } satisfies Registry
 
