@@ -2,7 +2,7 @@
 
 import React from "react"
 import { RefreshCwIcon } from "lucide-react"
-import { useTimeout } from "registry/use-timeout/use-timeout"
+import { useTimeout } from "registry/hooks/use-timeout"
 
 import { Button } from "@/components/ui/button"
 

@@ -11,7 +11,7 @@
       "files": [
         {
           "type": "registry:hook",
-          "path": "registry/use-boolean/use-boolean.tsx"
+          "path": "registry/hooks/use-boolean.tsx"
         }
       ]
     },
@@ -23,7 +23,7 @@
       "files": [
         {
           "type": "registry:hook",
-          "path": "registry/use-toggle/use-toggle.tsx"
+          "path": "registry/hooks/use-toggle.tsx"
         }
       ]
     },
@@ -35,7 +35,7 @@
       "files": [
         {
           "type": "registry:hook",
-          "path": "registry/use-copy-to-clipboard/use-copy-to-clipboard.tsx"
+          "path": "registry/hooks/use-copy-to-clipboard.tsx"
         }
       ]
     },
@@ -47,7 +47,7 @@
       "files": [
         {
           "type": "registry:hook",
-          "path": "registry/use-unmount/use-unmount.tsx"
+          "path": "registry/hooks/use-unmount.tsx"
         }
       ]
     },
@@ -56,13 +56,19 @@
       "title": "Use Debounce Callback",
       "description": "Delay function execution with useDebounceCallback, providing options for canceling, flushing, and checking if a call is pending.",
       "type": "registry:hook",
-      "registryDependencies": ["https://usekit.kiron.dev/r/use-unmount"],
-      "dependencies": ["lodash.debounce"],
-      "devDependencies": ["@types/lodash.debounce"],
+      "registryDependencies": [
+        "https://usekit.kiron.dev/r/use-unmount"
+      ],
+      "dependencies": [
+        "lodash.debounce"
+      ],
+      "devDependencies": [
+        "@types/lodash.debounce"
+      ],
       "files": [
         {
           "type": "registry:hook",
-          "path": "registry/use-debounce-callback/use-debounce-callback.tsx"
+          "path": "registry/hooks/use-debounce-callback.tsx"
         }
       ]
     },
@@ -74,7 +80,7 @@
       "files": [
         {
           "type": "registry:hook",
-          "path": "registry/use-isomorphic-layout-effect/use-isomorphic-layout-effect.tsx"
+          "path": "registry/hooks/use-isomorphic-layout-effect.tsx"
         }
       ]
     },
@@ -86,7 +92,7 @@
       "files": [
         {
           "type": "registry:hook",
-          "path": "registry/use-interval/use-interval.tsx"
+          "path": "registry/hooks/use-interval.tsx"
         }
       ]
     },
@@ -98,7 +104,7 @@
       "files": [
         {
           "type": "registry:hook",
-          "path": "registry/use-timeout/use-timeout.tsx"
+          "path": "registry/hooks/use-timeout.tsx"
         }
       ]
     },
@@ -110,7 +116,7 @@
       "files": [
         {
           "type": "registry:hook",
-          "path": "registry/use-document-title/use-document-title.tsx"
+          "path": "registry/hooks/use-document-title.tsx"
         }
       ]
     },
@@ -122,7 +128,7 @@
       "files": [
         {
           "type": "registry:hook",
-          "path": "registry/use-counter/use-counter.tsx"
+          "path": "registry/hooks/use-counter.tsx"
         }
       ]
     },
@@ -134,7 +140,7 @@
       "files": [
         {
           "type": "registry:hook",
-          "path": "registry/use-mouse-position/use-mouse-position.tsx"
+          "path": "registry/hooks/use-mouse-position.tsx"
         }
       ]
     },
@@ -146,7 +152,7 @@
       "files": [
         {
           "type": "registry:hook",
-          "path": "registry/use-battery/use-battery.tsx"
+          "path": "registry/hooks/use-battery.tsx"
         }
       ]
     },
@@ -158,7 +164,7 @@
       "files": [
         {
           "type": "registry:hook",
-          "path": "registry/use-local-storage/use-local-storage.tsx"
+          "path": "registry/hooks/use-local-storage.tsx"
         }
       ]
     },
@@ -170,7 +176,7 @@
       "files": [
         {
           "type": "registry:hook",
-          "path": "registry/use-session-storage/use-session-storage.tsx"
+          "path": "registry/hooks/use-session-storage.tsx"
         }
       ]
     },
@@ -182,7 +188,7 @@
       "files": [
         {
           "type": "registry:hook",
-          "path": "registry/use-fetch/use-fetch.tsx"
+          "path": "registry/hooks/use-fetch.tsx"
         }
       ]
     },
@@ -194,7 +200,7 @@
       "files": [
         {
           "type": "registry:hook",
-          "path": "registry/use-script/use-script.tsx"
+          "path": "registry/hooks/use-script.tsx"
         }
       ]
     },
@@ -206,7 +212,7 @@
       "files": [
         {
           "type": "registry:hook",
-          "path": "registry/use-scramble/use-scramble.tsx"
+          "path": "registry/hooks/use-scramble.tsx"
         }
       ]
     }

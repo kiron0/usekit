@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { useScript } from "registry/use-script/use-script"
+import { useScript } from "registry/hooks/use-script"
 
 import { Badge } from "@/components/ui/badge"
 

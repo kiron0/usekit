@@ -1,5 +1,5 @@
 import * as React from "react"
-import { useDocumentTitle } from "registry/use-document-title/use-document-title"
+import { useDocumentTitle } from "registry/hooks/use-document-title"
 
 import { Button } from "@/components/ui/button"
 

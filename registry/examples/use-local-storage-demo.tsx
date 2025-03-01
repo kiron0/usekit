@@ -1,6 +1,6 @@
 "use client"
 
-import { useLocalStorage } from "registry/use-local-storage/use-local-storage"
+import { useLocalStorage } from "registry/hooks/use-local-storage"
 
 import { Button } from "@/components/ui/button"
 

@@ -378,7 +378,7 @@ export const Index: Record<string, any> = {`
         typeof file === "string" ? { type: "registry:page", path: file } : file
       )
       if (files?.length) {
-        hookPath = `registry/${item.type === "registry:example" ? "examples" : item.name}/${item.name}${item.type === "registry:example" ? "" : `.${fileExtension}`}`
+        hookPath = `registry/${item.type === "registry:example" ? "examples" : "hooks"}/${item.name}${item.type === "registry:example" ? "" : `.${fileExtension}`}`
       }
       if (item.type !== "registry:example" && !item.name.includes("-demo")) {
         const demoExists = registry.items.some(
@@ -401,7 +401,7 @@ export const Index: Record<string, any> = {`
       return typeof file === "string"
         ? `"${resolvedFilePath}"`
         : `{
-      path: "${`registry/${item.type === "registry:example" ? "examples" : item.name}/${item.name}.${fileExtension}`}",
+      path: "${`registry/${item.type === "registry:example" ? "examples" : "hooks"}/${item.name}.${fileExtension}`}",
       type: "${file.type}",
       target: "${file.target ?? ""}"
     }`
@@ -427,7 +427,9 @@ async function buildRegistryJsonFile() {
       const files = item.files?.map((file) => {
         return {
           type: file.type,
-          path: `registry/${item.name}/${item.name}.tsx`,
+          path: `registry/hooks/${item.name}.${
+            typeof file === "string" ? file : file.path.split(".").pop()
+          }`,
         }
       })
 

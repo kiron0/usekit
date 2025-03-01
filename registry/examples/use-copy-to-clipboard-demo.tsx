@@ -1,5 +1,5 @@
 import { ClipboardCheckIcon, ClipboardIcon } from "lucide-react"
-import { useCopyToClipboard } from "registry/use-copy-to-clipboard/use-copy-to-clipboard"
+import { useCopyToClipboard } from "registry/hooks/use-copy-to-clipboard"
 import { toast } from "sonner"
 
 import { Button } from "@/components/ui/button"

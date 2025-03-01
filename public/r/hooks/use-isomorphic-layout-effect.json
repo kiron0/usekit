@@ -6,7 +6,7 @@
   "description": "Custom hook that uses either useLayoutEffect or useEffect based on the environment (client-side or server-side).",
   "files": [
     {
-      "path": "registry/use-isomorphic-layout-effect/use-isomorphic-layout-effect.tsx",
+      "path": "registry/hooks/use-isomorphic-layout-effect.tsx",
       "content": "\"use client\"\n\nimport * as React from \"react\"\n\nexport const useIsomorphicLayoutEffect =\n  typeof window !== \"undefined\" ? React.useLayoutEffect : React.useEffect\n",
       "type": "registry:hook"
     }

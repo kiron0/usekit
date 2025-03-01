@@ -1,6 +1,6 @@
 "use client"
 
-import { useSessionStorage } from "registry/use-session-storage/use-session-storage"
+import { useSessionStorage } from "registry/hooks/use-session-storage"
 
 import { Button } from "@/components/ui/button"
 
