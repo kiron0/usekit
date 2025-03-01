@@ -1,221 +1,212 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry.json",
-  "name": "usekit",
+  "name": "useKit",
   "homepage": "https://usekit.kiron.dev",
   "items": [
     {
       "name": "use-boolean",
-      "type": "registry:hook",
       "title": "Use Boolean",
       "description": "Manage a boolean state with the useBoolean hook, providing methods to set it to true, false, or toggle between them",
-      "files": [
-        {
-          "path": "registry/use-boolean/use-boolean.tsx",
-          "type": "registry:hook"
-        }
-      ]
-    },
-    {
-      "name": "use-copy-to-clipboard",
       "type": "registry:hook",
-      "title": "Use Copy To Clipboard",
-      "description": "Use the useCopyToClipboard hook to copy text to the clipboard and track whether the copy action was successful, with an optional delay to reset the copied state.",
       "files": [
         {
-          "path": "registry/use-copy-to-clipboard/use-copy-to-clipboard.tsx",
-          "type": "registry:hook"
-        }
-      ]
-    },
-    {
-      "name": "use-counter",
-      "type": "registry:hook",
-      "title": "Use Counter",
-      "description": "Manage a numeric state with useCounter, offering functions to increment, decrement, reset, and set a custom value.",
-      "files": [
-        {
-          "path": "registry/use-counter/use-counter.tsx",
-          "type": "registry:hook"
+          "type": "registry:hook",
+          "path": "registry/use-boolean/use-boolean.tsx"
         }
       ]
     },
     {
       "name": "use-toggle",
-      "type": "registry:hook",
       "title": "Use Toggle",
       "description": "Easily manage a boolean state with useToggle.",
+      "type": "registry:hook",
       "files": [
         {
-          "path": "registry/use-toggle/use-toggle.tsx",
-          "type": "registry:hook"
+          "type": "registry:hook",
+          "path": "registry/use-toggle/use-toggle.tsx"
+        }
+      ]
+    },
+    {
+      "name": "use-copy-to-clipboard",
+      "title": "Use Copy To Clipboard",
+      "description": "Use the useCopyToClipboard hook to copy text to the clipboard and track whether the copy action was successful, with an optional delay to reset the copied state.",
+      "type": "registry:hook",
+      "files": [
+        {
+          "type": "registry:hook",
+          "path": "registry/use-copy-to-clipboard/use-copy-to-clipboard.tsx"
         }
       ]
     },
     {
       "name": "use-unmount",
-      "type": "registry:hook",
       "title": "Use Unmount",
       "description": "Run a function when a component unmounts, ensuring cleanups or final actions are handled effectively.",
+      "type": "registry:hook",
       "files": [
         {
-          "path": "registry/use-unmount/use-unmount.tsx",
-          "type": "registry:hook"
+          "type": "registry:hook",
+          "path": "registry/use-unmount/use-unmount.tsx"
         }
       ]
     },
     {
       "name": "use-debounce-callback",
-      "type": "registry:hook",
       "title": "Use Debounce Callback",
       "description": "Delay function execution with useDebounceCallback, providing options for canceling, flushing, and checking if a call is pending.",
+      "type": "registry:hook",
+      "registryDependencies": ["https://usekit.kiron.dev/r/use-unmount"],
+      "dependencies": ["lodash.debounce"],
+      "devDependencies": ["@types/lodash.debounce"],
       "files": [
         {
-          "path": "registry/use-debounce-callback/use-debounce-callback.tsx",
-          "type": "registry:hook"
+          "type": "registry:hook",
+          "path": "registry/use-debounce-callback/use-debounce-callback.tsx"
         }
       ]
     },
     {
       "name": "use-isomorphic-layout-effect",
-      "type": "registry:hook",
       "title": "Use Isomorphic Layout Effect",
       "description": "Custom hook that uses either useLayoutEffect or useEffect based on the environment (client-side or server-side).",
+      "type": "registry:hook",
       "files": [
         {
-          "path": "registry/use-isomorphic-layout-effect/use-isomorphic-layout-effect.tsx",
-          "type": "registry:hook"
+          "type": "registry:hook",
+          "path": "registry/use-isomorphic-layout-effect/use-isomorphic-layout-effect.tsx"
         }
       ]
     },
     {
       "name": "use-interval",
-      "type": "registry:hook",
       "title": "Use Interval",
       "description": "Execute a callback function at specified intervals with useInterval, supporting dynamic delays and cleanup on unmount.",
+      "type": "registry:hook",
       "files": [
         {
-          "path": "registry/use-interval/use-interval.tsx",
-          "type": "registry:hook"
+          "type": "registry:hook",
+          "path": "registry/use-interval/use-interval.tsx"
         }
       ]
     },
     {
       "name": "use-timeout",
-      "type": "registry:hook",
       "title": "Use Timeout",
       "description": "Run a callback function after a specified delay with useTimeout.",
+      "type": "registry:hook",
       "files": [
         {
-          "path": "registry/use-timeout/use-timeout.tsx",
-          "type": "registry:hook"
+          "type": "registry:hook",
+          "path": "registry/use-timeout/use-timeout.tsx"
         }
       ]
     },
     {
       "name": "use-document-title",
-      "type": "registry:hook",
       "title": "Use Document Title",
       "description": "Dynamically update the document title. Pass a string, and the document title updates whenever the value changes.",
+      "type": "registry:hook",
       "files": [
         {
-          "path": "registry/use-document-title/use-document-title.tsx",
-          "type": "registry:hook"
+          "type": "registry:hook",
+          "path": "registry/use-document-title/use-document-title.tsx"
         }
       ]
     },
     {
       "name": "use-counter",
-      "type": "registry:hook",
-      "title": "Use Document Title",
+      "title": "Use Counter",
       "description": "Manage a numeric state with useCounter, offering functions to increment, decrement, reset, and set a custom value.",
+      "type": "registry:hook",
       "files": [
         {
-          "path": "registry/use-counter/use-counter.tsx",
-          "type": "registry:hook"
+          "type": "registry:hook",
+          "path": "registry/use-counter/use-counter.tsx"
         }
       ]
     },
     {
       "name": "use-mouse-position",
-      "type": "registry:hook",
       "title": "Use Mouse Position",
       "description": "Use the useCopyToClipboard hook to copy text to the clipboard and track whether the copy action was successful, with an optional delay to reset the copied state.",
+      "type": "registry:hook",
       "files": [
         {
-          "path": "registry/use-mouse-position/use-mouse-position.tsx",
-          "type": "registry:hook"
+          "type": "registry:hook",
+          "path": "registry/use-mouse-position/use-mouse-position.tsx"
         }
       ]
     },
     {
       "name": "use-battery",
-      "type": "registry:hook",
       "title": "Use Battery",
       "description": "Track the battery status of a user's device with useBattery.",
-      "files": [
-        {
-          "path": "registry/use-battery/use-battery.tsx",
-          "type": "registry:hook"
-        }
-      ]
-    },
-    {
-      "name": "use-fetch",
       "type": "registry:hook",
-      "title": "Use Battery",
-      "description": "Fetch data with accurate states, caching, and no stale responses using useFetch.",
       "files": [
         {
-          "path": "registry/use-fetch/use-fetch.tsx",
-          "type": "registry:hook"
+          "type": "registry:hook",
+          "path": "registry/use-battery/use-battery.tsx"
         }
       ]
     },
     {
       "name": "use-local-storage",
-      "type": "registry:hook",
       "title": "Use Local Storage",
       "description": "Store, retrieve, and synchronize data from the browser's localStorage API with useLocalStorage.",
+      "type": "registry:hook",
       "files": [
         {
-          "path": "registry/use-local-storage/use-local-storage.tsx",
-          "type": "registry:hook"
+          "type": "registry:hook",
+          "path": "registry/use-local-storage/use-local-storage.tsx"
         }
       ]
     },
     {
       "name": "use-session-storage",
-      "type": "registry:hook",
       "title": "Use Session Storage",
       "description": "Store, retrieve, and synchronize data from the browser's sessionStorage API with useSessionStorage.",
+      "type": "registry:hook",
       "files": [
         {
-          "path": "registry/use-session-storage/use-session-storage.tsx",
-          "type": "registry:hook"
+          "type": "registry:hook",
+          "path": "registry/use-session-storage/use-session-storage.tsx"
+        }
+      ]
+    },
+    {
+      "name": "use-fetch",
+      "title": "Use Battery",
+      "description": "Fetch data with accurate states, caching, and no stale responses using useFetch.",
+      "type": "registry:hook",
+      "files": [
+        {
+          "type": "registry:hook",
+          "path": "registry/use-fetch/use-fetch.tsx"
         }
       ]
     },
     {
       "name": "use-script",
-      "type": "registry:hook",
       "title": "Use Script",
       "description": "Load and manage external JavaScript scripts with useScript.",
+      "type": "registry:hook",
       "files": [
         {
-          "path": "registry/use-script/use-script.tsx",
-          "type": "registry:hook"
+          "type": "registry:hook",
+          "path": "registry/use-script/use-script.tsx"
         }
       ]
     },
     {
       "name": "use-scramble",
-      "type": "registry:hook",
       "title": "Use Scramble",
       "description": "Scramble text with the useScramble hook, providing methods to scramble, unscramble, and toggle between them.",
+      "type": "registry:hook",
       "files": [
         {
-          "path": "registry/use-scramble/use-scramble.tsx",
-          "type": "registry:hook"
+          "type": "registry:hook",
+          "path": "registry/use-scramble/use-scramble.tsx"
         }
       ]
     }

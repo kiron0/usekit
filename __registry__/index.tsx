@@ -17,7 +17,7 @@ export const Index: Record<string, any> = {
         target: "",
       },
     ],
-    component: React.lazy(() => import("registry/use-boolean/use-boolean")),
+    component: React.lazy(() => import("registry/use-boolean/use-boolean.tsx")),
     source: "",
   },
   "use-toggle": {
@@ -31,7 +31,7 @@ export const Index: Record<string, any> = {
         target: "",
       },
     ],
-    component: React.lazy(() => import("registry/use-toggle/use-toggle")),
+    component: React.lazy(() => import("registry/use-toggle/use-toggle.tsx")),
     source: "",
   },
   "use-copy-to-clipboard": {
@@ -61,7 +61,7 @@ export const Index: Record<string, any> = {
         target: "",
       },
     ],
-    component: React.lazy(() => import("registry/use-unmount/use-unmount")),
+    component: React.lazy(() => import("registry/use-unmount/use-unmount.tsx")),
     source: "",
   },
   "use-debounce-callback": {
@@ -76,7 +76,7 @@ export const Index: Record<string, any> = {
       },
     ],
     component: React.lazy(
-      () => import("registry/use-debounce-callback/use-debounce-callback")
+      () => import("registry/use-debounce-callback/use-debounce-callback.tsx")
     ),
     source: "",
   },
@@ -94,7 +94,7 @@ export const Index: Record<string, any> = {
     component: React.lazy(
       () =>
         import(
-          "registry/use-isomorphic-layout-effect/use-isomorphic-layout-effect"
+          "registry/use-isomorphic-layout-effect/use-isomorphic-layout-effect.tsx"
         )
     ),
     source: "",
@@ -110,7 +110,7 @@ export const Index: Record<string, any> = {
         target: "",
       },
     ],
-    component: React.lazy(() => import("registry/use-interval/use-interval")),
+    component: React.lazy(() => import("registry/examples/use-interval-demo")),
     source: "",
   },
   "use-timeout": {
@@ -124,7 +124,7 @@ export const Index: Record<string, any> = {
         target: "",
       },
     ],
-    component: React.lazy(() => import("registry/use-timeout/use-timeout")),
+    component: React.lazy(() => import("registry/examples/use-timeout-demo")),
     source: "",
   },
   "use-document-title": {
@@ -139,7 +139,7 @@ export const Index: Record<string, any> = {
       },
     ],
     component: React.lazy(
-      () => import("registry/use-document-title/use-document-title")
+      () => import("registry/examples/use-document-title-demo")
     ),
     source: "",
   },
@@ -169,7 +169,7 @@ export const Index: Record<string, any> = {
       },
     ],
     component: React.lazy(
-      () => import("registry/use-mouse-position/use-mouse-position")
+      () => import("registry/examples/use-mouse-position-demo")
     ),
     source: "",
   },
@@ -184,7 +184,7 @@ export const Index: Record<string, any> = {
         target: "",
       },
     ],
-    component: React.lazy(() => import("registry/use-battery/use-battery")),
+    component: React.lazy(() => import("registry/use-battery/use-battery.tsx")),
     source: "",
   },
   "use-local-storage": {
@@ -261,94 +261,6 @@ export const Index: Record<string, any> = {
     component: React.lazy(() => import("registry/examples/use-scramble-demo")),
     source: "",
   },
-  "use-scramble-demo": {
-    name: "use-scramble-demo",
-    type: "registry:example",
-    registryDependencies: undefined,
-    files: [
-      {
-        path: "registry/examples/use-scramble-demo.tsx",
-        type: "registry:example",
-        target: "",
-      },
-    ],
-    component: React.lazy(() => import("registry/examples/use-scramble-demo")),
-    source: "",
-  },
-  "use-counter-demo": {
-    name: "use-counter-demo",
-    type: "registry:example",
-    registryDependencies: undefined,
-    files: [
-      {
-        path: "registry/examples/use-counter-demo.tsx",
-        type: "registry:example",
-        target: "",
-      },
-    ],
-    component: React.lazy(() => import("registry/examples/use-counter-demo")),
-    source: "",
-  },
-  "use-fetch-demo": {
-    name: "use-fetch-demo",
-    type: "registry:example",
-    registryDependencies: undefined,
-    files: [
-      {
-        path: "registry/examples/use-fetch-demo.tsx",
-        type: "registry:example",
-        target: "",
-      },
-    ],
-    component: React.lazy(() => import("registry/examples/use-fetch-demo")),
-    source: "",
-  },
-  "use-local-storage-demo": {
-    name: "use-local-storage-demo",
-    type: "registry:example",
-    registryDependencies: undefined,
-    files: [
-      {
-        path: "registry/examples/use-local-storage-demo.tsx",
-        type: "registry:example",
-        target: "",
-      },
-    ],
-    component: React.lazy(
-      () => import("registry/examples/use-local-storage-demo")
-    ),
-    source: "",
-  },
-  "use-session-storage-demo": {
-    name: "use-session-storage-demo",
-    type: "registry:example",
-    registryDependencies: undefined,
-    files: [
-      {
-        path: "registry/examples/use-session-storage-demo.tsx",
-        type: "registry:example",
-        target: "",
-      },
-    ],
-    component: React.lazy(
-      () => import("registry/examples/use-session-storage-demo")
-    ),
-    source: "",
-  },
-  "use-script-demo": {
-    name: "use-script-demo",
-    type: "registry:example",
-    registryDependencies: undefined,
-    files: [
-      {
-        path: "registry/examples/use-script-demo.tsx",
-        type: "registry:example",
-        target: "",
-      },
-    ],
-    component: React.lazy(() => import("registry/examples/use-script-demo")),
-    source: "",
-  },
   "use-copy-to-clipboard-demo": {
     name: "use-copy-to-clipboard-demo",
     type: "registry:example",
@@ -423,6 +335,94 @@ export const Index: Record<string, any> = {
     component: React.lazy(
       () => import("registry/examples/use-mouse-position-demo")
     ),
+    source: "",
+  },
+  "use-counter-demo": {
+    name: "use-counter-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-counter-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(() => import("registry/examples/use-counter-demo")),
+    source: "",
+  },
+  "use-scramble-demo": {
+    name: "use-scramble-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-scramble-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(() => import("registry/examples/use-scramble-demo")),
+    source: "",
+  },
+  "use-fetch-demo": {
+    name: "use-fetch-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-fetch-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(() => import("registry/examples/use-fetch-demo")),
+    source: "",
+  },
+  "use-local-storage-demo": {
+    name: "use-local-storage-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-local-storage-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-local-storage-demo")
+    ),
+    source: "",
+  },
+  "use-session-storage-demo": {
+    name: "use-session-storage-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-session-storage-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-session-storage-demo")
+    ),
+    source: "",
+  },
+  "use-script-demo": {
+    name: "use-script-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-script-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(() => import("registry/examples/use-script-demo")),
     source: "",
   },
 }
