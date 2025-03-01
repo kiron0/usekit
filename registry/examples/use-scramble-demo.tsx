@@ -1,6 +1,6 @@
 "use client"
 
-import { useScramble } from "registry/use-scramble/use-scramble"
+import { useScramble } from "registry/hooks/use-scramble"
 
 import { Button } from "@/components/ui/button"
 

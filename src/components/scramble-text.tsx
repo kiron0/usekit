@@ -1,7 +1,7 @@
 "use client"
 
 import React from "react"
-import { useScramble } from "registry/use-scramble/use-scramble"
+import { useScramble } from "registry/hooks/use-scramble"
 
 interface ScrambleTextProps {
   text: string

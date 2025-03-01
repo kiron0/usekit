@@ -1,6 +1,6 @@
 "use client"
 
-import { useCounter } from "registry/use-counter/use-counter"
+import { useCounter } from "registry/hooks/use-counter"
 
 import { Button } from "@/components/ui/button"
 

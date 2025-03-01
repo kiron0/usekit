@@ -4,7 +4,7 @@ import { createPortal } from "react-dom"
 import {
   useMousePosition,
   type Position,
-} from "registry/use-mouse-position/use-mouse-position"
+} from "registry/hooks/use-mouse-position"
 
 import { cn } from "@/lib/utils"
 
