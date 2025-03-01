@@ -16,7 +16,7 @@ import Link from "next/link"
 
 import { badgeVariants } from "@/components/ui/badge"
 import { DocGridPattern } from "@/components/doc-grid-pattern"
-import { DocsPager } from "@/components/page"
+import { DocsPager } from "@/components/pager"
 import { ScrambleText } from "@/components/scramble-text"
 
 interface DocPageProps {
