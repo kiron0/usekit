@@ -209,6 +209,18 @@
           "path": "registry/hooks/use-scramble.tsx"
         }
       ]
+    },
+    {
+      "name": "use-intersection-observer",
+      "title": "Use Intersection Observer",
+      "description": "A hook that provides a way to detect when an element enters or leaves the viewport using the Intersection Observer API.",
+      "type": "registry:hook",
+      "files": [
+        {
+          "type": "registry:hook",
+          "path": "registry/hooks/use-intersection-observer.tsx"
+        }
+      ]
     }
   ]
 }

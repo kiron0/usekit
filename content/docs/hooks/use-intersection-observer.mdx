@@ -1,0 +1,109 @@
+---
+title: useIntersectionObserver
+description: A hook that provides a way to detect when an element enters or leaves the viewport using the Intersection Observer API.
+links:
+  Intersection Observer API: https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API
+---
+
+<ComponentPreview name="use-intersection-observer-demo" />
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://usekit.kiron.dev/r/use-intersection-observer
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="use-intersection-observer" />
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+```tsx {3, 8-11}
+import * as React from "react"
+
+import { useIntersectionObserver } from "@/hooks/use-intersection-observer"
+
+export function Component() {
+  const targetRef = React.useRef<HTMLDivElement>(null)
+
+  const entry = useIntersectionObserver(targetRef, {
+    threshold: 0.5, // Trigger when 50% of the element is visible
+    rootMargin: "0px", // No margin around the root
+  })
+
+  const isVisible = entry?.isIntersecting ?? false
+
+  return (
+    <div
+      ref={targetRef}
+      style={{
+        width: "100px",
+        height: "100px",
+        backgroundColor: isVisible ? "green" : "red",
+      }}
+    >
+      {isVisible ? "Visible" : "Not Visible"}
+    </div>
+  )
+}
+```
+
+## API Reference
+
+### Parameters
+
+| Name         | Type                           | Description                                                   |
+| ------------ | ------------------------------ | ------------------------------------------------------------- |
+| `elementRef` | `React.RefObject<T>`           | A React ref object pointing to the target element to observe. |
+| `options?`   | `UseIntersectionObserverProps` | Optional configuration for the Intersection Observer.         |
+
+#### `UseIntersectionObserverProps`
+
+| Name          | Type                          | Default | Description                                                                 |
+| ------------- | ----------------------------- | ------- | --------------------------------------------------------------------------- |
+| `threshold?`  | `number \| number[]`          | `0`     | The percentage of the target's visibility required to trigger the observer. |
+| `root?`       | `Element \| Document \| null` | `null`  | The root element used as the viewport for checking visibility.              |
+| `rootMargin?` | `string`                      | `"0%"`  | Margin around the root element to grow or shrink the intersection area.     |
+
+### Returns
+
+| Name    | Type                                     | Description                                                                  |
+| ------- | ---------------------------------------- | ---------------------------------------------------------------------------- |
+| `entry` | `IntersectionObserverEntry \| undefined` | The intersection observer entry containing details about the target element. |
+
+#### `IntersectionObserverEntry` Key Properties
+
+| Name                 | Type                      | Description                                                         |
+| -------------------- | ------------------------- | ------------------------------------------------------------------- |
+| `isIntersecting`     | `boolean`                 | Indicates whether the target element is intersecting with the root. |
+| `intersectionRatio`  | `number`                  | The ratio of the target element's visibility (between `0` and `1`). |
+| `boundingClientRect` | `DOMRectReadOnly`         | The bounding rectangle of the target element.                       |
+| `rootBounds`         | `DOMRectReadOnly \| null` | The bounding rectangle of the root element.                         |
+| `time`               | `number`                  | The timestamp when the intersection was recorded.                   |
+
+### Notes
+
+- Ensure the `IntersectionObserver` API is supported in your target browsers. If not, consider using a polyfill.
+- The hook automatically cleans up the observer when the component unmounts or the `elementRef` changes.

@@ -227,6 +227,19 @@ const hooks: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "use-intersection-observer",
+    title: "Use Intersection Observer",
+    description:
+      "A hook that provides a way to detect when an element enters or leaves the viewport using the Intersection Observer API.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "hooks/use-intersection-observer.tsx",
+        type: "registry:hook",
+      },
+    ],
+  },
 ]
 
 const hooksExamples: Registry["items"] = [
@@ -336,6 +349,16 @@ const hooksExamples: Registry["items"] = [
     files: [
       {
         path: "examples/use-script-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-intersection-observer-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "examples/use-intersection-observer-demo.tsx",
         type: "registry:example",
       },
     ],

@@ -258,6 +258,22 @@ export const Index: Record<string, any> = {
     component: React.lazy(() => import("registry/examples/use-scramble-demo")),
     source: "",
   },
+  "use-intersection-observer": {
+    name: "use-intersection-observer",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-intersection-observer.tsx",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-intersection-observer-demo")
+    ),
+    source: "",
+  },
   "use-copy-to-clipboard-demo": {
     name: "use-copy-to-clipboard-demo",
     type: "registry:example",
@@ -420,6 +436,22 @@ export const Index: Record<string, any> = {
       },
     ],
     component: React.lazy(() => import("registry/examples/use-script-demo")),
+    source: "",
+  },
+  "use-intersection-observer-demo": {
+    name: "use-intersection-observer-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-intersection-observer-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-intersection-observer-demo")
+    ),
     source: "",
   },
 }

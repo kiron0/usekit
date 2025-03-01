@@ -121,6 +121,12 @@ export const docsConfig: DocsConfig = {
           items: [],
           label: "New",
         },
+        {
+          title: "useIntersectionObserver",
+          href: "/docs/hooks/use-intersection-observer",
+          items: [],
+          label: "New",
+        },
       ],
     },
   ],
