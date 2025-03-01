@@ -133,6 +133,12 @@ export const docsConfig: DocsConfig = {
           items: [],
           label: "New",
         },
+        {
+          title: "useOrientation",
+          href: "/docs/hooks/use-orientation",
+          items: [],
+          label: "New",
+        },
       ],
     },
   ],

@@ -233,6 +233,18 @@
           "path": "registry/hooks/use-render-count.tsx"
         }
       ]
+    },
+    {
+      "name": "use-orientation",
+      "title": "Use Orientation",
+      "description": "Manage and respond to changes in device orientation with useOrientation.",
+      "type": "registry:hook",
+      "files": [
+        {
+          "type": "registry:hook",
+          "path": "registry/hooks/use-orientation.tsx"
+        }
+      ]
     }
   ]
 }

@@ -290,6 +290,22 @@ export const Index: Record<string, any> = {
     ),
     source: "",
   },
+  "use-orientation": {
+    name: "use-orientation",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-orientation.tsx",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-orientation-demo")
+    ),
+    source: "",
+  },
   "use-copy-to-clipboard-demo": {
     name: "use-copy-to-clipboard-demo",
     type: "registry:example",
@@ -483,6 +499,22 @@ export const Index: Record<string, any> = {
     ],
     component: React.lazy(
       () => import("registry/examples/use-render-count-demo")
+    ),
+    source: "",
+  },
+  "use-orientation-demo": {
+    name: "use-orientation-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-orientation-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-orientation-demo")
     ),
     source: "",
   },

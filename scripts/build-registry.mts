@@ -253,6 +253,19 @@ const hooks: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "use-orientation",
+    title: "Use Orientation",
+    description:
+      "Manage and respond to changes in device orientation with useOrientation.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "hooks/use-orientation.tsx",
+        type: "registry:hook",
+      },
+    ],
+  },
 ]
 
 const hooksExamples: Registry["items"] = [
@@ -382,6 +395,16 @@ const hooksExamples: Registry["items"] = [
     files: [
       {
         path: "examples/use-render-count-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-orientation-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "examples/use-orientation-demo.tsx",
         type: "registry:example",
       },
     ],

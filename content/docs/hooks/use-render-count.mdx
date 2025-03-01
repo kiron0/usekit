@@ -43,7 +43,7 @@ import * as React from "react"
 
 import { useRenderCount } from "@/hooks/use-render-count"
 
-export default function UseRenderCountDemo() {
+export function Component() {
   const { count, isStrictMode } = useRenderCount()
   const [numberCount, setNumberCount] = React.useState(0)
 
