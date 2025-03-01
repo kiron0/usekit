@@ -257,6 +257,18 @@
           "path": "registry/hooks/use-window-size.tsx"
         }
       ]
+    },
+    {
+      "name": "use-hover",
+      "title": "Use Hover",
+      "description": "Track whether an element is being hovered over with useHover.",
+      "type": "registry:hook",
+      "files": [
+        {
+          "type": "registry:hook",
+          "path": "registry/hooks/use-hover.tsx"
+        }
+      ]
     }
   ]
 }

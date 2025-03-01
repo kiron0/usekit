@@ -145,6 +145,12 @@ export const docsConfig: DocsConfig = {
           items: [],
           label: "New",
         },
+        {
+          title: "useHover",
+          href: "/docs/hooks/use-hover",
+          items: [],
+          label: "New",
+        },
       ],
     },
   ],

@@ -322,6 +322,20 @@ export const Index: Record<string, any> = {
     ),
     source: "",
   },
+  "use-hover": {
+    name: "use-hover",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-hover.tsx",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(() => import("registry/examples/use-hover-demo")),
+    source: "",
+  },
   "use-copy-to-clipboard-demo": {
     name: "use-copy-to-clipboard-demo",
     type: "registry:example",
@@ -548,6 +562,20 @@ export const Index: Record<string, any> = {
     component: React.lazy(
       () => import("registry/examples/use-window-size-demo")
     ),
+    source: "",
+  },
+  "use-hover-demo": {
+    name: "use-hover-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-hover-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(() => import("registry/examples/use-hover-demo")),
     source: "",
   },
 }

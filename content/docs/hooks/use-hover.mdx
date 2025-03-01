@@ -1,0 +1,70 @@
+---
+title: useHover
+description: Track whether an element is being hovered over with useHover.
+---
+
+<ComponentPreview name="use-hover-demo" />
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://usekit.kiron.dev/r/use-hover
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="use-hover" />
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+```tsx {3, 7}
+"use client"
+
+import { useHover } from "@/hooks/use-hover"
+
+export function Component() {
+  const [hoverRef, hovering] = useHover()
+
+  return (
+    <div
+      ref={hoverRef}
+      style={{
+        padding: "20px",
+        backgroundColor: isHovered ? "lightblue" : "white",
+      }}
+    >
+      {hovering ? "Hovering!" : "Hover over me"}
+    </div>
+  )
+}
+```
+
+## API Reference
+
+### Returns
+
+| Index | Type      | Description                                                                |
+| ----- | --------- | -------------------------------------------------------------------------- |
+| `0`   | `ref`     | A ref object that can be attached to the element intended to be hovered.   |
+| `1`   | `boolean` | A boolean value indicating whether the element is currently being hovered. |

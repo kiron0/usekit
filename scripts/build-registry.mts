@@ -279,6 +279,19 @@ const hooks: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "use-hover",
+    title: "Use Hover",
+    description:
+      "Track whether an element is being hovered over with useHover.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "hooks/use-hover.tsx",
+        type: "registry:hook",
+      },
+    ],
+  },
 ]
 
 const hooksExamples: Registry["items"] = [
@@ -428,6 +441,16 @@ const hooksExamples: Registry["items"] = [
     files: [
       {
         path: "examples/use-window-size-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-hover-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "examples/use-hover-demo.tsx",
         type: "registry:example",
       },
     ],
