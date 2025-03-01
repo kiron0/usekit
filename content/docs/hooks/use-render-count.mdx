@@ -1,0 +1,72 @@
+---
+title: useRenderCount
+description: Identify unnecessary re-renders and monitor update frequency with useRenderCount.
+---
+
+<ComponentPreview name="use-render-count-demo" />
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://usekit.kiron.dev/r/use-render-count
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="use-render-count" />
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+```tsx {3, 6}
+import * as React from "react"
+
+import { useRenderCount } from "@/hooks/use-render-count"
+
+export default function UseRenderCountDemo() {
+  const { count, isStrictMode } = useRenderCount()
+  const [numberCount, setNumberCount] = React.useState(0)
+
+  return (
+    <section>
+      <header>
+        <h1>useRenderCount</h1>
+        <h6>Strict Mode: {isStrictMode ? "Enabled" : "Disabled"}</h6>
+      </header>
+      <button className="primary" onClick={() => setNumberCount((c) => c + 1)}>
+        Increment
+      </button>
+      <p>Count: {numberCount}</p>
+      <p>Render Count: {renderCount}</p>
+    </section>
+  )
+}
+```
+
+## API Reference
+
+### Returns
+
+| Name          | Type                 | Description                                           |
+| ------------- | -------------------- | ----------------------------------------------------- |
+| `renderCount` | `React.RefObject<T>` | The total number of times the component has rendered. |

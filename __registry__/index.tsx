@@ -274,6 +274,22 @@ export const Index: Record<string, any> = {
     ),
     source: "",
   },
+  "use-render-count": {
+    name: "use-render-count",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-render-count.tsx",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-render-count-demo")
+    ),
+    source: "",
+  },
   "use-copy-to-clipboard-demo": {
     name: "use-copy-to-clipboard-demo",
     type: "registry:example",
@@ -451,6 +467,22 @@ export const Index: Record<string, any> = {
     ],
     component: React.lazy(
       () => import("registry/examples/use-intersection-observer-demo")
+    ),
+    source: "",
+  },
+  "use-render-count-demo": {
+    name: "use-render-count-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-render-count-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-render-count-demo")
     ),
     source: "",
   },

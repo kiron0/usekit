@@ -240,6 +240,19 @@ const hooks: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "use-render-count",
+    title: "Use Render Count",
+    description:
+      "Identify unnecessary re-renders and monitor update frequency with useRenderCount.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "hooks/use-render-count.tsx",
+        type: "registry:hook",
+      },
+    ],
+  },
 ]
 
 const hooksExamples: Registry["items"] = [
@@ -359,6 +372,16 @@ const hooksExamples: Registry["items"] = [
     files: [
       {
         path: "examples/use-intersection-observer-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-render-count-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "examples/use-render-count-demo.tsx",
         type: "registry:example",
       },
     ],

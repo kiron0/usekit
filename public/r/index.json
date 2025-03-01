@@ -221,6 +221,18 @@
           "path": "registry/hooks/use-intersection-observer.tsx"
         }
       ]
+    },
+    {
+      "name": "use-render-count",
+      "title": "Use Render Count",
+      "description": "Identify unnecessary re-renders and monitor update frequency with useRenderCount.",
+      "type": "registry:hook",
+      "files": [
+        {
+          "type": "registry:hook",
+          "path": "registry/hooks/use-render-count.tsx"
+        }
+      ]
     }
   ]
 }

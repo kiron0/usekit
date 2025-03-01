@@ -5,7 +5,7 @@ import { useIntersectionObserver } from "registry/hooks/use-intersection-observe
 
 import { cn } from "@/lib/utils"
 
-export default function Component() {
+export default function UseIntersectionObserverDemo() {
   const targetRef = React.useRef<HTMLDivElement>(null)
 
   const entry = useIntersectionObserver(targetRef, {

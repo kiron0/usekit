@@ -127,6 +127,12 @@ export const docsConfig: DocsConfig = {
           items: [],
           label: "New",
         },
+        {
+          title: "useRenderCount",
+          href: "/docs/hooks/use-render-count",
+          items: [],
+          label: "New",
+        },
       ],
     },
   ],
