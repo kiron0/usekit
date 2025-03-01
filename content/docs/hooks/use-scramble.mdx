@@ -41,7 +41,7 @@ npx shadcn@latest add https://usekit.kiron.dev/r/use-scramble
 ### Basic Example
 
 ```tsx {3, 6-20}
-import React from "react"
+"use client"
 
 import { useScramble } from "@/hooks/use-scramble"
 
@@ -131,35 +131,6 @@ const ScrambleText = () => {
 }
 ```
 
-## API Reference
-
-### Props
-
-| Name               | Type                       | Default Value | Description                                                                  |
-| ------------------ | -------------------------- | ------------- | ---------------------------------------------------------------------------- |
-| `playOnMount`      | `boolean`                  | `true`        | If `true`, the animation will play automatically when the component mounts.  |
-| `text`             | `string`                   | `''`          | The text to animate.                                                         |
-| `speed`            | `number`                   | `1`           | Animation speed (0-1). `1` is the fastest, `0` pauses the animation.         |
-| `tick`             | `number`                   | `1`           | How many frames to wait before moving the scramble controller forward.       |
-| `step`             | `number`                   | `1`           | How many characters to scramble on each tick.                                |
-| `chance`           | `number`                   | `1`           | Chance of scrambling a character (0-1). `1` means 100% chance.               |
-| `seed`             | `number`                   | `1`           | Number of characters to scramble randomly ahead of the scramble index.       |
-| `scramble`         | `number`                   | `1`           | How many times to scramble each character.                                   |
-| `ignore`           | `string[]`                 | `[' ']`       | Characters to avoid scrambling (e.g., spaces).                               |
-| `range`            | `RangeOrCharCodes`         | `[65, 125]`   | Unicode character range for scrambling.                                      |
-| `overdrive`        | `boolean` or `number`      | `true`        | Enables overdrive mode. If a number is provided, it sets the Unicode code.   |
-| `overflow`         | `boolean`                  | `true`        | If `true`, the animation starts from an empty string.                        |
-| `onAnimationStart` | `Function`                 | `undefined`   | Callback triggered when the animation starts.                                |
-| `onAnimationEnd`   | `Function`                 | `undefined`   | Callback triggered when the animation ends.                                  |
-| `onAnimationFrame` | `(result: string) => void` | `undefined`   | Callback triggered on every animation frame with the current scrambled text. |
-
-### Returns
-
-| Name     | Type                                  | Description                                              |
-| -------- | ------------------------------------- | -------------------------------------------------------- |
-| `ref`    | `React.RefObject<HTMLElement> \| any` | A ref to attach to the HTML element you want to animate. |
-| `replay` | `() => void`                          | A function to restart the animation.                     |
-
 ## Type Definitions
 
 ### `RangeOrCharCodes`
@@ -218,3 +189,32 @@ type RangeOrCharCodes = {
 
 - Verify that the `chance` prop is set to a value greater than `0`.
 - Ensure the `ignore` prop does not include characters you want to scramble.
+
+## API Reference
+
+### Props
+
+| Name               | Type                       | Default Value | Description                                                                  |
+| ------------------ | -------------------------- | ------------- | ---------------------------------------------------------------------------- |
+| `playOnMount`      | `boolean`                  | `true`        | If `true`, the animation will play automatically when the component mounts.  |
+| `text`             | `string`                   | `''`          | The text to animate.                                                         |
+| `speed`            | `number`                   | `1`           | Animation speed (0-1). `1` is the fastest, `0` pauses the animation.         |
+| `tick`             | `number`                   | `1`           | How many frames to wait before moving the scramble controller forward.       |
+| `step`             | `number`                   | `1`           | How many characters to scramble on each tick.                                |
+| `chance`           | `number`                   | `1`           | Chance of scrambling a character (0-1). `1` means 100% chance.               |
+| `seed`             | `number`                   | `1`           | Number of characters to scramble randomly ahead of the scramble index.       |
+| `scramble`         | `number`                   | `1`           | How many times to scramble each character.                                   |
+| `ignore`           | `string[]`                 | `[' ']`       | Characters to avoid scrambling (e.g., spaces).                               |
+| `range`            | `RangeOrCharCodes`         | `[65, 125]`   | Unicode character range for scrambling.                                      |
+| `overdrive`        | `boolean` or `number`      | `true`        | Enables overdrive mode. If a number is provided, it sets the Unicode code.   |
+| `overflow`         | `boolean`                  | `true`        | If `true`, the animation starts from an empty string.                        |
+| `onAnimationStart` | `Function`                 | `undefined`   | Callback triggered when the animation starts.                                |
+| `onAnimationEnd`   | `Function`                 | `undefined`   | Callback triggered when the animation ends.                                  |
+| `onAnimationFrame` | `(result: string) => void` | `undefined`   | Callback triggered on every animation frame with the current scrambled text. |
+
+### Returns
+
+| Name     | Type                                  | Description                                              |
+| -------- | ------------------------------------- | -------------------------------------------------------- |
+| `ref`    | `React.RefObject<HTMLElement> \| any` | A ref to attach to the HTML element you want to animate. |
+| `replay` | `() => void`                          | A function to restart the animation.                     |

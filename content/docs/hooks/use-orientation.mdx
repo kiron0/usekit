@@ -1,0 +1,69 @@
+---
+title: useOrientation
+description: Manage and respond to changes in device orientation with useOrientation.
+links:
+  Screen Orientation API: https://developer.mozilla.org/en-US/docs/Web/API/Screen_Orientation_API
+---
+
+<ComponentPreview name="use-orientation-demo" />
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://usekit.kiron.dev/r/use-orientation
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="use-orientation" />
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+```tsx {5, 8}
+"use client"
+
+import * as React from "react"
+
+import { useOrientation } from "@/hooks/use-orientation"
+
+export function Component() {
+  const { angle, type } = useOrientation()
+
+  return (
+    <div>
+      <p>Orientation Type: {type}</p>
+      <p>Rotation Angle: {angle}°</p>
+    </div>
+  )
+}
+```
+
+## API Reference
+
+### Returns
+
+| Name    | Type     | Description                                                                                                                                                                                 |
+| ------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `angle` | `number` | The current orientation angle of the device in degrees.                                                                                                                                     |
+| `type`  | `string` | The current orientation type of the device (e.g., `portrait-primary`, `landscape-primary`, `portrait-secondary`, `landscape-secondary`). If the type cannot be determined, it is `UNKNOWN`. |

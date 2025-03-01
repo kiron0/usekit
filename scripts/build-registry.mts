@@ -227,6 +227,71 @@ const hooks: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "use-intersection-observer",
+    title: "Use Intersection Observer",
+    description:
+      "A hook that provides a way to detect when an element enters or leaves the viewport using the Intersection Observer API.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "hooks/use-intersection-observer.tsx",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-render-count",
+    title: "Use Render Count",
+    description:
+      "Identify unnecessary re-renders and monitor update frequency with useRenderCount.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "hooks/use-render-count.tsx",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-orientation",
+    title: "Use Orientation",
+    description:
+      "Manage and respond to changes in device orientation with useOrientation.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "hooks/use-orientation.tsx",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-window-size",
+    title: "Use Window Size",
+    description:
+      "Track the dimensions of the browser window with useWindowSize.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "hooks/use-window-size.tsx",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-hover",
+    title: "Use Hover",
+    description:
+      "Track whether an element is being hovered over with useHover.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "hooks/use-hover.tsx",
+        type: "registry:hook",
+      },
+    ],
+  },
 ]
 
 const hooksExamples: Registry["items"] = [
@@ -340,6 +405,56 @@ const hooksExamples: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "use-intersection-observer-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "examples/use-intersection-observer-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-render-count-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "examples/use-render-count-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-orientation-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "examples/use-orientation-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-window-size-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "examples/use-window-size-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-hover-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "examples/use-hover-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
 ]
 
 const registryItems = [...hooks, ...hooksExamples]
@@ -347,7 +462,7 @@ const registryItems = [...hooks, ...hooksExamples]
 const registry: Registry = {
   name: "useKit",
   homepage: "https://usekit.kiron.dev",
-  items: registryItems ?? [],
+  items: registryItems,
 } satisfies Registry
 
 async function buildRegistryIndex() {

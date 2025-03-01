@@ -258,6 +258,84 @@ export const Index: Record<string, any> = {
     component: React.lazy(() => import("registry/examples/use-scramble-demo")),
     source: "",
   },
+  "use-intersection-observer": {
+    name: "use-intersection-observer",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-intersection-observer.tsx",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-intersection-observer-demo")
+    ),
+    source: "",
+  },
+  "use-render-count": {
+    name: "use-render-count",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-render-count.tsx",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-render-count-demo")
+    ),
+    source: "",
+  },
+  "use-orientation": {
+    name: "use-orientation",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-orientation.tsx",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-orientation-demo")
+    ),
+    source: "",
+  },
+  "use-window-size": {
+    name: "use-window-size",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-window-size.tsx",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-window-size-demo")
+    ),
+    source: "",
+  },
+  "use-hover": {
+    name: "use-hover",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-hover.tsx",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(() => import("registry/examples/use-hover-demo")),
+    source: "",
+  },
   "use-copy-to-clipboard-demo": {
     name: "use-copy-to-clipboard-demo",
     type: "registry:example",
@@ -420,6 +498,84 @@ export const Index: Record<string, any> = {
       },
     ],
     component: React.lazy(() => import("registry/examples/use-script-demo")),
+    source: "",
+  },
+  "use-intersection-observer-demo": {
+    name: "use-intersection-observer-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-intersection-observer-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-intersection-observer-demo")
+    ),
+    source: "",
+  },
+  "use-render-count-demo": {
+    name: "use-render-count-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-render-count-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-render-count-demo")
+    ),
+    source: "",
+  },
+  "use-orientation-demo": {
+    name: "use-orientation-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-orientation-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-orientation-demo")
+    ),
+    source: "",
+  },
+  "use-window-size-demo": {
+    name: "use-window-size-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-window-size-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-window-size-demo")
+    ),
+    source: "",
+  },
+  "use-hover-demo": {
+    name: "use-hover-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-hover-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(() => import("registry/examples/use-hover-demo")),
     source: "",
   },
 }

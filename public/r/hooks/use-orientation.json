@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-orientation",
+  "type": "registry:hook",
+  "title": "Use Orientation",
+  "description": "Manage and respond to changes in device orientation with useOrientation.",
+  "files": [
+    {
+      "path": "registry/hooks/use-orientation.tsx",
+      "content": "import { useEffect, useState } from \"react\"\n\ntype OrientationType =\n  | \"portrait-primary\"\n  | \"landscape-primary\"\n  | \"portrait-secondary\"\n  | \"landscape-secondary\"\n  | \"UNKNOWN\"\n\ninterface OrientationState {\n  angle: number\n  type: OrientationType\n}\n\nconst getLegacyOrientation = (): OrientationState => {\n  const angle = window.orientation ?? 0\n  let type: OrientationType = \"UNKNOWN\"\n\n  switch (Math.abs(angle)) {\n    case 0:\n      type = \"portrait-primary\"\n      break\n    case 90:\n      type = \"landscape-primary\"\n      break\n    case 180:\n      type = \"portrait-secondary\"\n      break\n    case 270:\n      type = \"landscape-secondary\"\n      break\n  }\n  return { angle, type }\n}\n\nexport function useOrientation(): OrientationState {\n  const [orientation, setOrientation] = useState<OrientationState>(\n    getLegacyOrientation()\n  )\n\n  const handleOrientationChange = () => {\n    if (screen.orientation && typeof screen.orientation.angle === \"number\") {\n      const { angle, type } = screen.orientation\n      if (\n        window.orientation !== undefined &&\n        Math.abs(window.orientation) !== Math.abs(angle)\n      ) {\n        setOrientation(getLegacyOrientation())\n      } else {\n        setOrientation({ angle, type: type as OrientationType })\n      }\n    } else {\n      setOrientation(getLegacyOrientation())\n    }\n  }\n\n  useEffect(() => {\n    handleOrientationChange()\n\n    if (screen.orientation && screen.orientation.addEventListener) {\n      screen.orientation.addEventListener(\"change\", handleOrientationChange)\n    }\n    window.addEventListener(\"orientationchange\", handleOrientationChange)\n\n    return () => {\n      if (screen.orientation && screen.orientation.removeEventListener) {\n        screen.orientation.removeEventListener(\n          \"change\",\n          handleOrientationChange\n        )\n      }\n      window.removeEventListener(\"orientationchange\", handleOrientationChange)\n    }\n  }, [])\n\n  return orientation\n}\n",
+      "type": "registry:hook"
+    }
+  ]
+}
