@@ -1,14 +1,24 @@
+"use client"
+
 import * as React from "react"
 
 export function useMediaQuery(query: string): boolean {
-  if (typeof window === "undefined") {
-    throw new Error("useMediaQuery can only be used on the client side")
-  }
+  const getDefaultSnapshot = () => false
 
-  const mediaQueryList = React.useMemo(() => window.matchMedia(query), [query])
+  const getServerSnapshot = React.useCallback(getDefaultSnapshot, [])
+
+  const mediaQueryList = React.useMemo(() => {
+    if (typeof window === "undefined") {
+      return null
+    }
+    return window.matchMedia(query)
+  }, [query])
 
   const subscribe = React.useCallback(
     (onStoreChange: () => void) => {
+      if (!mediaQueryList) {
+        return () => {}
+      }
       const listener = () => onStoreChange()
       mediaQueryList.addEventListener("change", listener)
       return () => mediaQueryList.removeEventListener("change", listener)
@@ -16,10 +26,12 @@ export function useMediaQuery(query: string): boolean {
     [mediaQueryList]
   )
 
-  const getSnapshot = React.useCallback(
-    () => mediaQueryList.matches,
-    [mediaQueryList]
-  )
+  const getSnapshot = React.useCallback(() => {
+    if (!mediaQueryList) {
+      return getDefaultSnapshot()
+    }
+    return mediaQueryList.matches
+  }, [mediaQueryList])
 
-  return React.useSyncExternalStore(subscribe, getSnapshot)
+  return React.useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot)
 }

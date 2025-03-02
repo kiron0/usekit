@@ -41,7 +41,7 @@ export default function UseFetchDemo() {
                 height={200}
                 placeholder="blur"
                 blurDataURL={data?.sprites?.other?.home?.front_shiny}
-                className="border border-primary rounded-xl"
+                className="rounded-xl border border-primary"
               />
             ) : (
               <p>No image</p>
