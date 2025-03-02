@@ -305,6 +305,19 @@ const hooks: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "use-interval-when",
+    title: "Use Interval When",
+    description:
+      "Create dynamic timers that can be started, paused, or resumed with useIntervalWhen.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "hooks/use-interval-when.tsx",
+        type: "registry:hook",
+      },
+    ],
+  },
 ]
 
 const hooksExamples: Registry["items"] = [
@@ -484,6 +497,16 @@ const hooksExamples: Registry["items"] = [
     files: [
       {
         path: "examples/use-media-query-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-interval-when-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "examples/use-interval-when-demo.tsx",
         type: "registry:example",
       },
     ],

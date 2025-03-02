@@ -167,6 +167,12 @@ export const docsConfig: DocsConfig = {
           items: [],
           label: "New",
         },
+        {
+          title: "useIntervalWhen",
+          href: "/docs/hooks/use-interval-when",
+          items: [],
+          label: "New",
+        },
       ],
     },
   ],

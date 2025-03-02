@@ -24,11 +24,12 @@ export default function UseHoverDemo() {
       ref={ref}
       className={cn(
         "size-48 transition-all rounded-xl flex justify-center items-center border",
-        hovering ? "cursor-crosshair" : ""
+        hovering
+          ? `cursor-crosshair border-[${backgroundColor}]`
+          : "border-primary"
       )}
       style={{
         backgroundColor,
-        borderColor: hovering ? backgroundColor : "#adfa1d",
       }}
     >
       Hovering? {hovering ? "Yes" : "No"}

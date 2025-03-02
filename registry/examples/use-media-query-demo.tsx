@@ -31,7 +31,7 @@ export default function UseMediaQueryDemo() {
             key={device.name}
             className={cn(
               "border rounded-lg text-center px-7 py-5",
-              device.isMatched ? "border-[#adfa1d]" : ""
+              device.isMatched ? "border-primary" : ""
             )}
           >
             {device.icon}

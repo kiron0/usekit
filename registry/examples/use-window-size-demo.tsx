@@ -9,7 +9,7 @@ export default function UseWindowSizeDemo() {
     <div className="flex flex-col items-center space-y-4">
       <div className="relative">
         <div
-          className="border border-[#adfa1d] rounded-xl"
+          className="border border-primary rounded-xl"
           style={{ width: width / 4, height: height / 4 }}
         />
         <div className="absolute top-1/2 truncate left-1/2 transform -translate-x-1/2 -translate-y-1/2">
