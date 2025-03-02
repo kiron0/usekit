@@ -17,12 +17,12 @@ export default function UseBatteryDemo() {
           <p>
             Level: <Badge>{level}%</Badge>
           </p>
-          <p>
+          <div>
             Charging:{" "}
             <Badge variant={charging ? "default" : "destructive"}>
               {charging ? "Yes" : "No"}
             </Badge>
-          </p>
+          </div>
           <p>Charging time: {chargingTime}</p>
           <p>Discharging time: {dischargingTime}</p>
         </div>
