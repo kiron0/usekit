@@ -38,7 +38,7 @@ npx shadcn@latest add https://usekit.kiron.dev/r/use-hover
 
 ## Usage
 
-```tsx {3, 7}
+```tsx {3, 6}
 "use client"
 
 import { useHover } from "@/hooks/use-hover"
@@ -50,8 +50,9 @@ export function Component() {
     <div
       ref={hoverRef}
       style={{
-        padding: "20px",
-        backgroundColor: isHovered ? "lightblue" : "white",
+        width: 200,
+        height: 200,
+        backgroundColor: hovering ? "lightblue" : "white",
       }}
     >
       {hovering ? "Hovering!" : "Hover over me"}

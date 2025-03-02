@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-media-query",
+  "type": "registry:hook",
+  "title": "Use Media Query",
+  "description": "Subscribe and respond to media query changes with useMediaQuery.",
+  "files": [
+    {
+      "path": "registry/hooks/use-media-query.tsx",
+      "content": "import * as React from \"react\"\n\nexport function useMediaQuery(query: string): boolean {\n  if (typeof window === \"undefined\") {\n    throw new Error(\"useMediaQuery can only be used on the client side\")\n  }\n\n  const mediaQueryList = React.useMemo(() => window.matchMedia(query), [query])\n\n  const subscribe = React.useCallback(\n    (onStoreChange: () => void) => {\n      const listener = () => onStoreChange()\n      mediaQueryList.addEventListener(\"change\", listener)\n      return () => mediaQueryList.removeEventListener(\"change\", listener)\n    },\n    [mediaQueryList]\n  )\n\n  const getSnapshot = React.useCallback(\n    () => mediaQueryList.matches,\n    [mediaQueryList]\n  )\n\n  return React.useSyncExternalStore(subscribe, getSnapshot)\n}\n",
+      "type": "registry:hook"
+    }
+  ]
+}

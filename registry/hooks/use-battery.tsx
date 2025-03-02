@@ -53,7 +53,7 @@ export function useBattery(): BatteryManager {
         setState({
           supported: true,
           loading: false,
-          level: battery.level,
+          level: battery.level * 100,
           charging: battery.charging,
           chargingTime: battery.chargingTime,
           dischargingTime: battery.dischargingTime,

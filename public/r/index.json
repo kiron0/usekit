@@ -269,6 +269,18 @@
           "path": "registry/hooks/use-hover.tsx"
         }
       ]
+    },
+    {
+      "name": "use-media-query",
+      "title": "Use Media Query",
+      "description": "Subscribe and respond to media query changes with useMediaQuery.",
+      "type": "registry:hook",
+      "files": [
+        {
+          "type": "registry:hook",
+          "path": "registry/hooks/use-media-query.tsx"
+        }
+      ]
     }
   ]
 }

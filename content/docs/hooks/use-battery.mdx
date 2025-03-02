@@ -3,6 +3,8 @@ title: useBattery
 description: Track the battery status of a user's device with useBattery.
 ---
 
+<ComponentPreview name="use-battery-demo" />
+
 ## Installation
 
 <Tabs defaultValue="cli">
@@ -48,21 +50,19 @@ export function Component() {
     useBattery()
 
   return (
-    <>
-      <div className="wrapper">
-        <h1>useBattery</h1>
-        {!loading ? (
-          <Battery
-            level={level * 100}
-            charging={charging}
-            chargingTime={chargingTime}
-            dischargingTime={dischargingTime}
-          />
-        ) : (
-          <h2>Loading...</h2>
-        )}
-      </div>
-    </>
+    <div>
+      <h1>useBattery</h1>
+      {loading ? (
+        <p>Loading...</p>
+      ) : (
+        <div>
+          <h2>Level: {level}</h2>
+          <h2>Charging: {charging ? "Yes" : "No"}</h2>
+          <h2>Charging time: {chargingTime}</h2>
+          <h2>Discharging time: {dischargingTime}</h2>
+        </div>
+      )}
+    </div>
   )
 }
 ```

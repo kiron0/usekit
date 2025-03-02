@@ -52,20 +52,22 @@ export function MobileNav() {
         <DialogTitle className="sr-only">Mobile navigation</DialogTitle>
         <div className="overflow-auto p-6">
           <div className="flex flex-col gap-y-3">
-            {docsConfig.mainNav?.map(
-              (item) =>
-                item.href && (
-                  <MobileLink
-                    key={item.href}
-                    href={item.href}
-                    onOpenChange={setOpen}
-                  >
-                    {item.title}
-                  </MobileLink>
-                )
-            )}
+            {docsConfig.mainNav
+              ?.filter((item) => item.href && item.title !== "Docs")
+              .map(
+                (item) =>
+                  item.href && (
+                    <MobileLink
+                      key={item.href}
+                      href={item.href}
+                      onOpenChange={setOpen}
+                    >
+                      {item.title}
+                    </MobileLink>
+                  )
+              )}
           </div>
-          <Separator className="my-6" />
+          <Separator className="my-4" />
           <div className="flex flex-col space-y-2 gap-5">
             {docsConfig.sidebarNav.map((item, index) => (
               <div key={index} className="flex flex-col space-y-3">
