@@ -13,6 +13,9 @@ interface OrientationState {
 }
 
 const getLegacyOrientation = (): OrientationState => {
+  if (typeof window === "undefined") {
+    return { angle: 0, type: "UNKNOWN" }
+  }
   const angle = window.orientation ?? 0
   let type: OrientationType = "UNKNOWN"
 
@@ -42,6 +45,7 @@ export function useOrientation(): OrientationState {
     if (screen.orientation && typeof screen.orientation.angle === "number") {
       const { angle, type } = screen.orientation
       if (
+        typeof window !== "undefined" &&
         window.orientation !== undefined &&
         Math.abs(window.orientation) !== Math.abs(angle)
       ) {
