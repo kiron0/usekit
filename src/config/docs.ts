@@ -12,8 +12,8 @@ export const docsConfig: DocsConfig = {
       href: "/",
     },
     {
-      title: "Hooks",
-      href: "/docs/hooks/use-boolean",
+      title: "Docs",
+      href: "/docs",
     },
   ],
   sidebarNav: [
@@ -23,6 +23,16 @@ export const docsConfig: DocsConfig = {
         {
           title: "Introduction",
           href: "/docs",
+          items: [],
+        },
+        {
+          title: "Installation",
+          href: "/docs/installation",
+          items: [],
+        },
+        {
+          title: "Hooks",
+          href: "/docs/hooks",
           items: [],
         },
       ],
@@ -148,6 +158,12 @@ export const docsConfig: DocsConfig = {
         {
           title: "useHover",
           href: "/docs/hooks/use-hover",
+          items: [],
+          label: "New",
+        },
+        {
+          title: "useMediaQuery",
+          href: "/docs/hooks/use-media-query",
           items: [],
           label: "New",
         },

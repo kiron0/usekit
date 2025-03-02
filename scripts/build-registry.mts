@@ -292,6 +292,19 @@ const hooks: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "use-media-query",
+    title: "Use Media Query",
+    description:
+      "Subscribe and respond to media query changes with useMediaQuery.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "hooks/use-media-query.tsx",
+        type: "registry:hook",
+      },
+    ],
+  },
 ]
 
 const hooksExamples: Registry["items"] = [
@@ -451,6 +464,26 @@ const hooksExamples: Registry["items"] = [
     files: [
       {
         path: "examples/use-hover-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-battery-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "examples/use-battery-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-media-query-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "examples/use-media-query-demo.tsx",
         type: "registry:example",
       },
     ],

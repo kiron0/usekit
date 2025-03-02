@@ -181,7 +181,7 @@ export const Index: Record<string, any> = {
         target: "",
       },
     ],
-    component: React.lazy(() => import("registry/hooks/use-battery.tsx")),
+    component: React.lazy(() => import("registry/examples/use-battery-demo")),
     source: "",
   },
   "use-local-storage": {
@@ -334,6 +334,22 @@ export const Index: Record<string, any> = {
       },
     ],
     component: React.lazy(() => import("registry/examples/use-hover-demo")),
+    source: "",
+  },
+  "use-media-query": {
+    name: "use-media-query",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-media-query.tsx",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-media-query-demo")
+    ),
     source: "",
   },
   "use-copy-to-clipboard-demo": {
@@ -576,6 +592,36 @@ export const Index: Record<string, any> = {
       },
     ],
     component: React.lazy(() => import("registry/examples/use-hover-demo")),
+    source: "",
+  },
+  "use-battery-demo": {
+    name: "use-battery-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-battery-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(() => import("registry/examples/use-battery-demo")),
+    source: "",
+  },
+  "use-media-query-demo": {
+    name: "use-media-query-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-media-query-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-media-query-demo")
+    ),
     source: "",
   },
 }
