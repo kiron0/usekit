@@ -281,6 +281,18 @@
           "path": "registry/hooks/use-media-query.tsx"
         }
       ]
+    },
+    {
+      "name": "use-interval-when",
+      "title": "Use Interval When",
+      "description": "Create dynamic timers that can be started, paused, or resumed with useIntervalWhen.",
+      "type": "registry:hook",
+      "files": [
+        {
+          "type": "registry:hook",
+          "path": "registry/hooks/use-interval-when.tsx"
+        }
+      ]
     }
   ]
 }

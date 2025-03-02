@@ -1,0 +1,91 @@
+---
+title: useIntervalWhen
+description: Create dynamic timers that can be started, paused, or resumed with useIntervalWhen.
+---
+
+<ComponentPreview name="use-interval-when-demo" />
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://usekit.kiron.dev/r/use-interval-when
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="use-interval-when" />
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+```tsx {5, 11-20}
+"use client"
+
+import * as React from "react"
+
+import { useIntervalWhen } from "@/hooks/use-interval-when"
+
+export function Component() {
+  const [count, setCount] = useState(0)
+  const [isActive, setIsActive] = useState(false)
+
+  const clearInterval = useIntervalWhen(
+    () => {
+      setCount((c) => c + 1)
+    },
+    {
+      ms: 1000,
+      when: isActive,
+      startImmediately: true,
+    }
+  )
+
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <button onClick={() => setIsActive((a) => !a)}>
+        {isActive ? "Pause" : "Start"}
+      </button>
+      <button onClick={clearInterval}>Clear</button>
+    </div>
+  )
+}
+```
+
+## API Reference
+
+### Parameters
+
+| Name                       | Type      | Description                                                                                         |
+| -------------------------- | --------- | --------------------------------------------------------------------------------------------------- |
+| `cb`                       | `func`    | The callback function to be executed at the specified interval when the condition is met.           |
+| `options?`                 | `object`  | An object containing the following options.                                                         |
+| `options.ms`               | `number`  | The interval duration in milliseconds.                                                              |
+| `options.when`             | `boolean` | The condition that determines whether the interval should be active (`true`) or paused (`false`).   |
+| `options.startImmediately` | `boolean` | (Optional) Whether to start the interval immediately when the condition is met. Default is `false`. |
+
+### Returns
+
+| Type   | Description                                               |
+| ------ | --------------------------------------------------------- |
+| `func` | A function to clear the interval and pause the execution. |
