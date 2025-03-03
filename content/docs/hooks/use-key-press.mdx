@@ -1,0 +1,91 @@
+---
+title: useKeyPress
+description: Detect and perform actions on key press events with useKeyPress.
+---
+
+<ComponentPreview name="use-key-press-demo" />
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://usekit.kiron.dev/r/use-key-press
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="use-key-press" />
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+```tsx {5, 16-19}
+"use client"
+
+import * as React from "react"
+
+import { useKeyPress } from "@/hooks/use-key-press"
+
+export function Component() {
+  const [activeKey, setActiveKey] = React.useState<string>("")
+
+  const handleKeyPress = React.useCallback((e: KeyboardEvent) => {
+    e.preventDefault()
+    setActiveKey(e.key)
+    setTimeout(() => setActiveKey(""), 600)
+  }, [])
+
+  useKeyPress("ArrowRight", handleKeyPress)
+  useKeyPress("ArrowLeft", handleKeyPress)
+  useKeyPress("ArrowUp", handleKeyPress)
+  useKeyPress("ArrowDown", handleKeyPress)
+
+  return (
+    <section>
+      <p>Press any arrow key on your keyboard</p>
+      <div className="button-grid">
+        <button className={activeKey === "ArrowUp" ? "active" : ""}>↑</button>
+        <button className={activeKey === "ArrowLeft" ? "active" : ""}>←</button>
+        <button className={activeKey === "ArrowDown" ? "active" : ""}>↓</button>
+        <button className={activeKey === "ArrowRight" ? "active" : ""}>
+          →
+        </button>
+      </div>
+      {activeKey && <p>{activeKey} pressed!</p>}
+    </section>
+  )
+}
+```
+
+## API Reference
+
+### Parameters
+
+| Name                   | Type                    | Description                                                                             |
+| ---------------------- | ----------------------- | --------------------------------------------------------------------------------------- |
+| `key`                  | `string`                | The key to listen for.                                                                  |
+| `cb`                   | `func`                  | The callback function to be executed when the key is pressed.                           |
+| `level`                | `number`                | Function to set the boolean state directly.                                             |
+| `options?`             | `object`                | Additional options for the key press event.                                             |
+| `options.event`        | `string`                | The event type to listen for. Default is `"keydown"`.                                   |
+| `options.target`       | `DOM element or window` | The target element or window object to attach the event listener to. Default is window. |
+| `options.eventOptions` | `object`                | Additional options for the event listener.                                              |

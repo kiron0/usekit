@@ -12,7 +12,7 @@ export default function UseDocumentTitleDemo() {
       <Button className="w-fit" onClick={() => setCounter(counter + 1)}>
         Increment Counter: {counter}
       </Button>
-      <p className="w-full md:w-3/4 text-center text-muted-foreground">
+      <p className="text-balance text-center text-muted-foreground">
         Click to increment the counter and watch the document title update in
         real-time!
       </p>

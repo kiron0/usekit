@@ -305,6 +305,30 @@
           "path": "registry/hooks/use-countdown.tsx"
         }
       ]
+    },
+    {
+      "name": "use-visibility-change",
+      "title": "Use Visibility Change",
+      "description": "Track document visibility and respond to changes with useVisibilityChange.",
+      "type": "registry:hook",
+      "files": [
+        {
+          "type": "registry:hook",
+          "path": "registry/hooks/use-visibility-change.tsx"
+        }
+      ]
+    },
+    {
+      "name": "use-key-press",
+      "title": "Use Key Press",
+      "description": "Detect and perform actions on key press events with useKeyPress.",
+      "type": "registry:hook",
+      "files": [
+        {
+          "type": "registry:hook",
+          "path": "registry/hooks/use-key-press.tsx"
+        }
+      ]
     }
   ]
 }

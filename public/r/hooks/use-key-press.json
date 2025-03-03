@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-key-press",
+  "type": "registry:hook",
+  "title": "Use Key Press",
+  "description": "Detect and perform actions on key press events with useKeyPress.",
+  "files": [
+    {
+      "path": "registry/hooks/use-key-press.tsx",
+      "content": "import * as React from \"react\"\n\ntype KeyboardEventType = \"keydown\" | \"keyup\" | \"keypress\"\n\nexport function useKeyPress(\n  key: string,\n  cb: (event: KeyboardEvent) => void,\n  options?: {\n    event?: KeyboardEventType\n    target?: EventTarget\n    eventOptions?: AddEventListenerOptions | boolean\n  }\n): void {\n  const {\n    event = \"keydown\",\n    target = typeof window !== \"undefined\" ? window : null,\n    eventOptions,\n  } = options || {}\n\n  React.useEffect(() => {\n    const handleEvent = (e: Event) => {\n      if (e instanceof KeyboardEvent && e.key === key) {\n        cb(e)\n      }\n    }\n\n    if (target) {\n      target.addEventListener(event, handleEvent, eventOptions)\n      return () => {\n        target.removeEventListener(event, handleEvent, eventOptions)\n      }\n    }\n  }, [key, cb, event, target, eventOptions])\n}\n",
+      "type": "registry:hook"
+    }
+  ]
+}

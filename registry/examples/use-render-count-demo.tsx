@@ -15,7 +15,7 @@ export default function UseRenderCountDemo() {
       <p>Render Count: {count}</p>
       <Button onClick={() => setNumberCount((c) => c + 1)}>Increment</Button>
       {isStrictMode && (
-        <p className="w-full md:w-3/4 text-center text-muted-foreground">
+        <p className="text-balance text-center text-muted-foreground">
           Strict Mode is enabled. This component renders twice on every render.
         </p>
       )}

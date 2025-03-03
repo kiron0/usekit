@@ -1,0 +1,74 @@
+---
+title: useVisibilityChange
+description: Track document visibility and respond to changes with useVisibilityChange.
+---
+
+<ComponentPreview name="use-visibility-change-demo" />
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://usekit.kiron.dev/r/use-visibility-change
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="use-visibility-change" />
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+```tsx {5, 8}
+"use client"
+
+import * as React from "react"
+
+import { useVisibilityChange } from "@/hooks/use-visibility-change"
+
+export function Component() {
+  const documentVisible = useVisibilityChange()
+  const [tabAwayCount, setTabAwayCount] = React.useState(0)
+
+  React.useEffect(() => {
+    if (!documentVisible) {
+      setTabAwayCount((prev) => prev + 1)
+    }
+  }, [documentVisible])
+
+  return (
+    <div>
+      <h1>Document Visibility Tracker</h1>
+      <p>Document is currently: {documentVisible ? "Visible" : "Hidden"}</p>
+      <p>Number of times tabbed away: {tabAwayCount}</p>
+    </div>
+  )
+}
+```
+
+## API Reference
+
+### Returns
+
+| Name              | Type      | Description                                                     |
+| ----------------- | --------- | --------------------------------------------------------------- |
+| `documentVisible` | `boolean` | `true` if the document is currently visible, `false` otherwise. |

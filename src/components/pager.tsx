@@ -20,7 +20,7 @@ export function DocsPager({ doc }: DocsPagerProps) {
   return (
     <div className="flex flex-wrap md:flex-nowrap flex-row items-center justify-between gap-4">
       {pager?.prev?.href && (
-        <Button variant="outline" asChild>
+        <Button variant="ghost" asChild>
           <Link href={pager.prev.href}>
             <ChevronLeft />
             {pager.prev.title}
@@ -28,7 +28,7 @@ export function DocsPager({ doc }: DocsPagerProps) {
         </Button>
       )}
       {pager?.next?.href && (
-        <Button variant="outline" className="ml-auto" asChild>
+        <Button variant="ghost" className="ml-auto" asChild>
           <Link href={pager.next.href}>
             {pager.next.title}
             <ChevronRight />

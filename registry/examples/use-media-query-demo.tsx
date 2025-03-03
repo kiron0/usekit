@@ -39,7 +39,7 @@ export default function UseMediaQueryDemo() {
           </div>
         ))}
       </div>
-      <p className="w-full md:w-3/4 text-center text-muted-foreground mx-auto">
+      <p className="text-balance text-center text-muted-foreground mx-auto">
         Resize your browser window to see changes.
       </p>
     </div>

@@ -27,7 +27,7 @@ export default function UseBatteryDemo() {
           <p>Discharging time: {dischargingTime}</p>
         </div>
       ) : (
-        <p className="text-red-500 w-full md:w-3/4 text-center mx-auto text-muted-foreground">
+        <p className="text-red-500 text-balance text-center mx-auto text-muted-foreground">
           Battery status not supported by the browser or device. Please use a
           different browser or device.
         </p>

@@ -45,7 +45,7 @@ export default function UseCountdownDemo() {
           </Button>
         </div>
       )}
-      <p className="w-full md:w-3/4 text-center text-muted-foreground">
+      <p className="text-balance text-center text-muted-foreground">
         Check the console to see the countdown tick every second.
       </p>
     </div>
