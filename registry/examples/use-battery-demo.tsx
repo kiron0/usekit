@@ -14,9 +14,9 @@ export default function UseBatteryDemo() {
         <p>Loading...</p>
       ) : supported ? (
         <div className="space-y-2">
-          <p>
+          <div>
             Level: <Badge>{level}%</Badge>
-          </p>
+          </div>
           <div>
             Charging:{" "}
             <Badge variant={charging ? "default" : "destructive"}>
@@ -27,7 +27,7 @@ export default function UseBatteryDemo() {
           <p>Discharging time: {dischargingTime}</p>
         </div>
       ) : (
-        <p className="text-red-500 w-3/4 text-center mx-auto text-muted-foreground">
+        <p className="text-red-500 w-full md:w-3/4 text-center mx-auto text-muted-foreground">
           Battery status not supported by the browser or device. Please use a
           different browser or device.
         </p>

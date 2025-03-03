@@ -25,7 +25,7 @@ export default function UseScrambleDemo() {
     <div className="flex flex-col items-center justify-center space-y-4">
       <h1 ref={ref} className="h-7 text-2xl font-bold md:h-10 md:text-4xl" />
       <Button onClick={replay}>Replay</Button>
-      <p className="w-3/4 text-center text-muted-foreground">
+      <p className="w-full md:w-3/4 text-center text-muted-foreground">
         Click to replay the scramble animation! Check the console for animation
         events.
       </p>

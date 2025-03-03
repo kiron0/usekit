@@ -17,7 +17,7 @@ export default function UseWindowSizeDemo() {
           <p>H: {height}px</p>
         </div>
       </div>
-      <p className="w-3/4 text-center text-muted-foreground">
+      <p className="w-full md:w-3/4 text-center text-muted-foreground">
         Resize the window to see the width and height update in real-time!
       </p>
     </div>
