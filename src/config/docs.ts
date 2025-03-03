@@ -192,6 +192,12 @@ export const docsConfig: DocsConfig = {
           label: "New",
         },
         {
+          title: "useCookieStorage",
+          href: "/docs/hooks/use-cookie-storage",
+          items: [],
+          label: "New",
+        },
+        {
           title: "useIdle",
           href: "/docs/hooks/use-idle",
           items: [],

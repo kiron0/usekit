@@ -7,7 +7,7 @@
   "files": [
     {
       "path": "registry/hooks/use-document-title.tsx",
-      "content": "\"use client\"\n\nimport * as React from \"react\"\n\nexport function useDocumentTitle(title: string) {\n  React.useEffect(() => {\n    document.title = title\n  }, [title])\n}\n",
+      "content": "import * as React from \"react\"\n\nexport function useDocumentTitle(title: string) {\n  const initial = React.useRef(\n    typeof document !== \"undefined\" ? document.title : \"\"\n  )\n\n  React.useEffect(() => {\n    const initialTitle = initial.current\n    document.title = title\n\n    return () => {\n      document.title = initialTitle\n    }\n  }, [title])\n}\n",
       "type": "registry:hook"
     }
   ]

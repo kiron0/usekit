@@ -49,12 +49,20 @@ import { Button } from "@/components/ui/button"
 export function Component() {
   const [copy, isCopied] = useCopyToClipboard()
 
+  const copyText = async (text: string) => {
+    await copy(text)
+      .then(() => {
+        toast.success("Copied to clipboard")
+      })
+      .catch((error) => {
+        if (error instanceof Error) {
+          toast.error(error.message)
+        }
+      })
+  }
+
   return (
-    <Button
-      onClick={() =>
-        copy("hello world").then(() => console.info("Text copied!"))
-      }
-    >
+    <Button onClick={() => copyText("Hello, World!")}>
       {isCopied ? "Text Copied" : "Click to copy"}
     </Button>
   )

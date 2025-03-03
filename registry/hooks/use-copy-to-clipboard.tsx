@@ -1,8 +1,6 @@
-"use client"
-
 import * as React from "react"
 
-type CopyFn = (text: string) => Promise<boolean>
+type CopyFn = (text: string) => Promise<void>
 
 export function useCopyToClipboard(delay = 2000): [CopyFn, boolean] {
   const [isCopied, setIsCopied] = React.useState(false)
@@ -19,17 +17,32 @@ export function useCopyToClipboard(delay = 2000): [CopyFn, boolean] {
 
   const copy: CopyFn = React.useCallback(async (text) => {
     if (!navigator?.clipboard) {
-      console.warn("Clipboard not supported")
-      return false
+      throw new Error("Clipboard not supported")
     }
 
+    if (!text) {
+      throw new Error("The 'text' argument is required.")
+    }
+
+    const isPlainText = /^[\x00-\x7F]*$/.test(text)
+    const isHtmlText = /<[^>]+>/.test(text)
+    const isMarkdownText = /^#+\s/.test(text)
+
+    const clipboardItem = new ClipboardItem(
+      isPlainText
+        ? { "text/plain": new Blob([text], { type: "text/plain" }) }
+        : isHtmlText
+          ? { "text/html": new Blob([text], { type: "text/html" }) }
+          : isMarkdownText
+            ? { "text/markdown": new Blob([text], { type: "text/markdown" }) }
+            : { "text/plain": new Blob([text], { type: "text/plain" }) }
+    )
+
     try {
-      await navigator.clipboard.writeText(text)
+      await navigator.clipboard.write([clipboardItem])
       setIsCopied(true)
-      return true
     } catch (error) {
-      console.warn("Copy failed", error)
-      return false
+      throw new Error(error instanceof Error ? error.message : "Copy failed") // Throw error instead of returning false
     }
   }, [])
 

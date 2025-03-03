@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react"
+import * as React from "react"
 
 type Options = {
   ms: number
@@ -10,14 +10,14 @@ export function useIntervalWhen(
   cb: () => void,
   { ms, when, startImmediately = false }: Options
 ): () => void {
-  const savedCb = useRef(cb)
-  const intervalId = useRef<NodeJS.Timeout | null>(null)
+  const savedCb = React.useRef(cb)
+  const intervalId = React.useRef<NodeJS.Timeout | null>(null)
 
-  useEffect(() => {
+  React.useEffect(() => {
     savedCb.current = cb
   }, [cb])
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (when) {
       if (startImmediately) {
         savedCb.current()

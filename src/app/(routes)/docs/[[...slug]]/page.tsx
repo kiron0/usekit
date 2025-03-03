@@ -14,6 +14,7 @@ import "@/styles/mdx.css"
 
 import Link from "next/link"
 
+import { getBaseURL } from "@/lib/baseUrl"
 import { badgeVariants } from "@/components/ui/badge"
 import { DocGridPattern } from "@/components/doc-grid-pattern"
 import { DocsPager } from "@/components/pager"
@@ -39,6 +40,8 @@ async function getDocFromParams({ params }: DocPageProps) {
 export async function generateMetadata(props: {
   params: Promise<DocPageProps["params"]>
 }): Promise<Metadata> {
+  const BASE_URL = await getBaseURL()
+
   const params = await props.params
   const doc = await getDocFromParams({ params })
 
@@ -53,10 +56,10 @@ export async function generateMetadata(props: {
       title: doc.title,
       description: doc.description,
       type: "article",
-      url: absoluteUrl(doc.slug),
+      url: await absoluteUrl(doc.slug),
       images: [
         {
-          url: siteConfig.ogImage,
+          url: new URL("/og.png", BASE_URL),
           width: 1200,
           height: 630,
           alt: siteConfig.name,
@@ -67,7 +70,7 @@ export async function generateMetadata(props: {
       card: "summary_large_image",
       title: doc.title,
       description: doc.description,
-      images: [siteConfig.ogImage],
+      images: [new URL("/og.png", BASE_URL)],
       creator: "@hashtagkiron",
     },
   }

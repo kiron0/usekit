@@ -1,16 +1,16 @@
-import { useCallback, useEffect, useState } from "react"
+import * as React from "react"
 
 type HoverRef = (node: Element | null) => void
 
 export function useHover(): [HoverRef, boolean] {
-  const [element, setElement] = useState<Element | null>(null)
-  const [hovering, setHovering] = useState(false)
+  const [element, setElement] = React.useState<Element | null>(null)
+  const [hovering, setHovering] = React.useState(false)
 
-  const ref = useCallback<HoverRef>((node) => {
+  const ref = React.useCallback<HoverRef>((node) => {
     setElement(node)
   }, [])
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (!element) return
 
     const handleMouseEnter = () => setHovering(true)

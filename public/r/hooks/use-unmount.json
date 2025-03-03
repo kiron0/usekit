@@ -7,7 +7,7 @@
   "files": [
     {
       "path": "registry/hooks/use-unmount.tsx",
-      "content": "\"use client\"\n\nimport * as React from \"react\"\n\nexport function useUnmount(func: () => void) {\n  const funcRef = React.useRef(func)\n\n  funcRef.current = func\n\n  React.useEffect(\n    () => () => {\n      funcRef.current()\n    },\n    []\n  )\n}\n",
+      "content": "import * as React from \"react\"\n\nexport function useUnmount(func: () => void) {\n  const funcRef = React.useRef(func)\n\n  funcRef.current = func\n\n  React.useEffect(\n    () => () => {\n      funcRef.current()\n    },\n    []\n  )\n}\n",
       "type": "registry:hook"
     }
   ]
