@@ -318,6 +318,18 @@ const hooks: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "use-countdown",
+    title: "Use Countdown",
+    description: "Create countdown timers using useCountdown.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "hooks/use-countdown.tsx",
+        type: "registry:hook",
+      },
+    ],
+  },
 ]
 
 const hooksExamples: Registry["items"] = [
@@ -432,16 +444,6 @@ const hooksExamples: Registry["items"] = [
     ],
   },
   {
-    name: "use-intersection-observer-demo",
-    type: "registry:example",
-    files: [
-      {
-        path: "examples/use-intersection-observer-demo.tsx",
-        type: "registry:example",
-      },
-    ],
-  },
-  {
     name: "use-render-count-demo",
     type: "registry:example",
     files: [
@@ -507,6 +509,16 @@ const hooksExamples: Registry["items"] = [
     files: [
       {
         path: "examples/use-interval-when-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-countdown-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "examples/use-countdown-demo.tsx",
         type: "registry:example",
       },
     ],

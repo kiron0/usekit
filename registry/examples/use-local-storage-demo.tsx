@@ -14,7 +14,7 @@ export default function UseLocalStorageDemo() {
         <Button onClick={() => setCount((c) => c + 1)}>Increment</Button>
         <Button onClick={() => setCount(0)}>Reset</Button>
       </div>
-      <p className="w-3/4 text-center text-muted-foreground">
+      <p className="w-full md:w-3/4 text-center text-muted-foreground">
         Click to increment the counter and watch the count persist in local
         storage!
       </p>

@@ -173,6 +173,12 @@ export const docsConfig: DocsConfig = {
           items: [],
           label: "New",
         },
+        {
+          title: "useCountdown",
+          href: "/docs/hooks/use-countdown",
+          items: [],
+          label: "New",
+        },
       ],
     },
   ],

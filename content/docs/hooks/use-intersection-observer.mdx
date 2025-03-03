@@ -5,8 +5,6 @@ links:
   Intersection Observer API: https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API
 ---
 
-<ComponentPreview name="use-intersection-observer-demo" />
-
 ## Installation
 
 <Tabs defaultValue="cli">
@@ -81,7 +79,7 @@ export function Component() {
 | `elementRef` | `React.RefObject<T>`           | A React ref object pointing to the target element to observe. |
 | `options?`   | `UseIntersectionObserverProps` | Optional configuration for the Intersection Observer.         |
 
-#### `UseIntersectionObserverProps`
+### Props
 
 | Name          | Type                          | Default | Description                                                                 |
 | ------------- | ----------------------------- | ------- | --------------------------------------------------------------------------- |
@@ -95,7 +93,7 @@ export function Component() {
 | ------- | ---------------------------------------- | ---------------------------------------------------------------------------- |
 | `entry` | `IntersectionObserverEntry \| undefined` | The intersection observer entry containing details about the target element. |
 
-#### `IntersectionObserverEntry` Key Properties
+### `IntersectionObserverEntry` Key Properties
 
 | Name                 | Type                      | Description                                                         |
 | -------------------- | ------------------------- | ------------------------------------------------------------------- |

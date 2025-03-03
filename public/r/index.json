@@ -293,6 +293,18 @@
           "path": "registry/hooks/use-interval-when.tsx"
         }
       ]
+    },
+    {
+      "name": "use-countdown",
+      "title": "Use Countdown",
+      "description": "Create countdown timers using useCountdown.",
+      "type": "registry:hook",
+      "files": [
+        {
+          "type": "registry:hook",
+          "path": "registry/hooks/use-countdown.tsx"
+        }
+      ]
     }
   ]
 }

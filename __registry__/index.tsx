@@ -270,7 +270,7 @@ export const Index: Record<string, any> = {
       },
     ],
     component: React.lazy(
-      () => import("registry/examples/use-intersection-observer-demo")
+      () => import("registry/hooks/use-intersection-observer.tsx")
     ),
     source: "",
   },
@@ -366,6 +366,20 @@ export const Index: Record<string, any> = {
     component: React.lazy(
       () => import("registry/examples/use-interval-when-demo")
     ),
+    source: "",
+  },
+  "use-countdown": {
+    name: "use-countdown",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-countdown.tsx",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(() => import("registry/examples/use-countdown-demo")),
     source: "",
   },
   "use-copy-to-clipboard-demo": {
@@ -532,22 +546,6 @@ export const Index: Record<string, any> = {
     component: React.lazy(() => import("registry/examples/use-script-demo")),
     source: "",
   },
-  "use-intersection-observer-demo": {
-    name: "use-intersection-observer-demo",
-    type: "registry:example",
-    registryDependencies: undefined,
-    files: [
-      {
-        path: "registry/examples/use-intersection-observer-demo.tsx",
-        type: "registry:example",
-        target: "",
-      },
-    ],
-    component: React.lazy(
-      () => import("registry/examples/use-intersection-observer-demo")
-    ),
-    source: "",
-  },
   "use-render-count-demo": {
     name: "use-render-count-demo",
     type: "registry:example",
@@ -654,6 +652,20 @@ export const Index: Record<string, any> = {
     component: React.lazy(
       () => import("registry/examples/use-interval-when-demo")
     ),
+    source: "",
+  },
+  "use-countdown-demo": {
+    name: "use-countdown-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-countdown-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(() => import("registry/examples/use-countdown-demo")),
     source: "",
   },
 }
