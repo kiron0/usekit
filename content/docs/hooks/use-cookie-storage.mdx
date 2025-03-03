@@ -183,17 +183,17 @@ export function PreferencesExample() {
 
 ### `CookieOptions` Interface
 
-| Property    | Type      | Description                                               |
-| ----------- | --------- | --------------------------------------------------------- | ------- | ------------------------------------------------------------- |
-| `expires?`  | `Date`    | The expiration date of the cookie.                        |
-| `path?`     | `string`  | The path where the cookie is accessible. Defaults to `/`. |
-| `domain?`   | `string`  | The domain where the cookie is accessible.                |
-| `secure?`   | `boolean` | If `true`, the cookie is only sent over HTTPS.            |
-| `sameSite?` | `"Strict" | "Lax"                                                     | "None"` | Controls whether the cookie is sent with cross-site requests. |
+| Property    | Type                           | Description                                                   |
+| ----------- | ------------------------------ | ------------------------------------------------------------- |
+| `expires?`  | `Date`                         | The expiration date of the cookie.                            |
+| `path?`     | `string`                       | The path where the cookie is accessible. Defaults to `/`.     |
+| `domain?`   | `string`                       | The domain where the cookie is accessible.                    |
+| `secure?`   | `boolean`                      | If `true`, the cookie is only sent over HTTPS.                |
+| `sameSite?` | `"Strict" \| "Lax"  \| "None"` | Controls whether the cookie is sent with cross-site requests. |
 
 ### Returns
 
-| Name          | Type       | Description                             |
-| ------------- | ---------- | --------------------------------------- | --------------------------------------------------------------------------------------------------------- |
-| `cookieState` | `T`        | The current value stored in the cookie. |
-| `setCookie`   | `(value: T | ((prev: T) => T)) => void`              | A function to update the cookie value. Accepts either a new value or a function that returns a new value. |
+| Name          | Type                                     | Description                                                                                               |
+| ------------- | ---------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| `cookieState` | `T`                                      | The current value stored in the cookie.                                                                   |
+| `setCookie`   | `(value: T \| ((prev: T) => T)) => void` | A function to update the cookie value. Accepts either a new value or a function that returns a new value. |

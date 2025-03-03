@@ -2,62 +2,67 @@ import type { Metadata, Viewport } from "next"
 import Providers from "@/providers"
 
 import { META_THEME_COLORS, siteConfig } from "@/config/site"
+import { getBaseURL } from "@/lib/baseUrl"
 import { fontMono, fontSans } from "@/lib/fonts"
 import { cn } from "@/lib/utils"
 
 import "@/styles/globals.css"
 import "@/styles/themes.css"
 
-export const metadata: Metadata = {
-  title: {
-    default: `${siteConfig.name} - ${siteConfig.slogan}`,
-    template: `%s - ${siteConfig.name}`,
-  },
-  metadataBase: new URL(siteConfig.url),
-  description: siteConfig.description,
-  keywords: [
-    "Next.js",
-    "React",
-    "Tailwind CSS",
-    "Server Components",
-    "Radix UI",
-  ],
-  authors: [
-    {
-      name: "toufiqhasankiron",
-      url: "https://toufiqhasankiron.com",
+export async function generateMetadata(): Promise<Metadata> {
+  const BASE_URL = await getBaseURL()
+
+  return {
+    title: {
+      default: `${siteConfig.name} - ${siteConfig.slogan}`,
+      template: `%s - ${siteConfig.name}`,
     },
-  ],
-  creator: "toufiqhasankiron",
-  openGraph: {
-    type: "website",
-    locale: "en_US",
-    url: siteConfig.url,
-    title: siteConfig.name,
+    metadataBase: new URL(BASE_URL),
     description: siteConfig.description,
-    siteName: siteConfig.name,
-    images: [
+    keywords: [
+      "Next.js",
+      "React",
+      "Tailwind CSS",
+      "Server Components",
+      "Radix UI",
+    ],
+    authors: [
       {
-        url: siteConfig.ogImage,
-        width: 1200,
-        height: 630,
-        alt: siteConfig.name,
+        name: "Toufiq Hasan Kiron",
+        url: "https://toufiqhasankiron.com",
       },
     ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: siteConfig.name,
-    description: siteConfig.description,
-    images: [siteConfig.ogImage],
-    creator: "@hashtagkiron",
-  },
-  icons: {
-    icon: "/favicon.ico",
-    shortcut: "/favicon-16x16.png",
-    apple: "/apple-touch-icon.png",
-  },
-  manifest: `${siteConfig.url}/site.webmanifest`,
+    creator: "Toufiq Hasan Kiron",
+    openGraph: {
+      type: "website",
+      locale: "en_US",
+      url: BASE_URL,
+      title: siteConfig.name,
+      description: siteConfig.description,
+      siteName: siteConfig.name,
+      images: [
+        {
+          url: new URL("/og.png", BASE_URL),
+          width: 1200,
+          height: 630,
+          alt: siteConfig.name,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: siteConfig.name,
+      description: siteConfig.description,
+      images: [new URL("/og.png", BASE_URL)],
+      creator: "@hashtagkiron",
+    },
+    icons: {
+      icon: "/favicon.ico",
+      shortcut: "/favicon-16x16.png",
+      apple: "/apple-touch-icon.png",
+    },
+    manifest: `${BASE_URL}/site.webmanifest`,
+  }
 }
 
 export const viewport: Viewport = {
