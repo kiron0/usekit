@@ -1,9 +1,9 @@
-"use client"
-
 import * as React from "react"
 
 export function useDocumentTitle(title: string) {
-  const initial = React.useRef(document.title)
+  const initial = React.useRef(
+    typeof document !== "undefined" ? document.title : ""
+  )
 
   React.useEffect(() => {
     const initialTitle = initial.current

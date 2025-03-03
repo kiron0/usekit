@@ -1,5 +1,3 @@
-"use client"
-
 import * as React from "react"
 
 type SetStateAction<T> = T | ((prevState: T) => T)

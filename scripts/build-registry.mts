@@ -356,6 +356,19 @@ const hooks: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "use-cookie-storage",
+    title: "Use Cookie Storage",
+    description:
+      "Store, retrieve, and synchronize data from the browser's Cookie Store API with useCookieStorage.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "hooks/use-cookie-storage.tsx",
+        type: "registry:hook",
+      },
+    ],
+  },
 ]
 
 const hooksExamples: Registry["items"] = [
@@ -565,6 +578,16 @@ const hooksExamples: Registry["items"] = [
     files: [
       {
         path: "examples/use-key-press-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-cookie-storage-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "examples/use-cookie-storage-demo.tsx",
         type: "registry:example",
       },
     ],

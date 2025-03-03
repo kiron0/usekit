@@ -329,6 +329,18 @@
           "path": "registry/hooks/use-key-press.tsx"
         }
       ]
+    },
+    {
+      "name": "use-cookie-storage",
+      "title": "Use Cookie Storage",
+      "description": "Store, retrieve, and synchronize data from the browser's Cookie Store API with useCookieStorage.",
+      "type": "registry:hook",
+      "files": [
+        {
+          "type": "registry:hook",
+          "path": "registry/hooks/use-cookie-storage.tsx"
+        }
+      ]
     }
   ]
 }

@@ -412,6 +412,22 @@ export const Index: Record<string, any> = {
     component: React.lazy(() => import("registry/examples/use-key-press-demo")),
     source: "",
   },
+  "use-cookie-storage": {
+    name: "use-cookie-storage",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-cookie-storage.tsx",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-cookie-storage-demo")
+    ),
+    source: "",
+  },
   "use-copy-to-clipboard-demo": {
     name: "use-copy-to-clipboard-demo",
     type: "registry:example",
@@ -726,6 +742,22 @@ export const Index: Record<string, any> = {
       },
     ],
     component: React.lazy(() => import("registry/examples/use-key-press-demo")),
+    source: "",
+  },
+  "use-cookie-storage-demo": {
+    name: "use-cookie-storage-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-cookie-storage-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-cookie-storage-demo")
+    ),
     source: "",
   },
 }

@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-cookie-storage",
+  "type": "registry:hook",
+  "title": "Use Cookie Storage",
+  "description": "Store, retrieve, and synchronize data from the browser's Cookie Store API with useCookieStorage.",
+  "files": [
+    {
+      "path": "registry/hooks/use-cookie-storage.tsx",
+      "content": "import * as React from \"react\"\n\ninterface CookieOptions {\n  expires?: Date\n  path?: string\n  domain?: string\n  secure?: boolean\n  sameSite?: \"Strict\" | \"Lax\" | \"None\"\n}\n\nexport function useCookieStorage<T>(\n  key: string,\n  initialValue: T,\n  options?: CookieOptions\n): [T, (value: T | ((prev: T) => T)) => void] {\n  const [cookieState, setCookieState] = React.useState<T>(initialValue)\n\n  const updateCookie = React.useCallback(\n    (value: T) => {\n      const serializedValue = JSON.stringify(value)\n      const encodedValue = encodeURIComponent(serializedValue)\n\n      let cookieString = `${key}=${encodedValue}`\n\n      if (options?.expires) {\n        cookieString += `; expires=${options.expires.toUTCString()}`\n      }\n      if (options?.path) {\n        cookieString += `; path=${options.path}`\n      }\n      if (options?.domain) {\n        cookieString += `; domain=${options.domain}`\n      }\n      if (options?.secure) {\n        cookieString += \"; secure\"\n      }\n      if (options?.sameSite) {\n        cookieString += `; samesite=${options.sameSite}`\n      }\n\n      document.cookie = cookieString\n      setCookieState(value)\n    },\n    [key, options]\n  )\n\n  React.useEffect(() => {\n    const readCookie = () => {\n      const cookies = document.cookie.split(\"; \")\n      const cookie = cookies.find((c) => c.startsWith(`${key}=`))\n\n      if (cookie) {\n        const encodedValue = cookie.split(\"=\").slice(1).join(\"=\")\n        try {\n          const decodedValue = decodeURIComponent(encodedValue)\n          const parsedValue = JSON.parse(decodedValue) as T\n          setCookieState(parsedValue)\n        } catch (error) {\n          console.error(\"Error parsing cookie value:\", error)\n          updateCookie(initialValue)\n        }\n      } else {\n        updateCookie(initialValue)\n      }\n    }\n\n    readCookie()\n    // eslint-disable-next-line react-hooks/exhaustive-deps\n  }, [key])\n\n  const setCookie = React.useCallback(\n    (value: T | ((prev: T) => T)) => {\n      const newValue = value instanceof Function ? value(cookieState) : value\n      updateCookie(newValue)\n    },\n    [cookieState, updateCookie]\n  )\n\n  return [cookieState, setCookie]\n}\n",
+      "type": "registry:hook"
+    }
+  ]
+}

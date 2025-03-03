@@ -1,0 +1,199 @@
+---
+title: useCookieStorage
+description: Store, retrieve, and synchronize data from the browser's Cookie Store API with useCookieStorage.
+links:
+  Cookie Store API: https://developer.mozilla.org/en-US/docs/Web/API/Cookie_Store_API
+---
+
+<ComponentPreview name="use-cookie-storage-demo" />
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://usekit.kiron.dev/r/use-cookie-storage
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="use-cookie-storage" />
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+```tsx {3, 11-15, 17-21}
+"use client"
+
+import { useCookieStorage } from "@/hooks/use-cookie-storage"
+
+interface UserPreferences {
+  theme: "light" | "dark"
+  fontSize: number
+}
+
+export function Component() {
+  const [username, setUsername] = useCookieStorage("username", "guest", {
+    path: "/",
+    expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000), // 7 days
+    sameSite: "Lax",
+  })
+
+  const [preferences, setPreferences] = useCookieStorage<UserPreferences>(
+    "preferences",
+    { theme: "light", fontSize: 16 },
+    { path: "/", secure: true }
+  )
+
+  return (
+    <div>
+      <div>
+        <h2>Username</h2>
+        <input value={username} onChange={(e) => setUsername(e.target.value)} />
+      </div>
+
+      <div>
+        <h2>Preferences</h2>
+        <select
+          value={preferences.theme}
+          onChange={(e) =>
+            setPreferences((prev) => ({
+              ...prev,
+              theme: e.target.value as "light" | "dark",
+            }))
+          }
+        >
+          <option value="light">Light</option>
+          <option value="dark">Dark</option>
+        </select>
+
+        <input
+          type="number"
+          value={preferences.fontSize}
+          onChange={(e) =>
+            setPreferences((prev) => ({
+              ...prev,
+              fontSize: Number(e.target.value),
+            }))
+          }
+        />
+      </div>
+    </div>
+  )
+}
+```
+
+## Example Usage
+
+### Storing a Primitive Value (e.g., a counter)
+
+```tsx
+export function CounterExample() {
+  const [counter, setCounter] = useCookieStorage("counter", 0, {
+    path: "/",
+    expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000), // Expires in 7 days
+  })
+
+  return (
+    <div>
+      <p>Counter: {counter}</p>
+      <button onClick={() => setCounter((c) => c + 1)}>Increment</button>
+    </div>
+  )
+}
+```
+
+### Storing an Object (e.g., user preferences)
+
+```tsx
+interface UserPreferences {
+  theme: "light" | "dark"
+  fontSize: number
+}
+
+export function PreferencesExample() {
+  const [preferences, setPreferences] = useCookieStorage<UserPreferences>(
+    "preferences",
+    { theme: "light", fontSize: 16 }
+  )
+
+  return (
+    <div>
+      <label>
+        Theme:
+        <select
+          value={preferences.theme}
+          onChange={(e) =>
+            setPreferences((prev) => ({
+              ...prev,
+              theme: e.target.value as "light" | "dark",
+            }))
+          }
+        >
+          <option value="light">Light</option>
+          <option value="dark">Dark</option>
+        </select>
+      </label>
+
+      <label>
+        Font Size:
+        <input
+          type="number"
+          value={preferences.fontSize}
+          onChange={(e) =>
+            setPreferences((prev) => ({
+              ...prev,
+              fontSize: Number(e.target.value),
+            }))
+          }
+        />
+      </label>
+    </div>
+  )
+}
+```
+
+## API Reference
+
+### Parameters
+
+| Name           | Type     | Description                                                         |
+| -------------- | -------- | ------------------------------------------------------------------- |
+| `key`          | `string` | The key used to access the cookie value.                            |
+| `initialValue` | `T`      | The initial value to use if no cookie exists with the provided key. |
+| `options?`     | `object` | Configuration options for the cookie.                               |
+
+### `CookieOptions` Interface
+
+| Property    | Type      | Description                                               |
+| ----------- | --------- | --------------------------------------------------------- | ------- | ------------------------------------------------------------- |
+| `expires?`  | `Date`    | The expiration date of the cookie.                        |
+| `path?`     | `string`  | The path where the cookie is accessible. Defaults to `/`. |
+| `domain?`   | `string`  | The domain where the cookie is accessible.                |
+| `secure?`   | `boolean` | If `true`, the cookie is only sent over HTTPS.            |
+| `sameSite?` | `"Strict" | "Lax"                                                     | "None"` | Controls whether the cookie is sent with cross-site requests. |
+
+### Returns
+
+| Name          | Type       | Description                             |
+| ------------- | ---------- | --------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| `cookieState` | `T`        | The current value stored in the cookie. |
+| `setCookie`   | `(value: T | ((prev: T) => T)) => void`              | A function to update the cookie value. Accepts either a new value or a function that returns a new value. |

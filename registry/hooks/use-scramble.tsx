@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react"
+import * as React from "react"
 
 function getRandomInt(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min
@@ -65,15 +65,14 @@ export function useScramble(props: UseScrambleProps) {
     overdrive = false
   }
 
-  /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
-  const nodeRef = useRef<any>(null)
-  const rafRef = useRef<number>(0)
-  const elapsedRef = useRef(0)
+  const nodeRef = React.useRef<any>(null)
+  const rafRef = React.useRef<number>(0)
+  const elapsedRef = React.useRef(0)
   const fpsInterval = 1000 / (60 * speed)
-  const stepRef = useRef<number>(0)
-  const scrambleIndexRef = useRef<number>(0)
-  const controlRef = useRef<Array<string | number | null>>([])
-  const overdriveRef = useRef<number>(0)
+  const stepRef = React.useRef<number>(0)
+  const scrambleIndexRef = React.useRef<number>(0)
+  const controlRef = React.useRef<Array<string | number | null>>([])
+  const overdriveRef = React.useRef<number>(0)
 
   const setIfNotIgnored = (
     value: string | number | null,
@@ -192,10 +191,14 @@ export function useScramble(props: UseScrambleProps) {
       }
     }
     nodeRef.current.innerHTML = result
-    onAnimationFrame && onAnimationFrame(result)
+    if (onAnimationFrame) {
+      onAnimationFrame(result)
+    }
     if (result === text) {
       controlRef.current.splice(text.length, controlRef.current.length)
-      onAnimationEnd && onAnimationEnd()
+      if (onAnimationEnd) {
+        onAnimationEnd()
+      }
       cancelAnimationFrame(rafRef.current)
     }
     stepRef.current++
@@ -213,15 +216,17 @@ export function useScramble(props: UseScrambleProps) {
   const play = () => {
     cancelAnimationFrame(rafRef.current)
     reset()
-    onAnimationStart && onAnimationStart()
+    if (onAnimationStart) {
+      onAnimationStart()
+    }
     rafRef.current = requestAnimationFrame(animate)
   }
 
-  useEffect(() => {
+  React.useEffect(() => {
     reset()
   }, [text])
 
-  useEffect(() => {
+  React.useEffect(() => {
     cancelAnimationFrame(rafRef.current)
     rafRef.current = requestAnimationFrame(animate)
     return () => {
@@ -229,7 +234,7 @@ export function useScramble(props: UseScrambleProps) {
     }
   }, [animate])
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (!playOnMount) {
       controlRef.current = text.split("")
       stepRef.current = text.length

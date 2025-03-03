@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import * as React from "react"
 
 type OrientationType =
   | "portrait-primary"
@@ -37,7 +37,7 @@ const getLegacyOrientation = (): OrientationState => {
 }
 
 export function useOrientation(): OrientationState {
-  const [orientation, setOrientation] = useState<OrientationState>(
+  const [orientation, setOrientation] = React.useState<OrientationState>(
     getLegacyOrientation()
   )
 
@@ -58,7 +58,7 @@ export function useOrientation(): OrientationState {
     }
   }
 
-  useEffect(() => {
+  React.useEffect(() => {
     handleOrientationChange()
 
     if (screen.orientation && screen.orientation.addEventListener) {
