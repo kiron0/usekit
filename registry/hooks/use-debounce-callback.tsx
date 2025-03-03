@@ -2,6 +2,7 @@
 
 import * as React from "react"
 import debounce from "lodash.debounce"
+// change the path accordingly to your project structure
 import { useUnmount } from "registry/hooks/use-unmount"
 
 type DebounceOptions = {
