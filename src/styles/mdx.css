@@ -15,21 +15,22 @@
 }
 
 [data-rehype-pretty-code-figure] {
-  @apply relative text-white;
+  @apply relative text-[#fff];
 }
 
 [data-rehype-pretty-code-figure] code {
-  @apply grid min-w-full break-words rounded-none border-0 bg-transparent p-0;
+  @apply grid min-w-full rounded-none border-0 bg-transparent break-words;
   counter-reset: line;
   box-decoration-break: clone;
+  padding: 0;
 }
 
 [data-rehype-pretty-code-figure] [data-line] {
-  @apply inline-block min-h-[1rem] w-full px-4 py-0.5;
+  @apply inline-block min-h-[1rem] w-full px-[16px] py-[2px];
 }
 
 [data-rehype-pretty-code-figure] [data-line-numbers] [data-line] {
-  @apply px-2;
+  @apply px-[8px];
 }
 
 [data-rehype-pretty-code-figure] [data-line-numbers] {
@@ -37,7 +38,7 @@
 }
 
 [data-rehype-pretty-code-figure] [data-line-numbers] > [data-line]::before {
-  @apply text-xs text-zinc-50/40;
+  @apply text-[12px] text-[#fafafa];
   counter-increment: line;
   content: counter(line);
   display: inline-block;
@@ -47,7 +48,7 @@
 }
 
 [data-rehype-pretty-code-figure] [data-highlighted-line] {
-  @apply bg-zinc-700/50;
+  @apply bg-[#3f3f46];
 }
 
 [data-rehype-pretty-code-figure] [data-highlighted-line] span {
@@ -55,25 +56,27 @@
 }
 
 [data-rehype-pretty-code-figure] [data-highlighted-chars] {
-  @apply rounded-md border-zinc-700/70 bg-background/50 px-1 py-px;
+  @apply rounded-[6px] border-[#27272a] px-[4px] py-px;
+  backgroundcolor: var(--color-background/50);
 }
 
 .dark [data-rehype-pretty-code-figure] [data-highlighted-chars] {
-  @apply bg-background/50;
+  backgroundcolor: var(--color-background/50);
 }
 
 [data-rehype-pretty-code-title] {
-  @apply mt-2 px-4 pt-6 text-sm font-medium text-foreground;
+  @apply mt-[8px] px-[16px] pt-[24px] text-[14px] font-[500];
+  color: var(--color-foreground);
 }
 
 [data-rehype-pretty-code-title] + pre {
-  @apply mt-2;
+  @apply mt-[8px];
 }
 
 .mdx > .steps:first-child > h3:first-child {
-  @apply mt-0;
+  @apply mt-[0px];
 }
 
 .steps > h3 {
-  @apply mb-4 mt-8 text-base font-semibold;
+  @apply mt-[32px] mb-[16px] text-[16px] font-[600];
 }

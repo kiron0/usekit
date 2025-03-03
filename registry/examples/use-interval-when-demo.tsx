@@ -17,7 +17,7 @@ export default function UseIntervalWhenDemo() {
   )
 
   return (
-    <div className="size-52 border dark:bg-zinc-900 dark:shadow hover:border-primary/30 rounded-full relative">
+    <div className="size-52 border dark:bg-zinc-900 dark:shadow-sm hover:border-primary/30 rounded-full relative">
       <button
         id="toggle-timer"
         title="Click to toggle the timer"
