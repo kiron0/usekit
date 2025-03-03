@@ -317,6 +317,18 @@
           "path": "registry/hooks/use-visibility-change.tsx"
         }
       ]
+    },
+    {
+      "name": "use-key-press",
+      "title": "Use Key Press",
+      "description": "Detect and perform actions on key press events with useKeyPress.",
+      "type": "registry:hook",
+      "files": [
+        {
+          "type": "registry:hook",
+          "path": "registry/hooks/use-key-press.tsx"
+        }
+      ]
     }
   ]
 }

@@ -343,6 +343,19 @@ const hooks: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "use-key-press",
+    title: "Use Key Press",
+    description:
+      "Detect and perform actions on key press events with useKeyPress.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "hooks/use-key-press.tsx",
+        type: "registry:hook",
+      },
+    ],
+  },
 ]
 
 const hooksExamples: Registry["items"] = [
@@ -542,6 +555,16 @@ const hooksExamples: Registry["items"] = [
     files: [
       {
         path: "examples/use-visibility-change-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-key-press-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "examples/use-key-press-demo.tsx",
         type: "registry:example",
       },
     ],

@@ -185,6 +185,12 @@ export const docsConfig: DocsConfig = {
           items: [],
           label: "New",
         },
+        {
+          title: "useKeyPress",
+          href: "/docs/hooks/use-key-press",
+          items: [],
+          label: "New",
+        },
       ],
     },
   ],

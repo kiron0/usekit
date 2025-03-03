@@ -45,7 +45,7 @@ import * as React from "react"
 
 import { useVisibilityChange } from "@/hooks/use-visibility-change"
 
-export default function VisibilityTracker() {
+export function Component() {
   const documentVisible = useVisibilityChange()
   const [tabAwayCount, setTabAwayCount] = React.useState(0)
 
