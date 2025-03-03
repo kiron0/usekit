@@ -52,7 +52,13 @@ function DocsNavItems({
           >
             {item.title}
             {item.label && (
-              <span className="ml-2 rounded-md bg-primary px-1.5 py-0.5 text-xs leading-none text-primary-foreground no-underline group-hover:no-underline">
+              <span
+                className={cn(
+                  "ml-2 rounded-md bg-primary px-1.5 py-0.5 text-xs leading-none text-primary-foreground no-underline group-hover:no-underline",
+                  item.label.toLowerCase() === "soon" &&
+                    "bg-[#adfa1d] text-[#000000]"
+                )}
+              >
                 {item.label}
               </span>
             )}
