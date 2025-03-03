@@ -257,6 +257,12 @@ export const docsConfig: DocsConfig = {
           items: [],
           label: "Soon",
         },
+        {
+          title: "useCookieStorage ",
+          href: "/docs/hooks/use-cookie-storage",
+          items: [],
+          label: "Soon",
+        },
       ],
     },
   ],
