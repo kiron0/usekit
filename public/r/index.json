@@ -305,6 +305,18 @@
           "path": "registry/hooks/use-countdown.tsx"
         }
       ]
+    },
+    {
+      "name": "use-visibility-change",
+      "title": "Use Visibility Change",
+      "description": "Track document visibility and respond to changes with useVisibilityChange.",
+      "type": "registry:hook",
+      "files": [
+        {
+          "type": "registry:hook",
+          "path": "registry/hooks/use-visibility-change.tsx"
+        }
+      ]
     }
   ]
 }

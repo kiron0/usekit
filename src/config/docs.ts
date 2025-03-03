@@ -179,6 +179,12 @@ export const docsConfig: DocsConfig = {
           items: [],
           label: "New",
         },
+        {
+          title: "useVisibilityChange",
+          href: "/docs/hooks/use-visibility-change",
+          items: [],
+          label: "New",
+        },
       ],
     },
   ],

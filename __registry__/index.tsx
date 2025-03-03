@@ -382,6 +382,22 @@ export const Index: Record<string, any> = {
     component: React.lazy(() => import("registry/examples/use-countdown-demo")),
     source: "",
   },
+  "use-visibility-change": {
+    name: "use-visibility-change",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-visibility-change.tsx",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-visibility-change-demo")
+    ),
+    source: "",
+  },
   "use-copy-to-clipboard-demo": {
     name: "use-copy-to-clipboard-demo",
     type: "registry:example",
@@ -666,6 +682,22 @@ export const Index: Record<string, any> = {
       },
     ],
     component: React.lazy(() => import("registry/examples/use-countdown-demo")),
+    source: "",
+  },
+  "use-visibility-change-demo": {
+    name: "use-visibility-change-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-visibility-change-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-visibility-change-demo")
+    ),
     source: "",
   },
 }

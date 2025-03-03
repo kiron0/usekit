@@ -330,6 +330,19 @@ const hooks: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "use-visibility-change",
+    title: "Use Visibility Change",
+    description:
+      "Track document visibility and respond to changes with useVisibilityChange.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "hooks/use-visibility-change.tsx",
+        type: "registry:hook",
+      },
+    ],
+  },
 ]
 
 const hooksExamples: Registry["items"] = [
@@ -519,6 +532,16 @@ const hooksExamples: Registry["items"] = [
     files: [
       {
         path: "examples/use-countdown-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-visibility-change-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "examples/use-visibility-change-demo.tsx",
         type: "registry:example",
       },
     ],
