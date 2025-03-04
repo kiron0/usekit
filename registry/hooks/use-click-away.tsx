@@ -8,7 +8,7 @@ export function useClickAway<T extends HTMLElement = HTMLElement>(
   const ref = React.useRef<T>(null)
   const callbackRef = React.useRef(callback)
 
-  React.useLayoutEffect(() => {
+  React.useEffect(() => {
     callbackRef.current = callback
   })
 
