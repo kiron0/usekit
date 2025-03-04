@@ -1,0 +1,93 @@
+---
+title: useLongPress
+description: Enable precise control of long-press interactions for both touch and mouse events with useLongPress.
+---
+
+<ComponentPreview name="use-long-press-demo" />
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://usekit.kiron.dev/r/use-long-press
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="use-long-press" />
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+```tsx {1, 20-25}
+import { useLongPress, type LongPressCallback } from "@/hooks/use-long-press"
+
+export function Component() {
+  const handleLongPress: LongPressCallback = (event) => {
+    console.log("Long press detected!", event)
+  }
+
+  const handleStart: LongPressCallback = (event) => {
+    console.log("Press started", event)
+  }
+
+  const handleFinish: LongPressCallback = (event) => {
+    console.log("Press finished", event)
+  }
+
+  const handleCancel: LongPressCallback = (event) => {
+    console.log("Press cancelled", event)
+  }
+
+  const buttonHandlers = useLongPress(handleLongPress, {
+    threshold: 500,
+    onStart: handleStart,
+    onFinish: handleFinish,
+    onCancel: handleCancel,
+  })
+
+  return <button {...buttonHandlers}>Press and hold me</button>
+}
+```
+
+## API Reference
+
+### Parameters
+
+| Name                | Type       | Description                                                                                                            |
+| ------------------- | ---------- | ---------------------------------------------------------------------------------------------------------------------- |
+| `callback`          | `function` | This is the function to be executed when a long press event is detected.                                               |
+| `options?`          | `object`   | This is an optional configuration object provided when calling `useLongPress`.                                         |
+| `options.threshold` | `number`   | This is the time (in milliseconds) the user must press and hold to trigger a long press event. Default value is `400`. |
+| `options.onStart`   | `function` | This function is called when the user starts pressing.                                                                 |
+| `options.onFinish`  | `function` | This function is called when a long press event finishes successfully (the user releases after the threshold).         |
+| `options.onCancel`  | `function` | This function is called when a press event is cancelled (the user releases before the threshold).                      |
+
+### Return Values
+
+| Name           | Type       | Description                            |
+| -------------- | ---------- | -------------------------------------- |
+| `onMouseDown`  | `function` | This is the mouse down event handler.  |
+| `onMouseUp`    | `function` | This is the mouse up event handler.    |
+| `onMouseLeave` | `function` | This is the mouse leave event handler. |
+| `onTouchStart` | `function` | This is the touch start event handler. |
+| `onTouchEnd`   | `function` | This is the touch end event handler.   |

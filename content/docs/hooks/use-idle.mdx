@@ -1,0 +1,79 @@
+---
+title: useIdle
+description: Detect user inactivity with useIdle.
+---
+
+<ComponentPreview name="use-idle-demo" />
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://usekit.kiron.dev/r/use-idle
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="use-idle" />
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+```tsx {1, 4}
+import { useIdle } from "@/hooks/use-idle"
+
+export function Component() {
+  const isIdle = useIdle(3000) // 3 seconds idle time
+
+  return (
+    <div>
+      <h2>User Status: {isIdle ? "⏸️ Idle" : "▶️ Active"}</h2>
+      <p>Move your mouse or press any key to reset the idle timer</p>
+      <div>
+        <div
+          style={{
+            height: "6px",
+            width: "100%",
+            borderRadius: "9999px",
+            transition: "background-color 0.3s",
+            backgroundColor: isIdle ? "yellow" : "green",
+          }}
+        />
+      </div>
+    </div>
+  )
+}
+```
+
+## API Reference
+
+### Parameters
+
+| Name | Type     | Description                                                                                                                                            |
+| ---- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `ms` | `number` | This is the duration of idle time (in milliseconds) after which the `idle` state will be set to `true`. The default value is `20 * 1000` (20 seconds). |
+
+### Returns
+
+| Name   | Type      | Description                                                                                                      |
+| ------ | --------- | ---------------------------------------------------------------------------------------------------------------- |
+| `idle` | `boolean` | A boolean indicating if the user is idle. It is `true` if the user has been idle for at least `ms` milliseconds. |

@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-idle",
+  "type": "registry:hook",
+  "title": "Use Idle",
+  "description": "Detect user inactivity with useIdle.",
+  "files": [
+    {
+      "path": "registry/hooks/use-idle.tsx",
+      "content": "import * as React from \"react\"\n\ntype ThrottledFunction<T extends (...args: any[]) => any> = (\n  ...args: Parameters<T>\n) => void\n\nfunction throttle<T extends (...args: any[]) => void>(\n  func: T,\n  limit: number\n): ThrottledFunction<T> {\n  let lastFunc: ReturnType<typeof setTimeout>\n  let lastRan: number\n\n  return (...args: Parameters<T>) => {\n    if (!lastRan) {\n      func(...args)\n      lastRan = Date.now()\n    } else {\n      clearTimeout(lastFunc)\n      lastFunc = setTimeout(\n        () => {\n          if (Date.now() - lastRan >= limit) {\n            func(...args)\n            lastRan = Date.now()\n          }\n        },\n        limit - (Date.now() - lastRan)\n      )\n    }\n  }\n}\n\nexport function useIdle(ms: number = 1000 * 60): boolean {\n  const [idle, setIdle] = React.useState(false)\n  const timeoutId = React.useRef<number>(0)\n\n  React.useEffect(() => {\n    if (typeof window === \"undefined\") return\n\n    const handleTimeout = () => {\n      setIdle(true)\n    }\n\n    // eslint-disable-next-line @typescript-eslint/no-unused-vars\n    const handleEvent = throttle((e: Event) => {\n      setIdle(false)\n\n      if (timeoutId.current !== undefined) {\n        window.clearTimeout(timeoutId.current)\n      }\n      timeoutId.current = window.setTimeout(handleTimeout, ms)\n    }, 500)\n\n    const handleVisibilityChange = () => {\n      if (!document.hidden) {\n        handleEvent(new Event(\"visibilitychange\"))\n      }\n    }\n\n    timeoutId.current = window.setTimeout(handleTimeout, ms)\n\n    const events: (keyof WindowEventMap)[] = [\n      \"mousemove\",\n      \"mousedown\",\n      \"resize\",\n      \"keydown\",\n      \"touchstart\",\n      \"wheel\",\n    ]\n\n    events.forEach((event) => {\n      window.addEventListener(event, handleEvent)\n    })\n    document.addEventListener(\"visibilitychange\", handleVisibilityChange)\n\n    return () => {\n      events.forEach((event) => {\n        window.removeEventListener(event, handleEvent)\n      })\n      document.removeEventListener(\"visibilitychange\", handleVisibilityChange)\n\n      if (timeoutId.current !== undefined) {\n        window.clearTimeout(timeoutId.current)\n      }\n    }\n  }, [ms])\n\n  return idle\n}\n",
+      "type": "registry:hook"
+    }
+  ]
+}

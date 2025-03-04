@@ -231,7 +231,13 @@ export const docsConfig: DocsConfig = {
           title: "useIdle",
           href: "/docs/hooks/use-idle",
           items: [],
-          label: "Soon",
+          label: "New",
+        },
+        {
+          title: "useLongPress",
+          href: "/docs/hooks/use-long-press",
+          items: [],
+          label: "New",
         },
         {
           title: "useLogger",
@@ -248,12 +254,6 @@ export const docsConfig: DocsConfig = {
         {
           title: "useDefault",
           href: "/docs/hooks/use-default",
-          items: [],
-          label: "Soon",
-        },
-        {
-          title: "useLongPress",
-          href: "/docs/hooks/use-long-press",
           items: [],
           label: "Soon",
         },

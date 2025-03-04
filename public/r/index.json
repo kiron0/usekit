@@ -401,6 +401,30 @@
           "path": "registry/hooks/use-window-scroll.tsx"
         }
       ]
+    },
+    {
+      "name": "use-idle",
+      "title": "Use Idle",
+      "description": "Detect user inactivity with useIdle.",
+      "type": "registry:hook",
+      "files": [
+        {
+          "type": "registry:hook",
+          "path": "registry/hooks/use-idle.tsx"
+        }
+      ]
+    },
+    {
+      "name": "use-long-press",
+      "title": "Use Long Press",
+      "description": "Enable precise control of long-press interactions for both touch and mouse events with useLongPress.",
+      "type": "registry:hook",
+      "files": [
+        {
+          "type": "registry:hook",
+          "path": "registry/hooks/use-long-press.tsx"
+        }
+      ]
     }
   ]
 }

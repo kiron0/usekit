@@ -434,6 +434,31 @@ const hooks: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "use-idle",
+    title: "Use Idle",
+    description: "Detect user inactivity with useIdle.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "hooks/use-idle.tsx",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-long-press",
+    title: "Use Long Press",
+    description:
+      "Enable precise control of long-press interactions for both touch and mouse events with useLongPress.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "hooks/use-long-press.tsx",
+        type: "registry:hook",
+      },
+    ],
+  },
 ]
 
 const hooksExamples: Registry["items"] = [
@@ -703,6 +728,26 @@ const hooksExamples: Registry["items"] = [
     files: [
       {
         path: "examples/use-window-scroll-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-idle-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "examples/use-idle-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-long-press-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "examples/use-long-press-demo.tsx",
         type: "registry:example",
       },
     ],
