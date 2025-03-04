@@ -484,6 +484,18 @@ const hooks: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "use-object-state",
+    title: "Use Object State",
+    description: "Manage complex state objects with useObjectState.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "hooks/use-object-state.tsx",
+        type: "registry:hook",
+      },
+    ],
+  },
 ]
 
 const hooksExamples: Registry["items"] = [
@@ -793,6 +805,16 @@ const hooksExamples: Registry["items"] = [
     files: [
       {
         path: "examples/use-click-away-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-object-state-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "examples/use-object-state-demo.tsx",
         type: "registry:example",
       },
     ],

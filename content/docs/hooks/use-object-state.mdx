@@ -1,0 +1,119 @@
+---
+title: useObjectState
+description: Manage complex state objects with useObjectState.
+---
+
+<ComponentPreview name="use-object-state-demo" />
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://usekit.kiron.dev/r/use-object-state
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="use-object-state" />
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+```tsx {1, 18}
+import { useObjectState } from "@/hooks/use-object-state"
+
+interface TeamStats {
+  team: string
+  wins: number
+  losses: number
+  championships: number
+}
+
+const initialState: TeamStats = {
+  team: "Utah Jazz",
+  wins: 2138,
+  losses: 1789,
+  championships: 0,
+}
+
+export default function UseObjectStateDemo() {
+  const [stats, setStats] = useObjectState<TeamStats>(initialState)
+
+  const addWin = () => {
+    setStats((s) => ({
+      wins: s.wins + 1,
+    }))
+  }
+
+  const addLoss = () => {
+    setStats((s) => ({
+      losses: s.losses + 1,
+    }))
+  }
+
+  const reset = () => {
+    setStats(initialState)
+  }
+
+  return (
+    <section>
+      <h1>Team Statistics</h1>
+      <div>
+        <button onClick={addWin}>Add Win</button>
+        <button onClick={addLoss}>Add Loss</button>
+        <button onClick={reset}>Reset</button>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            {(Object.keys(stats) as Array<keyof TeamStats>).map((key) => (
+              <th key={key}>{key}</th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            {(Object.keys(stats) as Array<keyof TeamStats>).map((key) => (
+              <td key={key}>{stats[key]}</td>
+            ))}
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  )
+}
+```
+
+## API Reference
+
+### Parameters
+
+| Name            | Type     | Description              |
+| --------------- | -------- | ------------------------ |
+| `initialValue?` | `object` | The initial state value. |
+
+### Returns
+
+| Index | Type       | Description                            |
+| ----- | ---------- | -------------------------------------- |
+| `0`   | `object`   | The current state object.              |
+| `1`   | `function` | A function to update the state object. |
