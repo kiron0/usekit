@@ -1,0 +1,62 @@
+---
+title: useIsClient
+description: Determine whether the code is running on the client-side or server-side with useIsClient.
+---
+
+<ComponentPreview name="use-is-client-demo" />
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://usekit.kiron.dev/r/use-is-client
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="use-is-client" />
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+```tsx {1, 4}
+import { useIsClient } from "@/hooks/use-is-client"
+
+export function Component() {
+  const isClient = useIsClient()
+
+  return (
+    <div>
+      <h6>Is Client? </h6>
+      <p>{isClient ? "If you can see this ... you already know" : "No"}</p>
+    </div>
+  )
+}
+```
+
+## API Reference
+
+### Returns
+
+| Name       | Type      | Description                                                        |
+| ---------- | --------- | ------------------------------------------------------------------ |
+| `isClient` | `boolean` | `true` if running in a client-side environment, `false` otherwise. |

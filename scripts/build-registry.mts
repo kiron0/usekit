@@ -369,6 +369,96 @@ const hooks: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "use-is-client",
+    title: "Use Is Client",
+    description:
+      "Determine whether the code is running on the client-side or server-side with useIsClient.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "hooks/use-is-client.tsx",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-geolocation",
+    title: "Use Geolocation",
+    description:
+      "Access and monitor a user's geolocation (after they give permission) with useGeolocation.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "hooks/use-geolocation.tsx",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-page-leave",
+    title: "Use Page Leave",
+    description:
+      "Track when a user navigates away from a webpage with usePageLeave.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "hooks/use-page-leave.tsx",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-is-first-render",
+    title: "Use Is First Render",
+    description:
+      "Differentiate between the first and subsequent renders with useIsFirstRender.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "hooks/use-is-first-render.tsx",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-window-scroll",
+    title: "Use Window Scroll",
+    description:
+      "Track and manipulate the scroll position of a web page with useWindowScroll.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "hooks/use-window-scroll.tsx",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-idle",
+    title: "Use Idle",
+    description: "Detect user inactivity with useIdle.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "hooks/use-idle.tsx",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-long-press",
+    title: "Use Long Press",
+    description:
+      "Enable precise control of long-press interactions for both touch and mouse events with useLongPress.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "hooks/use-long-press.tsx",
+        type: "registry:hook",
+      },
+    ],
+  },
 ]
 
 const hooksExamples: Registry["items"] = [
@@ -588,6 +678,76 @@ const hooksExamples: Registry["items"] = [
     files: [
       {
         path: "examples/use-cookie-storage-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-is-client-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "examples/use-is-client-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-geolocation-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "examples/use-geolocation-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-page-leave-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "examples/use-page-leave-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-is-first-render-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "examples/use-is-first-render-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-window-scroll-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "examples/use-window-scroll-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-idle-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "examples/use-idle-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-long-press-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "examples/use-long-press-demo.tsx",
         type: "registry:example",
       },
     ],

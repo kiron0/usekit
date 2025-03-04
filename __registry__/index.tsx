@@ -428,6 +428,114 @@ export const Index: Record<string, any> = {
     ),
     source: "",
   },
+  "use-is-client": {
+    name: "use-is-client",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-is-client.tsx",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(() => import("registry/examples/use-is-client-demo")),
+    source: "",
+  },
+  "use-geolocation": {
+    name: "use-geolocation",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-geolocation.tsx",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-geolocation-demo")
+    ),
+    source: "",
+  },
+  "use-page-leave": {
+    name: "use-page-leave",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-page-leave.tsx",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-page-leave-demo")
+    ),
+    source: "",
+  },
+  "use-is-first-render": {
+    name: "use-is-first-render",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-is-first-render.tsx",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-is-first-render-demo")
+    ),
+    source: "",
+  },
+  "use-window-scroll": {
+    name: "use-window-scroll",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-window-scroll.tsx",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-window-scroll-demo")
+    ),
+    source: "",
+  },
+  "use-idle": {
+    name: "use-idle",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-idle.tsx",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(() => import("registry/examples/use-idle-demo")),
+    source: "",
+  },
+  "use-long-press": {
+    name: "use-long-press",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-long-press.tsx",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-long-press-demo")
+    ),
+    source: "",
+  },
   "use-copy-to-clipboard-demo": {
     name: "use-copy-to-clipboard-demo",
     type: "registry:example",
@@ -757,6 +865,114 @@ export const Index: Record<string, any> = {
     ],
     component: React.lazy(
       () => import("registry/examples/use-cookie-storage-demo")
+    ),
+    source: "",
+  },
+  "use-is-client-demo": {
+    name: "use-is-client-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-is-client-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(() => import("registry/examples/use-is-client-demo")),
+    source: "",
+  },
+  "use-geolocation-demo": {
+    name: "use-geolocation-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-geolocation-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-geolocation-demo")
+    ),
+    source: "",
+  },
+  "use-page-leave-demo": {
+    name: "use-page-leave-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-page-leave-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-page-leave-demo")
+    ),
+    source: "",
+  },
+  "use-is-first-render-demo": {
+    name: "use-is-first-render-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-is-first-render-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-is-first-render-demo")
+    ),
+    source: "",
+  },
+  "use-window-scroll-demo": {
+    name: "use-window-scroll-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-window-scroll-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-window-scroll-demo")
+    ),
+    source: "",
+  },
+  "use-idle-demo": {
+    name: "use-idle-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-idle-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(() => import("registry/examples/use-idle-demo")),
+    source: "",
+  },
+  "use-long-press-demo": {
+    name: "use-long-press-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-long-press-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-long-press-demo")
     ),
     source: "",
   },

@@ -79,10 +79,16 @@ export default {
             height: "0",
           },
         },
+        pulsate: {
+          "0%": { transform: "scale(0.1, 0.1)", opacity: "0" },
+          "50%": { opacity: "1" },
+          "100%": { transform: "scale(1.2, 1.2)", opacity: "0" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        pulsate: "pulsate 1s ease-out infinite",
       },
     },
   },
