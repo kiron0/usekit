@@ -395,6 +395,19 @@ const hooks: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "use-page-leave",
+    title: "Use Page Leave",
+    description:
+      "Track when a user navigates away from a webpage with usePageLeave.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "hooks/use-page-leave.tsx",
+        type: "registry:hook",
+      },
+    ],
+  },
 ]
 
 const hooksExamples: Registry["items"] = [
@@ -634,6 +647,16 @@ const hooksExamples: Registry["items"] = [
     files: [
       {
         path: "examples/use-geolocation-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-page-leave-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "examples/use-page-leave-demo.tsx",
         type: "registry:example",
       },
     ],

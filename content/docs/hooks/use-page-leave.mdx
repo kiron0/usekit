@@ -1,0 +1,104 @@
+---
+title: usePageLeave
+description: Track when a user navigates away from a webpage with usePageLeave.
+---
+
+<ComponentPreview name="use-page-leave-demo" />
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://usekit.kiron.dev/r/use-page-leave
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="use-page-leave" />
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+```tsx {5, 11-16}
+"use client"
+
+import * as React from "react"
+
+import { useIntervalWhen } from "@/hooks/use-interval-when"
+
+export function Component() {
+  const [endTime, setEndTime] = React.useState(new Date(Date.now() + 10000))
+  const [complete, setComplete] = React.useState(false)
+
+  const count = useCountdown(endTime, {
+    interval: 1000,
+    onTick: (time) =>
+      console.log(`Tick: ${Math.round(time / 1000)}s remaining`),
+    onComplete: () => setComplete(true),
+  })
+
+  const handleClick = (additionalTime: number) => {
+    if (complete) return
+    const newEndTime = endTime.getTime() + additionalTime
+    setEndTime(new Date(newEndTime))
+  }
+
+  const formatTime = (milliseconds: number): string => {
+    const seconds = Math.ceil(milliseconds / 1000)
+    return `${seconds}s`
+  }
+
+  return (
+    <section>
+      <h1>Countdown Timer</h1>
+      <div className="countdown">
+        {complete ? "Complete!" : formatTime(count)}
+      </div>
+      {!complete && (
+        <div className="controls">
+          <button onClick={() => handleClick(5000)}>+5s</button>
+          <button onClick={() => handleClick(10000)}>+10s</button>
+          <button onClick={() => handleClick(15000)}>+15s</button>
+        </div>
+      )}
+    </section>
+  )
+}
+```
+
+## API Reference
+
+### Parameters
+
+| Name                 | Type     | Description                                                         |
+| -------------------- | -------- | ------------------------------------------------------------------- |
+| `endTime`            | `number` | The end time of the countdown in milliseconds since the Unix epoch. |
+| `options?`           | `object` | An object containing the following options                          |
+| `options.interval`   | `number` | The interval in milliseconds at which the countdown should tick.    |
+| `options.onComplete` | `func`   | A callback function to be called when the countdown reaches zero.   |
+| `options.onTick`     | `func`   | A callback function to be called on each tick of the countdown.     |
+
+### Returns
+
+| Name  | Type     | Description                         |
+| ----- | -------- | ----------------------------------- |
+| count | `number` | The current count of the countdown. |

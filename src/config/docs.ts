@@ -210,14 +210,14 @@ export const docsConfig: DocsConfig = {
           label: "New",
         },
         {
-          title: "useIdle",
-          href: "/docs/hooks/use-idle",
-          items: [],
-          label: "Soon",
-        },
-        {
           title: "usePageLeave",
           href: "/docs/hooks/use-page-leave",
+          items: [],
+          label: "New",
+        },
+        {
+          title: "useIdle",
+          href: "/docs/hooks/use-idle",
           items: [],
           label: "Soon",
         },
