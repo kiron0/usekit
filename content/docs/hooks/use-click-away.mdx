@@ -1,0 +1,95 @@
+---
+title: useClickAway
+description: Detect clicks outside of specific component with useClickAway.
+---
+
+<ComponentPreview name="use-click-away-demo" />
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://usekit.kiron.dev/r/use-click-away
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="use-click-away" />
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+```tsx {3, 9-11}
+import * as React from "react"
+
+import { useClickAway } from "@/hooks/use-click-away"
+
+import { closeIcon } from "./icons"
+
+export function Component() {
+  const [isOpen, setIsOpen] = React.useState(false)
+  const ref = useClickAway(() => {
+    setIsOpen(false)
+  })
+
+  const handleOpenModal = () => {
+    if (isOpen === false) {
+      setIsOpen(true)
+    }
+  }
+
+  return (
+    <>
+      <section>
+        <h1>useClickAway</h1>
+        <button className="link" onClick={handleOpenModal}>
+          Open Modal
+        </button>
+      </section>
+      {isOpen && (
+        <dialog ref={ref}>
+          <button onClick={() => setIsOpen(false)}>{closeIcon}</button>
+          <h2>Modal</h2>
+          <p>
+            Click outside the modal to close (or use the button) whatever you
+            prefer.
+          </p>
+        </dialog>
+      )}
+    </>
+  )
+}
+```
+
+## API Reference
+
+### Parameters
+
+| Name       | Type       | Description                                                                                                                                                                                                                                  |
+| ---------- | ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `callback` | `function` | The callback function that is provided as an argument to `useClickAway`. This function is invoked whenever a click event is detected outside of the referenced element. The event object from the click is passed to this callback function. |
+
+### Returns
+
+| Name  | Type        | Description                                                                                                                                                                                    |
+| ----- | ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ref` | `React ref` | This is a ref object returned by the hook. It should be attached to a React element to monitor click events. The ref provides a way to access the properties of the element it is attached to. |

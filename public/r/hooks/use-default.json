@@ -7,7 +7,7 @@
   "files": [
     {
       "path": "registry/hooks/use-default.tsx",
-      "content": "import React from \"react\"\n\nexport function useDefault<T, D>(\n  initialValue: T,\n  defaultValue: D\n): [D | Exclude<T, null | undefined>, React.Dispatch<React.SetStateAction<T>>] {\n  const [state, setState] = React.useState<T>(initialValue)\n\n  if (state === null || state === undefined) {\n    return [defaultValue, setState]\n  }\n\n  return [state as D | Exclude<T, null | undefined>, setState]\n}\n",
+      "content": "import * as React from \"react\"\n\nexport function useDefault<T>(initialState: T, defaultState: T) {\n  const [state, setState] = React.useState<T>(initialState)\n\n  const setDefaultState = (newState: T | null) => {\n    if (newState === null || newState === undefined) {\n      setState(defaultState)\n    } else {\n      setState(newState)\n    }\n  }\n\n  return [state, setDefaultState] as const\n}\n",
       "type": "registry:hook"
     }
   ]

@@ -437,6 +437,18 @@
           "path": "registry/hooks/use-default.tsx"
         }
       ]
+    },
+    {
+      "name": "use-click-away",
+      "title": "Use Click Away",
+      "description": "Detect clicks outside of specific component with useClickAway.",
+      "type": "registry:hook",
+      "files": [
+        {
+          "type": "registry:hook",
+          "path": "registry/hooks/use-click-away.tsx"
+        }
+      ]
     }
   ]
 }

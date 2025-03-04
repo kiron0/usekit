@@ -550,6 +550,22 @@ export const Index: Record<string, any> = {
     component: React.lazy(() => import("registry/examples/use-default-demo")),
     source: "",
   },
+  "use-click-away": {
+    name: "use-click-away",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-click-away.tsx",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-click-away-demo")
+    ),
+    source: "",
+  },
   "use-copy-to-clipboard-demo": {
     name: "use-copy-to-clipboard-demo",
     type: "registry:example",
@@ -1002,6 +1018,22 @@ export const Index: Record<string, any> = {
       },
     ],
     component: React.lazy(() => import("registry/examples/use-default-demo")),
+    source: "",
+  },
+  "use-click-away-demo": {
+    name: "use-click-away-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-click-away-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-click-away-demo")
+    ),
     source: "",
   },
 }
