@@ -12,15 +12,12 @@ export function useObjectState<T extends object>(
   const handleUpdate = React.useCallback(
     (arg: Partial<T> | ((prevState: T) => Partial<T>)) => {
       if (typeof arg === "function") {
-        setState((s) => {
-          const newState = arg(s)
-          if (isPlainObject(newState)) {
-            return { ...s, ...newState }
-          }
-          return s
+        setState((prev) => {
+          const update = arg(prev)
+          return isPlainObject(update) ? { ...prev, ...update } : prev
         })
-      } else if (isPlainObject(arg)) {
-        setState((s) => ({ ...s, ...arg }))
+      } else {
+        setState((prev) => ({ ...prev, ...arg }))
       }
     },
     []
