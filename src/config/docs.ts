@@ -216,6 +216,12 @@ export const docsConfig: DocsConfig = {
           label: "New",
         },
         {
+          title: "useIsFirstRender",
+          href: "/docs/hooks/use-is-first-render",
+          items: [],
+          label: "New",
+        },
+        {
           title: "useIdle",
           href: "/docs/hooks/use-idle",
           items: [],
@@ -242,12 +248,6 @@ export const docsConfig: DocsConfig = {
         {
           title: "useDefault",
           href: "/docs/hooks/use-default",
-          items: [],
-          label: "Soon",
-        },
-        {
-          title: "useIsFirstRender",
-          href: "/docs/hooks/use-is-first-render",
           items: [],
           label: "Soon",
         },

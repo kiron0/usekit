@@ -13,12 +13,12 @@ export default function UseIsFirstRenderDemo() {
   }, [isFirstRender])
 
   return (
-    <div>
-      <h1>useIsFirstRender Example</h1>
+    <div className="space-y-2 text-center">
+      <h2 className="text-xl font-semibold">Is First Render?</h2>
       <p>
         {isFirstRender
-          ? "This is the first render."
-          : "This is a subsequent render."}
+          ? "Yes, This is the first render."
+          : "No, This is a subsequent render."}
       </p>
     </div>
   )

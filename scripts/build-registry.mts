@@ -408,6 +408,19 @@ const hooks: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "use-is-first-render",
+    title: "Use Is First Render",
+    description:
+      "Differentiate between the first and subsequent renders with useIsFirstRender.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "hooks/use-is-first-render.tsx",
+        type: "registry:hook",
+      },
+    ],
+  },
 ]
 
 const hooksExamples: Registry["items"] = [
@@ -657,6 +670,16 @@ const hooksExamples: Registry["items"] = [
     files: [
       {
         path: "examples/use-page-leave-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-is-first-render-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "examples/use-is-first-render-demo.tsx",
         type: "registry:example",
       },
     ],

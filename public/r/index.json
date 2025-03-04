@@ -377,6 +377,18 @@
           "path": "registry/hooks/use-page-leave.tsx"
         }
       ]
+    },
+    {
+      "name": "use-is-first-render",
+      "title": "Use Is First Render",
+      "description": "Differentiate between the first and subsequent renders with useIsFirstRender.",
+      "type": "registry:hook",
+      "files": [
+        {
+          "type": "registry:hook",
+          "path": "registry/hooks/use-is-first-render.tsx"
+        }
+      ]
     }
   ]
 }

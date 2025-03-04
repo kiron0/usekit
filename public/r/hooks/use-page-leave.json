@@ -7,7 +7,7 @@
   "files": [
     {
       "path": "registry/hooks/use-page-leave.tsx",
-      "content": "import * as React from \"react\"\r\n\r\ntype CallbackFunction = () => void\r\n\r\nexport function usePageLeave(cb: CallbackFunction) {\r\n  React.useEffect(() => {\r\n    const handleMouseOut = (event: MouseEvent) => {\r\n      if (event.relatedTarget === null) {\r\n        cb()\r\n      }\r\n    }\r\n\r\n    document.addEventListener(\"mouseout\", handleMouseOut)\r\n\r\n    return () => {\r\n      document.removeEventListener(\"mouseout\", handleMouseOut)\r\n    }\r\n  }, [cb])\r\n}\r\n",
+      "content": "import * as React from \"react\"\n\ntype CallbackFunction = () => void\n\nexport function usePageLeave(\n  cb: CallbackFunction,\n  ref: React.RefObject<HTMLElement | null>\n) {\n  React.useEffect(() => {\n    const element = ref.current\n    if (!element) return\n\n    const handleMouseOut = (event: MouseEvent) => {\n      const isLeavingElement =\n        event.relatedTarget === null ||\n        !element.contains(event.relatedTarget as Node)\n\n      if (isLeavingElement) {\n        cb()\n      }\n    }\n\n    element.addEventListener(\"mouseout\", handleMouseOut)\n\n    return () => {\n      element.removeEventListener(\"mouseout\", handleMouseOut)\n    }\n  }, [cb, ref])\n}\n",
       "type": "registry:hook"
     }
   ]

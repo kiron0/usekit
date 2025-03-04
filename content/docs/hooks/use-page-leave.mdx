@@ -38,8 +38,9 @@ npx shadcn@latest add https://usekit.kiron.dev/r/use-page-leave
 
 ## Usage
 
-```tsx {2, 8-10}
+```tsx {3, 9-11}
 import * as React from "react"
+
 import { usePageLeave } from "@/hooks/use-page-leave"
 
 export default function PageLeaveTracker() {
@@ -65,7 +66,8 @@ export default function PageLeaveTracker() {
 ## API Reference
 
 ### Parameters
-| Name | Type       | Description                                                                 |
-| ---- | ---------- | --------------------------------------------------------------------------- |
-| cb   | `function` | The callback function to be invoked when the user navigates away from page. |
+
+| Name | Type        | Description                                                                 |
+| ---- | ----------- | --------------------------------------------------------------------------- |
+| cb   | `function`  | The callback function to be invoked when the user navigates away from page. |
 | ref  | `RefObject` | The reference to the element to track the mouse out event.                  |

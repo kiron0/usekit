@@ -1,5 +1,3 @@
-"use client"
-
 import { useCookieStorage } from "registry/hooks/use-cookie-storage"
 
 import { Badge } from "@/components/ui/badge"
@@ -18,7 +16,7 @@ interface UserPreferences {
   fontSize: number
 }
 
-export default function CookieExample() {
+export default function UseCookieStorageDemo() {
   const [username, setUsername] = useCookieStorage("username", "guest", {
     path: "/",
     expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),

@@ -1,0 +1,76 @@
+---
+title: usePageLeave
+description: Track when a user navigates away from a webpage with usePageLeave.
+---
+
+<ComponentPreview name="use-is-first-render-demo" />
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://usekit.kiron.dev/r/use-is-first-render
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="use-is-first-render" />
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+```tsx {3, 6}
+import * as React from "react"
+
+import { useIsFirstRender } from "registry/hooks/use-is-first-render"
+
+export function Component() {
+  const isFirstRender = useIsFirstRender()
+
+  React.useEffect(() => {
+    if (!isFirstRender) {
+      console.log("This effect runs on every render except the first one.")
+    } else {
+      console.log("This is the first render. Skipping effect.")
+    }
+  }, [isFirstRender])
+
+  return (
+    <div>
+      <h2>Is First Render?</h2>
+      <p>
+        {isFirstRender
+          ? "Yes, This is the first render."
+          : "No, This is a subsequent render."}
+      </p>
+    </div>
+  )
+}
+```
+
+## API Reference
+
+### Returns
+
+| Name | Type        | Description                                                                 |
+| ---- | ----------- | --------------------------------------------------------------------------- |
+| isFirstRender   | `boolean`  | `true` for the first render, `false` for others. |
