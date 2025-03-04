@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-default",
+  "type": "registry:hook",
+  "title": "Use Default",
+  "description": "Manage state with default values using useDefault.",
+  "files": [
+    {
+      "path": "registry/hooks/use-default.tsx",
+      "content": "import React from \"react\"\n\nexport function useDefault<T, D>(\n  initialValue: T,\n  defaultValue: D\n): [D | Exclude<T, null | undefined>, React.Dispatch<React.SetStateAction<T>>] {\n  const [state, setState] = React.useState<T>(initialValue)\n\n  if (state === null || state === undefined) {\n    return [defaultValue, setState]\n  }\n\n  return [state as D | Exclude<T, null | undefined>, setState]\n}\n",
+      "type": "registry:hook"
+    }
+  ]
+}

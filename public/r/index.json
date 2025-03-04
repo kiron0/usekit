@@ -425,6 +425,18 @@
           "path": "registry/hooks/use-long-press.tsx"
         }
       ]
+    },
+    {
+      "name": "use-default",
+      "title": "Use Default",
+      "description": "Manage state with default values using useDefault.",
+      "type": "registry:hook",
+      "files": [
+        {
+          "type": "registry:hook",
+          "path": "registry/hooks/use-default.tsx"
+        }
+      ]
     }
   ]
 }

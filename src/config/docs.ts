@@ -240,6 +240,12 @@ export const docsConfig: DocsConfig = {
           label: "New",
         },
         {
+          title: "useDefault",
+          href: "/docs/hooks/use-default",
+          items: [],
+          label: "New",
+        },
+        {
           title: "useLogger",
           href: "/docs/hooks/use-logger",
           items: [],
@@ -248,12 +254,6 @@ export const docsConfig: DocsConfig = {
         {
           title: "useClickAway",
           href: "/docs/hooks/use-click-away",
-          items: [],
-          label: "Soon",
-        },
-        {
-          title: "useDefault",
-          href: "/docs/hooks/use-default",
           items: [],
           label: "Soon",
         },

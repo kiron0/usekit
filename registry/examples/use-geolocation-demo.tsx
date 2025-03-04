@@ -1,5 +1,5 @@
 import { Loader2 } from "lucide-react"
-import useGeolocation from "registry/hooks/use-geolocation"
+import { useGeolocation } from "registry/hooks/use-geolocation"
 
 export default function UseGeolocationDemo() {
   const {
@@ -15,8 +15,8 @@ export default function UseGeolocationDemo() {
     timestamp,
   } = useGeolocation({
     enableHighAccuracy: true,
-    timeout: 5000,
-    maximumAge: 0,
+    timeout: 10000,
+    maximumAge: 60000,
   })
 
   if (loading) {

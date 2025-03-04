@@ -1,0 +1,133 @@
+---
+title: useDefault
+description: Manage state with default values using useDefault.
+---
+
+<ComponentPreview name="use-default-demo" />
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://usekit.kiron.dev/r/use-default
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="use-default" />
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+```tsx {2, 8}
+import * as React from "react"
+import { useDefault } from "@/hooks/use-default"
+
+export function Component() {
+  const initialState = { name: "Tyler" }
+  const defaultState = { name: "Ben" }
+
+  const [user, setUser] = useDefault(initialState, defaultState)
+
+  return (
+    <section>
+      <h1>useDefault</h1>
+
+      <button
+        title="Sets the value to Lynn"
+        className="link"
+        onClick={() => setUser({ name: "Lynn" })}
+      >
+        Lynn
+      </button>
+      <button
+        title="Sets the value to Tyler"
+        className="link"
+        onClick={() => setUser({ name: "Tyler" })}
+      >
+        Tyler
+      </button>
+      <button
+        title="Sets the value to null causing it to use the default value"
+        className="link"
+        onClick={() => setUser(null)}
+      >
+        Null
+      </button>
+      <pre>
+        <code>{JSON.stringify(user)}</code>
+      </pre>
+    </section>
+  )
+}
+```
+
+## Example
+
+### Scenario 1: Initial value might be null/undefined
+
+```tsx
+const Example1 = () => {
+  // type: [number, React.Dispatch<React.SetStateAction<number | null>>]
+  const [value, setValue] = useDefault<number | null, number>(null, 0)
+  // value will be 0 initially (default), then number when set
+  return <div>{value}</div>
+}
+```
+
+### Scenario 2: Initial value is undefined
+
+```tsx
+const Example2 = () => {
+  // inferred as [string, React.Dispatch<React.SetStateAction<undefined>>]
+  const [text, setText] = useDefault(undefined, "default")
+  // text will be 'default' initially, then string when set
+  return <div>{text}</div>
+}
+```
+
+### Scenario 3: Mixed types with type safety
+
+```tsx
+const Example3 = () => {
+  // explicit typing shows union type result
+  const [data, setData] = useDefault<string | null, boolean>(null, true)
+  // data has type: string | boolean
+  return <div>{data.toString()}</div>
+}
+```
+
+## API Reference
+
+### Parameters
+
+| Name           | Type  | Description                                                         |
+| -------------- | ----- | ------------------------------------------------------------------- |
+| `initialValue` | `any` | The initial value of the state returned from `useDefault`           |
+| `defaultValue` | `any` | The default value to be used if the state is `undefined` or `null`. |
+
+### Returns
+
+| Name       | Type       | Description                                                                                         |
+| ---------- | ---------- | --------------------------------------------------------------------------------------------------- |
+| `state`    | `any`      | The current state. If the state is `undefined` or `null`, `defaultValue` is returned instead.       |
+| `setState` | `function` | The state setter function returned from `React.useState()`. This can be called to update the state. |

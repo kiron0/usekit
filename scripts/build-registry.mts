@@ -459,6 +459,18 @@ const hooks: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "use-default",
+    title: "Use Default",
+    description: "Manage state with default values using useDefault.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "hooks/use-default.tsx",
+        type: "registry:hook",
+      },
+    ],
+  },
 ]
 
 const hooksExamples: Registry["items"] = [
@@ -748,6 +760,16 @@ const hooksExamples: Registry["items"] = [
     files: [
       {
         path: "examples/use-long-press-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-default-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "examples/use-default-demo.tsx",
         type: "registry:example",
       },
     ],
