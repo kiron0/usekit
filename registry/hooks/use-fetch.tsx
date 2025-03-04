@@ -77,5 +77,3 @@ export function useFetch<T = unknown>(
 
   return state
 }
-
-export default useFetch

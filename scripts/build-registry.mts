@@ -459,6 +459,31 @@ const hooks: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "use-default",
+    title: "Use Default",
+    description: "Manage state with default values using useDefault.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "hooks/use-default.tsx",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-click-away",
+    title: "Use Click Away",
+    description:
+      "Detect clicks outside of specific component with useClickAway.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "hooks/use-click-away.tsx",
+        type: "registry:hook",
+      },
+    ],
+  },
 ]
 
 const hooksExamples: Registry["items"] = [
@@ -748,6 +773,26 @@ const hooksExamples: Registry["items"] = [
     files: [
       {
         path: "examples/use-long-press-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-default-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "examples/use-default-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-click-away-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "examples/use-click-away-demo.tsx",
         type: "registry:example",
       },
     ],

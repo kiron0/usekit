@@ -28,16 +28,15 @@ export function useGeolocation(options?: PositionOptions): GeolocationState {
   })
 
   const optionsRef = React.useRef(options)
+  const watchId = React.useRef<number>(0)
+  const isMounted = React.useRef(true)
 
   React.useEffect(() => {
-    if (!navigator.geolocation) {
-      setState((prev) => ({
-        ...prev,
-        loading: false,
-        error: new Error("Geolocation is not supported by your browser"),
-      }))
-      return
-    }
+    optionsRef.current = options
+  }, [options])
+
+  React.useEffect(() => {
+    isMounted.current = true
 
     const handleSuccess = (position: GeolocationPosition) => {
       const { coords, timestamp } = position
@@ -63,22 +62,52 @@ export function useGeolocation(options?: PositionOptions): GeolocationState {
       }))
     }
 
-    navigator.geolocation.getCurrentPosition(
-      handleSuccess,
-      handleError,
-      optionsRef.current
-    )
+    const requestGeolocation = async () => {
+      try {
+        if (!navigator.geolocation) {
+          setState((prev) => ({
+            ...prev,
+            loading: false,
+            error: new Error("Geolocation is not supported by your browser"),
+          }))
+          return
+        }
 
-    const watchId = navigator.geolocation.watchPosition(
-      handleSuccess,
-      handleError,
-      optionsRef.current
-    )
+        if (navigator.permissions) {
+          const permissionStatus = await navigator.permissions.query({
+            name: "geolocation" as PermissionName,
+          })
 
-    return () => navigator.geolocation.clearWatch(watchId)
-  }, [options])
+          if (permissionStatus.state === "denied") {
+            throw new Error("Geolocation permission denied")
+          }
+        }
+
+        navigator.geolocation.getCurrentPosition(
+          handleSuccess,
+          handleError,
+          optionsRef.current
+        )
+
+        watchId.current = navigator.geolocation.watchPosition(
+          handleSuccess,
+          handleError,
+          optionsRef.current
+        )
+      } catch (error) {
+        handleError(error as GeolocationPositionError)
+      }
+    }
+
+    requestGeolocation()
+
+    return () => {
+      isMounted.current = false
+      if (watchId.current) {
+        navigator.geolocation.clearWatch(watchId.current)
+      }
+    }
+  }, [])
 
   return state
 }
-
-export default useGeolocation
