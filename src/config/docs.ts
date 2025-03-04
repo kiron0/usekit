@@ -198,14 +198,20 @@ export const docsConfig: DocsConfig = {
           label: "New",
         },
         {
-          title: "useIdle",
-          href: "/docs/hooks/use-idle",
+          title: "useIsClient",
+          href: "/docs/hooks/use-is-client",
           items: [],
-          label: "Soon",
+          label: "New",
         },
         {
           title: "useGeolocation",
           href: "/docs/hooks/use-geolocation",
+          items: [],
+          label: "New",
+        },
+        {
+          title: "useIdle",
+          href: "/docs/hooks/use-idle",
           items: [],
           label: "Soon",
         },
@@ -236,12 +242,6 @@ export const docsConfig: DocsConfig = {
         {
           title: "useDefault",
           href: "/docs/hooks/use-default",
-          items: [],
-          label: "Soon",
-        },
-        {
-          title: "useIsClient",
-          href: "/docs/hooks/use-is-client",
           items: [],
           label: "Soon",
         },

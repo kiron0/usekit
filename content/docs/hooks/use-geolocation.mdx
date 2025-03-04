@@ -1,0 +1,109 @@
+---
+title: useGeolocation
+description: Access and monitor a user's geolocation (after they give permission) with useGeolocation.
+---
+
+<ComponentPreview name="use-geolocation-demo" />
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://usekit.kiron.dev/r/use-geolocation
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="use-is-client" />
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+```tsx {1, 4-19}
+import useGeolocation from "@/hooks/use-geolocation"
+
+export function Component() {
+  const {
+    loading,
+    error,
+    latitude,
+    longitude,
+    altitude,
+    accuracy,
+    altitudeAccuracy,
+    heading,
+    speed,
+    timestamp,
+  } = useGeolocation({
+    enableHighAccuracy: true,
+    timeout: 5000,
+    maximumAge: 0,
+  })
+
+  if (loading) {
+    return <div>Loading geolocation data...</div>
+  }
+
+  if (error) {
+    return <div>Error: {error.message}</div>
+  }
+
+  return (
+    <div>
+      <h2>Geolocation Data</h2>
+      <p>Latitude: {latitude!.toFixed(6)}</p>
+      <p>Longitude: {longitude!.toFixed(6)}</p>
+      <p>Accuracy: {accuracy} meters</p>
+
+      {altitude && <p>Altitude: {altitude} meters</p>}
+      {altitudeAccuracy && <p>Altitude Accuracy: {altitudeAccuracy} meters</p>}
+      {heading && <p>Heading: {heading}° from true north</p>}
+      {speed && <p>Speed: {speed} m/s</p>}
+
+      <p>Last updated: {new Date(timestamp!).toLocaleTimeString()}</p>
+    </div>
+  )
+}
+```
+
+## API Reference
+
+### Parameters
+
+| Name    | Type   | Description                                                                                                                                                                                                                                                                                 |
+| ------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| options | object | This is an optional configuration object provided when calling `useGeolocation`. It is used when calling `navigator.geolocation.getCurrentPosition()` and `navigator.geolocation.watchPosition()`. Some of the attributes it accepts are `enableHighAccuracy`, `timeout`, and `maximumAge`. |
+
+### Return Values
+
+| Name             | Type    | Description                                                                                                                                    |
+| ---------------- | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| loading          | boolean | A boolean indicating if the geolocation data is currently being fetched.                                                                       |
+| accuracy         | number  | The accuracy of the latitude and longitude properties in meters.                                                                               |
+| altitude         | number  | The altitude in meters above the mean sea level.                                                                                               |
+| altitudeAccuracy | number  | The accuracy of altitude in meters.                                                                                                            |
+| heading          | number  | The direction in which the device is traveling. This value, specified in degrees, indicates how far off from heading true north the device is. |
+| latitude         | number  | The latitude in decimal degrees.                                                                                                               |
+| longitude        | number  | The longitude in decimal degrees.                                                                                                              |
+| speed            | number  | The current ground speed of the device, specified in meters per second.                                                                        |
+| timestamp        | number  | The timestamp at which the geolocation data was retrieved.                                                                                     |
+| error            | object  | An error object, if an error occurred while retrieving the geolocation data.                                                                   |

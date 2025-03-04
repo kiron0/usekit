@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-is-client",
+  "type": "registry:hook",
+  "title": "Use Is Client",
+  "description": "Determine whether the code is running on the client-side or server-side with useIsClient.",
+  "files": [
+    {
+      "path": "registry/hooks/use-is-client.tsx",
+      "content": "import * as React from \"react\"\n\nexport function useIsClient() {\n  const [isClient, setIsClient] = React.useState(false)\n\n  React.useEffect(() => {\n    setIsClient(true)\n  }, [])\n\n  return isClient\n}\n",
+      "type": "registry:hook"
+    }
+  ]
+}

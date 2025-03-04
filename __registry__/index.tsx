@@ -428,6 +428,36 @@ export const Index: Record<string, any> = {
     ),
     source: "",
   },
+  "use-is-client": {
+    name: "use-is-client",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-is-client.tsx",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(() => import("registry/examples/use-is-client-demo")),
+    source: "",
+  },
+  "use-geolocation": {
+    name: "use-geolocation",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-geolocation.tsx",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-geolocation-demo")
+    ),
+    source: "",
+  },
   "use-copy-to-clipboard-demo": {
     name: "use-copy-to-clipboard-demo",
     type: "registry:example",
@@ -757,6 +787,36 @@ export const Index: Record<string, any> = {
     ],
     component: React.lazy(
       () => import("registry/examples/use-cookie-storage-demo")
+    ),
+    source: "",
+  },
+  "use-is-client-demo": {
+    name: "use-is-client-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-is-client-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(() => import("registry/examples/use-is-client-demo")),
+    source: "",
+  },
+  "use-geolocation-demo": {
+    name: "use-geolocation-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-geolocation-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-geolocation-demo")
     ),
     source: "",
   },

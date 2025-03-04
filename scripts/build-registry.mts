@@ -369,6 +369,32 @@ const hooks: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "use-is-client",
+    title: "Use Is Client",
+    description:
+      "Determine whether the code is running on the client-side or server-side with useIsClient.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "hooks/use-is-client.tsx",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-geolocation",
+    title: "Use Geolocation",
+    description:
+      "Access and monitor a user's geolocation (after they give permission) with useGeolocation.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "hooks/use-geolocation.tsx",
+        type: "registry:hook",
+      },
+    ],
+  },
 ]
 
 const hooksExamples: Registry["items"] = [
@@ -588,6 +614,26 @@ const hooksExamples: Registry["items"] = [
     files: [
       {
         path: "examples/use-cookie-storage-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-is-client-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "examples/use-is-client-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-geolocation-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "examples/use-geolocation-demo.tsx",
         type: "registry:example",
       },
     ],

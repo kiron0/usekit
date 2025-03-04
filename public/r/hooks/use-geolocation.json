@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-geolocation",
+  "type": "registry:hook",
+  "title": "Use Geolocation",
+  "description": "Access and monitor a user's geolocation (after they give permission) with useGeolocation.",
+  "files": [
+    {
+      "path": "registry/hooks/use-geolocation.tsx",
+      "content": "import { useEffect, useState } from \"react\"\r\n\r\ninterface GeolocationState {\r\n  loading: boolean\r\n  accuracy: number | null\r\n  altitude: number | null\r\n  altitudeAccuracy: number | null\r\n  heading: number | null\r\n  latitude: number | null\r\n  longitude: number | null\r\n  speed: number | null\r\n  timestamp: number | null\r\n  error: GeolocationPositionError | Error | null\r\n}\r\n\r\nexport function useGeolocation(options?: PositionOptions): GeolocationState {\r\n  const [state, setState] = useState<GeolocationState>({\r\n    loading: true,\r\n    accuracy: null,\r\n    altitude: null,\r\n    altitudeAccuracy: null,\r\n    heading: null,\r\n    latitude: null,\r\n    longitude: null,\r\n    speed: null,\r\n    timestamp: null,\r\n    error: null,\r\n  })\r\n\r\n  useEffect(() => {\r\n    if (!navigator.geolocation) {\r\n      setState((prev) => ({\r\n        ...prev,\r\n        loading: false,\r\n        error: new Error(\"Geolocation is not supported by your browser\"),\r\n      }))\r\n      return\r\n    }\r\n\r\n    const handleSuccess = (position: GeolocationPosition) => {\r\n      const { coords, timestamp } = position\r\n      setState({\r\n        loading: false,\r\n        accuracy: coords.accuracy,\r\n        altitude: coords.altitude,\r\n        altitudeAccuracy: coords.altitudeAccuracy,\r\n        heading: coords.heading,\r\n        latitude: coords.latitude,\r\n        longitude: coords.longitude,\r\n        speed: coords.speed,\r\n        timestamp,\r\n        error: null,\r\n      })\r\n    }\r\n\r\n    const handleError = (error: GeolocationPositionError) => {\r\n      setState((prev) => ({\r\n        ...prev,\r\n        loading: false,\r\n        error,\r\n      }))\r\n    }\r\n\r\n    navigator.geolocation.getCurrentPosition(\r\n      handleSuccess,\r\n      handleError,\r\n      options\r\n    )\r\n\r\n    const watchId = navigator.geolocation.watchPosition(\r\n      handleSuccess,\r\n      handleError,\r\n      options\r\n    )\r\n\r\n    return () => navigator.geolocation.clearWatch(watchId)\r\n  }, [options])\r\n\r\n  return state\r\n}\r\n\r\nexport default useGeolocation\r\n",
+      "type": "registry:hook"
+    }
+  ]
+}
