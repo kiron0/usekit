@@ -566,6 +566,22 @@ export const Index: Record<string, any> = {
     ),
     source: "",
   },
+  "use-object-state": {
+    name: "use-object-state",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-object-state.tsx",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-object-state-demo")
+    ),
+    source: "",
+  },
   "use-copy-to-clipboard-demo": {
     name: "use-copy-to-clipboard-demo",
     type: "registry:example",
@@ -1033,6 +1049,22 @@ export const Index: Record<string, any> = {
     ],
     component: React.lazy(
       () => import("registry/examples/use-click-away-demo")
+    ),
+    source: "",
+  },
+  "use-object-state-demo": {
+    name: "use-object-state-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-object-state-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-object-state-demo")
     ),
     source: "",
   },
