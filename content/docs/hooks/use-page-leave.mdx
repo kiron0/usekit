@@ -43,7 +43,7 @@ import * as React from "react"
 
 import { usePageLeave } from "@/hooks/use-page-leave"
 
-export default function PageLeaveTracker() {
+export function Component() {
   const elementRef = React.useRef<HTMLDivElement>(null)
   const [distractions, setDistractions] = React.useState(0)
 

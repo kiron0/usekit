@@ -421,6 +421,19 @@ const hooks: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "use-window-scroll",
+    title: "Use Window Scroll",
+    description:
+      "Track and manipulate the scroll position of a web page with useWindowScroll.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "hooks/use-window-scroll.tsx",
+        type: "registry:hook",
+      },
+    ],
+  },
 ]
 
 const hooksExamples: Registry["items"] = [
@@ -680,6 +693,16 @@ const hooksExamples: Registry["items"] = [
     files: [
       {
         path: "examples/use-is-first-render-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-window-scroll-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "examples/use-window-scroll-demo.tsx",
         type: "registry:example",
       },
     ],

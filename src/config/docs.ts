@@ -222,6 +222,12 @@ export const docsConfig: DocsConfig = {
           label: "New",
         },
         {
+          title: "useWindowScroll",
+          href: "/docs/hooks/use-window-scroll",
+          items: [],
+          label: "New",
+        },
+        {
           title: "useIdle",
           href: "/docs/hooks/use-idle",
           items: [],
@@ -230,12 +236,6 @@ export const docsConfig: DocsConfig = {
         {
           title: "useLogger",
           href: "/docs/hooks/use-logger",
-          items: [],
-          label: "Soon",
-        },
-        {
-          title: "useWindowScroll",
-          href: "/docs/hooks/use-window-scroll",
           items: [],
           label: "Soon",
         },

@@ -389,6 +389,18 @@
           "path": "registry/hooks/use-is-first-render.tsx"
         }
       ]
+    },
+    {
+      "name": "use-window-scroll",
+      "title": "Use Window Scroll",
+      "description": "Track and manipulate the scroll position of a web page with useWindowScroll.",
+      "type": "registry:hook",
+      "files": [
+        {
+          "type": "registry:hook",
+          "path": "registry/hooks/use-window-scroll.tsx"
+        }
+      ]
     }
   ]
 }

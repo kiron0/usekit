@@ -1,0 +1,65 @@
+---
+title: useWindowScroll
+description: Track and manipulate the scroll position of a web page with useWindowScroll.
+---
+
+<ComponentPreview name="use-window-scroll-demo" />
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://usekit.kiron.dev/r/use-window-scroll
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="use-window-scroll" />
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+```tsx {1, 6}
+import { useWindowScroll } from "@/hooks/use-window-scroll"
+
+export function Component() {
+  const [{ x, y }, scrollTo] = useWindowScroll()
+
+  return (
+    <div>
+      <p>
+        Current position: {x ?? "Loading..."}, {y ?? "Loading..."}
+      </p>
+      <button onClick={() => scrollTo(0, 0)}>Scroll to Top</button>
+    </div>
+  )
+}
+```
+
+## API Reference
+
+### Returns
+
+| Name       | Type       | Description                                                              |
+| ---------- | ---------- | ------------------------------------------------------------------------ |
+| `state`    | `object`   | An object representing the current window scroll position.               |
+| `scrollTo` | `function` | A function that can be used to scroll the window to a specific position. |

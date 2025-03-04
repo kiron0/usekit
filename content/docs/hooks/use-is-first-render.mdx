@@ -38,10 +38,10 @@ npx shadcn@latest add https://usekit.kiron.dev/r/use-is-first-render
 
 ## Usage
 
-```tsx {3, 6}
+```tsx {2, 5}
 import * as React from "react"
 
-import { useIsFirstRender } from "registry/hooks/use-is-first-render"
+import { useIsFirstRender } from "@/hooks/use-is-first-render"
 
 export function Component() {
   const isFirstRender = useIsFirstRender()
@@ -71,6 +71,6 @@ export function Component() {
 
 ### Returns
 
-| Name | Type        | Description                                                                 |
-| ---- | ----------- | --------------------------------------------------------------------------- |
-| isFirstRender   | `boolean`  | `true` for the first render, `false` for others. |
+| Name          | Type      | Description                                      |
+| ------------- | --------- | ------------------------------------------------ |
+| isFirstRender | `boolean` | `true` for the first render, `false` for others. |

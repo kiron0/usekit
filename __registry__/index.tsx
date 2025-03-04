@@ -490,6 +490,22 @@ export const Index: Record<string, any> = {
     ),
     source: "",
   },
+  "use-window-scroll": {
+    name: "use-window-scroll",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-window-scroll.tsx",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-window-scroll-demo")
+    ),
+    source: "",
+  },
   "use-copy-to-clipboard-demo": {
     name: "use-copy-to-clipboard-demo",
     type: "registry:example",
@@ -881,6 +897,22 @@ export const Index: Record<string, any> = {
     ],
     component: React.lazy(
       () => import("registry/examples/use-is-first-render-demo")
+    ),
+    source: "",
+  },
+  "use-window-scroll-demo": {
+    name: "use-window-scroll-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-window-scroll-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-window-scroll-demo")
     ),
     source: "",
   },
