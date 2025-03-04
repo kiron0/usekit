@@ -2,18 +2,28 @@ import * as React from "react"
 
 type CallbackFunction = () => void
 
-export function usePageLeave(cb: CallbackFunction) {
+export function usePageLeave(
+  cb: CallbackFunction,
+  ref: React.RefObject<HTMLElement | null>
+) {
   React.useEffect(() => {
+    const element = ref.current
+    if (!element) return
+
     const handleMouseOut = (event: MouseEvent) => {
-      if (event.relatedTarget === null) {
+      const isLeavingElement =
+        event.relatedTarget === null ||
+        !element.contains(event.relatedTarget as Node)
+
+      if (isLeavingElement) {
         cb()
       }
     }
 
-    document.addEventListener("mouseout", handleMouseOut)
+    element.addEventListener("mouseout", handleMouseOut)
 
     return () => {
-      document.removeEventListener("mouseout", handleMouseOut)
+      element.removeEventListener("mouseout", handleMouseOut)
     }
-  }, [cb])
+  }, [cb, ref])
 }

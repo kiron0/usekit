@@ -458,6 +458,22 @@ export const Index: Record<string, any> = {
     ),
     source: "",
   },
+  "use-page-leave": {
+    name: "use-page-leave",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-page-leave.tsx",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-page-leave-demo")
+    ),
+    source: "",
+  },
   "use-copy-to-clipboard-demo": {
     name: "use-copy-to-clipboard-demo",
     type: "registry:example",
@@ -817,6 +833,22 @@ export const Index: Record<string, any> = {
     ],
     component: React.lazy(
       () => import("registry/examples/use-geolocation-demo")
+    ),
+    source: "",
+  },
+  "use-page-leave-demo": {
+    name: "use-page-leave-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-page-leave-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-page-leave-demo")
     ),
     source: "",
   },

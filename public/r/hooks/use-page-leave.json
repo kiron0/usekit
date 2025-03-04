@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-page-leave",
+  "type": "registry:hook",
+  "title": "Use Page Leave",
+  "description": "Track when a user navigates away from a webpage with usePageLeave.",
+  "files": [
+    {
+      "path": "registry/hooks/use-page-leave.tsx",
+      "content": "import * as React from \"react\"\r\n\r\ntype CallbackFunction = () => void\r\n\r\nexport function usePageLeave(cb: CallbackFunction) {\r\n  React.useEffect(() => {\r\n    const handleMouseOut = (event: MouseEvent) => {\r\n      if (event.relatedTarget === null) {\r\n        cb()\r\n      }\r\n    }\r\n\r\n    document.addEventListener(\"mouseout\", handleMouseOut)\r\n\r\n    return () => {\r\n      document.removeEventListener(\"mouseout\", handleMouseOut)\r\n    }\r\n  }, [cb])\r\n}\r\n",
+      "type": "registry:hook"
+    }
+  ]
+}

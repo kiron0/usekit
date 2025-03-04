@@ -365,6 +365,18 @@
           "path": "registry/hooks/use-geolocation.tsx"
         }
       ]
+    },
+    {
+      "name": "use-page-leave",
+      "title": "Use Page Leave",
+      "description": "Track when a user navigates away from a webpage with usePageLeave.",
+      "type": "registry:hook",
+      "files": [
+        {
+          "type": "registry:hook",
+          "path": "registry/hooks/use-page-leave.tsx"
+        }
+      ]
     }
   ]
 }
