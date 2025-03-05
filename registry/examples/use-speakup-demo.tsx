@@ -33,9 +33,10 @@ export default function UseSpeakupDemo() {
     setVoice,
     voices,
     isSpeaking,
-    ref,
     isSupported: isTextToVoiceSupported,
-  } = useTextToVoice<HTMLDivElement>()
+  } = useTextToVoice({
+    text: transcript || text,
+  })
 
   return (
     <div className="flex flex-col items-center justify-center w-full space-y-8">
@@ -55,7 +56,7 @@ export default function UseSpeakupDemo() {
               </Button>
               <Button
                 onClick={stopListening}
-                disabled={transcript.length === 0 || !isListening}
+                disabled={transcript.length === 0}
               >
                 Stop Listening
               </Button>
@@ -107,7 +108,7 @@ export default function UseSpeakupDemo() {
               <Label>Select Voice:</Label>
               <Select
                 onValueChange={(value) => setVoice(value)}
-                defaultValue={voices[0]}
+                value={voices[0]}
               >
                 <SelectTrigger className="w-full">
                   <SelectValue placeholder="Select Voice" />
@@ -122,9 +123,6 @@ export default function UseSpeakupDemo() {
               </Select>
             </div>
             <p>Status: {isSpeaking ? "Speaking..." : "Not Speaking"}</p>
-            <div ref={ref} className="">
-              {text}
-            </div>
           </>
         ) : (
           <p className="text-red-500">

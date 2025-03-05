@@ -135,107 +135,141 @@ export const useVoiceToText = ({
   }
 }
 
-enum NodeType {
-  ELEMENT = 1,
-  TEXT = 3,
-}
-
 interface TextToVoiceOptions {
+  text?: string
   pitch?: number
   rate?: number
   volume?: number
+  onError?: (error: string) => void
 }
 
-export const useTextToVoice = <T extends HTMLElement>({
+export const useTextToVoice = ({
+  text = "",
   pitch = 1,
   rate = 1,
   volume = 1,
+  onError,
 }: TextToVoiceOptions = {}) => {
-  const textRef = React.useRef<T>(null)
-  const transcript = React.useRef<string>("")
-  const [textContent, setTextContent] = React.useState<string>("")
   const [isSpeaking, setIsSpeaking] = React.useState(false)
-  const synth = typeof window !== "undefined" ? window.speechSynthesis : null
+  const [isPaused, setIsPaused] = React.useState(false)
+  const [voices, setVoices] = React.useState<SpeechSynthesisVoice[]>([])
+  const [selectedVoice, setSelectedVoice] =
+    React.useState<SpeechSynthesisVoice | null>(null)
+  const utteranceRef = React.useRef<SpeechSynthesisUtterance | null>(null)
 
-  const utter = React.useMemo(() => {
-    if (!synth || typeof SpeechSynthesisUtterance === "undefined") return null
-    return new SpeechSynthesisUtterance(textContent)
-  }, [textContent, synth])
-
-  const extractText = React.useCallback((node: Node | null) => {
-    if (!node) return
-
-    node.childNodes.forEach((child) => {
-      if (child.nodeType === NodeType.TEXT) {
-        transcript.current += child.textContent
-      } else if (child.nodeType === NodeType.ELEMENT) {
-        extractText(child)
-      }
-    })
+  const synth = React.useMemo(() => {
+    if (typeof window === "undefined") return null
+    return window.speechSynthesis
   }, [])
 
   React.useEffect(() => {
-    if (textRef.current) {
-      transcript.current = ""
-      extractText(textRef.current)
-      setTextContent(transcript.current)
+    if (!synth) return
+
+    const updateVoices = () => {
+      const voices = synth.getVoices()
+      setVoices(voices)
     }
-  }, [extractText])
 
-  React.useEffect(() => {
-    if (!utter) return
+    updateVoices()
+    synth.addEventListener("voiceschanged", updateVoices)
+    return () => synth.removeEventListener("voiceschanged", updateVoices)
+  }, [synth])
 
-    utter.pitch = pitch
-    utter.rate = rate
-    utter.volume = volume
-  }, [utter, pitch, rate, volume])
+  const createUtterance = React.useCallback(() => {
+    if (!synth || !text) return null
 
-  React.useEffect(() => {
-    if (!utter) return
+    const utterance = new SpeechSynthesisUtterance(text)
+    utterance.pitch = pitch
+    utterance.rate = rate
+    utterance.volume = volume
+    utterance.voice = selectedVoice
 
-    utter.onend = () => setIsSpeaking(false)
-    utter.onerror = (event) => {
-      console.error(`Speech synthesis error: ${event.error}`)
+    utterance.onstart = () => {
+      setIsSpeaking(true)
+      setIsPaused(false)
     }
-  }, [utter])
 
-  const voices = React.useMemo(() => synth?.getVoices() || [], [synth])
-  const voiceNames = React.useMemo(() => voices.map((v) => v.name), [voices])
+    utterance.onend = () => {
+      setIsSpeaking(false)
+      setIsPaused(false)
+    }
+
+    utterance.onerror = (event) => {
+      onError?.(`Speech error: ${event.error}`)
+      setIsSpeaking(false)
+      setIsPaused(false)
+    }
+
+    utterance.onpause = () => {
+      setIsSpeaking(false)
+      setIsPaused(true)
+    }
+
+    utterance.onresume = () => {
+      setIsSpeaking(true)
+      setIsPaused(false)
+    }
+
+    return utterance
+  }, [text, synth, pitch, rate, volume, selectedVoice, onError])
 
   const speak = React.useCallback(() => {
-    if (!synth || !utter) return
+    if (!synth || !text) return
 
-    synth.speak(utter)
-    setIsSpeaking(true)
-  }, [synth, utter])
+    synth.cancel()
+
+    const utterance = createUtterance()
+    if (!utterance) return
+
+    utteranceRef.current = utterance
+    synth.speak(utterance)
+  }, [createUtterance, synth, text])
 
   const pause = React.useCallback(() => {
-    synth?.pause()
-    setIsSpeaking(false)
+    if (synth?.speaking && utteranceRef.current) {
+      synth.pause()
+      setIsSpeaking(false)
+      setIsPaused(true)
+    }
   }, [synth])
 
   const resume = React.useCallback(() => {
-    synth?.resume()
-    setIsSpeaking(true)
+    if (synth?.paused && utteranceRef.current) {
+      synth.resume()
+      setIsSpeaking(true)
+      setIsPaused(false)
+    }
+  }, [synth])
+
+  const cancel = React.useCallback(() => {
+    synth?.cancel()
+    setIsSpeaking(false)
+    setIsPaused(false)
   }, [synth])
 
   const setVoice = React.useCallback(
     (name: string) => {
-      if (utter) {
-        utter.voice = voices.find((v) => v.name === name) || null
-      }
+      const voice = voices.find((v) => v.name === name)
+      setSelectedVoice(voice || null)
     },
-    [utter, voices]
+    [voices]
   )
 
+  React.useEffect(() => {
+    if (utteranceRef.current && selectedVoice) {
+      utteranceRef.current.voice = selectedVoice
+    }
+  }, [selectedVoice])
+
   return {
-    ref: textRef,
     speak,
     pause,
     resume,
+    cancel,
     setVoice,
-    voices: voiceNames,
     isSpeaking,
+    isPaused,
+    voices: voices.map((v) => v.name),
     isSupported: !!synth,
   }
 }
