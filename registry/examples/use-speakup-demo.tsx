@@ -45,10 +45,6 @@ export default function UseSpeakupDemo() {
       <div className="border p-4 rounded-lg w-full">
         <h2 className="text-lg md:text-xl font-semibold mb-4">Voice to Text</h2>
         {isVoiceToTextSupported ? (
-          <p className="text-red-500">
-            Voice-to-Text is not supported in your browser.
-          </p>
-        ) : (
           <>
             <div className="flex flex-wrap gap-2 mb-4">
               <Button
@@ -77,17 +73,17 @@ export default function UseSpeakupDemo() {
               )}
             </p>
           </>
+        ) : (
+          <p className="text-red-500">
+            Voice-to-Text is not supported in your browser.
+          </p>
         )}
       </div>
 
       {/* Text-to-Voice Section */}
       <div className="border p-4 rounded-lg w-full">
         <h2 className="text-lg md:text-xl font-semibold mb-4">Text to Voice</h2>
-        {!isTextToVoiceSupported ? (
-          <p className="text-red-500">
-            Text-to-Voice is not supported in your browser.
-          </p>
-        ) : (
+        {isTextToVoiceSupported ? (
           <>
             <Textarea
               value={text}
@@ -130,6 +126,10 @@ export default function UseSpeakupDemo() {
               {text}
             </div>
           </>
+        ) : (
+          <p className="text-red-500">
+            Text-to-Voice is not supported in your browser.
+          </p>
         )}
       </div>
     </div>
