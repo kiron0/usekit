@@ -38,46 +38,132 @@ npx shadcn@latest add https://usekit.kiron.dev/r/use-speakup
 
 </Tabs>
 
-## Usage
+## Text To Voice
 
-```tsx {1, 5}
-import { useCopyToClipboard } from "@/hooks/use-copy-to-clipboard"
-import { Button } from "@/components/ui/button"
+The `useTextToVoice` hook provides text-to-speech functionality using the Web Speech API. It supports chunking long texts into smaller parts for better performance.
+
+### Example
+
+```tsx {1, 4-19}
+import { useTextToVoice } from "@/hooks/use-speakup"
 
 export function Component() {
-  const [copy, isCopied] = useCopyToClipboard()
-
-  const copyText = async (text: string) => {
-    await copy(text)
-      .then(() => {
-        toast.success("Copied to clipboard")
-      })
-      .catch((error) => {
-        if (error instanceof Error) {
-          toast.error(error.message)
-        }
-      })
-  }
+  const {
+    speak,
+    pause,
+    resume,
+    cancel,
+    isSpeaking,
+    isPaused,
+    voices,
+    setVoice,
+  } = useTextToVoice({
+    text: "Hello, this is a long text that will be chunked into smaller parts.",
+    pitch: 1.2,
+    rate: 1.1,
+    volume: 0.8,
+    chunkSize: 100,
+  })
 
   return (
-    <Button onClick={() => copyText("Hello, World!")}>
-      {isCopied ? "Text Copied" : "Click to copy"}
-    </Button>
+    <div>
+      <button onClick={speak}>Speak</button>
+      <button onClick={pause} disabled={!isSpeaking}>
+        Pause
+      </button>
+      <button onClick={resume} disabled={!isPaused}>
+        Resume
+      </button>
+      <button onClick={cancel}>Stop</button>
+      <select onChange={(e) => setVoice(e.target.value)}>
+        {voices.map((voice) => (
+          <option key={voice} value={voice}>
+            {voice}
+          </option>
+        ))}
+      </select>
+    </div>
   )
 }
 ```
 
-## API Reference
-
 ### Parameters
 
-| Name     | Type     | Description                               | Default |
-| -------- | -------- | ----------------------------------------- | ------- |
-| `delay?` | `number` | Time in milliseconds to reset `isCopied`. | `2000`  |
+| Name        | Type                      | Default     | Description                                                 |
+| ----------- | ------------------------- | ----------- | ----------------------------------------------------------- |
+| `text`      | `string`                  | `""`        | The text to be spoken.                                      |
+| `pitch`     | `number`                  | `1`         | The pitch of the voice (0 to 2).                            |
+| `rate`      | `number`                  | `1`         | The speed of the speech (0.1 to 10).                        |
+| `volume`    | `number`                  | `1`         | The volume of the speech (0 to 1).                          |
+| `chunkSize` | `number`                  | `200`       | The maximum number of characters per chunk for long texts.  |
+| `onError`   | `(error: string) => void` | `undefined` | Callback function to handle errors during speech synthesis. |
 
 ### Returns
 
-| Index | Type                                 | Description                                                             |
-| ----- | ------------------------------------ | ----------------------------------------------------------------------- |
-| `0`   | `(text: string) => Promise<boolean>` | Function to copy text to the clipboard.                                 |
-| `1`   | `boolean`                            | Indicates if the last copy was successful, resetting after the `delay`. |
+| Property      | Type                     | Description                                                        |
+| ------------- | ------------------------ | ------------------------------------------------------------------ |
+| `speak`       | `() => void`             | Starts speaking the text.                                          |
+| `pause`       | `() => void`             | Pauses the speech.                                                 |
+| `resume`      | `() => void`             | Resumes paused speech.                                             |
+| `cancel`      | `() => void`             | Stops and cancels the speech.                                      |
+| `setVoice`    | `(name: string) => void` | Sets the voice by name (use `voices` array for available options). |
+| `isSpeaking`  | `boolean`                | Indicates whether speech is currently active.                      |
+| `isPaused`    | `boolean`                | Indicates whether speech is paused.                                |
+| `voices`      | `string[]`               | Array of available voice names.                                    |
+| `isSupported` | `boolean`                | Indicates whether the browser supports the Web Speech API.         |
+
+## Voice To Text
+
+The `useVoiceToText` hook provides speech-to-text functionality using the Web Speech API. It supports continuous listening and error handling.
+
+### Example
+
+```tsx {1, 4-12}
+import { useVoiceToText } from "@/hooks/use-speakup"
+
+export function Component() {
+  const {
+    startListening,
+    stopListening,
+    isListening,
+    isStopped,
+    transcript,
+    reset,
+    isSupported,
+  } = useVoiceToText({ lang: "en-US", continuous: true })
+
+  return (
+    <div>
+      <button onClick={startListening} disabled={isListening}>
+        Start Listening
+      </button>
+      <button onClick={stopListening} disabled={!isListening}>
+        Stop Listening
+      </button>
+      <button onClick={reset}>Reset</button>
+      <p>{transcript}</p>
+      {!isSupported && <p>Your browser does not support speech recognition.</p>}
+      {isStopped && <p>Speech recognition stopped.</p>}
+    </div>
+  )
+}
+```
+
+### Parameters
+
+| Name         | Type      | Default   | Description                                                               |
+| ------------ | --------- | --------- | ------------------------------------------------------------------------- |
+| `lang`       | `string`  | `"en-US"` | The language for speech recognition.                                      |
+| `continuous` | `boolean` | `true`    | Whether to continuously listen for speech or stop after the first result. |
+
+### Returns
+
+| Property         | Type         | Description                                                  |
+| ---------------- | ------------ | ------------------------------------------------------------ |
+| `startListening` | `() => void` | Starts listening for speech input.                           |
+| `stopListening`  | `() => void` | Stops listening for speech input.                            |
+| `isListening`    | `boolean`    | Indicates whether speech recognition is active.              |
+| `isStopped`      | `boolean`    | Indicates whether speech recognition was explicitly stopped. |
+| `transcript`     | `string`     | The recognized text from speech input.                       |
+| `reset`          | `() => void` | Resets the transcript and stops listening.                   |
+| `isSupported`    | `boolean`    | Indicates whether the browser supports the Web Speech API.   |
