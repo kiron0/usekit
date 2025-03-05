@@ -140,6 +140,7 @@ interface TextToVoiceOptions {
   pitch?: number
   rate?: number
   volume?: number
+  chunkSize?: number
   onError?: (error: string) => void
 }
 
@@ -148,6 +149,7 @@ export const useTextToVoice = ({
   pitch = 1,
   rate = 1,
   volume = 1,
+  chunkSize = 200,
   onError,
 }: TextToVoiceOptions = {}) => {
   const [isSpeaking, setIsSpeaking] = React.useState(false)
@@ -157,10 +159,31 @@ export const useTextToVoice = ({
     React.useState<SpeechSynthesisVoice | null>(null)
   const utteranceRef = React.useRef<SpeechSynthesisUtterance | null>(null)
 
+  const pitchRef = React.useRef(pitch)
+  const rateRef = React.useRef(rate)
+  const volumeRef = React.useRef(volume)
+  const selectedVoiceRef = React.useRef(selectedVoice)
+  const chunksRef = React.useRef<string[]>([])
+  const currentChunkIndexRef = React.useRef(0)
+
   const synth = React.useMemo(() => {
     if (typeof window === "undefined") return null
     return window.speechSynthesis
   }, [])
+
+  // Update refs when dependencies change
+  React.useEffect(() => {
+    pitchRef.current = pitch
+  }, [pitch])
+  React.useEffect(() => {
+    rateRef.current = rate
+  }, [rate])
+  React.useEffect(() => {
+    volumeRef.current = volume
+  }, [volume])
+  React.useEffect(() => {
+    selectedVoiceRef.current = selectedVoice
+  }, [selectedVoice])
 
   React.useEffect(() => {
     if (!synth) return
@@ -175,55 +198,74 @@ export const useTextToVoice = ({
     return () => synth.removeEventListener("voiceschanged", updateVoices)
   }, [synth])
 
-  const createUtterance = React.useCallback(() => {
-    if (!synth || !text) return null
+  const createUtterance = React.useCallback(
+    (chunkText: string) => {
+      if (!synth) return null
 
-    const utterance = new SpeechSynthesisUtterance(text)
-    utterance.pitch = pitch
-    utterance.rate = rate
-    utterance.volume = volume
-    utterance.voice = selectedVoice
+      const utterance = new SpeechSynthesisUtterance(chunkText)
+      utterance.pitch = pitchRef.current
+      utterance.rate = rateRef.current
+      utterance.volume = volumeRef.current
+      utterance.voice = selectedVoiceRef.current
 
-    utterance.onstart = () => {
-      setIsSpeaking(true)
-      setIsPaused(false)
-    }
+      utterance.onstart = () => {
+        setIsSpeaking(true)
+        setIsPaused(false)
+      }
 
-    utterance.onend = () => {
-      setIsSpeaking(false)
-      setIsPaused(false)
-    }
+      utterance.onend = () => {
+        const nextIndex = currentChunkIndexRef.current + 1
+        if (nextIndex < chunksRef.current.length) {
+          currentChunkIndexRef.current = nextIndex
+          const nextChunk = chunksRef.current[nextIndex]
+          const nextUtterance = createUtterance(nextChunk)
+          if (nextUtterance) {
+            utteranceRef.current = nextUtterance
+            synth.speak(nextUtterance)
+          }
+        } else {
+          setIsSpeaking(false)
+          setIsPaused(false)
+        }
+      }
 
-    utterance.onerror = (event) => {
-      onError?.(`Speech error: ${event.error}`)
-      setIsSpeaking(false)
-      setIsPaused(false)
-    }
+      utterance.onerror = (event) => {
+        onError?.(`Speech error: ${event.error}`)
+        setIsSpeaking(false)
+        setIsPaused(false)
+      }
 
-    utterance.onpause = () => {
-      setIsSpeaking(false)
-      setIsPaused(true)
-    }
+      utterance.onpause = () => {
+        setIsSpeaking(false)
+        setIsPaused(true)
+      }
 
-    utterance.onresume = () => {
-      setIsSpeaking(true)
-      setIsPaused(false)
-    }
+      utterance.onresume = () => {
+        setIsSpeaking(true)
+        setIsPaused(false)
+      }
 
-    return utterance
-  }, [text, synth, pitch, rate, volume, selectedVoice, onError])
+      return utterance
+    },
+    [synth, onError]
+  )
 
   const speak = React.useCallback(() => {
     if (!synth || !text) return
 
     synth.cancel()
+    const chunks = text.match(new RegExp(`.{1,${chunkSize}}`, "g")) || []
+    chunksRef.current = chunks
+    currentChunkIndexRef.current = 0
 
-    const utterance = createUtterance()
+    if (chunks.length === 0) return
+
+    const utterance = createUtterance(chunks[0] || "")
     if (!utterance) return
 
     utteranceRef.current = utterance
     synth.speak(utterance)
-  }, [createUtterance, synth, text])
+  }, [text, synth, createUtterance, chunkSize])
 
   const pause = React.useCallback(() => {
     if (synth?.speaking && utteranceRef.current) {
@@ -255,17 +297,12 @@ export const useTextToVoice = ({
     [voices]
   )
 
-  React.useEffect(() => {
-    if (utteranceRef.current && selectedVoice) {
-      utteranceRef.current.voice = selectedVoice
-    }
-  }, [selectedVoice])
-
   return {
     speak,
     pause,
     resume,
     cancel,
+    voice: selectedVoice?.name,
     setVoice,
     isSpeaking,
     isPaused,

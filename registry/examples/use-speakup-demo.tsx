@@ -30,13 +30,22 @@ export default function UseSpeakupDemo() {
     speak,
     pause,
     resume,
+    cancel,
+    voice,
     setVoice,
     voices,
     isSpeaking,
+    isPaused,
     isSupported: isTextToVoiceSupported,
   } = useTextToVoice({
-    text: transcript || text,
+    text,
   })
+
+  const handleReset = React.useCallback(() => {
+    cancel()
+    setVoice(voices[0])
+    setText("")
+  }, [cancel, setVoice, voices])
 
   return (
     <div className="flex flex-col items-center justify-center w-full space-y-8">
@@ -94,21 +103,26 @@ export default function UseSpeakupDemo() {
               rows={4}
             />
             <div className="flex flex-wrap gap-2 mb-4">
-              <Button onClick={speak} disabled={!text}>
+              <Button onClick={speak} disabled={!text || isSpeaking}>
                 Speak
               </Button>
               <Button onClick={pause} disabled={!isSpeaking}>
                 Pause
               </Button>
-              <Button onClick={resume} disabled={!isSpeaking}>
+              <Button onClick={resume} disabled={!text || !isPaused}>
                 Resume
+              </Button>
+              <Button onClick={handleReset} disabled={!text}>
+                Reset
               </Button>
             </div>
             <div className="mb-4 space-y-2">
               <Label>Select Voice:</Label>
               <Select
                 onValueChange={(value) => setVoice(value)}
-                value={voices[0]}
+                defaultValue={voices[0]}
+                value={voice}
+                disabled={isSpeaking || isPaused}
               >
                 <SelectTrigger className="w-full">
                   <SelectValue placeholder="Select Voice" />
