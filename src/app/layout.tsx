@@ -19,20 +19,14 @@ export async function generateMetadata(): Promise<Metadata> {
     },
     metadataBase: new URL(BASE_URL),
     description: siteConfig.description,
-    keywords: [
-      "Next.js",
-      "React",
-      "Tailwind CSS",
-      "Server Components",
-      "Radix UI",
-    ],
+    keywords: siteConfig.keywords,
     authors: [
       {
-        name: "Toufiq Hasan Kiron",
-        url: "https://toufiqhasankiron.com",
+        name: siteConfig.author.name,
+        url: siteConfig.links.portfolio,
       },
     ],
-    creator: "Toufiq Hasan Kiron",
+    creator: siteConfig.author.name,
     openGraph: {
       type: "website",
       locale: "en_US",
@@ -54,7 +48,7 @@ export async function generateMetadata(): Promise<Metadata> {
       title: siteConfig.name,
       description: siteConfig.description,
       images: [new URL("/og.png", BASE_URL)],
-      creator: "@hashtagkiron",
+      creator: siteConfig.links.twitter,
     },
     icons: {
       icon: "/favicon.ico",

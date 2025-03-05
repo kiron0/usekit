@@ -582,6 +582,34 @@ export const Index: Record<string, any> = {
     ),
     source: "",
   },
+  "use-logger": {
+    name: "use-logger",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-logger.tsx",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(() => import("registry/examples/use-logger-demo")),
+    source: "",
+  },
+  "use-speakup": {
+    name: "use-speakup",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-speakup.tsx",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(() => import("registry/examples/use-speakup-demo")),
+    source: "",
+  },
   "use-copy-to-clipboard-demo": {
     name: "use-copy-to-clipboard-demo",
     type: "registry:example",
@@ -1066,6 +1094,34 @@ export const Index: Record<string, any> = {
     component: React.lazy(
       () => import("registry/examples/use-object-state-demo")
     ),
+    source: "",
+  },
+  "use-logger-demo": {
+    name: "use-logger-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-logger-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(() => import("registry/examples/use-logger-demo")),
+    source: "",
+  },
+  "use-speakup-demo": {
+    name: "use-speakup-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-speakup-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(() => import("registry/examples/use-speakup-demo")),
     source: "",
   },
 }

@@ -496,6 +496,31 @@ const hooks: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "use-logger",
+    title: "Use Logger",
+    description: "Debug lifecycle events with useLogger.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "hooks/use-logger.tsx",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-speakup",
+    title: "Use Speakup",
+    description:
+      "Use the useSpeakup hook to convert text to speech, with options to control pitch, rate, volume, and voice selection.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "hooks/use-speakup.tsx",
+        type: "registry:hook",
+      },
+    ],
+  },
 ]
 
 const hooksExamples: Registry["items"] = [
@@ -815,6 +840,26 @@ const hooksExamples: Registry["items"] = [
     files: [
       {
         path: "examples/use-object-state-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-logger-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "examples/use-logger-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-speakup-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "examples/use-speakup-demo.tsx",
         type: "registry:example",
       },
     ],

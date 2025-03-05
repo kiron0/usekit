@@ -461,6 +461,30 @@
           "path": "registry/hooks/use-object-state.tsx"
         }
       ]
+    },
+    {
+      "name": "use-logger",
+      "title": "Use Logger",
+      "description": "Debug lifecycle events with useLogger.",
+      "type": "registry:hook",
+      "files": [
+        {
+          "type": "registry:hook",
+          "path": "registry/hooks/use-logger.tsx"
+        }
+      ]
+    },
+    {
+      "name": "use-speakup",
+      "title": "Use Speakup",
+      "description": "Use the useSpeakup hook to convert text to speech, with options to control pitch, rate, volume, and voice selection.",
+      "type": "registry:hook",
+      "files": [
+        {
+          "type": "registry:hook",
+          "path": "registry/hooks/use-speakup.tsx"
+        }
+      ]
     }
   ]
 }
