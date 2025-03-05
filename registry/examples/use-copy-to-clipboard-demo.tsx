@@ -1,5 +1,3 @@
-"use client"
-
 import { ClipboardCheckIcon, ClipboardIcon } from "lucide-react"
 import { useCopyToClipboard } from "registry/hooks/use-copy-to-clipboard"
 import { toast } from "sonner"

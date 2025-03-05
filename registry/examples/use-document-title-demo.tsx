@@ -9,6 +9,7 @@ export default function UseDocumentTitleDemo() {
   const [counter, setCounter] = React.useState(0)
 
   useDocumentTitle(`Clicked ${counter} times.`)
+
   return (
     <div className="flex flex-col items-center gap-4">
       <Button className="w-fit" onClick={() => setCounter(counter + 1)}>
