@@ -236,6 +236,11 @@ export const docsConfig: DocsConfig = {
           items: [],
         },
         {
+          title: "useSpeakup",
+          href: "/docs/hooks/use-speakup",
+          items: [],
+        },
+        {
           title: "usePrevious",
           href: "/docs/hooks/use-previous",
           items: [],
@@ -250,12 +255,6 @@ export const docsConfig: DocsConfig = {
         {
           title: "useUrlState",
           href: "/docs/hooks/use-url-state",
-          items: [],
-          label: "Soon",
-        },
-        {
-          title: "useSpeech",
-          href: "/docs/hooks/use-speech",
           items: [],
           label: "Soon",
         },

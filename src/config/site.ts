@@ -11,6 +11,13 @@ export const siteConfig = {
     twitter: "https://twitter.com/hashtagkiron",
     github: "https://github.com/kiron0",
   },
+  keywords: [
+    "Next.js",
+    "React",
+    "Tailwind CSS",
+    "Server Components",
+    "Radix UI",
+  ],
 }
 
 export type SiteConfig = typeof siteConfig

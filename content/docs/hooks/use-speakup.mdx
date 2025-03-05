@@ -1,0 +1,83 @@
+---
+title: useSpeakup
+description: Use the useSpeakup hook to convert text to speech, with options to control pitch, rate, volume, and voice selection.
+links:
+  Web Speech API: https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API
+---
+
+<ComponentPreview name="use-speakup-demo" />
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://usekit.kiron.dev/r/use-copy-to-clipboard
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="use-copy-to-clipboard" />
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+```tsx {1, 5}
+import { useCopyToClipboard } from "@/hooks/use-copy-to-clipboard"
+import { Button } from "@/components/ui/button"
+
+export function Component() {
+  const [copy, isCopied] = useCopyToClipboard()
+
+  const copyText = async (text: string) => {
+    await copy(text)
+      .then(() => {
+        toast.success("Copied to clipboard")
+      })
+      .catch((error) => {
+        if (error instanceof Error) {
+          toast.error(error.message)
+        }
+      })
+  }
+
+  return (
+    <Button onClick={() => copyText("Hello, World!")}>
+      {isCopied ? "Text Copied" : "Click to copy"}
+    </Button>
+  )
+}
+```
+
+## API Reference
+
+### Parameters
+
+| Name     | Type     | Description                               | Default |
+| -------- | -------- | ----------------------------------------- | ------- |
+| `delay?` | `number` | Time in milliseconds to reset `isCopied`. | `2000`  |
+
+### Returns
+
+| Index | Type                                 | Description                                                             |
+| ----- | ------------------------------------ | ----------------------------------------------------------------------- |
+| `0`   | `(text: string) => Promise<boolean>` | Function to copy text to the clipboard.                                 |
+| `1`   | `boolean`                            | Indicates if the last copy was successful, resetting after the `delay`. |
