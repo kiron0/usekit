@@ -92,6 +92,7 @@ export const useVoiceToText = ({
     if (recognition?.listening) return
     recognition?.start()
     isContinuous.current = continuous
+    setIsListening(true)
   }, [recognition, continuous])
 
   const stopListening = React.useCallback(() => {
@@ -171,16 +172,18 @@ export const useTextToVoice = ({
     return window.speechSynthesis
   }, [])
 
-  // Update refs when dependencies change
   React.useEffect(() => {
     pitchRef.current = pitch
   }, [pitch])
+
   React.useEffect(() => {
     rateRef.current = rate
   }, [rate])
+
   React.useEffect(() => {
     volumeRef.current = volume
   }, [volume])
+
   React.useEffect(() => {
     selectedVoiceRef.current = selectedVoice
   }, [selectedVoice])

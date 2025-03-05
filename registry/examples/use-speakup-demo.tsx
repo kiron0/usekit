@@ -49,8 +49,6 @@ export default function UseSpeakupDemo() {
 
   return (
     <div className="flex flex-col items-center justify-center w-full space-y-8">
-      <h1 className="text-2xl md:text-3xl font-bold">Speech App</h1>
-
       {/* Voice-to-Text Section */}
       <div className="border p-4 rounded-lg w-full">
         <h2 className="text-lg md:text-xl font-semibold mb-4">Voice to Text</h2>
@@ -63,10 +61,7 @@ export default function UseSpeakupDemo() {
               >
                 Start Listening
               </Button>
-              <Button
-                onClick={stopListening}
-                disabled={transcript.length === 0}
-              >
+              <Button onClick={stopListening} disabled={!isListening}>
                 Stop Listening
               </Button>
               <Button
