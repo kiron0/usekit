@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-logger",
+  "type": "registry:hook",
+  "title": "Use Logger",
+  "description": "Debug lifecycle events with useLogger.",
+  "files": [
+    {
+      "path": "registry/hooks/use-logger.tsx",
+      "content": "",
+      "type": "registry:hook"
+    }
+  ]
+}

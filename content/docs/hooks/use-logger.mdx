@@ -1,0 +1,99 @@
+---
+title: useLogger
+description: Debug lifecycle events with useLogger.
+---
+
+<ComponentPreview name="use-logger-demo" />
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://usekit.kiron.dev/r/use-logger
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="use-logger" />
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+```tsx {2, 11}
+import * as React from "react"
+import { useLogger } from "registry/hooks/use-logger"
+
+interface FirstChildProps {
+  name: string
+  isActive: boolean
+  count: number
+}
+
+function FirstChild(props: FirstChildProps) {
+  useLogger(props.name, props)
+
+  return (
+    <li className={props.isActive ? "active" : ""}>
+      <h5>{props.name}</h5>
+      <p>{props.count}</p>
+    </li>
+  )
+}
+
+export function Component() {
+  const [count, setCount] = React.useState(0)
+
+  const handleClick = () => setCount(count + 1)
+
+  return (
+    <section>
+      <h1>useLogger</h1>
+      <h6>(Check the console)</h6>
+      <button className="primary" onClick={handleClick}>
+        Increment Count
+      </button>
+      <ul>
+        {["First", "Second", "Third"].map((item, index) => {
+          const isActive = count % 3 === index
+          return (
+            <FirstChild
+              key={index}
+              name={item}
+              isActive={isActive}
+              count={count}
+            />
+          )
+        })}
+      </ul>
+    </section>
+  )
+}
+```
+
+## API Reference
+
+### Parameters
+
+| Name      | Type     | Description                            |
+| --------- | -------- | -------------------------------------- |
+| `name`    | `string` | The name or identifier for the logger. |
+| `...rest` | `any`    | Additional arguments to be logged.     |

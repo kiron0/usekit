@@ -461,6 +461,18 @@
           "path": "registry/hooks/use-object-state.tsx"
         }
       ]
+    },
+    {
+      "name": "use-logger",
+      "title": "Use Logger",
+      "description": "Debug lifecycle events with useLogger.",
+      "type": "registry:hook",
+      "files": [
+        {
+          "type": "registry:hook",
+          "path": "registry/hooks/use-logger.tsx"
+        }
+      ]
     }
   ]
 }
