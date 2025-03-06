@@ -222,4 +222,300 @@ export const hooks: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "use-intersection-observer",
+    title: "Use Intersection Observer",
+    description:
+      "A hook that provides a way to detect when an element enters or leaves the viewport using the Intersection Observer API.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "hooks/use-intersection-observer.tsx",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-render-count",
+    title: "Use Render Count",
+    description:
+      "Identify unnecessary re-renders and monitor update frequency with useRenderCount.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "hooks/use-render-count.tsx",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-orientation",
+    title: "Use Orientation",
+    description:
+      "Manage and respond to changes in device orientation with useOrientation.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "hooks/use-orientation.tsx",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-window-size",
+    title: "Use Window Size",
+    description:
+      "Track the dimensions of the browser window with useWindowSize.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "hooks/use-window-size.tsx",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-hover",
+    title: "Use Hover",
+    description:
+      "Track whether an element is being hovered over with useHover.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "hooks/use-hover.tsx",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-media-query",
+    title: "Use Media Query",
+    description:
+      "Subscribe and respond to media query changes with useMediaQuery.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "hooks/use-media-query.tsx",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-interval-when",
+    title: "Use Interval When",
+    description:
+      "Create dynamic timers that can be started, paused, or resumed with useIntervalWhen.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "hooks/use-interval-when.tsx",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-countdown",
+    title: "Use Countdown",
+    description: "Create countdown timers using useCountdown.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "hooks/use-countdown.tsx",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-visibility-change",
+    title: "Use Visibility Change",
+    description:
+      "Track document visibility and respond to changes with useVisibilityChange.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "hooks/use-visibility-change.tsx",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-key-press",
+    title: "Use Key Press",
+    description:
+      "Detect and perform actions on key press events with useKeyPress.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "hooks/use-key-press.tsx",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-cookie-storage",
+    title: "Use Cookie Storage",
+    description:
+      "Store, retrieve, and synchronize data from the browser's Cookie Store API with useCookieStorage.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "hooks/use-cookie-storage.tsx",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-is-client",
+    title: "Use Is Client",
+    description:
+      "Determine whether the code is running on the client-side or server-side with useIsClient.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "hooks/use-is-client.tsx",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-geolocation",
+    title: "Use Geolocation",
+    description:
+      "Access and monitor a user's geolocation (after they give permission) with useGeolocation.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "hooks/use-geolocation.tsx",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-page-leave",
+    title: "Use Page Leave",
+    description:
+      "Track when a user navigates away from a webpage with usePageLeave.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "hooks/use-page-leave.tsx",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-is-first-render",
+    title: "Use Is First Render",
+    description:
+      "Differentiate between the first and subsequent renders with useIsFirstRender.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "hooks/use-is-first-render.tsx",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-window-scroll",
+    title: "Use Window Scroll",
+    description:
+      "Track and manipulate the scroll position of a web page with useWindowScroll.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "hooks/use-window-scroll.tsx",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-idle",
+    title: "Use Idle",
+    description: "Detect user inactivity with useIdle.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "hooks/use-idle.tsx",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-long-press",
+    title: "Use Long Press",
+    description:
+      "Enable precise control of long-press interactions for both touch and mouse events with useLongPress.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "hooks/use-long-press.tsx",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-default",
+    title: "Use Default",
+    description: "Manage state with default values using useDefault.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "hooks/use-default.tsx",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-click-away",
+    title: "Use Click Away",
+    description:
+      "Detect clicks outside of specific component with useClickAway.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "hooks/use-click-away.tsx",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-object-state",
+    title: "Use Object State",
+    description: "Manage complex state objects with useObjectState.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "hooks/use-object-state.tsx",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-logger",
+    title: "Use Logger",
+    description: "Debug lifecycle events with useLogger.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "hooks/use-logger.tsx",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-speakup",
+    title: "Use Speakup",
+    description:
+      "Use the useSpeakup hook to convert text to speech, with options to control pitch, rate, volume, and voice selection.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "hooks/use-speakup.tsx",
+        type: "registry:hook",
+      },
+    ],
+  },
 ]
+
+export default hooks
