@@ -1,0 +1,79 @@
+---
+title: useMeasure
+description: Measure the dimensions of an element with useMeasure, providing options to track changes and observe the element.
+---
+
+<ComponentPreview name="use-measure-demo" />
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://usekit.kiron.dev/r/use-measure
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Install the following dependencies:</Step>
+
+```bash
+npm install lucide-react
+```
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="use-measure" />
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+```tsx {1, 4-8}
+import { useMeasure } from "@/hooks/use-measure"
+
+export function Component() {
+  const { MeasureComponent } = useMeasure({
+    borderRadius: 0,
+    actionPosition: "top-right",
+    measurementPosition: "top-right",
+  })
+
+  return (
+    <div>
+      <p>Press and hold to measure distances</p>
+      <MeasureComponent />
+    </div>
+  )
+}
+```
+
+## API Reference
+
+### Parameters
+
+| Name     | Type     | Description                               | Default |
+| -------- | -------- | ----------------------------------------- | ------- |
+| `delay?` | `number` | Time in milliseconds to reset `isCopied`. | `2000`  |
+
+### Returns
+
+| Index | Type                                 | Description                                                             |
+| ----- | ------------------------------------ | ----------------------------------------------------------------------- |
+| `0`   | `(text: string) => Promise<boolean>` | Function to copy text to the clipboard.                                 |
+| `1`   | `boolean`                            | Indicates if the last copy was successful, resetting after the `delay`. |

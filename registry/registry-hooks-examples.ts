@@ -341,4 +341,14 @@ export const hooksExamples: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "use-measure-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "examples/use-measure-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
 ]

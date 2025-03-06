@@ -241,6 +241,11 @@ export const docsConfig: DocsConfig = {
           items: [],
         },
         {
+          title: "useMeasure",
+          href: "/docs/hooks/use-measure",
+          items: [],
+        },
+        {
           title: "useIsMobile",
           href: "/docs/hooks/use-is-mobile",
           items: [],
@@ -285,12 +290,6 @@ export const docsConfig: DocsConfig = {
         {
           title: "useHistoryState",
           href: "/docs/hooks/use-history-state",
-          items: [],
-          label: "Soon",
-        },
-        {
-          title: "useMeasure",
-          href: "/docs/hooks/use-measure",
           items: [],
           label: "Soon",
         },

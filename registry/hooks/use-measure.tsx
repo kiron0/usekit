@@ -1,9 +1,6 @@
 import * as React from "react"
 import { Copy, RefreshCw } from "lucide-react"
 import * as ReactDOM from "react-dom"
-import { useIsMobile } from "registry/hooks/use-is-mobile"
-
-import { Button } from "@/components/ui/button"
 
 type Point = { x: number; y: number } | null
 
@@ -14,6 +11,8 @@ const convertPxTo = (px: number, unit: "cm" | "rem" | "inches") => {
 
   return { cm, rem, inches }[unit]
 }
+
+const MOBILE_BREAKPOINT = 768
 
 interface MeasureOptions {
   borderRadius?: number
@@ -26,13 +25,27 @@ interface MeasureOptions {
     | "bottom-right"
 }
 
+const actionPositions = [
+  { name: "top-right", top: 100, right: 16 },
+  { name: "top-left", top: 100, left: 16 },
+  { name: "bottom-right", bottom: 100, right: 16 },
+  { name: "bottom-left", bottom: 100, left: 16 },
+]
+
+const measurementPositions = [
+  { name: "top-right", top: 16, right: 16 },
+  { name: "top-left", top: 16, left: 16 },
+  { name: "bottom-right", bottom: 16, right: 16 },
+  { name: "bottom-left", bottom: 16, left: 16 },
+]
+
 export function useMeasure({
   borderRadius = 0.5,
   borderWidth = 1,
   actionPosition = "top-right",
   measurementPosition = "bottom-left",
 }: MeasureOptions = {}) {
-  const isMobile = useIsMobile()
+  const [isMobile, setIsMobile] = React.useState<boolean | undefined>(undefined)
 
   const [startPoint, setStartPoint] = React.useState<Point>(null)
   const [endPoint, setEndPoint] = React.useState<Point>(null)
@@ -237,6 +250,18 @@ export function useMeasure({
     }
   }, [handleMouseDown, handleMouseMove, handleMouseUp])
 
+  React.useEffect(() => {
+    if (typeof window !== "undefined") {
+      const mql = window.matchMedia(`(max-width: ${MOBILE_BREAKPOINT - 1}px)`)
+      const onChange = () => {
+        setIsMobile(window.innerWidth < MOBILE_BREAKPOINT)
+      }
+      mql.addEventListener("change", onChange)
+      setIsMobile(window.innerWidth < MOBILE_BREAKPOINT)
+      return () => mql.removeEventListener("change", onChange)
+    }
+  }, [])
+
   const measurements = React.useMemo(() => {
     if (!startPoint || !endPoint) return null
 
@@ -332,26 +357,17 @@ export function useMeasure({
             height,
             borderRadius: `${borderRadius}px`,
             borderWidth: `${borderWidth}px`,
-            zIndex: 40,
           }}
-          className="border-primary fixed z-40 border border-dashed bg-transparent"
+          className="border-primary fixed z-[999] border border-dashed bg-transparent"
         />
-
         <div
           ref={measureRef}
           style={{
-            ...(measurementPosition === "top-left" && { top: 16, left: 16 }),
-            ...(measurementPosition === "top-right" && { top: 16, right: 16 }),
-            ...(measurementPosition === "bottom-left" && {
-              bottom: 16,
-              left: 16,
-            }),
-            ...(measurementPosition === "bottom-right" && {
-              bottom: 16,
-              right: 16,
-            }),
+            ...measurementPositions.find(
+              (pos) => pos.name === measurementPosition
+            ),
           }}
-          className="bg-background pointer-events-none fixed rounded-md border p-2 text-sm"
+          className="bg-background/50 backdrop-blur z-50 pointer-events-none fixed rounded-md border p-4 text-sm"
         >
           <div className="flex flex-col gap-1">
             <span>
@@ -371,19 +387,22 @@ export function useMeasure({
 
         <div
           style={{
-            ...(actionPosition === "top-left" && { top: 16, left: 16 }),
-            ...(actionPosition === "top-right" && { top: 16, right: 16 }),
-            ...(actionPosition === "bottom-left" && { bottom: 16, left: 16 }),
-            ...(actionPosition === "bottom-right" && { bottom: 16, right: 16 }),
+            ...actionPositions.find((pos) => pos.name === actionPosition),
           }}
           className="fixed z-50 flex gap-2"
         >
-          <Button size="sm" onClick={handleReset}>
+          <button
+            className="h-8 rounded-md px-3 text-xs bg-primary text-primary-foreground"
+            onClick={handleReset}
+          >
             <RefreshCw size={16} />
-          </Button>
-          <Button size="sm" onClick={handleCopy}>
+          </button>
+          <button
+            className="h-8 rounded-md px-3 text-xs bg-primary text-primary-foreground"
+            onClick={handleCopy}
+          >
             <Copy size={16} />
-          </Button>
+          </button>
         </div>
       </>,
       document.body

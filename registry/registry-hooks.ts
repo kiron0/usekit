@@ -516,6 +516,20 @@ export const hooks: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "use-measure",
+    title: "Use Measure",
+    description:
+      "Measure the dimensions of an element with useMeasure, providing options to track changes and observe the element.",
+    type: "registry:hook",
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "hooks/use-measure.tsx",
+        type: "registry:hook",
+      },
+    ],
+  },
 ]
 
 export default hooks
