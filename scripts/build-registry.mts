@@ -3,7 +3,6 @@ import { promises as fs } from "fs"
 import path from "path"
 import { rimraf } from "rimraf"
 
-import { default as hooks } from "../registry/registry-hooks"
 import { default as registryItems } from "../registry/registry-items"
 import { RegistryItem, type Registry } from "../registry/schema"
 
@@ -57,7 +56,7 @@ export const Index: Record<string, any> = {`
     index += `
   "${item.name}": {
     name: "${item.name}",
-    type: "${item.type}",
+    type: "${item.type === "registry:example" ? "registry:hook" : item.type}",
     registryDependencies: ${JSON.stringify(item.registryDependencies)},
     files: [${item.files?.map((file) => {
       const filePath = `registry/${typeof file === "string" ? file : file.path}`
@@ -66,7 +65,7 @@ export const Index: Record<string, any> = {`
         ? `"${resolvedFilePath}"`
         : `{
       path: "${`registry/${item.type === "registry:example" ? "examples" : "hooks"}/${item.name}.${fileExtension}`}",
-      type: "${file.type}",
+      type: "${file.type === "registry:example" ? "registry:hook" : file.type}",
       target: "${file.target ?? ""}"
     }`
     })}],
@@ -88,11 +87,11 @@ async function buildRegistryJsonFile() {
     $schema: "https://ui.shadcn.com/schema/registry.json",
     ...registry,
     // @ts-ignore
-    items: hooks.hooks.map((item: RegistryItem) => {
+    items: registryItems.registryItems.map((item: RegistryItem) => {
       const files = item.files?.map((file) => {
         return {
-          type: file.type,
-          path: `registry/hooks/${item.name}.${
+          type: file.type === "registry:example" ? "registry:hook" : file.type,
+          path: `registry/${file.type === "registry:hook" ? "hooks" : file.type === "registry:example" ? "examples" : ""}/${item.name}.${
             typeof file === "string" ? file : file.path.split(".").pop()
           }`,
         }
@@ -100,6 +99,7 @@ async function buildRegistryJsonFile() {
 
       return {
         ...item,
+        type: item.type === "registry:example" ? "registry:hook" : item.type,
         files,
       }
     }),

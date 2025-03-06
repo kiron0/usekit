@@ -1,0 +1,12 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-logger-demo",
+  "type": "registry:hook",
+  "files": [
+    {
+      "path": "registry/examples/use-logger-demo.tsx",
+      "content": "import * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\nimport { Button } from \"@/components/ui/button\"\nimport { useLogger } from \"registry/hooks/use-logger\"\n\ninterface FirstChildProps {\n  name: string\n  isActive: boolean\n  count: number\n}\n\nfunction FirstChild(props: FirstChildProps) {\n  useLogger(props.name, props)\n\n  return (\n    <div\n      className={cn(\n        \"p-4 w-full border rounded-xl text-center\",\n        props.isActive\n          ? \"bg-primary text-primary-foreground\"\n          : \"bg-background text-foreground\",\n        props.name === \"Third\" && \"col-span-2 md:col-span-1\"\n      )}\n    >\n      <p className=\"font-bold text-2xl\">{props.count}</p>\n      <h5>{props.name}</h5>\n    </div>\n  )\n}\n\nexport default function UseLoggerDemo() {\n  const [count, setCount] = React.useState(0)\n\n  const handleClick = () => setCount(count + 1)\n\n  return (\n    <div className=\"gap-6 w-full flex flex-col items-center justify-center\">\n      <h6>(Check the console)</h6>\n      <Button onClick={handleClick}>Increment Count</Button>\n      <div className=\"grid grid-cols-2 md:grid-cols-3 gap-2 w-full\">\n        {[\"First\", \"Second\", \"Third\"].map((item, index) => {\n          const isActive = count % 3 === index\n          return (\n            <FirstChild\n              key={index}\n              name={item}\n              isActive={isActive}\n              count={count}\n            />\n          )\n        })}\n      </div>\n    </div>\n  )\n}\n",
+      "type": "registry:hook"
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-object-state-demo",
+  "type": "registry:hook",
+  "files": [
+    {
+      "path": "registry/examples/use-object-state-demo.tsx",
+      "content": "import { Button } from \"@/components/ui/button\"\nimport {\n  Table,\n  TableBody,\n  TableCell,\n  TableHead,\n  TableHeader,\n  TableRow,\n} from \"@/components/ui/table\"\nimport { useObjectState } from \"registry/hooks/use-object-state\"\n\ninterface TeamStats {\n  team: string\n  wins: number\n  losses: number\n  championships: number\n}\n\nconst initialState: TeamStats = {\n  team: \"Utah Jazz\",\n  wins: 2138,\n  losses: 1789,\n  championships: 0,\n}\n\nexport default function UseObjectStateDemo() {\n  const [stats, setStats] = useObjectState<TeamStats>(initialState)\n\n  const addWin = () => {\n    setStats((s) => ({\n      wins: s.wins + 1,\n    }))\n  }\n\n  const addLoss = () => {\n    setStats((s) => ({\n      losses: s.losses + 1,\n    }))\n  }\n\n  const addChampionship = () => {\n    setStats((s) => ({\n      championships: s.championships + 1,\n    }))\n  }\n\n  const reset = () => {\n    setStats(initialState)\n  }\n\n  return (\n    <div className=\"space-y-6 text-center overflow-hidden\">\n      <h1 className=\"font-semibold text-2xl underline\">Team Statistics</h1>\n      <div className=\"flex flex-wrap gap-2 justify-center\">\n        <Button variant=\"link\" onClick={addWin}>\n          Add Win\n        </Button>\n        <Button variant=\"link\" onClick={addLoss}>\n          Add Loss\n        </Button>\n        <Button variant=\"link\" onClick={addChampionship}>\n          Add Championship\n        </Button>\n        <Button variant=\"link\" onClick={reset}>\n          Reset\n        </Button>\n      </div>\n      <Table>\n        <TableHeader>\n          <TableRow>\n            {(Object.keys(stats) as Array<keyof TeamStats>).map((key) => (\n              <TableHead key={key} className=\"capitalize text-start min-w-24\">\n                {key}\n              </TableHead>\n            ))}\n          </TableRow>\n        </TableHeader>\n        <TableBody>\n          <TableRow>\n            {(Object.keys(stats) as Array<keyof TeamStats>).map((key) => (\n              <TableCell key={key} className=\"text-start\">\n                {stats[key]}\n              </TableCell>\n            ))}\n          </TableRow>\n        </TableBody>\n      </Table>\n    </div>\n  )\n}\n",
+      "type": "registry:hook"
+    }
+  ]
+}

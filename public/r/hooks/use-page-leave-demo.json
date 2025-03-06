@@ -1,0 +1,12 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-page-leave-demo",
+  "type": "registry:hook",
+  "files": [
+    {
+      "path": "registry/examples/use-page-leave-demo.tsx",
+      "content": "import * as React from \"react\"\n\nimport { usePageLeave } from \"registry/hooks/use-page-leave\"\n\nexport default function UsePageLeaveDemo() {\n  const elementRef = React.useRef<HTMLDivElement>(null)\n  const [distractions, setDistractions] = React.useState(0)\n\n  usePageLeave(() => {\n    setDistractions((d) => d + 1)\n  }, elementRef)\n\n  return (\n    <div className=\"flex flex-col items-center justify-center gap-6\">\n      <div\n        ref={elementRef}\n        className=\"space-y-2 text-center border-2 p-6 rounded-xl w-96 mx-auto duration-300 hover:border-dashed hover:cursor-pointer hover:border-primary\"\n      >\n        <p>(Mouse out of the box)</p>\n        <h1 className=\"text-2xl font-semibold py-4\">\n          {distractions}{\" \"}\n          {distractions === 0 ? \"time\" : distractions > 1 ? \"times\" : \"time\"}\n        </h1>\n        <p>You&apos;ve been distracted</p>\n      </div>\n    </div>\n  )\n}\n",
+      "type": "registry:hook"
+    }
+  ]
+}

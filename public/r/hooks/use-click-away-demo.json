@@ -1,0 +1,12 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-click-away-demo",
+  "type": "registry:hook",
+  "files": [
+    {
+      "path": "registry/examples/use-click-away-demo.tsx",
+      "content": "import * as React from \"react\"\nimport { X } from \"lucide-react\"\nimport * as ReactDOM from \"react-dom\"\n\nimport { Button } from \"@/components/ui/button\"\nimport { useClickAway } from \"registry/hooks/use-click-away\"\n\nexport default function UseClickAwayDemo() {\n  const [isOpen, setIsOpen] = React.useState(false)\n  const modalRef = useClickAway<HTMLDivElement>(() => {\n    setIsOpen(false)\n  })\n\n  const handleOpenModal = () => {\n    setIsOpen(true)\n  }\n\n  const handleCloseModal = () => {\n    setIsOpen(false)\n  }\n\n  return (\n    <>\n      <div>\n        <Button className=\"link\" onClick={handleOpenModal}>\n          Open Modal\n        </Button>\n      </div>\n      {isOpen &&\n        ReactDOM.createPortal(\n          <>\n            <div className=\"fixed inset-0 bg-black/40 backdrop-blur-sm z-[998]\" />\n            <div\n              ref={modalRef}\n              className=\"fixed left-1/2 top-1/2 z-[999] grid w-[95%] md:w-full max-w-lg -translate-x-1/2 -translate-y-1/2 h-60 rounded-xl border bg-background p-4 text-muted-foreground shadow-md\"\n            >\n              <div className=\"relative flex justify-center items-center h-full\">\n                <X\n                  size={18}\n                  className=\"absolute top-1 right-1 cursor-pointer\"\n                  onClick={handleCloseModal}\n                  aria-label=\"Close modal\"\n                />\n                <p className=\"text-center text-balance\">\n                  Click outside the modal to close (or use the button) whatever\n                  you prefer.\n                </p>\n              </div>\n            </div>\n          </>,\n          document.body\n        )}\n    </>\n  )\n}\n",
+      "type": "registry:hook"
+    }
+  ]
+}

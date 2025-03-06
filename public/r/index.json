@@ -582,6 +582,386 @@
           "path": "registry/hooks/use-async-status.tsx"
         }
       ]
+    },
+    {
+      "name": "use-copy-to-clipboard-demo",
+      "type": "registry:hook",
+      "files": [
+        {
+          "type": "registry:hook",
+          "path": "registry/examples/use-copy-to-clipboard-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "use-interval-demo",
+      "type": "registry:hook",
+      "files": [
+        {
+          "type": "registry:hook",
+          "path": "registry/examples/use-interval-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "use-timeout-demo",
+      "type": "registry:hook",
+      "files": [
+        {
+          "type": "registry:hook",
+          "path": "registry/examples/use-timeout-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "use-document-title-demo",
+      "type": "registry:hook",
+      "files": [
+        {
+          "type": "registry:hook",
+          "path": "registry/examples/use-document-title-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "use-mouse-position-demo",
+      "type": "registry:hook",
+      "files": [
+        {
+          "type": "registry:hook",
+          "path": "registry/examples/use-mouse-position-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "use-counter-demo",
+      "type": "registry:hook",
+      "files": [
+        {
+          "type": "registry:hook",
+          "path": "registry/examples/use-counter-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "use-scramble-demo",
+      "type": "registry:hook",
+      "files": [
+        {
+          "type": "registry:hook",
+          "path": "registry/examples/use-scramble-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "use-fetch-demo",
+      "type": "registry:hook",
+      "files": [
+        {
+          "type": "registry:hook",
+          "path": "registry/examples/use-fetch-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "use-local-storage-demo",
+      "type": "registry:hook",
+      "files": [
+        {
+          "type": "registry:hook",
+          "path": "registry/examples/use-local-storage-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "use-session-storage-demo",
+      "type": "registry:hook",
+      "files": [
+        {
+          "type": "registry:hook",
+          "path": "registry/examples/use-session-storage-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "use-script-demo",
+      "type": "registry:hook",
+      "files": [
+        {
+          "type": "registry:hook",
+          "path": "registry/examples/use-script-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "use-render-count-demo",
+      "type": "registry:hook",
+      "files": [
+        {
+          "type": "registry:hook",
+          "path": "registry/examples/use-render-count-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "use-orientation-demo",
+      "type": "registry:hook",
+      "files": [
+        {
+          "type": "registry:hook",
+          "path": "registry/examples/use-orientation-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "use-window-size-demo",
+      "type": "registry:hook",
+      "files": [
+        {
+          "type": "registry:hook",
+          "path": "registry/examples/use-window-size-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "use-hover-demo",
+      "type": "registry:hook",
+      "files": [
+        {
+          "type": "registry:hook",
+          "path": "registry/examples/use-hover-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "use-battery-demo",
+      "type": "registry:hook",
+      "files": [
+        {
+          "type": "registry:hook",
+          "path": "registry/examples/use-battery-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "use-media-query-demo",
+      "type": "registry:hook",
+      "files": [
+        {
+          "type": "registry:hook",
+          "path": "registry/examples/use-media-query-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "use-interval-when-demo",
+      "type": "registry:hook",
+      "files": [
+        {
+          "type": "registry:hook",
+          "path": "registry/examples/use-interval-when-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "use-countdown-demo",
+      "type": "registry:hook",
+      "files": [
+        {
+          "type": "registry:hook",
+          "path": "registry/examples/use-countdown-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "use-visibility-change-demo",
+      "type": "registry:hook",
+      "files": [
+        {
+          "type": "registry:hook",
+          "path": "registry/examples/use-visibility-change-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "use-key-press-demo",
+      "type": "registry:hook",
+      "files": [
+        {
+          "type": "registry:hook",
+          "path": "registry/examples/use-key-press-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "use-cookie-storage-demo",
+      "type": "registry:hook",
+      "files": [
+        {
+          "type": "registry:hook",
+          "path": "registry/examples/use-cookie-storage-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "use-is-client-demo",
+      "type": "registry:hook",
+      "files": [
+        {
+          "type": "registry:hook",
+          "path": "registry/examples/use-is-client-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "use-geolocation-demo",
+      "type": "registry:hook",
+      "files": [
+        {
+          "type": "registry:hook",
+          "path": "registry/examples/use-geolocation-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "use-page-leave-demo",
+      "type": "registry:hook",
+      "files": [
+        {
+          "type": "registry:hook",
+          "path": "registry/examples/use-page-leave-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "use-is-first-render-demo",
+      "type": "registry:hook",
+      "files": [
+        {
+          "type": "registry:hook",
+          "path": "registry/examples/use-is-first-render-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "use-window-scroll-demo",
+      "type": "registry:hook",
+      "files": [
+        {
+          "type": "registry:hook",
+          "path": "registry/examples/use-window-scroll-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "use-idle-demo",
+      "type": "registry:hook",
+      "files": [
+        {
+          "type": "registry:hook",
+          "path": "registry/examples/use-idle-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "use-long-press-demo",
+      "type": "registry:hook",
+      "files": [
+        {
+          "type": "registry:hook",
+          "path": "registry/examples/use-long-press-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "use-default-demo",
+      "type": "registry:hook",
+      "files": [
+        {
+          "type": "registry:hook",
+          "path": "registry/examples/use-default-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "use-click-away-demo",
+      "type": "registry:hook",
+      "files": [
+        {
+          "type": "registry:hook",
+          "path": "registry/examples/use-click-away-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "use-object-state-demo",
+      "type": "registry:hook",
+      "files": [
+        {
+          "type": "registry:hook",
+          "path": "registry/examples/use-object-state-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "use-logger-demo",
+      "type": "registry:hook",
+      "files": [
+        {
+          "type": "registry:hook",
+          "path": "registry/examples/use-logger-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "use-speakup-demo",
+      "type": "registry:hook",
+      "files": [
+        {
+          "type": "registry:hook",
+          "path": "registry/examples/use-speakup-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "use-measure-demo",
+      "type": "registry:hook",
+      "files": [
+        {
+          "type": "registry:hook",
+          "path": "registry/examples/use-measure-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "use-previous-demo",
+      "type": "registry:hook",
+      "files": [
+        {
+          "type": "registry:hook",
+          "path": "registry/examples/use-previous-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "use-history-state-demo",
+      "type": "registry:hook",
+      "files": [
+        {
+          "type": "registry:hook",
+          "path": "registry/examples/use-history-state-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "use-async-status-demo",
+      "type": "registry:hook",
+      "files": [
+        {
+          "type": "registry:hook",
+          "path": "registry/examples/use-async-status-demo.tsx"
+        }
+      ]
     }
   ]
 }

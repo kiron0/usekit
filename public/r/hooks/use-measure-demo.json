@@ -1,0 +1,12 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-measure-demo",
+  "type": "registry:hook",
+  "files": [
+    {
+      "path": "registry/examples/use-measure-demo.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\n\nimport { Button } from \"@/components/ui/button\"\nimport { useMeasure } from \"registry/hooks/use-measure\"\n\nexport default function UseMeasureDemo() {\n  const ref = React.useRef<HTMLDivElement>(null)\n\n  const [isStarted, setIsStarted] = React.useState(false)\n\n  const { MeasureComponent, reset } = useMeasure({\n    ref,\n    actionPosition: \"top-right\",\n    measurementPosition: \"top-right\",\n    startMeasure: isStarted,\n  })\n\n  return (\n    <div className=\"w-full space-y-8\">\n      <div ref={ref} className=\"w-full h-[60vh] border rounded-md\">\n        <MeasureComponent />\n        <p className=\"text-muted-foreground pointer-events-none text-balance text-center flex justify-center items-center h-full\">\n          {isStarted\n            ? \"Press and hold to measure distances\"\n            : \"Press the button below to start measuring\"}\n        </p>\n      </div>\n      <div className=\"text-center\">\n        <Button\n          onClick={() => {\n            if (isStarted) {\n              reset()\n            }\n            setIsStarted(!isStarted)\n          }}\n          variant={isStarted ? \"destructive\" : \"default\"}\n        >\n          {isStarted ? \"Stop\" : \"Start\"} measuring\n        </Button>\n      </div>\n    </div>\n  )\n}\n",
+      "type": "registry:hook"
+    }
+  ]
+}

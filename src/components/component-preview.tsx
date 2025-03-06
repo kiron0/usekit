@@ -2,12 +2,14 @@
 
 import * as React from "react"
 
+import { siteConfig } from "@/config/site"
 import { cn } from "@/lib/utils"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { CopyButton } from "@/components/copy-button"
 import { Icons } from "@/components/icons"
 
 import { Index } from "../../__registry__"
+import { OpenInV0Button } from "./open-in-v0-button"
 
 interface ComponentPreviewProps extends React.HTMLAttributes<HTMLDivElement> {
   name: string
@@ -83,7 +85,10 @@ export function ComponentPreview({
           )}
         </div>
         <TabsContent value="preview" className="relative rounded-md border">
-          <CopyButton value={codeString} className="absolute right-4 top-4" />
+          <div className="absolute right-4 top-4 flex items-center gap-3">
+            <OpenInV0Button url={`${siteConfig.url}/r/hooks/${name}.json`} />
+            <CopyButton value={codeString} />
+          </div>
           <div
             className={cn(
               "preview flex min-h-[350px] w-full justify-center p-10",

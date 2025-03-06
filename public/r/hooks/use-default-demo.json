@@ -1,0 +1,12 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-default-demo",
+  "type": "registry:hook",
+  "files": [
+    {
+      "path": "registry/examples/use-default-demo.tsx",
+      "content": "import { Button } from \"@/components/ui/button\"\nimport { useDefault } from \"registry/hooks/use-default\"\n\nexport default function UseDefaultDemo() {\n  const initialState = { name: \"Tyler\" }\n  const defaultState = { name: \"Ben\" }\n\n  const [user, setUser] = useDefault(initialState, defaultState)\n\n  return (\n    <div className=\"space-y-4 flex flex-col justify-center items-center text-center\">\n      <div className=\"space-x-2\">\n        <Button\n          title=\"Sets the value to Lynn\"\n          className=\"link\"\n          onClick={() => setUser({ name: \"Lynn\" })}\n        >\n          Lynn\n        </Button>\n        <Button\n          title=\"Sets the value to Tyler\"\n          className=\"link\"\n          onClick={() => setUser({ name: \"Tyler\" })}\n        >\n          Tyler\n        </Button>\n        <Button\n          title=\"Sets the value to null causing it to use the default value\"\n          className=\"link\"\n          onClick={() => setUser(null)}\n        >\n          Null\n        </Button>\n      </div>\n      <p className=\"text-muted-foreground text-balance\">\n        Clicking on the buttons will set the user object to different values.\n        When the &quot;Null&quot; button is clicked, the user object will be set\n        to the default value: {JSON.stringify(defaultState)}.\n      </p>\n      <pre>\n        <code>{JSON.stringify(user)}</code>\n      </pre>\n    </div>\n  )\n}\n",
+      "type": "registry:hook"
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-local-storage-demo",
+  "type": "registry:hook",
+  "files": [
+    {
+      "path": "registry/examples/use-local-storage-demo.tsx",
+      "content": "\"use client\"\n\nimport { Button } from \"@/components/ui/button\"\nimport { useLocalStorage } from \"registry/hooks/use-local-storage\"\n\nexport default function UseLocalStorageDemo() {\n  const [count, setCount] = useLocalStorage(\"local-count\", 0)\n\n  return (\n    <div className=\"flex flex-col justify-center items-center gap-4\">\n      <p>Count: {count}</p>\n      <div className=\"flex gap-2\">\n        <Button onClick={() => setCount((c) => c + 1)}>Increment</Button>\n        <Button onClick={() => setCount(0)}>Reset</Button>\n      </div>\n      <p className=\"text-balance text-center text-muted-foreground\">\n        Click to increment the counter and watch the count persist in local\n        storage!\n      </p>\n    </div>\n  )\n}\n",
+      "type": "registry:hook"
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-scramble-demo",
+  "type": "registry:hook",
+  "files": [
+    {
+      "path": "registry/examples/use-scramble-demo.tsx",
+      "content": "\"use client\"\n\nimport { Button } from \"@/components/ui/button\"\nimport { useScramble } from \"registry/hooks/use-scramble\"\n\nexport default function UseScrambleDemo() {\n  const { ref, replay } = useScramble({\n    text: \"Hello, World!\",\n    speed: 0.8,\n    tick: 1,\n    step: 1,\n    scramble: 4,\n    chance: 0.8,\n    seed: 2,\n    range: [65, 125],\n    overdrive: true,\n    overflow: true,\n    onAnimationStart: () => console.log(\"Animation started!\"),\n    onAnimationEnd: () => console.log(\"Animation ended!\"),\n    onAnimationFrame: (result) => console.log(result),\n  })\n\n  return (\n    <div className=\"flex flex-col items-center justify-center space-y-4\">\n      <h1 ref={ref} className=\"h-7 text-2xl font-bold md:h-10 md:text-4xl\" />\n      <Button onClick={replay}>Replay</Button>\n      <p className=\"text-balance text-center text-muted-foreground\">\n        Click to replay the scramble animation! Check the console for animation\n        events.\n      </p>\n    </div>\n  )\n}\n",
+      "type": "registry:hook"
+    }
+  ]
+}

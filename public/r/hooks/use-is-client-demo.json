@@ -1,0 +1,12 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-is-client-demo",
+  "type": "registry:hook",
+  "files": [
+    {
+      "path": "registry/examples/use-is-client-demo.tsx",
+      "content": "import { useIsClient } from \"registry/hooks/use-is-client\"\n\nexport default function UseIsClientDemo() {\n  const isClient = useIsClient()\n\n  return (\n    <div className=\"space-y-2 text-center\">\n      <h2 className=\"text-xl font-semibold\">Is Client? </h2>\n      <p>{isClient ? \"If you can see this ... you already know\" : \"No\"}</p>\n    </div>\n  )\n}\n",
+      "type": "registry:hook"
+    }
+  ]
+}
