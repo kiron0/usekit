@@ -1,8 +1,8 @@
 import { ClipboardCheckIcon, ClipboardIcon } from "lucide-react"
-import { useCopyToClipboard } from "registry/hooks/use-copy-to-clipboard"
 import { toast } from "sonner"
 
 import { Button } from "@/components/ui/button"
+import { useCopyToClipboard } from "registry/hooks/use-copy-to-clipboard"
 
 export default function UseCopyToClipboardDemo() {
   const [copy, isCopied] = useCopyToClipboard()

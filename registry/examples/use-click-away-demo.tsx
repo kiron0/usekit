@@ -1,9 +1,9 @@
 import * as React from "react"
 import { X } from "lucide-react"
 import * as ReactDOM from "react-dom"
-import { useClickAway } from "registry/hooks/use-click-away"
 
 import { Button } from "@/components/ui/button"
+import { useClickAway } from "registry/hooks/use-click-away"
 
 export default function UseClickAwayDemo() {
   const [isOpen, setIsOpen] = React.useState(false)

@@ -1,4 +1,5 @@
 import * as React from "react"
+
 import { usePageLeave } from "registry/hooks/use-page-leave"
 
 export default function UsePageLeaveDemo() {

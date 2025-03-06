@@ -1,9 +1,9 @@
 "use client"
 
 import * as React from "react"
-import { useCountdown } from "registry/hooks/use-countdown"
 
 import { Button } from "@/components/ui/button"
+import { useCountdown } from "registry/hooks/use-countdown"
 
 export default function UseCountdownDemo() {
   const [endTime, setEndTime] = React.useState(new Date(Date.now() + 10000))

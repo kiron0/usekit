@@ -1,9 +1,9 @@
 "use client"
 
 import * as React from "react"
-import { useScript } from "registry/hooks/use-script"
 
 import { Badge } from "@/components/ui/badge"
+import { useScript } from "registry/hooks/use-script"
 
 declare global {
   interface Window {

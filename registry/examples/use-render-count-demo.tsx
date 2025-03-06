@@ -1,9 +1,9 @@
 "use client"
 
 import * as React from "react"
-import { useRenderCount } from "registry/hooks/use-render-count"
 
 import { Button } from "@/components/ui/button"
+import { useRenderCount } from "registry/hooks/use-render-count"
 
 export default function UseRenderCountDemo() {
   const { count, isStrictMode } = useRenderCount()

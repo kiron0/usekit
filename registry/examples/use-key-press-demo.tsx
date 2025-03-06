@@ -2,9 +2,9 @@
 
 import * as React from "react"
 import { MoveDown, MoveLeft, MoveRight, MoveUp } from "lucide-react"
-import { useKeyPress } from "registry/hooks/use-key-press"
 
 import { cn } from "@/lib/utils"
+import { useKeyPress } from "registry/hooks/use-key-press"
 
 type Direction = "ArrowUp" | "ArrowDown" | "ArrowLeft" | "ArrowRight"
 

@@ -351,4 +351,34 @@ export const hooksExamples: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "use-previous-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "examples/use-previous-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-history-state-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "examples/use-history-state-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-async-status-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "examples/use-async-status-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
 ]

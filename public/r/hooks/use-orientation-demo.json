@@ -1,0 +1,12 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-orientation-demo",
+  "type": "registry:hook",
+  "files": [
+    {
+      "path": "registry/examples/use-orientation-demo.tsx",
+      "content": "\"use client\"\n\nimport { Badge } from \"@/components/ui/badge\"\nimport { useOrientation } from \"registry/hooks/use-orientation\"\n\nexport default function OrientationDemo() {\n  const { angle, type } = useOrientation()\n\n  return (\n    <div className=\"flex flex-col items-center gap-5\">\n      <div\n        style={{\n          aspectRatio: type.startsWith(\"portrait\") ? \"9 / 16\" : \"16 / 9\",\n        }}\n        className=\"border border-primary p-5 rounded-xl w-60 md:min-w-96 flex items-center justify-center h-full\"\n      >\n        <Badge className=\"capitalize truncate\">\n          {type.replace(/-/, \" \")} ({angle}°)\n        </Badge>\n      </div>\n    </div>\n  )\n}\n",
+      "type": "registry:hook"
+    }
+  ]
+}

@@ -1,8 +1,8 @@
 import * as React from "react"
-import { useLogger } from "registry/hooks/use-logger"
 
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
+import { useLogger } from "registry/hooks/use-logger"
 
 interface FirstChildProps {
   name: string

@@ -1,8 +1,7 @@
 "use client"
 
-import { useOrientation } from "registry/hooks/use-orientation"
-
 import { Badge } from "@/components/ui/badge"
+import { useOrientation } from "registry/hooks/use-orientation"
 
 export default function OrientationDemo() {
   const { angle, type } = useOrientation()

@@ -1,9 +1,9 @@
 "use client"
 
 import * as React from "react"
-import { useHover } from "registry/hooks/use-hover"
 
 import { cn } from "@/lib/utils"
+import { useHover } from "registry/hooks/use-hover"
 
 export default function UseHoverDemo() {
   const [ref, hovering] = useHover()

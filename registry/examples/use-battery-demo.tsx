@@ -1,6 +1,5 @@
-import { useBattery } from "registry/hooks/use-battery"
-
 import { Badge } from "@/components/ui/badge"
+import { useBattery } from "registry/hooks/use-battery"
 
 export default function UseBatteryDemo() {
   const { loading, supported, level, charging, chargingTime, dischargingTime } =

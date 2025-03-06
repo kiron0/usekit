@@ -1,9 +1,9 @@
 "use client"
 
 import * as React from "react"
-import { useVisibilityChange } from "registry/hooks/use-visibility-change"
 
 import { Badge } from "@/components/ui/badge"
+import { useVisibilityChange } from "registry/hooks/use-visibility-change"
 
 export default function VisibilityTracker() {
   const documentVisible = useVisibilityChange()

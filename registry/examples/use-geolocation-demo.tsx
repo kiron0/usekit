@@ -1,4 +1,5 @@
 import { Loader2 } from "lucide-react"
+
 import { useGeolocation } from "registry/hooks/use-geolocation"
 
 export default function UseGeolocationDemo() {

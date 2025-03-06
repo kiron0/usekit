@@ -1,5 +1,3 @@
-import { useObjectState } from "registry/hooks/use-object-state"
-
 import { Button } from "@/components/ui/button"
 import {
   Table,
@@ -9,6 +7,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
+import { useObjectState } from "registry/hooks/use-object-state"
 
 interface TeamStats {
   team: string

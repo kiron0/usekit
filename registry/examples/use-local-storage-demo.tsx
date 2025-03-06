@@ -1,8 +1,7 @@
 "use client"
 
-import { useLocalStorage } from "registry/hooks/use-local-storage"
-
 import { Button } from "@/components/ui/button"
+import { useLocalStorage } from "registry/hooks/use-local-storage"
 
 export default function UseLocalStorageDemo() {
   const [count, setCount] = useLocalStorage("local-count", 0)

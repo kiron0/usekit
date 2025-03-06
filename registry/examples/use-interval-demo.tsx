@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+
 import { useInterval } from "registry/hooks/use-interval"
 
 export default function UseIntervalDemo() {

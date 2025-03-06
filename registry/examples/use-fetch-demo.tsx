@@ -2,9 +2,9 @@
 
 import * as React from "react"
 import Image from "next/image"
-import { useFetch } from "registry/hooks/use-fetch"
 
 import { Button } from "@/components/ui/button"
+import { useFetch } from "registry/hooks/use-fetch"
 
 type Pokemon = {
   name: string

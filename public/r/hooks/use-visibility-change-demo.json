@@ -1,0 +1,12 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-visibility-change-demo",
+  "type": "registry:hook",
+  "files": [
+    {
+      "path": "registry/examples/use-visibility-change-demo.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\n\nimport { Badge } from \"@/components/ui/badge\"\nimport { useVisibilityChange } from \"registry/hooks/use-visibility-change\"\n\nexport default function VisibilityTracker() {\n  const documentVisible = useVisibilityChange()\n  const [tabAwayCount, setTabAwayCount] = React.useState(0)\n\n  React.useEffect(() => {\n    if (!documentVisible) {\n      setTabAwayCount((prev) => prev + 1)\n    }\n  }, [documentVisible])\n\n  return (\n    <div className=\"flex flex-col items-center justify-center gap-2\">\n      <h1 className=\"text-5xl font-semibold pb-4\">{tabAwayCount}</h1>\n      <p>Number of times tabbed away</p>\n      <div className=\"flex gap-2\">\n        Document is currently:{\" \"}\n        <Badge variant={documentVisible ? \"default\" : \"destructive\"}>\n          {documentVisible ? \"Visible\" : \"Hidden\"}\n        </Badge>\n      </div>\n      <p className=\"text-muted-foreground text-center text-balance\">\n        Change tab to see the count increase\n      </p>\n    </div>\n  )\n}\n",
+      "type": "registry:hook"
+    }
+  ]
+}

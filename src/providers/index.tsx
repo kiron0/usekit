@@ -1,3 +1,5 @@
+import NextTopLoader from "nextjs-toploader"
+
 import { THEMES } from "@/config/colors"
 import { Toaster } from "@/components/ui/sonner"
 import { TooltipProvider } from "@/components/ui/tooltip"
@@ -24,6 +26,7 @@ export default function Providers({ children }: ProvidersProps) {
         </div>
       </TooltipProvider>
       <Toaster />
+      <NextTopLoader />
     </ThemeProvider>
   )
 }

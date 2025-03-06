@@ -1,0 +1,12 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-counter-demo",
+  "type": "registry:hook",
+  "files": [
+    {
+      "path": "registry/examples/use-counter-demo.tsx",
+      "content": "import { Button } from \"@/components/ui/button\"\nimport { useCounter } from \"registry/hooks/use-counter\"\n\nexport default function UseCounterDemo() {\n  const { count, setCount, increment, decrement, reset } = useCounter(0)\n\n  const multiplyBy2 = () => {\n    setCount((x: number) => x * 2)\n  }\n\n  return (\n    <div className=\"flex flex-col items-center space-y-6\">\n      <h1 className=\"text-2xl font-bold\">Counter</h1>\n      <p className=\"text-4xl font-bold\">{count}</p>\n      <div className=\"flex justify-center flex-wrap gap-2\">\n        <Button onClick={increment}>Increment</Button>\n        <Button onClick={decrement}>Decrement</Button>\n        <Button onClick={reset}>Reset</Button>\n        <Button onClick={multiplyBy2}>Multiply by 2</Button>\n      </div>\n    </div>\n  )\n}\n",
+      "type": "registry:hook"
+    }
+  ]
+}

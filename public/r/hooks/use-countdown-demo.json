@@ -1,0 +1,12 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-countdown-demo",
+  "type": "registry:hook",
+  "files": [
+    {
+      "path": "registry/examples/use-countdown-demo.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\n\nimport { Button } from \"@/components/ui/button\"\nimport { useCountdown } from \"registry/hooks/use-countdown\"\n\nexport default function UseCountdownDemo() {\n  const [endTime, setEndTime] = React.useState(new Date(Date.now() + 10000))\n  const [complete, setComplete] = React.useState(false)\n\n  const count = useCountdown(endTime, {\n    interval: 1000,\n    onTick: (time) =>\n      console.log(`Tick: ${Math.round(time / 1000)}s remaining`),\n    onComplete: () => setComplete(true),\n  })\n\n  const handleClick = (additionalTime: number) => {\n    if (complete) return\n    const newEndTime = endTime.getTime() + additionalTime\n    setEndTime(new Date(newEndTime))\n  }\n\n  const formatTime = (milliseconds: number): string => {\n    const seconds = Math.ceil(milliseconds / 1000)\n    return `${seconds}s`\n  }\n\n  return (\n    <div className=\"flex flex-col items-center space-y-6\">\n      <h3 className=\"text-5xl font-bold text-center\">\n        {complete ? \"Complete!\" : formatTime(count)}\n      </h3>\n      {!complete && (\n        <div className=\"flex items-center justify-center gap-2\">\n          <Button variant=\"secondary\" onClick={() => handleClick(5000)}>\n            +5s\n          </Button>\n          <Button variant=\"secondary\" onClick={() => handleClick(10000)}>\n            +10s\n          </Button>\n          <Button variant=\"secondary\" onClick={() => handleClick(15000)}>\n            +15s\n          </Button>\n        </div>\n      )}\n      <p className=\"text-balance text-center text-muted-foreground\">\n        Check the console to see the countdown tick every second.\n      </p>\n    </div>\n  )\n}\n",
+      "type": "registry:hook"
+    }
+  ]
+}

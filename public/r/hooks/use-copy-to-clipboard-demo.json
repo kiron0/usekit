@@ -1,0 +1,12 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-copy-to-clipboard-demo",
+  "type": "registry:hook",
+  "files": [
+    {
+      "path": "registry/examples/use-copy-to-clipboard-demo.tsx",
+      "content": "import { ClipboardCheckIcon, ClipboardIcon } from \"lucide-react\"\nimport { toast } from \"sonner\"\n\nimport { Button } from \"@/components/ui/button\"\nimport { useCopyToClipboard } from \"registry/hooks/use-copy-to-clipboard\"\n\nexport default function UseCopyToClipboardDemo() {\n  const [copy, isCopied] = useCopyToClipboard()\n\n  const copyText = async (text: string) => {\n    await copy(text)\n      .then(() => {\n        toast.success(\"Copied to clipboard\")\n      })\n      .catch((error) => {\n        if (error instanceof Error) {\n          toast.error(error.message)\n        }\n      })\n  }\n\n  return (\n    <Button\n      variant=\"outline\"\n      className=\"gap-2 text-sm\"\n      onClick={() => copyText(\"I'm copied!\")}\n    >\n      Click me to copy\n      {isCopied ? (\n        <ClipboardCheckIcon size={10} />\n      ) : (\n        <ClipboardIcon size={10} />\n      )}\n    </Button>\n  )\n}\n",
+      "type": "registry:hook"
+    }
+  ]
+}

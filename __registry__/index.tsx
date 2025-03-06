@@ -684,14 +684,60 @@ export const Index: Record<string, any> = {
     ),
     source: "",
   },
+  "use-previous": {
+    name: "use-previous",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-previous.tsx",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(() => import("registry/examples/use-previous-demo")),
+    source: "",
+  },
+  "use-history-state": {
+    name: "use-history-state",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-history-state.tsx",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-history-state-demo")
+    ),
+    source: "",
+  },
+  "use-async-status": {
+    name: "use-async-status",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-async-status.tsx",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-async-status-demo")
+    ),
+    source: "",
+  },
   "use-copy-to-clipboard-demo": {
     name: "use-copy-to-clipboard-demo",
-    type: "registry:example",
+    type: "registry:hook",
     registryDependencies: undefined,
     files: [
       {
         path: "registry/examples/use-copy-to-clipboard-demo.tsx",
-        type: "registry:example",
+        type: "registry:hook",
         target: "",
       },
     ],
@@ -702,12 +748,12 @@ export const Index: Record<string, any> = {
   },
   "use-interval-demo": {
     name: "use-interval-demo",
-    type: "registry:example",
+    type: "registry:hook",
     registryDependencies: undefined,
     files: [
       {
         path: "registry/examples/use-interval-demo.tsx",
-        type: "registry:example",
+        type: "registry:hook",
         target: "",
       },
     ],
@@ -716,12 +762,12 @@ export const Index: Record<string, any> = {
   },
   "use-timeout-demo": {
     name: "use-timeout-demo",
-    type: "registry:example",
+    type: "registry:hook",
     registryDependencies: undefined,
     files: [
       {
         path: "registry/examples/use-timeout-demo.tsx",
-        type: "registry:example",
+        type: "registry:hook",
         target: "",
       },
     ],
@@ -730,12 +776,12 @@ export const Index: Record<string, any> = {
   },
   "use-document-title-demo": {
     name: "use-document-title-demo",
-    type: "registry:example",
+    type: "registry:hook",
     registryDependencies: undefined,
     files: [
       {
         path: "registry/examples/use-document-title-demo.tsx",
-        type: "registry:example",
+        type: "registry:hook",
         target: "",
       },
     ],
@@ -746,12 +792,12 @@ export const Index: Record<string, any> = {
   },
   "use-mouse-position-demo": {
     name: "use-mouse-position-demo",
-    type: "registry:example",
+    type: "registry:hook",
     registryDependencies: undefined,
     files: [
       {
         path: "registry/examples/use-mouse-position-demo.tsx",
-        type: "registry:example",
+        type: "registry:hook",
         target: "",
       },
     ],
@@ -762,12 +808,12 @@ export const Index: Record<string, any> = {
   },
   "use-counter-demo": {
     name: "use-counter-demo",
-    type: "registry:example",
+    type: "registry:hook",
     registryDependencies: undefined,
     files: [
       {
         path: "registry/examples/use-counter-demo.tsx",
-        type: "registry:example",
+        type: "registry:hook",
         target: "",
       },
     ],
@@ -776,12 +822,12 @@ export const Index: Record<string, any> = {
   },
   "use-scramble-demo": {
     name: "use-scramble-demo",
-    type: "registry:example",
+    type: "registry:hook",
     registryDependencies: undefined,
     files: [
       {
         path: "registry/examples/use-scramble-demo.tsx",
-        type: "registry:example",
+        type: "registry:hook",
         target: "",
       },
     ],
@@ -790,12 +836,12 @@ export const Index: Record<string, any> = {
   },
   "use-fetch-demo": {
     name: "use-fetch-demo",
-    type: "registry:example",
+    type: "registry:hook",
     registryDependencies: undefined,
     files: [
       {
         path: "registry/examples/use-fetch-demo.tsx",
-        type: "registry:example",
+        type: "registry:hook",
         target: "",
       },
     ],
@@ -804,12 +850,12 @@ export const Index: Record<string, any> = {
   },
   "use-local-storage-demo": {
     name: "use-local-storage-demo",
-    type: "registry:example",
+    type: "registry:hook",
     registryDependencies: undefined,
     files: [
       {
         path: "registry/examples/use-local-storage-demo.tsx",
-        type: "registry:example",
+        type: "registry:hook",
         target: "",
       },
     ],
@@ -820,12 +866,12 @@ export const Index: Record<string, any> = {
   },
   "use-session-storage-demo": {
     name: "use-session-storage-demo",
-    type: "registry:example",
+    type: "registry:hook",
     registryDependencies: undefined,
     files: [
       {
         path: "registry/examples/use-session-storage-demo.tsx",
-        type: "registry:example",
+        type: "registry:hook",
         target: "",
       },
     ],
@@ -836,12 +882,12 @@ export const Index: Record<string, any> = {
   },
   "use-script-demo": {
     name: "use-script-demo",
-    type: "registry:example",
+    type: "registry:hook",
     registryDependencies: undefined,
     files: [
       {
         path: "registry/examples/use-script-demo.tsx",
-        type: "registry:example",
+        type: "registry:hook",
         target: "",
       },
     ],
@@ -850,12 +896,12 @@ export const Index: Record<string, any> = {
   },
   "use-render-count-demo": {
     name: "use-render-count-demo",
-    type: "registry:example",
+    type: "registry:hook",
     registryDependencies: undefined,
     files: [
       {
         path: "registry/examples/use-render-count-demo.tsx",
-        type: "registry:example",
+        type: "registry:hook",
         target: "",
       },
     ],
@@ -866,12 +912,12 @@ export const Index: Record<string, any> = {
   },
   "use-orientation-demo": {
     name: "use-orientation-demo",
-    type: "registry:example",
+    type: "registry:hook",
     registryDependencies: undefined,
     files: [
       {
         path: "registry/examples/use-orientation-demo.tsx",
-        type: "registry:example",
+        type: "registry:hook",
         target: "",
       },
     ],
@@ -882,12 +928,12 @@ export const Index: Record<string, any> = {
   },
   "use-window-size-demo": {
     name: "use-window-size-demo",
-    type: "registry:example",
+    type: "registry:hook",
     registryDependencies: undefined,
     files: [
       {
         path: "registry/examples/use-window-size-demo.tsx",
-        type: "registry:example",
+        type: "registry:hook",
         target: "",
       },
     ],
@@ -898,12 +944,12 @@ export const Index: Record<string, any> = {
   },
   "use-hover-demo": {
     name: "use-hover-demo",
-    type: "registry:example",
+    type: "registry:hook",
     registryDependencies: undefined,
     files: [
       {
         path: "registry/examples/use-hover-demo.tsx",
-        type: "registry:example",
+        type: "registry:hook",
         target: "",
       },
     ],
@@ -912,12 +958,12 @@ export const Index: Record<string, any> = {
   },
   "use-battery-demo": {
     name: "use-battery-demo",
-    type: "registry:example",
+    type: "registry:hook",
     registryDependencies: undefined,
     files: [
       {
         path: "registry/examples/use-battery-demo.tsx",
-        type: "registry:example",
+        type: "registry:hook",
         target: "",
       },
     ],
@@ -926,12 +972,12 @@ export const Index: Record<string, any> = {
   },
   "use-media-query-demo": {
     name: "use-media-query-demo",
-    type: "registry:example",
+    type: "registry:hook",
     registryDependencies: undefined,
     files: [
       {
         path: "registry/examples/use-media-query-demo.tsx",
-        type: "registry:example",
+        type: "registry:hook",
         target: "",
       },
     ],
@@ -942,12 +988,12 @@ export const Index: Record<string, any> = {
   },
   "use-interval-when-demo": {
     name: "use-interval-when-demo",
-    type: "registry:example",
+    type: "registry:hook",
     registryDependencies: undefined,
     files: [
       {
         path: "registry/examples/use-interval-when-demo.tsx",
-        type: "registry:example",
+        type: "registry:hook",
         target: "",
       },
     ],
@@ -958,12 +1004,12 @@ export const Index: Record<string, any> = {
   },
   "use-countdown-demo": {
     name: "use-countdown-demo",
-    type: "registry:example",
+    type: "registry:hook",
     registryDependencies: undefined,
     files: [
       {
         path: "registry/examples/use-countdown-demo.tsx",
-        type: "registry:example",
+        type: "registry:hook",
         target: "",
       },
     ],
@@ -972,12 +1018,12 @@ export const Index: Record<string, any> = {
   },
   "use-visibility-change-demo": {
     name: "use-visibility-change-demo",
-    type: "registry:example",
+    type: "registry:hook",
     registryDependencies: undefined,
     files: [
       {
         path: "registry/examples/use-visibility-change-demo.tsx",
-        type: "registry:example",
+        type: "registry:hook",
         target: "",
       },
     ],
@@ -988,12 +1034,12 @@ export const Index: Record<string, any> = {
   },
   "use-key-press-demo": {
     name: "use-key-press-demo",
-    type: "registry:example",
+    type: "registry:hook",
     registryDependencies: undefined,
     files: [
       {
         path: "registry/examples/use-key-press-demo.tsx",
-        type: "registry:example",
+        type: "registry:hook",
         target: "",
       },
     ],
@@ -1002,12 +1048,12 @@ export const Index: Record<string, any> = {
   },
   "use-cookie-storage-demo": {
     name: "use-cookie-storage-demo",
-    type: "registry:example",
+    type: "registry:hook",
     registryDependencies: undefined,
     files: [
       {
         path: "registry/examples/use-cookie-storage-demo.tsx",
-        type: "registry:example",
+        type: "registry:hook",
         target: "",
       },
     ],
@@ -1018,12 +1064,12 @@ export const Index: Record<string, any> = {
   },
   "use-is-client-demo": {
     name: "use-is-client-demo",
-    type: "registry:example",
+    type: "registry:hook",
     registryDependencies: undefined,
     files: [
       {
         path: "registry/examples/use-is-client-demo.tsx",
-        type: "registry:example",
+        type: "registry:hook",
         target: "",
       },
     ],
@@ -1032,12 +1078,12 @@ export const Index: Record<string, any> = {
   },
   "use-geolocation-demo": {
     name: "use-geolocation-demo",
-    type: "registry:example",
+    type: "registry:hook",
     registryDependencies: undefined,
     files: [
       {
         path: "registry/examples/use-geolocation-demo.tsx",
-        type: "registry:example",
+        type: "registry:hook",
         target: "",
       },
     ],
@@ -1048,12 +1094,12 @@ export const Index: Record<string, any> = {
   },
   "use-page-leave-demo": {
     name: "use-page-leave-demo",
-    type: "registry:example",
+    type: "registry:hook",
     registryDependencies: undefined,
     files: [
       {
         path: "registry/examples/use-page-leave-demo.tsx",
-        type: "registry:example",
+        type: "registry:hook",
         target: "",
       },
     ],
@@ -1064,12 +1110,12 @@ export const Index: Record<string, any> = {
   },
   "use-is-first-render-demo": {
     name: "use-is-first-render-demo",
-    type: "registry:example",
+    type: "registry:hook",
     registryDependencies: undefined,
     files: [
       {
         path: "registry/examples/use-is-first-render-demo.tsx",
-        type: "registry:example",
+        type: "registry:hook",
         target: "",
       },
     ],
@@ -1080,12 +1126,12 @@ export const Index: Record<string, any> = {
   },
   "use-window-scroll-demo": {
     name: "use-window-scroll-demo",
-    type: "registry:example",
+    type: "registry:hook",
     registryDependencies: undefined,
     files: [
       {
         path: "registry/examples/use-window-scroll-demo.tsx",
-        type: "registry:example",
+        type: "registry:hook",
         target: "",
       },
     ],
@@ -1096,12 +1142,12 @@ export const Index: Record<string, any> = {
   },
   "use-idle-demo": {
     name: "use-idle-demo",
-    type: "registry:example",
+    type: "registry:hook",
     registryDependencies: undefined,
     files: [
       {
         path: "registry/examples/use-idle-demo.tsx",
-        type: "registry:example",
+        type: "registry:hook",
         target: "",
       },
     ],
@@ -1110,12 +1156,12 @@ export const Index: Record<string, any> = {
   },
   "use-long-press-demo": {
     name: "use-long-press-demo",
-    type: "registry:example",
+    type: "registry:hook",
     registryDependencies: undefined,
     files: [
       {
         path: "registry/examples/use-long-press-demo.tsx",
-        type: "registry:example",
+        type: "registry:hook",
         target: "",
       },
     ],
@@ -1126,12 +1172,12 @@ export const Index: Record<string, any> = {
   },
   "use-default-demo": {
     name: "use-default-demo",
-    type: "registry:example",
+    type: "registry:hook",
     registryDependencies: undefined,
     files: [
       {
         path: "registry/examples/use-default-demo.tsx",
-        type: "registry:example",
+        type: "registry:hook",
         target: "",
       },
     ],
@@ -1140,12 +1186,12 @@ export const Index: Record<string, any> = {
   },
   "use-click-away-demo": {
     name: "use-click-away-demo",
-    type: "registry:example",
+    type: "registry:hook",
     registryDependencies: undefined,
     files: [
       {
         path: "registry/examples/use-click-away-demo.tsx",
-        type: "registry:example",
+        type: "registry:hook",
         target: "",
       },
     ],
@@ -1156,12 +1202,12 @@ export const Index: Record<string, any> = {
   },
   "use-object-state-demo": {
     name: "use-object-state-demo",
-    type: "registry:example",
+    type: "registry:hook",
     registryDependencies: undefined,
     files: [
       {
         path: "registry/examples/use-object-state-demo.tsx",
-        type: "registry:example",
+        type: "registry:hook",
         target: "",
       },
     ],
@@ -1172,12 +1218,12 @@ export const Index: Record<string, any> = {
   },
   "use-logger-demo": {
     name: "use-logger-demo",
-    type: "registry:example",
+    type: "registry:hook",
     registryDependencies: undefined,
     files: [
       {
         path: "registry/examples/use-logger-demo.tsx",
-        type: "registry:example",
+        type: "registry:hook",
         target: "",
       },
     ],
@@ -1186,12 +1232,12 @@ export const Index: Record<string, any> = {
   },
   "use-speakup-demo": {
     name: "use-speakup-demo",
-    type: "registry:example",
+    type: "registry:hook",
     registryDependencies: undefined,
     files: [
       {
         path: "registry/examples/use-speakup-demo.tsx",
-        type: "registry:example",
+        type: "registry:hook",
         target: "",
       },
     ],
@@ -1200,16 +1246,62 @@ export const Index: Record<string, any> = {
   },
   "use-measure-demo": {
     name: "use-measure-demo",
-    type: "registry:example",
+    type: "registry:hook",
     registryDependencies: undefined,
     files: [
       {
         path: "registry/examples/use-measure-demo.tsx",
-        type: "registry:example",
+        type: "registry:hook",
         target: "",
       },
     ],
     component: React.lazy(() => import("registry/examples/use-measure-demo")),
+    source: "",
+  },
+  "use-previous-demo": {
+    name: "use-previous-demo",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-previous-demo.tsx",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(() => import("registry/examples/use-previous-demo")),
+    source: "",
+  },
+  "use-history-state-demo": {
+    name: "use-history-state-demo",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-history-state-demo.tsx",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-history-state-demo")
+    ),
+    source: "",
+  },
+  "use-async-status-demo": {
+    name: "use-async-status-demo",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-async-status-demo.tsx",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-async-status-demo")
+    ),
     source: "",
   },
 }

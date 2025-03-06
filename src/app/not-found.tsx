@@ -1,8 +1,8 @@
 "use client"
 
 import Link from "next/link"
-import { useRouter } from "next/navigation"
 import { AlertTriangleIcon, ChevronLeftIcon, HouseIcon } from "lucide-react"
+import { useRouter } from "nextjs-toploader/app"
 
 import { Button, buttonVariants } from "@/components/ui/button"
 

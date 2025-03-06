@@ -1,9 +1,9 @@
 "use client"
 
 import * as React from "react"
-import { useMeasure } from "registry/hooks/use-measure"
 
 import { Button } from "@/components/ui/button"
+import { useMeasure } from "registry/hooks/use-measure"
 
 export default function UseMeasureDemo() {
   const ref = React.useRef<HTMLDivElement>(null)

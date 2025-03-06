@@ -1,0 +1,12 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-previous-demo",
+  "type": "registry:hook",
+  "files": [
+    {
+      "path": "registry/examples/use-previous-demo.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\n\nimport { Button } from \"@/components/ui/button\"\nimport { usePrevious } from \"registry/hooks/use-previous\"\n\nfunction getRandomColor() {\n  const colors = [\"green\", \"blue\", \"purple\", \"red\", \"pink\"]\n  return colors[Math.floor(Math.random() * colors.length)]\n}\n\nexport default function UsePreviousDemo() {\n  const [color, setColor] = React.useState(getRandomColor)\n  const previousColor = usePrevious(color)\n\n  const handleClick = () => {\n    let newColor: string\n    do {\n      newColor = getRandomColor()\n    } while (color === newColor)\n\n    setColor(newColor)\n  }\n\n  return (\n    <div className=\"flex flex-col items-center justify-center space-y-4\">\n      <Button className=\"link\" onClick={handleClick}>\n        Next\n      </Button>\n      <div className=\"flex gap-4\">\n        <div className=\"flex flex-col items-center gap-2\">\n          <div\n            style={{ background: `${previousColor}` }}\n            className=\"size-40 rounded-lg border\"\n          />\n          <p>Previous: {previousColor ?? \"None\"}</p>\n        </div>\n        <div className=\"flex flex-col items-center gap-2\">\n          <div\n            style={{ background: `${color}` }}\n            className=\"size-40 rounded-lg border\"\n          />\n          <p>Current: {color}</p>\n        </div>\n      </div>\n    </div>\n  )\n}\n",
+      "type": "registry:hook"
+    }
+  ]
+}

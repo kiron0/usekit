@@ -1,0 +1,12 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-geolocation-demo",
+  "type": "registry:hook",
+  "files": [
+    {
+      "path": "registry/examples/use-geolocation-demo.tsx",
+      "content": "import { Loader2 } from \"lucide-react\"\n\nimport { useGeolocation } from \"registry/hooks/use-geolocation\"\n\nexport default function UseGeolocationDemo() {\n  const {\n    loading,\n    error,\n    latitude,\n    longitude,\n    altitude,\n    accuracy,\n    altitudeAccuracy,\n    heading,\n    speed,\n    timestamp,\n  } = useGeolocation({\n    enableHighAccuracy: true,\n    timeout: 10000,\n    maximumAge: 60000,\n  })\n\n  if (loading) {\n    return <Loader2 className=\"animate-spin\" />\n  }\n\n  if (error) {\n    return <p className=\"text-red-500\">Error: {error.message}</p>\n  }\n\n  return (\n    <div className=\"space-y-4\">\n      <h2 className=\"text-xl font-semibold\">Geolocation Data</h2>\n      <div>\n        <p>Latitude: {latitude!.toFixed(6)}</p>\n        <p>Longitude: {longitude!.toFixed(6)}</p>\n        <p>Accuracy: {accuracy} meters</p>\n      </div>\n\n      <div>\n        {altitude && <p>Altitude: {altitude} meters</p>}\n        {altitudeAccuracy && (\n          <p>Altitude Accuracy: {altitudeAccuracy} meters</p>\n        )}\n        {heading && <p>Heading: {heading}° from true north</p>}\n        {speed && <p>Speed: {speed} m/s</p>}\n      </div>\n\n      <p>Last updated: {new Date(timestamp!).toLocaleTimeString()}</p>\n    </div>\n  )\n}\n",
+      "type": "registry:hook"
+    }
+  ]
+}
