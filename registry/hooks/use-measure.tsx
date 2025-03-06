@@ -23,6 +23,8 @@ interface MeasureOptions {
     | "top-right"
     | "bottom-left"
     | "bottom-right"
+  startMeasure?: boolean
+  ref?: React.RefObject<HTMLDivElement | null>
 }
 
 const actionPositions = [
@@ -44,6 +46,8 @@ export function useMeasure({
   borderWidth = 1,
   actionPosition = "top-right",
   measurementPosition = "bottom-left",
+  startMeasure = false,
+  ref,
 }: MeasureOptions = {}) {
   const [isMobile, setIsMobile] = React.useState<boolean | undefined>(undefined)
 
@@ -56,7 +60,6 @@ export function useMeasure({
     y: number
   } | null>(null)
   const [resizeCorner, setResizeCorner] = React.useState<string | null>(null)
-  const measureRef = React.useRef<HTMLDivElement>(null)
   const borderBoxRef = React.useRef<HTMLDivElement>(null)
 
   const originalStartRef = React.useRef<Point>(null)
@@ -187,11 +190,11 @@ export function useMeasure({
             newStart.x = Math.max(
               0,
               Math.min(newStart.x + deltaX, newEnd.x - 10)
-            ) // Min width of 10px
+            )
             newEnd.y = Math.min(
               window.innerHeight,
               Math.max(newEnd.y + deltaY, newStart.y + 10)
-            ) // Min height of 10px
+            )
             break
           default:
             break
@@ -358,16 +361,15 @@ export function useMeasure({
             borderRadius: `${borderRadius}px`,
             borderWidth: `${borderWidth}px`,
           }}
-          className="border-primary fixed z-[999] border border-dashed bg-transparent"
+          className="border-primary fixed z-[998] border border-dashed bg-transparent"
         />
         <div
-          ref={measureRef}
           style={{
             ...measurementPositions.find(
               (pos) => pos.name === measurementPosition
             ),
           }}
-          className="bg-background/50 backdrop-blur z-50 pointer-events-none fixed rounded-md border p-4 text-sm"
+          className="bg-background/50 backdrop-blur z-[999] pointer-events-none fixed rounded-md border p-4 text-sm"
         >
           <div className="flex flex-col gap-1">
             <span>
@@ -389,7 +391,7 @@ export function useMeasure({
           style={{
             ...actionPositions.find((pos) => pos.name === actionPosition),
           }}
-          className="fixed z-50 flex gap-2"
+          className="fixed z-[999] flex gap-2"
         >
           <button
             className="h-8 rounded-md px-3 text-xs bg-primary text-primary-foreground"
@@ -409,9 +411,16 @@ export function useMeasure({
     )
   }
 
-  if (isMobile) {
-    return { measurements, MeasureComponent: () => null }
+  if (!startMeasure || isMobile) {
+    return { measurements: {}, MeasureComponent: () => null, reset: () => {} }
   } else {
-    return { measurements, MeasureComponent }
+    return {
+      measurements,
+      MeasureComponent,
+      reset: () => {
+        setStartPoint(null)
+        setEndPoint(null)
+      },
+    }
   }
 }
