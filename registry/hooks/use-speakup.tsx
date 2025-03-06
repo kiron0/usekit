@@ -70,9 +70,18 @@ export const useVoiceToText = ({
   const [transcript, setTranscript] = React.useState<string>("")
   const isContinuous = React.useRef<boolean>(continuous)
   const [isListening, setIsListening] = React.useState(false)
+  const [isSupported, setIsSupported] = React.useState(false)
+
+  React.useEffect(() => {
+    if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+      console.error("getUserMedia not supported")
+      setIsSupported(false)
+    }
+  }, [])
 
   const SpeechRecognition = React.useMemo(() => {
     if (typeof window === "undefined") {
+      setIsSupported(false)
       return null
     }
     return window.SpeechRecognition || window.webkitSpeechRecognition
@@ -132,7 +141,7 @@ export const useVoiceToText = ({
     isListening,
     transcript,
     reset,
-    isSupported: !!recognition,
+    isSupported,
   }
 }
 
@@ -141,8 +150,6 @@ interface TextToVoiceOptions {
   pitch?: number
   rate?: number
   volume?: number
-  chunkSize?: number
-  onError?: (error: string) => void
 }
 
 export const useTextToVoice = ({
@@ -150,8 +157,6 @@ export const useTextToVoice = ({
   pitch = 1,
   rate = 1,
   volume = 1,
-  chunkSize = 200,
-  onError,
 }: TextToVoiceOptions = {}) => {
   const [isSpeaking, setIsSpeaking] = React.useState(false)
   const [isPaused, setIsPaused] = React.useState(false)
@@ -201,6 +206,12 @@ export const useTextToVoice = ({
     return () => synth.removeEventListener("voiceschanged", updateVoices)
   }, [synth])
 
+  React.useEffect(() => {
+    if (voices.length > 0 && !selectedVoice) {
+      setSelectedVoice(voices[0])
+    }
+  }, [voices, selectedVoice])
+
   const createUtterance = React.useCallback(
     (chunkText: string) => {
       if (!synth) return null
@@ -233,7 +244,7 @@ export const useTextToVoice = ({
       }
 
       utterance.onerror = (event) => {
-        onError?.(`Speech error: ${event.error}`)
+        console.error(`Speech error: ${event.error}`)
         setIsSpeaking(false)
         setIsPaused(false)
       }
@@ -250,14 +261,14 @@ export const useTextToVoice = ({
 
       return utterance
     },
-    [synth, onError]
+    [synth]
   )
 
   const speak = React.useCallback(() => {
     if (!synth || !text) return
 
     synth.cancel()
-    const chunks = text.match(new RegExp(`.{1,${chunkSize}}`, "g")) || []
+    const chunks = text.match(new RegExp(`.{1,${200}}`, "g")) || []
     chunksRef.current = chunks
     currentChunkIndexRef.current = 0
 
@@ -268,7 +279,7 @@ export const useTextToVoice = ({
 
     utteranceRef.current = utterance
     synth.speak(utterance)
-  }, [text, synth, createUtterance, chunkSize])
+  }, [text, synth, createUtterance])
 
   const pause = React.useCallback(() => {
     if (synth?.speaking && utteranceRef.current) {

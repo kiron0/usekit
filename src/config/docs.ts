@@ -61,6 +61,11 @@ export const docsConfig: DocsConfig = {
           items: [],
         },
         {
+          title: "useMounted",
+          href: "/docs/hooks/use-mounted",
+          items: [],
+        },
+        {
           title: "useUnmount",
           href: "/docs/hooks/use-unmount",
           items: [],
@@ -191,8 +196,18 @@ export const docsConfig: DocsConfig = {
           items: [],
         },
         {
+          title: "useIsMobile",
+          href: "/docs/hooks/use-is-mobile",
+          items: [],
+        },
+        {
           title: "usePageLeave",
           href: "/docs/hooks/use-page-leave",
+          items: [],
+        },
+        {
+          title: "useLockBodyScroll",
+          href: "/docs/hooks/use-lock-body-scroll",
           items: [],
         },
         {
@@ -241,6 +256,16 @@ export const docsConfig: DocsConfig = {
           items: [],
         },
         {
+          title: "useMeasure",
+          href: "/docs/hooks/use-measure",
+          items: [],
+        },
+        {
+          title: "useMutationObserver",
+          href: "/docs/hooks/use-mutation-observer",
+          items: [],
+        },
+        {
           title: "usePrevious",
           href: "/docs/hooks/use-previous",
           items: [],
@@ -261,12 +286,6 @@ export const docsConfig: DocsConfig = {
         {
           title: "useHistoryState",
           href: "/docs/hooks/use-history-state",
-          items: [],
-          label: "Soon",
-        },
-        {
-          title: "useMeasure",
-          href: "/docs/hooks/use-measure",
           items: [],
           label: "Soon",
         },

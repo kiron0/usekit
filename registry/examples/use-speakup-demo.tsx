@@ -115,7 +115,6 @@ export default function UseSpeakupDemo() {
               <Label>Select Voice:</Label>
               <Select
                 onValueChange={(value) => setVoice(value)}
-                defaultValue={voices[0]}
                 value={voice}
                 disabled={isSpeaking || isPaused}
               >
