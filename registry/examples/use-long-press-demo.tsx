@@ -3,12 +3,12 @@
 import * as React from "react"
 import { X } from "lucide-react"
 import * as ReactDOM from "react-dom"
+
+import { Button } from "@/components/ui/button"
 import {
   useLongPress,
   type LongPressCallback,
 } from "registry/hooks/use-long-press"
-
-import { Button } from "@/components/ui/button"
 
 export default function UseLongPressDemo() {
   const [open, setOpen] = React.useState(false)

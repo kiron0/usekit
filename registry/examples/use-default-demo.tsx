@@ -1,6 +1,5 @@
-import { useDefault } from "registry/hooks/use-default"
-
 import { Button } from "@/components/ui/button"
+import { useDefault } from "registry/hooks/use-default"
 
 export default function UseDefaultDemo() {
   const initialState = { name: "Tyler" }

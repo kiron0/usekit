@@ -1,12 +1,12 @@
 "use client"
 
 import { createPortal } from "react-dom"
+
+import { cn } from "@/lib/utils"
 import {
   useMousePosition,
   type Position,
 } from "registry/hooks/use-mouse-position"
-
-import { cn } from "@/lib/utils"
 
 export default function UseMousePositionDemo() {
   const [mouse, ref] = useMousePosition<HTMLParagraphElement>()

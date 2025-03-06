@@ -1,7 +1,7 @@
 import * as React from "react"
-import { useIdle } from "registry/hooks/use-idle"
 
 import { cn } from "@/lib/utils"
+import { useIdle } from "registry/hooks/use-idle"
 
 const time = 10000 // 10 seconds
 

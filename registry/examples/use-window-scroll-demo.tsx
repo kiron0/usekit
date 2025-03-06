@@ -1,8 +1,7 @@
 "use client"
 
-import { useWindowScroll } from "registry/hooks/use-window-scroll"
-
 import { Button } from "@/components/ui/button"
+import { useWindowScroll } from "registry/hooks/use-window-scroll"
 
 export default function WindowScrollDemo() {
   const [{ x, y }, scrollTo] = useWindowScroll()

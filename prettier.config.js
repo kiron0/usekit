@@ -22,7 +22,7 @@ module.exports = {
     "^@/components/(.*)$",
     "^@/styles/(.*)$",
     "^@/app/(.*)$",
-    "^@/registry/(.*)$",
+    "^registry/(.*)$",
     "",
     "^[./]",
   ],

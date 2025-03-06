@@ -1,4 +1,5 @@
 import * as React from "react"
+
 import { useIsFirstRender } from "registry/hooks/use-is-first-render"
 
 export default function UseIsFirstRenderDemo() {

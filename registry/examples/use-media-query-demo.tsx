@@ -1,8 +1,7 @@
 "use client"
 
-import { useMediaQuery } from "registry/hooks/use-media-query"
-
 import { cn } from "@/lib/utils"
+import { useMediaQuery } from "registry/hooks/use-media-query"
 
 export default function UseMediaQueryDemo() {
   const isSmallDevice = useMediaQuery("only screen and (max-width: 768px)")

@@ -1,6 +1,5 @@
-import { useCounter } from "registry/hooks/use-counter"
-
 import { Button } from "@/components/ui/button"
+import { useCounter } from "registry/hooks/use-counter"
 
 export default function UseCounterDemo() {
   const { count, setCount, increment, decrement, reset } = useCounter(0)

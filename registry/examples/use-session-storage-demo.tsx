@@ -1,8 +1,7 @@
 "use client"
 
-import { useSessionStorage } from "registry/hooks/use-session-storage"
-
 import { Button } from "@/components/ui/button"
+import { useSessionStorage } from "registry/hooks/use-session-storage"
 
 export default function UseSessionStorageDemo() {
   const [count, setCount] = useSessionStorage("session-count", 0)

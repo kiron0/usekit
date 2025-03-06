@@ -1,8 +1,7 @@
 "use client"
 
-import { useAsyncStatus } from "registry/hooks/use-async-status"
-
 import { Button } from "@/components/ui/button"
+import { useAsyncStatus } from "registry/hooks/use-async-status"
 
 export default function UseAsyncStatusDemo() {
   const [trigger, status, feedbackJsx] = useAsyncStatus(

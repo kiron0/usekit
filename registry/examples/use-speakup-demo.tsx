@@ -1,7 +1,6 @@
 "use client"
 
 import * as React from "react"
-import { useTextToVoice, useVoiceToText } from "registry/hooks/use-speakup"
 
 import { Button } from "@/components/ui/button"
 import { Label } from "@/components/ui/label"
@@ -13,6 +12,7 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { Textarea } from "@/components/ui/textarea"
+import { useTextToVoice, useVoiceToText } from "registry/hooks/use-speakup"
 
 export default function UseSpeakupDemo() {
   const [text, setText] = React.useState<string>("")

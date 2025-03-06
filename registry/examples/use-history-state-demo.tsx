@@ -2,10 +2,10 @@
 
 import * as React from "react"
 import { Trash } from "lucide-react"
-import { useHistoryState } from "registry/hooks/use-history-state"
 
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
+import { useHistoryState } from "registry/hooks/use-history-state"
 
 interface TodoItem {
   id: string

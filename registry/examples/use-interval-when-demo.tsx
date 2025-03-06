@@ -1,9 +1,9 @@
 "use client"
 
 import * as React from "react"
-import { useIntervalWhen } from "registry/hooks/use-interval-when"
 
 import { Label } from "@/components/ui/label"
+import { useIntervalWhen } from "registry/hooks/use-interval-when"
 
 export default function UseIntervalWhenDemo() {
   const [count, setCount] = React.useState(0)

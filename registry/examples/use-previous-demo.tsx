@@ -1,9 +1,9 @@
 "use client"
 
 import * as React from "react"
-import { usePrevious } from "registry/hooks/use-previous"
 
 import { Button } from "@/components/ui/button"
+import { usePrevious } from "registry/hooks/use-previous"
 
 function getRandomColor() {
   const colors = ["green", "blue", "purple", "red", "pink"]

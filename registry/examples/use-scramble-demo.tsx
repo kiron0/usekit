@@ -1,8 +1,7 @@
 "use client"
 
-import { useScramble } from "registry/hooks/use-scramble"
-
 import { Button } from "@/components/ui/button"
+import { useScramble } from "registry/hooks/use-scramble"
 
 export default function UseScrambleDemo() {
   const { ref, replay } = useScramble({
