@@ -1,0 +1,59 @@
+---
+title: useMounted
+description: Determine if a component is mounted with the useMounted hook.
+---
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://usekit.kiron.dev/r/use-mounted
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="use-mounted" />
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+```tsx {1, 4}
+import { useMounted } from "@/hooks/use-mounted"
+
+export function Component() {
+  const isMounted = useMounted()
+
+  return (
+    <div>
+      <p>{isMounted ? "Component is mounted" : "Component is not mounted"}</p>
+    </div>
+  )
+}
+```
+
+## API Reference
+
+### Returns
+
+| Name      | Type      | Description                                             |
+| --------- | --------- | ------------------------------------------------------- |
+| isMounted | `boolean` | A boolean value indicating if the component is mounted. |

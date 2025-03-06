@@ -624,6 +624,66 @@ export const Index: Record<string, any> = {
     component: React.lazy(() => import("registry/examples/use-measure-demo")),
     source: "",
   },
+  "use-is-mobile": {
+    name: "use-is-mobile",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-is-mobile.tsx",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(() => import("registry/hooks/use-is-mobile.tsx")),
+    source: "",
+  },
+  "use-lock-body-scroll": {
+    name: "use-lock-body-scroll",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-lock-body-scroll.tsx",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/hooks/use-lock-body-scroll.tsx")
+    ),
+    source: "",
+  },
+  "use-mounted": {
+    name: "use-mounted",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-mounted.tsx",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(() => import("registry/hooks/use-mounted.tsx")),
+    source: "",
+  },
+  "use-mutation-observer": {
+    name: "use-mutation-observer",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-mutation-observer.tsx",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/hooks/use-mutation-observer.tsx")
+    ),
+    source: "",
+  },
   "use-copy-to-clipboard-demo": {
     name: "use-copy-to-clipboard-demo",
     type: "registry:example",

@@ -1,0 +1,59 @@
+---
+title: useIsMobile
+description: Determine if the current device is a mobile device with the useIsMobile hook.
+---
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://usekit.kiron.dev/r/use-is-mobile
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="use-is-mobile" />
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+```tsx {1, 4}
+import { useIsMobile } from "@/hooks/use-is-mobile"
+
+export function Component() {
+  const isMobile = useIsMobile()
+
+  return (
+    <p>
+      {isMobile ? "You are on a mobile device" : "You are on a desktop device"}
+    </p>
+  )
+}
+```
+
+## API Reference
+
+### Returns
+
+| Name     | Type      | Description                                                  |
+| -------- | --------- | ------------------------------------------------------------ |
+| isMobile | `boolean` | A boolean value indicating if the device is a mobile device. |

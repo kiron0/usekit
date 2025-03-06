@@ -530,6 +530,58 @@ export const hooks: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "use-is-mobile",
+    title: "Use Is Mobile",
+    description:
+      "Determine if the current device is a mobile device with the useIsMobile hook.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "hooks/use-is-mobile.tsx",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-lock-body-scroll",
+    title: "Use Lock Body Scroll",
+    description:
+      "Disable body scrolling with the useLockBodyScroll hook. Useful for modals and other components that require a fixed body.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "hooks/use-lock-body-scroll.tsx",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-mounted",
+    title: "Use Mounted",
+    description:
+      "Determine if a component is mounted with the useMounted hook.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "hooks/use-mounted.tsx",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-mutation-observer",
+    title: "Use Mutation Observer",
+    description:
+      "Observe mutations on a DOM element with the useMutationObserver hook.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "hooks/use-mutation-observer.tsx",
+        type: "registry:hook",
+      },
+    ],
+  },
 ]
 
 export default hooks
