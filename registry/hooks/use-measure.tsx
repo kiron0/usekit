@@ -48,7 +48,7 @@ export function useMeasure({
   measurementPosition = "bottom-left",
   startMeasure = false,
   ref,
-}: MeasureOptions = {}) {
+}: MeasureOptions) {
   const [isMobile, setIsMobile] = React.useState<boolean | undefined>(undefined)
 
   const [startPoint, setStartPoint] = React.useState<Point>(null)
