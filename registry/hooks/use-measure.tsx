@@ -66,6 +66,20 @@ export function useMeasure({
   const originalEndRef = React.useRef<Point>(null)
   const initialMouseRef = React.useRef<{ x: number; y: number } | null>(null)
 
+  const getBoundingRect = React.useCallback(() => {
+    if (ref?.current) {
+      return ref.current.getBoundingClientRect()
+    }
+    return {
+      left: 0,
+      top: 0,
+      right: window.innerWidth,
+      bottom: window.innerHeight,
+      width: window.innerWidth,
+      height: window.innerHeight,
+    }
+  }, [ref])
+
   const isMouseOverCorner = (
     mouseX: number,
     mouseY: number,
@@ -93,9 +107,20 @@ export function useMeasure({
   const handleMouseDown = React.useCallback(
     (e: MouseEvent) => {
       e.preventDefault()
+
+      if (ref?.current && !startMeasure) return
+
+      const rect = getBoundingRect()
+      const x = e.clientX - rect.left
+      const y = e.clientY - rect.top
+
+      if (ref?.current && !ref.current.contains(e.target as Node)) {
+        return
+      }
+
       if (!startPoint || !endPoint) {
-        setStartPoint({ x: e.clientX, y: e.clientY })
-        setEndPoint({ x: e.clientX, y: e.clientY })
+        setStartPoint({ x, y })
+        setEndPoint({ x, y })
         setMeasuring(true)
         return
       }
@@ -105,40 +130,36 @@ export function useMeasure({
       const width = Math.abs(endPoint.x - startPoint.x)
       const height = Math.abs(endPoint.y - startPoint.y)
 
-      const corner = isMouseOverCorner(
-        e.clientX,
-        e.clientY,
-        left,
-        top,
-        width,
-        height
-      )
+      const corner = isMouseOverCorner(x, y, left, top, width, height)
       if (corner) {
         originalStartRef.current = startPoint
         originalEndRef.current = endPoint
-        initialMouseRef.current = { x: e.clientX, y: e.clientY }
+        initialMouseRef.current = { x, y }
         setResizeCorner(corner)
       } else if (
-        e.clientX >= left &&
-        e.clientX <= left + width &&
-        e.clientY >= top &&
-        e.clientY <= top + height
+        x >= left &&
+        x <= left + width &&
+        y >= top &&
+        y <= top + height
       ) {
         setDragging(true)
-        setDragOffset({ x: e.clientX - left, y: e.clientY - top })
+        setDragOffset({ x: x - left, y: y - top })
       }
     },
-    [startPoint, endPoint]
+    [startPoint, endPoint, getBoundingRect, ref, startMeasure]
   )
 
   const handleMouseMove = React.useCallback(
     (e: MouseEvent) => {
+      if (ref?.current && !startMeasure) return
+
+      const rect = getBoundingRect()
+      const x = e.clientX - rect.left
+      const y = e.clientY - rect.top
+
       if (isMeasuring) {
-        const constrainedX = Math.max(0, Math.min(e.clientX, window.innerWidth))
-        const constrainedY = Math.max(
-          0,
-          Math.min(e.clientY, window.innerHeight)
-        )
+        const constrainedX = Math.max(0, Math.min(x, rect.width))
+        const constrainedY = Math.max(0, Math.min(y, rect.height))
         setEndPoint({ x: constrainedX, y: constrainedY })
         return
       }
@@ -149,8 +170,8 @@ export function useMeasure({
         originalEndRef.current &&
         initialMouseRef.current
       ) {
-        const deltaX = e.clientX - initialMouseRef.current.x
-        const deltaY = e.clientY - initialMouseRef.current.y
+        const deltaX = x - initialMouseRef.current.x
+        const deltaY = y - initialMouseRef.current.y
 
         const newStart = { ...originalStartRef.current }
         const newEnd = { ...originalEndRef.current }
@@ -168,7 +189,7 @@ export function useMeasure({
             break
           case "top-right":
             newEnd.x = Math.min(
-              window.innerWidth,
+              getBoundingRect().width,
               Math.max(newEnd.x + deltaX, newStart.x + 10)
             )
             newStart.y = Math.max(
@@ -178,11 +199,11 @@ export function useMeasure({
             break
           case "bottom-right":
             newEnd.x = Math.min(
-              window.innerWidth,
+              getBoundingRect().width,
               Math.max(newEnd.x + deltaX, newStart.x + 10)
             )
             newEnd.y = Math.min(
-              window.innerHeight,
+              getBoundingRect().height,
               Math.max(newEnd.y + deltaY, newStart.y + 10)
             )
             break
@@ -192,7 +213,7 @@ export function useMeasure({
               Math.min(newStart.x + deltaX, newEnd.x - 10)
             )
             newEnd.y = Math.min(
-              window.innerHeight,
+              getBoundingRect().height,
               Math.max(newEnd.y + deltaY, newStart.y + 10)
             )
             break
@@ -210,11 +231,11 @@ export function useMeasure({
 
         const newLeft = Math.max(
           0,
-          Math.min(e.clientX - dragOffset.x, window.innerWidth - width)
+          Math.min(x - dragOffset.x, getBoundingRect().width - width)
         )
         const newTop = Math.max(
           0,
-          Math.min(e.clientY - dragOffset.y, window.innerHeight - height)
+          Math.min(y - dragOffset.y, getBoundingRect().height - height)
         )
 
         setStartPoint({ x: newLeft, y: newTop })
@@ -229,6 +250,9 @@ export function useMeasure({
       endPoint,
       dragOffset,
       isDragging,
+      getBoundingRect,
+      ref,
+      startMeasure,
     ]
   )
 
@@ -329,10 +353,12 @@ export function useMeasure({
       return () => borderBox.removeEventListener("mousemove", handleMouseMove)
     }, [])
 
-    if (!startPoint || !endPoint) return null
+    if (!startPoint || !endPoint || (ref?.current && !startMeasure) || isMobile)
+      return null
 
-    const left = Math.min(startPoint.x, endPoint.x)
-    const top = Math.min(startPoint.y, endPoint.y)
+    const rect = getBoundingRect()
+    const left = Math.min(startPoint.x, endPoint.x) + rect.left
+    const top = Math.min(startPoint.y, endPoint.y) + rect.top
     const width = Math.abs(endPoint.x - startPoint.x)
     const height = Math.abs(endPoint.y - startPoint.y)
 
@@ -407,11 +433,11 @@ export function useMeasure({
           </button>
         </div>
       </>,
-      document.body
+      ref?.current || document.body
     )
   }
 
-  if (!startMeasure || isMobile) {
+  if (isMobile || (ref?.current && !startMeasure)) {
     return { measurements: {}, MeasureComponent: () => null, reset: () => {} }
   } else {
     return {

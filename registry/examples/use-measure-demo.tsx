@@ -19,7 +19,7 @@ export default function UseMeasureDemo() {
 
   return (
     <div className="w-full space-y-8">
-      <div ref={ref} className="w-full h-[60vh] border rounded-md">
+      <div ref={ref} className="w-full h-[60vh] border rounded-md relative">
         <MeasureComponent />
       </div>
       <div className="space-y-4 text-center">
