@@ -19,15 +19,15 @@ export default function UseMeasureDemo() {
 
   return (
     <div className="w-full space-y-8">
-      <div ref={ref} className="w-full h-[60vh] border rounded-md relative">
+      <div ref={ref} className="w-full h-[60vh] border rounded-md">
         <MeasureComponent />
-      </div>
-      <div className="space-y-4 text-center">
-        <p className="text-muted-foreground text-balance">
+        <p className="text-muted-foreground pointer-events-none text-balance text-center flex justify-center items-center h-full">
           {isStarted
             ? "Press and hold to measure distances"
             : "Press the button below to start measuring"}
         </p>
+      </div>
+      <div className="text-center">
         <Button
           onClick={() => {
             if (isStarted) {

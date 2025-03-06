@@ -67,13 +67,19 @@ export function Component() {
 
 ### Parameters
 
-| Name     | Type     | Description                               | Default |
-| -------- | -------- | ----------------------------------------- | ------- |
-| `delay?` | `number` | Time in milliseconds to reset `isCopied`. | `2000`  |
+| Name                   | Type                                                           | Description                                      | Default         |
+| ---------------------- | -------------------------------------------------------------- | ------------------------------------------------ | --------------- |
+| `borderRadius?`        | `number`                                                       | The radius of the border corners.                | `0.5`           |
+| `borderWidth?`         | `number`                                                       | The width of the border.                         | `1`             |
+| `actionPosition?`      | `"top-left" \| "top-right" \| "bottom-left" \| "bottom-right"` | The position of the action button.               | `"top-right"`   |
+| `measurementPosition?` | `"top-left" \| "top-right" \| "bottom-left" \| "bottom-right"` | The position where the measurement is displayed. | `"bottom-left"` |
+| `startMeasure?`        | `boolean`                                                      | Whether to start measuring immediately.          | `false`         |
+| `ref?`                 | `React.RefObject<HTMLDivElement \| null>`                      | A ref to the element that will be measured.      | -               |
 
 ### Returns
 
-| Index | Type                                 | Description                                                             |
-| ----- | ------------------------------------ | ----------------------------------------------------------------------- |
-| `0`   | `(text: string) => Promise<boolean>` | Function to copy text to the clipboard.                                 |
-| `1`   | `boolean`                            | Indicates if the last copy was successful, resetting after the `delay`. |
+| Name               | Type              | Description                                                         |
+| ------------------ | ----------------- | ------------------------------------------------------------------- |
+| `measurements`     | `Object`          | An object containing the measured dimensions (e.g., width, height). |
+| `MeasureComponent` | `React.Component` | A React component that can be used to render the measurement UI.    |
+| `reset`            | `() => void`      | A function to reset the measurement points.                         |
