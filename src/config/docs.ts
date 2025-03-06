@@ -241,6 +241,30 @@ export const docsConfig: DocsConfig = {
           items: [],
         },
         {
+          title: "useIsMobile",
+          href: "/docs/hooks/use-is-mobile",
+          items: [],
+          label: "Soon",
+        },
+        {
+          title: "useLockBodyScroll",
+          href: "/docs/hooks/use-lock-body-scroll",
+          items: [],
+          label: "Soon",
+        },
+        {
+          title: "useMounted",
+          href: "/docs/hooks/use-mounted",
+          items: [],
+          label: "Soon",
+        },
+        {
+          title: "useMutationObserver",
+          href: "/docs/hooks/use-mutation-observer",
+          items: [],
+          label: "Soon",
+        },
+        {
           title: "usePrevious",
           href: "/docs/hooks/use-previous",
           items: [],
