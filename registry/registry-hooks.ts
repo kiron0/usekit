@@ -582,6 +582,43 @@ export const hooks: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "use-previous",
+    title: "Use Previous",
+    description: "Track the previous value of a variable with usePrevious.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "hooks/use-previous.tsx",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-history-state",
+    title: "Use History State",
+    description: "Add undo / redo functionality with useHistoryState.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "hooks/use-history-state.tsx",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-async-status",
+    title: "Use Async Status",
+    description:
+      "Track the status of asynchronous operations with useAsyncStatus.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "hooks/use-async-status.tsx",
+        type: "registry:hook",
+      },
+    ],
+  },
 ]
 
 export default hooks

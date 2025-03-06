@@ -546,6 +546,42 @@
           "path": "registry/hooks/use-mutation-observer.tsx"
         }
       ]
+    },
+    {
+      "name": "use-previous",
+      "title": "Use Previous",
+      "description": "Track the previous value of a variable with usePrevious.",
+      "type": "registry:hook",
+      "files": [
+        {
+          "type": "registry:hook",
+          "path": "registry/hooks/use-previous.tsx"
+        }
+      ]
+    },
+    {
+      "name": "use-history-state",
+      "title": "Use History State",
+      "description": "Add undo / redo functionality with useHistoryState.",
+      "type": "registry:hook",
+      "files": [
+        {
+          "type": "registry:hook",
+          "path": "registry/hooks/use-history-state.tsx"
+        }
+      ]
+    },
+    {
+      "name": "use-async-status",
+      "title": "Use Async Status",
+      "description": "Track the status of asynchronous operations with useAsyncStatus.",
+      "type": "registry:hook",
+      "files": [
+        {
+          "type": "registry:hook",
+          "path": "registry/hooks/use-async-status.tsx"
+        }
+      ]
     }
   ]
 }
