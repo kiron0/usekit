@@ -6,51 +6,83 @@ export function useFavicon(url: string) {
   const linkRef = React.useRef<HTMLLinkElement | null>(null)
 
   React.useEffect(() => {
-    if (!url) {
-      throw new Error("Invalid favicon URL: URL cannot be empty.")
+    if (!url || typeof url !== "string") {
+      console.warn("useFavicon: Invalid favicon URL provided.")
+      return
+    }
+
+    if (linkRef.current?.href === url) {
+      return
     }
 
     const img = new Image()
     img.src = url
 
-    img.onload = () => {
+    const handleLoad = () => {
       const existingLink =
-        document.querySelector<HTMLLinkElement>('link[rel~="icon"]')
+        document.querySelector<HTMLLinkElement>('link[rel="icon"]')
 
       if (existingLink) {
-        originalHref.current = existingLink.href
+        if (originalHref.current === null) {
+          originalHref.current = existingLink.href
+        }
         linkRef.current = existingLink
       } else {
         const newLink = document.createElement("link")
         newLink.rel = "icon"
-        newLink.type = "image/x-icon"
+        newLink.type = getImageType(url)
         newLink.href = url
         document.head.appendChild(newLink)
         linkRef.current = newLink
         isLinkCreated.current = true
       }
+
+      // Update href after link is set
+      if (linkRef.current) {
+        linkRef.current.href = url
+      }
     }
 
-    img.onerror = () => {
-      throw new Error(`Invalid favicon URL: ${url} is not a valid image.`)
+    const handleError = () => {
+      console.error(`useFavicon: Failed to load favicon from ${url}`)
     }
-  }, [url])
 
-  React.useEffect(() => {
-    if (linkRef.current) {
-      linkRef.current.href = url
+    img.addEventListener("load", handleLoad)
+    img.addEventListener("error", handleError)
+
+    return () => {
+      img.removeEventListener("load", handleLoad)
+      img.removeEventListener("error", handleError)
     }
   }, [url])
 
   React.useEffect(() => {
     return () => {
-      if (!linkRef.current) return
+      const link = linkRef.current
+      if (!link) return
 
       if (isLinkCreated.current) {
-        document.head.removeChild(linkRef.current)
+        link.parentNode?.removeChild(link)
       } else if (originalHref.current) {
-        linkRef.current.href = originalHref.current
+        link.href = originalHref.current
       }
     }
   }, [])
+}
+
+function getImageType(url: string): string {
+  const extension = url.split(".").pop()?.toLowerCase()
+  switch (extension) {
+    case "ico":
+      return "image/x-icon"
+    case "png":
+      return "image/png"
+    case "jpg":
+    case "jpeg":
+      return "image/jpeg"
+    case "gif":
+      return "image/gif"
+    default:
+      return "image/x-icon"
+  }
 }
