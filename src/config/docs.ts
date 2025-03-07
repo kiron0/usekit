@@ -274,7 +274,6 @@ export const docsConfig: DocsConfig = {
           title: "useAsyncStatus",
           href: "/docs/hooks/use-async-status",
           items: [],
-          label: "Soon",
         },
         {
           title: "useHistoryState",

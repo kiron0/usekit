@@ -44,8 +44,8 @@ import * as React from "react"
 import { usePrevious } from "@/hooks/use-previous"
 
 export function Component() {
-const [count, setCount] = React.useState(0);
-  const previousCount = usePrevious(count, -1); // Initial previous value is -1
+  const [count, setCount] = React.useState(0)
+  const previousCount = usePrevious(count, -1) // Initial previous value is -1
 
   return (
     <div>
@@ -53,7 +53,7 @@ const [count, setCount] = React.useState(0);
       <p>Previous: {previousCount}</p>
       <button onClick={() => setCount(count + 1)}>Increment</button>
     </div>
-  );
+  )
 }
 ```
 
@@ -61,13 +61,13 @@ const [count, setCount] = React.useState(0);
 
 ### Parameters
 
-| Name                  | Type               | Description                                                                 |
-|-----------------------|--------------------|-----------------------------------------------------------------------------|
-| `newValue`            | `T`                | The new value to track and return the previous value of.                    |
-| `initialPreviousValue`| `T \| null`        | (Optional) The initial value to use as the previous value before the first update. Defaults to `null`. |
+| Name                   | Type        | Description                                                                                            |
+| ---------------------- | ----------- | ------------------------------------------------------------------------------------------------------ |
+| `newValue`             | `T`         | The new value to track and return the previous value of.                                               |
+| `initialPreviousValue` | `T \| null` | (Optional) The initial value to use as the previous value before the first update. Defaults to `null`. |
 
 ### Returns
 
-| Name              | Type               | Description                                                                 |
-|-------------------|--------------------|-----------------------------------------------------------------------------|
-| `previousValue`   | `T \| null \| undefined` | The previous value of the provided `newValue`. Initially, this will be `initialPreviousValue` or `null`. |
+| Name            | Type                     | Description                                                                                              |
+| --------------- | ------------------------ | -------------------------------------------------------------------------------------------------------- |
+| `previousValue` | `T \| null \| undefined` | The previous value of the provided `newValue`. Initially, this will be `initialPreviousValue` or `null`. |

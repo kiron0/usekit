@@ -38,44 +38,48 @@ npx shadcn@latest add https://usekit.kiron.dev/r/use-async-status
 
 ## Usage
 
-```tsx {1, 6-13}
-import { useAsyncStatus } from '@/hooks/use-async-status';
+```tsx {1, 6-10}
+import { useAsyncStatus } from "@/hooks/use-async-status"
 
 export function Component(props: {
-  fetchData: () => Promise<{ data: string } | { error: string }>;
+  fetchData: () => Promise<{ data: string } | { error: string }>
 }) {
   const [trigger, status, feedbackJsx] = useAsyncStatus(props.fetchData, {
     loadingJsx: <span>Loading...</span>,
     successJsx: (data) => <span>Data: {data}</span>,
     errorJsx: (error) => <span>Error: {error}</span>,
-  });
+  })
 
   return (
     <div>
       {feedbackJsx}
-      <button onClick={trigger} disabled={status.state === 'loading'}>
-        {status.state === 'loading' ? 'Processing...' : 'Click me'}
+      <button onClick={trigger} disabled={status.state === "loading"}>
+        {status.state === "loading" ? "Processing..." : "Click me"}
       </button>
     </div>
-  );
+  )
 }
 ```
 
 ### Key Points
 
 1. **`asyncFn`**:
+
    - The asynchronous function to track. It can either return `{ data: TData }` or `{ error: TError }`.
    - If the function throws an error, it will be caught and treated as an `error` state.
 
 2. **`options`**:
+
    - Optional custom JSX for loading, success, and error states.
    - If not provided, `feedbackJsx` will default to `null`.
 
 3. **`trigger`**:
+
    - A function to manually trigger the async operation.
    - Accepts the same arguments as `asyncFn`.
 
 4. **`status`**:
+
    - Represents the current state of the async operation.
    - Can be `idle`, `loading`, `success`, or `error`.
 
@@ -90,43 +94,44 @@ export function Component(props: {
 #### `AsyncFunction`
 
 ```ts
-type AsyncFunction<TArgs extends unknown[], TData, TError> =
-  (...args: TArgs) => Promise<{ data: TData } | { error: TError }>;
+type AsyncFunction<TArgs extends unknown[], TData, TError> = (
+  ...args: TArgs
+) => Promise<{ data: TData } | { error: TError }>
 ```
 
 #### `AsyncStatus`
 
 ```ts
 type AsyncStatus<TData, TError> =
-  | { state: 'idle' }
-  | { state: 'loading' }
-  | { state: 'success', data: TData }
-  | { state: 'error', error: TError };
+  | { state: "idle" }
+  | { state: "loading" }
+  | { state: "success"; data: TData }
+  | { state: "error"; error: TError }
 ```
 
 #### `FeedbackOptions`
 
 ```ts
 type FeedbackOptions<TData, TError> = {
-  loadingJsx?: React.ReactNode;
-  successJsx?: (data: TData) => React.ReactNode;
-  errorJsx?: (error: TError) => React.ReactNode;
-};
+  loadingJsx?: React.ReactNode
+  successJsx?: (data: TData) => React.ReactNode
+  errorJsx?: (error: TError) => React.ReactNode
+}
 ```
 
 ## API Reference
 
 ### Parameters
 
-| Name                  | Type                                                                 | Description                                                                 |
-|-----------------------|----------------------------------------------------------------------|-----------------------------------------------------------------------------|
-| `asyncFn`             | `AsyncFunction<TArgs, TData, TError>`                               | The asynchronous function to track. It can return `{ data: TData }` or `{ error: TError }`. |
-| `options`             | `{ loadingJsx?: React.ReactNode, successJsx?: (data: TData) => React.ReactNode, errorJsx?: (error: TError) => React.ReactNode }` | (Optional) Custom JSX to render for loading, success, and error states.     |
+| Name      | Type                                                                                                                             | Description                                                                                 |
+| --------- | -------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| `asyncFn` | `AsyncFunction<TArgs, TData, TError>`                                                                                            | The asynchronous function to track. It can return `{ data: TData }` or `{ error: TError }`. |
+| `options` | `{ loadingJsx?: React.ReactNode, successJsx?: (data: TData) => React.ReactNode, errorJsx?: (error: TError) => React.ReactNode }` | (Optional) Custom JSX to render for loading, success, and error states.                     |
 
 ### Returns
 
-| Name              | Type                                                                 | Description                                                                 |
-|-------------------|----------------------------------------------------------------------|-----------------------------------------------------------------------------|
-| `trigger`         | `(...args: TArgs) => Promise<void>`                                  | A function to trigger the async operation. Accepts the same arguments as `asyncFn`. |
-| `status`          | `{ state: 'idle' } \| { state: 'loading' } \| { state: 'success', data: TData } \| { state: 'error', error: TError }` | The current status of the async operation. Includes `state` and optional `data` or `error`. |
-| `feedbackJsx`     | `React.ReactNode \| null`                                            | The JSX to render based on the current status. Uses `options` if provided, otherwise defaults to `null`. |
+| Name          | Type                                                                                                                  | Description                                                                                              |
+| ------------- | --------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| `trigger`     | `(...args: TArgs) => Promise<void>`                                                                                   | A function to trigger the async operation. Accepts the same arguments as `asyncFn`.                      |
+| `status`      | `{ state: 'idle' } \| { state: 'loading' } \| { state: 'success', data: TData } \| { state: 'error', error: TError }` | The current status of the async operation. Includes `state` and optional `data` or `error`.              |
+| `feedbackJsx` | `React.ReactNode \| null`                                                                                             | The JSX to render based on the current status. Uses `options` if provided, otherwise defaults to `null`. |
