@@ -38,44 +38,149 @@ npx shadcn@latest add https://usekit.kiron.dev/r/use-history-state
 
 ## Usage
 
-```tsx {1, 5}
-import { useCopyToClipboard } from "@/hooks/use-copy-to-clipboard"
-import { Button } from "@/components/ui/button"
+```tsx {1, 4-6}
+import { useHistoryState } from "@/hooks/use-history-state"
 
 export function Component() {
-  const [copy, isCopied] = useCopyToClipboard()
-
-  const copyText = async (text: string) => {
-    await copy(text)
-      .then(() => {
-        toast.success("Copied to clipboard")
-      })
-      .catch((error) => {
-        if (error instanceof Error) {
-          toast.error(error.message)
-        }
-      })
-  }
+  const { state, set, undo, redo, clear, canUndo, canRedo } = useHistoryState({
+    count: 0,
+  })
 
   return (
-    <Button onClick={() => copyText("Hello, World!")}>
-      {isCopied ? "Text Copied" : "Click to copy"}
-    </Button>
+    <div>
+      <p>Count: {state.count}</p>
+      <button onClick={() => set({ count: state.count + 1 })}>Increment</button>
+      <button onClick={undo} disabled={!canUndo}>
+        Undo
+      </button>
+      <button onClick={redo} disabled={!canRedo}>
+        Redo
+      </button>
+      <button onClick={clear}>Clear</button>
+    </div>
   )
 }
 ```
+
+### Key Points
+
+1. **`initialPresent`**:
+
+   - The initial state for the `present` value.
+   - Defaults to an empty object (`{}`) if not provided.
+
+2. **`state`**:
+
+   - The current state (i.e., the `present` value).
+
+3. **`set`**:
+
+   - Updates the state by adding the current `present` to the `past` and setting `newPresent` as the new `present`.
+
+4. **`undo`**:
+
+   - Reverts to the previous state by moving the last `past` state to `present` and the current `present` to `future`.
+
+5. **`redo`**:
+
+   - Reapplies the last undone state by moving the first `future` state to `present` and the current `present` to `past`.
+
+6. **`clear`**:
+
+   - Resets the state to the initial `present` value and clears `past` and `future`.
+
+7. **`canUndo`**:
+
+   - A boolean indicating whether an undo operation is possible (`past.length > 0`).
+
+8. **`canRedo`**:
+   - A boolean indicating whether a redo operation is possible (`future.length > 0`).
+
+---
+
+### Type Definitions
+
+#### `useHistoryState`
+
+```ts
+export function useHistoryState<T extends object = object>(
+  initialPresent: T = {} as T
+): {
+  state: T
+  set: (newPresent: T) => void
+  undo: () => void
+  redo: () => void
+  clear: () => void
+  canUndo: boolean
+  canRedo: boolean
+}
+```
+
+---
+
+### Internal State Structure
+
+The internal state of the hook is structured as follows:
+
+```ts
+{
+  past: T[];       // Array of past states
+  present: T;      // Current state
+  future: T[];     // Array of future states (for redo)
+}
+```
+
+---
+
+### Example Workflow
+
+1. **Initial State**:
+
+   - `past`: `[]`
+   - `present`: `{ count: 0 }`
+   - `future`: `[]`
+
+2. **After `set({ count: 1 })`**:
+
+   - `past`: `[{ count: 0 }]`
+   - `present`: `{ count: 1 }`
+   - `future`: `[]`
+
+3. **After `undo`**:
+
+   - `past`: `[]`
+   - `present`: `{ count: 0 }`
+   - `future`: `[{ count: 1 }]`
+
+4. **After `redo`**:
+
+   - `past`: `[{ count: 0 }]`
+   - `present`: `{ count: 1 }`
+   - `future`: `[]`
+
+5. **After `clear`**:
+   - `past`: `[]`
+   - `present`: `{ count: 0 }`
+   - `future`: `[]`
+
+---
 
 ## API Reference
 
 ### Parameters
 
-| Name     | Type     | Description                               | Default |
-| -------- | -------- | ----------------------------------------- | ------- |
-| `delay?` | `number` | Time in milliseconds to reset `isCopied`. | `2000`  |
+| Name             | Type | Description                                                                               |
+| ---------------- | ---- | ----------------------------------------------------------------------------------------- |
+| `initialPresent` | `T`  | (Optional) The initial state for the `present` value. Defaults to an empty object (`{}`). |
 
 ### Returns
 
-| Index | Type                                 | Description                                                             |
-| ----- | ------------------------------------ | ----------------------------------------------------------------------- |
-| `0`   | `(text: string) => Promise<boolean>` | Function to copy text to the clipboard.                                 |
-| `1`   | `boolean`                            | Indicates if the last copy was successful, resetting after the `delay`. |
+| Name      | Type                      | Description                                                                                                                       |
+| --------- | ------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| `state`   | `T`                       | The current state (i.e., the `present` value).                                                                                    |
+| `set`     | `(newPresent: T) => void` | A function to update the state. Adds the current `present` to the `past` and sets `newPresent` as the new `present`.              |
+| `undo`    | `() => void`              | A function to undo the last state change. Moves the last `past` state to `present` and the current `present` to `future`.         |
+| `redo`    | `() => void`              | A function to redo the last undone state change. Moves the first `future` state to `present` and the current `present` to `past`. |
+| `clear`   | `() => void`              | A function to reset the state to the initial `present` value and clear `past` and `future`.                                       |
+| `canUndo` | `boolean`                 | Indicates whether an undo operation is possible (`past.length > 0`).                                                              |
+| `canRedo` | `boolean`                 | Indicates whether a redo operation is possible (`future.length > 0`).                                                             |

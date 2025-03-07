@@ -279,7 +279,6 @@ export const docsConfig: DocsConfig = {
           title: "useHistoryState",
           href: "/docs/hooks/use-history-state",
           items: [],
-          label: "Soon",
         },
       ],
     },
