@@ -269,7 +269,6 @@ export const docsConfig: DocsConfig = {
           title: "usePrevious",
           href: "/docs/hooks/use-previous",
           items: [],
-          label: "Soon",
         },
         {
           title: "useAsyncStatus",

@@ -38,30 +38,22 @@ npx shadcn@latest add https://usekit.kiron.dev/r/use-previous
 
 ## Usage
 
-```tsx {1, 5}
-import { useCopyToClipboard } from "@/hooks/use-copy-to-clipboard"
-import { Button } from "@/components/ui/button"
+```tsx {3, 7}
+import * as React from "react"
+
+import { usePrevious } from "@/hooks/use-previous"
 
 export function Component() {
-  const [copy, isCopied] = useCopyToClipboard()
-
-  const copyText = async (text: string) => {
-    await copy(text)
-      .then(() => {
-        toast.success("Copied to clipboard")
-      })
-      .catch((error) => {
-        if (error instanceof Error) {
-          toast.error(error.message)
-        }
-      })
-  }
+const [count, setCount] = React.useState(0);
+  const previousCount = usePrevious(count, -1); // Initial previous value is -1
 
   return (
-    <Button onClick={() => copyText("Hello, World!")}>
-      {isCopied ? "Text Copied" : "Click to copy"}
-    </Button>
-  )
+    <div>
+      <p>Current: {count}</p>
+      <p>Previous: {previousCount}</p>
+      <button onClick={() => setCount(count + 1)}>Increment</button>
+    </div>
+  );
 }
 ```
 
@@ -69,13 +61,13 @@ export function Component() {
 
 ### Parameters
 
-| Name     | Type     | Description                               | Default |
-| -------- | -------- | ----------------------------------------- | ------- |
-| `delay?` | `number` | Time in milliseconds to reset `isCopied`. | `2000`  |
+| Name                  | Type               | Description                                                                 |
+|-----------------------|--------------------|-----------------------------------------------------------------------------|
+| `newValue`            | `T`                | The new value to track and return the previous value of.                    |
+| `initialPreviousValue`| `T \| null`        | (Optional) The initial value to use as the previous value before the first update. Defaults to `null`. |
 
 ### Returns
 
-| Index | Type                                 | Description                                                             |
-| ----- | ------------------------------------ | ----------------------------------------------------------------------- |
-| `0`   | `(text: string) => Promise<boolean>` | Function to copy text to the clipboard.                                 |
-| `1`   | `boolean`                            | Indicates if the last copy was successful, resetting after the `delay`. |
+| Name              | Type               | Description                                                                 |
+|-------------------|--------------------|-----------------------------------------------------------------------------|
+| `previousValue`   | `T \| null \| undefined` | The previous value of the provided `newValue`. Initially, this will be `initialPreviousValue` or `null`. |
