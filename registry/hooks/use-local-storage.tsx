@@ -12,7 +12,6 @@ export function useLocalStorage<T>(
         ? (initialValue as () => T)()
         : initialValue
     }
-
     try {
       const item = window.localStorage.getItem(key)
       return item
@@ -28,23 +27,15 @@ export function useLocalStorage<T>(
     }
   })
 
-  const setValue = React.useCallback(
-    (value: SetStateAction<T>) => {
+  React.useEffect(() => {
+    if (typeof window !== "undefined") {
       try {
-        const valueToStore =
-          value instanceof Function ? value(storedValue) : value
-
-        setStoredValue(valueToStore)
-
-        if (typeof window !== "undefined") {
-          window.localStorage.setItem(key, JSON.stringify(valueToStore))
-        }
+        window.localStorage.setItem(key, JSON.stringify(storedValue))
       } catch (error) {
         console.error(`Error setting localStorage key "${key}":`, error)
       }
-    },
-    [key, storedValue]
-  )
+    }
+  }, [key, storedValue])
 
   const handleStorageChange = React.useCallback(
     (event: StorageEvent) => {
@@ -55,7 +46,6 @@ export function useLocalStorage<T>(
             : typeof initialValue === "function"
               ? (initialValue as () => T)()
               : initialValue
-
           setStoredValue(newValue)
         } catch (error) {
           console.error(
@@ -73,5 +63,5 @@ export function useLocalStorage<T>(
     return () => window.removeEventListener("storage", handleStorageChange)
   }, [handleStorageChange])
 
-  return [storedValue, setValue]
+  return [storedValue, setStoredValue]
 }
