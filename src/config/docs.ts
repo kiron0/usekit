@@ -96,6 +96,11 @@ export const docsConfig: DocsConfig = {
           items: [],
         },
         {
+          title: "useFavicon",
+          href: "/docs/hooks/use-favicon",
+          items: [],
+        },
+        {
           title: "useDocumentTitle",
           href: "/docs/hooks/use-document-title",
           items: [],

@@ -619,6 +619,18 @@ export const hooks: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "use-favicon",
+    title: "Use Favicon",
+    description: "Dynamically update the favicon of a webpage with useFavicon.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "hooks/use-favicon.tsx",
+        type: "registry:hook",
+      },
+    ],
+  },
 ]
 
 export default hooks
