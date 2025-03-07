@@ -37,7 +37,6 @@ export function useFavicon(url: string) {
         isLinkCreated.current = true
       }
 
-      // Update href after link is set
       if (linkRef.current) {
         linkRef.current.href = url
       }
