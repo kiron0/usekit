@@ -381,4 +381,14 @@ export const hooksExamples: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "use-favicon-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "examples/use-favicon-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
 ]

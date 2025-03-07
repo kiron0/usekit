@@ -582,6 +582,18 @@
           "path": "registry/hooks/use-async-status.tsx"
         }
       ]
+    },
+    {
+      "name": "use-favicon",
+      "title": "Use Favicon",
+      "description": "Dynamically update the favicon of a webpage with useFavicon.",
+      "type": "registry:hook",
+      "files": [
+        {
+          "type": "registry:hook",
+          "path": "registry/hooks/use-favicon.tsx"
+        }
+      ]
     }
   ]
 }

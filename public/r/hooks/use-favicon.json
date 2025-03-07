@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-favicon",
+  "type": "registry:hook",
+  "title": "Use Favicon",
+  "description": "Dynamically update the favicon of a webpage with useFavicon.",
+  "files": [
+    {
+      "path": "registry/hooks/use-favicon.tsx",
+      "content": "import * as React from \"react\"\n\nexport function useFavicon(url: string) {\n  const originalHref = React.useRef<string | null>(null)\n  const isLinkCreated = React.useRef(false)\n  const linkRef = React.useRef<HTMLLinkElement | null>(null)\n\n  React.useEffect(() => {\n    if (!url || typeof url !== \"string\") {\n      console.warn(\"useFavicon: Invalid favicon URL provided.\")\n      return\n    }\n\n    if (linkRef.current?.href === url) {\n      return\n    }\n\n    const img = new Image()\n    img.src = url\n\n    const handleLoad = () => {\n      const existingLink =\n        document.querySelector<HTMLLinkElement>('link[rel=\"icon\"]')\n\n      if (existingLink) {\n        if (originalHref.current === null) {\n          originalHref.current = existingLink.href\n        }\n        linkRef.current = existingLink\n      } else {\n        const newLink = document.createElement(\"link\")\n        newLink.rel = \"icon\"\n        newLink.type = getImageType(url)\n        newLink.href = url\n        document.head.appendChild(newLink)\n        linkRef.current = newLink\n        isLinkCreated.current = true\n      }\n\n      if (linkRef.current) {\n        linkRef.current.href = url\n      }\n    }\n\n    const handleError = () => {\n      console.error(`useFavicon: Failed to load favicon from ${url}`)\n    }\n\n    img.addEventListener(\"load\", handleLoad)\n    img.addEventListener(\"error\", handleError)\n\n    return () => {\n      img.removeEventListener(\"load\", handleLoad)\n      img.removeEventListener(\"error\", handleError)\n    }\n  }, [url])\n\n  React.useEffect(() => {\n    return () => {\n      const link = linkRef.current\n      if (!link) return\n\n      if (isLinkCreated.current) {\n        link.parentNode?.removeChild(link)\n      } else if (originalHref.current) {\n        link.href = originalHref.current\n      }\n    }\n  }, [])\n}\n\nfunction getImageType(url: string): string {\n  const extension = url.split(\".\").pop()?.toLowerCase()\n  switch (extension) {\n    case \"ico\":\n      return \"image/x-icon\"\n    case \"png\":\n      return \"image/png\"\n    case \"jpg\":\n    case \"jpeg\":\n      return \"image/jpeg\"\n    case \"gif\":\n      return \"image/gif\"\n    default:\n      return \"image/x-icon\"\n  }\n}\n",
+      "type": "registry:hook"
+    }
+  ]
+}

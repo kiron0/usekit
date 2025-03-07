@@ -1,0 +1,87 @@
+---
+title: useFavicon
+description: Dynamically update the favicon with useFavicon.
+---
+
+<ComponentPreview name="use-favicon-demo" />
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://usekit.kiron.dev/r/use-favicon
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="use-favicon" />
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+```tsx {3, 8-16}
+import * as React from "react"
+
+import { useFavicon } from "@/hooks/use-favicon"
+
+export function Component() {
+  const [darkMode, setDarkMode] = React.useState(false)
+
+  try {
+    useFavicon(
+      darkMode
+        ? "/dark-mode-favicon.ico" // Valid image URL
+        : "/light-mode-favicon.ico" // Valid image URL
+    )
+  } catch (error) {
+    console.error(error.message)
+  }
+
+  return (
+    <button onClick={() => setDarkMode(!darkMode)}>Toggle Dark Mode</button>
+  )
+}
+```
+
+## Error Handling
+
+If an invalid URL is passed, the hook will throw an error:
+
+```tsx
+function InvalidFaviconExample() {
+  try {
+    useFavicon("https://example.com/invalid-image-url.png") // Invalid URL
+  } catch (error) {
+    console.error(error.message) // Logs: "Invalid favicon URL: https://example.com/invalid-image-url.png is not a valid image."
+  }
+
+  return <div>Invalid Favicon Example</div>
+}
+```
+
+## API Reference
+
+### Parameters
+
+| Name  | Type     | Description                                          |
+| ----- | -------- | ---------------------------------------------------- |
+| `url` | `string` | The URL of the favicon. Must point to a valid image. |

@@ -4,31 +4,31 @@ import { Button } from "@/components/ui/button"
 import { useAsyncStatus } from "registry/hooks/use-async-status"
 
 export default function UseAsyncStatusDemo() {
-  const [trigger, status, feedbackJsx] = useAsyncStatus(
+  const [trigger, status, data] = useAsyncStatus(
     async () => {
       const response = await fetch("https://jsonplaceholder.typicode.com/users")
       if (!response.ok) throw new Error("API Error")
       return { data: await response.json() }
     },
     {
-      loadingJsx: <span>Loading...</span>,
-      errorJsx: (error) => <span>Error: {(error as Error).message}</span>,
-      successJsx: (data) => <span>Result: {JSON.stringify(data)}</span>,
+      loading: <span>Loading...</span>,
+      error: (error) => <span>Error: {(error as Error).message}</span>,
+      success: (data) => <span>Result: {JSON.stringify(data)}</span>,
     }
   )
 
   return (
-    <div className="space-y-4 flex flex-col items-center gap-3 overflow-auto">
-      <div>{feedbackJsx}</div>
+    <div className="flex flex-col items-center gap-3 overflow-auto">
+      <div>{data}</div>
       <Button onClick={trigger} disabled={status.state === "loading"}>
         {status.state === "loading" ? "Processing..." : "Click me"}
       </Button>
-      <AnotherComponent />
+      <AnotherUseAsyncStatusDemo />
     </div>
   )
 }
 
-export function AnotherComponent() {
+function AnotherUseAsyncStatusDemo() {
   const [trigger, status] = useAsyncStatus(async (id: number) => {
     const response = await fetch(
       `https://jsonplaceholder.typicode.com/users/${id}`
@@ -38,7 +38,7 @@ export function AnotherComponent() {
   })
 
   return (
-    <div className="space-y-4 flex flex-col items-center gap-3 overflow-hidden">
+    <div className="flex flex-col items-center gap-3 overflow-auto">
       {status.state === "success" && (
         <div>Result: {JSON.stringify(status.data)}</div>
       )}
@@ -46,7 +46,7 @@ export function AnotherComponent() {
       {status.state === "error" && (
         <div>Error occurred: {(status.error as Error).message}</div>
       )}
-      <Button onClick={() => trigger(9)}>Fetch Data</Button>
+      <Button onClick={() => trigger(6)}>Click me also</Button>
     </div>
   )
 }
