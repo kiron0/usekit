@@ -11,9 +11,9 @@ type AsyncStatus<TData, TError> =
   | { state: "error"; error: TError }
 
 type FeedbackOptions<TData, TError> = {
-  loadingJsx?: React.ReactNode
-  successJsx?: (data: TData) => React.ReactNode
-  errorJsx?: (error: TError) => React.ReactNode
+  loading?: React.ReactNode
+  success?: (data: TData) => React.ReactNode
+  error?: (error: TError) => React.ReactNode
 }
 
 export function useAsyncStatus<TArgs extends unknown[], TData, TError>(
@@ -22,7 +22,7 @@ export function useAsyncStatus<TArgs extends unknown[], TData, TError>(
 ): [
   trigger: (...args: TArgs) => Promise<void>,
   status: AsyncStatus<TData, TError>,
-  feedbackJsx: React.ReactNode | null,
+  data: React.ReactNode | null,
 ] {
   const [status, setStatus] = React.useState<AsyncStatus<TData, TError>>({
     state: "idle",
@@ -57,17 +57,17 @@ export function useAsyncStatus<TArgs extends unknown[], TData, TError>(
     [asyncFn]
   )
 
-  const feedbackJsx = React.useMemo(() => {
+  const data = React.useMemo(() => {
     switch (status.state) {
       case "loading":
-        return options?.loadingJsx || null
+        return options?.loading || null
       case "success":
-        return options?.successJsx?.(status.data) || null
+        return options?.success?.(status.data) || null
       case "error":
         const errorContent =
           typeof status.error === "string" ? status.error : String(status.error)
         return (
-          options?.errorJsx?.(errorContent as TError) || (
+          options?.error?.(errorContent as TError) || (
             <span>Error: {errorContent}</span>
           )
         )
@@ -76,5 +76,5 @@ export function useAsyncStatus<TArgs extends unknown[], TData, TError>(
     }
   }, [status, options])
 
-  return [trigger, status, feedbackJsx]
+  return [trigger, status, data]
 }
