@@ -18,8 +18,8 @@ export default function UseAsyncStatusDemo() {
   )
 
   return (
-    <div className="space-y-4">
-      {feedbackJsx}
+    <div className="space-y-4 flex flex-col items-center gap-3 overflow-auto">
+      <div>{feedbackJsx}</div>
       <Button onClick={trigger} disabled={status.state === "loading"}>
         {status.state === "loading" ? "Processing..." : "Click me"}
       </Button>
@@ -38,7 +38,7 @@ export function AnotherComponent() {
   })
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-4 flex flex-col items-center gap-3 overflow-hidden">
       {status.state === "success" && (
         <div>Result: {JSON.stringify(status.data)}</div>
       )}
