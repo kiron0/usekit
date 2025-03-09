@@ -11,9 +11,26 @@ interface GeolocationState {
   speed: number | null
   timestamp: number | null
   error: GeolocationPositionError | Error | null
+  permissionDenied: boolean
 }
 
-export function useGeolocation(options?: PositionOptions): GeolocationState {
+function requestUserLocation(
+  options?: PositionOptions
+): Promise<GeolocationPosition> {
+  return new Promise((resolve, reject) => {
+    if (!navigator.geolocation) {
+      reject(new Error("Geolocation is not supported by this browser."))
+      return
+    }
+
+    navigator.geolocation.getCurrentPosition(resolve, reject, options)
+  })
+}
+
+export function useGeolocation(options?: PositionOptions): GeolocationState & {
+  requestGeolocation: () => void
+  retry: () => void
+} {
   const [state, setState] = React.useState<GeolocationState>({
     loading: true,
     accuracy: null,
@@ -25,11 +42,62 @@ export function useGeolocation(options?: PositionOptions): GeolocationState {
     speed: null,
     timestamp: null,
     error: null,
+    permissionDenied: false,
   })
 
   const optionsRef = React.useRef(options)
-  const watchId = React.useRef<number>(0)
   const isMounted = React.useRef(true)
+
+  const requestGeolocation = React.useCallback(async () => {
+    setState((prev) => ({
+      ...prev,
+      loading: true,
+      error: null,
+      permissionDenied: false,
+    }))
+
+    try {
+      const position = await requestUserLocation(optionsRef.current)
+      if (isMounted.current) {
+        setState({
+          loading: false,
+          accuracy: position.coords.accuracy,
+          altitude: position.coords.altitude,
+          altitudeAccuracy: position.coords.altitudeAccuracy,
+          heading: position.coords.heading,
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude,
+          speed: position.coords.speed,
+          timestamp: position.timestamp,
+          error: null,
+          permissionDenied: false,
+        })
+      }
+    } catch (error) {
+      if (isMounted.current) {
+        const isPermissionDenied =
+          (error as GeolocationPositionError).code ===
+          (error as GeolocationPositionError).PERMISSION_DENIED
+
+        setState((prev) => ({
+          ...prev,
+          loading: false,
+          error: error as GeolocationPositionError | Error,
+          permissionDenied: isPermissionDenied,
+        }))
+      }
+    }
+  }, [])
+
+  const retry = React.useCallback(() => {
+    if (state.permissionDenied) {
+      alert(
+        "Location access is blocked. Please enable it in your browser settings and refresh the page."
+      )
+    } else {
+      requestGeolocation()
+    }
+  }, [state.permissionDenied, requestGeolocation])
 
   React.useEffect(() => {
     optionsRef.current = options
@@ -37,77 +105,12 @@ export function useGeolocation(options?: PositionOptions): GeolocationState {
 
   React.useEffect(() => {
     isMounted.current = true
-
-    const handleSuccess = (position: GeolocationPosition) => {
-      const { coords, timestamp } = position
-      setState({
-        loading: false,
-        accuracy: coords.accuracy,
-        altitude: coords.altitude,
-        altitudeAccuracy: coords.altitudeAccuracy,
-        heading: coords.heading,
-        latitude: coords.latitude,
-        longitude: coords.longitude,
-        speed: coords.speed,
-        timestamp,
-        error: null,
-      })
-    }
-
-    const handleError = (error: GeolocationPositionError) => {
-      setState((prev) => ({
-        ...prev,
-        loading: false,
-        error,
-      }))
-    }
-
-    const requestGeolocation = async () => {
-      try {
-        if (!navigator.geolocation) {
-          setState((prev) => ({
-            ...prev,
-            loading: false,
-            error: new Error("Geolocation is not supported by your browser"),
-          }))
-          return
-        }
-
-        if (navigator.permissions) {
-          const permissionStatus = await navigator.permissions.query({
-            name: "geolocation" as PermissionName,
-          })
-
-          if (permissionStatus.state === "denied") {
-            throw new Error("Geolocation permission denied")
-          }
-        }
-
-        navigator.geolocation.getCurrentPosition(
-          handleSuccess,
-          handleError,
-          optionsRef.current
-        )
-
-        watchId.current = navigator.geolocation.watchPosition(
-          handleSuccess,
-          handleError,
-          optionsRef.current
-        )
-      } catch (error) {
-        handleError(error as GeolocationPositionError)
-      }
-    }
-
     requestGeolocation()
 
     return () => {
       isMounted.current = false
-      if (watchId.current) {
-        navigator.geolocation.clearWatch(watchId.current)
-      }
     }
-  }, [])
+  }, [requestGeolocation])
 
-  return state
+  return { ...state, requestGeolocation, retry }
 }

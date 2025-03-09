@@ -10,18 +10,26 @@ export default function UseMeasureDemo() {
 
   const [isStarted, setIsStarted] = React.useState(false)
 
-  const { MeasureComponent, reset } = useMeasure({
+  const { MeasureComponent, reset, isMobile } = useMeasure({
     ref,
     actionPosition: "top-right",
     measurementPosition: "top-right",
     startMeasure: isStarted,
   })
 
+  if (isMobile) {
+    return (
+      <p className="text-muted-foreground text-balance text-center">
+        This feature is not available on mobile devices
+      </p>
+    )
+  }
+
   return (
     <div className="w-full space-y-8">
       <div ref={ref} className="w-full h-[60vh] border rounded-md">
         <MeasureComponent />
-        <p className="text-muted-foreground pointer-events-none text-balance text-center flex justify-center items-center h-full">
+        <p className="text-muted-foreground pointer-events-none text-balance text-center flex justify-center items-center h-full px-1">
           {isStarted
             ? "Press and hold to measure distances"
             : "Press the button below to start measuring"}

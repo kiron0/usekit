@@ -91,21 +91,23 @@ export function Component() {
 
 ### Parameters
 
-| Name    | Type   | Description                                                                                                                                                                                                                                                                                 |
-| ------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| options | object | This is an optional configuration object provided when calling `useGeolocation`. It is used when calling `navigator.geolocation.getCurrentPosition()` and `navigator.geolocation.watchPosition()`. Some of the attributes it accepts are `enableHighAccuracy`, `timeout`, and `maximumAge`. |
+| Name       | Type     | Description                                                                                                                                                                                                                                                                                 |
+| ---------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `options?` | `object` | This is an optional configuration object provided when calling `useGeolocation`. It is used when calling `navigator.geolocation.getCurrentPosition()` and `navigator.geolocation.watchPosition()`. Some of the attributes it accepts are `enableHighAccuracy`, `timeout`, and `maximumAge`. |
 
 ### Returns
 
-| Name             | Type    | Description                                                                                                                                    |
-| ---------------- | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
-| loading          | boolean | A boolean indicating if the geolocation data is currently being fetched.                                                                       |
-| accuracy         | number  | The accuracy of the latitude and longitude properties in meters.                                                                               |
-| altitude         | number  | The altitude in meters above the mean sea level.                                                                                               |
-| altitudeAccuracy | number  | The accuracy of altitude in meters.                                                                                                            |
-| heading          | number  | The direction in which the device is traveling. This value, specified in degrees, indicates how far off from heading true north the device is. |
-| latitude         | number  | The latitude in decimal degrees.                                                                                                               |
-| longitude        | number  | The longitude in decimal degrees.                                                                                                              |
-| speed            | number  | The current ground speed of the device, specified in meters per second.                                                                        |
-| timestamp        | number  | The timestamp at which the geolocation data was retrieved.                                                                                     |
-| error            | object  | An error object, if an error occurred while retrieving the geolocation data.                                                                   |
+| Name                 | Type       | Description                                                                                                                                    |
+| -------------------- | ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| `loading`            | `boolean`  | A boolean indicating if the geolocation data is currently being fetched.                                                                       |
+| `accuracy`           | `number`   | The accuracy of the latitude and longitude properties in meters.                                                                               |
+| `altitude`           | `number`   | The altitude in meters above the mean sea level.                                                                                               |
+| `altitudeAccuracy`   | number`    | The accuracy of altitude in meters.                                                                                                            |
+| `heading`            | `number`   | The direction in which the device is traveling. This value, specified in degrees, indicates how far off from heading true north the device is. |
+| `latitude`           | `number`   | The latitude in decimal degrees.                                                                                                               |
+| `longitude`          | `number`   | The longitude in decimal degrees.                                                                                                              |
+| `speed`              | `number`   | The current ground speed of the device, specified in meters per second.                                                                        |
+| `timestamp`          | `number`   | The timestamp at which the geolocation data was retrieved.                                                                                     |
+| `error`              | `object`   | An error object, if an error occurred while retrieving the geolocation data.                                                                   |
+| `requestGeolocation` | `function` | A function that can be called to request the user's geolocation data.                                                                          |
+| `retry`              | `function` | A function that can be called to retry fetching the geolocation data.                                                                          |

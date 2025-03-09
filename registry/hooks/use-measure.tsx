@@ -438,9 +438,15 @@ export function useMeasure({
   }
 
   if (isMobile || (ref?.current && !startMeasure)) {
-    return { measurements: {}, MeasureComponent: () => null, reset: () => {} }
+    return {
+      isMobile,
+      measurements: {},
+      MeasureComponent: () => null,
+      reset: () => {},
+    }
   } else {
     return {
+      isMobile,
       measurements,
       MeasureComponent,
       reset: () => {

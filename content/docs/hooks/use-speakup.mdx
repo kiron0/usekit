@@ -158,12 +158,14 @@ export function Component() {
 
 ### Returns
 
-| Property         | Type         | Description                                                  |
-| ---------------- | ------------ | ------------------------------------------------------------ |
-| `startListening` | `() => void` | Starts listening for speech input.                           |
-| `stopListening`  | `() => void` | Stops listening for speech input.                            |
-| `isListening`    | `boolean`    | Indicates whether speech recognition is active.              |
-| `isStopped`      | `boolean`    | Indicates whether speech recognition was explicitly stopped. |
-| `transcript`     | `string`     | The recognized text from speech input.                       |
-| `reset`          | `() => void` | Resets the transcript and stops listening.                   |
-| `isSupported`    | `boolean`    | Indicates whether the browser supports the Web Speech API.   |
+| Property         | Type                              | Description                                                  |
+| ---------------- | --------------------------------- | ------------------------------------------------------------ |
+| `startListening` | `() => void`                      | Starts listening for speech input.                           |
+| `stopListening`  | `() => void`                      | Stops listening for speech input.                            |
+| `isListening`    | `boolean`                         | Indicates whether speech recognition is active.              |
+| `isStopped`      | `boolean`                         | Indicates whether speech recognition was explicitly stopped. |
+| `transcript`     | `string`                          | The recognized text from speech input.                       |
+| `reset`          | `() => void`                      | Resets the transcript and stops listening.                   |
+| `isSupported`    | `boolean`                         | Indicates whether the browser supports the Web Speech API.   |
+| `error`          | `permission` \| `device` \| `api` | The type of error that occurred.                             |
+| `retry`          | `() => void`                      | Retries speech recognition after an error.                   |

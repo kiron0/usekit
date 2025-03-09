@@ -24,6 +24,8 @@ export default function UseSpeakupDemo() {
     isListening,
     reset: resetVoiceToText,
     isSupported: isVoiceToTextSupported,
+    retry,
+    error,
   } = useVoiceToText({ lang: "en-US", continuous: true })
 
   const {
@@ -48,7 +50,7 @@ export default function UseSpeakupDemo() {
   }, [cancel, setVoice, voices])
 
   return (
-    <div className="flex flex-col items-center justify-center w-full space-y-8">
+    <div className="flex flex-col items-center justify-center gap-8 w-full">
       {/* Voice-to-Text Section */}
       <div className="border p-4 rounded-lg w-full">
         <h2 className="text-lg md:text-xl font-semibold mb-4">Voice to Text</h2>
@@ -79,9 +81,17 @@ export default function UseSpeakupDemo() {
             </p>
           </>
         ) : (
-          <p className="text-red-500">
-            Voice-to-Text is not supported in your browser.
-          </p>
+          <div className="flex flex-col gap-4">
+            <p className="text-red-500">
+              {error === "api" && "Browser not supported"}
+              {error === "permission" && "Microphone access denied"}
+              {error === "device" && "No microphone found"}
+              {!error && "Voice-to-Text is not supported in your browser."}
+            </p>
+            <Button onClick={retry} className="w-fit">
+              Retry
+            </Button>
+          </div>
         )}
       </div>
 
