@@ -1,0 +1,105 @@
+---
+title: useList
+description: Manage and manipulate lists with useList.
+---
+
+<ComponentPreview name="use-list-demo" />
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://usekit.kiron.dev/r/use-list
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="use-list" />
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+```tsx {1, 4}
+import { useList } from "@/hooks/use-list"
+
+export function Component() {
+  const [list, { set, push, removeAt, insertAt, updateAt, clear }] = useList([
+    "First",
+    "Second",
+    "Third",
+  ])
+
+  return (
+    <section>
+      <header>
+        <h1>UseList</h1>
+        <button
+          disabled={list.length < 1}
+          className="link"
+          onClick={() => insertAt(1, "woo")}
+        >
+          Insert After First
+        </button>
+        <button
+          disabled={list.length < 2}
+          className="link"
+          onClick={() => removeAt(1)}
+        >
+          Remove Second Item
+        </button>
+        <button className="link" onClick={() => set([1, 2, 3])}>
+          Reset
+        </button>
+        <button className="link" onClick={() => clear()}>
+          Clear
+        </button>
+      </header>
+      <ListDemo
+        list={list}
+        updateAt={updateAt}
+        push={push}
+        removeAt={removeAt}
+      />
+    </section>
+  )
+}
+```
+
+## API Reference
+
+### Parameters
+
+| Name          | Type    | Description                                              |
+| ------------- | ------- | -------------------------------------------------------- |
+| `defaultList` | `array` | The initial list of elements. Default is an empty array. |
+
+### Returns
+
+| Name           | Parameters                    | Description                                                       |
+| -------------- | ----------------------------- | ----------------------------------------------------------------- |
+| `[0]`          |                               | The current list of elements.                                     |
+| `[1].set`      | `l: array`                    | Replaces the entire list with a new array `l`.                    |
+| `[1].push`     | `element: any`                | Appends the `element` to the end of the list.                     |
+| `[1].removeAt` | `index: number`               | Removes the element at the specified `index` from the list.       |
+| `[1].insertAt` | `index: number, element: any` | Inserts the `element` at the specified `index` in the list.       |
+| `[1].updateAt` | `index: number, element: any` | Replaces the element at the specified `index` with the `element`. |
+| `[1].clear`    |                               | Removes all elements from the list.                               |

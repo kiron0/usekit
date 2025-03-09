@@ -744,6 +744,20 @@ export const Index: Record<string, any> = {
     component: React.lazy(() => import("registry/examples/use-favicon-demo")),
     source: "",
   },
+  "use-list": {
+    name: "use-list",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-list.tsx",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(() => import("registry/examples/use-list-demo")),
+    source: "",
+  },
   "use-copy-to-clipboard-demo": {
     name: "use-copy-to-clipboard-demo",
     type: "registry:example",
@@ -1330,6 +1344,20 @@ export const Index: Record<string, any> = {
       },
     ],
     component: React.lazy(() => import("registry/examples/use-favicon-demo")),
+    source: "",
+  },
+  "use-list-demo": {
+    name: "use-list-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-list-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(() => import("registry/examples/use-list-demo")),
     source: "",
   },
 }

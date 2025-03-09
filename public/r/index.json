@@ -594,6 +594,18 @@
           "path": "registry/hooks/use-favicon.tsx"
         }
       ]
+    },
+    {
+      "name": "use-list",
+      "title": "Use List",
+      "description": "Manage and manipulate lists with useList.",
+      "type": "registry:hook",
+      "files": [
+        {
+          "type": "registry:hook",
+          "path": "registry/hooks/use-list.tsx"
+        }
+      ]
     }
   ]
 }
