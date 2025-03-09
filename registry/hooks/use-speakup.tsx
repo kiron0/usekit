@@ -70,18 +70,20 @@ export const useVoiceToText = ({
   const [transcript, setTranscript] = React.useState<string>("")
   const isContinuous = React.useRef<boolean>(continuous)
   const [isListening, setIsListening] = React.useState(false)
-  const [isSupported, setIsSupported] = React.useState(false)
+  const [status, setStatus] = React.useState<{
+    isSupported: boolean
+    error?: "permission" | "device" | "api"
+  }>({ isSupported: false })
 
   React.useEffect(() => {
     if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
-      console.error("getUserMedia not supported")
-      setIsSupported(false)
+      setStatus({ isSupported: false, error: "device" })
     }
   }, [])
 
   const SpeechRecognition = React.useMemo(() => {
     if (typeof window === "undefined") {
-      setIsSupported(false)
+      setStatus({ isSupported: false, error: "api" })
       return null
     }
     return window.SpeechRecognition || window.webkitSpeechRecognition
@@ -135,13 +137,29 @@ export const useVoiceToText = ({
     }
   }, [recognition, startListening, stopListening])
 
+  const retry = React.useCallback(async () => {
+    if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+      setStatus({ isSupported: false, error: "device" })
+      return
+    }
+    await navigator.mediaDevices
+      .getUserMedia({ audio: true })
+      .then(() => {
+        setStatus({ isSupported: true })
+      })
+      .catch(() => {
+        setStatus({ isSupported: false, error: "device" })
+      })
+  }, [])
+
   return {
     startListening,
     stopListening,
     isListening,
     transcript,
     reset,
-    isSupported,
+    ...status,
+    retry,
   }
 }
 
