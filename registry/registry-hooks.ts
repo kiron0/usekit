@@ -631,6 +631,18 @@ export const hooks: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "use-list",
+    title: "Use List",
+    description: "Manage and manipulate lists with useList.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "hooks/use-list.tsx",
+        type: "registry:hook",
+      },
+    ],
+  },
 ]
 
 export default hooks

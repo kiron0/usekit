@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-list",
+  "type": "registry:hook",
+  "title": "Use List",
+  "description": "Manage and manipulate lists with useList.",
+  "files": [
+    {
+      "path": "registry/hooks/use-list.tsx",
+      "content": "import * as React from \"react\"\n\ninterface ListActions<T> {\n  set: (l: T[]) => void\n  push: (element: T) => void\n  removeAt: (index: number) => void\n  insertAt: (index: number, element: T) => void\n  updateAt: (index: number, element: T) => void\n  clear: () => void\n}\n\nexport function useList<T>(defaultList: T[] = []): [T[], ListActions<T>] {\n  const [list, setList] = React.useState<T[]>(defaultList)\n\n  const set = React.useCallback((l: T[]) => {\n    setList(l)\n  }, [])\n\n  const push = React.useCallback((element: T) => {\n    setList((l) => [...l, element])\n  }, [])\n\n  const removeAt = React.useCallback((index: number) => {\n    setList((l) => [...l.slice(0, index), ...l.slice(index + 1)])\n  }, [])\n\n  const insertAt = React.useCallback((index: number, element: T) => {\n    setList((l) => [...l.slice(0, index), element, ...l.slice(index)])\n  }, [])\n\n  const updateAt = React.useCallback((index: number, element: T) => {\n    setList((l) => l.map((e, i) => (i === index ? element : e)))\n  }, [])\n\n  const clear = React.useCallback(() => setList([]), [])\n\n  return [list, { set, push, removeAt, insertAt, updateAt, clear }]\n}\n",
+      "type": "registry:hook"
+    }
+  ]
+}

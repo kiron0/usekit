@@ -289,7 +289,6 @@ export const docsConfig: DocsConfig = {
           title: "useList",
           href: "/docs/hooks/use-list",
           items: [],
-          label: "Soon",
         },
         {
           title: "useMap",
