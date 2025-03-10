@@ -643,6 +643,19 @@ export const hooks: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "use-map",
+    title: "Use Map",
+    description:
+      "Synchronize and update state based on the Map data structure with useMap.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "hooks/use-map.tsx",
+        type: "registry:hook",
+      },
+    ],
+  },
 ]
 
 export default hooks
