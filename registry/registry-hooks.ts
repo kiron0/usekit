@@ -656,6 +656,19 @@ export const hooks: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "use-queue",
+    title: "Use Queue",
+    description:
+      "Add, remove, and clear element from a queue data structure with useQueue.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "hooks/use-queue.tsx",
+        type: "registry:hook",
+      },
+    ],
+  },
 ]
 
 export default hooks

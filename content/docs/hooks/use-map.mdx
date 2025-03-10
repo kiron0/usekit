@@ -81,8 +81,16 @@ export function Component() {
 
 ## API Reference
 
-### Returns
+### Parameters
 
-| Name  | Type     | Description                                            |
-| ----- | -------- | ------------------------------------------------------ |
-| `map` | `object` | An instance of the `Map` object with enhanced methods. |
+| Name           | Type               | Description                                                                |
+| -------------- | ------------------ | -------------------------------------------------------------------------- |
+| `initialState` | `Iterable<[K, V]>` | (Optional) The initial value for the map. Defaults to an empty map (`[]`). |
+
+### Return Values
+
+| Name     | Type                         | Description                                                                                                        |
+| -------- | ---------------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| `set`    | `(key: K, value: V) => this` | Adds or updates a key-value pair in the map. Triggers a re-render.                                                 |
+| `delete` | `(key: K) => boolean`        | Removes a key-value pair from the map. Triggers a re-render. Returns `true` if the key existed, otherwise `false`. |
+| `clear`  | `() => void`                 | Clears the map, removing all key-value pairs. Triggers a re-render.                                                |

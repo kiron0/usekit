@@ -1,0 +1,116 @@
+---
+title: useQueue
+description: Add, remove, and clear element from a queue data structure with useQueue.
+---
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://usekit.kiron.dev/r/use-queue
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="use-queue" />
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+```tsx {1, 37-39}
+import { useQueue } from "@/hooks/use-queue"
+
+interface QueueDemoProps<T> {
+  first: T | undefined
+  last: T | undefined
+  size: number
+  queue: T[]
+}
+
+function QueueDemo<T>({ first, last, size, queue }: QueueDemoProps<T>) {
+  return (
+    <figure>
+      <article>
+        <p>Front</p>
+        <ul>
+          {queue.map((item, i) => {
+            const isFirst = first === item
+            const isLast = last === item
+            return (
+              <li key={i}>
+                {isFirst && "First: "}
+                {isLast && "Last: "}
+                {!isFirst && !isLast && "Item: "}
+                {String(item)}
+              </li>
+            )
+          })}
+        </ul>
+        <p>Back</p>
+      </article>
+      <figcaption>{size} items in the queue</figcaption>
+    </figure>
+  )
+}
+
+export function Component() {
+  const { add, remove, clear, first, last, size, queue } = useQueue<number>([
+    1, 2, 3,
+  ])
+
+  return (
+    <div>
+      <header>
+        <h1>UseQueue</h1>
+        <button onClick={() => add((last || 0) + 1)}>Add</button>
+        <button disabled={size === 0} onClick={remove}>
+          Remove
+        </button>
+        <button disabled={size === 0} onClick={clear}>
+          Clear
+        </button>
+      </header>
+      <QueueDemo queue={queue} size={size} first={first} last={last} />
+    </div>
+  )
+}
+```
+
+## API Reference
+
+### Parameters
+
+| Name            | Type  | Description                                                         |
+| --------------- | ----- | ------------------------------------------------------------------- |
+| `initialValue?` | `T[]` | The initial value for the queue. Defaults to an empty array (`[]`). |
+
+### Return Values
+
+| Name     | Type                   | Description                                                                                       |
+| -------- | ---------------------- | ------------------------------------------------------------------------------------------------- |
+| `add`    | `(element: T) => void` | Adds an element to the end of the queue.                                                          |
+| `remove` | `() => T \| undefined` | Removes and returns the first element from the queue. If the queue is empty, returns `undefined`. |
+| `clear`  | `() => void`           | Clears the queue, removing all elements.                                                          |
+| `first`  | `T \| undefined`       | The first element in the queue. If the queue is empty, returns `undefined`.                       |
+| `last`   | `T \| undefined`       | The last element in the queue. If the queue is empty, returns `undefined`.                        |
+| `size`   | `number`               | The number of elements in the queue.                                                              |
+| `queue`  | `T[]`                  | The current array representing the queue.                                                         |
