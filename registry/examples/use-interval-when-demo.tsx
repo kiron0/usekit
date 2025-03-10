@@ -17,12 +17,12 @@ export default function UseIntervalWhenDemo() {
   )
 
   return (
-    <div className="size-52 border dark:bg-zinc-900 dark:shadow hover:border-primary/30 rounded-full relative">
+    <div className="relative size-52 rounded-full border hover:border-primary/30 dark:bg-zinc-900 dark:shadow">
       <button
         id="toggle-timer"
         title="Click to toggle the timer"
         onClick={() => setWhen(!when)}
-        className="absolute top-0 left-0 right-0 text-4xl font-semibold z-10 w-full h-full bg-transparent rounded-full"
+        className="absolute left-0 right-0 top-0 z-10 h-full w-full rounded-full bg-transparent text-4xl font-semibold"
       >
         {count.toLocaleString("en-US", {
           maximumFractionDigits: 2,
@@ -31,7 +31,7 @@ export default function UseIntervalWhenDemo() {
       </button>
       <Label
         htmlFor="toggle-timer"
-        className="absolute bottom-8 cursor-pointer right-0 left-0 text-base text-center capitalize"
+        className="absolute bottom-8 left-0 right-0 cursor-pointer text-center text-base capitalize"
       >
         {when ? "stop" : "start"}
       </Label>

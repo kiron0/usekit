@@ -12,9 +12,9 @@ export default function OrientationDemo() {
         style={{
           aspectRatio: type.startsWith("portrait") ? "9 / 16" : "16 / 9",
         }}
-        className="border border-primary p-5 rounded-xl w-60 md:min-w-96 flex items-center justify-center h-full"
+        className="flex h-full w-60 items-center justify-center rounded-xl border border-primary p-5 md:min-w-96"
       >
-        <Badge className="capitalize truncate">
+        <Badge className="truncate capitalize">
           {type.replace(/-/, " ")} ({angle}°)
         </Badge>
       </div>

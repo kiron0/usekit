@@ -17,7 +17,7 @@ export default function VisibilityTracker() {
 
   return (
     <div className="flex flex-col items-center justify-center gap-2">
-      <h1 className="text-5xl font-semibold pb-4">{tabAwayCount}</h1>
+      <h1 className="pb-4 text-5xl font-semibold">{tabAwayCount}</h1>
       <p>Number of times tabbed away</p>
       <div className="flex gap-2">
         Document is currently:{" "}
@@ -25,7 +25,7 @@ export default function VisibilityTracker() {
           {documentVisible ? "Visible" : "Hidden"}
         </Badge>
       </div>
-      <p className="text-muted-foreground text-center text-balance">
+      <p className="text-balance text-center text-muted-foreground">
         Change tab to see the count increase
       </p>
     </div>

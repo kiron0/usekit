@@ -29,19 +29,19 @@ export default function UseClickAwayDemo() {
       {isOpen &&
         ReactDOM.createPortal(
           <>
-            <div className="fixed inset-0 bg-black/40 backdrop-blur-sm z-[998]" />
+            <div className="fixed inset-0 z-[998] bg-black/40 backdrop-blur-sm" />
             <div
               ref={modalRef}
-              className="fixed left-1/2 top-1/2 z-[999] grid w-[95%] md:w-full max-w-lg -translate-x-1/2 -translate-y-1/2 h-60 rounded-xl border bg-background p-4 text-muted-foreground shadow-md"
+              className="fixed left-1/2 top-1/2 z-[999] grid h-60 w-[95%] max-w-lg -translate-x-1/2 -translate-y-1/2 rounded-xl border bg-background p-4 text-muted-foreground shadow-md md:w-full"
             >
-              <div className="relative flex justify-center items-center h-full">
+              <div className="relative flex h-full items-center justify-center">
                 <X
                   size={18}
-                  className="absolute top-1 right-1 cursor-pointer"
+                  className="absolute right-1 top-1 cursor-pointer"
                   onClick={handleCloseModal}
                   aria-label="Close modal"
                 />
-                <p className="text-center text-balance">
+                <p className="text-balance text-center">
                   Click outside the modal to close (or use the button) whatever
                   you prefer.
                 </p>

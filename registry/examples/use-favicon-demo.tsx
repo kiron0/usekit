@@ -20,7 +20,7 @@ export default function UseFaviconDemo() {
           <Button
             key={name}
             title={title}
-            className={cn("p-1 size-12")}
+            className={cn("size-12 p-1")}
             variant={favicon === url ? "secondary" : "outline"}
             onClick={() => setFavicon(url)}
           >
@@ -38,7 +38,7 @@ export default function UseFaviconDemo() {
           </Button>
         ))}
       </div>
-      <p className="text-center text-muted-foreground text-balance">
+      <p className="text-balance text-center text-muted-foreground">
         Click on the buttons above to change the favicon of this page. The
         favicon will be updated in the browser tab.
       </p>

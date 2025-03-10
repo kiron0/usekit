@@ -2,8 +2,8 @@ import { siteConfig } from "@/config/site"
 
 export function SiteFooter() {
   return (
-    <footer className="border-grid border-t md:px-8 py-3">
-      <div className="text-balance container text-center text-xs leading-loose text-muted-foreground md:text-left">
+    <footer className="border-grid border-t py-3 md:px-8">
+      <div className="container text-balance text-center text-xs leading-loose text-muted-foreground md:text-left">
         Built by{" "}
         <a
           href={siteConfig.links.twitter}

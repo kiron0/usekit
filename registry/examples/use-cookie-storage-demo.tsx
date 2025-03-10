@@ -76,9 +76,9 @@ export default function UseCookieStorageDemo() {
         />
       </div>
 
-      <div className="col-span-full space-y-2 flex flex-col justify-center items-center">
+      <div className="col-span-full flex flex-col items-center justify-center space-y-2">
         <h3 className="text-lg font-semibold underline">Results</h3>
-        <div className="text-sm space-y-2">
+        <div className="space-y-2 text-sm">
           <p>Username: {username}</p>
           <div className="flex items-center gap-2">
             Theme: <Badge className="capitalize">{preferences.theme}</Badge>

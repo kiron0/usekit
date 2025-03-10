@@ -32,7 +32,7 @@ export default function UseHistoryStateDemo() {
   }
 
   return (
-    <div className="space-y-5 w-full">
+    <div className="w-full space-y-5">
       <div className="w-full space-y-5">
         <div className="flex items-center gap-3">
           <Button disabled={!canUndo} onClick={undo}>
