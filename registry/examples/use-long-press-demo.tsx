@@ -60,7 +60,7 @@ export default function UseLongPressDemo() {
   return (
     <div className="space-y-4 text-center">
       <Button {...buttonHandlers}>Press and hold me</Button>
-      <p className="text-muted-foreground text-balance">
+      <p className="text-balance text-muted-foreground">
         Open the console to see the logs
       </p>
       {open && <Demo setOpen={setOpen} />}
@@ -73,17 +73,17 @@ function Demo({ setOpen }: { setOpen: (open: boolean) => void }) {
     return ReactDOM.createPortal(
       <>
         <div
-          className="fixed inset-0 bg-black/40 backdrop-blur-sm z-[998]"
+          className="fixed inset-0 z-[998] bg-black/40 backdrop-blur-sm"
           onClick={() => setOpen(false)}
         />
-        <dialog className="fixed left-1/2 right-1/2 top-1/2 z-[999] grid w-[95%] md:w-full max-w-lg -translate-x-1/2 -translate-y-1/2 h-60 rounded-xl border bg-background p-4 text-muted-foreground shadow-md">
-          <div className="relative flex justify-center items-center h-full">
+        <dialog className="fixed left-1/2 right-1/2 top-1/2 z-[999] grid h-60 w-[95%] max-w-lg -translate-x-1/2 -translate-y-1/2 rounded-xl border bg-background p-4 text-muted-foreground shadow-md md:w-full">
+          <div className="relative flex h-full items-center justify-center">
             <X
               size={18}
-              className="absolute top-1 right-1 cursor-pointer"
+              className="absolute right-1 top-1 cursor-pointer"
               onClick={() => setOpen(false)}
             />
-            <p className="text-center text-balance">
+            <p className="text-balance text-center">
               This is a dialog that opens when you press and hold the button for
               500ms or more. The button also triggers a long press event. Open
               the console to see the logs.

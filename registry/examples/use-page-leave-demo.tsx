@@ -14,10 +14,10 @@ export default function UsePageLeaveDemo() {
     <div className="flex flex-col items-center justify-center gap-6">
       <div
         ref={elementRef}
-        className="space-y-2 text-center border-2 p-6 rounded-xl w-96 mx-auto duration-300 hover:border-dashed hover:cursor-pointer hover:border-primary"
+        className="mx-auto w-96 space-y-2 rounded-xl border-2 p-6 text-center duration-300 hover:cursor-pointer hover:border-dashed hover:border-primary"
       >
         <p>(Mouse out of the box)</p>
-        <h1 className="text-2xl font-semibold py-4">
+        <h1 className="py-4 text-2xl font-semibold">
           {distractions}{" "}
           {distractions === 0 ? "time" : distractions > 1 ? "times" : "time"}
         </h1>

@@ -387,7 +387,7 @@ export function useMeasure({
             borderRadius: `${borderRadius}px`,
             borderWidth: `${borderWidth}px`,
           }}
-          className="border-primary fixed z-[998] border border-dashed bg-transparent"
+          className="fixed z-[998] border border-dashed border-primary bg-transparent"
         />
         <div
           style={{
@@ -395,7 +395,7 @@ export function useMeasure({
               (pos) => pos.name === measurementPosition
             ),
           }}
-          className="bg-background/50 backdrop-blur z-[999] pointer-events-none fixed rounded-md border p-4 text-sm"
+          className="pointer-events-none fixed z-[999] rounded-md border bg-background/50 p-4 text-sm backdrop-blur"
         >
           <div className="flex flex-col gap-1">
             <span>
@@ -420,13 +420,13 @@ export function useMeasure({
           className="fixed z-[999] flex gap-2"
         >
           <button
-            className="h-8 rounded-md px-3 text-xs bg-primary text-primary-foreground"
+            className="h-8 rounded-md bg-primary px-3 text-xs text-primary-foreground"
             onClick={handleReset}
           >
             <RefreshCw size={16} />
           </button>
           <button
-            className="h-8 rounded-md px-3 text-xs bg-primary text-primary-foreground"
+            className="h-8 rounded-md bg-primary px-3 text-xs text-primary-foreground"
             onClick={handleCopy}
           >
             <Copy size={16} />

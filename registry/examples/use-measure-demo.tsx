@@ -19,7 +19,7 @@ export default function UseMeasureDemo() {
 
   if (isMobile) {
     return (
-      <p className="text-muted-foreground text-balance text-center">
+      <p className="text-balance text-center text-muted-foreground">
         This feature is not available on mobile devices
       </p>
     )
@@ -27,9 +27,9 @@ export default function UseMeasureDemo() {
 
   return (
     <div className="w-full space-y-8">
-      <div ref={ref} className="w-full h-[60vh] border rounded-md">
+      <div ref={ref} className="h-[60vh] w-full rounded-md border">
         <MeasureComponent />
-        <p className="text-muted-foreground pointer-events-none text-balance text-center flex justify-center items-center h-full px-1">
+        <p className="pointer-events-none flex h-full items-center justify-center text-balance px-1 text-center text-muted-foreground">
           {isStarted
             ? "Press and hold to measure distances"
             : "Press the button below to start measuring"}

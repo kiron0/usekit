@@ -29,16 +29,16 @@ export default function UseMediaQueryDemo() {
           <div
             key={device.name}
             className={cn(
-              "border rounded-lg text-center px-7 py-5",
+              "rounded-lg border px-7 py-5 text-center",
               device.isMatched ? "border-primary" : ""
             )}
           >
             {device.icon}
-            <p className="text-muted-foreground text-sm">{device.name}</p>
+            <p className="text-sm text-muted-foreground">{device.name}</p>
           </div>
         ))}
       </div>
-      <p className="text-balance text-center text-muted-foreground mx-auto">
+      <p className="mx-auto text-balance text-center text-muted-foreground">
         Resize your browser window to see changes.
       </p>
     </div>

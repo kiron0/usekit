@@ -23,7 +23,7 @@ export default function UseHoverDemo() {
     <div
       ref={ref}
       className={cn(
-        "size-48 transition-all rounded-xl flex justify-center items-center border",
+        "flex size-48 items-center justify-center rounded-xl border transition-all",
         hovering
           ? `cursor-crosshair border-[${backgroundColor}]`
           : "border-primary"

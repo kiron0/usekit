@@ -27,17 +27,17 @@ export default function UseIdleDemo() {
   }, [isIdle])
 
   return (
-    <div className="flex flex-col justify-center items-center gap-4">
-      <div className="relative w-8 h-8 mx-auto">
+    <div className="flex flex-col items-center justify-center gap-4">
+      <div className="relative mx-auto h-8 w-8">
         <div
           className={cn(
-            "absolute top-0 left-0 size-8 border-2 rounded-full opacity-0 animate-pulsate",
+            "absolute left-0 top-0 size-8 animate-pulsate rounded-full border-2 opacity-0",
             isIdle ? "opacity-0" : "border-green-500 opacity-100"
           )}
         />
         <div
           className={cn(
-            "absolute top-1.5 left-1.5 size-5 rounded-full",
+            "absolute left-1.5 top-1.5 size-5 rounded-full",
             isIdle ? "bg-yellow-500" : "bg-green-500"
           )}
         />

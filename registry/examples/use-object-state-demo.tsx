@@ -49,9 +49,9 @@ export default function UseObjectStateDemo() {
   }
 
   return (
-    <div className="space-y-6 text-center overflow-hidden">
-      <h1 className="font-semibold text-2xl underline">Team Statistics</h1>
-      <div className="flex flex-wrap gap-2 justify-center">
+    <div className="space-y-6 overflow-hidden text-center">
+      <h1 className="text-2xl font-semibold underline">Team Statistics</h1>
+      <div className="flex flex-wrap justify-center gap-2">
         <Button variant="link" onClick={addWin}>
           Add Win
         </Button>
@@ -69,7 +69,7 @@ export default function UseObjectStateDemo() {
         <TableHeader>
           <TableRow>
             {(Object.keys(stats) as Array<keyof TeamStats>).map((key) => (
-              <TableHead key={key} className="capitalize text-start min-w-24">
+              <TableHead key={key} className="min-w-24 text-start capitalize">
                 {key}
               </TableHead>
             ))}

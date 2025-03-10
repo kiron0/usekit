@@ -5,8 +5,8 @@ module.exports = {
   tabWidth: 2,
   trailingComma: "es5",
   plugins: [
-    "prettier-plugin-tailwindcss",
     "@ianvs/prettier-plugin-sort-imports",
+    "prettier-plugin-tailwindcss",
   ],
   importOrder: [
     "^(react/(.*)$)|^(react$)",

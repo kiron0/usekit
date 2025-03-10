@@ -14,7 +14,7 @@ export default function UseListDemo() {
     useList<List>(["First", "Second", "Third"])
 
   return (
-    <div className="space-y-8 w-full md:w-2/3 mx-auto">
+    <div className="mx-auto w-full space-y-8 md:w-2/3">
       <div className="flex flex-wrap items-center justify-center gap-2">
         <Button
           disabled={list.length < 1}
@@ -36,7 +36,7 @@ export default function UseListDemo() {
       {list.length > 0 ? (
         <ListDemo list={list} update={updateAt} remove={removeAt} />
       ) : (
-        <div className="border p-4 rounded-md">
+        <div className="rounded-md border p-4">
           <p className="text-center text-red-500">No items in the list</p>
         </div>
       )}
@@ -71,7 +71,7 @@ function ListDemo({ list, update, remove }: ListDemoProps) {
       {list.map((item, index) => (
         <div
           key={index}
-          className="grid grid-cols-4 gap-2 border p-4 rounded-md"
+          className="grid grid-cols-4 gap-2 rounded-md border p-4"
         >
           {isUpdate[index] ? (
             <>
@@ -86,7 +86,7 @@ function ListDemo({ list, update, remove }: ListDemoProps) {
                 }
                 className="col-span-full"
               />
-              <div className="flex gap-2 justify-end col-span-full">
+              <div className="col-span-full flex justify-end gap-2">
                 <Button
                   size="sm"
                   onClick={() => handleUpdate(index)}
@@ -106,7 +106,7 @@ function ListDemo({ list, update, remove }: ListDemoProps) {
           ) : (
             <>
               <p className="col-span-full md:col-span-3">{item}</p>
-              <div className="flex gap-2 col-span-full md:col-span-1 justify-end">
+              <div className="col-span-full flex justify-end gap-2 md:col-span-1">
                 <Button
                   size="sm"
                   onClick={() =>

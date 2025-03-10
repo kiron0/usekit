@@ -128,7 +128,7 @@ const components = {
   }: React.ImgHTMLAttributes<HTMLImageElement>) => (
     // eslint-disable-next-line @next/next/no-img-element
     <img
-      className={cn("rounded-xl border select-none", className)}
+      className={cn("select-none rounded-xl border", className)}
       alt={alt}
       draggable={false}
       onContextMenu={(e) => e.preventDefault()}

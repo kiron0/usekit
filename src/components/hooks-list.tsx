@@ -15,7 +15,7 @@ export function HooksList() {
               <p className="font-semibold">
                 {i + 1}. {doc.title}
               </p>
-              <p className="text-muted-foreground text-sm">{doc.description}</p>
+              <p className="text-sm text-muted-foreground">{doc.description}</p>
             </Link>
           </div>
         ))}

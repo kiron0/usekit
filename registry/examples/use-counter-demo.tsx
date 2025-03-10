@@ -12,7 +12,7 @@ export default function UseCounterDemo() {
     <div className="flex flex-col items-center space-y-6">
       <h1 className="text-2xl font-bold">Counter</h1>
       <p className="text-4xl font-bold">{count}</p>
-      <div className="flex justify-center flex-wrap gap-2">
+      <div className="flex flex-wrap justify-center gap-2">
         <Button onClick={increment}>Increment</Button>
         <Button onClick={decrement}>Decrement</Button>
         <Button onClick={reset}>Reset</Button>
