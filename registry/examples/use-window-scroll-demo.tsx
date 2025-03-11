@@ -16,8 +16,8 @@ export default function WindowScrollDemo() {
 
   return (
     <div>
-      <div className="relative flex flex-col items-center w-full justify-center">
-        <div className="fixed top-1/3 md:top-20 xl:top-1/4 right-0 left-0 md:left-auto mx-auto md:mx-0 md:right-5 xl:right-1/3 p-5 z-50 bg-muted/10 backdrop-blur-sm border border-dashed border-primary rounded-xl w-80 space-y-4">
+      <div className="relative flex w-full flex-col items-center justify-center">
+        <div className="fixed left-0 right-0 top-1/3 z-50 mx-auto w-80 space-y-4 rounded-xl border border-dashed border-primary bg-muted/10 p-5 backdrop-blur-sm md:left-auto md:right-5 md:top-20 md:mx-0 xl:right-1/3 xl:top-1/4">
           <p>
             Current position: {x ?? "Loading..."},{" "}
             {y?.toFixed(0) ?? "Loading..."}

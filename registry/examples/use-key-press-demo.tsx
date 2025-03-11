@@ -28,10 +28,10 @@ export default function KeyPressDemo() {
         <div className="col-span-3 mx-auto">
           <button
             className={cn(
-              "pb-[3px] w-[48px] h-[45px] opacity-80 flex justify-center items-center rounded-[5px]",
+              "flex h-[45px] w-[48px] items-center justify-center rounded-[5px] pb-[3px] opacity-80",
               activeKey === "ArrowUp"
-                ? "bg-destructive border-t-destructive text-destructive-foreground [box-shadow:0px_3px_0px_2px_rgba(239,_68,_68,_0.7)]"
-                : "border-t-primary dark:border-t-[1px_solid_rgba(249,_244,_218,_0.8)] [box-shadow:0px_3px_0px_2px_rgba(39,_39,_42,_0.8)] dark:[box-shadow:0px_3px_0px_2px_rgba(249,_244,_218,_0.8)] dark:bg-[#f9f4da] bg-zinc-800 text-white dark:text-black"
+                ? "border-t-destructive bg-destructive text-destructive-foreground [box-shadow:0px_3px_0px_2px_rgba(239,_68,_68,_0.7)]"
+                : "border-t-primary bg-zinc-800 text-white [box-shadow:0px_3px_0px_2px_rgba(39,_39,_42,_0.8)] dark:border-t-[1px_solid_rgba(249,_244,_218,_0.8)] dark:bg-[#f9f4da] dark:text-black dark:[box-shadow:0px_3px_0px_2px_rgba(249,_244,_218,_0.8)]"
             )}
           >
             <MoveUp />
@@ -39,30 +39,30 @@ export default function KeyPressDemo() {
         </div>
         <button
           className={cn(
-            "pb-[3px] w-[48px] h-[45px] opacity-80 flex justify-center items-center rounded-[5px]",
+            "flex h-[45px] w-[48px] items-center justify-center rounded-[5px] pb-[3px] opacity-80",
             activeKey === "ArrowLeft"
-              ? "bg-destructive border-t-destructive text-destructive-foreground [box-shadow:0px_3px_0px_2px_rgba(239,_68,_68,_0.7)]"
-              : "border-t-primary dark:border-t-[1px_solid_rgba(249,_244,_218,_0.8)] [box-shadow:0px_3px_0px_2px_rgba(39,_39,_42,_0.8)] dark:[box-shadow:0px_3px_0px_2px_rgba(249,_244,_218,_0.8)] dark:bg-[#f9f4da] bg-zinc-800 text-white dark:text-black"
+              ? "border-t-destructive bg-destructive text-destructive-foreground [box-shadow:0px_3px_0px_2px_rgba(239,_68,_68,_0.7)]"
+              : "border-t-primary bg-zinc-800 text-white [box-shadow:0px_3px_0px_2px_rgba(39,_39,_42,_0.8)] dark:border-t-[1px_solid_rgba(249,_244,_218,_0.8)] dark:bg-[#f9f4da] dark:text-black dark:[box-shadow:0px_3px_0px_2px_rgba(249,_244,_218,_0.8)]"
           )}
         >
           <MoveLeft className="mt-2" />
         </button>
         <button
           className={cn(
-            "pb-[3px] w-[48px] h-[45px] opacity-80 flex justify-center items-center rounded-[5px]",
+            "flex h-[45px] w-[48px] items-center justify-center rounded-[5px] pb-[3px] opacity-80",
             activeKey === "ArrowDown"
-              ? "bg-destructive border-t-destructive text-destructive-foreground [box-shadow:0px_3px_0px_2px_rgba(239,_68,_68,_0.7)]"
-              : "border-t-primary dark:border-t-[1px_solid_rgba(249,_244,_218,_0.8)] [box-shadow:0px_3px_0px_2px_rgba(39,_39,_42,_0.8)] dark:[box-shadow:0px_3px_0px_2px_rgba(249,_244,_218,_0.8)] dark:bg-[#f9f4da] bg-zinc-800 text-white dark:text-black"
+              ? "border-t-destructive bg-destructive text-destructive-foreground [box-shadow:0px_3px_0px_2px_rgba(239,_68,_68,_0.7)]"
+              : "border-t-primary bg-zinc-800 text-white [box-shadow:0px_3px_0px_2px_rgba(39,_39,_42,_0.8)] dark:border-t-[1px_solid_rgba(249,_244,_218,_0.8)] dark:bg-[#f9f4da] dark:text-black dark:[box-shadow:0px_3px_0px_2px_rgba(249,_244,_218,_0.8)]"
           )}
         >
           <MoveDown />
         </button>
         <button
           className={cn(
-            "pb-[3px] w-[48px] h-[45px] opacity-80 flex justify-center items-center rounded-[5px]",
+            "flex h-[45px] w-[48px] items-center justify-center rounded-[5px] pb-[3px] opacity-80",
             activeKey === "ArrowRight"
-              ? "bg-destructive border-t-destructive text-destructive-foreground [box-shadow:0px_3px_0px_2px_rgba(239,_68,_68,_0.7)]"
-              : "border-t-primary dark:border-t-[1px_solid_rgba(249,_244,_218,_0.8)] [box-shadow:0px_3px_0px_2px_rgba(39,_39,_42,_0.8)] dark:[box-shadow:0px_3px_0px_2px_rgba(249,_244,_218,_0.8)] dark:bg-[#f9f4da] bg-zinc-800 text-white dark:text-black"
+              ? "border-t-destructive bg-destructive text-destructive-foreground [box-shadow:0px_3px_0px_2px_rgba(239,_68,_68,_0.7)]"
+              : "border-t-primary bg-zinc-800 text-white [box-shadow:0px_3px_0px_2px_rgba(39,_39,_42,_0.8)] dark:border-t-[1px_solid_rgba(249,_244,_218,_0.8)] dark:bg-[#f9f4da] dark:text-black dark:[box-shadow:0px_3px_0px_2px_rgba(249,_244,_218,_0.8)]"
           )}
         >
           <MoveRight className="mt-2" />

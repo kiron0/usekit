@@ -66,7 +66,7 @@ export function MobileNav() {
             )}
           </div>
           <Separator className="my-4" />
-          <div className="flex flex-col space-y-2 gap-5">
+          <div className="flex flex-col gap-5 space-y-2">
             {docsConfig.sidebarNav.map((item, index) => (
               <div key={index} className="flex flex-col space-y-3">
                 <h4 className="font-medium">{item.title}</h4>

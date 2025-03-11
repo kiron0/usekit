@@ -50,13 +50,13 @@ export default function UseSpeakupDemo() {
   }, [cancel, setVoice, voices])
 
   return (
-    <div className="flex flex-col items-center justify-center gap-8 w-full">
+    <div className="flex w-full flex-col items-center justify-center gap-8">
       {/* Voice-to-Text Section */}
-      <div className="border p-4 rounded-lg w-full">
-        <h2 className="text-lg md:text-xl font-semibold mb-4">Voice to Text</h2>
+      <div className="w-full rounded-lg border p-4">
+        <h2 className="mb-4 text-lg font-semibold md:text-xl">Voice to Text</h2>
         {isVoiceToTextSupported ? (
           <>
-            <div className="flex flex-wrap gap-2 mb-4">
+            <div className="mb-4 flex flex-wrap gap-2">
               <Button
                 onClick={startListening}
                 disabled={isListening || transcript.length > 0}
@@ -96,18 +96,18 @@ export default function UseSpeakupDemo() {
       </div>
 
       {/* Text-to-Voice Section */}
-      <div className="border p-4 rounded-lg w-full">
-        <h2 className="text-lg md:text-xl font-semibold mb-4">Text to Voice</h2>
+      <div className="w-full rounded-lg border p-4">
+        <h2 className="mb-4 text-lg font-semibold md:text-xl">Text to Voice</h2>
         {isTextToVoiceSupported ? (
           <>
             <Textarea
               value={text}
               onChange={(e) => setText(e.target.value)}
               placeholder="Enter text to speak..."
-              className="w-full mb-4"
+              className="mb-4 w-full"
               rows={4}
             />
-            <div className="flex flex-wrap gap-2 mb-4">
+            <div className="mb-4 flex flex-wrap gap-2">
               <Button onClick={speak} disabled={!text || isSpeaking}>
                 Speak
               </Button>

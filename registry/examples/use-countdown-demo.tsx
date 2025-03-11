@@ -29,7 +29,7 @@ export default function UseCountdownDemo() {
 
   return (
     <div className="flex flex-col items-center space-y-6">
-      <h3 className="text-5xl font-bold text-center">
+      <h3 className="text-center text-5xl font-bold">
         {complete ? "Complete!" : formatTime(count)}
       </h3>
       {!complete && (

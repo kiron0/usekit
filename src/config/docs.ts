@@ -294,13 +294,11 @@ export const docsConfig: DocsConfig = {
           title: "useMap",
           href: "/docs/hooks/use-map",
           items: [],
-          label: "Soon",
         },
         {
           title: "useQueue",
           href: "/docs/hooks/use-queue",
           items: [],
-          label: "Soon",
         },
         {
           title: "useSet",

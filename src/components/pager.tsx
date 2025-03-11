@@ -18,7 +18,7 @@ export function DocsPager({ doc }: DocsPagerProps) {
   }
 
   return (
-    <div className="flex flex-wrap md:flex-nowrap flex-row items-center justify-between gap-4">
+    <div className="flex flex-row flex-wrap items-center justify-between gap-4 md:flex-nowrap">
       {pager?.prev?.href && (
         <Button variant="ghost" asChild>
           <Link href={pager.prev.href}>
