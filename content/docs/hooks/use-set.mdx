@@ -1,0 +1,131 @@
+---
+title: useSet
+description: Synchronize and update state based on the Set data structure with useSet.
+---
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://usekit.kiron.dev/r/use-set
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="use-set" />
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+```tsx {3, 12-20}
+import * as React from "react"
+
+import { useSet } from "@/hooks/use-set"
+
+function format(val) {
+  return val.toLocaleLowerCase().replace(/\s/g, "")
+}
+
+export function Component() {
+  const [value, setValue] = React.useState("")
+
+  const set = useSet([
+    "ronaldo",
+    "brutecode",
+    "alenwalker",
+    "sakinaka",
+    "usekit",
+    "1stdev",
+    "nextblog",
+  ])
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+
+    const formData = new FormData(e.target)
+    const username = formData.get("username")
+
+    set.add(format(username))
+    setValue("")
+
+    e.target.reset()
+    e.target.focus()
+  }
+
+  const hasError = set.has(value)
+
+  return (
+    <section>
+      <h1>useSet</h1>
+      <p>Check if your username is available</p>
+      <article>
+        <form className={hasError ? "error" : ""} onSubmit={handleSubmit}>
+          <span>@</span>
+          <input
+            type="text"
+            name="username"
+            placeholder="Enter a username"
+            onChange={(e) => {
+              setValue(format(e.target.value))
+            }}
+          />
+        </form>
+        {hasError && <label>Woops that user is taken</label>}
+      </article>
+
+      <table>
+        <tbody>
+          {Array.from(set.values()).map((username) => {
+            const match = username === value
+            return (
+              <tr key={username}>
+                <th>username</th>
+                <td
+                  style={{
+                    borderColor: match ? "var(--red)" : "var(--charcoal)",
+                  }}
+                >
+                  {username}
+                </td>
+              </tr>
+            )
+          })}
+        </tbody>
+      </table>
+    </section>
+  )
+}
+```
+
+## API Reference
+
+### Parameters
+
+| Name      | Type  | Description                            |
+| --------- | ----- | -------------------------------------- |
+| `values?` | `T[]` | (Optional) Initial values for the set. |
+
+### Return Values
+
+| Name  | Type     | Description                                          |
+| ----- | -------- | ---------------------------------------------------- |
+| `set` | `Set<T>` | An instance of the Set object with enhanced methods. |

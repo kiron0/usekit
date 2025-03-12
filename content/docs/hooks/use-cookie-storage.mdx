@@ -177,17 +177,17 @@ export function PreferencesExample() {
 | -------------- | -------- | ------------------------------------------------------------------- |
 | `key`          | `string` | The key used to access the cookie value.                            |
 | `initialValue` | `T`      | The initial value to use if no cookie exists with the provided key. |
-| `options?`     | `object` | Configuration options for the cookie.                               |
+| `options?`     | `object` | (Optional) Configuration options for the cookie.                    |
 
 ### `CookieOptions` Interface
 
-| Property    | Type                           | Description                                                   |
-| ----------- | ------------------------------ | ------------------------------------------------------------- |
-| `expires?`  | `Date`                         | The expiration date of the cookie.                            |
-| `path?`     | `string`                       | The path where the cookie is accessible. Defaults to `/`.     |
-| `domain?`   | `string`                       | The domain where the cookie is accessible.                    |
-| `secure?`   | `boolean`                      | If `true`, the cookie is only sent over HTTPS.                |
-| `sameSite?` | `"Strict" \| "Lax"  \| "None"` | Controls whether the cookie is sent with cross-site requests. |
+| Property    | Type                           | Description                                                              |
+| ----------- | ------------------------------ | ------------------------------------------------------------------------ |
+| `expires?`  | `Date`                         | (Optional) The expiration date of the cookie.                            |
+| `path?`     | `string`                       | (Optional) The path where the cookie is accessible. Defaults to `/`.     |
+| `domain?`   | `string`                       | (Optional) The domain where the cookie is accessible.                    |
+| `secure?`   | `boolean`                      | (Optional) If `true`, the cookie is only sent over HTTPS.                |
+| `sameSite?` | `"Strict" \| "Lax"  \| "None"` | (Optional) Controls whether the cookie is sent with cross-site requests. |
 
 ### Return Values
 

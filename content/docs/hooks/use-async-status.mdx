@@ -126,7 +126,7 @@ type FeedbackOptions<TData, TError> = {
 | Name       | Type                                                                                                                    | Description                                                                                 |
 | ---------- | ----------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
 | `asyncFn`  | `AsyncFunction<TArgs, TData, TError>`                                                                                   | The asynchronous function to track. It can return `{ data: TData }` or `{ error: TError }`. |
-| `options?` | `{ loading?: React.ReactNode, success?: (data: TData) => React.ReactNode, error?: (error: TError) => React.ReactNode }` | Custom JSX to render for loading, success, and error states.                                |
+| `options?` | `{ loading?: React.ReactNode, success?: (data: TData) => React.ReactNode, error?: (error: TError) => React.ReactNode }` | (Optional) Custom JSX to render for loading, success, and error states.                     |
 
 ### Return Values
 

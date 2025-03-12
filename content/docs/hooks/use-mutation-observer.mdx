@@ -68,8 +68,8 @@ export function Component() {
 
 ### Parameters
 
-| Name       | Type                                          | Description                                                                 | Default                                                                     |
-| ---------- | --------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
-| `ref`      | `React.MutableRefObject<HTMLElement \| null>` | A ref to the DOM element to observe.                                        | -                                                                           |
-| `callback` | `MutationCallback`                            | A callback function that will be called when mutations are observed.        | -                                                                           |
-| `options?` | `MutationObserverInit`                        | Options for the `MutationObserver` (e.g., `attributes`, `childList`, etc.). | `{ attributes: true, characterData: true, childList: true, subtree: true }` |
+| Name       | Type                                          | Description                                                                            | Default                                                                     |
+| ---------- | --------------------------------------------- | -------------------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| `ref`      | `React.MutableRefObject<HTMLElement \| null>` | A ref to the DOM element to observe.                                                   | -                                                                           |
+| `callback` | `MutationCallback`                            | A callback function that will be called when mutations are observed.                   | -                                                                           |
+| `options?` | `MutationObserverInit`                        | (Optional) Options for the `MutationObserver` (e.g., `attributes`, `childList`, etc.). | `{ attributes: true, characterData: true, childList: true, subtree: true }` |
