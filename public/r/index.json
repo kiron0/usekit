@@ -642,6 +642,54 @@
           "path": "registry/hooks/use-set.tsx"
         }
       ]
+    },
+    {
+      "name": "use-throttle",
+      "title": "Use Throttle",
+      "description": "Throttle computationally expensive operations with useThrottle.",
+      "type": "registry:hook",
+      "files": [
+        {
+          "type": "registry:hook",
+          "path": "registry/hooks/use-throttle.tsx"
+        }
+      ]
+    },
+    {
+      "name": "use-continuous-retry",
+      "title": "Use Continuous Retry",
+      "description": "Automates retries of a callback function until it succeeds with useContinuousRetry.",
+      "type": "registry:hook",
+      "files": [
+        {
+          "type": "registry:hook",
+          "path": "registry/hooks/use-continuous-retry.tsx"
+        }
+      ]
+    },
+    {
+      "name": "use-event-listener",
+      "title": "Use Event Listener",
+      "description": "Listen for events on a target element with useEventListener.",
+      "type": "registry:hook",
+      "files": [
+        {
+          "type": "registry:hook",
+          "path": "registry/hooks/use-event-listener.tsx"
+        }
+      ]
+    },
+    {
+      "name": "use-random-interval",
+      "title": "Use Random Interval",
+      "description": "Execute a callback function at a random interval with useRandomInterval.",
+      "type": "registry:hook",
+      "files": [
+        {
+          "type": "registry:hook",
+          "path": "registry/hooks/use-random-interval.tsx"
+        }
+      ]
     }
   ]
 }

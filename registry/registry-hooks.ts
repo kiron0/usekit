@@ -682,6 +682,57 @@ export const hooks: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "use-throttle",
+    title: "Use Throttle",
+    description:
+      "Throttle computationally expensive operations with useThrottle.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "hooks/use-throttle.tsx",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-continuous-retry",
+    title: "Use Continuous Retry",
+    description:
+      "Automates retries of a callback function until it succeeds with useContinuousRetry.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "hooks/use-continuous-retry.tsx",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-event-listener",
+    title: "Use Event Listener",
+    description: "Listen for events on a target element with useEventListener.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "hooks/use-event-listener.tsx",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-random-interval",
+    title: "Use Random Interval",
+    description:
+      "Execute a callback function at a random interval with useRandomInterval.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "hooks/use-random-interval.tsx",
+        type: "registry:hook",
+      },
+    ],
+  },
 ]
 
 export default hooks

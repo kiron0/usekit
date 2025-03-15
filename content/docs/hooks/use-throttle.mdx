@@ -1,0 +1,90 @@
+---
+title: useThrottle
+description: Throttle computationally expensive operations with useThrottle.
+---
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://usekit.kiron.dev/r/use-throttle
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="use-throttle" />
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+```tsx {3, 7}
+import * as React from "react"
+
+import { useThrottle } from "@/hooks/use-throttle"
+
+export function Component() {
+  const [val, setVal] = React.useState("")
+  const throttledValue = useThrottle(val, 300)
+
+  return (
+    <section>
+      <h1>useThrottle</h1>
+      <input
+        placeholder="Type some text"
+        style={{ background: "var(--charcoal)" }}
+        type="text"
+        value={val}
+        onChange={(e) => {
+          setVal(e.target.value)
+        }}
+      />
+      <p>Val: {val}</p>
+      <p>Throttled: {throttledValue}</p>
+    </section>
+  )
+}
+```
+
+### Example Usage
+
+```tsx
+const throttledValue = useThrottle(inputValue, 300)
+```
+
+- `inputValue`: The value to throttle (e.g., a search query or scroll position).
+- `300`: The interval in milliseconds (e.g., update at most every 300ms).
+- `throttledValue`: The throttled value that updates at most once every 300ms.
+
+## API Reference
+
+### Parameters
+
+| Name       | Type     | Description                                                                    | Default Value |
+| ---------- | -------- | ------------------------------------------------------------------------------ | ------------- |
+| `value`    | `T`      | The value to throttle. This can be of any type (string, number, object, etc.). | -             |
+| `interval` | `number` | The interval in milliseconds at which the throttled value is updated.          | `500`         |
+
+### Return Values
+
+| Name             | Type | Description                                                       |
+| ---------------- | ---- | ----------------------------------------------------------------- |
+| `throttledValue` | `T`  | The throttled value, updated at most once per specified interval. |
