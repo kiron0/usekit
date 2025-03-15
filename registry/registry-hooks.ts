@@ -720,6 +720,19 @@ export const hooks: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "use-random-interval",
+    title: "Use Random Interval",
+    description:
+      "Execute a callback function at a random interval with useRandomInterval.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "hooks/use-random-interval.tsx",
+        type: "registry:hook",
+      },
+    ],
+  },
 ]
 
 export default hooks

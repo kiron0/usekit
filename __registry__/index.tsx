@@ -846,6 +846,22 @@ export const Index: Record<string, any> = {
     ),
     source: "",
   },
+  "use-random-interval": {
+    name: "use-random-interval",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-random-interval.tsx",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/hooks/use-random-interval.tsx")
+    ),
+    source: "",
+  },
   "use-copy-to-clipboard-demo": {
     name: "use-copy-to-clipboard-demo",
     type: "registry:example",

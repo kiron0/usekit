@@ -324,7 +324,6 @@ export const docsConfig: DocsConfig = {
           title: "useRandomInterval",
           href: "/docs/hooks/use-random-interval",
           items: [],
-          label: "Soon",
         },
       ],
     },

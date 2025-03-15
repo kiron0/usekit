@@ -678,6 +678,18 @@
           "path": "registry/hooks/use-event-listener.tsx"
         }
       ]
+    },
+    {
+      "name": "use-random-interval",
+      "title": "Use Random Interval",
+      "description": "Execute a callback function at a random interval with useRandomInterval.",
+      "type": "registry:hook",
+      "files": [
+        {
+          "type": "registry:hook",
+          "path": "registry/hooks/use-random-interval.tsx"
+        }
+      ]
     }
   ]
 }
