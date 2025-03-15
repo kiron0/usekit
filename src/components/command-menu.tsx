@@ -72,7 +72,7 @@ export function CommandMenu({ ...props }: DialogProps) {
           <CommandEmpty>No results found.</CommandEmpty>
           <CommandGroup heading="Links">
             {docsConfig.mainNav
-              .filter((navitem) => !navitem.external)
+              .filter((navItem) => !navItem.external)
               .map((navItem) => (
                 <CommandItem
                   key={navItem.href}
@@ -96,9 +96,7 @@ export function CommandMenu({ ...props }: DialogProps) {
                     runCommand(() => router.push(navItem.href as string))
                   }}
                 >
-                  <div className="mr-2 flex h-4 w-4 items-center justify-center">
-                    <Circle className="h-3 w-3" />
-                  </div>
+                  <Circle />
                   {navItem.title}
                 </CommandItem>
               ))}
