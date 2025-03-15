@@ -786,6 +786,20 @@ export const Index: Record<string, any> = {
     component: React.lazy(() => import("registry/hooks/use-queue.tsx")),
     source: "",
   },
+  "use-set": {
+    name: "use-set",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-set.tsx",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(() => import("registry/hooks/use-set.tsx")),
+    source: "",
+  },
   "use-copy-to-clipboard-demo": {
     name: "use-copy-to-clipboard-demo",
     type: "registry:example",

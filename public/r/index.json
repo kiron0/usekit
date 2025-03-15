@@ -630,6 +630,18 @@
           "path": "registry/hooks/use-queue.tsx"
         }
       ]
+    },
+    {
+      "name": "use-set",
+      "title": "Use Set",
+      "description": "Synchronize and update state based on the Set data structure with useSet.",
+      "type": "registry:hook",
+      "files": [
+        {
+          "type": "registry:hook",
+          "path": "registry/hooks/use-set.tsx"
+        }
+      ]
     }
   ]
 }
