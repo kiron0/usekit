@@ -10,7 +10,7 @@ type AsyncStatus<TData, TError> =
   | { state: "success"; data: TData }
   | { state: "error"; error: TError }
 
-type FeedbackOptions<TData, TError> = {
+type Options<TData, TError> = {
   loading?: React.ReactNode
   success?: (data: TData) => React.ReactNode
   error?: (error: TError) => React.ReactNode
@@ -18,7 +18,7 @@ type FeedbackOptions<TData, TError> = {
 
 export function useAsyncStatus<TArgs extends unknown[], TData, TError>(
   asyncFn: AsyncFunction<TArgs, TData, TError> | undefined,
-  options?: FeedbackOptions<TData, TError>
+  options?: Options<TData, TError>
 ): [
   trigger: (...args: TArgs) => Promise<void>,
   status: AsyncStatus<TData, TError>,

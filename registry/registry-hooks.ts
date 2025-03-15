@@ -669,6 +669,19 @@ export const hooks: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "use-set",
+    title: "Use Set",
+    description:
+      "Synchronize and update state based on the Set data structure with useSet.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "hooks/use-set.tsx",
+        type: "registry:hook",
+      },
+    ],
+  },
 ]
 
 export default hooks

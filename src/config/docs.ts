@@ -304,7 +304,6 @@ export const docsConfig: DocsConfig = {
           title: "useSet",
           href: "/docs/hooks/use-set",
           items: [],
-          label: "Soon",
         },
         {
           title: "useThrottle",
