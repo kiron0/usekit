@@ -319,7 +319,6 @@ export const docsConfig: DocsConfig = {
           title: "useEventListener",
           href: "/docs/hooks/use-event-listener",
           items: [],
-          label: "Soon",
         },
         {
           title: "useRandomInterval",

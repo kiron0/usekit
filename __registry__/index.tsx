@@ -830,6 +830,22 @@ export const Index: Record<string, any> = {
     ),
     source: "",
   },
+  "use-event-listener": {
+    name: "use-event-listener",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-event-listener.tsx",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/hooks/use-event-listener.tsx")
+    ),
+    source: "",
+  },
   "use-copy-to-clipboard-demo": {
     name: "use-copy-to-clipboard-demo",
     type: "registry:example",

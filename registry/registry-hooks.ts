@@ -708,6 +708,18 @@ export const hooks: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "use-event-listener",
+    title: "Use Event Listener",
+    description: "Listen for events on a target element with useEventListener.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "hooks/use-event-listener.tsx",
+        type: "registry:hook",
+      },
+    ],
+  },
 ]
 
 export default hooks

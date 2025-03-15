@@ -666,6 +666,18 @@
           "path": "registry/hooks/use-continuous-retry.tsx"
         }
       ]
+    },
+    {
+      "name": "use-event-listener",
+      "title": "Use Event Listener",
+      "description": "Listen for events on a target element with useEventListener.",
+      "type": "registry:hook",
+      "files": [
+        {
+          "type": "registry:hook",
+          "path": "registry/hooks/use-event-listener.tsx"
+        }
+      ]
     }
   ]
 }

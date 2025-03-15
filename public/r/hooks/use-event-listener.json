@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-event-listener",
+  "type": "registry:hook",
+  "title": "Use Event Listener",
+  "description": "Listen for events on a target element with useEventListener.",
+  "files": [
+    {
+      "path": "registry/hooks/use-event-listener.tsx",
+      "content": "import * as React from \"react\"\n\ntype EventOptions = {\n  capture?: boolean\n  passive?: boolean\n  once?: boolean\n}\n\nexport function useEventListener<\n  T extends HTMLElement | Window | Document | null,\n  K extends keyof HTMLElementEventMap,\n>(\n  target: React.RefObject<T> | T | Window | Document,\n  eventName: K,\n  handler: (event: HTMLElementEventMap[K]) => void,\n  options?: EventOptions\n): void\n\nexport function useEventListener<\n  T extends HTMLElement | Window | Document | null,\n  K extends keyof WindowEventMap,\n>(\n  target: React.RefObject<T> | T | Window | Document,\n  eventName: K,\n  handler: (event: WindowEventMap[K]) => void,\n  options?: EventOptions\n): void\n\nexport function useEventListener<\n  T extends HTMLElement | Window | Document | null,\n  K extends keyof DocumentEventMap,\n>(\n  target: React.RefObject<T> | T | Window | Document,\n  eventName: K,\n  handler: (event: DocumentEventMap[K]) => void,\n  options?: EventOptions\n): void\n\nexport function useEventListener<\n  T extends HTMLElement | Window | Document | null,\n  E extends Event = Event,\n>(\n  target: React.RefObject<T> | T | Window | Document,\n  eventName: string,\n  handler: (event: E) => void,\n  options?: EventOptions\n): void\n\nexport function useEventListener<\n  T extends HTMLElement | Window | Document | null,\n  E extends Event = Event,\n>(\n  target: React.RefObject<T> | T | Window | Document,\n  eventName: string,\n  handler: (event: E) => void,\n  options: EventOptions = {}\n) {\n  const savedHandler = React.useRef(handler)\n\n  React.useLayoutEffect(() => {\n    savedHandler.current = handler\n  }, [handler])\n\n  React.useEffect(() => {\n    const element = target && \"current\" in target ? target.current : target\n    if (!element?.addEventListener) return\n\n    const eventListener = (event: E) => savedHandler.current(event)\n    const opts = {\n      capture: options.capture,\n      passive: options.passive,\n      once: options.once,\n    }\n\n    element.addEventListener(eventName, eventListener as EventListener, opts)\n\n    return () => {\n      element.removeEventListener(\n        eventName,\n        eventListener as EventListener,\n        opts\n      )\n    }\n  }, [eventName, target, options.capture, options.passive, options.once])\n}\n",
+      "type": "registry:hook"
+    }
+  ]
+}

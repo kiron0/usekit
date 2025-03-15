@@ -1,0 +1,120 @@
+---
+title: useEventListener
+description: Automates retries of a callback function until it succeeds with useContinuousRetry.
+---
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://usekit.kiron.dev/r/use-continuous-retry
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="use-event-listener" />
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+```tsx {4, 17}
+import * as React from "react"
+import { X } from "lucide-react"
+
+import { useEventListener } from "@/hooks/use-event-listener"
+
+export function Component() {
+  const ref = React.useRef(null)
+  const [isOpen, setIsOpen] = React.useState(false)
+
+  const handleClick = (e) => {
+    const element = ref.current
+    if (element && !element.contains(e.target)) {
+      setIsOpen(false)
+    }
+  }
+
+  useEventListener(document, "mousedown", handleClick)
+
+  return (
+    <section>
+      <h1>useEventListener</h1>
+      <div style={{ minHeight: "200vh" }}>
+        <button className="link" onClick={() => setIsOpen(true)}>
+          Click me
+        </button>
+      </div>
+      {isOpen && (
+        <dialog ref={ref}>
+          <button onClick={() => setIsOpen(false)}>
+            <X />
+          </button>
+          <h2>Modal</h2>
+          <p>
+            Click outside the modal to close (or use the button) whatever you
+            prefer.
+          </p>
+        </dialog>
+      )}
+    </section>
+  )
+}
+```
+
+### Usage Examples
+
+**Standard DOM Element:**
+
+```tsx
+useEventListener(document, "mousedown", (e: MouseEvent) => {
+  console.log("Document click:", e.clientX, e.clientY)
+})
+```
+
+**React Ref:**
+
+```tsx
+const buttonRef = useRef<HTMLButtonElement>(null)
+
+useEventListener(buttonRef, "click", (e: MouseEvent) => {
+  console.log("Button clicked!", e.currentTarget)
+})
+```
+
+**Window Events with Options:**
+
+```tsx
+useEventListener(window, "resize", () => console.log("Window resized"), {
+  passive: true,
+})
+```
+
+## API Reference
+
+### Parameters
+
+| Name        | Type                                                                  | Description                                         | Required |
+| ----------- | --------------------------------------------------------------------- | --------------------------------------------------- | -------- |
+| `target`    | `RefObject<Element>` \| `Element` \| `Window` \| `Document` \| `null` | DOM element, React ref, or global target            | Yes      |
+| `eventName` | `string`                                                              | Event name to listen for (e.g., "click", "keydown") | Yes      |
+| `handler`   | `(event: Event) => void`                                              | Callback function to execute when event occurs      | Yes      |
+| `options`   | `{ capture?: boolean, passive?: boolean, once?: boolean }`            | Event listener options                              | No       |
