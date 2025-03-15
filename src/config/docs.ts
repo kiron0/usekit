@@ -309,7 +309,6 @@ export const docsConfig: DocsConfig = {
           title: "useThrottle",
           href: "/docs/hooks/use-throttle",
           items: [],
-          label: "Soon",
         },
         {
           title: "useContinuousRetry",

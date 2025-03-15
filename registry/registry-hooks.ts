@@ -682,6 +682,19 @@ export const hooks: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "use-throttle",
+    title: "Use Throttle",
+    description:
+      "Throttle computationally expensive operations with useThrottle.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "hooks/use-throttle.tsx",
+        type: "registry:hook",
+      },
+    ],
+  },
 ]
 
 export default hooks

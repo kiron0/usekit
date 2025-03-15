@@ -642,6 +642,18 @@
           "path": "registry/hooks/use-set.tsx"
         }
       ]
+    },
+    {
+      "name": "use-throttle",
+      "title": "Use Throttle",
+      "description": "Throttle computationally expensive operations with useThrottle.",
+      "type": "registry:hook",
+      "files": [
+        {
+          "type": "registry:hook",
+          "path": "registry/hooks/use-throttle.tsx"
+        }
+      ]
     }
   ]
 }

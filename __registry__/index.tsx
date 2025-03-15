@@ -800,6 +800,20 @@ export const Index: Record<string, any> = {
     component: React.lazy(() => import("registry/hooks/use-set.tsx")),
     source: "",
   },
+  "use-throttle": {
+    name: "use-throttle",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-throttle.tsx",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(() => import("registry/hooks/use-throttle.tsx")),
+    source: "",
+  },
   "use-copy-to-clipboard-demo": {
     name: "use-copy-to-clipboard-demo",
     type: "registry:example",
