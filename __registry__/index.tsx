@@ -814,6 +814,22 @@ export const Index: Record<string, any> = {
     component: React.lazy(() => import("registry/hooks/use-throttle.tsx")),
     source: "",
   },
+  "use-continuous-retry": {
+    name: "use-continuous-retry",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-continuous-retry.tsx",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/hooks/use-continuous-retry.tsx")
+    ),
+    source: "",
+  },
   "use-copy-to-clipboard-demo": {
     name: "use-copy-to-clipboard-demo",
     type: "registry:example",

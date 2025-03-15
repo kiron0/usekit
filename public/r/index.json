@@ -654,6 +654,18 @@
           "path": "registry/hooks/use-throttle.tsx"
         }
       ]
+    },
+    {
+      "name": "use-continuous-retry",
+      "title": "Use Continuous Retry",
+      "description": "Automates retries of a callback function until it succeeds with useContinuousRetry.",
+      "type": "registry:hook",
+      "files": [
+        {
+          "type": "registry:hook",
+          "path": "registry/hooks/use-continuous-retry.tsx"
+        }
+      ]
     }
   ]
 }

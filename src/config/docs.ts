@@ -314,7 +314,6 @@ export const docsConfig: DocsConfig = {
           title: "useContinuousRetry",
           href: "/docs/hooks/use-continuous-retry",
           items: [],
-          label: "Soon",
         },
         {
           title: "useEventListener",

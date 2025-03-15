@@ -1,0 +1,82 @@
+---
+title: useContinuousRetry
+description: Automates retries of a callback function until it succeeds with useContinuousRetry.
+---
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://usekit.kiron.dev/r/use-continuous-retry
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="use-continuous-retry" />
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+```tsx {3, 8-16}
+import * as React from "react"
+
+import { useContinuousRetry } from "@/hooks/use-continuous-retry"
+
+export function Component() {
+  const [connectionAttempts, setAttempts] = React.useState(0)
+
+  const isConnected = useContinuousRetry(
+    async () => {
+      const success = await checkConnection()
+      setAttempts((prev) => prev + 1)
+      return success
+    },
+    1000,
+    { maxRetries: 5 }
+  )
+
+  return (
+    <div>
+      <p>Connection status: {isConnected ? "Connected" : "Retrying..."}</p>
+      <p>Attempts made: {connectionAttempts}</p>
+    </div>
+  )
+}
+```
+
+## API Reference
+
+### Parameters
+
+| Name       | Type                                        | Description                                             | Default Value |
+| ---------- | ------------------------------------------- | ------------------------------------------------------- | ------------- |
+| `callback` | `() => boolean` or `() => Promise<boolean>` | Function to execute until it returns/resolves to `true` | -             |
+| `interval` | `number`                                    | Delay between retry attempts in milliseconds            | `100`         |
+| `options?`  | `{ maxRetries?: number }`                   | Optional configuration with maximum retry attempts      | `undefined`   |
+
+---
+
+### Return Values
+
+| Name          | Type      | Description                                                           |
+| ------------- | --------- | --------------------------------------------------------------------- |
+| `hasResolved` | `boolean` | `true` if the callback succeeded, `false` if still retrying or failed |

@@ -695,6 +695,19 @@ export const hooks: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "use-continuous-retry",
+    title: "Use Continuous Retry",
+    description:
+      "Automates retries of a callback function until it succeeds with useContinuousRetry.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "hooks/use-continuous-retry.tsx",
+        type: "registry:hook",
+      },
+    ],
+  },
 ]
 
 export default hooks
