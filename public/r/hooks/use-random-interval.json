@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-random-interval",
+  "type": "registry:hook",
+  "title": "Use Random Interval",
+  "description": "Execute a callback function at a random interval with useRandomInterval.",
+  "files": [
+    {
+      "path": "registry/hooks/use-random-interval.tsx",
+      "content": "import * as React from \"react\"\r\n\r\ntype Options = {\r\n  minDelay: number\r\n  maxDelay: number\r\n}\r\n\r\nexport function useRandomInterval(\r\n  cb: () => void,\r\n  options: Options\r\n): () => void {\r\n  const { minDelay, maxDelay } = options\r\n  const timeoutId = React.useRef<number>(0)\r\n  const isMounted = React.useRef(false)\r\n  const savedCallback = React.useRef(cb)\r\n\r\n  React.useEffect(() => {\r\n    savedCallback.current = cb\r\n  }, [cb])\r\n\r\n  const clear = React.useCallback(() => {\r\n    window.clearTimeout(timeoutId.current)\r\n    isMounted.current = false\r\n  }, [])\r\n\r\n  React.useEffect(() => {\r\n    isMounted.current = true\r\n\r\n    const getRandomNumber = (min: number, max: number) =>\r\n      Math.floor(Math.random() * (max - min + 1)) + min\r\n\r\n    const tick = () => {\r\n      if (!isMounted.current) return\r\n\r\n      savedCallback.current()\r\n\r\n      const nextTick = () => {\r\n        timeoutId.current = window.setTimeout(\r\n          tick,\r\n          getRandomNumber(minDelay, maxDelay)\r\n        )\r\n      }\r\n\r\n      nextTick()\r\n    }\r\n\r\n    timeoutId.current = window.setTimeout(\r\n      tick,\r\n      getRandomNumber(minDelay, maxDelay)\r\n    )\r\n\r\n    return clear\r\n  }, [minDelay, maxDelay, clear])\r\n\r\n  return clear\r\n}\r\n",
+      "type": "registry:hook"
+    }
+  ]
+}

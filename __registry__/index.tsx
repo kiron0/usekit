@@ -800,6 +800,68 @@ export const Index: Record<string, any> = {
     component: React.lazy(() => import("registry/hooks/use-set.tsx")),
     source: "",
   },
+  "use-throttle": {
+    name: "use-throttle",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-throttle.tsx",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(() => import("registry/hooks/use-throttle.tsx")),
+    source: "",
+  },
+  "use-continuous-retry": {
+    name: "use-continuous-retry",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-continuous-retry.tsx",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/hooks/use-continuous-retry.tsx")
+    ),
+    source: "",
+  },
+  "use-event-listener": {
+    name: "use-event-listener",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-event-listener.tsx",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/hooks/use-event-listener.tsx")
+    ),
+    source: "",
+  },
+  "use-random-interval": {
+    name: "use-random-interval",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-random-interval.tsx",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/hooks/use-random-interval.tsx")
+    ),
+    source: "",
+  },
   "use-copy-to-clipboard-demo": {
     name: "use-copy-to-clipboard-demo",
     type: "registry:example",

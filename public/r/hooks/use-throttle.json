@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-throttle",
+  "type": "registry:hook",
+  "title": "Use Throttle",
+  "description": "Throttle computationally expensive operations with useThrottle.",
+  "files": [
+    {
+      "path": "registry/hooks/use-throttle.tsx",
+      "content": "import React from \"react\"\r\n\r\nexport function useThrottle<T>(value: T, interval: number = 500): T {\r\n  const [throttledValue, setThrottledValue] = React.useState(value)\r\n  const lastUpdated = React.useRef<number | null>(null)\r\n  const timeoutId = React.useRef<ReturnType<typeof setTimeout> | null>(null)\r\n\r\n  React.useEffect(() => {\r\n    const now = Date.now()\r\n\r\n    if (lastUpdated.current === null || now >= lastUpdated.current + interval) {\r\n      lastUpdated.current = now\r\n      setThrottledValue(value)\r\n    } else {\r\n      const remainingTime = lastUpdated.current + interval - now\r\n\r\n      if (timeoutId.current) {\r\n        clearTimeout(timeoutId.current)\r\n      }\r\n\r\n      timeoutId.current = setTimeout(() => {\r\n        lastUpdated.current = Date.now()\r\n        setThrottledValue(value)\r\n      }, remainingTime)\r\n    }\r\n\r\n    return () => {\r\n      if (timeoutId.current) {\r\n        clearTimeout(timeoutId.current)\r\n        timeoutId.current = null\r\n      }\r\n    }\r\n  }, [value, interval])\r\n\r\n  return throttledValue\r\n}\r\n",
+      "type": "registry:hook"
+    }
+  ]
+}

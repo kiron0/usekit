@@ -1,0 +1,74 @@
+---
+title: useRandomInterval
+description: Execute a callback function at a random interval with useRandomInterval.
+---
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://usekit.kiron.dev/r/use-random-interval
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="use-random-interval" />
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+```tsx {3, 8-11}
+import * as React from "react"
+
+import { useRandomInterval } from "@/hooks/use-random-interval"
+
+export function Component() {
+  const [frame, setFrame] = React.useState(0)
+
+  const clear = useRandomInterval(() => setFrame((prev) => prev + 1), {
+    minDelay: 100,
+    maxDelay: 1000,
+  })
+
+  return (
+    <div>
+      <p>Animation Frame: {frame}</p>
+      <button onClick={clear}>Stop Animation</button>
+    </div>
+  )
+}
+```
+
+## API Reference
+
+### Parameters
+
+| Name      | Type                                     | Description                                      | Required |
+| --------- | ---------------------------------------- | ------------------------------------------------ | -------- |
+| `cb`      | `() => void`                             | Callback function to execute at random intervals | Yes      |
+| `options` | `{ minDelay: number, maxDelay: number }` | Configuration object with delay range            | Yes      |
+
+### Return Values
+
+| Type         | Description                                            |
+| ------------ | ------------------------------------------------------ |
+| `() => void` | Cleanup function to stop the random interval execution |
