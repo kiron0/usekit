@@ -241,6 +241,11 @@ export const docsConfig: DocsConfig = {
           items: [],
         },
         {
+          title: "useMeasure",
+          href: "/docs/hooks/use-measure",
+          items: [],
+        },
+        {
           title: "useClickAway",
           href: "/docs/hooks/use-click-away",
           items: [],
