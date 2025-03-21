@@ -411,4 +411,14 @@ export const hooksExamples: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "use-dropzone-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "examples/use-dropzone-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
 ]

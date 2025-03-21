@@ -727,6 +727,9 @@ export const hooks: Registry["items"] = [
     title: "Use Event Listener",
     description: "Listen for events on a target element with useEventListener.",
     type: "registry:hook",
+    registryDependencies: [
+      "https://usekit.kiron.dev/r/use-isomorphic-layout-effect",
+    ],
     files: [
       {
         path: "hooks/use-event-listener.tsx",
@@ -743,6 +746,20 @@ export const hooks: Registry["items"] = [
     files: [
       {
         path: "hooks/use-random-interval.tsx",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-dropzone",
+    title: "Use Dropzone",
+    description:
+      "Drag and drop files into a dropzone with useDropzone, providing options to customize the dropzone.",
+    type: "registry:hook",
+    registryDependencies: ["https://usekit.kiron.dev/r/use-event-listener"],
+    files: [
+      {
+        path: "hooks/use-dropzone.tsx",
         type: "registry:hook",
       },
     ],

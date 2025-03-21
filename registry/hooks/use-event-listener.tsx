@@ -1,85 +1,83 @@
 import * as React from "react"
 
-type EventOptions = {
-  capture?: boolean
-  passive?: boolean
-  once?: boolean
-}
+import { useIsomorphicLayoutEffect } from "./use-isomorphic-layout-effect"
 
-export function useEventListener<
-  T extends HTMLElement | Window | Document | null,
-  K extends keyof HTMLElementEventMap,
->(
-  target: React.RefObject<T> | T | Window | Document,
+function useEventListener<K extends keyof MediaQueryListEventMap>(
   eventName: K,
-  handler: (event: HTMLElementEventMap[K]) => void,
-  options?: EventOptions
+  handler: (event: MediaQueryListEventMap[K]) => void,
+  element: React.RefObject<MediaQueryList>,
+  options?: boolean | AddEventListenerOptions
 ): void
 
-export function useEventListener<
-  T extends HTMLElement | Window | Document | null,
-  K extends keyof WindowEventMap,
->(
-  target: React.RefObject<T> | T | Window | Document,
+function useEventListener<K extends keyof WindowEventMap>(
   eventName: K,
   handler: (event: WindowEventMap[K]) => void,
-  options?: EventOptions
+  element?: undefined,
+  options?: boolean | AddEventListenerOptions
 ): void
 
-export function useEventListener<
-  T extends HTMLElement | Window | Document | null,
-  K extends keyof DocumentEventMap,
+function useEventListener<
+  K extends keyof HTMLElementEventMap & keyof SVGElementEventMap,
+  T extends Element = K extends keyof HTMLElementEventMap
+    ? HTMLDivElement
+    : SVGElement,
 >(
-  target: React.RefObject<T> | T | Window | Document,
+  eventName: K,
+  handler:
+    | ((event: HTMLElementEventMap[K]) => void)
+    | ((event: SVGElementEventMap[K]) => void),
+  element: React.RefObject<T | null>,
+  options?: boolean | AddEventListenerOptions
+): void
+
+function useEventListener<K extends keyof DocumentEventMap>(
   eventName: K,
   handler: (event: DocumentEventMap[K]) => void,
-  options?: EventOptions
+  element: React.RefObject<Document>,
+  options?: boolean | AddEventListenerOptions
 ): void
 
-export function useEventListener<
-  T extends HTMLElement | Window | Document | null,
-  E extends Event = Event,
+function useEventListener<
+  KW extends keyof WindowEventMap,
+  KH extends keyof HTMLElementEventMap & keyof SVGElementEventMap,
+  KM extends keyof MediaQueryListEventMap,
+  T extends HTMLElement | SVGAElement | MediaQueryList = HTMLElement,
 >(
-  target: React.RefObject<T> | T | Window | Document,
-  eventName: string,
-  handler: (event: E) => void,
-  options?: EventOptions
-): void
-
-export function useEventListener<
-  T extends HTMLElement | Window | Document | null,
-  E extends Event = Event,
->(
-  target: React.RefObject<T> | T | Window | Document,
-  eventName: string,
-  handler: (event: E) => void,
-  options: EventOptions = {}
+  eventName: KW | KH | KM,
+  handler: (
+    event:
+      | WindowEventMap[KW]
+      | HTMLElementEventMap[KH]
+      | SVGElementEventMap[KH]
+      | MediaQueryListEventMap[KM]
+      | Event
+  ) => void,
+  element?: React.RefObject<T>,
+  options?: boolean | AddEventListenerOptions
 ) {
   const savedHandler = React.useRef(handler)
 
-  React.useLayoutEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     savedHandler.current = handler
   }, [handler])
 
   React.useEffect(() => {
-    const element = target && "current" in target ? target.current : target
-    if (!element?.addEventListener) return
+    const targetElement: T | Window = element?.current ?? window
 
-    const eventListener = (event: E) => savedHandler.current(event)
-    const opts = {
-      capture: options.capture,
-      passive: options.passive,
-      once: options.once,
+    if (!targetElement?.addEventListener) {
+      return
     }
 
-    element.addEventListener(eventName, eventListener as EventListener, opts)
+    const listener: typeof handler = (event) => {
+      savedHandler.current(event)
+    }
+
+    targetElement.addEventListener(eventName, listener, options)
 
     return () => {
-      element.removeEventListener(
-        eventName,
-        eventListener as EventListener,
-        opts
-      )
+      targetElement.removeEventListener(eventName, listener, options)
     }
-  }, [eventName, target, options.capture, options.passive, options.once])
+  }, [eventName, element, options])
 }
+
+export { useEventListener }

@@ -849,7 +849,9 @@ export const Index: Record<string, any> = {
   "use-event-listener": {
     name: "use-event-listener",
     type: "registry:hook",
-    registryDependencies: undefined,
+    registryDependencies: [
+      "https://usekit.kiron.dev/r/use-isomorphic-layout-effect",
+    ],
     files: [
       {
         path: "registry/hooks/use-event-listener.tsx",
@@ -876,6 +878,20 @@ export const Index: Record<string, any> = {
     component: React.lazy(
       () => import("registry/hooks/use-random-interval.tsx")
     ),
+    source: "",
+  },
+  "use-dropzone": {
+    name: "use-dropzone",
+    type: "registry:hook",
+    registryDependencies: ["https://usekit.kiron.dev/r/use-event-listener"],
+    files: [
+      {
+        path: "registry/hooks/use-dropzone.tsx",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(() => import("registry/examples/use-dropzone-demo")),
     source: "",
   },
   "use-copy-to-clipboard-demo": {
@@ -1494,6 +1510,20 @@ export const Index: Record<string, any> = {
       },
     ],
     component: React.lazy(() => import("registry/examples/use-list-demo")),
+    source: "",
+  },
+  "use-dropzone-demo": {
+    name: "use-dropzone-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-dropzone-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(() => import("registry/examples/use-dropzone-demo")),
     source: "",
   },
 }

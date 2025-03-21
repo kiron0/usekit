@@ -1,0 +1,106 @@
+---
+title: useDropzone
+description: Drag and drop files into a dropzone with useDropzone, providing options to customize the dropzone.
+---
+
+<ComponentPreview name="use-dropzone-demo" />
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://usekit.kiron.dev/r/use-dropzone
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Install the following dependencies:</Step>
+
+```bash
+npm install lucide-react
+```
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="use-dropzone" />
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+```tsx {1, 4, 8-12}
+import * as React from "react"
+
+import { cn } from "@/lib/utils"
+import { useDropZone } from "@/hooks/use-dropzone"
+
+export function Component() {
+  const dropZoneRef = React.useRef<HTMLDivElement>(null)
+  const { files, isOverDropZone } = useDropZone(dropZoneRef, {
+    onDrop: (files) => {
+      console.log("Dropped files:", files)
+    },
+  })
+
+  return (
+    <div className="space-y-4">
+      <div
+        ref={dropZoneRef}
+        className={cn(
+          "rounded-2xl border-2 border-dashed p-8",
+          isOverDropZone
+            ? "border-blue-500 bg-neutral-400/0"
+            : "border-neutral-500 bg-neutral-400/15"
+        )}
+      >
+        {files ? (
+          <p>Dropped {files.length} files</p>
+        ) : isOverDropZone ? (
+          <p>Drop files here</p>
+        ) : (
+          <p>Drag files here</p>
+        )}
+      </div>
+      <p>Here is the filenames dropped:</p>
+      <ul>{files?.map((file) => <li key={file.name}>{file.name}</li>)}</ul>
+    </div>
+  )
+}
+```
+
+## API Reference
+
+### Parameters
+
+| Name                   | Type                                                           | Description                                                 | Default         |
+| ---------------------- | -------------------------------------------------------------- | ----------------------------------------------------------- | --------------- |
+| `borderRadius?`        | `number`                                                       | (Optional) The radius of the border corners.                | `0.5`           |
+| `borderWidth?`         | `number`                                                       | (Optional) The width of the border.                         | `1`             |
+| `actionPosition?`      | `"top-left" \| "top-right" \| "bottom-left" \| "bottom-right"` | (Optional) The position of the action button.               | `"top-right"`   |
+| `measurementPosition?` | `"top-left" \| "top-right" \| "bottom-left" \| "bottom-right"` | (Optional) The position where the measurement is displayed. | `"bottom-left"` |
+| `startMeasure?`        | `boolean`                                                      | (Optional) Whether to start measuring immediately.          | `false`         |
+| `ref?`                 | `React.RefObject<HTMLDivElement \| null>`                      | (Optional) A ref to the element that will be measured.      | -               |
+
+### Return Values
+
+| Name               | Type              | Description                                                         |
+| ------------------ | ----------------- | ------------------------------------------------------------------- |
+| `measurements`     | `Object`          | An object containing the measured dimensions (e.g., width, height). |
+| `MeasureComponent` | `React.Component` | A React component that can be used to render the measurement UI.    |
+| `reset`            | `() => void`      | A function to reset the measurement points.                         |

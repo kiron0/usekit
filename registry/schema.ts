@@ -2,6 +2,7 @@ import { z } from "zod"
 
 export const registryItemTypeSchema = z.enum([
   "registry:hook",
+  "registry:lib",
   "registry:example",
 ])
 
