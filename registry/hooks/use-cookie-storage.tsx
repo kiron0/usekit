@@ -5,7 +5,7 @@ interface CookieOptions {
   path?: string
   domain?: string
   secure?: boolean
-  sameSite?: "Strict" | "Lax" | "None"
+  sameSite?: "strict" | "lax" | "none"
 }
 
 export function useCookieStorage<T>(

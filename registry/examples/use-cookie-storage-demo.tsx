@@ -19,7 +19,7 @@ export default function UseCookieStorageDemo() {
   const [username, setUsername] = useCookieStorage("username", "guest", {
     path: "/",
     expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
-    sameSite: "Lax",
+    sameSite: "lax",
   })
 
   const [preferences, setPreferences] = useCookieStorage<UserPreferences>(
