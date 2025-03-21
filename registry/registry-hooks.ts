@@ -764,6 +764,19 @@ export const hooks: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "use-input-value",
+    title: "Use Input Value",
+    description: "A hook to manage input values with useInputValue.",
+    type: "registry:hook",
+    registryDependencies: ["https://usekit.kiron.dev/r/use-event-listener"],
+    files: [
+      {
+        path: "hooks/use-input-value.tsx",
+        type: "registry:hook",
+      },
+    ],
+  },
 ]
 
 export default hooks

@@ -1,0 +1,86 @@
+---
+title: useInputValue
+description: A hook to manage input values with useInputValue.
+---
+
+<ComponentPreview name="use-input-value-demo" />
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://usekit.kiron.dev/r/use-input-value
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Install the following dependencies:</Step>
+
+```bash
+npm install lucide-react
+```
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="use-input-value" />
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+```tsx {5, 8}
+"use client"
+
+import * as React from "react"
+
+import { useInputValue } from "@/hooks/use-input-value"
+
+export function Component() {
+  const name = useInputValue("useKit")
+
+  return (
+    <div>
+      <input
+        style={{
+          borderRadius: "0.5rem",
+          backgroundColor: "rgba(229, 231, 235, 0.2)",
+          border: "1px solid rgba(229, 231, 235, 0.2)",
+        }}
+        {...name}
+      />
+      <p>Hello, {name.value}!</p>
+    </div>
+  )
+}
+```
+
+## API Reference
+
+### Parameters
+
+| Name      | Type                                               | Description                     | Default Value | Optional |
+| --------- | -------------------------------------------------- | ------------------------------- | ------------- | -------- |
+| `initial` | `string \| number \| boolean \| null \| undefined` | The initial value of the input. | `""`          | Yes      |
+
+### Return Values
+
+| Name       | Type                       | Description                                         |
+| ---------- | -------------------------- | --------------------------------------------------- |
+| `value`    | `string`                   | The current value of the input.                     |
+| `onChange` | `React.ChangeEventHandler` | The event handler to update the value of the input. |

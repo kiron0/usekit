@@ -363,7 +363,6 @@ export const docsConfig: DocsConfig = {
           title: "useInputValue",
           href: "/docs/hooks/use-input-value",
           items: [],
-          label: "Soon",
         },
         {
           title: "useLocation",

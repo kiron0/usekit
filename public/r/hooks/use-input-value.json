@@ -1,0 +1,15 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-input-value",
+  "type": "registry:hook",
+  "title": "Use Input Value",
+  "description": "A hook to manage input values with useInputValue.",
+  "registryDependencies": ["https://usekit.kiron.dev/r/use-event-listener"],
+  "files": [
+    {
+      "path": "registry/hooks/use-input-value.tsx",
+      "content": "import * as React from \"react\"\n\nexport function useInputValue(initialValue: string) {\n  const [value, setValue] = React.useState(initialValue)\n\n  function onChange(event: React.ChangeEvent<HTMLInputElement>) {\n    setValue(event.currentTarget.value)\n  }\n\n  return {\n    value,\n    onChange,\n  }\n}\n",
+      "type": "registry:hook"
+    }
+  ]
+}

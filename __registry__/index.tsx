@@ -892,6 +892,22 @@ export const Index: Record<string, any> = {
     component: React.lazy(() => import("registry/examples/use-dropzone-demo")),
     source: "",
   },
+  "use-input-value": {
+    name: "use-input-value",
+    type: "registry:hook",
+    registryDependencies: ["https://usekit.kiron.dev/r/use-event-listener"],
+    files: [
+      {
+        path: "registry/hooks/use-input-value.tsx",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-input-value-demo")
+    ),
+    source: "",
+  },
   "use-copy-to-clipboard-demo": {
     name: "use-copy-to-clipboard-demo",
     type: "registry:example",
@@ -1522,6 +1538,22 @@ export const Index: Record<string, any> = {
       },
     ],
     component: React.lazy(() => import("registry/examples/use-dropzone-demo")),
+    source: "",
+  },
+  "use-input-value-demo": {
+    name: "use-input-value-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-input-value-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-input-value-demo")
+    ),
     source: "",
   },
 }

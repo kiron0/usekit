@@ -719,6 +719,19 @@
           "path": "registry/hooks/use-dropzone.tsx"
         }
       ]
+    },
+    {
+      "name": "use-input-value",
+      "title": "Use Input Value",
+      "description": "A hook to manage input values with useInputValue.",
+      "type": "registry:hook",
+      "registryDependencies": ["https://usekit.kiron.dev/r/use-event-listener"],
+      "files": [
+        {
+          "type": "registry:hook",
+          "path": "registry/hooks/use-input-value.tsx"
+        }
+      ]
     }
   ]
 }

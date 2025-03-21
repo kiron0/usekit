@@ -421,4 +421,14 @@ export const hooksExamples: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "use-input-value-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "examples/use-input-value-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
 ]
