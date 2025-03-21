@@ -36,7 +36,9 @@ npx shadcn@latest add https://usekit.kiron.dev/r/use-map
 
 ## Usage
 
-```tsx {1, 6-9}
+```tsx {3, 8-11}
+"use client"
+
 import { useMap } from "@/hooks/use-map"
 
 type TeamName = "Jazz" | "Suns"
@@ -83,9 +85,9 @@ export function Component() {
 
 ### Parameters
 
-| Name            | Type               | Description                                                                |
-| --------------- | ------------------ | -------------------------------------------------------------------------- |
-| `initialState?` | `Iterable<[K, V]>` | (Optional) The initial value for the map. Defaults to an empty map (`[]`). |
+| Name           | Type               | Description                                                     | Default Value | Optional |
+| -------------- | ------------------ | --------------------------------------------------------------- | ------------- | -------- |
+| `initialState` | `Iterable<[K, V]>` | The initial value for the map. Defaults to an empty map (`[]`). | `[]`          | Yes      |
 
 ### Return Values
 

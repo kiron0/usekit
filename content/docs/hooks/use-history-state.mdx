@@ -38,7 +38,9 @@ npx shadcn@latest add https://usekit.kiron.dev/r/use-history-state
 
 ## Usage
 
-```tsx {1, 4-6}
+```tsx {3, 6-8}
+"use client"
+
 import { useHistoryState } from "@/hooks/use-history-state"
 
 export function Component() {
@@ -96,8 +98,6 @@ export function Component() {
 8. **`canRedo`**:
    - A boolean indicating whether a redo operation is possible (`future.length > 0`).
 
----
-
 ### Type Definitions
 
 #### `useHistoryState`
@@ -116,8 +116,6 @@ export function useHistoryState<T extends object = object>(
 }
 ```
 
----
-
 ### Internal State Structure
 
 The internal state of the hook is structured as follows:
@@ -129,8 +127,6 @@ The internal state of the hook is structured as follows:
   future: T[];     // Array of future states (for redo)
 }
 ```
-
----
 
 ### Example Workflow
 
@@ -163,15 +159,13 @@ The internal state of the hook is structured as follows:
    - `present`: `{ count: 0 }`
    - `future`: `[]`
 
----
-
 ## API Reference
 
 ### Parameters
 
-| Name              | Type | Description                                                                               |
-| ----------------- | ---- | ----------------------------------------------------------------------------------------- |
-| `initialPresent?` | `T`  | (Optional) The initial state for the `present` value. Defaults to an empty object (`{}`). |
+| Name             | Type | Description                                                                    | Default Value | Optional |
+| ---------------- | ---- | ------------------------------------------------------------------------------ | ------------- | -------- |
+| `initialPresent` | `T`  | The initial state for the `present` value. Defaults to an empty object (`{}`). | `{}`          | Yes      |
 
 ### Return Values
 

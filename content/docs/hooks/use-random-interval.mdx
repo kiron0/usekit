@@ -36,7 +36,9 @@ npx shadcn@latest add https://usekit.kiron.dev/r/use-random-interval
 
 ## Usage
 
-```tsx {3, 8-11}
+```tsx {5, 10-13}
+"use client"
+
 import * as React from "react"
 
 import { useRandomInterval } from "@/hooks/use-random-interval"
@@ -62,10 +64,10 @@ export function Component() {
 
 ### Parameters
 
-| Name      | Type                                     | Description                                      | Required |
-| --------- | ---------------------------------------- | ------------------------------------------------ | -------- |
-| `cb`      | `() => void`                             | Callback function to execute at random intervals | Yes      |
-| `options` | `{ minDelay: number, maxDelay: number }` | Configuration object with delay range            | Yes      |
+| Name      | Type                                     | Description                                      | Default Value | Optional |
+| --------- | ---------------------------------------- | ------------------------------------------------ | ------------- | -------- |
+| `cb`      | `() => void`                             | Callback function to execute at random intervals | -             | No       |
+| `options` | `{ minDelay: number, maxDelay: number }` | Configuration object with delay range            | `{}`          | Yes      |
 
 ### Return Values
 

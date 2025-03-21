@@ -36,7 +36,9 @@ npx shadcn@latest add https://usekit.kiron.dev/r/use-continuous-retry
 
 ## Usage
 
-```tsx {3, 8-16}
+```tsx {5, 10-18}
+"use client"
+
 import * as React from "react"
 
 import { useContinuousRetry } from "@/hooks/use-continuous-retry"
@@ -67,13 +69,11 @@ export function Component() {
 
 ### Parameters
 
-| Name       | Type                                        | Description                                             | Default Value |
-| ---------- | ------------------------------------------- | ------------------------------------------------------- | ------------- |
-| `callback` | `() => boolean` or `() => Promise<boolean>` | Function to execute until it returns/resolves to `true` | -             |
-| `interval` | `number`                                    | Delay between retry attempts in milliseconds            | `100`         |
-| `options?` | `{ maxRetries?: number }`                   | Optional configuration with maximum retry attempts      | `undefined`   |
-
----
+| Name       | Type                                        | Description                                             | Default Value | Optional |
+| ---------- | ------------------------------------------- | ------------------------------------------------------- | ------------- | -------- |
+| `callback` | `() => boolean` or `() => Promise<boolean>` | Function to execute until it returns/resolves to `true` | -             | No       |
+| `interval` | `number`                                    | Delay between retry attempts in milliseconds            | `100`         | Yes      |
+| `options`  | `{ maxRetries: number }`                    | Configuration with maximum retry attempts               | `undefined`   | Yes      |
 
 ### Return Values
 

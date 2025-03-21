@@ -36,7 +36,9 @@ npx shadcn@latest add https://usekit.kiron.dev/r/use-event-listener
 
 ## Usage
 
-```tsx {4, 17}
+```tsx {6, 19}
+"use client"
+
 import * as React from "react"
 import { X } from "lucide-react"
 
@@ -112,9 +114,9 @@ useEventListener(window, "resize", () => console.log("Window resized"), {
 
 ### Parameters
 
-| Name        | Type                                                                  | Description                                         | Required |
-| ----------- | --------------------------------------------------------------------- | --------------------------------------------------- | -------- |
-| `target`    | `RefObject<Element>` \| `Element` \| `Window` \| `Document` \| `null` | DOM element, React ref, or global target            | Yes      |
-| `eventName` | `string`                                                              | Event name to listen for (e.g., "click", "keydown") | Yes      |
-| `handler`   | `(event: Event) => void`                                              | Callback function to execute when event occurs      | Yes      |
-| `options`   | `{ capture?: boolean, passive?: boolean, once?: boolean }`            | Event listener options                              | No       |
+| Name        | Type                                                                  | Description                                         | Default Value | Optional |
+| ----------- | --------------------------------------------------------------------- | --------------------------------------------------- | ------------- | -------- |
+| `target`    | `RefObject<Element>` \| `Element` \| `Window` \| `Document` \| `null` | DOM element, React ref, or global target            | -             | No       |
+| `eventName` | `string`                                                              | Event name to listen for (e.g., "click", "keydown") | -             | No       |
+| `handler`   | `(event: Event) => void`                                              | Callback function to execute when event occurs      | -             | No       |
+| `options`   | `{ capture: boolean, passive: boolean, once: boolean }`               | Event listener options                              | `{}`          | Yes      |

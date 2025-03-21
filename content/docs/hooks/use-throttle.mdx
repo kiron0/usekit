@@ -36,7 +36,9 @@ npx shadcn@latest add https://usekit.kiron.dev/r/use-throttle
 
 ## Usage
 
-```tsx {3, 7}
+```tsx {5, 9}
+"use client"
+
 import * as React from "react"
 
 import { useThrottle } from "@/hooks/use-throttle"
@@ -78,10 +80,10 @@ const throttledValue = useThrottle(inputValue, 300)
 
 ### Parameters
 
-| Name       | Type     | Description                                                                    | Default Value |
-| ---------- | -------- | ------------------------------------------------------------------------------ | ------------- |
-| `value`    | `T`      | The value to throttle. This can be of any type (string, number, object, etc.). | -             |
-| `interval` | `number` | The interval in milliseconds at which the throttled value is updated.          | `500`         |
+| Name       | Type     | Description                                                                    | Default Value | Optional |
+| ---------- | -------- | ------------------------------------------------------------------------------ | ------------- | -------- |
+| `value`    | `T`      | The value to throttle. This can be of any type (string, number, object, etc.). | -             | No       |
+| `interval` | `number` | The interval in milliseconds at which the throttled value is updated.          | `500`         | Yes      |
 
 ### Return Values
 

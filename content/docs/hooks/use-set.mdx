@@ -36,7 +36,9 @@ npx shadcn@latest add https://usekit.kiron.dev/r/use-set
 
 ## Usage
 
-```tsx {3, 12-20}
+```tsx {5, 14-22}
+"use client"
+
 import * as React from "react"
 
 import { useSet } from "@/hooks/use-set"
@@ -120,9 +122,9 @@ export function Component() {
 
 ### Parameters
 
-| Name      | Type  | Description                            |
-| --------- | ----- | -------------------------------------- |
-| `values?` | `T[]` | (Optional) Initial values for the set. |
+| Name     | Type  | Description                 | Default Value | Optional |
+| -------- | ----- | --------------------------- | ------------- | -------- |
+| `values` | `T[]` | Initial values for the set. | `[]`          | Yes      |
 
 ### Return Values
 

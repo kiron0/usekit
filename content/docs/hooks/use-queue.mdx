@@ -36,7 +36,9 @@ npx shadcn@latest add https://usekit.kiron.dev/r/use-queue
 
 ## Usage
 
-```tsx {1, 37-39}
+```tsx {3, 39-41}
+"use client"
+
 import { useQueue } from "@/hooks/use-queue"
 
 interface QueueDemoProps<T> {
@@ -99,9 +101,9 @@ export function Component() {
 
 ### Parameters
 
-| Name            | Type  | Description                                                                    |
-| --------------- | ----- | ------------------------------------------------------------------------------ |
-| `initialValue?` | `T[]` | (Optional) The initial value for the queue. Defaults to an empty array (`[]`). |
+| Name           | Type  | Description                                                         | Default Value | Optional |
+| -------------- | ----- | ------------------------------------------------------------------- | ------------- | -------- |
+| `initialValue` | `T[]` | The initial value for the queue. Defaults to an empty array (`[]`). | `[]`          | Yes      |
 
 ### Return Values
 

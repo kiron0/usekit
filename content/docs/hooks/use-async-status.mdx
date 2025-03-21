@@ -38,7 +38,9 @@ npx shadcn@latest add https://usekit.kiron.dev/r/use-async-status
 
 ## Usage
 
-```tsx {1, 6-10}
+```tsx {3, 8-12}
+"use client"
+
 import { useAsyncStatus } from "@/hooks/use-async-status"
 
 export function Component(props: {
@@ -123,10 +125,10 @@ type FeedbackOptions<TData, TError> = {
 
 ### Parameters
 
-| Name       | Type                                                                                                                    | Description                                                                                 |
-| ---------- | ----------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
-| `asyncFn`  | `AsyncFunction<TArgs, TData, TError>`                                                                                   | The asynchronous function to track. It can return `{ data: TData }` or `{ error: TError }`. |
-| `options?` | `{ loading?: React.ReactNode, success?: (data: TData) => React.ReactNode, error?: (error: TError) => React.ReactNode }` | (Optional) Custom JSX to render for loading, success, and error states.                     |
+| Name      | Type                                                                                                                 | Description                                                                                 | Default Value       | Optional |
+| --------- | -------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------- | -------- |
+| `asyncFn` | `AsyncFunction<TArgs, TData, TError>`                                                                                | The asynchronous function to track. It can return `{ data: TData }` or `{ error: TError }`. | -                   | No       |
+| `options` | `{ loading: React.ReactNode, success: (data: TData) => React.ReactNode, error: (error: TError) => React.ReactNode }` | Custom JSX to render for loading, success, and error states.                                | `{ loading: null }` | Yes      |
 
 ### Return Values
 
