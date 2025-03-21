@@ -352,7 +352,6 @@ export const docsConfig: DocsConfig = {
           title: "useDropzone",
           href: "/docs/hooks/use-dropzone",
           items: [],
-          label: "Soon",
         },
         {
           title: "useInView",
