@@ -2,8 +2,8 @@ export function Logo() {
   return (
     <span className="select-none">
       <svg
-        width="32"
-        height="32"
+        width="30"
+        height="30"
         viewBox="0 0 200 200"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"

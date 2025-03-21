@@ -610,18 +610,20 @@ export const Index: Record<string, any> = {
     component: React.lazy(() => import("registry/examples/use-speakup-demo")),
     source: "",
   },
-  "use-measure": {
-    name: "use-measure",
+  "use-any-measure": {
+    name: "use-any-measure",
     type: "registry:hook",
     registryDependencies: undefined,
     files: [
       {
-        path: "registry/hooks/use-measure.tsx",
+        path: "registry/hooks/use-any-measure.tsx",
         type: "registry:hook",
         target: "",
       },
     ],
-    component: React.lazy(() => import("registry/examples/use-measure-demo")),
+    component: React.lazy(
+      () => import("registry/examples/use-any-measure-demo")
+    ),
     source: "",
   },
   "use-is-mobile": {
@@ -1376,18 +1378,20 @@ export const Index: Record<string, any> = {
     component: React.lazy(() => import("registry/examples/use-speakup-demo")),
     source: "",
   },
-  "use-measure-demo": {
-    name: "use-measure-demo",
+  "use-any-measure-demo": {
+    name: "use-any-measure-demo",
     type: "registry:example",
     registryDependencies: undefined,
     files: [
       {
-        path: "registry/examples/use-measure-demo.tsx",
+        path: "registry/examples/use-any-measure-demo.tsx",
         type: "registry:example",
         target: "",
       },
     ],
-    component: React.lazy(() => import("registry/examples/use-measure-demo")),
+    component: React.lazy(
+      () => import("registry/examples/use-any-measure-demo")
+    ),
     source: "",
   },
   "use-previous-demo": {

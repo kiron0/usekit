@@ -261,8 +261,8 @@ export const docsConfig: DocsConfig = {
           items: [],
         },
         {
-          title: "useMeasure",
-          href: "/docs/hooks/use-measure",
+          title: "useAnyMeasure",
+          href: "/docs/hooks/use-any-measure",
           items: [],
         },
         {

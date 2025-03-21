@@ -46,8 +46,8 @@ export function CommandMenu({ ...props }: DialogProps) {
   }, [])
 
   const runCommand = React.useCallback((command: () => unknown) => {
-    setOpen(false)
     command()
+    setOpen(false)
   }, [])
 
   return (
@@ -98,6 +98,17 @@ export function CommandMenu({ ...props }: DialogProps) {
                 >
                   <Circle />
                   {navItem.title}
+                  {navItem.label && (
+                    <span
+                      className={cn(
+                        "ml-2 rounded-md bg-primary px-1.5 py-0.5 text-xs leading-none text-primary-foreground no-underline group-hover:no-underline",
+                        navItem.label.toLowerCase() === "soon" &&
+                          "bg-[#adfa1d] text-[#000000]"
+                      )}
+                    >
+                      {navItem.label}
+                    </span>
+                  )}
                 </CommandItem>
               ))}
             </CommandGroup>
