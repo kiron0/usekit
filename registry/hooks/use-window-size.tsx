@@ -1,30 +1,55 @@
 import * as React from "react"
 
 interface WindowSize {
-  width: number
-  height: number
+  innerHeight: number
+  innerWidth: number
+  outerHeight: number
+  outerWidth: number
+}
+
+function getSize() {
+  if (typeof window !== "undefined") {
+    return {
+      innerHeight: window.innerHeight,
+      innerWidth: window.innerWidth,
+      outerHeight: window.outerHeight,
+      outerWidth: window.outerWidth,
+    }
+  }
+  return {
+    innerHeight: 0,
+    innerWidth: 0,
+    outerHeight: 0,
+    outerWidth: 0,
+  }
 }
 
 export function useWindowSize(): WindowSize {
-  const [windowSize, setWindowSize] = React.useState<WindowSize>({
-    width: typeof window !== "undefined" ? window.innerWidth : 0,
-    height: typeof window !== "undefined" ? window.innerHeight : 0,
-  })
+  const [windowSize, setWindowSize] = React.useState(getSize())
 
   React.useEffect(() => {
+    if (typeof window === "undefined") {
+      return
+    }
+
     const handleResize = () => {
-      setWindowSize({
-        width: window.innerWidth,
-        height: window.innerHeight,
-      })
+      const newSize = getSize()
+      if (
+        newSize.innerHeight !== windowSize.innerHeight ||
+        newSize.innerWidth !== windowSize.innerWidth ||
+        newSize.outerHeight !== windowSize.outerHeight ||
+        newSize.outerWidth !== windowSize.outerWidth
+      ) {
+        setWindowSize(newSize)
+      }
     }
 
     window.addEventListener("resize", handleResize)
 
-    handleResize()
-
-    return () => window.removeEventListener("resize", handleResize)
-  }, [])
+    return () => {
+      window.removeEventListener("resize", handleResize)
+    }
+  }, [windowSize])
 
   return windowSize
 }
