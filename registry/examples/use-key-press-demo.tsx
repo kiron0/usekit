@@ -17,10 +17,26 @@ export default function KeyPressDemo() {
     setTimeout(() => setActiveKey(""), 600)
   }, [])
 
-  useKeyPress("ArrowRight", handleKeyPress)
-  useKeyPress("ArrowLeft", handleKeyPress)
-  useKeyPress("ArrowUp", handleKeyPress)
-  useKeyPress("ArrowDown", handleKeyPress)
+  useKeyPress({
+    keyPressItems: [
+      {
+        keys: ["UpArrow"],
+        event: handleKeyPress,
+      },
+      {
+        keys: ["DownArrow"],
+        event: handleKeyPress,
+      },
+      {
+        keys: ["LeftArrow"],
+        event: handleKeyPress,
+      },
+      {
+        keys: ["RightArrow"],
+        event: handleKeyPress,
+      },
+    ],
+  })
 
   return (
     <div className="flex flex-col items-center justify-center gap-4 text-center">

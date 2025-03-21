@@ -38,7 +38,7 @@ npx shadcn@latest add https://usekit.kiron.dev/r/use-key-press
 
 ## Usage
 
-```tsx {5, 16-19}
+```tsx {5, 16-35}
 "use client"
 
 import * as React from "react"
@@ -54,10 +54,26 @@ export function Component() {
     setTimeout(() => setActiveKey(""), 600)
   }, [])
 
-  useKeyPress("ArrowRight", handleKeyPress)
-  useKeyPress("ArrowLeft", handleKeyPress)
-  useKeyPress("ArrowUp", handleKeyPress)
-  useKeyPress("ArrowDown", handleKeyPress)
+  useKeyPress({
+    keyPressItems: [
+      {
+        keys: ["UpArrow"],
+        event: handleKeyPress,
+      },
+      {
+        keys: ["DownArrow"],
+        event: handleKeyPress,
+      },
+      {
+        keys: ["LeftArrow"],
+        event: handleKeyPress,
+      },
+      {
+        keys: ["RightArrow"],
+        event: handleKeyPress,
+      },
+    ],
+  })
 
   return (
     <section>
@@ -78,14 +94,15 @@ export function Component() {
 
 ## API Reference
 
-### Parameters
+### Parameter
 
-| Name                   | Type                    | Description                                                                             |
-| ---------------------- | ----------------------- | --------------------------------------------------------------------------------------- |
-| `key`                  | `string`                | The key to listen for.                                                                  |
-| `cb`                   | `func`                  | The callback function to be executed when the key is pressed.                           |
-| `level`                | `number`                | Function to set the boolean state directly.                                             |
-| `options?`             | `object`                | (Optional) Additional options for the key press event.                                  |
-| `options.event`        | `string`                | The event type to listen for. Default is `"keydown"`.                                   |
-| `options.target`       | `DOM element or window` | The target element or window object to attach the event listener to. Default is window. |
-| `options.eventOptions` | `object`                | Additional options for the event listener.                                              |
+| Name                        | Type                             | Description                                                                            | Default Value                     |
+| --------------------------- | -------------------------------- | -------------------------------------------------------------------------------------- | --------------------------------- |
+| **useKeyPress Options**     |                                  |                                                                                        |                                   |
+| `keyPressItems`             | `KeyPressItem[]`                 | Array of key press combinations and their associated events to monitor.                | Required                          |
+| `tagsToIgnore?`             | `string[]`                       | Array of HTML tag names where key events should not trigger (e.g., input fields).      | `["INPUT", "TEXTAREA", "SELECT"]` |
+| `triggerOnContentEditable?` | `boolean`                        | Whether to trigger events on elements with `contenteditable="true"`.                   | `false`                           |
+| **KeyPressItem Interface**  |                                  |                                                                                        |                                   |
+| `keys`                      | `Array<keyof typeof Keys>`       | Array of key codes (from the `Keys` object) that must be pressed to trigger the event. | Required                          |
+| `event`                     | `(event: KeyboardEvent) => void` | Function to call when the key combination is pressed.                                  | Required                          |
+| `preventDefault`            | `boolean`                        | Whether to call `event.preventDefault()` when the key combination is detected.         | `true`                            |
