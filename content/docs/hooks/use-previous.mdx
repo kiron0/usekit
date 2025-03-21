@@ -38,7 +38,9 @@ npx shadcn@latest add https://usekit.kiron.dev/r/use-previous
 
 ## Usage
 
-```tsx {3, 7}
+```tsx {5, 9}
+"use client"
+
 import * as React from "react"
 
 import { usePrevious } from "@/hooks/use-previous"
@@ -61,10 +63,10 @@ export function Component() {
 
 ### Parameters
 
-| Name                   | Type        | Description                                                                                            |
-| ---------------------- | ----------- | ------------------------------------------------------------------------------------------------------ |
-| `newValue`             | `T`         | The new value to track and return the previous value of.                                               |
-| `initialPreviousValue` | `T \| null` | (Optional) The initial value to use as the previous value before the first update. Defaults to `null`. |
+| Name                   | Type        | Description                                                                                 | Default Value | Optional |
+| ---------------------- | ----------- | ------------------------------------------------------------------------------------------- | ------------- | -------- |
+| `newValue`             | `T`         | The new value to track and return the previous value of.                                    | -             | No       |
+| `initialPreviousValue` | `T \| null` | The initial value to use as the previous value before the first update. Defaults to `null`. | `null`        | Yes      |
 
 ### Return Values
 

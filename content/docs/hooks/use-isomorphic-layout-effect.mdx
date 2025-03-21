@@ -36,7 +36,9 @@ npx shadcn@latest add https://usekit.kiron.dev/r/use-isomorphic-layout-effect
 
 ## Usage
 
-```tsx {1, 4-8}
+```tsx {3, 6-10}
+"use client"
+
 import { useIsomorphicLayoutEffect } from "@/hooks/isomorphic-layout-effect"
 
 export function Component() {
@@ -54,13 +56,13 @@ export function Component() {
 
 ### Parameters
 
-| Name     | Type             | Description                                |
-| -------- | ---------------- | ------------------------------------------ |
-| `effect` | `EffectCallback` | The effect function to be executed.        |
-| `deps?`  | `DependencyList` | (Optional) The dependencies of the effect. |
+| Name     | Type             | Description                         | Default Value | Optional |
+| -------- | ---------------- | ----------------------------------- | ------------- | -------- |
+| `effect` | `EffectCallback` | The effect function to be executed. | -             | No       |
+| `deps`   | `DependencyList` | The dependencies of the effect.     | `undefined`   | Yes      |
 
 ### Return Values
 
-| Name   | Type   | Description |
-| ------ | ------ | ----------- |
-| `func` | `void` | -           |
+| Name       | Type   | Description |
+| ---------- | ------ | ----------- |
+| `Function` | `void` | -           |

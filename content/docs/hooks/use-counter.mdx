@@ -38,7 +38,9 @@ npx shadcn@latest add https://usekit.kiron.dev/r/use-counter
 
 ## Usage
 
-```tsx {1, 4}
+```tsx {3, 6}
+"use client"
+
 import { useCounter } from "@/hooks/use-counter"
 
 export function Component() {
@@ -64,9 +66,9 @@ export function Component() {
 
 ### Parameters
 
-| Name            | Type     | Description                                   |
-| --------------- | -------- | --------------------------------------------- |
-| `initialValue?` | `number` | (Optional) The initial value for the counter. |
+| Name           | Type     | Description                        | Default Value | Optional |
+| -------------- | -------- | ---------------------------------- | ------------- | -------- |
+| `initialValue` | `number` | The initial value for the counter. | `0`           | Yes      |
 
 ### Return Values
 

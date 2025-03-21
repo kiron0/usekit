@@ -38,7 +38,9 @@ npx shadcn@latest add https://usekit.kiron.dev/r/use-default
 
 ## Usage
 
-```tsx {3, 9}
+```tsx {5, 11}
+"use client"
+
 import * as React from "react"
 
 import { useDefault } from "@/hooks/use-default"
@@ -121,14 +123,14 @@ const Example3 = () => {
 
 ### Parameters
 
-| Name           | Type  | Description                                                         |
-| -------------- | ----- | ------------------------------------------------------------------- |
-| `initialValue` | `any` | The initial value of the state returned from `useDefault`           |
-| `defaultValue` | `any` | The default value to be used if the state is `undefined` or `null`. |
+| Name           | Type  | Description                                                         | Default Value | Optional |
+| -------------- | ----- | ------------------------------------------------------------------- | ------------- | -------- |
+| `initialValue` | `any` | The initial value of the state returned from `useDefault`           | -             | No       |
+| `defaultValue` | `any` | The default value to be used if the state is `undefined` or `null`. | -             | No       |
 
 ### Return Values
 
 | Name       | Type       | Description                                                                                         |
 | ---------- | ---------- | --------------------------------------------------------------------------------------------------- |
 | `state`    | `any`      | The current state. If the state is `undefined` or `null`, `defaultValue` is returned instead.       |
-| `setState` | `function` | The state setter function returned from `React.useState()`. This can be called to update the state. |
+| `setState` | `Function` | The state setter function returned from `React.useState()`. This can be called to update the state. |

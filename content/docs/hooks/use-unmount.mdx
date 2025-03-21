@@ -36,7 +36,9 @@ npx shadcn@latest add https://usekit.kiron.dev/r/use-unmount
 
 ## Usage
 
-```tsx {1, 4-6}
+```tsx {3, 6-8}
+"use client"
+
 import { useUnmount } from "@/hooks/use-unmount"
 
 export default function Component() {
@@ -52,9 +54,9 @@ export default function Component() {
 
 ### Parameters
 
-| Name   | Type         | Description                                     |
-| ------ | ------------ | ----------------------------------------------- |
-| `func` | `() => void` | The cleanup function to be executed on unmount. |
+| Name       | Type         | Description                                     | Default Value     | Optional |
+| ---------- | ------------ | ----------------------------------------------- | ----------------- | -------- |
+| `Function` | `() => void` | The cleanup function to be executed on unmount. | `() => undefined` | No       |
 
 ### Return Values
 

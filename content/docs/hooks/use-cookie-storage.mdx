@@ -40,7 +40,9 @@ npx shadcn@latest add https://usekit.kiron.dev/r/use-cookie-storage
 
 ## Usage
 
-```tsx {1, 9-13, 15-19}
+```tsx {3, 11-15, 17-21}
+"use client"
+
 import { useCookieStorage } from "@/hooks/use-cookie-storage"
 
 interface UserPreferences {
@@ -173,11 +175,11 @@ export function PreferencesExample() {
 
 ### Parameters
 
-| Name           | Type     | Description                                                         |
-| -------------- | -------- | ------------------------------------------------------------------- |
-| `key`          | `string` | The key used to access the cookie value.                            |
-| `initialValue` | `T`      | The initial value to use if no cookie exists with the provided key. |
-| `options?`     | `object` | (Optional) Configuration options for the cookie.                    |
+| Name           | Type     | Description                                                         | Default Value | Optional |
+| -------------- | -------- | ------------------------------------------------------------------- | ------------- | -------- |
+| `key`          | `string` | The key used to access the cookie value.                            | -             | No       |
+| `initialValue` | `T`      | The initial value to use if no cookie exists with the provided key. | -             | No       |
+| `options`      | `object` | Configuration options for the cookie.                               | `{}`          | Yes      |
 
 ### `CookieOptions` Interface
 

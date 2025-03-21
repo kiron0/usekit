@@ -38,7 +38,9 @@ npx shadcn@latest add https://usekit.kiron.dev/r/use-object-state
 
 ## Usage
 
-```tsx {1, 18}
+```tsx {3, 20}
+"use client"
+
 import { useObjectState } from "@/hooks/use-object-state"
 
 interface TeamStats {
@@ -107,13 +109,13 @@ export default function UseObjectStateDemo() {
 
 ### Parameters
 
-| Name            | Type     | Description                         |
-| --------------- | -------- | ----------------------------------- |
-| `initialValue?` | `object` | (Optional) The initial state value. |
+| Name           | Type     | Description              | Default Value | Optional |
+| -------------- | -------- | ------------------------ | ------------- | -------- |
+| `initialValue` | `object` | The initial state value. | `{}`          | Yes      |
 
 ### Return Values
 
 | Index | Type       | Description                            |
 | ----- | ---------- | -------------------------------------- |
 | `0`   | `object`   | The current state object.              |
-| `1`   | `function` | A function to update the state object. |
+| `1`   | `Function` | A function to update the state object. |

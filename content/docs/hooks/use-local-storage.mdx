@@ -102,14 +102,14 @@ const [authToken, setAuthToken] = useLocalStorage<string>("auth-token", () =>
 
 ### Parameters
 
-| Name           | Type     | Description                                                                              |
-| -------------- | -------- | ---------------------------------------------------------------------------------------- |
-| `key`          | `string` | The key used to access the local storage value.                                          |
-| `initialValue` | `T`      | The initial value to use if there is no item in the local storage with the provided key. |
+| Name           | Type     | Description                                                                              | Default Value | Optional |
+| -------------- | -------- | ---------------------------------------------------------------------------------------- | ------------- | -------- |
+| `key`          | `string` | The key used to access the local storage value.                                          | -             | No       |
+| `initialValue` | `T`      | The initial value to use if there is no item in the local storage with the provided key. | -             | Yes      |
 
 ### Return Values
 
 | Name             | Type       | Description                                                                                                                                                                                                   |
 | ---------------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `localState`     | `T`        | The current state of the value stored in local storage.                                                                                                                                                       |
-| `handleSetState` | `function` | A function to set the state of the value in the local storage. This function accepts a new value or a function that returns a new value. The value is also saved in the local storage under the provided key. |
+| `handleSetState` | `Function` | A function to set the state of the value in the local storage. This function accepts a new value or a function that returns a new value. The value is also saved in the local storage under the provided key. |

@@ -102,14 +102,14 @@ const [authToken, setAuthToken] = useSessionStorage<string>("auth-token", () =>
 
 ### Parameters
 
-| Name           | Type     | Description                                                                               |
-| -------------- | -------- | ----------------------------------------------------------------------------------------- |
-| `key`          | `string` | The key used to access the sessionStorage value.                                          |
-| `initialValue` | `T`      | The initial value to use if there is no item in the sessionStorage with the provided key. |
+| Name           | Type     | Description                                                                               | Default Value | Optional |
+| -------------- | -------- | ----------------------------------------------------------------------------------------- | ------------- | -------- |
+| `key`          | `string` | The key used to access the sessionStorage value.                                          | -             | No       |
+| `initialValue` | `T`      | The initial value to use if there is no item in the sessionStorage with the provided key. | `undefined`   | Yes      |
 
 ### Return Values
 
 | Name             | Type       | Description                                                                                                                                                                                                     |
 | ---------------- | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `sessionState`   | `T`        | The current state of the value stored in sessionStorage.                                                                                                                                                        |
-| `handleSetState` | `function` | A function to set the state of the value in the sessionStorage. This function accepts a new value or a function that returns a new value. The value is also saved in the sessionStorage under the provided key. |
+| `handleSetState` | `Function` | A function to set the state of the value in the sessionStorage. This function accepts a new value or a function that returns a new value. The value is also saved in the sessionStorage under the provided key. |

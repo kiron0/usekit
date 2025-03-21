@@ -38,7 +38,9 @@ npx shadcn@latest add https://usekit.kiron.dev/r/use-window-scroll
 
 ## Usage
 
-```tsx {1, 6}
+```tsx {3, 6}
+"use client"
+
 import { useWindowScroll } from "@/hooks/use-window-scroll"
 
 export function Component() {
@@ -62,4 +64,4 @@ export function Component() {
 | Name       | Type       | Description                                                              |
 | ---------- | ---------- | ------------------------------------------------------------------------ |
 | `state`    | `object`   | An object representing the current window scroll position.               |
-| `scrollTo` | `function` | A function that can be used to scroll the window to a specific position. |
+| `scrollTo` | `Function` | A function that can be used to scroll the window to a specific position. |

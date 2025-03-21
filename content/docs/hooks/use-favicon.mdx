@@ -38,7 +38,9 @@ npx shadcn@latest add https://usekit.kiron.dev/r/use-favicon
 
 ## Usage
 
-```tsx {3, 8-16}
+```tsx {5, 10-18}
+"use client"
+
 import * as React from "react"
 
 import { useFavicon } from "@/hooks/use-favicon"
@@ -82,6 +84,6 @@ function InvalidFaviconExample() {
 
 ### Parameters
 
-| Name  | Type     | Description                                          |
-| ----- | -------- | ---------------------------------------------------- |
-| `url` | `string` | The URL of the favicon. Must point to a valid image. |
+| Name  | Type     | Description                                          | Default Value | Optional |
+| ----- | -------- | ---------------------------------------------------- | ------------- | -------- |
+| `url` | `string` | The URL of the favicon. Must point to a valid image. | -             | No       |

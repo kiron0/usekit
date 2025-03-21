@@ -36,7 +36,11 @@ npx shadcn@latest add https://usekit.kiron.dev/r/use-mutation-observer
 
 ## Usage
 
-```tsx {1, 18}
+```tsx {5, 22}
+"use client"
+
+import * as React from "react"
+
 import { useMutationObserver } from "@/hooks/use-mutation-observer"
 
 export function Component() {
@@ -68,8 +72,8 @@ export function Component() {
 
 ### Parameters
 
-| Name       | Type                                          | Description                                                                            | Default                                                                     |
-| ---------- | --------------------------------------------- | -------------------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
-| `ref`      | `React.MutableRefObject<HTMLElement \| null>` | A ref to the DOM element to observe.                                                   | -                                                                           |
-| `callback` | `MutationCallback`                            | A callback function that will be called when mutations are observed.                   | -                                                                           |
-| `options?` | `MutationObserverInit`                        | (Optional) Options for the `MutationObserver` (e.g., `attributes`, `childList`, etc.). | `{ attributes: true, characterData: true, childList: true, subtree: true }` |
+| Name       | Type                                          | Description                                                                 | Default Value                                                               | Optional |
+| ---------- | --------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | -------- |
+| `ref`      | `React.MutableRefObject<HTMLElement \| null>` | A ref to the DOM element to observe.                                        | -                                                                           | No       |
+| `callback` | `MutationCallback`                            | A callback function that will be called when mutations are observed.        | -                                                                           | No       |
+| `options`  | `MutationObserverInit`                        | Options for the `MutationObserver` (e.g., `attributes`, `childList`, etc.). | `{ attributes: true, characterData: true, childList: true, subtree: true }` | Yes      |

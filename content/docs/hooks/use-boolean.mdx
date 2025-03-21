@@ -36,7 +36,9 @@ npx shadcn@latest add https://usekit.kiron.dev/r/use-boolean
 
 ## Usage
 
-```tsx {1, 4}
+```tsx {3, 6}
+"use client"
+
 import { useBoolean } from "@/hooks/use-boolean"
 
 export function Component() {
@@ -65,9 +67,9 @@ export function Component() {
 
 ### Parameters
 
-| Name            | Type      | Description                                                              |
-| --------------- | --------- | ------------------------------------------------------------------------ |
-| `defaultValue?` | `boolean` | (Optional) The initial value for the boolean state (default is `false`). |
+| Name           | Type      | Description                                                   | Default Value | Optional |
+| -------------- | --------- | ------------------------------------------------------------- | ------------- | -------- |
+| `defaultValue` | `boolean` | The initial value for the boolean state (default is `false`). | `false`       | Yes      |
 
 ### Return Values
 

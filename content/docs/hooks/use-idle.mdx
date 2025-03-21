@@ -38,7 +38,9 @@ npx shadcn@latest add https://usekit.kiron.dev/r/use-idle
 
 ## Usage
 
-```tsx {1, 4}
+```tsx {3, 6}
+"use client"
+
 import { useIdle } from "@/hooks/use-idle"
 
 export function Component() {
@@ -68,9 +70,9 @@ export function Component() {
 
 ### Parameters
 
-| Name | Type     | Description                                                                                                                                            |
-| ---- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `ms` | `number` | This is the duration of idle time (in milliseconds) after which the `idle` state will be set to `true`. The default value is `20 * 1000` (20 seconds). |
+| Name | Type     | Description                                                                                                                                            | Default Value            | Optional |
+| ---- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------ | -------- |
+| `ms` | `number` | This is the duration of idle time (in milliseconds) after which the `idle` state will be set to `true`. The default value is `20 * 1000` (20 seconds). | `60 * 1000` (60 seconds) | Yes      |
 
 ### Return Values
 

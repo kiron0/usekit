@@ -96,13 +96,13 @@ export function Component() {
 
 ### Parameter
 
-| Name                        | Type                             | Description                                                                            | Default Value                     |
-| --------------------------- | -------------------------------- | -------------------------------------------------------------------------------------- | --------------------------------- |
+| Name                        | Type                             | Description                                                                            | Default Value                     | Optional |
+| --------------------------- | -------------------------------- | -------------------------------------------------------------------------------------- | --------------------------------- | -------- |
 | **useKeyPress Options**     |                                  |                                                                                        |                                   |
-| `keyPressItems`             | `KeyPressItem[]`                 | Array of key press combinations and their associated events to monitor.                | Required                          |
-| `tagsToIgnore?`             | `string[]`                       | Array of HTML tag names where key events should not trigger (e.g., input fields).      | `["INPUT", "TEXTAREA", "SELECT"]` |
-| `triggerOnContentEditable?` | `boolean`                        | Whether to trigger events on elements with `contenteditable="true"`.                   | `false`                           |
+| `keyPressItems`             | `KeyPressItem[]`                 | Array of key press combinations and their associated events to monitor.                | Required                          | No       |
+| `tagsToIgnore`              | `string[]`                       | Array of HTML tag names where key events should not trigger (e.g., input fields).      | `["INPUT", "TEXTAREA", "SELECT"]` | Yes      |
+| `triggerOnContentEditable?` | `boolean`                        | Whether to trigger events on elements with `contenteditable="true"`.                   | `false`                           | Yes      |
 | **KeyPressItem Interface**  |                                  |                                                                                        |                                   |
-| `keys`                      | `Array<keyof typeof Keys>`       | Array of key codes (from the `Keys` object) that must be pressed to trigger the event. | Required                          |
-| `event`                     | `(event: KeyboardEvent) => void` | Function to call when the key combination is pressed.                                  | Required                          |
-| `preventDefault`            | `boolean`                        | Whether to call `event.preventDefault()` when the key combination is detected.         | `true`                            |
+| `keys`                      | `Array<keyof typeof Keys>`       | Array of key codes (from the `Keys` object) that must be pressed to trigger the event. | Required                          | No       |
+| `event`                     | `(event: KeyboardEvent) => void` | Function to call when the key combination is pressed.                                  | Required                          | No       |
+| `preventDefault`            | `boolean`                        | Whether to call `event.preventDefault()` when the key combination is detected.         | `true`                            | Yes      |

@@ -38,7 +38,9 @@ npx shadcn@latest add https://usekit.kiron.dev/r/use-logger
 
 ## Usage
 
-```tsx {3, 12}
+```tsx {5, 14}
+"use client"
+
 import * as React from "react"
 
 import { useLogger } from "@/hooks/use-logger"
@@ -94,7 +96,7 @@ export function Component() {
 
 ### Parameters
 
-| Name      | Type     | Description                            |
-| --------- | -------- | -------------------------------------- |
-| `name`    | `string` | The name or identifier for the logger. |
-| `...rest` | `any`    | Additional arguments to be logged.     |
+| Name      | Type     | Description                            | Default Value | Optional |
+| --------- | -------- | -------------------------------------- | ------------- | -------- |
+| `name`    | `string` | The name or identifier for the logger. | -             | No       |
+| `...rest` | `any`    | Additional arguments to be logged.     | -             | Yes      |

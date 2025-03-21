@@ -44,7 +44,9 @@ npm install lucide-react
 
 ## Usage
 
-```tsx {1, 4-8}
+```tsx {3, 6-10}
+"use client"
+
 import { useAnyMeasure } from "@/hooks/use-any-measure"
 
 export function Component() {
@@ -67,14 +69,14 @@ export function Component() {
 
 ### Parameters
 
-| Name                   | Type                                                           | Description                                                 | Default         |
-| ---------------------- | -------------------------------------------------------------- | ----------------------------------------------------------- | --------------- |
-| `borderRadius?`        | `number`                                                       | (Optional) The radius of the border corners.                | `0.5`           |
-| `borderWidth?`         | `number`                                                       | (Optional) The width of the border.                         | `1`             |
-| `actionPosition?`      | `"top-left" \| "top-right" \| "bottom-left" \| "bottom-right"` | (Optional) The position of the action button.               | `"top-right"`   |
-| `measurementPosition?` | `"top-left" \| "top-right" \| "bottom-left" \| "bottom-right"` | (Optional) The position where the measurement is displayed. | `"bottom-left"` |
-| `startMeasure?`        | `boolean`                                                      | (Optional) Whether to start measuring immediately.          | `false`         |
-| `ref?`                 | `React.RefObject<HTMLDivElement \| null>`                      | (Optional) A ref to the element that will be measured.      | -               |
+| Name                  | Type                                                           | Description                                      | Default Value   | Optional |
+| --------------------- | -------------------------------------------------------------- | ------------------------------------------------ | --------------- | -------- |
+| `borderRadius`        | `number`                                                       | The radius of the border corners.                | `0.5`           | Yes      |
+| `borderWidth`         | `number`                                                       | The width of the border.                         | `1`             | Yes      |
+| `actionPosition`      | `"top-left" \| "top-right" \| "bottom-left" \| "bottom-right"` | The position of the action button.               | `"top-right"`   | Yes      |
+| `measurementPosition` | `"top-left" \| "top-right" \| "bottom-left" \| "bottom-right"` | The position where the measurement is displayed. | `"bottom-left"` | Yes      |
+| `startMeasure`        | `boolean`                                                      | Whether to start measuring immediately.          | `false`         | Yes      |
+| `ref`                 | `React.RefObject<HTMLDivElement \| null>`                      | A ref to the element that will be measured.      | -               | Yes      |
 
 ### Return Values
 

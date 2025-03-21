@@ -164,18 +164,18 @@ export const useVoiceToText = ({
 }
 
 interface TextToVoiceOptions {
-  text?: string
+  text: string
   pitch?: number
   rate?: number
   volume?: number
 }
 
 export const useTextToVoice = ({
-  text = "",
+  text,
   pitch = 1,
   rate = 1,
   volume = 1,
-}: TextToVoiceOptions = {}) => {
+}: TextToVoiceOptions) => {
   const [isSpeaking, setIsSpeaking] = React.useState(false)
   const [isPaused, setIsPaused] = React.useState(false)
   const [voices, setVoices] = React.useState<SpeechSynthesisVoice[]>([])

@@ -89,13 +89,13 @@ export function Component() {
 
 ### Parameters
 
-| Name                 | Type     | Description                                                         |
-| -------------------- | -------- | ------------------------------------------------------------------- |
-| `endTime`            | `number` | The end time of the countdown in milliseconds since the Unix epoch. |
-| `options?`           | `object` | (Optional) An object containing the following options               |
-| `options.interval`   | `number` | The interval in milliseconds at which the countdown should tick.    |
-| `options.onComplete` | `func`   | A callback function to be called when the countdown reaches zero.   |
-| `options.onTick`     | `func`   | A callback function to be called on each tick of the countdown.     |
+| Name                 | Type       | Description                                                         | Default Value | Optional |
+| -------------------- | ---------- | ------------------------------------------------------------------- | ------------- | -------- |
+| `endTime`            | `number`   | The end time of the countdown in milliseconds since the Unix epoch. | -             | No       |
+| `options`            | `object`   | An object containing the following options                          | -             | Yes      |
+| `options.interval`   | `number`   | The interval in milliseconds at which the countdown should tick.    | `1000`        | Yes      |
+| `options.onComplete` | `Function` | A callback function to be called when the countdown reaches zero.   | -             | Yes      |
+| `options.onTick`     | `Function` | A callback function to be called on each tick of the countdown.     | -             | Yes      |
 
 ### Return Values
 

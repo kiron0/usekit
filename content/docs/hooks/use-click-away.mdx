@@ -38,7 +38,9 @@ npx shadcn@latest add https://usekit.kiron.dev/r/use-click-away
 
 ## Usage
 
-```tsx {3, 9-11}
+```tsx {3, 11-13}
+"use client"
+
 import * as React from "react"
 
 import { useClickAway } from "@/hooks/use-click-away"
@@ -84,9 +86,9 @@ export function Component() {
 
 ### Parameters
 
-| Name       | Type       | Description                                                                                                                                                                                                                                  |
-| ---------- | ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `callback` | `function` | The callback function that is provided as an argument to `useClickAway`. This function is invoked whenever a click event is detected outside of the referenced element. The event object from the click is passed to this callback function. |
+| Name       | Type       | Description                                                                                                                                                                                                                                  | Default Value | Optional |
+| ---------- | ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- | -------- |
+| `callback` | `Function` | The callback function that is provided as an argument to `useClickAway`. This function is invoked whenever a click event is detected outside of the referenced element. The event object from the click is passed to this callback function. | -             | No       |
 
 ### Return Values
 

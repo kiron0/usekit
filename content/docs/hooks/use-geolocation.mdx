@@ -40,7 +40,9 @@ npx shadcn@latest add https://usekit.kiron.dev/r/use-geolocation
 
 ## Usage
 
-```tsx {1, 4-19}
+```tsx {3, 6-21}
+"use client"
+
 import useGeolocation from "@/hooks/use-geolocation"
 
 export function Component() {
@@ -91,9 +93,9 @@ export function Component() {
 
 ### Parameters
 
-| Name       | Type     | Description                                                                                                                                                                                                                                                                                            |
-| ---------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `options?` | `object` | (Optional) This is an optional configuration object provided when calling `useGeolocation`. It is used when calling `navigator.geolocation.getCurrentPosition()` and `navigator.geolocation.watchPosition()`. Some of the attributes it accepts are `enableHighAccuracy`, `timeout`, and `maximumAge`. |
+| Name      | Type     | Description                                                                                                                                                                                                                                                                                 | Default Value                                                | Optional |
+| --------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ | -------- |
+| `options` | `object` | This is an optional configuration object provided when calling `useGeolocation`. It is used when calling `navigator.geolocation.getCurrentPosition()` and `navigator.geolocation.watchPosition()`. Some of the attributes it accepts are `enableHighAccuracy`, `timeout`, and `maximumAge`. | `{ enableHighAccuracy: true, timeout: 5000, maximumAge: 0 }` | Yes      |
 
 ### Return Values
 
@@ -109,5 +111,5 @@ export function Component() {
 | `speed`              | `number`   | The current ground speed of the device, specified in meters per second.                                                                        |
 | `timestamp`          | `number`   | The timestamp at which the geolocation data was retrieved.                                                                                     |
 | `error`              | `object`   | An error object, if an error occurred while retrieving the geolocation data.                                                                   |
-| `requestGeolocation` | `function` | A function that can be called to request the user's geolocation data.                                                                          |
-| `retry`              | `function` | A function that can be called to retry fetching the geolocation data.                                                                          |
+| `requestGeolocation` | `Function` | A function that can be called to request the user's geolocation data.                                                                          |
+| `retry`              | `Function` | A function that can be called to retry fetching the geolocation data.                                                                          |

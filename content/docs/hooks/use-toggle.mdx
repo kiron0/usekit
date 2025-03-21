@@ -36,7 +36,9 @@ npx shadcn@latest add https://usekit.kiron.dev/r/use-toggle
 
 ## Usage
 
-```tsx {1, 4}
+```tsx {3, 6}
+"use client"
+
 import { useToggle } from "@/hooks/use-toggle"
 
 export function Component() {
@@ -77,9 +79,9 @@ export function Component() {
 
 ### Parameters
 
-| Name            | Type      | Description                                        |
-| --------------- | --------- | -------------------------------------------------- |
-| `defaultValue?` | `boolean` | (Optional) The initial value for the toggle state. |
+| Name           | Type      | Description                             | Default Value | Optional |
+| -------------- | --------- | --------------------------------------- | ------------- | -------- |
+| `defaultValue` | `boolean` | The initial value for the toggle state. | `false`       | Yes      |
 
 ### Return Values
 

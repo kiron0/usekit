@@ -88,29 +88,26 @@ export function Component() {
 
 ### Parameters
 
-| Name       | Type                                                                 | Description                                                                                   | Default Value         | Optional |
-|-----------------|----------------------------------------------------------------------|-----------------------------------------------------------------------------------------------|-----------------------|----------|
-| `target`        | `RefObject<HTMLElement \| null>`                                     | A React ref to the HTML element that will act as the drop zone.                              | N/A                   | No       |
-| `options`       | `UseDropZoneOptions \| UseDropZoneOptions["onDrop"]`                | Configuration options or a standalone `onDrop` callback function.                            | `{}`                  | Yes      |
+| Name      | Type                                                 | Description                                                       | Default Value | Optional |
+| --------- | ---------------------------------------------------- | ----------------------------------------------------------------- | ------------- | -------- |
+| `target`  | `RefObject<HTMLElement \| null>`                     | A React ref to the HTML element that will act as the drop zone.   | -             | No       |
+| `options` | `UseDropZoneOptions \| UseDropZoneOptions["onDrop"]` | Configuration options or a standalone `onDrop` callback function. | `{}`          | Yes      |
 
 **`UseDropZoneOptions` Interface**
 
-
-| Name                   | Type                              | Description                                                                                   | Default Value | Optional |
-|----------------------------|-----------------------------------|-----------------------------------------------------------------------------------------------|---------------|----------|
-| `dataTypes`                | `string[] \| ((types: readonly string[]) => boolean)` | Allowed MIME types or a function to validate dragged item types.                              | `undefined`   | Yes      |
-| `onDrop`                   | `(files: File[] \| null, event: DragEvent) => void`  | Callback when files are dropped.                                                              | `undefined`   | Yes      |
-| `onEnter`                  | `(files: File[] \| null, event: DragEvent) => void`  | Callback when dragging enters the drop zone.                                                  | `undefined`   | Yes      |
-| `onLeave`                  | `(files: File[] \| null, event: DragEvent) => void`  | Callback when dragging leaves the drop zone.                                                  | `undefined`   | Yes      |
-| `onOver`                   | `(files: File[] \| null, event: DragEvent) => void`  | Callback when dragging is over the drop zone.                                                 | `undefined`   | Yes      |
-| `multiple`                 | `boolean`                         | Whether to allow multiple files to be dropped.                                                | `true`        | Yes      |
-| `preventDefaultForUnhandled` | `boolean`                         | Whether to prevent default behavior for unhandled drag events.                                | `false`       | Yes      |
-
+| Name                         | Type                                                  | Description                                                      | Default Value | Optional |
+| ---------------------------- | ----------------------------------------------------- | ---------------------------------------------------------------- | ------------- | -------- |
+| `dataTypes`                  | `string[] \| ((types: readonly string[]) => boolean)` | Allowed MIME types or a function to validate dragged item types. | `undefined`   | Yes      |
+| `onDrop`                     | `(files: File[] \| null, event: DragEvent) => void`   | Callback when files are dropped.                                 | `undefined`   | Yes      |
+| `onEnter`                    | `(files: File[] \| null, event: DragEvent) => void`   | Callback when dragging enters the drop zone.                     | `undefined`   | Yes      |
+| `onLeave`                    | `(files: File[] \| null, event: DragEvent) => void`   | Callback when dragging leaves the drop zone.                     | `undefined`   | Yes      |
+| `onOver`                     | `(files: File[] \| null, event: DragEvent) => void`   | Callback when dragging is over the drop zone.                    | `undefined`   | Yes      |
+| `multiple`                   | `boolean`                                             | Whether to allow multiple files to be dropped.                   | `true`        | Yes      |
+| `preventDefaultForUnhandled` | `boolean`                                             | Whether to prevent default behavior for unhandled drag events.   | `false`       | Yes      |
 
 ### Return Values
 
-
-| Name          | Type            | Description                                                                                   |
-|-------------------|-----------------|-----------------------------------------------------------------------------------------------|
-| `files`           | `File[] \| null` | The array of dropped files, or `null` if no files have been dropped or the drop was invalid.  |
-| `isOverDropZone`  | `boolean`        | Indicates whether the user is currently dragging an item over the drop zone.                  |
+| Name             | Type             | Description                                                                                  |
+| ---------------- | ---------------- | -------------------------------------------------------------------------------------------- |
+| `files`          | `File[] \| null` | The array of dropped files, or `null` if no files have been dropped or the drop was invalid. |
+| `isOverDropZone` | `boolean`        | Indicates whether the user is currently dragging an item over the drop zone.                 |

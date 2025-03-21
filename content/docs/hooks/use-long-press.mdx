@@ -38,7 +38,9 @@ npx shadcn@latest add https://usekit.kiron.dev/r/use-long-press
 
 ## Usage
 
-```tsx {1, 20-25}
+```tsx {3, 22-27}
+"use client"
+
 import { useLongPress, type LongPressCallback } from "@/hooks/use-long-press"
 
 export function Component() {
@@ -73,21 +75,21 @@ export function Component() {
 
 ### Parameters
 
-| Name                | Type       | Description                                                                                                            |
-| ------------------- | ---------- | ---------------------------------------------------------------------------------------------------------------------- |
-| `callback`          | `function` | This is the function to be executed when a long press event is detected.                                               |
-| `options?`          | `object`   | (Optional) This is an optional configuration object provided when calling `useLongPress`.                              |
-| `options.threshold` | `number`   | This is the time (in milliseconds) the user must press and hold to trigger a long press event. Default value is `400`. |
-| `options.onStart`   | `function` | This function is called when the user starts pressing.                                                                 |
-| `options.onFinish`  | `function` | This function is called when a long press event finishes successfully (the user releases after the threshold).         |
-| `options.onCancel`  | `function` | This function is called when a press event is cancelled (the user releases before the threshold).                      |
+| Name                | Type       | Description                                                                                                            | Default Value | Optional |
+| ------------------- | ---------- | ---------------------------------------------------------------------------------------------------------------------- | ------------- | -------- |
+| `callback`          | `Function` | This is the function to be executed when a long press event is detected.                                               | -             | No       |
+| `options`           | `object`   | This is an optional configuration object provided when calling `useLongPress`.                                         | `{}`          | Yes      |
+| `options.threshold` | `number`   | This is the time (in milliseconds) the user must press and hold to trigger a long press event. Default value is `400`. | `400`         | Yes      |
+| `options.onStart`   | `Function` | This function is called when the user starts pressing.                                                                 | -             | Yes      |
+| `options.onFinish`  | `Function` | This function is called when a long press event finishes successfully (the user releases after the threshold).         | -             | Yes      |
+| `options.onCancel`  | `Function` | This function is called when a press event is cancelled (the user releases before the threshold).                      | -             | Yes      |
 
 ### Return Values
 
 | Name           | Type       | Description                            |
 | -------------- | ---------- | -------------------------------------- |
-| `onMouseDown`  | `function` | This is the mouse down event handler.  |
-| `onMouseUp`    | `function` | This is the mouse up event handler.    |
-| `onMouseLeave` | `function` | This is the mouse leave event handler. |
-| `onTouchStart` | `function` | This is the touch start event handler. |
-| `onTouchEnd`   | `function` | This is the touch end event handler.   |
+| `onMouseDown`  | `Function` | This is the mouse down event handler.  |
+| `onMouseUp`    | `Function` | This is the mouse up event handler.    |
+| `onMouseLeave` | `Function` | This is the mouse leave event handler. |
+| `onTouchStart` | `Function` | This is the touch start event handler. |
+| `onTouchEnd`   | `Function` | This is the touch end event handler.   |
