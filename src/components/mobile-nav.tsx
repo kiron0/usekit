@@ -73,7 +73,22 @@ export function MobileNav() {
                 {item?.items?.length &&
                   item.items
                     .map((item) => ({ ...item }))
-                    .sort((a, b) => a.title.localeCompare(b.title))
+                    .sort((a, b) => {
+                      const aStartsWithUse = a.title
+                        .toLowerCase()
+                        .startsWith("use")
+                      const bStartsWithUse = b.title
+                        .toLowerCase()
+                        .startsWith("use")
+
+                      if (aStartsWithUse && bStartsWithUse) {
+                        return a.title.localeCompare(b.title)
+                      }
+
+                      if (aStartsWithUse) return -1
+                      if (bStartsWithUse) return 1
+                      return 0
+                    })
                     .map((item) => (
                       <React.Fragment key={item.href}>
                         {!item.disabled &&

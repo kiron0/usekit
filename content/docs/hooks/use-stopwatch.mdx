@@ -1,0 +1,108 @@
+---
+title: useStopwatch
+description: Create a stopwatch with useStopwatch, providing options to pause, play, reset, and toggle the stopwatch.
+---
+
+<ComponentPreview name="use-stopwatch-demo" />
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://usekit.kiron.dev/r/use-stopwatch
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="use-stopwatch" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+```tsx {3, 6-19}
+"use client"
+
+import { useStopwatch } from "@/hooks/use-stopwatch"
+
+export function Component() {
+  const {
+    current,
+    isPaused,
+    isOver,
+    currentDays,
+    currentHours,
+    currentMinutes,
+    currentSeconds,
+    elapsedSeconds,
+    pause,
+    play,
+    reset,
+    togglePause,
+  } = useStopwatch()
+
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+      <p>Counter value: {current}</p>
+      <p>Is the counter paused? {isPaused ? "Yes" : "No"}</p>
+      <p>Has the counter over? {isOver ? "Yes" : "No"}</p>
+      <p>Current days: {currentDays}</p>
+      <p>Current hours: {currentHours}</p>
+      <p>Current minutes: {currentMinutes}</p>
+      <p>Current seconds: {currentSeconds}</p>
+      <p>Elapsed seconds: {elapsedSeconds}</p>
+      <button type="button" onClick={pause}>
+        Pause
+      </button>
+      <button type="button" onClick={play}>
+        Play
+      </button>
+      <button type="button" onClick={reset}>
+        Reset
+      </button>
+      <button type="button" onClick={togglePause}>
+        Toggle Pause
+      </button>
+    </div>
+  )
+}
+```
+
+## API Reference
+
+### Return Values
+
+| Name             | Type         | Description                              |
+| ---------------- | ------------ | ---------------------------------------- |
+| `current`        | `number`     | The current value of the stopwatch.      |
+| `isPaused`       | `boolean`    | Whether the stopwatch is paused.         |
+| `isOver`         | `boolean`    | Whether the stopwatch is over.           |
+| `currentDays`    | `number`     | The current days of the stopwatch.       |
+| `currentHours`   | `number`     | The current hours of the stopwatch.      |
+| `currentMinutes` | `number`     | The current minutes of the stopwatch.    |
+| `currentSeconds` | `number`     | The current seconds of the stopwatch.    |
+| `elapsedSeconds` | `number`     | The elapsed seconds of the stopwatch.    |
+| `pause`          | `() => void` | Pause the stopwatch.                     |
+| `play`           | `() => void` | Play the stopwatch.                      |
+| `reset`          | `() => void` | Reset the stopwatch.                     |
+| `togglePause`    | `() => void` | Toggle the pause state of the stopwatch. |

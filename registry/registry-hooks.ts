@@ -801,6 +801,19 @@ export const hooks: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "use-stopwatch",
+    title: "Use Stopwatch",
+    description:
+      "Create a stopwatch with useStopwatch, providing options to pause, play, reset, and toggle the stopwatch.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "hooks/use-stopwatch.tsx",
+        type: "registry:hook",
+      },
+    ],
+  },
 ]
 
 export default hooks

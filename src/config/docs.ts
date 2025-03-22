@@ -396,7 +396,6 @@ export const docsConfig: DocsConfig = {
           title: "useStopwatch",
           href: "/docs/hooks/use-stopwatch",
           items: [],
-          label: "Soon",
         },
       ],
     },
