@@ -139,19 +139,19 @@
     background: hsl(var(--border));
     border-radius: 5px;
   }
+}
 
-  /* Top Loader */
-  #nprogress .bar {
-    @apply !bg-primary;
-  }
+/* Top Loader */
+#nprogress .bar {
+  @apply !bg-primary;
+}
 
-  #nprogress .spinner-icon {
-    @apply !border-l-primary !border-t-primary;
-  }
+#nprogress .spinner-icon {
+  @apply !border-l-primary !border-t-primary;
+}
 
-  #nprogress .peg {
-    box-shadow:
-      0 0 10px hsla(var(--primary)),
-      0 0 5px hsla(var(--primary)) !important;
-  }
+#nprogress .peg {
+  box-shadow:
+    0 0 10px hsla(var(--primary)),
+    0 0 5px hsla(var(--primary)) !important;
 }

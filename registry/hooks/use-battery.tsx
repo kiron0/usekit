@@ -1,21 +1,23 @@
 import * as React from "react"
 
-interface Battery {
+interface Battery extends EventTarget {
   level: number
   charging: boolean
   chargingTime: number
   dischargingTime: number
-  addEventListener: (type: string, listener: () => void) => void
-  removeEventListener: (type: string, listener: () => void) => void
+  onlevelchange: (() => void) | null
+  onchargingchange: (() => void) | null
+  onchargingtimechange: (() => void) | null
+  ondischargingtimechange: (() => void) | null
 }
 
-declare global {
-  interface Navigator {
-    getBattery?: () => Promise<Battery>
-  }
+export interface Navigator {
+  getBattery: () => Promise<Battery>
 }
 
-type BatteryManager = {
+declare const navigator: Navigator
+
+interface BatteryManager {
   supported: boolean
   loading: boolean
   level: number | null
@@ -48,10 +50,15 @@ export function useBattery(): BatteryManager {
 
     const handleChange = () => {
       if (battery) {
+        const isBatteryAbsent =
+          battery.charging === true &&
+          battery.level === 1.0 &&
+          battery.dischargingTime === Infinity
+
         setState({
-          supported: true,
+          supported: !isBatteryAbsent,
           loading: false,
-          level: battery.level * 100,
+          level: battery.level * 100 || 0,
           charging: battery.charging,
           chargingTime: battery.chargingTime,
           dischargingTime: battery.dischargingTime,
@@ -59,22 +66,31 @@ export function useBattery(): BatteryManager {
       }
     }
 
-    navigator.getBattery().then((b: Battery) => {
-      battery = b
-      handleChange()
+    navigator
+      .getBattery()
+      .then((b: Battery) => {
+        battery = b
+        handleChange()
 
-      b.addEventListener("levelchange", handleChange)
-      b.addEventListener("chargingchange", handleChange)
-      b.addEventListener("chargingtimechange", handleChange)
-      b.addEventListener("dischargingtimechange", handleChange)
-    })
+        b.onlevelchange = handleChange
+        b.onchargingchange = handleChange
+        b.onchargingtimechange = handleChange
+        b.ondischargingtimechange = handleChange
+      })
+      .catch(() => {
+        setState((s) => ({
+          ...s,
+          supported: false,
+          loading: false,
+        }))
+      })
 
     return () => {
       if (battery) {
-        battery.removeEventListener("levelchange", handleChange)
-        battery.removeEventListener("chargingchange", handleChange)
-        battery.removeEventListener("chargingtimechange", handleChange)
-        battery.removeEventListener("dischargingtimechange", handleChange)
+        battery.onlevelchange = null
+        battery.onchargingchange = null
+        battery.onchargingtimechange = null
+        battery.ondischargingtimechange = null
       }
     }
   }, [])

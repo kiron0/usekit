@@ -93,7 +93,7 @@ export function ComponentPreview({
           <div
             key={key}
             className={cn(
-              "preview flex min-h-[350px] w-full justify-center p-10",
+              "preview mt-3 flex min-h-[350px] w-full justify-center p-10",
               {
                 "items-center": align === "center",
                 "items-start": align === "start",

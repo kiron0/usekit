@@ -1,3 +1,5 @@
+"use client"
+
 import { Badge } from "@/components/ui/badge"
 import { useBattery } from "registry/hooks/use-battery"
 
