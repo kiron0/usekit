@@ -342,11 +342,11 @@ export const hooksExamples: Registry["items"] = [
     ],
   },
   {
-    name: "use-any-measure-demo",
+    name: "use-measure-any-demo",
     type: "registry:example",
     files: [
       {
-        path: "examples/use-any-measure-demo.tsx",
+        path: "examples/use-measure-any-demo.tsx",
         type: "registry:example",
       },
     ],

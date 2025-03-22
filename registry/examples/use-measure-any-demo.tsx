@@ -3,14 +3,14 @@
 import * as React from "react"
 
 import { Button } from "@/components/ui/button"
-import { useAnyMeasure } from "registry/hooks/use-any-measure"
+import { useMeasureAny } from "registry/hooks/use-measure-any"
 
 export default function UseMeasureDemo() {
   const ref = React.useRef<HTMLDivElement>(null)
 
   const [isStarted, setIsStarted] = React.useState(false)
 
-  const { MeasureComponent, reset, isMobile } = useAnyMeasure({
+  const { MeasureComponent, reset, isMobile } = useMeasureAny({
     ref,
     actionPosition: "top-right",
     measurementPosition: "top-right",

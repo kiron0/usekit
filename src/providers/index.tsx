@@ -26,7 +26,7 @@ export default function Providers({ children }: ProvidersProps) {
         </div>
       </TooltipProvider>
       <Toaster />
-      <NextTopLoader />
+      <NextTopLoader showForHashAnchor={false} />
     </ThemeProvider>
   )
 }

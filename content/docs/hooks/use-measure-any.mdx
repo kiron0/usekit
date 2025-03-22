@@ -1,9 +1,9 @@
 ---
-title: useAnyMeasure
-description: Measure the dimensions of any element with useAnyMeasure, providing options to track changes and observe the element.
+title: useMeasureAny
+description: Measure the dimensions of any element with useMeasureAny, providing options to track changes and observe the element.
 ---
 
-<ComponentPreview name="use-any-measure-demo" />
+<ComponentPreview name="use-measure-any-demo" />
 
 ## Installation
 
@@ -17,7 +17,7 @@ description: Measure the dimensions of any element with useAnyMeasure, providing
 <TabsContent value="cli">
 
 ```bash
-npx shadcn@latest add https://usekit.kiron.dev/r/use-any-measure
+npx shadcn@latest add https://usekit.kiron.dev/r/use-measure-any
 ```
 
 </TabsContent>
@@ -34,7 +34,9 @@ npm install lucide-react
 
 <Step>Copy and paste the following code into your project.</Step>
 
-<ComponentSource name="use-any-measure" />
+<ComponentSource name="use-measure-any" />
+
+<Step>Update the import paths to match your project setup.</Step>
 
 </Steps>
 
@@ -47,10 +49,10 @@ npm install lucide-react
 ```tsx {3, 6-10}
 "use client"
 
-import { useAnyMeasure } from "@/hooks/use-any-measure"
+import { useMeasureAny } from "@/hooks/use-measure-any"
 
 export function Component() {
-  const { MeasureComponent } = useAnyMeasure({
+  const { MeasureComponent } = useMeasureAny({
     borderRadius: 0,
     actionPosition: "top-right",
     measurementPosition: "top-right",
