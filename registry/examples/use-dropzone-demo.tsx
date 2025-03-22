@@ -15,11 +15,11 @@ export default function UseDropzoneDemo() {
   })
 
   return (
-    <div className="space-y-4 text-center">
+    <div className="space-y-4 overflow-hidden text-center">
       <div
         ref={dropZoneRef}
         className={cn(
-          "mx-auto flex h-40 w-[calc(100vw-5rem)] items-center justify-center rounded-2xl border-2 border-dashed p-4 md:w-80",
+          "mx-auto flex aspect-video h-40 max-w-full items-center justify-center rounded-2xl border-2 border-dashed p-4",
           isOverDropZone
             ? "border-blue-500 bg-neutral-400/0"
             : "border-neutral-500 bg-neutral-400/15"
@@ -36,7 +36,13 @@ export default function UseDropzoneDemo() {
       {files && (
         <>
           <p>Here is the filenames dropped:</p>
-          <ul>{files?.map((file) => <li key={file.name}>{file.name}</li>)}</ul>
+          <ul>
+            {files?.map((file) => (
+              <li key={file.name} className="truncate">
+                {file.name}
+              </li>
+            ))}
+          </ul>
           <Button variant="destructive" onClick={clearFiles}>
             Clear files
           </Button>

@@ -431,4 +431,14 @@ export const hooksExamples: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "use-step-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "examples/use-step-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
 ]

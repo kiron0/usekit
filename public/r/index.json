@@ -725,11 +725,22 @@
       "title": "Use Input Value",
       "description": "A hook to manage input values with useInputValue.",
       "type": "registry:hook",
-      "registryDependencies": ["https://usekit.kiron.dev/r/use-event-listener"],
       "files": [
         {
           "type": "registry:hook",
           "path": "registry/hooks/use-input-value.tsx"
+        }
+      ]
+    },
+    {
+      "name": "use-step",
+      "title": "Use Step",
+      "description": "A hook to manage step values with useStep.",
+      "type": "registry:hook",
+      "files": [
+        {
+          "type": "registry:hook",
+          "path": "registry/hooks/use-step.tsx"
         }
       ]
     }

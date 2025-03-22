@@ -895,7 +895,7 @@ export const Index: Record<string, any> = {
   "use-input-value": {
     name: "use-input-value",
     type: "registry:hook",
-    registryDependencies: ["https://usekit.kiron.dev/r/use-event-listener"],
+    registryDependencies: undefined,
     files: [
       {
         path: "registry/hooks/use-input-value.tsx",
@@ -906,6 +906,20 @@ export const Index: Record<string, any> = {
     component: React.lazy(
       () => import("registry/examples/use-input-value-demo")
     ),
+    source: "",
+  },
+  "use-step": {
+    name: "use-step",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-step.tsx",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(() => import("registry/examples/use-step-demo")),
     source: "",
   },
   "use-copy-to-clipboard-demo": {
@@ -1554,6 +1568,20 @@ export const Index: Record<string, any> = {
     component: React.lazy(
       () => import("registry/examples/use-input-value-demo")
     ),
+    source: "",
+  },
+  "use-step-demo": {
+    name: "use-step-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-step-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(() => import("registry/examples/use-step-demo")),
     source: "",
   },
 }

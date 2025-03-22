@@ -380,7 +380,6 @@ export const docsConfig: DocsConfig = {
           title: "useStep",
           href: "/docs/hooks/use-step",
           items: [],
-          label: "Soon",
         },
         {
           title: "useRerender",

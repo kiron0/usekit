@@ -769,10 +769,21 @@ export const hooks: Registry["items"] = [
     title: "Use Input Value",
     description: "A hook to manage input values with useInputValue.",
     type: "registry:hook",
-    registryDependencies: ["https://usekit.kiron.dev/r/use-event-listener"],
     files: [
       {
         path: "hooks/use-input-value.tsx",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-step",
+    title: "Use Step",
+    description: "A hook to manage step values with useStep.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "hooks/use-step.tsx",
         type: "registry:hook",
       },
     ],

@@ -1,0 +1,109 @@
+---
+title: useStep
+description: A hook to manage step values with useStep.
+---
+
+<ComponentPreview name="use-step-demo" />
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://usekit.kiron.dev/r/use-step
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="use-step" />
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+```tsx {6, 8-15}
+"use client"
+
+import { useStep } from "@/hooks/use-step"
+
+export function Component() {
+  const [currentStep, helpers] = useStep(5)
+
+  const {
+    canGoToPrevStep,
+    canGoToNextStep,
+    goToNextStep,
+    goToPrevStep,
+    reset,
+    setStep,
+  } = helpers
+
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+      <p>Current step is {currentStep}</p>
+      <p>Can go to previous step {canGoToPrevStep ? "yes" : "no"}</p>
+      <p>Can go to next step {canGoToNextStep ? "yes" : "no"}</p>
+      <button onClick={goToNextStep} type="button">
+        Go to next step
+      </button>
+      <button onClick={goToPrevStep} type="button">
+        Go to previous step
+      </button>
+      <button onClick={reset} type="button">
+        Reset
+      </button>
+      <button
+        onClick={() => {
+          setStep(3)
+        }}
+        type="button"
+      >
+        Set to step 3
+      </button>
+    </div>
+  )
+}
+```
+
+## API Reference
+
+### Parameters
+
+| Name      | Type     | Description                    | Default Value | Optional |
+| --------- | -------- | ------------------------------ | ------------- | -------- |
+| `initial` | `number` | The initial value of the step. | `0`           | Yes      |
+
+### Return Values
+
+| Name          | Type     | Description                            |
+| ------------- | -------- | -------------------------------------- |
+| `currentStep` | `number` | The current step value.                |
+| `helpers`     | `object` | An object containing helper functions. |
+
+**Helper Functions**
+
+| Name              | Type       | Description                                                          |
+| ----------------- | ---------- | -------------------------------------------------------------------- |
+| `canGoToPrevStep` | `boolean`  | Returns `true` if the previous step is available, otherwise `false`. |
+| `canGoToNextStep` | `boolean`  | Returns `true` if the next step is available, otherwise `false`.     |
+| `goToNextStep`    | `function` | Moves to the next step.                                              |
+| `goToPrevStep`    | `function` | Moves to the previous step.                                          |
+| `reset`           | `function` | Resets the step value to the initial value.                          |
+| `setStep`         | `function` | Sets the step value to the specified value.                          |

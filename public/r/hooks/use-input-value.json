@@ -4,7 +4,6 @@
   "type": "registry:hook",
   "title": "Use Input Value",
   "description": "A hook to manage input values with useInputValue.",
-  "registryDependencies": ["https://usekit.kiron.dev/r/use-event-listener"],
   "files": [
     {
       "path": "registry/hooks/use-input-value.tsx",
