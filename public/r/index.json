@@ -743,6 +743,18 @@
           "path": "registry/hooks/use-step.tsx"
         }
       ]
+    },
+    {
+      "name": "use-draggable",
+      "title": "Use Draggable",
+      "description": "Create draggable elements with useDraggable, providing options to customize the drag behavior.",
+      "type": "registry:hook",
+      "files": [
+        {
+          "type": "registry:hook",
+          "path": "registry/hooks/use-draggable.tsx"
+        }
+      ]
     }
   ]
 }

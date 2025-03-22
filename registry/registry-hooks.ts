@@ -788,6 +788,19 @@ export const hooks: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "use-draggable",
+    title: "Use Draggable",
+    description:
+      "Create draggable elements with useDraggable, providing options to customize the drag behavior.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "hooks/use-draggable.tsx",
+        type: "registry:hook",
+      },
+    ],
+  },
 ]
 
 export default hooks

@@ -346,7 +346,6 @@ export const docsConfig: DocsConfig = {
           title: "useDraggable",
           href: "/docs/hooks/use-draggable",
           items: [],
-          label: "Soon",
         },
         {
           title: "useDropzone",

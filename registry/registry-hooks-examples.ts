@@ -441,4 +441,14 @@ export const hooksExamples: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "use-draggable-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "examples/use-draggable-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
 ]

@@ -1,0 +1,332 @@
+---
+title: useDraggable
+description: A hook to manage draggable elements with useDraggable.
+---
+
+<ComponentPreview name="use-draggable-demo" />
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://usekit.kiron.dev/r/use-draggable
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="use-draggable" />
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+```tsx {6, 8-15}
+"use client"
+
+import { useStep } from "@/hooks/use-step"
+
+export function Component() {
+  const [currentStep, helpers] = useStep(5)
+
+  const {
+    canGoToPrevStep,
+    canGoToNextStep,
+    goToNextStep,
+    goToPrevStep,
+    reset,
+    setStep,
+  } = helpers
+
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+      <p>Current step is {currentStep}</p>
+      <p>Can go to previous step {canGoToPrevStep ? "yes" : "no"}</p>
+      <p>Can go to next step {canGoToNextStep ? "yes" : "no"}</p>
+      <button onClick={goToNextStep} type="button">
+        Go to next step
+      </button>
+      <button onClick={goToPrevStep} type="button">
+        Go to previous step
+      </button>
+      <button onClick={reset} type="button">
+        Reset
+      </button>
+      <button
+        onClick={() => {
+          setStep(3)
+        }}
+        type="button"
+      >
+        Set to step 3
+      </button>
+    </div>
+  )
+}
+```
+
+## Examples
+
+### **Example 1: Basic Draggable Div**
+
+This example shows how to make a simple `div` draggable.
+
+```tsx
+import { useDraggable } from "@/hooks/use-draggable"
+
+const DraggableDiv = () => {
+  const { ref, isDragging } = useDraggable<HTMLDivElement>()
+
+  return (
+    <div
+      ref={ref}
+      style={{
+        width: "200px",
+        height: "200px",
+        backgroundColor: isDragging ? "lightblue" : "lightcoral",
+        cursor: "grab",
+        userSelect: "none", // Prevent text selection while dragging
+      }}
+    >
+      Drag me!
+    </div>
+  )
+}
+
+export default DraggableDiv
+```
+
+### **Example 2: Draggable with Conditional Logic**
+
+This example adds a condition to allow dragging only if the element is not disabled.
+
+```tsx
+import * as React from "react"
+
+import { useDraggable } from "@/hooks/use-draggable"
+
+const ConditionalDraggable = () => {
+  const [isDisabled, setIsDisabled] = React.useState(false)
+  const { ref, isDragging } = useDraggable<HTMLDivElement>({
+    canDrag: (element) => !isDisabled, // Only allow dragging if not disabled
+  })
+
+  return (
+    <div>
+      <div
+        ref={ref}
+        style={{
+          width: "200px",
+          height: "200px",
+          backgroundColor: isDragging ? "lightgreen" : "lightpink",
+          cursor: isDisabled ? "not-allowed" : "grab",
+          userSelect: "none",
+        }}
+      >
+        {isDisabled ? "Disabled" : "Drag me!"}
+      </div>
+      <button onClick={() => setIsDisabled(!isDisabled)}>
+        {isDisabled ? "Enable Dragging" : "Disable Dragging"}
+      </button>
+    </div>
+  )
+}
+
+export default ConditionalDraggable
+```
+
+### **Example 3: Draggable Image**
+
+This example makes an image draggable.
+
+```tsx
+import { useDraggable } from "@/hooks/use-draggable"
+
+const DraggableImage = () => {
+  const { ref, isDragging } = useDraggable<HTMLImageElement>()
+
+  return (
+    <img
+      ref={ref}
+      src="https://via.placeholder.com/200"
+      alt="Draggable"
+      style={{
+        cursor: "grab",
+        border: isDragging ? "2px solid blue" : "2px solid transparent",
+        userSelect: "none",
+      }}
+    />
+  )
+}
+
+export default DraggableImage
+```
+
+### **Example 4: Draggable with Boundaries**
+
+This example restricts dragging within a container.
+
+```tsx
+import * as React from "react"
+
+import { useDraggable } from "@/hooks/use-draggable"
+
+const BoundedDraggable = () => {
+  const containerRef = React.useRef<HTMLDivElement>(null)
+  const { ref, isDragging } = useDraggable<HTMLDivElement>({
+    canDrag: (element) => {
+      // Ensure the element stays within the container
+      const container = containerRef.current
+      if (!container) return true
+
+      const containerRect = container.getBoundingClientRect()
+      const elementRect = element.getBoundingClientRect()
+
+      return (
+        elementRect.left >= containerRect.left &&
+        elementRect.right <= containerRect.right &&
+        elementRect.top >= containerRect.top &&
+        elementRect.bottom <= containerRect.bottom
+      )
+    },
+  })
+
+  return (
+    <div
+      ref={containerRef}
+      style={{
+        position: "relative",
+        width: "500px",
+        height: "500px",
+        border: "2px solid black",
+        overflow: "hidden",
+      }}
+    >
+      <div
+        ref={ref}
+        style={{
+          width: "100px",
+          height: "100px",
+          backgroundColor: isDragging ? "lightyellow" : "lightseagreen",
+          cursor: "grab",
+          userSelect: "none",
+        }}
+      >
+        Drag me!
+      </div>
+    </div>
+  )
+}
+
+export default BoundedDraggable
+```
+
+### **Example 5: Draggable List Items**
+
+This example makes each item in a list draggable.
+
+```tsx
+import { useDraggable } from "@/hooks/use-draggable"
+
+const DraggableList = () => {
+  const items = ["Item 1", "Item 2", "Item 3", "Item 4"]
+
+  return (
+    <div>
+      {items.map((item, index) => {
+        const { ref, isDragging } = useDraggable<HTMLLIElement>()
+        return (
+          <li
+            key={index}
+            ref={ref}
+            style={{
+              padding: "10px",
+              margin: "5px",
+              backgroundColor: isDragging ? "lightgray" : "white",
+              cursor: "grab",
+              userSelect: "none",
+              border: "1px solid #ccc",
+              listStyle: "none",
+            }}
+          >
+            {item}
+          </li>
+        )
+      })}
+    </div>
+  )
+}
+
+export default DraggableList
+```
+
+### **Example 6: Draggable with Snap-to-Grid**
+
+This example snaps the draggable element to a grid.
+
+```tsx
+import { useDraggable } from "@/hooks/use-draggable"
+
+const SnapToGridDraggable = () => {
+  const { ref, isDragging } = useDraggable<HTMLDivElement>({
+    canDrag: (element) => {
+      // Snap to grid logic
+      const gridSize = 50
+      const rect = element.getBoundingClientRect()
+      const snappedX = Math.round(rect.left / gridSize) * gridSize
+      const snappedY = Math.round(rect.top / gridSize) * gridSize
+      element.style.transform = `translate(${snappedX}px, ${snappedY}px)`
+      return true
+    },
+  })
+
+  return (
+    <div
+      ref={ref}
+      style={{
+        width: "100px",
+        height: "100px",
+        backgroundColor: isDragging ? "lightcyan" : "lightgoldenrodyellow",
+        cursor: "grab",
+        userSelect: "none",
+      }}
+    >
+      Snap to Grid
+    </div>
+  )
+}
+
+export default SnapToGridDraggable
+```
+
+## API Reference
+
+### Parameters
+
+| Name      | Type       | Description                                                    | Default Value | Optional |
+| --------- | ---------- | -------------------------------------------------------------- | ------------- | -------- |
+| `canDrag` | `function` | A function that determines whether the element can be dragged. | `() => true`  | Yes      |
+
+### Return Values
+
+| Name         | Type           | Description                                                                |
+| ------------ | -------------- | -------------------------------------------------------------------------- |
+| `ref`        | `RefObject<T>` | A React ref object to attach to the draggable element.                     |
+| `isDragging` | `boolean`      | A boolean value indicating whether the element is currently being dragged. |
