@@ -8,6 +8,7 @@ import { CopyButton } from "@/components/copy-button"
 import { Icons } from "@/components/icons"
 
 import { Index } from "../../__registry__"
+import { RerenderComponent } from "./rerender-component"
 
 interface ComponentPreviewProps extends React.HTMLAttributes<HTMLDivElement> {
   name: string
@@ -25,6 +26,8 @@ export function ComponentPreview({
   hideCode = false,
   ...props
 }: ComponentPreviewProps) {
+  const [key, setKey] = React.useState(0)
+
   const Codes = React.Children.toArray(children) as React.ReactElement<
     any,
     string | React.JSXElementConstructor<any>
@@ -83,8 +86,12 @@ export function ComponentPreview({
           )}
         </div>
         <TabsContent value="preview" className="relative rounded-md border">
-          <CopyButton value={codeString} className="absolute right-4 top-4" />
+          <div className="absolute right-4 top-4 space-x-2">
+            <CopyButton value={codeString} />
+            <RerenderComponent onClick={() => setKey((prev) => prev + 1)} />
+          </div>
           <div
+            key={key}
             className={cn(
               "preview flex min-h-[350px] w-full justify-center p-10",
               {

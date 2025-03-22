@@ -1,15 +1,16 @@
 import * as React from "react"
 
-type ScrollState = {
+interface ScrollState {
   x: number | null
   y: number | null
 }
 
-type ScrollToOptions = {
+interface ScrollToOptions {
   top?: number
   left?: number
   behavior?: ScrollBehavior
 }
+
 type ScrollToFunction = (
   optionsOrX: ScrollToOptions | number,
   y?: number,

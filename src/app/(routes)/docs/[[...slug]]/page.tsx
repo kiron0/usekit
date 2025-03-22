@@ -19,6 +19,7 @@ import { badgeVariants } from "@/components/ui/badge"
 import { DocGridPattern } from "@/components/doc-grid-pattern"
 import { DocsPager } from "@/components/pager"
 import { ScrambleText } from "@/components/scramble-text"
+import { ScrollToTop } from "@/components/scroll-to-top"
 
 interface DocPageProps {
   params: {
@@ -71,7 +72,7 @@ export async function generateMetadata(props: {
       title: doc.title,
       description: doc.description,
       images: [new URL("/og.png", BASE_URL)],
-      creator: "@hashtagkiron",
+      creator: siteConfig.links.twitter,
     },
   }
 }
@@ -151,6 +152,7 @@ export default async function DocPage(props: {
             </div>
           </div>
         </div>
+        <ScrollToTop />
       </main>
     </>
   )
