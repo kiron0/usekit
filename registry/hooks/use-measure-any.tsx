@@ -41,7 +41,7 @@ const measurementPositions = [
   { name: "bottom-left", bottom: 16, left: 16 },
 ]
 
-export function useAnyMeasure({
+export function useMeasureAny({
   borderRadius = 0.5,
   borderWidth = 1,
   actionPosition = "top-right",
