@@ -755,6 +755,30 @@
           "path": "registry/hooks/use-draggable.tsx"
         }
       ]
+    },
+    {
+      "name": "use-stopwatch",
+      "title": "Use Stopwatch",
+      "description": "Create a stopwatch with useStopwatch, providing options to pause, play, reset, and toggle the stopwatch.",
+      "type": "registry:hook",
+      "files": [
+        {
+          "type": "registry:hook",
+          "path": "registry/hooks/use-stopwatch.tsx"
+        }
+      ]
+    },
+    {
+      "name": "use-location",
+      "title": "Use Location",
+      "description": "A hook that allows you to access and manage the current location in your application",
+      "type": "registry:hook",
+      "files": [
+        {
+          "type": "registry:hook",
+          "path": "registry/hooks/use-location.tsx"
+        }
+      ]
     }
   ]
 }

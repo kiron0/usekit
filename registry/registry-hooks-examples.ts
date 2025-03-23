@@ -451,4 +451,24 @@ export const hooksExamples: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "use-stopwatch-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "examples/use-stopwatch-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-location-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "examples/use-location-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
 ]

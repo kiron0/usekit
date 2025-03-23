@@ -936,6 +936,34 @@ export const Index: Record<string, any> = {
     component: React.lazy(() => import("registry/examples/use-draggable-demo")),
     source: "",
   },
+  "use-stopwatch": {
+    name: "use-stopwatch",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-stopwatch.tsx",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(() => import("registry/examples/use-stopwatch-demo")),
+    source: "",
+  },
+  "use-location": {
+    name: "use-location",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-location.tsx",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(() => import("registry/examples/use-location-demo")),
+    source: "",
+  },
   "use-copy-to-clipboard-demo": {
     name: "use-copy-to-clipboard-demo",
     type: "registry:example",
@@ -1610,6 +1638,34 @@ export const Index: Record<string, any> = {
       },
     ],
     component: React.lazy(() => import("registry/examples/use-draggable-demo")),
+    source: "",
+  },
+  "use-stopwatch-demo": {
+    name: "use-stopwatch-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-stopwatch-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(() => import("registry/examples/use-stopwatch-demo")),
+    source: "",
+  },
+  "use-location-demo": {
+    name: "use-location-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-location-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(() => import("registry/examples/use-location-demo")),
     source: "",
   },
 }

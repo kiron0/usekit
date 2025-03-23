@@ -19,7 +19,7 @@ export default function UseIntervalWhenDemo() {
   return (
     <div className="relative size-52 rounded-full border hover:border-primary/30 dark:bg-zinc-900 dark:shadow">
       <button
-        id="toggle-timer"
+        id="toggle-interval"
         title="Click to toggle the timer"
         onClick={() => setWhen(!when)}
         className="absolute left-0 right-0 top-0 z-10 h-full w-full rounded-full bg-transparent text-4xl font-semibold"
@@ -30,7 +30,7 @@ export default function UseIntervalWhenDemo() {
         })}
       </button>
       <Label
-        htmlFor="toggle-timer"
+        htmlFor="toggle-interval"
         className="absolute bottom-8 left-0 right-0 cursor-pointer text-center text-base capitalize"
       >
         {when ? "stop" : "start"}

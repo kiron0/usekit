@@ -367,7 +367,6 @@ export const docsConfig: DocsConfig = {
           title: "useLocation",
           href: "/docs/hooks/use-location",
           items: [],
-          label: "Soon",
         },
         {
           title: "useMemory",
@@ -396,7 +395,6 @@ export const docsConfig: DocsConfig = {
           title: "useStopwatch",
           href: "/docs/hooks/use-stopwatch",
           items: [],
-          label: "Soon",
         },
       ],
     },
