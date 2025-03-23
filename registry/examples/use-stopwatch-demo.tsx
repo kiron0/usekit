@@ -26,7 +26,7 @@ export default function UseStopwatchDemo() {
           {isPaused ? "play" : "pause"}
         </Label>
       </div>
-      <div className="flex flex-wrap items-center gap-2">
+      <div className="flex flex-wrap justify-center items-center gap-2">
         <Button type="button" onClick={pause} disabled={isPaused}>
           Pause
         </Button>

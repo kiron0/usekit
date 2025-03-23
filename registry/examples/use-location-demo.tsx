@@ -17,7 +17,7 @@ export default function UseLocationDemo() {
   }
 
   return (
-    <div className="w-full p-8">
+    <div className="w-full">
       <header className="mb-8 text-center">
         <h2 className="mb-2 text-2xl tracking-tighter">
           📍 useLocation Hook Preview
