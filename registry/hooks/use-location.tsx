@@ -46,7 +46,7 @@ if (isClient) {
   patchHistoryMethod("replaceState")
 }
 
-type LocationStateType = {
+interface LocationState {
   trigger: string
   state: unknown
   length: number
@@ -61,7 +61,7 @@ type LocationStateType = {
   search: string
 }
 
-const defaultLocationState: LocationStateType = {
+const defaultLocationState: LocationState = {
   trigger: "load",
   state: null,
   length: 1,
@@ -76,8 +76,8 @@ const defaultLocationState: LocationStateType = {
   search: "",
 }
 
-export const useLocation = (): LocationStateType => {
-  const buildState = React.useCallback((trigger: string): LocationStateType => {
+export const useLocation = (): LocationState => {
+  const buildState = React.useCallback((trigger: string): LocationState => {
     if (!isClient) {
       return defaultLocationState
     }
@@ -111,7 +111,7 @@ export const useLocation = (): LocationStateType => {
     }
   }, [])
 
-  const [locationState, setLocationState] = React.useState<LocationStateType>(
+  const [locationState, setLocationState] = React.useState<LocationState>(
     buildState("load")
   )
 
