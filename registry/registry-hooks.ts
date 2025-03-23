@@ -814,6 +814,19 @@ export const hooks: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "use-location",
+    title: "Use Location",
+    description:
+      "A hook that allows you to access and manage the current location in your application",
+    type: "registry:hook",
+    files: [
+      {
+        path: "hooks/use-location.tsx",
+        type: "registry:hook",
+      },
+    ],
+  },
 ]
 
 export default hooks

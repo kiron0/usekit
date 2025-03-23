@@ -367,7 +367,6 @@ export const docsConfig: DocsConfig = {
           title: "useLocation",
           href: "/docs/hooks/use-location",
           items: [],
-          label: "Soon",
         },
         {
           title: "useMemory",
