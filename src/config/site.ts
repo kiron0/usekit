@@ -1,5 +1,6 @@
 export const siteConfig = {
   name: "useKit",
+  url: "https://usekit.kiron.dev",
   description:
     "A collection of reusable react hooks that you can copy and paste into your apps.",
   slogan: "A collection of reusable react hooks",

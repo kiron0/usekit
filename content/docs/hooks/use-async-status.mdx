@@ -116,7 +116,7 @@ type AsyncStatus<TData, TError> =
 #### `FeedbackOptions`
 
 ```ts
-type FeedbackOptions<TData, TError> = {
+type options<TData, TError> = {
   loading?: React.ReactNode
   success?: (data: TData) => React.ReactNode
   error?: (error: TError) => React.ReactNode

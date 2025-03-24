@@ -1,3 +1,5 @@
+import { siteConfig } from "@/config/site"
+
 import { type Registry } from "./schema"
 
 export const hooks: Registry["items"] = [
@@ -58,7 +60,7 @@ export const hooks: Registry["items"] = [
     description:
       "Delay function execution with useDebounceCallback, providing options for canceling, flushing, and checking if a call is pending.",
     type: "registry:hook",
-    registryDependencies: ["https://usekit.kiron.dev/r/use-unmount"],
+    registryDependencies: [`${siteConfig.url}/r/use-unmount`],
     dependencies: ["lodash.debounce"],
     devDependencies: ["@types/lodash.debounce"],
     files: [
@@ -727,9 +729,7 @@ export const hooks: Registry["items"] = [
     title: "Use Event Listener",
     description: "Listen for events on a target element with useEventListener.",
     type: "registry:hook",
-    registryDependencies: [
-      "https://usekit.kiron.dev/r/use-isomorphic-layout-effect",
-    ],
+    registryDependencies: [`${siteConfig.url}/r/use-isomorphic-layout-effect`],
     files: [
       {
         path: "hooks/use-event-listener.tsx",
@@ -756,7 +756,7 @@ export const hooks: Registry["items"] = [
     description:
       "Drag and drop files into a dropzone with useDropzone, providing options to customize the dropzone.",
     type: "registry:hook",
-    registryDependencies: ["https://usekit.kiron.dev/r/use-event-listener"],
+    registryDependencies: [`${siteConfig.url}/r/use-event-listener`],
     files: [
       {
         path: "hooks/use-dropzone.tsx",
