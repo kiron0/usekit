@@ -3,8 +3,8 @@ import { promises as fs } from "fs"
 import path from "path"
 import { rimraf } from "rimraf"
 
-import { default as hooks } from "../registry/registry-hooks"
-import { default as registryItems } from "../registry/registry-items"
+import { default as registryItems } from "../registry"
+import { default as hooks } from "../registry/hooks"
 import { RegistryItem, type Registry } from "../registry/schema"
 
 const registry: Registry = {
@@ -69,13 +69,7 @@ export const Index: Record<string, any> = {`
       return typeof file === "string"
         ? `"${resolvedFilePath}"`
         : `{
-      path: "${`registry/${
-        item.type === "registry:example"
-          ? "examples"
-          : item.type === "registry:hook"
-            ? "hooks"
-            : item.type
-      }/${item.name}.${fileExtension}`}",
+      path: "${`registry/${file.path}`}",
       type: "${file.type}",
       target: "${file.target ?? ""}"
     }`
@@ -146,8 +140,8 @@ try {
   console.log("💅 Building registry.json...")
   await buildRegistryJsonFile()
 
-  console.log("🚀 Building registry...")
-  await buildRegistry()
+  //   console.log("🚀 Building registry...")
+  //   await buildRegistry()
 } catch (error) {
   console.error(error)
   process.exit(1)
