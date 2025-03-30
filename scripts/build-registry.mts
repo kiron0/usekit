@@ -8,7 +8,7 @@ import { RegistryItem, type Registry } from "../registry/schema"
 const REGISTRY_JSON_FILE_PATH = "public/k/index.json"
 const INDEX_FILE_PATH = path.join(process.cwd(), "__registry__/index.tsx")
 const REGISTRY_JSON_PATH = path.join(process.cwd(), REGISTRY_JSON_FILE_PATH)
-const REGISTRY_OUTPUT_PATH = "public/k/files"
+const REGISTRY_OUTPUT_PATH = "public/k/hooks"
 
 const registry: Registry = {
   name: "useKit",
