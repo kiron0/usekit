@@ -6,7 +6,7 @@ export const hooksExamples: Registry["items"] = [
     type: "registry:example",
     files: [
       {
-        path: "examples/use-copy-to-clipboard-demo.tsx",
+        path: "registry/examples/use-copy-to-clipboard-demo.tsx",
         type: "registry:example",
       },
     ],
@@ -16,7 +16,7 @@ export const hooksExamples: Registry["items"] = [
     type: "registry:example",
     files: [
       {
-        path: "examples/use-interval-demo.tsx",
+        path: "registry/examples/use-interval-demo.tsx",
         type: "registry:example",
       },
     ],
@@ -26,7 +26,7 @@ export const hooksExamples: Registry["items"] = [
     type: "registry:example",
     files: [
       {
-        path: "examples/use-timeout-demo.tsx",
+        path: "registry/examples/use-timeout-demo.tsx",
         type: "registry:example",
       },
     ],
@@ -36,7 +36,7 @@ export const hooksExamples: Registry["items"] = [
     type: "registry:example",
     files: [
       {
-        path: "examples/use-document-title-demo.tsx",
+        path: "registry/examples/use-document-title-demo.tsx",
         type: "registry:example",
       },
     ],
@@ -46,7 +46,7 @@ export const hooksExamples: Registry["items"] = [
     type: "registry:example",
     files: [
       {
-        path: "examples/use-mouse-position-demo.tsx",
+        path: "registry/examples/use-mouse-position-demo.tsx",
         type: "registry:example",
       },
     ],
@@ -56,7 +56,7 @@ export const hooksExamples: Registry["items"] = [
     type: "registry:example",
     files: [
       {
-        path: "examples/use-counter-demo.tsx",
+        path: "registry/examples/use-counter-demo.tsx",
         type: "registry:example",
       },
     ],
@@ -66,7 +66,7 @@ export const hooksExamples: Registry["items"] = [
     type: "registry:example",
     files: [
       {
-        path: "examples/use-scramble-demo.tsx",
+        path: "registry/examples/use-scramble-demo.tsx",
         type: "registry:example",
       },
     ],
@@ -76,7 +76,7 @@ export const hooksExamples: Registry["items"] = [
     type: "registry:example",
     files: [
       {
-        path: "examples/use-fetch-demo.tsx",
+        path: "registry/examples/use-fetch-demo.tsx",
         type: "registry:example",
       },
     ],
@@ -86,7 +86,7 @@ export const hooksExamples: Registry["items"] = [
     type: "registry:example",
     files: [
       {
-        path: "examples/use-local-storage-demo.tsx",
+        path: "registry/examples/use-local-storage-demo.tsx",
         type: "registry:example",
       },
     ],
@@ -96,7 +96,7 @@ export const hooksExamples: Registry["items"] = [
     type: "registry:example",
     files: [
       {
-        path: "examples/use-session-storage-demo.tsx",
+        path: "registry/examples/use-session-storage-demo.tsx",
         type: "registry:example",
       },
     ],
@@ -106,7 +106,7 @@ export const hooksExamples: Registry["items"] = [
     type: "registry:example",
     files: [
       {
-        path: "examples/use-script-demo.tsx",
+        path: "registry/examples/use-script-demo.tsx",
         type: "registry:example",
       },
     ],
@@ -116,7 +116,7 @@ export const hooksExamples: Registry["items"] = [
     type: "registry:example",
     files: [
       {
-        path: "examples/use-render-count-demo.tsx",
+        path: "registry/examples/use-render-count-demo.tsx",
         type: "registry:example",
       },
     ],
@@ -126,7 +126,7 @@ export const hooksExamples: Registry["items"] = [
     type: "registry:example",
     files: [
       {
-        path: "examples/use-orientation-demo.tsx",
+        path: "registry/examples/use-orientation-demo.tsx",
         type: "registry:example",
       },
     ],
@@ -136,7 +136,7 @@ export const hooksExamples: Registry["items"] = [
     type: "registry:example",
     files: [
       {
-        path: "examples/use-window-size-demo.tsx",
+        path: "registry/examples/use-window-size-demo.tsx",
         type: "registry:example",
       },
     ],
@@ -146,7 +146,7 @@ export const hooksExamples: Registry["items"] = [
     type: "registry:example",
     files: [
       {
-        path: "examples/use-hover-demo.tsx",
+        path: "registry/examples/use-hover-demo.tsx",
         type: "registry:example",
       },
     ],
@@ -156,7 +156,7 @@ export const hooksExamples: Registry["items"] = [
     type: "registry:example",
     files: [
       {
-        path: "examples/use-battery-demo.tsx",
+        path: "registry/examples/use-battery-demo.tsx",
         type: "registry:example",
       },
     ],
@@ -166,7 +166,7 @@ export const hooksExamples: Registry["items"] = [
     type: "registry:example",
     files: [
       {
-        path: "examples/use-media-query-demo.tsx",
+        path: "registry/examples/use-media-query-demo.tsx",
         type: "registry:example",
       },
     ],
@@ -176,7 +176,7 @@ export const hooksExamples: Registry["items"] = [
     type: "registry:example",
     files: [
       {
-        path: "examples/use-interval-when-demo.tsx",
+        path: "registry/examples/use-interval-when-demo.tsx",
         type: "registry:example",
       },
     ],
@@ -186,7 +186,7 @@ export const hooksExamples: Registry["items"] = [
     type: "registry:example",
     files: [
       {
-        path: "examples/use-countdown-demo.tsx",
+        path: "registry/examples/use-countdown-demo.tsx",
         type: "registry:example",
       },
     ],
@@ -196,7 +196,7 @@ export const hooksExamples: Registry["items"] = [
     type: "registry:example",
     files: [
       {
-        path: "examples/use-visibility-change-demo.tsx",
+        path: "registry/examples/use-visibility-change-demo.tsx",
         type: "registry:example",
       },
     ],
@@ -206,7 +206,7 @@ export const hooksExamples: Registry["items"] = [
     type: "registry:example",
     files: [
       {
-        path: "examples/use-key-press-demo.tsx",
+        path: "registry/examples/use-key-press-demo.tsx",
         type: "registry:example",
       },
     ],
@@ -216,7 +216,7 @@ export const hooksExamples: Registry["items"] = [
     type: "registry:example",
     files: [
       {
-        path: "examples/use-cookie-storage-demo.tsx",
+        path: "registry/examples/use-cookie-storage-demo.tsx",
         type: "registry:example",
       },
     ],
@@ -226,7 +226,7 @@ export const hooksExamples: Registry["items"] = [
     type: "registry:example",
     files: [
       {
-        path: "examples/use-is-client-demo.tsx",
+        path: "registry/examples/use-is-client-demo.tsx",
         type: "registry:example",
       },
     ],
@@ -236,7 +236,7 @@ export const hooksExamples: Registry["items"] = [
     type: "registry:example",
     files: [
       {
-        path: "examples/use-geolocation-demo.tsx",
+        path: "registry/examples/use-geolocation-demo.tsx",
         type: "registry:example",
       },
     ],
@@ -246,7 +246,7 @@ export const hooksExamples: Registry["items"] = [
     type: "registry:example",
     files: [
       {
-        path: "examples/use-page-leave-demo.tsx",
+        path: "registry/examples/use-page-leave-demo.tsx",
         type: "registry:example",
       },
     ],
@@ -256,7 +256,7 @@ export const hooksExamples: Registry["items"] = [
     type: "registry:example",
     files: [
       {
-        path: "examples/use-is-first-render-demo.tsx",
+        path: "registry/examples/use-is-first-render-demo.tsx",
         type: "registry:example",
       },
     ],
@@ -266,7 +266,7 @@ export const hooksExamples: Registry["items"] = [
     type: "registry:example",
     files: [
       {
-        path: "examples/use-window-scroll-demo.tsx",
+        path: "registry/examples/use-window-scroll-demo.tsx",
         type: "registry:example",
       },
     ],
@@ -276,7 +276,7 @@ export const hooksExamples: Registry["items"] = [
     type: "registry:example",
     files: [
       {
-        path: "examples/use-idle-demo.tsx",
+        path: "registry/examples/use-idle-demo.tsx",
         type: "registry:example",
       },
     ],
@@ -286,7 +286,7 @@ export const hooksExamples: Registry["items"] = [
     type: "registry:example",
     files: [
       {
-        path: "examples/use-long-press-demo.tsx",
+        path: "registry/examples/use-long-press-demo.tsx",
         type: "registry:example",
       },
     ],
@@ -296,7 +296,7 @@ export const hooksExamples: Registry["items"] = [
     type: "registry:example",
     files: [
       {
-        path: "examples/use-default-demo.tsx",
+        path: "registry/examples/use-default-demo.tsx",
         type: "registry:example",
       },
     ],
@@ -306,7 +306,7 @@ export const hooksExamples: Registry["items"] = [
     type: "registry:example",
     files: [
       {
-        path: "examples/use-click-away-demo.tsx",
+        path: "registry/examples/use-click-away-demo.tsx",
         type: "registry:example",
       },
     ],
@@ -316,7 +316,7 @@ export const hooksExamples: Registry["items"] = [
     type: "registry:example",
     files: [
       {
-        path: "examples/use-object-state-demo.tsx",
+        path: "registry/examples/use-object-state-demo.tsx",
         type: "registry:example",
       },
     ],
@@ -326,7 +326,7 @@ export const hooksExamples: Registry["items"] = [
     type: "registry:example",
     files: [
       {
-        path: "examples/use-logger-demo.tsx",
+        path: "registry/examples/use-logger-demo.tsx",
         type: "registry:example",
       },
     ],
@@ -336,7 +336,7 @@ export const hooksExamples: Registry["items"] = [
     type: "registry:example",
     files: [
       {
-        path: "examples/use-speakup-demo.tsx",
+        path: "registry/examples/use-speakup-demo.tsx",
         type: "registry:example",
       },
     ],
@@ -346,7 +346,7 @@ export const hooksExamples: Registry["items"] = [
     type: "registry:example",
     files: [
       {
-        path: "examples/use-measure-any-demo.tsx",
+        path: "registry/examples/use-measure-any-demo.tsx",
         type: "registry:example",
       },
     ],
@@ -356,7 +356,7 @@ export const hooksExamples: Registry["items"] = [
     type: "registry:example",
     files: [
       {
-        path: "examples/use-measure-demo.tsx",
+        path: "registry/examples/use-measure-demo.tsx",
         type: "registry:example",
       },
     ],
@@ -366,7 +366,7 @@ export const hooksExamples: Registry["items"] = [
     type: "registry:example",
     files: [
       {
-        path: "examples/use-previous-demo.tsx",
+        path: "registry/examples/use-previous-demo.tsx",
         type: "registry:example",
       },
     ],
@@ -376,7 +376,7 @@ export const hooksExamples: Registry["items"] = [
     type: "registry:example",
     files: [
       {
-        path: "examples/use-history-state-demo.tsx",
+        path: "registry/examples/use-history-state-demo.tsx",
         type: "registry:example",
       },
     ],
@@ -386,7 +386,7 @@ export const hooksExamples: Registry["items"] = [
     type: "registry:example",
     files: [
       {
-        path: "examples/use-async-status-demo.tsx",
+        path: "registry/examples/use-async-status-demo.tsx",
         type: "registry:example",
       },
     ],
@@ -396,7 +396,7 @@ export const hooksExamples: Registry["items"] = [
     type: "registry:example",
     files: [
       {
-        path: "examples/use-favicon-demo.tsx",
+        path: "registry/examples/use-favicon-demo.tsx",
         type: "registry:example",
       },
     ],
@@ -406,7 +406,7 @@ export const hooksExamples: Registry["items"] = [
     type: "registry:example",
     files: [
       {
-        path: "examples/use-list-demo.tsx",
+        path: "registry/examples/use-list-demo.tsx",
         type: "registry:example",
       },
     ],
@@ -416,7 +416,7 @@ export const hooksExamples: Registry["items"] = [
     type: "registry:example",
     files: [
       {
-        path: "examples/use-dropzone-demo.tsx",
+        path: "registry/examples/use-dropzone-demo.tsx",
         type: "registry:example",
       },
     ],
@@ -426,7 +426,7 @@ export const hooksExamples: Registry["items"] = [
     type: "registry:example",
     files: [
       {
-        path: "examples/use-input-value-demo.tsx",
+        path: "registry/examples/use-input-value-demo.tsx",
         type: "registry:example",
       },
     ],
@@ -436,7 +436,7 @@ export const hooksExamples: Registry["items"] = [
     type: "registry:example",
     files: [
       {
-        path: "examples/use-step-demo.tsx",
+        path: "registry/examples/use-step-demo.tsx",
         type: "registry:example",
       },
     ],
@@ -446,7 +446,7 @@ export const hooksExamples: Registry["items"] = [
     type: "registry:example",
     files: [
       {
-        path: "examples/use-draggable-demo.tsx",
+        path: "registry/examples/use-draggable-demo.tsx",
         type: "registry:example",
       },
     ],
@@ -456,7 +456,7 @@ export const hooksExamples: Registry["items"] = [
     type: "registry:example",
     files: [
       {
-        path: "examples/use-stopwatch-demo.tsx",
+        path: "registry/examples/use-stopwatch-demo.tsx",
         type: "registry:example",
       },
     ],
@@ -466,7 +466,7 @@ export const hooksExamples: Registry["items"] = [
     type: "registry:example",
     files: [
       {
-        path: "examples/use-location-demo.tsx",
+        path: "registry/examples/use-location-demo.tsx",
         type: "registry:example",
       },
     ],

@@ -11,7 +11,7 @@ export const hooks: Registry["items"] = [
     type: "registry:hook",
     files: [
       {
-        path: "hooks/use-boolean.tsx",
+        path: "registry/hooks/use-boolean.tsx",
         type: "registry:hook",
       },
     ],
@@ -23,7 +23,7 @@ export const hooks: Registry["items"] = [
     type: "registry:hook",
     files: [
       {
-        path: "hooks/use-toggle.tsx",
+        path: "registry/hooks/use-toggle.tsx",
         type: "registry:hook",
       },
     ],
@@ -36,7 +36,7 @@ export const hooks: Registry["items"] = [
     type: "registry:hook",
     files: [
       {
-        path: "hooks/use-copy-to-clipboard.tsx",
+        path: "registry/hooks/use-copy-to-clipboard.tsx",
         type: "registry:hook",
       },
     ],
@@ -49,7 +49,7 @@ export const hooks: Registry["items"] = [
     type: "registry:hook",
     files: [
       {
-        path: "hooks/use-unmount.tsx",
+        path: "registry/hooks/use-unmount.tsx",
         type: "registry:hook",
       },
     ],
@@ -65,7 +65,7 @@ export const hooks: Registry["items"] = [
     devDependencies: ["@types/lodash.debounce"],
     files: [
       {
-        path: "hooks/use-debounce-callback.tsx",
+        path: "registry/hooks/use-debounce-callback.tsx",
         type: "registry:hook",
       },
     ],
@@ -78,7 +78,7 @@ export const hooks: Registry["items"] = [
     type: "registry:hook",
     files: [
       {
-        path: "hooks/use-isomorphic-layout-effect.tsx",
+        path: "registry/hooks/use-isomorphic-layout-effect.tsx",
         type: "registry:hook",
       },
     ],
@@ -91,7 +91,7 @@ export const hooks: Registry["items"] = [
     type: "registry:hook",
     files: [
       {
-        path: "hooks/use-interval.tsx",
+        path: "registry/hooks/use-interval.tsx",
         type: "registry:hook",
       },
     ],
@@ -104,7 +104,7 @@ export const hooks: Registry["items"] = [
     type: "registry:hook",
     files: [
       {
-        path: "hooks/use-timeout.tsx",
+        path: "registry/hooks/use-timeout.tsx",
         type: "registry:hook",
       },
     ],
@@ -117,7 +117,7 @@ export const hooks: Registry["items"] = [
     type: "registry:hook",
     files: [
       {
-        path: "hooks/use-document-title.tsx",
+        path: "registry/hooks/use-document-title.tsx",
         type: "registry:hook",
       },
     ],
@@ -130,7 +130,7 @@ export const hooks: Registry["items"] = [
     type: "registry:hook",
     files: [
       {
-        path: "hooks/use-counter.tsx",
+        path: "registry/hooks/use-counter.tsx",
         type: "registry:hook",
       },
     ],
@@ -143,7 +143,7 @@ export const hooks: Registry["items"] = [
     type: "registry:hook",
     files: [
       {
-        path: "hooks/use-mouse-position.tsx",
+        path: "registry/hooks/use-mouse-position.tsx",
         type: "registry:hook",
       },
     ],
@@ -155,7 +155,7 @@ export const hooks: Registry["items"] = [
     type: "registry:hook",
     files: [
       {
-        path: "hooks/use-battery.tsx",
+        path: "registry/hooks/use-battery.tsx",
         type: "registry:hook",
       },
     ],
@@ -168,7 +168,7 @@ export const hooks: Registry["items"] = [
     type: "registry:hook",
     files: [
       {
-        path: "hooks/use-local-storage.tsx",
+        path: "registry/hooks/use-local-storage.tsx",
         type: "registry:hook",
       },
     ],
@@ -181,7 +181,7 @@ export const hooks: Registry["items"] = [
     type: "registry:hook",
     files: [
       {
-        path: "hooks/use-session-storage.tsx",
+        path: "registry/hooks/use-session-storage.tsx",
         type: "registry:hook",
       },
     ],
@@ -194,7 +194,7 @@ export const hooks: Registry["items"] = [
     type: "registry:hook",
     files: [
       {
-        path: "hooks/use-fetch.tsx",
+        path: "registry/hooks/use-fetch.tsx",
         type: "registry:hook",
       },
     ],
@@ -206,7 +206,7 @@ export const hooks: Registry["items"] = [
     type: "registry:hook",
     files: [
       {
-        path: "hooks/use-script.tsx",
+        path: "registry/hooks/use-script.tsx",
         type: "registry:hook",
       },
     ],
@@ -219,7 +219,7 @@ export const hooks: Registry["items"] = [
     type: "registry:hook",
     files: [
       {
-        path: "hooks/use-scramble.tsx",
+        path: "registry/hooks/use-scramble.tsx",
         type: "registry:hook",
       },
     ],
@@ -232,7 +232,7 @@ export const hooks: Registry["items"] = [
     type: "registry:hook",
     files: [
       {
-        path: "hooks/use-intersection-observer.tsx",
+        path: "registry/hooks/use-intersection-observer.tsx",
         type: "registry:hook",
       },
     ],
@@ -245,7 +245,7 @@ export const hooks: Registry["items"] = [
     type: "registry:hook",
     files: [
       {
-        path: "hooks/use-render-count.tsx",
+        path: "registry/hooks/use-render-count.tsx",
         type: "registry:hook",
       },
     ],
@@ -258,7 +258,7 @@ export const hooks: Registry["items"] = [
     type: "registry:hook",
     files: [
       {
-        path: "hooks/use-orientation.tsx",
+        path: "registry/hooks/use-orientation.tsx",
         type: "registry:hook",
       },
     ],
@@ -271,7 +271,7 @@ export const hooks: Registry["items"] = [
     type: "registry:hook",
     files: [
       {
-        path: "hooks/use-window-size.tsx",
+        path: "registry/hooks/use-window-size.tsx",
         type: "registry:hook",
       },
     ],
@@ -284,7 +284,7 @@ export const hooks: Registry["items"] = [
     type: "registry:hook",
     files: [
       {
-        path: "hooks/use-hover.tsx",
+        path: "registry/hooks/use-hover.tsx",
         type: "registry:hook",
       },
     ],
@@ -297,7 +297,7 @@ export const hooks: Registry["items"] = [
     type: "registry:hook",
     files: [
       {
-        path: "hooks/use-media-query.tsx",
+        path: "registry/hooks/use-media-query.tsx",
         type: "registry:hook",
       },
     ],
@@ -310,7 +310,7 @@ export const hooks: Registry["items"] = [
     type: "registry:hook",
     files: [
       {
-        path: "hooks/use-interval-when.tsx",
+        path: "registry/hooks/use-interval-when.tsx",
         type: "registry:hook",
       },
     ],
@@ -322,7 +322,7 @@ export const hooks: Registry["items"] = [
     type: "registry:hook",
     files: [
       {
-        path: "hooks/use-countdown.tsx",
+        path: "registry/hooks/use-countdown.tsx",
         type: "registry:hook",
       },
     ],
@@ -335,7 +335,7 @@ export const hooks: Registry["items"] = [
     type: "registry:hook",
     files: [
       {
-        path: "hooks/use-visibility-change.tsx",
+        path: "registry/hooks/use-visibility-change.tsx",
         type: "registry:hook",
       },
     ],
@@ -348,7 +348,7 @@ export const hooks: Registry["items"] = [
     type: "registry:hook",
     files: [
       {
-        path: "hooks/use-key-press.tsx",
+        path: "registry/hooks/use-key-press.tsx",
         type: "registry:hook",
       },
     ],
@@ -361,7 +361,7 @@ export const hooks: Registry["items"] = [
     type: "registry:hook",
     files: [
       {
-        path: "hooks/use-cookie-storage.tsx",
+        path: "registry/hooks/use-cookie-storage.tsx",
         type: "registry:hook",
       },
     ],
@@ -374,7 +374,7 @@ export const hooks: Registry["items"] = [
     type: "registry:hook",
     files: [
       {
-        path: "hooks/use-is-client.tsx",
+        path: "registry/hooks/use-is-client.tsx",
         type: "registry:hook",
       },
     ],
@@ -387,7 +387,7 @@ export const hooks: Registry["items"] = [
     type: "registry:hook",
     files: [
       {
-        path: "hooks/use-geolocation.tsx",
+        path: "registry/hooks/use-geolocation.tsx",
         type: "registry:hook",
       },
     ],
@@ -400,7 +400,7 @@ export const hooks: Registry["items"] = [
     type: "registry:hook",
     files: [
       {
-        path: "hooks/use-page-leave.tsx",
+        path: "registry/hooks/use-page-leave.tsx",
         type: "registry:hook",
       },
     ],
@@ -413,7 +413,7 @@ export const hooks: Registry["items"] = [
     type: "registry:hook",
     files: [
       {
-        path: "hooks/use-is-first-render.tsx",
+        path: "registry/hooks/use-is-first-render.tsx",
         type: "registry:hook",
       },
     ],
@@ -426,7 +426,7 @@ export const hooks: Registry["items"] = [
     type: "registry:hook",
     files: [
       {
-        path: "hooks/use-window-scroll.tsx",
+        path: "registry/hooks/use-window-scroll.tsx",
         type: "registry:hook",
       },
     ],
@@ -438,7 +438,7 @@ export const hooks: Registry["items"] = [
     type: "registry:hook",
     files: [
       {
-        path: "hooks/use-idle.tsx",
+        path: "registry/hooks/use-idle.tsx",
         type: "registry:hook",
       },
     ],
@@ -451,7 +451,7 @@ export const hooks: Registry["items"] = [
     type: "registry:hook",
     files: [
       {
-        path: "hooks/use-long-press.tsx",
+        path: "registry/hooks/use-long-press.tsx",
         type: "registry:hook",
       },
     ],
@@ -463,7 +463,7 @@ export const hooks: Registry["items"] = [
     type: "registry:hook",
     files: [
       {
-        path: "hooks/use-default.tsx",
+        path: "registry/hooks/use-default.tsx",
         type: "registry:hook",
       },
     ],
@@ -476,7 +476,7 @@ export const hooks: Registry["items"] = [
     type: "registry:hook",
     files: [
       {
-        path: "hooks/use-click-away.tsx",
+        path: "registry/hooks/use-click-away.tsx",
         type: "registry:hook",
       },
     ],
@@ -488,7 +488,7 @@ export const hooks: Registry["items"] = [
     type: "registry:hook",
     files: [
       {
-        path: "hooks/use-object-state.tsx",
+        path: "registry/hooks/use-object-state.tsx",
         type: "registry:hook",
       },
     ],
@@ -500,7 +500,7 @@ export const hooks: Registry["items"] = [
     type: "registry:hook",
     files: [
       {
-        path: "hooks/use-logger.tsx",
+        path: "registry/hooks/use-logger.tsx",
         type: "registry:hook",
       },
     ],
@@ -513,7 +513,7 @@ export const hooks: Registry["items"] = [
     type: "registry:hook",
     files: [
       {
-        path: "hooks/use-speakup.tsx",
+        path: "registry/hooks/use-speakup.tsx",
         type: "registry:hook",
       },
     ],
@@ -527,7 +527,7 @@ export const hooks: Registry["items"] = [
     dependencies: ["lucide-react"],
     files: [
       {
-        path: "hooks/use-measure-any.tsx",
+        path: "registry/hooks/use-measure-any.tsx",
         type: "registry:hook",
       },
     ],
@@ -541,7 +541,7 @@ export const hooks: Registry["items"] = [
     dependencies: ["lucide-react"],
     files: [
       {
-        path: "hooks/use-measure.tsx",
+        path: "registry/hooks/use-measure.tsx",
         type: "registry:hook",
       },
     ],
@@ -554,7 +554,7 @@ export const hooks: Registry["items"] = [
     type: "registry:hook",
     files: [
       {
-        path: "hooks/use-is-mobile.tsx",
+        path: "registry/hooks/use-is-mobile.tsx",
         type: "registry:hook",
       },
     ],
@@ -567,7 +567,7 @@ export const hooks: Registry["items"] = [
     type: "registry:hook",
     files: [
       {
-        path: "hooks/use-lock-body-scroll.tsx",
+        path: "registry/hooks/use-lock-body-scroll.tsx",
         type: "registry:hook",
       },
     ],
@@ -580,7 +580,7 @@ export const hooks: Registry["items"] = [
     type: "registry:hook",
     files: [
       {
-        path: "hooks/use-mounted.tsx",
+        path: "registry/hooks/use-mounted.tsx",
         type: "registry:hook",
       },
     ],
@@ -593,7 +593,7 @@ export const hooks: Registry["items"] = [
     type: "registry:hook",
     files: [
       {
-        path: "hooks/use-mutation-observer.tsx",
+        path: "registry/hooks/use-mutation-observer.tsx",
         type: "registry:hook",
       },
     ],
@@ -605,7 +605,7 @@ export const hooks: Registry["items"] = [
     type: "registry:hook",
     files: [
       {
-        path: "hooks/use-previous.tsx",
+        path: "registry/hooks/use-previous.tsx",
         type: "registry:hook",
       },
     ],
@@ -617,7 +617,7 @@ export const hooks: Registry["items"] = [
     type: "registry:hook",
     files: [
       {
-        path: "hooks/use-history-state.tsx",
+        path: "registry/hooks/use-history-state.tsx",
         type: "registry:hook",
       },
     ],
@@ -630,7 +630,7 @@ export const hooks: Registry["items"] = [
     type: "registry:hook",
     files: [
       {
-        path: "hooks/use-async-status.tsx",
+        path: "registry/hooks/use-async-status.tsx",
         type: "registry:hook",
       },
     ],
@@ -642,7 +642,7 @@ export const hooks: Registry["items"] = [
     type: "registry:hook",
     files: [
       {
-        path: "hooks/use-favicon.tsx",
+        path: "registry/hooks/use-favicon.tsx",
         type: "registry:hook",
       },
     ],
@@ -654,7 +654,7 @@ export const hooks: Registry["items"] = [
     type: "registry:hook",
     files: [
       {
-        path: "hooks/use-list.tsx",
+        path: "registry/hooks/use-list.tsx",
         type: "registry:hook",
       },
     ],
@@ -667,7 +667,7 @@ export const hooks: Registry["items"] = [
     type: "registry:hook",
     files: [
       {
-        path: "hooks/use-map.tsx",
+        path: "registry/hooks/use-map.tsx",
         type: "registry:hook",
       },
     ],
@@ -680,7 +680,7 @@ export const hooks: Registry["items"] = [
     type: "registry:hook",
     files: [
       {
-        path: "hooks/use-queue.tsx",
+        path: "registry/hooks/use-queue.tsx",
         type: "registry:hook",
       },
     ],
@@ -693,7 +693,7 @@ export const hooks: Registry["items"] = [
     type: "registry:hook",
     files: [
       {
-        path: "hooks/use-set.tsx",
+        path: "registry/hooks/use-set.tsx",
         type: "registry:hook",
       },
     ],
@@ -706,7 +706,7 @@ export const hooks: Registry["items"] = [
     type: "registry:hook",
     files: [
       {
-        path: "hooks/use-throttle.tsx",
+        path: "registry/hooks/use-throttle.tsx",
         type: "registry:hook",
       },
     ],
@@ -719,7 +719,7 @@ export const hooks: Registry["items"] = [
     type: "registry:hook",
     files: [
       {
-        path: "hooks/use-continuous-retry.tsx",
+        path: "registry/hooks/use-continuous-retry.tsx",
         type: "registry:hook",
       },
     ],
@@ -732,7 +732,7 @@ export const hooks: Registry["items"] = [
     registryDependencies: [`${siteConfig.url}/r/use-isomorphic-layout-effect`],
     files: [
       {
-        path: "hooks/use-event-listener.tsx",
+        path: "registry/hooks/use-event-listener.tsx",
         type: "registry:hook",
       },
     ],
@@ -745,7 +745,7 @@ export const hooks: Registry["items"] = [
     type: "registry:hook",
     files: [
       {
-        path: "hooks/use-random-interval.tsx",
+        path: "registry/hooks/use-random-interval.tsx",
         type: "registry:hook",
       },
     ],
@@ -759,7 +759,7 @@ export const hooks: Registry["items"] = [
     registryDependencies: [`${siteConfig.url}/r/use-event-listener`],
     files: [
       {
-        path: "hooks/use-dropzone.tsx",
+        path: "registry/hooks/use-dropzone.tsx",
         type: "registry:hook",
       },
     ],
@@ -771,7 +771,7 @@ export const hooks: Registry["items"] = [
     type: "registry:hook",
     files: [
       {
-        path: "hooks/use-input-value.tsx",
+        path: "registry/hooks/use-input-value.tsx",
         type: "registry:hook",
       },
     ],
@@ -783,7 +783,7 @@ export const hooks: Registry["items"] = [
     type: "registry:hook",
     files: [
       {
-        path: "hooks/use-step.tsx",
+        path: "registry/hooks/use-step.tsx",
         type: "registry:hook",
       },
     ],
@@ -796,7 +796,7 @@ export const hooks: Registry["items"] = [
     type: "registry:hook",
     files: [
       {
-        path: "hooks/use-draggable.tsx",
+        path: "registry/hooks/use-draggable.tsx",
         type: "registry:hook",
       },
     ],
@@ -809,7 +809,7 @@ export const hooks: Registry["items"] = [
     type: "registry:hook",
     files: [
       {
-        path: "hooks/use-stopwatch.tsx",
+        path: "registry/hooks/use-stopwatch.tsx",
         type: "registry:hook",
       },
     ],
@@ -822,7 +822,7 @@ export const hooks: Registry["items"] = [
     type: "registry:hook",
     files: [
       {
-        path: "hooks/use-location.tsx",
+        path: "registry/hooks/use-location.tsx",
         type: "registry:hook",
       },
     ],
