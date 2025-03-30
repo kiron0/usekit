@@ -60,7 +60,7 @@ export const hooks: Registry["items"] = [
     description:
       "Delay function execution with useDebounceCallback, providing options for canceling, flushing, and checking if a call is pending.",
     type: "registry:hook",
-    registryDependencies: [`${siteConfig.url}/r/use-unmount`],
+    registryDependencies: [`${siteConfig.url}/k/use-unmount`],
     dependencies: ["lodash.debounce"],
     devDependencies: ["@types/lodash.debounce"],
     files: [
