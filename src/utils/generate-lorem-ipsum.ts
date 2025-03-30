@@ -72,20 +72,21 @@ export const generateLoremIpsum = (minWords = 10, maxWords = 30) => {
 
   const wordCount =
     Math.floor(Math.random() * (maxWords - minWords + 1)) + minWords
-  let result = ""
+  const result = []
 
   for (let i = 0; i < wordCount; i++) {
     const randomIndex = Math.floor(Math.random() * loremWords.length)
-    result += (i === 0 ? "" : " ") + loremWords[randomIndex]
+    let word = loremWords[randomIndex]
 
-    // Randomly add punctuation
     if (i === wordCount - 1) {
-      result += "."
+      word += "."
     } else if (Math.random() < 0.1) {
-      result += Math.random() < 0.5 ? "," : "."
+      word += Math.random() < 0.5 ? "," : "."
     }
+
+    result.push(word)
   }
 
-  // Capitalize first letter
-  return result.charAt(0).toUpperCase() + result.slice(1)
+  const sentence = result.join(" ")
+  return sentence.charAt(0).toUpperCase() + sentence.slice(1)
 }

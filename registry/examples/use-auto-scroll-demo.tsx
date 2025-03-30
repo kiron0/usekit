@@ -82,7 +82,7 @@ export default function UseAutoScrollDemo() {
   }, [])
 
   return (
-    <div className="mx-auto mt-10 w-full max-w-md rounded-xl border p-4">
+    <div className="mx-auto w-full max-w-md rounded-xl border p-4">
       <h2 className="mb-4 text-center text-2xl font-semibold">
         Chat Interface
       </h2>
