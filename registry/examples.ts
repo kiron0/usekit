@@ -471,4 +471,14 @@ export const hooksExamples: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "use-auto-scroll-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/use-auto-scroll-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
 ]

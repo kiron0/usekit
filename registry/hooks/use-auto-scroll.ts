@@ -1,73 +1,130 @@
 import * as React from "react"
 
-// How many pixels from the bottom of the container to enable auto-scroll
-const ACTIVATION_THRESHOLD = 50
-// Minimum pixels of scroll-up movement required to disable auto-scroll
-const MIN_SCROLL_UP_THRESHOLD = 10
+type ScrollableElement = HTMLUListElement | HTMLDivElement | HTMLOListElement
 
-export function useAutoScroll(dependencies: React.DependencyList) {
-  const containerRef = React.useRef<HTMLDivElement | null>(null)
-  const previousScrollTop = React.useRef<number | null>(null)
-  const [shouldAutoScroll, setShouldAutoScroll] = React.useState(true)
+interface AutoScrollOptions {
+  scrollThreshold?: number
+  smoothScroll?: boolean
+}
+
+const useAutoScroll = <T extends ScrollableElement = HTMLUListElement>(
+  enabled: boolean,
+  deps: React.DependencyList,
+  options?: AutoScrollOptions
+): React.RefObject<T | null> => {
+  const listRef = React.useRef<T | null>(null)
+  const optionsRef = React.useRef(options)
+  const cleanupRef = React.useRef<(() => void) | undefined>(undefined)
+
+  React.useEffect(() => {
+    optionsRef.current = options
+  }, [options])
+
+  React.useEffect(() => {
+    if (enabled && listRef.current) {
+      cleanupRef.current = autoScrollElement(
+        listRef.current,
+        optionsRef.current
+      )
+      return () => cleanupRef.current?.()
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [enabled, ...deps])
+
+  return listRef
+}
+
+export default useAutoScroll
+
+export function autoScrollElement(
+  element: ScrollableElement,
+  options?: AutoScrollOptions
+): () => void {
+  const { scrollThreshold = 0.5, smoothScroll = true } = options || {}
+
+  let shouldAutoScroll = true
+  let touchStartY = 0
+  let lastScrollTop = 0
+  let animationFrameId: number | null = null
+
+  const checkScrollPosition = () => {
+    const { scrollHeight, clientHeight, scrollTop } = element
+    const maxScrollHeight = scrollHeight - clientHeight
+    const thresholdPosition = maxScrollHeight * (1 - scrollThreshold)
+
+    if (scrollTop < lastScrollTop) {
+      shouldAutoScroll = false
+    } else if (maxScrollHeight - scrollTop <= thresholdPosition) {
+      shouldAutoScroll = true
+    }
+
+    lastScrollTop = scrollTop
+  }
+
+  const handleWheel = (e: WheelEvent) => {
+    if (e.deltaY < 0) {
+      shouldAutoScroll = false
+    } else {
+      checkScrollPosition()
+    }
+  }
+
+  const handleTouchStart = (e: TouchEvent) => {
+    touchStartY = e.touches[0].clientY
+  }
+
+  const handleTouchMove = (e: TouchEvent) => {
+    const touchEndY = e.touches[0].clientY
+    const deltaY = touchStartY - touchEndY
+
+    if (deltaY < 0) {
+      shouldAutoScroll = false
+    } else {
+      checkScrollPosition()
+    }
+
+    touchStartY = touchEndY
+  }
 
   const scrollToBottom = () => {
-    if (containerRef.current) {
-      containerRef.current.scrollTop = containerRef.current.scrollHeight
+    if (animationFrameId) {
+      cancelAnimationFrame(animationFrameId)
     }
+    animationFrameId = requestAnimationFrame(() => {
+      element.scrollTo({
+        top: element.scrollHeight,
+        behavior: smoothScroll ? "smooth" : "auto",
+      })
+    })
   }
 
-  const handleScroll = () => {
-    if (containerRef.current) {
-      const { scrollTop, scrollHeight, clientHeight } = containerRef.current
-
-      const distanceFromBottom = Math.abs(
-        scrollHeight - scrollTop - clientHeight
-      )
-
-      const isScrollingUp = previousScrollTop.current
-        ? scrollTop < previousScrollTop.current
-        : false
-
-      const scrollUpDistance = previousScrollTop.current
-        ? previousScrollTop.current - scrollTop
-        : 0
-
-      const isDeliberateScrollUp =
-        isScrollingUp && scrollUpDistance > MIN_SCROLL_UP_THRESHOLD
-
-      if (isDeliberateScrollUp) {
-        setShouldAutoScroll(false)
-      } else {
-        const isScrolledToBottom = distanceFromBottom < ACTIVATION_THRESHOLD
-        setShouldAutoScroll(isScrolledToBottom)
-      }
-
-      previousScrollTop.current = scrollTop
-    }
-  }
-
-  const handleTouchStart = () => {
-    setShouldAutoScroll(false)
-  }
-
-  React.useEffect(() => {
-    if (containerRef.current) {
-      previousScrollTop.current = containerRef.current.scrollTop
-    }
-  }, [])
-
-  React.useEffect(() => {
+  const handleMutation = () => {
     if (shouldAutoScroll) {
       scrollToBottom()
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, dependencies)
+  }
 
-  return {
-    containerRef,
-    scrollToBottom,
-    handleScroll,
-    shouldAutoScroll,
-    handleTouchStart,
+  // Cast to HTMLElement to access correct addEventListener overloads
+  const htmlElement = element as HTMLElement
+
+  htmlElement.addEventListener("wheel", handleWheel)
+  htmlElement.addEventListener("touchstart", handleTouchStart)
+  htmlElement.addEventListener("touchmove", handleTouchMove)
+
+  const observer = new MutationObserver(handleMutation)
+  observer.observe(element, {
+    childList: true,
+    subtree: true,
+    characterData: true,
+  })
+
+  return () => {
+    observer.disconnect()
+    htmlElement.removeEventListener("wheel", handleWheel)
+    htmlElement.removeEventListener("touchstart", handleTouchStart)
+    htmlElement.removeEventListener("touchmove", handleTouchMove)
+    if (animationFrameId) {
+      cancelAnimationFrame(animationFrameId)
+    }
   }
 }

@@ -771,12 +771,24 @@
     {
       "name": "use-location",
       "title": "Use Location",
-      "description": "A hook that allows you to access and manage the current location in your application",
+      "description": "A hook that allows you to access and manage the current location in your application.",
       "type": "registry:hook",
       "files": [
         {
           "type": "registry:hook",
           "path": "registry/hooks/use-location.ts"
+        }
+      ]
+    },
+    {
+      "name": "use-auto-scroll",
+      "title": "Use Auto Scroll",
+      "description": "Use the useAutoScroll hook to automatically scroll an element into view when it is focused, with optional parameters for behavior and block alignment.",
+      "type": "registry:hook",
+      "files": [
+        {
+          "type": "registry:hook",
+          "path": "registry/hooks/use-auto-scroll.ts"
         }
       ]
     }

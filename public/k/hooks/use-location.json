@@ -3,7 +3,7 @@
   "name": "use-location",
   "type": "registry:hook",
   "title": "Use Location",
-  "description": "A hook that allows you to access and manage the current location in your application",
+  "description": "A hook that allows you to access and manage the current location in your application.",
   "files": [
     {
       "path": "registry/hooks/use-location.ts",

@@ -818,11 +818,24 @@ export const hooks: Registry["items"] = [
     name: "use-location",
     title: "Use Location",
     description:
-      "A hook that allows you to access and manage the current location in your application",
+      "A hook that allows you to access and manage the current location in your application.",
     type: "registry:hook",
     files: [
       {
         path: "registry/hooks/use-location.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-auto-scroll",
+    title: "Use Auto Scroll",
+    description:
+      "Use the useAutoScroll hook to automatically scroll an element into view when it is focused, with optional parameters for behavior and block alignment.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-auto-scroll.ts",
         type: "registry:hook",
       },
     ],

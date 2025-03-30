@@ -12,21 +12,23 @@ interface ProvidersProps {
 
 export default function Providers({ children }: ProvidersProps) {
   return (
-    <ThemeProvider
-      themes={THEMES}
-      attribute="class"
-      defaultTheme="system"
-      enableSystem
-      disableTransitionOnChange
-      enableColorScheme
-    >
-      <TooltipProvider>
-        <div className="relative flex min-h-svh flex-col bg-background">
-          {children}
-        </div>
-      </TooltipProvider>
-      <Toaster />
-      <NextTopLoader showForHashAnchor={false} />
-    </ThemeProvider>
+    <>
+      <ThemeProvider
+        themes={THEMES}
+        attribute="class"
+        defaultTheme="system"
+        enableSystem
+        disableTransitionOnChange
+        enableColorScheme
+      >
+        <TooltipProvider>
+          <div className="relative flex min-h-svh flex-col bg-background">
+            {children}
+          </div>
+          <Toaster />
+          <NextTopLoader showForHashAnchor={false} />
+        </TooltipProvider>
+      </ThemeProvider>
+    </>
   )
 }

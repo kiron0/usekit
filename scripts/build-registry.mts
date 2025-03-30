@@ -35,7 +35,6 @@ async function buildRegistryIndex(): Promise<void> {
 
     if (!resolveFiles) continue
 
-    const fileExtension = resolveFiles[0].split(".").pop()
     const sourceFilename = ""
 
     let hookPath = ""
@@ -58,7 +57,7 @@ async function buildRegistryIndex(): Promise<void> {
         item.type !== "registry:example" &&
         !item.name.includes("-demo") &&
         demoExists
-          ? `registry/examples/${subParts}${item.name}-demo.${fileExtension}`
+          ? `registry/examples/${subParts}${item.name}-demo`
           : files[0].path
     }
 
