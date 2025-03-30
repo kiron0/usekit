@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useRef, useState, type KeyboardEvent } from "react"
+import { generateLoremIpsum } from "@/utils/generate-lorem-ipsum"
 import { toast } from "sonner"
 
 import { cn } from "@/lib/utils"
@@ -32,10 +33,7 @@ export default function UseAutoScrollDemo() {
     setMessages((prev) => [...prev, userMessage])
     setInput("")
 
-    const aiResponse = `Sint nisi eu cillum nulla officia incididunt irure laboris enim cillum cupidatat occaecat.
-Duis adipisicing veniam exercitation quis anim. Exercitation consectetur tempor et consectetur dolor.
-Cupidatat culpa eiusmod ex enim occaecat dolor sunt. Et et commodo qui ipsum nostrud ut et incididunt est cupidatat excepteur laborum.
-Anim ullamco aliqua ad sit sint cupidatat esse esse.`
+    const aiResponse = generateLoremIpsum(80, 120)
 
     const words = aiResponse.split(" ")
     let currentWordIndex = 0
@@ -95,9 +93,15 @@ Anim ullamco aliqua ad sit sint cupidatat esse esse.`
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={handleKeyPress}
+          disabled={!!typingIntervalRef.current}
           placeholder="Type your message..."
         />
-        <Button variant="outline" type="button" onClick={sendMessage}>
+        <Button
+          variant="outline"
+          type="button"
+          disabled={input.trim() === "" || !!typingIntervalRef.current}
+          onClick={sendMessage}
+        >
           Send
         </Button>
       </div>

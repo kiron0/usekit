@@ -334,7 +334,6 @@ export const docsConfig: DocsConfig = {
           title: "useAutoScroll",
           href: "/docs/hooks/use-auto-scroll",
           items: [],
-          label: "Soon",
         },
         {
           title: "useBluetooth",
