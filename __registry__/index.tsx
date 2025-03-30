@@ -44,7 +44,7 @@ export const Index: Record<string, any> = {
       },
     ],
     component: React.lazy(
-      () => import("registry/examples/use-copy-to-clipboard-demo")
+      () => import("registry/examples/use-copy-to-clipboard-demo.tsx")
     ),
     source: "",
   },
@@ -65,7 +65,7 @@ export const Index: Record<string, any> = {
   "use-debounce-callback": {
     name: "use-debounce-callback",
     type: "registry:hook",
-    registryDependencies: ["https://usekit.kiron.dev/r/use-unmount"],
+    registryDependencies: ["https://usekit.kiron.dev/k/use-unmount"],
     files: [
       {
         path: "registry/hooks/use-debounce-callback.tsx",
@@ -105,7 +105,9 @@ export const Index: Record<string, any> = {
         target: "",
       },
     ],
-    component: React.lazy(() => import("registry/examples/use-interval-demo")),
+    component: React.lazy(
+      () => import("registry/examples/use-interval-demo.tsx")
+    ),
     source: "",
   },
   "use-timeout": {
@@ -119,7 +121,9 @@ export const Index: Record<string, any> = {
         target: "",
       },
     ],
-    component: React.lazy(() => import("registry/examples/use-timeout-demo")),
+    component: React.lazy(
+      () => import("registry/examples/use-timeout-demo.tsx")
+    ),
     source: "",
   },
   "use-document-title": {
@@ -134,7 +138,7 @@ export const Index: Record<string, any> = {
       },
     ],
     component: React.lazy(
-      () => import("registry/examples/use-document-title-demo")
+      () => import("registry/examples/use-document-title-demo.tsx")
     ),
     source: "",
   },
@@ -149,7 +153,9 @@ export const Index: Record<string, any> = {
         target: "",
       },
     ],
-    component: React.lazy(() => import("registry/examples/use-counter-demo")),
+    component: React.lazy(
+      () => import("registry/examples/use-counter-demo.tsx")
+    ),
     source: "",
   },
   "use-mouse-position": {
@@ -164,7 +170,7 @@ export const Index: Record<string, any> = {
       },
     ],
     component: React.lazy(
-      () => import("registry/examples/use-mouse-position-demo")
+      () => import("registry/examples/use-mouse-position-demo.tsx")
     ),
     source: "",
   },
@@ -179,7 +185,9 @@ export const Index: Record<string, any> = {
         target: "",
       },
     ],
-    component: React.lazy(() => import("registry/examples/use-battery-demo")),
+    component: React.lazy(
+      () => import("registry/examples/use-battery-demo.tsx")
+    ),
     source: "",
   },
   "use-local-storage": {
@@ -194,7 +202,7 @@ export const Index: Record<string, any> = {
       },
     ],
     component: React.lazy(
-      () => import("registry/examples/use-local-storage-demo")
+      () => import("registry/examples/use-local-storage-demo.tsx")
     ),
     source: "",
   },
@@ -210,7 +218,7 @@ export const Index: Record<string, any> = {
       },
     ],
     component: React.lazy(
-      () => import("registry/examples/use-session-storage-demo")
+      () => import("registry/examples/use-session-storage-demo.tsx")
     ),
     source: "",
   },
@@ -225,7 +233,7 @@ export const Index: Record<string, any> = {
         target: "",
       },
     ],
-    component: React.lazy(() => import("registry/examples/use-fetch-demo")),
+    component: React.lazy(() => import("registry/examples/use-fetch-demo.tsx")),
     source: "",
   },
   "use-script": {
@@ -239,7 +247,9 @@ export const Index: Record<string, any> = {
         target: "",
       },
     ],
-    component: React.lazy(() => import("registry/examples/use-script-demo")),
+    component: React.lazy(
+      () => import("registry/examples/use-script-demo.tsx")
+    ),
     source: "",
   },
   "use-scramble": {
@@ -253,7 +263,9 @@ export const Index: Record<string, any> = {
         target: "",
       },
     ],
-    component: React.lazy(() => import("registry/examples/use-scramble-demo")),
+    component: React.lazy(
+      () => import("registry/examples/use-scramble-demo.tsx")
+    ),
     source: "",
   },
   "use-intersection-observer": {
@@ -284,7 +296,7 @@ export const Index: Record<string, any> = {
       },
     ],
     component: React.lazy(
-      () => import("registry/examples/use-render-count-demo")
+      () => import("registry/examples/use-render-count-demo.tsx")
     ),
     source: "",
   },
@@ -300,7 +312,7 @@ export const Index: Record<string, any> = {
       },
     ],
     component: React.lazy(
-      () => import("registry/examples/use-orientation-demo")
+      () => import("registry/examples/use-orientation-demo.tsx")
     ),
     source: "",
   },
@@ -316,7 +328,7 @@ export const Index: Record<string, any> = {
       },
     ],
     component: React.lazy(
-      () => import("registry/examples/use-window-size-demo")
+      () => import("registry/examples/use-window-size-demo.tsx")
     ),
     source: "",
   },
@@ -331,7 +343,7 @@ export const Index: Record<string, any> = {
         target: "",
       },
     ],
-    component: React.lazy(() => import("registry/examples/use-hover-demo")),
+    component: React.lazy(() => import("registry/examples/use-hover-demo.tsx")),
     source: "",
   },
   "use-media-query": {
@@ -346,7 +358,7 @@ export const Index: Record<string, any> = {
       },
     ],
     component: React.lazy(
-      () => import("registry/examples/use-media-query-demo")
+      () => import("registry/examples/use-media-query-demo.tsx")
     ),
     source: "",
   },
@@ -362,7 +374,7 @@ export const Index: Record<string, any> = {
       },
     ],
     component: React.lazy(
-      () => import("registry/examples/use-interval-when-demo")
+      () => import("registry/examples/use-interval-when-demo.tsx")
     ),
     source: "",
   },
@@ -377,7 +389,9 @@ export const Index: Record<string, any> = {
         target: "",
       },
     ],
-    component: React.lazy(() => import("registry/examples/use-countdown-demo")),
+    component: React.lazy(
+      () => import("registry/examples/use-countdown-demo.tsx")
+    ),
     source: "",
   },
   "use-visibility-change": {
@@ -392,7 +406,7 @@ export const Index: Record<string, any> = {
       },
     ],
     component: React.lazy(
-      () => import("registry/examples/use-visibility-change-demo")
+      () => import("registry/examples/use-visibility-change-demo.tsx")
     ),
     source: "",
   },
@@ -407,7 +421,9 @@ export const Index: Record<string, any> = {
         target: "",
       },
     ],
-    component: React.lazy(() => import("registry/examples/use-key-press-demo")),
+    component: React.lazy(
+      () => import("registry/examples/use-key-press-demo.tsx")
+    ),
     source: "",
   },
   "use-cookie-storage": {
@@ -422,7 +438,7 @@ export const Index: Record<string, any> = {
       },
     ],
     component: React.lazy(
-      () => import("registry/examples/use-cookie-storage-demo")
+      () => import("registry/examples/use-cookie-storage-demo.tsx")
     ),
     source: "",
   },
@@ -437,7 +453,9 @@ export const Index: Record<string, any> = {
         target: "",
       },
     ],
-    component: React.lazy(() => import("registry/examples/use-is-client-demo")),
+    component: React.lazy(
+      () => import("registry/examples/use-is-client-demo.tsx")
+    ),
     source: "",
   },
   "use-geolocation": {
@@ -452,7 +470,7 @@ export const Index: Record<string, any> = {
       },
     ],
     component: React.lazy(
-      () => import("registry/examples/use-geolocation-demo")
+      () => import("registry/examples/use-geolocation-demo.tsx")
     ),
     source: "",
   },
@@ -468,7 +486,7 @@ export const Index: Record<string, any> = {
       },
     ],
     component: React.lazy(
-      () => import("registry/examples/use-page-leave-demo")
+      () => import("registry/examples/use-page-leave-demo.tsx")
     ),
     source: "",
   },
@@ -484,7 +502,7 @@ export const Index: Record<string, any> = {
       },
     ],
     component: React.lazy(
-      () => import("registry/examples/use-is-first-render-demo")
+      () => import("registry/examples/use-is-first-render-demo.tsx")
     ),
     source: "",
   },
@@ -500,7 +518,7 @@ export const Index: Record<string, any> = {
       },
     ],
     component: React.lazy(
-      () => import("registry/examples/use-window-scroll-demo")
+      () => import("registry/examples/use-window-scroll-demo.tsx")
     ),
     source: "",
   },
@@ -515,7 +533,7 @@ export const Index: Record<string, any> = {
         target: "",
       },
     ],
-    component: React.lazy(() => import("registry/examples/use-idle-demo")),
+    component: React.lazy(() => import("registry/examples/use-idle-demo.tsx")),
     source: "",
   },
   "use-long-press": {
@@ -530,7 +548,7 @@ export const Index: Record<string, any> = {
       },
     ],
     component: React.lazy(
-      () => import("registry/examples/use-long-press-demo")
+      () => import("registry/examples/use-long-press-demo.tsx")
     ),
     source: "",
   },
@@ -545,7 +563,9 @@ export const Index: Record<string, any> = {
         target: "",
       },
     ],
-    component: React.lazy(() => import("registry/examples/use-default-demo")),
+    component: React.lazy(
+      () => import("registry/examples/use-default-demo.tsx")
+    ),
     source: "",
   },
   "use-click-away": {
@@ -560,7 +580,7 @@ export const Index: Record<string, any> = {
       },
     ],
     component: React.lazy(
-      () => import("registry/examples/use-click-away-demo")
+      () => import("registry/examples/use-click-away-demo.tsx")
     ),
     source: "",
   },
@@ -576,7 +596,7 @@ export const Index: Record<string, any> = {
       },
     ],
     component: React.lazy(
-      () => import("registry/examples/use-object-state-demo")
+      () => import("registry/examples/use-object-state-demo.tsx")
     ),
     source: "",
   },
@@ -591,7 +611,9 @@ export const Index: Record<string, any> = {
         target: "",
       },
     ],
-    component: React.lazy(() => import("registry/examples/use-logger-demo")),
+    component: React.lazy(
+      () => import("registry/examples/use-logger-demo.tsx")
+    ),
     source: "",
   },
   "use-speakup": {
@@ -605,7 +627,9 @@ export const Index: Record<string, any> = {
         target: "",
       },
     ],
-    component: React.lazy(() => import("registry/examples/use-speakup-demo")),
+    component: React.lazy(
+      () => import("registry/examples/use-speakup-demo.tsx")
+    ),
     source: "",
   },
   "use-measure-any": {
@@ -620,7 +644,7 @@ export const Index: Record<string, any> = {
       },
     ],
     component: React.lazy(
-      () => import("registry/examples/use-measure-any-demo")
+      () => import("registry/examples/use-measure-any-demo.tsx")
     ),
     source: "",
   },
@@ -635,7 +659,9 @@ export const Index: Record<string, any> = {
         target: "",
       },
     ],
-    component: React.lazy(() => import("registry/examples/use-measure-demo")),
+    component: React.lazy(
+      () => import("registry/examples/use-measure-demo.tsx")
+    ),
     source: "",
   },
   "use-is-mobile": {
@@ -709,7 +735,9 @@ export const Index: Record<string, any> = {
         target: "",
       },
     ],
-    component: React.lazy(() => import("registry/examples/use-previous-demo")),
+    component: React.lazy(
+      () => import("registry/examples/use-previous-demo.tsx")
+    ),
     source: "",
   },
   "use-history-state": {
@@ -724,7 +752,7 @@ export const Index: Record<string, any> = {
       },
     ],
     component: React.lazy(
-      () => import("registry/examples/use-history-state-demo")
+      () => import("registry/examples/use-history-state-demo.tsx")
     ),
     source: "",
   },
@@ -740,7 +768,7 @@ export const Index: Record<string, any> = {
       },
     ],
     component: React.lazy(
-      () => import("registry/examples/use-async-status-demo")
+      () => import("registry/examples/use-async-status-demo.tsx")
     ),
     source: "",
   },
@@ -755,7 +783,9 @@ export const Index: Record<string, any> = {
         target: "",
       },
     ],
-    component: React.lazy(() => import("registry/examples/use-favicon-demo")),
+    component: React.lazy(
+      () => import("registry/examples/use-favicon-demo.tsx")
+    ),
     source: "",
   },
   "use-list": {
@@ -769,7 +799,7 @@ export const Index: Record<string, any> = {
         target: "",
       },
     ],
-    component: React.lazy(() => import("registry/examples/use-list-demo")),
+    component: React.lazy(() => import("registry/examples/use-list-demo.tsx")),
     source: "",
   },
   "use-map": {
@@ -889,7 +919,9 @@ export const Index: Record<string, any> = {
         target: "",
       },
     ],
-    component: React.lazy(() => import("registry/examples/use-dropzone-demo")),
+    component: React.lazy(
+      () => import("registry/examples/use-dropzone-demo.tsx")
+    ),
     source: "",
   },
   "use-input-value": {
@@ -904,7 +936,7 @@ export const Index: Record<string, any> = {
       },
     ],
     component: React.lazy(
-      () => import("registry/examples/use-input-value-demo")
+      () => import("registry/examples/use-input-value-demo.tsx")
     ),
     source: "",
   },
@@ -919,7 +951,7 @@ export const Index: Record<string, any> = {
         target: "",
       },
     ],
-    component: React.lazy(() => import("registry/examples/use-step-demo")),
+    component: React.lazy(() => import("registry/examples/use-step-demo.tsx")),
     source: "",
   },
   "use-draggable": {
@@ -933,7 +965,9 @@ export const Index: Record<string, any> = {
         target: "",
       },
     ],
-    component: React.lazy(() => import("registry/examples/use-draggable-demo")),
+    component: React.lazy(
+      () => import("registry/examples/use-draggable-demo.tsx")
+    ),
     source: "",
   },
   "use-stopwatch": {
@@ -947,7 +981,9 @@ export const Index: Record<string, any> = {
         target: "",
       },
     ],
-    component: React.lazy(() => import("registry/examples/use-stopwatch-demo")),
+    component: React.lazy(
+      () => import("registry/examples/use-stopwatch-demo.tsx")
+    ),
     source: "",
   },
   "use-location": {
@@ -961,7 +997,9 @@ export const Index: Record<string, any> = {
         target: "",
       },
     ],
-    component: React.lazy(() => import("registry/examples/use-location-demo")),
+    component: React.lazy(
+      () => import("registry/examples/use-location-demo.tsx")
+    ),
     source: "",
   },
   "use-copy-to-clipboard-demo": {
@@ -976,7 +1014,7 @@ export const Index: Record<string, any> = {
       },
     ],
     component: React.lazy(
-      () => import("registry/examples/use-copy-to-clipboard-demo")
+      () => import("registry/examples/use-copy-to-clipboard-demo.tsx")
     ),
     source: "",
   },
@@ -991,7 +1029,9 @@ export const Index: Record<string, any> = {
         target: "",
       },
     ],
-    component: React.lazy(() => import("registry/examples/use-interval-demo")),
+    component: React.lazy(
+      () => import("registry/examples/use-interval-demo.tsx")
+    ),
     source: "",
   },
   "use-timeout-demo": {
@@ -1005,7 +1045,9 @@ export const Index: Record<string, any> = {
         target: "",
       },
     ],
-    component: React.lazy(() => import("registry/examples/use-timeout-demo")),
+    component: React.lazy(
+      () => import("registry/examples/use-timeout-demo.tsx")
+    ),
     source: "",
   },
   "use-document-title-demo": {
@@ -1020,7 +1062,7 @@ export const Index: Record<string, any> = {
       },
     ],
     component: React.lazy(
-      () => import("registry/examples/use-document-title-demo")
+      () => import("registry/examples/use-document-title-demo.tsx")
     ),
     source: "",
   },
@@ -1036,7 +1078,7 @@ export const Index: Record<string, any> = {
       },
     ],
     component: React.lazy(
-      () => import("registry/examples/use-mouse-position-demo")
+      () => import("registry/examples/use-mouse-position-demo.tsx")
     ),
     source: "",
   },
@@ -1051,7 +1093,9 @@ export const Index: Record<string, any> = {
         target: "",
       },
     ],
-    component: React.lazy(() => import("registry/examples/use-counter-demo")),
+    component: React.lazy(
+      () => import("registry/examples/use-counter-demo.tsx")
+    ),
     source: "",
   },
   "use-scramble-demo": {
@@ -1065,7 +1109,9 @@ export const Index: Record<string, any> = {
         target: "",
       },
     ],
-    component: React.lazy(() => import("registry/examples/use-scramble-demo")),
+    component: React.lazy(
+      () => import("registry/examples/use-scramble-demo.tsx")
+    ),
     source: "",
   },
   "use-fetch-demo": {
@@ -1079,7 +1125,7 @@ export const Index: Record<string, any> = {
         target: "",
       },
     ],
-    component: React.lazy(() => import("registry/examples/use-fetch-demo")),
+    component: React.lazy(() => import("registry/examples/use-fetch-demo.tsx")),
     source: "",
   },
   "use-local-storage-demo": {
@@ -1094,7 +1140,7 @@ export const Index: Record<string, any> = {
       },
     ],
     component: React.lazy(
-      () => import("registry/examples/use-local-storage-demo")
+      () => import("registry/examples/use-local-storage-demo.tsx")
     ),
     source: "",
   },
@@ -1110,7 +1156,7 @@ export const Index: Record<string, any> = {
       },
     ],
     component: React.lazy(
-      () => import("registry/examples/use-session-storage-demo")
+      () => import("registry/examples/use-session-storage-demo.tsx")
     ),
     source: "",
   },
@@ -1125,7 +1171,9 @@ export const Index: Record<string, any> = {
         target: "",
       },
     ],
-    component: React.lazy(() => import("registry/examples/use-script-demo")),
+    component: React.lazy(
+      () => import("registry/examples/use-script-demo.tsx")
+    ),
     source: "",
   },
   "use-render-count-demo": {
@@ -1140,7 +1188,7 @@ export const Index: Record<string, any> = {
       },
     ],
     component: React.lazy(
-      () => import("registry/examples/use-render-count-demo")
+      () => import("registry/examples/use-render-count-demo.tsx")
     ),
     source: "",
   },
@@ -1156,7 +1204,7 @@ export const Index: Record<string, any> = {
       },
     ],
     component: React.lazy(
-      () => import("registry/examples/use-orientation-demo")
+      () => import("registry/examples/use-orientation-demo.tsx")
     ),
     source: "",
   },
@@ -1172,7 +1220,7 @@ export const Index: Record<string, any> = {
       },
     ],
     component: React.lazy(
-      () => import("registry/examples/use-window-size-demo")
+      () => import("registry/examples/use-window-size-demo.tsx")
     ),
     source: "",
   },
@@ -1187,7 +1235,7 @@ export const Index: Record<string, any> = {
         target: "",
       },
     ],
-    component: React.lazy(() => import("registry/examples/use-hover-demo")),
+    component: React.lazy(() => import("registry/examples/use-hover-demo.tsx")),
     source: "",
   },
   "use-battery-demo": {
@@ -1201,7 +1249,9 @@ export const Index: Record<string, any> = {
         target: "",
       },
     ],
-    component: React.lazy(() => import("registry/examples/use-battery-demo")),
+    component: React.lazy(
+      () => import("registry/examples/use-battery-demo.tsx")
+    ),
     source: "",
   },
   "use-media-query-demo": {
@@ -1216,7 +1266,7 @@ export const Index: Record<string, any> = {
       },
     ],
     component: React.lazy(
-      () => import("registry/examples/use-media-query-demo")
+      () => import("registry/examples/use-media-query-demo.tsx")
     ),
     source: "",
   },
@@ -1232,7 +1282,7 @@ export const Index: Record<string, any> = {
       },
     ],
     component: React.lazy(
-      () => import("registry/examples/use-interval-when-demo")
+      () => import("registry/examples/use-interval-when-demo.tsx")
     ),
     source: "",
   },
@@ -1247,7 +1297,9 @@ export const Index: Record<string, any> = {
         target: "",
       },
     ],
-    component: React.lazy(() => import("registry/examples/use-countdown-demo")),
+    component: React.lazy(
+      () => import("registry/examples/use-countdown-demo.tsx")
+    ),
     source: "",
   },
   "use-visibility-change-demo": {
@@ -1262,7 +1314,7 @@ export const Index: Record<string, any> = {
       },
     ],
     component: React.lazy(
-      () => import("registry/examples/use-visibility-change-demo")
+      () => import("registry/examples/use-visibility-change-demo.tsx")
     ),
     source: "",
   },
@@ -1277,7 +1329,9 @@ export const Index: Record<string, any> = {
         target: "",
       },
     ],
-    component: React.lazy(() => import("registry/examples/use-key-press-demo")),
+    component: React.lazy(
+      () => import("registry/examples/use-key-press-demo.tsx")
+    ),
     source: "",
   },
   "use-cookie-storage-demo": {
@@ -1292,7 +1346,7 @@ export const Index: Record<string, any> = {
       },
     ],
     component: React.lazy(
-      () => import("registry/examples/use-cookie-storage-demo")
+      () => import("registry/examples/use-cookie-storage-demo.tsx")
     ),
     source: "",
   },
@@ -1307,7 +1361,9 @@ export const Index: Record<string, any> = {
         target: "",
       },
     ],
-    component: React.lazy(() => import("registry/examples/use-is-client-demo")),
+    component: React.lazy(
+      () => import("registry/examples/use-is-client-demo.tsx")
+    ),
     source: "",
   },
   "use-geolocation-demo": {
@@ -1322,7 +1378,7 @@ export const Index: Record<string, any> = {
       },
     ],
     component: React.lazy(
-      () => import("registry/examples/use-geolocation-demo")
+      () => import("registry/examples/use-geolocation-demo.tsx")
     ),
     source: "",
   },
@@ -1338,7 +1394,7 @@ export const Index: Record<string, any> = {
       },
     ],
     component: React.lazy(
-      () => import("registry/examples/use-page-leave-demo")
+      () => import("registry/examples/use-page-leave-demo.tsx")
     ),
     source: "",
   },
@@ -1354,7 +1410,7 @@ export const Index: Record<string, any> = {
       },
     ],
     component: React.lazy(
-      () => import("registry/examples/use-is-first-render-demo")
+      () => import("registry/examples/use-is-first-render-demo.tsx")
     ),
     source: "",
   },
@@ -1370,7 +1426,7 @@ export const Index: Record<string, any> = {
       },
     ],
     component: React.lazy(
-      () => import("registry/examples/use-window-scroll-demo")
+      () => import("registry/examples/use-window-scroll-demo.tsx")
     ),
     source: "",
   },
@@ -1385,7 +1441,7 @@ export const Index: Record<string, any> = {
         target: "",
       },
     ],
-    component: React.lazy(() => import("registry/examples/use-idle-demo")),
+    component: React.lazy(() => import("registry/examples/use-idle-demo.tsx")),
     source: "",
   },
   "use-long-press-demo": {
@@ -1400,7 +1456,7 @@ export const Index: Record<string, any> = {
       },
     ],
     component: React.lazy(
-      () => import("registry/examples/use-long-press-demo")
+      () => import("registry/examples/use-long-press-demo.tsx")
     ),
     source: "",
   },
@@ -1415,7 +1471,9 @@ export const Index: Record<string, any> = {
         target: "",
       },
     ],
-    component: React.lazy(() => import("registry/examples/use-default-demo")),
+    component: React.lazy(
+      () => import("registry/examples/use-default-demo.tsx")
+    ),
     source: "",
   },
   "use-click-away-demo": {
@@ -1430,7 +1488,7 @@ export const Index: Record<string, any> = {
       },
     ],
     component: React.lazy(
-      () => import("registry/examples/use-click-away-demo")
+      () => import("registry/examples/use-click-away-demo.tsx")
     ),
     source: "",
   },
@@ -1446,7 +1504,7 @@ export const Index: Record<string, any> = {
       },
     ],
     component: React.lazy(
-      () => import("registry/examples/use-object-state-demo")
+      () => import("registry/examples/use-object-state-demo.tsx")
     ),
     source: "",
   },
@@ -1461,7 +1519,9 @@ export const Index: Record<string, any> = {
         target: "",
       },
     ],
-    component: React.lazy(() => import("registry/examples/use-logger-demo")),
+    component: React.lazy(
+      () => import("registry/examples/use-logger-demo.tsx")
+    ),
     source: "",
   },
   "use-speakup-demo": {
@@ -1475,7 +1535,9 @@ export const Index: Record<string, any> = {
         target: "",
       },
     ],
-    component: React.lazy(() => import("registry/examples/use-speakup-demo")),
+    component: React.lazy(
+      () => import("registry/examples/use-speakup-demo.tsx")
+    ),
     source: "",
   },
   "use-measure-any-demo": {
@@ -1490,7 +1552,7 @@ export const Index: Record<string, any> = {
       },
     ],
     component: React.lazy(
-      () => import("registry/examples/use-measure-any-demo")
+      () => import("registry/examples/use-measure-any-demo.tsx")
     ),
     source: "",
   },
@@ -1505,7 +1567,9 @@ export const Index: Record<string, any> = {
         target: "",
       },
     ],
-    component: React.lazy(() => import("registry/examples/use-measure-demo")),
+    component: React.lazy(
+      () => import("registry/examples/use-measure-demo.tsx")
+    ),
     source: "",
   },
   "use-previous-demo": {
@@ -1519,7 +1583,9 @@ export const Index: Record<string, any> = {
         target: "",
       },
     ],
-    component: React.lazy(() => import("registry/examples/use-previous-demo")),
+    component: React.lazy(
+      () => import("registry/examples/use-previous-demo.tsx")
+    ),
     source: "",
   },
   "use-history-state-demo": {
@@ -1534,7 +1600,7 @@ export const Index: Record<string, any> = {
       },
     ],
     component: React.lazy(
-      () => import("registry/examples/use-history-state-demo")
+      () => import("registry/examples/use-history-state-demo.tsx")
     ),
     source: "",
   },
@@ -1550,7 +1616,7 @@ export const Index: Record<string, any> = {
       },
     ],
     component: React.lazy(
-      () => import("registry/examples/use-async-status-demo")
+      () => import("registry/examples/use-async-status-demo.tsx")
     ),
     source: "",
   },
@@ -1565,7 +1631,9 @@ export const Index: Record<string, any> = {
         target: "",
       },
     ],
-    component: React.lazy(() => import("registry/examples/use-favicon-demo")),
+    component: React.lazy(
+      () => import("registry/examples/use-favicon-demo.tsx")
+    ),
     source: "",
   },
   "use-list-demo": {
@@ -1579,7 +1647,7 @@ export const Index: Record<string, any> = {
         target: "",
       },
     ],
-    component: React.lazy(() => import("registry/examples/use-list-demo")),
+    component: React.lazy(() => import("registry/examples/use-list-demo.tsx")),
     source: "",
   },
   "use-dropzone-demo": {
@@ -1593,7 +1661,9 @@ export const Index: Record<string, any> = {
         target: "",
       },
     ],
-    component: React.lazy(() => import("registry/examples/use-dropzone-demo")),
+    component: React.lazy(
+      () => import("registry/examples/use-dropzone-demo.tsx")
+    ),
     source: "",
   },
   "use-input-value-demo": {
@@ -1608,7 +1678,7 @@ export const Index: Record<string, any> = {
       },
     ],
     component: React.lazy(
-      () => import("registry/examples/use-input-value-demo")
+      () => import("registry/examples/use-input-value-demo.tsx")
     ),
     source: "",
   },
@@ -1623,7 +1693,7 @@ export const Index: Record<string, any> = {
         target: "",
       },
     ],
-    component: React.lazy(() => import("registry/examples/use-step-demo")),
+    component: React.lazy(() => import("registry/examples/use-step-demo.tsx")),
     source: "",
   },
   "use-draggable-demo": {
@@ -1637,7 +1707,9 @@ export const Index: Record<string, any> = {
         target: "",
       },
     ],
-    component: React.lazy(() => import("registry/examples/use-draggable-demo")),
+    component: React.lazy(
+      () => import("registry/examples/use-draggable-demo.tsx")
+    ),
     source: "",
   },
   "use-stopwatch-demo": {
@@ -1651,7 +1723,9 @@ export const Index: Record<string, any> = {
         target: "",
       },
     ],
-    component: React.lazy(() => import("registry/examples/use-stopwatch-demo")),
+    component: React.lazy(
+      () => import("registry/examples/use-stopwatch-demo.tsx")
+    ),
     source: "",
   },
   "use-location-demo": {
@@ -1665,7 +1739,9 @@ export const Index: Record<string, any> = {
         target: "",
       },
     ],
-    component: React.lazy(() => import("registry/examples/use-location-demo")),
+    component: React.lazy(
+      () => import("registry/examples/use-location-demo.tsx")
+    ),
     source: "",
   },
 }

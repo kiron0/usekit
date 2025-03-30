@@ -5,8 +5,8 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       {
-        source: "/r/:name((?!index\\.json|hooks/).*)",
-        destination: "/r/hooks/:name.json",
+        source: "/k/:name((?!index\\.json|hooks/).*)",
+        destination: "/k/hooks/:name.json",
         permanent: true,
         missing: [
           {
