@@ -25,7 +25,7 @@ const eslintConfig = [
       "@typescript-eslint/no-require-imports": "off",
       "tailwindcss/no-custom-classname": "off",
       "@typescript-eslint/no-explicit-any": "off",
-      "@typescript-eslint/ban-ts-comment": "off",
+      "@typescript-eslint/ban-ts-comment": "warn",
     },
   },
   {
