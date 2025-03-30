@@ -1,6 +1,6 @@
 import * as React from "react"
 
-type UseCounterReturn = {
+interface UseCounterReturn {
   count: number
   increment: () => void
   decrement: () => void

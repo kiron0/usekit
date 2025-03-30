@@ -1,8 +1,10 @@
 import * as React from "react"
 
 type LongPressEvent = React.MouseEvent | React.TouchEvent
+
 export type LongPressCallback = (event: LongPressEvent) => void
-type LongPressOptions = {
+
+interface LongPressOptions {
   threshold?: number
   onStart?: (event: LongPressEvent) => void
   onFinish?: (event: LongPressEvent) => void

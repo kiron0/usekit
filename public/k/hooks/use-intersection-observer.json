@@ -6,7 +6,7 @@
   "description": "A hook that provides a way to detect when an element enters or leaves the viewport using the Intersection Observer API.",
   "files": [
     {
-      "path": "registry/hooks/use-intersection-observer.tsx",
+      "path": "registry/hooks/use-intersection-observer.ts",
       "content": "import * as React from \"react\"\n\ninterface UseIntersectionObserverProps {\n  threshold?: number | number[]\n  root?: Element | Document | null\n  rootMargin?: string\n}\n\nexport function useIntersectionObserver<T extends Element>(\n  elementRef: React.RefObject<T | null>,\n  {\n    threshold = 0,\n    root = null,\n    rootMargin = \"0%\",\n  }: UseIntersectionObserverProps = {}\n): IntersectionObserverEntry | undefined {\n  const [entry, setEntry] = React.useState<IntersectionObserverEntry>()\n\n  const updateEntry = ([entry]: IntersectionObserverEntry[]): void => {\n    setEntry(entry)\n  }\n\n  React.useEffect(() => {\n    const node = elementRef.current\n    const isSupported = !!window.IntersectionObserver\n\n    if (!node || !isSupported) return\n\n    const observer = new IntersectionObserver(updateEntry, {\n      threshold,\n      root,\n      rootMargin,\n    })\n\n    observer.observe(node)\n\n    return () => observer.disconnect()\n  }, [elementRef, threshold, root, rootMargin])\n\n  return entry\n}\n",
       "type": "registry:hook"
     }

@@ -1,6 +1,6 @@
 import React from "react"
 
-type Options = {
+interface Options {
   maxRetries?: number
 }
 

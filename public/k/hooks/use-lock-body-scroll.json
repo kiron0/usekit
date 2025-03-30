@@ -6,7 +6,7 @@
   "description": "Disable body scrolling with the useLockBodyScroll hook. Useful for modals and other components that require a fixed body.",
   "files": [
     {
-      "path": "registry/hooks/use-lock-body-scroll.tsx",
+      "path": "registry/hooks/use-lock-body-scroll.ts",
       "content": "import * as React from \"react\"\n\nexport function useLockBodyScroll() {\n  React.useLayoutEffect((): (() => void) => {\n    const originalStyle: string = window.getComputedStyle(\n      document.body\n    ).overflow\n    document.body.style.overflow = \"hidden\"\n    return () => (document.body.style.overflow = originalStyle)\n  }, [])\n}\n",
       "type": "registry:hook"
     }

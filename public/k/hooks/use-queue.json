@@ -6,7 +6,7 @@
   "description": "Add, remove, and clear element from a queue data structure with useQueue.",
   "files": [
     {
-      "path": "registry/hooks/use-queue.tsx",
+      "path": "registry/hooks/use-queue.ts",
       "content": "import * as React from \"react\"\n\nexport function useQueue<T>(initialValue: T[] = []) {\n  const [queue, setQueue] = React.useState<T[]>(initialValue)\n\n  const add = React.useCallback((element: T) => {\n    setQueue((q) => [...q, element])\n  }, [])\n\n  const remove = React.useCallback(() => {\n    let removedElement: T | undefined\n\n    setQueue(([first, ...rest]) => {\n      removedElement = first\n      return rest\n    })\n\n    return removedElement\n  }, [])\n\n  const clear = React.useCallback(() => {\n    setQueue([])\n  }, [])\n\n  return {\n    add,\n    remove,\n    clear,\n    first: queue[0],\n    last: queue[queue.length - 1],\n    size: queue.length,\n    queue,\n  }\n}\n\nexport interface Queue<T> {\n  add: (element: T) => void\n  remove: () => T | undefined\n  clear: () => void\n  first: T | undefined\n  last: T | undefined\n  size: number\n  queue: T[]\n}\n",
       "type": "registry:hook"
     }

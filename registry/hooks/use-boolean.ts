@@ -1,6 +1,6 @@
 import * as React from "react"
 
-type UseBooleanReturn = {
+interface UseBooleanReturn {
   value: boolean
   setValue: React.Dispatch<React.SetStateAction<boolean>>
   setTrue: () => void

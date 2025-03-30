@@ -16,7 +16,7 @@ function getRandomChar(range: RangeOrCharCodes) {
 
 type RangeOrCharCodes = { 0: number; 1: number } & number[]
 
-export type UseScrambleProps = {
+export interface UseScrambleProps {
   playOnMount?: boolean
   text?: string
   speed?: number

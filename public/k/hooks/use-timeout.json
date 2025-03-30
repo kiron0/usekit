@@ -6,7 +6,7 @@
   "description": "Run a callback function after a specified delay with useTimeout.",
   "files": [
     {
-      "path": "registry/hooks/use-timeout.tsx",
+      "path": "registry/hooks/use-timeout.ts",
       "content": "import * as React from \"react\"\n\nexport function useTimeout(callback: () => void, delay: number | null): void {\n  const savedCallback = React.useRef(callback)\n\n  React.useEffect(() => {\n    savedCallback.current = callback\n  }, [callback])\n\n  React.useEffect(() => {\n    if (delay === null || typeof delay !== \"number\") return\n\n    const tick = () => savedCallback.current()\n\n    const id = setTimeout(tick, delay)\n\n    return () => clearTimeout(id)\n  }, [delay])\n}\n",
       "type": "registry:hook"
     }

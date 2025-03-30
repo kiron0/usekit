@@ -6,7 +6,7 @@
   "description": "Throttle computationally expensive operations with useThrottle.",
   "files": [
     {
-      "path": "registry/hooks/use-throttle.tsx",
+      "path": "registry/hooks/use-throttle.ts",
       "content": "import React from \"react\"\n\nexport function useThrottle<T>(value: T, interval: number = 500): T {\n  const [throttledValue, setThrottledValue] = React.useState(value)\n  const lastUpdated = React.useRef<number | null>(null)\n  const timeoutId = React.useRef<ReturnType<typeof setTimeout> | null>(null)\n\n  React.useEffect(() => {\n    const now = Date.now()\n\n    if (lastUpdated.current === null || now >= lastUpdated.current + interval) {\n      lastUpdated.current = now\n      setThrottledValue(value)\n    } else {\n      const remainingTime = lastUpdated.current + interval - now\n\n      if (timeoutId.current) {\n        clearTimeout(timeoutId.current)\n      }\n\n      timeoutId.current = setTimeout(() => {\n        lastUpdated.current = Date.now()\n        setThrottledValue(value)\n      }, remainingTime)\n    }\n\n    return () => {\n      if (timeoutId.current) {\n        clearTimeout(timeoutId.current)\n        timeoutId.current = null\n      }\n    }\n  }, [value, interval])\n\n  return throttledValue\n}\n",
       "type": "registry:hook"
     }

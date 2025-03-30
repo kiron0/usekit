@@ -1,6 +1,6 @@
 import * as React from "react"
 
-type RenderCountReturn = {
+interface RenderCountReturn {
   count: number
   isStrictMode: boolean
 }
