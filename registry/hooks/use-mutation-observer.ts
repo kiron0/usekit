@@ -1,7 +1,7 @@
 import * as React from "react"
 
 export function useMutationObserver(
-  ref: React.MutableRefObject<HTMLElement | null>,
+  ref: React.RefObject<HTMLElement | null>,
   callback: MutationCallback,
   options = {
     attributes: true,

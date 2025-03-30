@@ -1,6 +1,6 @@
 import * as React from "react"
 
-type Options = {
+interface Options {
   ms: number
   when: boolean
   startImmediately?: boolean

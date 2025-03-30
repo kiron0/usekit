@@ -6,7 +6,7 @@
   "description": "Detect clicks outside of specific component with useClickAway.",
   "files": [
     {
-      "path": "registry/hooks/use-click-away.tsx",
+      "path": "registry/hooks/use-click-away.ts",
       "content": "import * as React from \"react\"\n\ntype ClickAwayCallback = (event: MouseEvent | TouchEvent) => void\n\nexport function useClickAway<T extends HTMLElement = HTMLElement>(\n  callback: ClickAwayCallback\n): React.RefObject<T> {\n  const ref = React.useRef<T>(null)\n  const callbackRef = React.useRef(callback)\n\n  React.useEffect(() => {\n    callbackRef.current = callback\n  })\n\n  React.useEffect(() => {\n    const handleClickOutside = (event: MouseEvent | TouchEvent) => {\n      const element = ref.current\n      if (element && !element.contains(event.target as Node)) {\n        callbackRef.current(event)\n      }\n    }\n\n    document.addEventListener(\"mousedown\", handleClickOutside)\n    document.addEventListener(\"touchstart\", handleClickOutside)\n\n    return () => {\n      document.removeEventListener(\"mousedown\", handleClickOutside)\n      document.removeEventListener(\"touchstart\", handleClickOutside)\n    }\n  }, [])\n\n  return ref as React.RefObject<T>\n}\n",
       "type": "registry:hook"
     }

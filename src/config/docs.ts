@@ -334,7 +334,6 @@ export const docsConfig: DocsConfig = {
           title: "useAutoScroll",
           href: "/docs/hooks/use-auto-scroll",
           items: [],
-          label: "Soon",
         },
         {
           title: "useBluetooth",
@@ -395,6 +394,30 @@ export const docsConfig: DocsConfig = {
           title: "useStopwatch",
           href: "/docs/hooks/use-stopwatch",
           items: [],
+        },
+        {
+          title: "useAutosizeTextarea",
+          href: "/docs/hooks/use-autosize-textarea",
+          items: [],
+          label: "Soon",
+        },
+        {
+          title: "useCallbackRef",
+          href: "/docs/hooks/use-callback-ref",
+          items: [],
+          label: "Soon",
+        },
+        {
+          title: "useControlledState",
+          href: "/docs/hooks/use-controlled-state",
+          items: [],
+          label: "Soon",
+        },
+        {
+          title: "useUncontrolledState",
+          href: "/docs/hooks/use-uncontrolled-state",
+          items: [],
+          label: "Soon",
         },
       ],
     },

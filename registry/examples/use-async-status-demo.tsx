@@ -18,8 +18,8 @@ export default function UseAsyncStatusDemo() {
   )
 
   return (
-    <div className="flex flex-col items-center gap-3 overflow-auto">
-      <div>{data}</div>
+    <div className="flex w-full flex-col items-center gap-3">
+      <p className="break-all">{data}</p>
       <Button onClick={trigger} disabled={status.state === "loading"}>
         {status.state === "loading" ? "Processing..." : "Click me"}
       </Button>
@@ -38,9 +38,9 @@ function AnotherUseAsyncStatusDemo() {
   })
 
   return (
-    <div className="flex flex-col items-center gap-3 overflow-auto">
+    <div className="flex w-full flex-col items-center gap-3">
       {status.state === "success" && (
-        <div>Result: {JSON.stringify(status.data)}</div>
+        <p className="break-all">Result: {JSON.stringify(status.data)}</p>
       )}
       {status.state === "loading" && <div>Loading...</div>}
       {status.state === "error" && (

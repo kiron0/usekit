@@ -1,6 +1,6 @@
 import * as React from "react"
 
-export type Position = {
+export interface Position {
   x: number
   y: number
   elementX?: number

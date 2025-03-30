@@ -6,7 +6,7 @@
   "description": "Differentiate between the first and subsequent renders with useIsFirstRender.",
   "files": [
     {
-      "path": "registry/hooks/use-is-first-render.tsx",
+      "path": "registry/hooks/use-is-first-render.ts",
       "content": "import * as React from \"react\"\n\nexport function useIsFirstRender() {\n  const renderRef = React.useRef(true)\n\n  if (renderRef.current === true) {\n    renderRef.current = false\n    return true\n  }\n\n  return renderRef.current\n}\n",
       "type": "registry:hook"
     }

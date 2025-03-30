@@ -1,6 +1,6 @@
 import * as React from "react"
 
-type CountdownOptions = {
+interface CountdownOptions {
   interval?: number
   onTick?: (timeRemaining: number) => void
   onComplete?: (timeRemaining: number) => void

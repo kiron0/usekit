@@ -4,7 +4,7 @@ type UseFetchOptions = RequestInit & {
   cache?: boolean
 }
 
-type UseFetchState<T> = {
+interface UseFetchState<T> {
   data: T | undefined
   error: Error | undefined
   loading: boolean

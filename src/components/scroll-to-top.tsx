@@ -17,7 +17,7 @@ export function ScrollToTop() {
   if (y < 300) return null
 
   return (
-    <div className="fixed bottom-5 right-5 z-[999]">
+    <div className="fixed bottom-5 right-5 z-[49]">
       <Button variant="secondary" size="icon" onClick={scrollToTop}>
         <MoveUp size={24} />
       </Button>

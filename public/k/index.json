@@ -11,7 +11,7 @@
       "files": [
         {
           "type": "registry:hook",
-          "path": "registry/hooks/use-boolean.tsx"
+          "path": "registry/hooks/use-boolean.ts"
         }
       ]
     },
@@ -23,7 +23,7 @@
       "files": [
         {
           "type": "registry:hook",
-          "path": "registry/hooks/use-toggle.tsx"
+          "path": "registry/hooks/use-toggle.ts"
         }
       ]
     },
@@ -35,7 +35,7 @@
       "files": [
         {
           "type": "registry:hook",
-          "path": "registry/hooks/use-copy-to-clipboard.tsx"
+          "path": "registry/hooks/use-copy-to-clipboard.ts"
         }
       ]
     },
@@ -47,7 +47,7 @@
       "files": [
         {
           "type": "registry:hook",
-          "path": "registry/hooks/use-unmount.tsx"
+          "path": "registry/hooks/use-unmount.ts"
         }
       ]
     },
@@ -62,7 +62,7 @@
       "files": [
         {
           "type": "registry:hook",
-          "path": "registry/hooks/use-debounce-callback.tsx"
+          "path": "registry/hooks/use-debounce-callback.ts"
         }
       ]
     },
@@ -74,7 +74,7 @@
       "files": [
         {
           "type": "registry:hook",
-          "path": "registry/hooks/use-isomorphic-layout-effect.tsx"
+          "path": "registry/hooks/use-isomorphic-layout-effect.ts"
         }
       ]
     },
@@ -86,7 +86,7 @@
       "files": [
         {
           "type": "registry:hook",
-          "path": "registry/hooks/use-interval.tsx"
+          "path": "registry/hooks/use-interval.ts"
         }
       ]
     },
@@ -98,7 +98,7 @@
       "files": [
         {
           "type": "registry:hook",
-          "path": "registry/hooks/use-timeout.tsx"
+          "path": "registry/hooks/use-timeout.ts"
         }
       ]
     },
@@ -110,7 +110,7 @@
       "files": [
         {
           "type": "registry:hook",
-          "path": "registry/hooks/use-document-title.tsx"
+          "path": "registry/hooks/use-document-title.ts"
         }
       ]
     },
@@ -122,7 +122,7 @@
       "files": [
         {
           "type": "registry:hook",
-          "path": "registry/hooks/use-counter.tsx"
+          "path": "registry/hooks/use-counter.ts"
         }
       ]
     },
@@ -134,7 +134,7 @@
       "files": [
         {
           "type": "registry:hook",
-          "path": "registry/hooks/use-mouse-position.tsx"
+          "path": "registry/hooks/use-mouse-position.ts"
         }
       ]
     },
@@ -146,7 +146,7 @@
       "files": [
         {
           "type": "registry:hook",
-          "path": "registry/hooks/use-battery.tsx"
+          "path": "registry/hooks/use-battery.ts"
         }
       ]
     },
@@ -158,7 +158,7 @@
       "files": [
         {
           "type": "registry:hook",
-          "path": "registry/hooks/use-local-storage.tsx"
+          "path": "registry/hooks/use-local-storage.ts"
         }
       ]
     },
@@ -170,7 +170,7 @@
       "files": [
         {
           "type": "registry:hook",
-          "path": "registry/hooks/use-session-storage.tsx"
+          "path": "registry/hooks/use-session-storage.ts"
         }
       ]
     },
@@ -182,7 +182,7 @@
       "files": [
         {
           "type": "registry:hook",
-          "path": "registry/hooks/use-fetch.tsx"
+          "path": "registry/hooks/use-fetch.ts"
         }
       ]
     },
@@ -194,7 +194,7 @@
       "files": [
         {
           "type": "registry:hook",
-          "path": "registry/hooks/use-script.tsx"
+          "path": "registry/hooks/use-script.ts"
         }
       ]
     },
@@ -206,7 +206,7 @@
       "files": [
         {
           "type": "registry:hook",
-          "path": "registry/hooks/use-scramble.tsx"
+          "path": "registry/hooks/use-scramble.ts"
         }
       ]
     },
@@ -218,7 +218,7 @@
       "files": [
         {
           "type": "registry:hook",
-          "path": "registry/hooks/use-intersection-observer.tsx"
+          "path": "registry/hooks/use-intersection-observer.ts"
         }
       ]
     },
@@ -230,7 +230,7 @@
       "files": [
         {
           "type": "registry:hook",
-          "path": "registry/hooks/use-render-count.tsx"
+          "path": "registry/hooks/use-render-count.ts"
         }
       ]
     },
@@ -242,7 +242,7 @@
       "files": [
         {
           "type": "registry:hook",
-          "path": "registry/hooks/use-orientation.tsx"
+          "path": "registry/hooks/use-orientation.ts"
         }
       ]
     },
@@ -254,7 +254,7 @@
       "files": [
         {
           "type": "registry:hook",
-          "path": "registry/hooks/use-window-size.tsx"
+          "path": "registry/hooks/use-window-size.ts"
         }
       ]
     },
@@ -266,7 +266,7 @@
       "files": [
         {
           "type": "registry:hook",
-          "path": "registry/hooks/use-hover.tsx"
+          "path": "registry/hooks/use-hover.ts"
         }
       ]
     },
@@ -278,7 +278,7 @@
       "files": [
         {
           "type": "registry:hook",
-          "path": "registry/hooks/use-media-query.tsx"
+          "path": "registry/hooks/use-media-query.ts"
         }
       ]
     },
@@ -290,7 +290,7 @@
       "files": [
         {
           "type": "registry:hook",
-          "path": "registry/hooks/use-interval-when.tsx"
+          "path": "registry/hooks/use-interval-when.ts"
         }
       ]
     },
@@ -302,7 +302,7 @@
       "files": [
         {
           "type": "registry:hook",
-          "path": "registry/hooks/use-countdown.tsx"
+          "path": "registry/hooks/use-countdown.ts"
         }
       ]
     },
@@ -314,7 +314,7 @@
       "files": [
         {
           "type": "registry:hook",
-          "path": "registry/hooks/use-visibility-change.tsx"
+          "path": "registry/hooks/use-visibility-change.ts"
         }
       ]
     },
@@ -326,7 +326,7 @@
       "files": [
         {
           "type": "registry:hook",
-          "path": "registry/hooks/use-key-press.tsx"
+          "path": "registry/hooks/use-key-press.ts"
         }
       ]
     },
@@ -338,7 +338,7 @@
       "files": [
         {
           "type": "registry:hook",
-          "path": "registry/hooks/use-cookie-storage.tsx"
+          "path": "registry/hooks/use-cookie-storage.ts"
         }
       ]
     },
@@ -350,7 +350,7 @@
       "files": [
         {
           "type": "registry:hook",
-          "path": "registry/hooks/use-is-client.tsx"
+          "path": "registry/hooks/use-is-client.ts"
         }
       ]
     },
@@ -362,7 +362,7 @@
       "files": [
         {
           "type": "registry:hook",
-          "path": "registry/hooks/use-geolocation.tsx"
+          "path": "registry/hooks/use-geolocation.ts"
         }
       ]
     },
@@ -374,7 +374,7 @@
       "files": [
         {
           "type": "registry:hook",
-          "path": "registry/hooks/use-page-leave.tsx"
+          "path": "registry/hooks/use-page-leave.ts"
         }
       ]
     },
@@ -386,7 +386,7 @@
       "files": [
         {
           "type": "registry:hook",
-          "path": "registry/hooks/use-is-first-render.tsx"
+          "path": "registry/hooks/use-is-first-render.ts"
         }
       ]
     },
@@ -398,7 +398,7 @@
       "files": [
         {
           "type": "registry:hook",
-          "path": "registry/hooks/use-window-scroll.tsx"
+          "path": "registry/hooks/use-window-scroll.ts"
         }
       ]
     },
@@ -410,7 +410,7 @@
       "files": [
         {
           "type": "registry:hook",
-          "path": "registry/hooks/use-idle.tsx"
+          "path": "registry/hooks/use-idle.ts"
         }
       ]
     },
@@ -422,7 +422,7 @@
       "files": [
         {
           "type": "registry:hook",
-          "path": "registry/hooks/use-long-press.tsx"
+          "path": "registry/hooks/use-long-press.ts"
         }
       ]
     },
@@ -434,7 +434,7 @@
       "files": [
         {
           "type": "registry:hook",
-          "path": "registry/hooks/use-default.tsx"
+          "path": "registry/hooks/use-default.ts"
         }
       ]
     },
@@ -446,7 +446,7 @@
       "files": [
         {
           "type": "registry:hook",
-          "path": "registry/hooks/use-click-away.tsx"
+          "path": "registry/hooks/use-click-away.ts"
         }
       ]
     },
@@ -458,7 +458,7 @@
       "files": [
         {
           "type": "registry:hook",
-          "path": "registry/hooks/use-object-state.tsx"
+          "path": "registry/hooks/use-object-state.ts"
         }
       ]
     },
@@ -470,7 +470,7 @@
       "files": [
         {
           "type": "registry:hook",
-          "path": "registry/hooks/use-logger.tsx"
+          "path": "registry/hooks/use-logger.ts"
         }
       ]
     },
@@ -482,7 +482,7 @@
       "files": [
         {
           "type": "registry:hook",
-          "path": "registry/hooks/use-speakup.tsx"
+          "path": "registry/hooks/use-speakup.ts"
         }
       ]
     },
@@ -508,7 +508,7 @@
       "files": [
         {
           "type": "registry:hook",
-          "path": "registry/hooks/use-measure.tsx"
+          "path": "registry/hooks/use-measure.ts"
         }
       ]
     },
@@ -520,7 +520,7 @@
       "files": [
         {
           "type": "registry:hook",
-          "path": "registry/hooks/use-is-mobile.tsx"
+          "path": "registry/hooks/use-is-mobile.ts"
         }
       ]
     },
@@ -532,7 +532,7 @@
       "files": [
         {
           "type": "registry:hook",
-          "path": "registry/hooks/use-lock-body-scroll.tsx"
+          "path": "registry/hooks/use-lock-body-scroll.ts"
         }
       ]
     },
@@ -544,7 +544,7 @@
       "files": [
         {
           "type": "registry:hook",
-          "path": "registry/hooks/use-mounted.tsx"
+          "path": "registry/hooks/use-mounted.ts"
         }
       ]
     },
@@ -556,7 +556,7 @@
       "files": [
         {
           "type": "registry:hook",
-          "path": "registry/hooks/use-mutation-observer.tsx"
+          "path": "registry/hooks/use-mutation-observer.ts"
         }
       ]
     },
@@ -568,7 +568,7 @@
       "files": [
         {
           "type": "registry:hook",
-          "path": "registry/hooks/use-previous.tsx"
+          "path": "registry/hooks/use-previous.ts"
         }
       ]
     },
@@ -580,7 +580,7 @@
       "files": [
         {
           "type": "registry:hook",
-          "path": "registry/hooks/use-history-state.tsx"
+          "path": "registry/hooks/use-history-state.ts"
         }
       ]
     },
@@ -592,7 +592,7 @@
       "files": [
         {
           "type": "registry:hook",
-          "path": "registry/hooks/use-async-status.tsx"
+          "path": "registry/hooks/use-async-status.ts"
         }
       ]
     },
@@ -604,7 +604,7 @@
       "files": [
         {
           "type": "registry:hook",
-          "path": "registry/hooks/use-favicon.tsx"
+          "path": "registry/hooks/use-favicon.ts"
         }
       ]
     },
@@ -616,7 +616,7 @@
       "files": [
         {
           "type": "registry:hook",
-          "path": "registry/hooks/use-list.tsx"
+          "path": "registry/hooks/use-list.ts"
         }
       ]
     },
@@ -628,7 +628,7 @@
       "files": [
         {
           "type": "registry:hook",
-          "path": "registry/hooks/use-map.tsx"
+          "path": "registry/hooks/use-map.ts"
         }
       ]
     },
@@ -640,7 +640,7 @@
       "files": [
         {
           "type": "registry:hook",
-          "path": "registry/hooks/use-queue.tsx"
+          "path": "registry/hooks/use-queue.ts"
         }
       ]
     },
@@ -652,7 +652,7 @@
       "files": [
         {
           "type": "registry:hook",
-          "path": "registry/hooks/use-set.tsx"
+          "path": "registry/hooks/use-set.ts"
         }
       ]
     },
@@ -664,7 +664,7 @@
       "files": [
         {
           "type": "registry:hook",
-          "path": "registry/hooks/use-throttle.tsx"
+          "path": "registry/hooks/use-throttle.ts"
         }
       ]
     },
@@ -676,7 +676,7 @@
       "files": [
         {
           "type": "registry:hook",
-          "path": "registry/hooks/use-continuous-retry.tsx"
+          "path": "registry/hooks/use-continuous-retry.ts"
         }
       ]
     },
@@ -686,12 +686,12 @@
       "description": "Listen for events on a target element with useEventListener.",
       "type": "registry:hook",
       "registryDependencies": [
-        "https://usekit.kiron.dev/r/use-isomorphic-layout-effect"
+        "https://usekit.kiron.dev/k/use-isomorphic-layout-effect"
       ],
       "files": [
         {
           "type": "registry:hook",
-          "path": "registry/hooks/use-event-listener.tsx"
+          "path": "registry/hooks/use-event-listener.ts"
         }
       ]
     },
@@ -703,7 +703,7 @@
       "files": [
         {
           "type": "registry:hook",
-          "path": "registry/hooks/use-random-interval.tsx"
+          "path": "registry/hooks/use-random-interval.ts"
         }
       ]
     },
@@ -712,11 +712,11 @@
       "title": "Use Dropzone",
       "description": "Drag and drop files into a dropzone with useDropzone, providing options to customize the dropzone.",
       "type": "registry:hook",
-      "registryDependencies": ["https://usekit.kiron.dev/r/use-event-listener"],
+      "registryDependencies": ["https://usekit.kiron.dev/k/use-event-listener"],
       "files": [
         {
           "type": "registry:hook",
-          "path": "registry/hooks/use-dropzone.tsx"
+          "path": "registry/hooks/use-dropzone.ts"
         }
       ]
     },
@@ -728,7 +728,7 @@
       "files": [
         {
           "type": "registry:hook",
-          "path": "registry/hooks/use-input-value.tsx"
+          "path": "registry/hooks/use-input-value.ts"
         }
       ]
     },
@@ -740,7 +740,7 @@
       "files": [
         {
           "type": "registry:hook",
-          "path": "registry/hooks/use-step.tsx"
+          "path": "registry/hooks/use-step.ts"
         }
       ]
     },
@@ -752,7 +752,7 @@
       "files": [
         {
           "type": "registry:hook",
-          "path": "registry/hooks/use-draggable.tsx"
+          "path": "registry/hooks/use-draggable.ts"
         }
       ]
     },
@@ -764,19 +764,84 @@
       "files": [
         {
           "type": "registry:hook",
-          "path": "registry/hooks/use-stopwatch.tsx"
+          "path": "registry/hooks/use-stopwatch.ts"
         }
       ]
     },
     {
       "name": "use-location",
       "title": "Use Location",
-      "description": "A hook that allows you to access and manage the current location in your application",
+      "description": "A hook that allows you to access and manage the current location in your application.",
       "type": "registry:hook",
       "files": [
         {
           "type": "registry:hook",
-          "path": "registry/hooks/use-location.tsx"
+          "path": "registry/hooks/use-location.ts"
+        }
+      ]
+    },
+    {
+      "name": "use-auto-scroll",
+      "title": "Use Auto Scroll",
+      "description": "Use the useAutoScroll hook to automatically scroll an element into view when it is focused, with optional parameters for behavior and block alignment.",
+      "type": "registry:hook",
+      "files": [
+        {
+          "type": "registry:hook",
+          "path": "registry/hooks/use-auto-scroll.ts"
+        }
+      ]
+    },
+    {
+      "name": "use-autosize-textarea",
+      "title": "Use Autosize Textarea",
+      "description": "Automatically adjust the height of a textarea to fit its content with useAutosizeTextarea.",
+      "type": "registry:hook",
+      "files": [
+        {
+          "type": "registry:hook",
+          "path": "registry/hooks/use-autosize-textarea.ts"
+        }
+      ]
+    },
+    {
+      "name": "use-callback-ref",
+      "title": "Use Callback Ref",
+      "description": "A custom hook that converts a callback to a ref to avoid triggering re-renders when passed as a prop, or avoid re-executing effects when passed as a dependency.",
+      "type": "registry:hook",
+      "files": [
+        {
+          "type": "registry:hook",
+          "path": "registry/hooks/use-callback-ref.ts"
+        }
+      ]
+    },
+    {
+      "name": "use-controlled-state",
+      "title": "Use Controlled State",
+      "description": "Manage a controlled state with the useControlledState hook, providing methods to set it to true, false, or toggle between them",
+      "type": "registry:hook",
+      "registryDependencies": [
+        "https://usekit.kiron.dev/k/use-callback-ref",
+        "https://usekit.kiron.dev/k/use-uncontrolled-state"
+      ],
+      "files": [
+        {
+          "type": "registry:hook",
+          "path": "registry/hooks/use-controlled-state.ts"
+        }
+      ]
+    },
+    {
+      "name": "use-uncontrolled-state",
+      "title": "Use Uncontrolled State",
+      "description": "Manage an uncontrolled state with the useUncontrolledState hook, providing methods to set it to true, false, or toggle between them",
+      "type": "registry:hook",
+      "registryDependencies": ["https://usekit.kiron.dev/k/use-callback-ref"],
+      "files": [
+        {
+          "type": "registry:hook",
+          "path": "registry/hooks/use-uncontrolled-state.ts"
         }
       ]
     }

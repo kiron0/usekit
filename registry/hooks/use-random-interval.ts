@@ -1,6 +1,6 @@
 import * as React from "react"
 
-type Options = {
+interface Options {
   minDelay: number
   maxDelay: number
 }

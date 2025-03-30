@@ -6,8 +6,8 @@
   "description": "Observe mutations on a DOM element with the useMutationObserver hook.",
   "files": [
     {
-      "path": "registry/hooks/use-mutation-observer.tsx",
-      "content": "import * as React from \"react\"\n\nexport function useMutationObserver(\n  ref: React.MutableRefObject<HTMLElement | null>,\n  callback: MutationCallback,\n  options = {\n    attributes: true,\n    characterData: true,\n    childList: true,\n    subtree: true,\n  }\n) {\n  React.useEffect(() => {\n    if (ref.current) {\n      const observer = new MutationObserver(callback)\n      observer.observe(ref.current, options)\n      return () => observer.disconnect()\n    }\n  }, [ref, callback, options])\n}\n",
+      "path": "registry/hooks/use-mutation-observer.ts",
+      "content": "import * as React from \"react\"\n\nexport function useMutationObserver(\n  ref: React.RefObject<HTMLElement | null>,\n  callback: MutationCallback,\n  options = {\n    attributes: true,\n    characterData: true,\n    childList: true,\n    subtree: true,\n  }\n) {\n  React.useEffect(() => {\n    if (ref.current) {\n      const observer = new MutationObserver(callback)\n      observer.observe(ref.current, options)\n      return () => observer.disconnect()\n    }\n  }, [ref, callback, options])\n}\n",
       "type": "registry:hook"
     }
   ]

@@ -10,12 +10,12 @@ export const Index: Record<string, any> = {
     registryDependencies: undefined,
     files: [
       {
-        path: "registry/hooks/use-boolean.tsx",
+        path: "registry/hooks/use-boolean.ts",
         type: "registry:hook",
         target: "",
       },
     ],
-    component: React.lazy(() => import("registry/hooks/use-boolean.tsx")),
+    component: React.lazy(() => import("registry/hooks/use-boolean.ts")),
     source: "",
   },
   "use-toggle": {
@@ -24,12 +24,12 @@ export const Index: Record<string, any> = {
     registryDependencies: undefined,
     files: [
       {
-        path: "registry/hooks/use-toggle.tsx",
+        path: "registry/hooks/use-toggle.ts",
         type: "registry:hook",
         target: "",
       },
     ],
-    component: React.lazy(() => import("registry/hooks/use-toggle.tsx")),
+    component: React.lazy(() => import("registry/hooks/use-toggle.ts")),
     source: "",
   },
   "use-copy-to-clipboard": {
@@ -38,13 +38,13 @@ export const Index: Record<string, any> = {
     registryDependencies: undefined,
     files: [
       {
-        path: "registry/hooks/use-copy-to-clipboard.tsx",
+        path: "registry/hooks/use-copy-to-clipboard.ts",
         type: "registry:hook",
         target: "",
       },
     ],
     component: React.lazy(
-      () => import("registry/examples/use-copy-to-clipboard-demo.tsx")
+      () => import("registry/examples/use-copy-to-clipboard-demo")
     ),
     source: "",
   },
@@ -54,12 +54,12 @@ export const Index: Record<string, any> = {
     registryDependencies: undefined,
     files: [
       {
-        path: "registry/hooks/use-unmount.tsx",
+        path: "registry/hooks/use-unmount.ts",
         type: "registry:hook",
         target: "",
       },
     ],
-    component: React.lazy(() => import("registry/hooks/use-unmount.tsx")),
+    component: React.lazy(() => import("registry/hooks/use-unmount.ts")),
     source: "",
   },
   "use-debounce-callback": {
@@ -68,13 +68,13 @@ export const Index: Record<string, any> = {
     registryDependencies: ["https://usekit.kiron.dev/k/use-unmount"],
     files: [
       {
-        path: "registry/hooks/use-debounce-callback.tsx",
+        path: "registry/hooks/use-debounce-callback.ts",
         type: "registry:hook",
         target: "",
       },
     ],
     component: React.lazy(
-      () => import("registry/hooks/use-debounce-callback.tsx")
+      () => import("registry/hooks/use-debounce-callback.ts")
     ),
     source: "",
   },
@@ -84,13 +84,13 @@ export const Index: Record<string, any> = {
     registryDependencies: undefined,
     files: [
       {
-        path: "registry/hooks/use-isomorphic-layout-effect.tsx",
+        path: "registry/hooks/use-isomorphic-layout-effect.ts",
         type: "registry:hook",
         target: "",
       },
     ],
     component: React.lazy(
-      () => import("registry/hooks/use-isomorphic-layout-effect.tsx")
+      () => import("registry/hooks/use-isomorphic-layout-effect.ts")
     ),
     source: "",
   },
@@ -100,14 +100,12 @@ export const Index: Record<string, any> = {
     registryDependencies: undefined,
     files: [
       {
-        path: "registry/hooks/use-interval.tsx",
+        path: "registry/hooks/use-interval.ts",
         type: "registry:hook",
         target: "",
       },
     ],
-    component: React.lazy(
-      () => import("registry/examples/use-interval-demo.tsx")
-    ),
+    component: React.lazy(() => import("registry/examples/use-interval-demo")),
     source: "",
   },
   "use-timeout": {
@@ -116,14 +114,12 @@ export const Index: Record<string, any> = {
     registryDependencies: undefined,
     files: [
       {
-        path: "registry/hooks/use-timeout.tsx",
+        path: "registry/hooks/use-timeout.ts",
         type: "registry:hook",
         target: "",
       },
     ],
-    component: React.lazy(
-      () => import("registry/examples/use-timeout-demo.tsx")
-    ),
+    component: React.lazy(() => import("registry/examples/use-timeout-demo")),
     source: "",
   },
   "use-document-title": {
@@ -132,13 +128,13 @@ export const Index: Record<string, any> = {
     registryDependencies: undefined,
     files: [
       {
-        path: "registry/hooks/use-document-title.tsx",
+        path: "registry/hooks/use-document-title.ts",
         type: "registry:hook",
         target: "",
       },
     ],
     component: React.lazy(
-      () => import("registry/examples/use-document-title-demo.tsx")
+      () => import("registry/examples/use-document-title-demo")
     ),
     source: "",
   },
@@ -148,14 +144,12 @@ export const Index: Record<string, any> = {
     registryDependencies: undefined,
     files: [
       {
-        path: "registry/hooks/use-counter.tsx",
+        path: "registry/hooks/use-counter.ts",
         type: "registry:hook",
         target: "",
       },
     ],
-    component: React.lazy(
-      () => import("registry/examples/use-counter-demo.tsx")
-    ),
+    component: React.lazy(() => import("registry/examples/use-counter-demo")),
     source: "",
   },
   "use-mouse-position": {
@@ -164,13 +158,13 @@ export const Index: Record<string, any> = {
     registryDependencies: undefined,
     files: [
       {
-        path: "registry/hooks/use-mouse-position.tsx",
+        path: "registry/hooks/use-mouse-position.ts",
         type: "registry:hook",
         target: "",
       },
     ],
     component: React.lazy(
-      () => import("registry/examples/use-mouse-position-demo.tsx")
+      () => import("registry/examples/use-mouse-position-demo")
     ),
     source: "",
   },
@@ -180,14 +174,12 @@ export const Index: Record<string, any> = {
     registryDependencies: undefined,
     files: [
       {
-        path: "registry/hooks/use-battery.tsx",
+        path: "registry/hooks/use-battery.ts",
         type: "registry:hook",
         target: "",
       },
     ],
-    component: React.lazy(
-      () => import("registry/examples/use-battery-demo.tsx")
-    ),
+    component: React.lazy(() => import("registry/examples/use-battery-demo")),
     source: "",
   },
   "use-local-storage": {
@@ -196,13 +188,13 @@ export const Index: Record<string, any> = {
     registryDependencies: undefined,
     files: [
       {
-        path: "registry/hooks/use-local-storage.tsx",
+        path: "registry/hooks/use-local-storage.ts",
         type: "registry:hook",
         target: "",
       },
     ],
     component: React.lazy(
-      () => import("registry/examples/use-local-storage-demo.tsx")
+      () => import("registry/examples/use-local-storage-demo")
     ),
     source: "",
   },
@@ -212,13 +204,13 @@ export const Index: Record<string, any> = {
     registryDependencies: undefined,
     files: [
       {
-        path: "registry/hooks/use-session-storage.tsx",
+        path: "registry/hooks/use-session-storage.ts",
         type: "registry:hook",
         target: "",
       },
     ],
     component: React.lazy(
-      () => import("registry/examples/use-session-storage-demo.tsx")
+      () => import("registry/examples/use-session-storage-demo")
     ),
     source: "",
   },
@@ -228,12 +220,12 @@ export const Index: Record<string, any> = {
     registryDependencies: undefined,
     files: [
       {
-        path: "registry/hooks/use-fetch.tsx",
+        path: "registry/hooks/use-fetch.ts",
         type: "registry:hook",
         target: "",
       },
     ],
-    component: React.lazy(() => import("registry/examples/use-fetch-demo.tsx")),
+    component: React.lazy(() => import("registry/examples/use-fetch-demo")),
     source: "",
   },
   "use-script": {
@@ -242,14 +234,12 @@ export const Index: Record<string, any> = {
     registryDependencies: undefined,
     files: [
       {
-        path: "registry/hooks/use-script.tsx",
+        path: "registry/hooks/use-script.ts",
         type: "registry:hook",
         target: "",
       },
     ],
-    component: React.lazy(
-      () => import("registry/examples/use-script-demo.tsx")
-    ),
+    component: React.lazy(() => import("registry/examples/use-script-demo")),
     source: "",
   },
   "use-scramble": {
@@ -258,14 +248,12 @@ export const Index: Record<string, any> = {
     registryDependencies: undefined,
     files: [
       {
-        path: "registry/hooks/use-scramble.tsx",
+        path: "registry/hooks/use-scramble.ts",
         type: "registry:hook",
         target: "",
       },
     ],
-    component: React.lazy(
-      () => import("registry/examples/use-scramble-demo.tsx")
-    ),
+    component: React.lazy(() => import("registry/examples/use-scramble-demo")),
     source: "",
   },
   "use-intersection-observer": {
@@ -274,13 +262,13 @@ export const Index: Record<string, any> = {
     registryDependencies: undefined,
     files: [
       {
-        path: "registry/hooks/use-intersection-observer.tsx",
+        path: "registry/hooks/use-intersection-observer.ts",
         type: "registry:hook",
         target: "",
       },
     ],
     component: React.lazy(
-      () => import("registry/hooks/use-intersection-observer.tsx")
+      () => import("registry/hooks/use-intersection-observer.ts")
     ),
     source: "",
   },
@@ -290,13 +278,13 @@ export const Index: Record<string, any> = {
     registryDependencies: undefined,
     files: [
       {
-        path: "registry/hooks/use-render-count.tsx",
+        path: "registry/hooks/use-render-count.ts",
         type: "registry:hook",
         target: "",
       },
     ],
     component: React.lazy(
-      () => import("registry/examples/use-render-count-demo.tsx")
+      () => import("registry/examples/use-render-count-demo")
     ),
     source: "",
   },
@@ -306,13 +294,13 @@ export const Index: Record<string, any> = {
     registryDependencies: undefined,
     files: [
       {
-        path: "registry/hooks/use-orientation.tsx",
+        path: "registry/hooks/use-orientation.ts",
         type: "registry:hook",
         target: "",
       },
     ],
     component: React.lazy(
-      () => import("registry/examples/use-orientation-demo.tsx")
+      () => import("registry/examples/use-orientation-demo")
     ),
     source: "",
   },
@@ -322,13 +310,13 @@ export const Index: Record<string, any> = {
     registryDependencies: undefined,
     files: [
       {
-        path: "registry/hooks/use-window-size.tsx",
+        path: "registry/hooks/use-window-size.ts",
         type: "registry:hook",
         target: "",
       },
     ],
     component: React.lazy(
-      () => import("registry/examples/use-window-size-demo.tsx")
+      () => import("registry/examples/use-window-size-demo")
     ),
     source: "",
   },
@@ -338,12 +326,12 @@ export const Index: Record<string, any> = {
     registryDependencies: undefined,
     files: [
       {
-        path: "registry/hooks/use-hover.tsx",
+        path: "registry/hooks/use-hover.ts",
         type: "registry:hook",
         target: "",
       },
     ],
-    component: React.lazy(() => import("registry/examples/use-hover-demo.tsx")),
+    component: React.lazy(() => import("registry/examples/use-hover-demo")),
     source: "",
   },
   "use-media-query": {
@@ -352,13 +340,13 @@ export const Index: Record<string, any> = {
     registryDependencies: undefined,
     files: [
       {
-        path: "registry/hooks/use-media-query.tsx",
+        path: "registry/hooks/use-media-query.ts",
         type: "registry:hook",
         target: "",
       },
     ],
     component: React.lazy(
-      () => import("registry/examples/use-media-query-demo.tsx")
+      () => import("registry/examples/use-media-query-demo")
     ),
     source: "",
   },
@@ -368,13 +356,13 @@ export const Index: Record<string, any> = {
     registryDependencies: undefined,
     files: [
       {
-        path: "registry/hooks/use-interval-when.tsx",
+        path: "registry/hooks/use-interval-when.ts",
         type: "registry:hook",
         target: "",
       },
     ],
     component: React.lazy(
-      () => import("registry/examples/use-interval-when-demo.tsx")
+      () => import("registry/examples/use-interval-when-demo")
     ),
     source: "",
   },
@@ -384,14 +372,12 @@ export const Index: Record<string, any> = {
     registryDependencies: undefined,
     files: [
       {
-        path: "registry/hooks/use-countdown.tsx",
+        path: "registry/hooks/use-countdown.ts",
         type: "registry:hook",
         target: "",
       },
     ],
-    component: React.lazy(
-      () => import("registry/examples/use-countdown-demo.tsx")
-    ),
+    component: React.lazy(() => import("registry/examples/use-countdown-demo")),
     source: "",
   },
   "use-visibility-change": {
@@ -400,13 +386,13 @@ export const Index: Record<string, any> = {
     registryDependencies: undefined,
     files: [
       {
-        path: "registry/hooks/use-visibility-change.tsx",
+        path: "registry/hooks/use-visibility-change.ts",
         type: "registry:hook",
         target: "",
       },
     ],
     component: React.lazy(
-      () => import("registry/examples/use-visibility-change-demo.tsx")
+      () => import("registry/examples/use-visibility-change-demo")
     ),
     source: "",
   },
@@ -416,14 +402,12 @@ export const Index: Record<string, any> = {
     registryDependencies: undefined,
     files: [
       {
-        path: "registry/hooks/use-key-press.tsx",
+        path: "registry/hooks/use-key-press.ts",
         type: "registry:hook",
         target: "",
       },
     ],
-    component: React.lazy(
-      () => import("registry/examples/use-key-press-demo.tsx")
-    ),
+    component: React.lazy(() => import("registry/examples/use-key-press-demo")),
     source: "",
   },
   "use-cookie-storage": {
@@ -432,13 +416,13 @@ export const Index: Record<string, any> = {
     registryDependencies: undefined,
     files: [
       {
-        path: "registry/hooks/use-cookie-storage.tsx",
+        path: "registry/hooks/use-cookie-storage.ts",
         type: "registry:hook",
         target: "",
       },
     ],
     component: React.lazy(
-      () => import("registry/examples/use-cookie-storage-demo.tsx")
+      () => import("registry/examples/use-cookie-storage-demo")
     ),
     source: "",
   },
@@ -448,14 +432,12 @@ export const Index: Record<string, any> = {
     registryDependencies: undefined,
     files: [
       {
-        path: "registry/hooks/use-is-client.tsx",
+        path: "registry/hooks/use-is-client.ts",
         type: "registry:hook",
         target: "",
       },
     ],
-    component: React.lazy(
-      () => import("registry/examples/use-is-client-demo.tsx")
-    ),
+    component: React.lazy(() => import("registry/examples/use-is-client-demo")),
     source: "",
   },
   "use-geolocation": {
@@ -464,13 +446,13 @@ export const Index: Record<string, any> = {
     registryDependencies: undefined,
     files: [
       {
-        path: "registry/hooks/use-geolocation.tsx",
+        path: "registry/hooks/use-geolocation.ts",
         type: "registry:hook",
         target: "",
       },
     ],
     component: React.lazy(
-      () => import("registry/examples/use-geolocation-demo.tsx")
+      () => import("registry/examples/use-geolocation-demo")
     ),
     source: "",
   },
@@ -480,13 +462,13 @@ export const Index: Record<string, any> = {
     registryDependencies: undefined,
     files: [
       {
-        path: "registry/hooks/use-page-leave.tsx",
+        path: "registry/hooks/use-page-leave.ts",
         type: "registry:hook",
         target: "",
       },
     ],
     component: React.lazy(
-      () => import("registry/examples/use-page-leave-demo.tsx")
+      () => import("registry/examples/use-page-leave-demo")
     ),
     source: "",
   },
@@ -496,13 +478,13 @@ export const Index: Record<string, any> = {
     registryDependencies: undefined,
     files: [
       {
-        path: "registry/hooks/use-is-first-render.tsx",
+        path: "registry/hooks/use-is-first-render.ts",
         type: "registry:hook",
         target: "",
       },
     ],
     component: React.lazy(
-      () => import("registry/examples/use-is-first-render-demo.tsx")
+      () => import("registry/examples/use-is-first-render-demo")
     ),
     source: "",
   },
@@ -512,13 +494,13 @@ export const Index: Record<string, any> = {
     registryDependencies: undefined,
     files: [
       {
-        path: "registry/hooks/use-window-scroll.tsx",
+        path: "registry/hooks/use-window-scroll.ts",
         type: "registry:hook",
         target: "",
       },
     ],
     component: React.lazy(
-      () => import("registry/examples/use-window-scroll-demo.tsx")
+      () => import("registry/examples/use-window-scroll-demo")
     ),
     source: "",
   },
@@ -528,12 +510,12 @@ export const Index: Record<string, any> = {
     registryDependencies: undefined,
     files: [
       {
-        path: "registry/hooks/use-idle.tsx",
+        path: "registry/hooks/use-idle.ts",
         type: "registry:hook",
         target: "",
       },
     ],
-    component: React.lazy(() => import("registry/examples/use-idle-demo.tsx")),
+    component: React.lazy(() => import("registry/examples/use-idle-demo")),
     source: "",
   },
   "use-long-press": {
@@ -542,13 +524,13 @@ export const Index: Record<string, any> = {
     registryDependencies: undefined,
     files: [
       {
-        path: "registry/hooks/use-long-press.tsx",
+        path: "registry/hooks/use-long-press.ts",
         type: "registry:hook",
         target: "",
       },
     ],
     component: React.lazy(
-      () => import("registry/examples/use-long-press-demo.tsx")
+      () => import("registry/examples/use-long-press-demo")
     ),
     source: "",
   },
@@ -558,14 +540,12 @@ export const Index: Record<string, any> = {
     registryDependencies: undefined,
     files: [
       {
-        path: "registry/hooks/use-default.tsx",
+        path: "registry/hooks/use-default.ts",
         type: "registry:hook",
         target: "",
       },
     ],
-    component: React.lazy(
-      () => import("registry/examples/use-default-demo.tsx")
-    ),
+    component: React.lazy(() => import("registry/examples/use-default-demo")),
     source: "",
   },
   "use-click-away": {
@@ -574,13 +554,13 @@ export const Index: Record<string, any> = {
     registryDependencies: undefined,
     files: [
       {
-        path: "registry/hooks/use-click-away.tsx",
+        path: "registry/hooks/use-click-away.ts",
         type: "registry:hook",
         target: "",
       },
     ],
     component: React.lazy(
-      () => import("registry/examples/use-click-away-demo.tsx")
+      () => import("registry/examples/use-click-away-demo")
     ),
     source: "",
   },
@@ -590,13 +570,13 @@ export const Index: Record<string, any> = {
     registryDependencies: undefined,
     files: [
       {
-        path: "registry/hooks/use-object-state.tsx",
+        path: "registry/hooks/use-object-state.ts",
         type: "registry:hook",
         target: "",
       },
     ],
     component: React.lazy(
-      () => import("registry/examples/use-object-state-demo.tsx")
+      () => import("registry/examples/use-object-state-demo")
     ),
     source: "",
   },
@@ -606,14 +586,12 @@ export const Index: Record<string, any> = {
     registryDependencies: undefined,
     files: [
       {
-        path: "registry/hooks/use-logger.tsx",
+        path: "registry/hooks/use-logger.ts",
         type: "registry:hook",
         target: "",
       },
     ],
-    component: React.lazy(
-      () => import("registry/examples/use-logger-demo.tsx")
-    ),
+    component: React.lazy(() => import("registry/examples/use-logger-demo")),
     source: "",
   },
   "use-speakup": {
@@ -622,14 +600,12 @@ export const Index: Record<string, any> = {
     registryDependencies: undefined,
     files: [
       {
-        path: "registry/hooks/use-speakup.tsx",
+        path: "registry/hooks/use-speakup.ts",
         type: "registry:hook",
         target: "",
       },
     ],
-    component: React.lazy(
-      () => import("registry/examples/use-speakup-demo.tsx")
-    ),
+    component: React.lazy(() => import("registry/examples/use-speakup-demo")),
     source: "",
   },
   "use-measure-any": {
@@ -644,7 +620,7 @@ export const Index: Record<string, any> = {
       },
     ],
     component: React.lazy(
-      () => import("registry/examples/use-measure-any-demo.tsx")
+      () => import("registry/examples/use-measure-any-demo")
     ),
     source: "",
   },
@@ -654,14 +630,12 @@ export const Index: Record<string, any> = {
     registryDependencies: undefined,
     files: [
       {
-        path: "registry/hooks/use-measure.tsx",
+        path: "registry/hooks/use-measure.ts",
         type: "registry:hook",
         target: "",
       },
     ],
-    component: React.lazy(
-      () => import("registry/examples/use-measure-demo.tsx")
-    ),
+    component: React.lazy(() => import("registry/examples/use-measure-demo")),
     source: "",
   },
   "use-is-mobile": {
@@ -670,12 +644,12 @@ export const Index: Record<string, any> = {
     registryDependencies: undefined,
     files: [
       {
-        path: "registry/hooks/use-is-mobile.tsx",
+        path: "registry/hooks/use-is-mobile.ts",
         type: "registry:hook",
         target: "",
       },
     ],
-    component: React.lazy(() => import("registry/hooks/use-is-mobile.tsx")),
+    component: React.lazy(() => import("registry/hooks/use-is-mobile.ts")),
     source: "",
   },
   "use-lock-body-scroll": {
@@ -684,13 +658,13 @@ export const Index: Record<string, any> = {
     registryDependencies: undefined,
     files: [
       {
-        path: "registry/hooks/use-lock-body-scroll.tsx",
+        path: "registry/hooks/use-lock-body-scroll.ts",
         type: "registry:hook",
         target: "",
       },
     ],
     component: React.lazy(
-      () => import("registry/hooks/use-lock-body-scroll.tsx")
+      () => import("registry/hooks/use-lock-body-scroll.ts")
     ),
     source: "",
   },
@@ -700,12 +674,12 @@ export const Index: Record<string, any> = {
     registryDependencies: undefined,
     files: [
       {
-        path: "registry/hooks/use-mounted.tsx",
+        path: "registry/hooks/use-mounted.ts",
         type: "registry:hook",
         target: "",
       },
     ],
-    component: React.lazy(() => import("registry/hooks/use-mounted.tsx")),
+    component: React.lazy(() => import("registry/hooks/use-mounted.ts")),
     source: "",
   },
   "use-mutation-observer": {
@@ -714,13 +688,13 @@ export const Index: Record<string, any> = {
     registryDependencies: undefined,
     files: [
       {
-        path: "registry/hooks/use-mutation-observer.tsx",
+        path: "registry/hooks/use-mutation-observer.ts",
         type: "registry:hook",
         target: "",
       },
     ],
     component: React.lazy(
-      () => import("registry/hooks/use-mutation-observer.tsx")
+      () => import("registry/hooks/use-mutation-observer.ts")
     ),
     source: "",
   },
@@ -730,14 +704,12 @@ export const Index: Record<string, any> = {
     registryDependencies: undefined,
     files: [
       {
-        path: "registry/hooks/use-previous.tsx",
+        path: "registry/hooks/use-previous.ts",
         type: "registry:hook",
         target: "",
       },
     ],
-    component: React.lazy(
-      () => import("registry/examples/use-previous-demo.tsx")
-    ),
+    component: React.lazy(() => import("registry/examples/use-previous-demo")),
     source: "",
   },
   "use-history-state": {
@@ -746,13 +718,13 @@ export const Index: Record<string, any> = {
     registryDependencies: undefined,
     files: [
       {
-        path: "registry/hooks/use-history-state.tsx",
+        path: "registry/hooks/use-history-state.ts",
         type: "registry:hook",
         target: "",
       },
     ],
     component: React.lazy(
-      () => import("registry/examples/use-history-state-demo.tsx")
+      () => import("registry/examples/use-history-state-demo")
     ),
     source: "",
   },
@@ -762,13 +734,13 @@ export const Index: Record<string, any> = {
     registryDependencies: undefined,
     files: [
       {
-        path: "registry/hooks/use-async-status.tsx",
+        path: "registry/hooks/use-async-status.ts",
         type: "registry:hook",
         target: "",
       },
     ],
     component: React.lazy(
-      () => import("registry/examples/use-async-status-demo.tsx")
+      () => import("registry/examples/use-async-status-demo")
     ),
     source: "",
   },
@@ -778,14 +750,12 @@ export const Index: Record<string, any> = {
     registryDependencies: undefined,
     files: [
       {
-        path: "registry/hooks/use-favicon.tsx",
+        path: "registry/hooks/use-favicon.ts",
         type: "registry:hook",
         target: "",
       },
     ],
-    component: React.lazy(
-      () => import("registry/examples/use-favicon-demo.tsx")
-    ),
+    component: React.lazy(() => import("registry/examples/use-favicon-demo")),
     source: "",
   },
   "use-list": {
@@ -794,12 +764,12 @@ export const Index: Record<string, any> = {
     registryDependencies: undefined,
     files: [
       {
-        path: "registry/hooks/use-list.tsx",
+        path: "registry/hooks/use-list.ts",
         type: "registry:hook",
         target: "",
       },
     ],
-    component: React.lazy(() => import("registry/examples/use-list-demo.tsx")),
+    component: React.lazy(() => import("registry/examples/use-list-demo")),
     source: "",
   },
   "use-map": {
@@ -808,12 +778,12 @@ export const Index: Record<string, any> = {
     registryDependencies: undefined,
     files: [
       {
-        path: "registry/hooks/use-map.tsx",
+        path: "registry/hooks/use-map.ts",
         type: "registry:hook",
         target: "",
       },
     ],
-    component: React.lazy(() => import("registry/hooks/use-map.tsx")),
+    component: React.lazy(() => import("registry/hooks/use-map.ts")),
     source: "",
   },
   "use-queue": {
@@ -822,12 +792,12 @@ export const Index: Record<string, any> = {
     registryDependencies: undefined,
     files: [
       {
-        path: "registry/hooks/use-queue.tsx",
+        path: "registry/hooks/use-queue.ts",
         type: "registry:hook",
         target: "",
       },
     ],
-    component: React.lazy(() => import("registry/hooks/use-queue.tsx")),
+    component: React.lazy(() => import("registry/hooks/use-queue.ts")),
     source: "",
   },
   "use-set": {
@@ -836,12 +806,12 @@ export const Index: Record<string, any> = {
     registryDependencies: undefined,
     files: [
       {
-        path: "registry/hooks/use-set.tsx",
+        path: "registry/hooks/use-set.ts",
         type: "registry:hook",
         target: "",
       },
     ],
-    component: React.lazy(() => import("registry/hooks/use-set.tsx")),
+    component: React.lazy(() => import("registry/hooks/use-set.ts")),
     source: "",
   },
   "use-throttle": {
@@ -850,12 +820,12 @@ export const Index: Record<string, any> = {
     registryDependencies: undefined,
     files: [
       {
-        path: "registry/hooks/use-throttle.tsx",
+        path: "registry/hooks/use-throttle.ts",
         type: "registry:hook",
         target: "",
       },
     ],
-    component: React.lazy(() => import("registry/hooks/use-throttle.tsx")),
+    component: React.lazy(() => import("registry/hooks/use-throttle.ts")),
     source: "",
   },
   "use-continuous-retry": {
@@ -864,13 +834,13 @@ export const Index: Record<string, any> = {
     registryDependencies: undefined,
     files: [
       {
-        path: "registry/hooks/use-continuous-retry.tsx",
+        path: "registry/hooks/use-continuous-retry.ts",
         type: "registry:hook",
         target: "",
       },
     ],
     component: React.lazy(
-      () => import("registry/hooks/use-continuous-retry.tsx")
+      () => import("registry/hooks/use-continuous-retry.ts")
     ),
     source: "",
   },
@@ -878,18 +848,16 @@ export const Index: Record<string, any> = {
     name: "use-event-listener",
     type: "registry:hook",
     registryDependencies: [
-      "https://usekit.kiron.dev/r/use-isomorphic-layout-effect",
+      "https://usekit.kiron.dev/k/use-isomorphic-layout-effect",
     ],
     files: [
       {
-        path: "registry/hooks/use-event-listener.tsx",
+        path: "registry/hooks/use-event-listener.ts",
         type: "registry:hook",
         target: "",
       },
     ],
-    component: React.lazy(
-      () => import("registry/hooks/use-event-listener.tsx")
-    ),
+    component: React.lazy(() => import("registry/hooks/use-event-listener.ts")),
     source: "",
   },
   "use-random-interval": {
@@ -898,30 +866,28 @@ export const Index: Record<string, any> = {
     registryDependencies: undefined,
     files: [
       {
-        path: "registry/hooks/use-random-interval.tsx",
+        path: "registry/hooks/use-random-interval.ts",
         type: "registry:hook",
         target: "",
       },
     ],
     component: React.lazy(
-      () => import("registry/hooks/use-random-interval.tsx")
+      () => import("registry/hooks/use-random-interval.ts")
     ),
     source: "",
   },
   "use-dropzone": {
     name: "use-dropzone",
     type: "registry:hook",
-    registryDependencies: ["https://usekit.kiron.dev/r/use-event-listener"],
+    registryDependencies: ["https://usekit.kiron.dev/k/use-event-listener"],
     files: [
       {
-        path: "registry/hooks/use-dropzone.tsx",
+        path: "registry/hooks/use-dropzone.ts",
         type: "registry:hook",
         target: "",
       },
     ],
-    component: React.lazy(
-      () => import("registry/examples/use-dropzone-demo.tsx")
-    ),
+    component: React.lazy(() => import("registry/examples/use-dropzone-demo")),
     source: "",
   },
   "use-input-value": {
@@ -930,13 +896,13 @@ export const Index: Record<string, any> = {
     registryDependencies: undefined,
     files: [
       {
-        path: "registry/hooks/use-input-value.tsx",
+        path: "registry/hooks/use-input-value.ts",
         type: "registry:hook",
         target: "",
       },
     ],
     component: React.lazy(
-      () => import("registry/examples/use-input-value-demo.tsx")
+      () => import("registry/examples/use-input-value-demo")
     ),
     source: "",
   },
@@ -946,12 +912,12 @@ export const Index: Record<string, any> = {
     registryDependencies: undefined,
     files: [
       {
-        path: "registry/hooks/use-step.tsx",
+        path: "registry/hooks/use-step.ts",
         type: "registry:hook",
         target: "",
       },
     ],
-    component: React.lazy(() => import("registry/examples/use-step-demo.tsx")),
+    component: React.lazy(() => import("registry/examples/use-step-demo")),
     source: "",
   },
   "use-draggable": {
@@ -960,14 +926,12 @@ export const Index: Record<string, any> = {
     registryDependencies: undefined,
     files: [
       {
-        path: "registry/hooks/use-draggable.tsx",
+        path: "registry/hooks/use-draggable.ts",
         type: "registry:hook",
         target: "",
       },
     ],
-    component: React.lazy(
-      () => import("registry/examples/use-draggable-demo.tsx")
-    ),
+    component: React.lazy(() => import("registry/examples/use-draggable-demo")),
     source: "",
   },
   "use-stopwatch": {
@@ -976,14 +940,12 @@ export const Index: Record<string, any> = {
     registryDependencies: undefined,
     files: [
       {
-        path: "registry/hooks/use-stopwatch.tsx",
+        path: "registry/hooks/use-stopwatch.ts",
         type: "registry:hook",
         target: "",
       },
     ],
-    component: React.lazy(
-      () => import("registry/examples/use-stopwatch-demo.tsx")
-    ),
+    component: React.lazy(() => import("registry/examples/use-stopwatch-demo")),
     source: "",
   },
   "use-location": {
@@ -992,13 +954,92 @@ export const Index: Record<string, any> = {
     registryDependencies: undefined,
     files: [
       {
-        path: "registry/hooks/use-location.tsx",
+        path: "registry/hooks/use-location.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(() => import("registry/examples/use-location-demo")),
+    source: "",
+  },
+  "use-auto-scroll": {
+    name: "use-auto-scroll",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-auto-scroll.ts",
         type: "registry:hook",
         target: "",
       },
     ],
     component: React.lazy(
-      () => import("registry/examples/use-location-demo.tsx")
+      () => import("registry/examples/use-auto-scroll-demo")
+    ),
+    source: "",
+  },
+  "use-autosize-textarea": {
+    name: "use-autosize-textarea",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-autosize-textarea.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/hooks/use-autosize-textarea.ts")
+    ),
+    source: "",
+  },
+  "use-callback-ref": {
+    name: "use-callback-ref",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-callback-ref.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(() => import("registry/hooks/use-callback-ref.ts")),
+    source: "",
+  },
+  "use-controlled-state": {
+    name: "use-controlled-state",
+    type: "registry:hook",
+    registryDependencies: [
+      "https://usekit.kiron.dev/k/use-callback-ref",
+      "https://usekit.kiron.dev/k/use-uncontrolled-state",
+    ],
+    files: [
+      {
+        path: "registry/hooks/use-controlled-state.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/hooks/use-controlled-state.ts")
+    ),
+    source: "",
+  },
+  "use-uncontrolled-state": {
+    name: "use-uncontrolled-state",
+    type: "registry:hook",
+    registryDependencies: ["https://usekit.kiron.dev/k/use-callback-ref"],
+    files: [
+      {
+        path: "registry/hooks/use-uncontrolled-state.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/hooks/use-uncontrolled-state.ts")
     ),
     source: "",
   },
@@ -1741,6 +1782,22 @@ export const Index: Record<string, any> = {
     ],
     component: React.lazy(
       () => import("registry/examples/use-location-demo.tsx")
+    ),
+    source: "",
+  },
+  "use-auto-scroll-demo": {
+    name: "use-auto-scroll-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-auto-scroll-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-auto-scroll-demo.tsx")
     ),
     source: "",
   },

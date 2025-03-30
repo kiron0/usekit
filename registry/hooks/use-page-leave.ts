@@ -1,9 +1,7 @@
 import * as React from "react"
 
-type CallbackFunction = () => void
-
 export function usePageLeave(
-  cb: CallbackFunction,
+  cb: () => void,
   ref: React.RefObject<HTMLElement | null>
 ) {
   React.useEffect(() => {

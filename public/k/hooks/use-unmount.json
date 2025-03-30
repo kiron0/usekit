@@ -6,7 +6,7 @@
   "description": "Run a function when a component unmounts, ensuring cleanups or final actions are handled effectively.",
   "files": [
     {
-      "path": "registry/hooks/use-unmount.tsx",
+      "path": "registry/hooks/use-unmount.ts",
       "content": "import * as React from \"react\"\n\nexport function useUnmount(func: () => void) {\n  const funcRef = React.useRef(func)\n\n  funcRef.current = func\n\n  React.useEffect(\n    () => () => {\n      funcRef.current()\n    },\n    []\n  )\n}\n",
       "type": "registry:hook"
     }

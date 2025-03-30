@@ -10,7 +10,7 @@ type AsyncStatus<TData, TError> =
   | { state: "success"; data: TData }
   | { state: "error"; error: TError }
 
-type Options<TData, TError> = {
+interface Options<TData, TError> {
   loading?: React.ReactNode
   success?: (data: TData) => React.ReactNode
   error?: (error: TError) => React.ReactNode
@@ -66,11 +66,7 @@ export function useAsyncStatus<TArgs extends unknown[], TData, TError>(
       case "error":
         const errorContent =
           typeof status.error === "string" ? status.error : String(status.error)
-        return (
-          options?.error?.(errorContent as TError) || (
-            <span>Error: {errorContent}</span>
-          )
-        )
+        return options?.error?.(errorContent as TError) || null
       default:
         return null
     }
