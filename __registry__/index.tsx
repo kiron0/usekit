@@ -848,7 +848,7 @@ export const Index: Record<string, any> = {
     name: "use-event-listener",
     type: "registry:hook",
     registryDependencies: [
-      "https://usekit.kiron.dev/r/use-isomorphic-layout-effect",
+      "https://usekit.kiron.dev/k/use-isomorphic-layout-effect",
     ],
     files: [
       {
@@ -879,7 +879,7 @@ export const Index: Record<string, any> = {
   "use-dropzone": {
     name: "use-dropzone",
     type: "registry:hook",
-    registryDependencies: ["https://usekit.kiron.dev/r/use-event-listener"],
+    registryDependencies: ["https://usekit.kiron.dev/k/use-event-listener"],
     files: [
       {
         path: "registry/hooks/use-dropzone.ts",
@@ -975,6 +975,71 @@ export const Index: Record<string, any> = {
     ],
     component: React.lazy(
       () => import("registry/examples/use-auto-scroll-demo")
+    ),
+    source: "",
+  },
+  "use-autosize-textarea": {
+    name: "use-autosize-textarea",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-autosize-textarea.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/hooks/use-autosize-textarea.ts")
+    ),
+    source: "",
+  },
+  "use-callback-ref": {
+    name: "use-callback-ref",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-callback-ref.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(() => import("registry/hooks/use-callback-ref.ts")),
+    source: "",
+  },
+  "use-controlled-state": {
+    name: "use-controlled-state",
+    type: "registry:hook",
+    registryDependencies: [
+      "https://usekit.kiron.dev/k/use-callback-ref",
+      "https://usekit.kiron.dev/k/use-uncontrolled-state",
+    ],
+    files: [
+      {
+        path: "registry/hooks/use-controlled-state.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/hooks/use-controlled-state.ts")
+    ),
+    source: "",
+  },
+  "use-uncontrolled-state": {
+    name: "use-uncontrolled-state",
+    type: "registry:hook",
+    registryDependencies: ["https://usekit.kiron.dev/k/use-callback-ref"],
+    files: [
+      {
+        path: "registry/hooks/use-uncontrolled-state.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/hooks/use-uncontrolled-state.ts")
     ),
     source: "",
   },

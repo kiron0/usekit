@@ -5,7 +5,7 @@
   "title": "Use Event Listener",
   "description": "Listen for events on a target element with useEventListener.",
   "registryDependencies": [
-    "https://usekit.kiron.dev/r/use-isomorphic-layout-effect"
+    "https://usekit.kiron.dev/k/use-isomorphic-layout-effect"
   ],
   "files": [
     {

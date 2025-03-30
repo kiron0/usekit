@@ -729,7 +729,7 @@ export const hooks: Registry["items"] = [
     title: "Use Event Listener",
     description: "Listen for events on a target element with useEventListener.",
     type: "registry:hook",
-    registryDependencies: [`${siteConfig.url}/r/use-isomorphic-layout-effect`],
+    registryDependencies: [`${siteConfig.url}/k/use-isomorphic-layout-effect`],
     files: [
       {
         path: "registry/hooks/use-event-listener.ts",
@@ -756,7 +756,7 @@ export const hooks: Registry["items"] = [
     description:
       "Drag and drop files into a dropzone with useDropzone, providing options to customize the dropzone.",
     type: "registry:hook",
-    registryDependencies: [`${siteConfig.url}/r/use-event-listener`],
+    registryDependencies: [`${siteConfig.url}/k/use-event-listener`],
     files: [
       {
         path: "registry/hooks/use-dropzone.ts",
@@ -836,6 +836,63 @@ export const hooks: Registry["items"] = [
     files: [
       {
         path: "registry/hooks/use-auto-scroll.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-autosize-textarea",
+    title: "Use Autosize Textarea",
+    description:
+      "Automatically adjust the height of a textarea to fit its content with useAutosizeTextarea.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-autosize-textarea.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-callback-ref",
+    title: "Use Callback Ref",
+    description:
+      "A custom hook that converts a callback to a ref to avoid triggering re-renders when passed as a prop, or avoid re-executing effects when passed as a dependency.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-callback-ref.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-controlled-state",
+    title: "Use Controlled State",
+    description:
+      "Manage a controlled state with the useControlledState hook, providing methods to set it to true, false, or toggle between them",
+    type: "registry:hook",
+    registryDependencies: [
+      `${siteConfig.url}/k/use-callback-ref`,
+      `${siteConfig.url}/k/use-uncontrolled-state`,
+    ],
+    files: [
+      {
+        path: "registry/hooks/use-controlled-state.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-uncontrolled-state",
+    title: "Use Uncontrolled State",
+    description:
+      "Manage an uncontrolled state with the useUncontrolledState hook, providing methods to set it to true, false, or toggle between them",
+    type: "registry:hook",
+    registryDependencies: [`${siteConfig.url}/k/use-callback-ref`],
+    files: [
+      {
+        path: "registry/hooks/use-uncontrolled-state.ts",
         type: "registry:hook",
       },
     ],

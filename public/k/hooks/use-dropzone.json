@@ -4,7 +4,7 @@
   "type": "registry:hook",
   "title": "Use Dropzone",
   "description": "Drag and drop files into a dropzone with useDropzone, providing options to customize the dropzone.",
-  "registryDependencies": ["https://usekit.kiron.dev/r/use-event-listener"],
+  "registryDependencies": ["https://usekit.kiron.dev/k/use-event-listener"],
   "files": [
     {
       "path": "registry/hooks/use-dropzone.ts",
