@@ -2,15 +2,12 @@ import * as React from "react"
 
 type ScriptStatus = "loading" | "ready" | "error" | "unknown"
 
-interface UseScriptOptions {
+interface Options {
   removeOnUnmount?: boolean
   customAttributes?: Record<string, string>
 }
 
-export function useScript(
-  src: string,
-  options?: UseScriptOptions
-): ScriptStatus {
+export function useScript(src: string, options?: Options): ScriptStatus {
   const [status, setStatus] = React.useState<ScriptStatus>(() => {
     if (typeof document === "undefined") {
       return "loading"

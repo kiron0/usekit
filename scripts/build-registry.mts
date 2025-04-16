@@ -13,7 +13,7 @@ const REGISTRY_OUTPUT_PATH = "public/k/hooks"
 const registry: Registry = {
   name: "useKit",
   homepage: "https://usekit.kiron.dev",
-  // @ts-ignore
+  // @ts-expect-error: registryItems might not match the expected type
   items: registryItems.registryItems,
 } satisfies Registry
 

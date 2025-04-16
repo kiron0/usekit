@@ -1,6 +1,6 @@
 import * as React from "react"
 
-interface UseIntersectionObserverProps {
+interface Props {
   threshold?: number | number[]
   root?: Element | Document | null
   rootMargin?: string
@@ -8,11 +8,7 @@ interface UseIntersectionObserverProps {
 
 export function useIntersectionObserver<T extends Element>(
   elementRef: React.RefObject<T | null>,
-  {
-    threshold = 0,
-    root = null,
-    rootMargin = "0%",
-  }: UseIntersectionObserverProps = {}
+  { threshold = 0, root = null, rootMargin = "0%" }: Props = {}
 ): IntersectionObserverEntry | undefined {
   const [entry, setEntry] = React.useState<IntersectionObserverEntry>()
 

@@ -1,6 +1,6 @@
 import * as React from "react"
 
-interface UseAutosizeTextAreaProps {
+interface Props {
   ref: React.RefObject<HTMLTextAreaElement | null>
   maxHeight?: number
   borderWidth?: number
@@ -12,7 +12,7 @@ export function useAutosizeTextArea({
   maxHeight = Number.MAX_SAFE_INTEGER,
   borderWidth = 0,
   dependencies,
-}: UseAutosizeTextAreaProps) {
+}: Props) {
   const originalHeight = React.useRef<number | null>(null)
 
   React.useLayoutEffect(() => {
