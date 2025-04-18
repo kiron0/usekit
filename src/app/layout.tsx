@@ -7,6 +7,8 @@ import { cn } from "@/lib/utils"
 
 import "@/styles/globals.css"
 
+import { cookies } from "next/headers"
+
 export const metadata: Metadata = {
   title: {
     default: `${siteConfig.name} - ${siteConfig.slogan}`,
@@ -67,14 +69,18 @@ interface RootLayoutProps {
   children: React.ReactNode
 }
 
-export default function RootLayout({ children }: RootLayoutProps) {
+export default async function RootLayout({ children }: RootLayoutProps) {
+  const cookieStore = await cookies()
+  const activeThemeValue = cookieStore.get("active_theme")?.value
+
   return (
     <html lang="en" suppressHydrationWarning>
       <body
         className={cn(
-          "min-h-svh overflow-x-hidden bg-background font-sans antialiased",
+          "bg-background min-h-svh overflow-x-hidden font-sans antialiased",
           fontSans.variable,
-          fontMono.variable
+          fontMono.variable,
+          activeThemeValue ? `theme-${activeThemeValue}` : ""
         )}
       >
         <Providers>{children}</Providers>

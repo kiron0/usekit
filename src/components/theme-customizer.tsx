@@ -13,7 +13,6 @@ import { useTheme } from "next-themes"
 import { baseColors } from "@/config/colors"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
-import { DialogTitle } from "@/components/ui/dialog"
 import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer"
 import { Label } from "@/components/ui/label"
 import {
@@ -22,6 +21,8 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover"
 import { Skeleton } from "@/components/ui/skeleton"
+
+import { useThemeConfig } from "./active-theme"
 
 export function ThemeCustomizer() {
   return (
@@ -32,8 +33,8 @@ export function ThemeCustomizer() {
             <PaletteIcon />
           </Button>
         </DrawerTrigger>
-        <DrawerContent className="p-6">
-          <DialogTitle className="sr-only">Theme Customizer</DialogTitle>
+        <DrawerContent>
+          <p className="sr-only">Theme Customizer</p>
           <Customizer />
         </DrawerContent>
       </Drawer>
@@ -58,6 +59,7 @@ export function ThemeCustomizer() {
 }
 
 export function Customizer() {
+  const { activeTheme, setActiveTheme } = useThemeConfig()
   const [mounted, setMounted] = React.useState(false)
   const { setTheme, resolvedTheme: theme } = useTheme()
 
@@ -66,11 +68,11 @@ export function Customizer() {
   }, [])
 
   return (
-    <div className="w-full">
+    <div className="w-full p-4 md:p-0">
       <div className="flex items-start py-4 md:pt-0">
         <div className="space-y-1 pr-2">
-          <p className="font-semibold leading-none tracking-tight">Customize</p>
-          <p className="text-xs text-muted-foreground">
+          <p className="leading-none font-semibold tracking-tight">Customize</p>
+          <p className="text-muted-foreground text-xs">
             Pick a style and color for the website.
           </p>
         </div>
@@ -78,7 +80,10 @@ export function Customizer() {
           variant="ghost"
           size="icon"
           className="ml-auto rounded-[0.5rem]"
-          onClick={() => setTheme("system")}
+          onClick={() => {
+            setActiveTheme("default")
+            setTheme("system")
+          }}
         >
           <RepeatIcon />
           <span className="sr-only">Reset</span>
@@ -89,23 +94,17 @@ export function Customizer() {
           <Label className="text-xs">Color</Label>
           <div className="grid grid-cols-3 gap-2">
             {baseColors.map((color) => {
-              const isActive = theme?.includes(color.name)
+              const isActive = activeTheme === color.name
 
               return mounted ? (
                 <Button
-                  variant={"outline"}
+                  variant="outline"
                   size="sm"
                   key={color.name}
-                  onClick={() => {
-                    setTheme(
-                      theme?.includes("dark")
-                        ? `dark-${color.name}`
-                        : color.name
-                    )
-                  }}
+                  onClick={() => setActiveTheme(color.name)}
                   className={cn(
-                    "justify-start",
-                    isActive && "border-2 border-primary"
+                    "justify-start border-2",
+                    isActive && "border-primary"
                   )}
                   style={
                     {
@@ -115,11 +114,7 @@ export function Customizer() {
                     } as React.CSSProperties
                   }
                 >
-                  <span
-                    className={cn(
-                      "mr-1 flex size-5 shrink-0 -translate-x-1 items-center justify-center rounded-full bg-(--theme-primary)"
-                    )}
-                  >
+                  <span className="flex min-h-4 min-w-4 items-center justify-center rounded-full bg-[var(--theme-primary)]">
                     {isActive && <CheckIcon className="size-4 text-white" />}
                   </span>
                   {color.label}
@@ -136,7 +131,7 @@ export function Customizer() {
             {mounted ? (
               <>
                 <Button
-                  variant={"outline"}
+                  variant="outline"
                   size="sm"
                   onClick={() =>
                     setTheme(
@@ -148,14 +143,14 @@ export function Customizer() {
                     )
                   }
                   className={cn(
-                    !theme?.includes("dark") && "border-2 border-primary"
+                    !theme?.includes("dark") && "border-primary border-2"
                   )}
                 >
-                  <SunIcon className="mr-1 -translate-x-1" />
+                  <SunIcon />
                   Light
                 </Button>
                 <Button
-                  variant={"outline"}
+                  variant="outline"
                   size="sm"
                   onClick={() =>
                     setTheme(
@@ -167,10 +162,10 @@ export function Customizer() {
                     )
                   }
                   className={cn(
-                    theme?.includes("dark") && "border-2 border-primary"
+                    theme?.includes("dark") && "border-primary border-2"
                   )}
                 >
-                  <MoonIcon className="mr-1 -translate-x-1" />
+                  <MoonIcon />
                   Dark
                 </Button>
               </>
