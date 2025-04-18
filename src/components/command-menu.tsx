@@ -2,7 +2,7 @@
 
 import * as React from "react"
 import { type DialogProps } from "@radix-ui/react-dialog"
-import { Circle, File, Laptop, Moon, Sun } from "lucide-react"
+import { Circle, File, Moon, Sun } from "lucide-react"
 import { useTheme } from "next-themes"
 import { useRouter } from "nextjs-toploader/app"
 
@@ -113,7 +113,7 @@ export function CommandMenu({ ...props }: DialogProps) {
               ))}
             </CommandGroup>
           ))}
-          <CommandSeparator />
+          <CommandSeparator className="mb-1" />
           <CommandGroup heading="Theme">
             <CommandItem onSelect={() => runCommand(() => setTheme("light"))}>
               <Sun />
@@ -122,10 +122,6 @@ export function CommandMenu({ ...props }: DialogProps) {
             <CommandItem onSelect={() => runCommand(() => setTheme("dark"))}>
               <Moon />
               Dark
-            </CommandItem>
-            <CommandItem onSelect={() => runCommand(() => setTheme("system"))}>
-              <Laptop />
-              System
             </CommandItem>
           </CommandGroup>
         </CommandList>

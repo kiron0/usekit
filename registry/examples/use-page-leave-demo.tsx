@@ -11,10 +11,10 @@ export default function UsePageLeaveDemo() {
   }, elementRef)
 
   return (
-    <div className="flex flex-col items-center justify-center gap-6">
+    <div className="flex w-full flex-col items-center justify-center gap-6">
       <div
         ref={elementRef}
-        className="mx-auto w-96 space-y-2 rounded-xl border-2 p-6 text-center duration-300 hover:cursor-pointer hover:border-dashed hover:border-primary"
+        className="mx-auto w-full space-y-2 rounded-xl border-2 p-6 text-center duration-300 hover:cursor-pointer hover:border-dashed hover:border-primary md:w-96"
       >
         <p>(Mouse out of the box)</p>
         <h1 className="py-4 text-2xl font-semibold">

@@ -38,7 +38,7 @@ export const docsConfig: DocsConfig = {
       ],
     },
     {
-      title: "hooks",
+      title: "Hooks",
       items: [
         {
           title: "useBoolean",
@@ -408,6 +408,21 @@ export const docsConfig: DocsConfig = {
         {
           title: "useUncontrolledState",
           href: "/docs/hooks/use-uncontrolled-state",
+          items: [],
+        },
+      ],
+    },
+    {
+      title: "Contribute",
+      items: [
+        {
+          title: "Report an issue",
+          href: "/docs/report",
+          items: [],
+        },
+        {
+          title: "Request a feature",
+          href: "/docs/feature",
           items: [],
         },
       ],

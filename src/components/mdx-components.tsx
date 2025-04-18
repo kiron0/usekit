@@ -21,7 +21,9 @@ import { CodeTabs } from "@/components/code-tabs"
 import { ComponentPreview } from "@/components/component-preview"
 import { ComponentSource } from "@/components/component-source"
 import { CopyButton } from "@/components/copy-button"
+import { Feature } from "@/components/feature"
 import { HooksList } from "@/components/hooks-list"
+import { Report } from "@/components/report"
 
 interface MdxProps {
   code: string
@@ -39,6 +41,8 @@ const components = {
   ComponentPreview,
   HooksList,
   CodeTabs,
+  Report,
+  Feature,
   CodeBlockWrapper: ({ ...props }) => (
     <CodeBlockWrapper className="rounded-md border" {...props} />
   ),

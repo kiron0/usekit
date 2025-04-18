@@ -8,7 +8,6 @@ import { docsConfig } from "@/config/docs"
 import { cn } from "@/lib/utils"
 import { useMetaColor } from "@/hooks/use-meta-color"
 import { Button } from "@/components/ui/button"
-import { DialogTitle } from "@/components/ui/dialog"
 import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer"
 import { Separator } from "@/components/ui/separator"
 
@@ -49,7 +48,7 @@ export function MobileNav() {
         </Button>
       </DrawerTrigger>
       <DrawerContent className="max-h-[60svh] p-0">
-        <DialogTitle className="sr-only">Mobile navigation</DialogTitle>
+        <p className="sr-only">Mobile navigation</p>
         <div className="overflow-auto p-6">
           <div className="flex flex-col gap-y-3">
             {docsConfig.mainNav.map(
