@@ -978,22 +978,6 @@ export const Index: Record<string, any> = {
     ),
     source: "",
   },
-  "use-autosize-textarea": {
-    name: "use-autosize-textarea",
-    type: "registry:hook",
-    registryDependencies: undefined,
-    files: [
-      {
-        path: "registry/hooks/use-autosize-textarea.ts",
-        type: "registry:hook",
-        target: "",
-      },
-    ],
-    component: React.lazy(
-      () => import("registry/hooks/use-autosize-textarea.ts")
-    ),
-    source: "",
-  },
   "use-callback-ref": {
     name: "use-callback-ref",
     type: "registry:hook",
@@ -1040,6 +1024,36 @@ export const Index: Record<string, any> = {
     ],
     component: React.lazy(
       () => import("registry/hooks/use-uncontrolled-state.ts")
+    ),
+    source: "",
+  },
+  "use-bluetooth": {
+    name: "use-bluetooth",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-bluetooth.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(() => import("registry/examples/use-bluetooth-demo")),
+    source: "",
+  },
+  "use-autosize-textarea": {
+    name: "use-autosize-textarea",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-autosize-textarea.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-autosize-textarea-demo")
     ),
     source: "",
   },
@@ -1798,6 +1812,38 @@ export const Index: Record<string, any> = {
     ],
     component: React.lazy(
       () => import("registry/examples/use-auto-scroll-demo.tsx")
+    ),
+    source: "",
+  },
+  "use-bluetooth-demo": {
+    name: "use-bluetooth-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-bluetooth-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-bluetooth-demo.tsx")
+    ),
+    source: "",
+  },
+  "use-autosize-textarea-demo": {
+    name: "use-autosize-textarea-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-autosize-textarea-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-autosize-textarea-demo.tsx")
     ),
     source: "",
   },

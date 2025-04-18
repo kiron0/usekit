@@ -481,4 +481,24 @@ export const hooksExamples: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "use-bluetooth-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/use-bluetooth-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-autosize-textarea-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/use-autosize-textarea-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
 ]

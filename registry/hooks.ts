@@ -841,19 +841,6 @@ export const hooks: Registry["items"] = [
     ],
   },
   {
-    name: "use-autosize-textarea",
-    title: "Use Autosize Textarea",
-    description:
-      "Automatically adjust the height of a textarea to fit its content with useAutosizeTextarea.",
-    type: "registry:hook",
-    files: [
-      {
-        path: "registry/hooks/use-autosize-textarea.ts",
-        type: "registry:hook",
-      },
-    ],
-  },
-  {
     name: "use-callback-ref",
     title: "Use Callback Ref",
     description:
@@ -893,6 +880,33 @@ export const hooks: Registry["items"] = [
     files: [
       {
         path: "registry/hooks/use-uncontrolled-state.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-bluetooth",
+    title: "Use Bluetooth",
+    description:
+      "Connect to Bluetooth devices and manage their state with useBluetooth.",
+    type: "registry:hook",
+    devDependencies: ["@types/web-bluetooth"],
+    files: [
+      {
+        path: "registry/hooks/use-bluetooth.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-autosize-textarea",
+    title: "Use Autosize Textarea",
+    description:
+      "Automatically resize a textarea to fit its content with useAutosizeTextarea.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-autosize-textarea.ts",
         type: "registry:hook",
       },
     ],

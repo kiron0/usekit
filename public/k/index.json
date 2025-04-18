@@ -793,18 +793,6 @@
       ]
     },
     {
-      "name": "use-autosize-textarea",
-      "title": "Use Autosize Textarea",
-      "description": "Automatically adjust the height of a textarea to fit its content with useAutosizeTextarea.",
-      "type": "registry:hook",
-      "files": [
-        {
-          "type": "registry:hook",
-          "path": "registry/hooks/use-autosize-textarea.ts"
-        }
-      ]
-    },
-    {
       "name": "use-callback-ref",
       "title": "Use Callback Ref",
       "description": "A custom hook that converts a callback to a ref to avoid triggering re-renders when passed as a prop, or avoid re-executing effects when passed as a dependency.",
@@ -842,6 +830,31 @@
         {
           "type": "registry:hook",
           "path": "registry/hooks/use-uncontrolled-state.ts"
+        }
+      ]
+    },
+    {
+      "name": "use-bluetooth",
+      "title": "Use Bluetooth",
+      "description": "Connect to Bluetooth devices and manage their state with useBluetooth.",
+      "type": "registry:hook",
+      "devDependencies": ["@types/web-bluetooth"],
+      "files": [
+        {
+          "type": "registry:hook",
+          "path": "registry/hooks/use-bluetooth.ts"
+        }
+      ]
+    },
+    {
+      "name": "use-autosize-textarea",
+      "title": "Use Autosize Textarea",
+      "description": "Automatically resize a textarea to fit its content with useAutosizeTextarea.",
+      "type": "registry:hook",
+      "files": [
+        {
+          "type": "registry:hook",
+          "path": "registry/hooks/use-autosize-textarea.ts"
         }
       ]
     }

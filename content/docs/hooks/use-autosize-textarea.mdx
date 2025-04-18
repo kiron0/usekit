@@ -1,0 +1,85 @@
+---
+title: useAutosizeTextarea
+description: Automatically resize a textarea to fit its content with useAutosizeTextarea.
+---
+
+<ComponentPreview name="use-autosize-textarea-demo" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://usekit.kiron.dev/k/use-autosize-textarea
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="use-autosize-textarea" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx {3, 8-9}
+"use client"
+
+import { useBluetooth } from "@/hooks/use-bluetooth"
+
+export function Component() {
+  const { isSupported, isConnected, device, requestDevice, server, error } =
+    useBluetooth({
+      acceptAllDevices: true,
+      optionalServices: ["battery_service"],
+    })
+
+  if (!isSupported) {
+    return <div>Bluetooth is not supported</div>
+  }
+
+  return (
+    <div>
+      <button type="button" onClick={requestDevice}>
+        Connect to Bluetooth Device
+      </button>
+      {isConnected && <div>Connected to: {device?.name}</div>}
+      {(error as Error) && (
+        <>
+          <p>Error:</p>
+          <pre>{JSON.stringify(error, null, 2)}</pre>
+        </>
+      )}
+    </div>
+  )
+}
+```
+
+## API Reference
+
+### Parameters
+
+| Name           | Type                             | Description                                                                  | Default Value             |
+| -------------- | -------------------------------- | ---------------------------------------------------------------------------- | ------------------------- |
+| `ref`          | `RefObject<HTMLTextAreaElement>` | A React ref object pointing to the `<textarea>` element to resize.           | **Required**              |
+| `maxHeight`    | `number`                         | The maximum height (in pixels) the textarea can grow to.                     | `Number.MAX_SAFE_INTEGER` |
+| `borderWidth`  | `number`                         | The width (in pixels) of the textarea's border, used for height adjustments. | `0`                       |
+| `dependencies` | `DependencyList`                 | An array of dependencies to trigger resizing when they change.               | `[]` (empty array)        |

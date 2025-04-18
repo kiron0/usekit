@@ -339,7 +339,6 @@ export const docsConfig: DocsConfig = {
           title: "useBluetooth",
           href: "/docs/hooks/use-bluetooth",
           items: [],
-          label: "Soon",
         },
         {
           title: "useDraggable",
@@ -399,7 +398,6 @@ export const docsConfig: DocsConfig = {
           title: "useAutosizeTextarea",
           href: "/docs/hooks/use-autosize-textarea",
           items: [],
-          label: "Soon",
         },
         {
           title: "useCallbackRef",

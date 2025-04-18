@@ -1,0 +1,96 @@
+---
+title: useBluetooth
+description: Connect to Bluetooth devices and manage their state with useBluetooth.
+---
+
+<ComponentPreview name="use-bluetooth-demo" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://usekit.kiron.dev/k/use-bluetooth
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="use-bluetooth" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx {3, 8-9}
+"use client"
+
+import { useBluetooth } from "@/hooks/use-bluetooth"
+
+export function Component() {
+  const { isSupported, isConnected, device, requestDevice, server, error } =
+    useBluetooth({
+      acceptAllDevices: true,
+      optionalServices: ["battery_service"],
+    })
+
+  if (!isSupported) {
+    return <div>Bluetooth is not supported</div>
+  }
+
+  return (
+    <div>
+      <button type="button" onClick={requestDevice}>
+        Connect to Bluetooth Device
+      </button>
+      {isConnected && <div>Connected to: {device?.name}</div>}
+      {(error as Error) && (
+        <>
+          <p>Error:</p>
+          <pre>{JSON.stringify(error, null, 2)}</pre>
+        </>
+      )}
+    </div>
+  )
+}
+```
+
+## API Reference
+
+### Parameters
+
+| Name               | Type                      | Description                                                                       | Default Value | Optional |
+| ------------------ | ------------------------- | --------------------------------------------------------------------------------- | ------------- | -------- |
+| `filters`          | `BluetoothLEScanFilter[]` | Filters to apply when scanning for devices.                                       | `[]`          | Yes      |
+| `optionalServices` | `BluetoothServiceUUID[]`  | Optional services to request when connecting to the device.                       | `[]`          | Yes      |
+| `acceptAllDevices` | `boolean`                 | If true, all devices will be accepted.                                            | `false`       | Yes      |
+| `navigator`        | `Navigator`               | The navigator object to use. If not provided, the default navigator will be used. | `undefined`   | Yes      |
+
+### Return Values
+
+| Name            | Type                        | Description                                  |
+| --------------- | --------------------------- | -------------------------------------------- |
+| `isSupported`   | `boolean`                   | Indicates if the browser supports Bluetooth. |
+| `isConnected`   | `boolean`                   | Indicates if the device is connected.        |
+| `device`        | `BluetoothDevice`           | The connected Bluetooth device.              |
+| `requestDevice` | `() => Promise<void>`       | Function to request a Bluetooth device.      |
+| `server`        | `BluetoothRemoteGATTServer` | The GATT server of the connected device.     |
+| `error`         | `Error \| null`             | Error object if an error occurred.           |
