@@ -11,7 +11,9 @@ export default function WindowScrollDemo() {
   }
 
   const scrollToBottom = () => {
-    scrollTo({ top: document.body.scrollHeight, behavior: "smooth" })
+    if (typeof document !== "undefined") {
+      scrollTo({ top: document.body.scrollHeight, behavior: "smooth" })
+    }
   }
 
   return (
@@ -28,7 +30,12 @@ export default function WindowScrollDemo() {
             </Button>
             <Button
               onClick={scrollToBottom}
-              disabled={y === document.body.scrollHeight - window.innerHeight}
+              disabled={
+                y ===
+                (typeof document !== "undefined"
+                  ? document.body.scrollHeight - window.innerHeight
+                  : undefined)
+              }
             >
               Scroll to Bottom
             </Button>
