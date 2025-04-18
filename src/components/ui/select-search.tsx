@@ -1,6 +1,6 @@
 "use client"
 
-import { useId, useState } from "react"
+import * as React from "react"
 import { CheckIcon, ChevronDownIcon } from "lucide-react"
 
 import { cn } from "@/lib/utils"
@@ -36,8 +36,8 @@ export function SelectSearch({
   searchText,
   disabled,
 }: Props) {
-  const id = useId()
-  const [open, setOpen] = useState<boolean>(false)
+  const id = React.useId()
+  const [open, setOpen] = React.useState<boolean>(false)
 
   return (
     <Popover open={open} onOpenChange={setOpen}>

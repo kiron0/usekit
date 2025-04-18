@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useRef, useState, type KeyboardEvent } from "react"
+import * as React from "react"
 import { generateLoremIpsum } from "@/utils/generate-lorem-ipsum"
 
 import { cn } from "@/lib/utils"
@@ -15,13 +15,13 @@ interface Message {
 }
 
 export default function UseAutoScrollDemo() {
-  const [messages, setMessages] = useState<Message[]>([
+  const [messages, setMessages] = React.useState<Message[]>([
     { sender: "ai", text: "Welcome to the chat!" },
     { sender: "ai", text: "Feel free to add new messages." },
   ])
-  const [input, setInput] = useState("")
+  const [input, setInput] = React.useState("")
 
-  const typingIntervalRef = useRef<NodeJS.Timeout | null>(null)
+  const typingIntervalRef = React.useRef<NodeJS.Timeout | null>(null)
 
   const sendMessage = () => {
     const trimmedInput = input.trim()
@@ -69,13 +69,13 @@ export default function UseAutoScrollDemo() {
     }, 100)
   }
 
-  const handleKeyPress = (e: KeyboardEvent<HTMLInputElement>) => {
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
       sendMessage()
     }
   }
 
-  useEffect(() => {
+  React.useEffect(() => {
     return () => {
       if (typingIntervalRef.current) {
         clearInterval(typingIntervalRef.current)

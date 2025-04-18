@@ -20,6 +20,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { SelectSearch } from "@/components/ui/select-search"
 import { Textarea } from "@/components/ui/textarea"
+import { Loading } from "@/components/loading"
 import { notifyError, notifySuccess } from "@/components/toast"
 
 const formSchema = z.object({
@@ -29,7 +30,7 @@ const formSchema = z.object({
 })
 type FormSchema = z.infer<typeof formSchema>
 
-export function Report() {
+function ReportSuspense() {
   const [isValidHook, setIsValidHook] = React.useState(false)
   const searchParams = useSearchParams()
   const hookName = searchParams.get("name")
@@ -165,5 +166,13 @@ export function Report() {
         </form>
       </Form>
     </div>
+  )
+}
+
+export function Report() {
+  return (
+    <React.Suspense fallback={<Loading />}>
+      <ReportSuspense />
+    </React.Suspense>
   )
 }

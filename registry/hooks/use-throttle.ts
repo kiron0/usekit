@@ -1,4 +1,4 @@
-import React from "react"
+import * as React from "react"
 
 export function useThrottle<T>(value: T, interval: number = 500): T {
   const [throttledValue, setThrottledValue] = React.useState(value)
