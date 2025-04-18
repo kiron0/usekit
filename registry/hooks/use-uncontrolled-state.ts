@@ -2,12 +2,12 @@ import * as React from "react"
 
 import { useCallbackRef } from "./use-callback-ref"
 
-interface Params<T> {
+interface Props<T> {
   defaultProp?: T
   onChange?: (state: T) => void
 }
 
-export function useUncontrolledState<T>({ defaultProp, onChange }: Params<T>) {
+export function useUncontrolledState<T>({ defaultProp, onChange }: Props<T>) {
   const [state, setState] = React.useState(defaultProp)
   const prevStateRef = React.useRef(state)
   const handleChange = useCallbackRef(onChange)

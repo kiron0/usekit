@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-online-status",
+  "type": "registry:hook",
+  "title": "Use Online Status",
+  "description": "Detect when the user is online or offline with useOnlineStatus, providing a boolean value.",
+  "files": [
+    {
+      "path": "registry/hooks/use-online-status.ts",
+      "content": "import * as React from \"react\"\r\n\r\nexport function useOnlineStatus(): boolean {\r\n  const [isOnline, setIsOnline] = React.useState(() =>\r\n    typeof navigator !== \"undefined\" && typeof navigator.onLine === \"boolean\"\r\n      ? navigator.onLine\r\n      : true\r\n  )\r\n\r\n  React.useEffect(() => {\r\n    const handleOnline = () => setIsOnline(true)\r\n    const handleOffline = () => setIsOnline(false)\r\n\r\n    window.addEventListener(\"online\", handleOnline)\r\n    window.addEventListener(\"offline\", handleOffline)\r\n    return () => {\r\n      window.removeEventListener(\"online\", handleOnline)\r\n      window.removeEventListener(\"offline\", handleOffline)\r\n    }\r\n  }, [])\r\n\r\n  return isOnline\r\n}\r\n",
+      "type": "registry:hook"
+    }
+  ]
+}

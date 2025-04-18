@@ -1,7 +1,7 @@
 import { ClipboardCheckIcon, ClipboardIcon } from "lucide-react"
-import { toast } from "sonner"
 
 import { Button } from "@/components/ui/button"
+import { notifyError, notifySuccess } from "@/components/toast"
 import { useCopyToClipboard } from "registry/hooks/use-copy-to-clipboard"
 
 export default function UseCopyToClipboardDemo() {
@@ -10,11 +10,17 @@ export default function UseCopyToClipboardDemo() {
   const copyText = async (text: string) => {
     await copy(text)
       .then(() => {
-        toast.success("Copied to clipboard")
+        notifySuccess({
+          title: "Copied to clipboard",
+          description: text,
+        })
       })
       .catch((error) => {
         if (error instanceof Error) {
-          toast.error(error.message)
+          notifyError({
+            title: "Copy failed",
+            description: error.message,
+          })
         }
       })
   }

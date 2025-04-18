@@ -911,6 +911,58 @@ export const hooks: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "use-in-view",
+    title: "Use In View",
+    description:
+      "Detect when an element is in the viewport with useInView, providing options for threshold and root margin.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-in-view.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-online-status",
+    title: "Use Online Status",
+    description:
+      "Detect when the user is online or offline with useOnlineStatus, providing a boolean value.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-online-status.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-rerender",
+    title: "Use Rerender",
+    description:
+      "Force a component to rerender with useRerender, providing a method to trigger the rerender.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-rerender.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-memory",
+    title: "Use Memory",
+    description:
+      "Monitor the memory usage of a web page with useMemory, providing information about the JavaScript heap size.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-rerender.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
 ]
 
 export default hooks

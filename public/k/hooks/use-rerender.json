@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-rerender",
+  "type": "registry:hook",
+  "title": "Use Rerender",
+  "description": "Force a component to rerender with useRerender, providing a method to trigger the rerender.",
+  "files": [
+    {
+      "path": "registry/hooks/use-rerender.ts",
+      "content": "import * as React from \"react\"\r\n\r\nexport function useRerender(): () => void {\r\n  const [, setCount] = React.useState(0)\r\n\r\n  return React.useCallback(() => setCount((prev) => prev + 1), [])\r\n}\r\n",
+      "type": "registry:hook"
+    }
+  ]
+}

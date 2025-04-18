@@ -1,7 +1,7 @@
 import NextTopLoader from "nextjs-toploader"
 
 import { THEMES } from "@/config/colors"
-import { Toaster } from "@/components/ui/sonner"
+import { Toaster } from "@/components/ui/toaster"
 import { TooltipProvider } from "@/components/ui/tooltip"
 
 import { ThemeProvider } from "./theme-provider"

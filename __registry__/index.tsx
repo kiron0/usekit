@@ -989,7 +989,9 @@ export const Index: Record<string, any> = {
         target: "",
       },
     ],
-    component: React.lazy(() => import("registry/hooks/use-callback-ref.ts")),
+    component: React.lazy(
+      () => import("registry/examples/use-callback-ref-demo")
+    ),
     source: "",
   },
   "use-controlled-state": {
@@ -1007,7 +1009,7 @@ export const Index: Record<string, any> = {
       },
     ],
     component: React.lazy(
-      () => import("registry/hooks/use-controlled-state.ts")
+      () => import("registry/examples/use-controlled-state-demo")
     ),
     source: "",
   },
@@ -1023,7 +1025,7 @@ export const Index: Record<string, any> = {
       },
     ],
     component: React.lazy(
-      () => import("registry/hooks/use-uncontrolled-state.ts")
+      () => import("registry/examples/use-uncontrolled-state-demo")
     ),
     source: "",
   },
@@ -1055,6 +1057,64 @@ export const Index: Record<string, any> = {
     component: React.lazy(
       () => import("registry/examples/use-autosize-textarea-demo")
     ),
+    source: "",
+  },
+  "use-in-view": {
+    name: "use-in-view",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-in-view.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(() => import("registry/examples/use-in-view-demo")),
+    source: "",
+  },
+  "use-online-status": {
+    name: "use-online-status",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-online-status.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-online-status-demo")
+    ),
+    source: "",
+  },
+  "use-rerender": {
+    name: "use-rerender",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-rerender.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(() => import("registry/examples/use-rerender-demo")),
+    source: "",
+  },
+  "use-memory": {
+    name: "use-memory",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-rerender.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(() => import("registry/examples/use-memory-demo")),
     source: "",
   },
   "use-copy-to-clipboard-demo": {
@@ -1844,6 +1904,118 @@ export const Index: Record<string, any> = {
     ],
     component: React.lazy(
       () => import("registry/examples/use-autosize-textarea-demo.tsx")
+    ),
+    source: "",
+  },
+  "use-callback-ref-demo": {
+    name: "use-callback-ref-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-callback-ref-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-callback-ref-demo.tsx")
+    ),
+    source: "",
+  },
+  "use-controlled-state-demo": {
+    name: "use-controlled-state-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-controlled-state-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-controlled-state-demo.tsx")
+    ),
+    source: "",
+  },
+  "use-uncontrolled-state-demo": {
+    name: "use-uncontrolled-state-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-uncontrolled-state-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-uncontrolled-state-demo.tsx")
+    ),
+    source: "",
+  },
+  "use-in-view-demo": {
+    name: "use-in-view-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-in-view-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-in-view-demo.tsx")
+    ),
+    source: "",
+  },
+  "use-memory-demo": {
+    name: "use-memory-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-memory-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-memory-demo.tsx")
+    ),
+    source: "",
+  },
+  "use-online-status-demo": {
+    name: "use-online-status-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-online-status-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-online-status-demo.tsx")
+    ),
+    source: "",
+  },
+  "use-rerender-demo": {
+    name: "use-rerender-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-rerender-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-rerender-demo.tsx")
     ),
     source: "",
   },

@@ -1,0 +1,79 @@
+---
+title: useUncontrolledState
+description: Manage an uncontrolled state with the useUncontrolledState hook, providing methods to set it to true, false, or toggle between them.
+---
+
+<ComponentPreview name="use-uncontrolled-state-demo" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://usekit.kiron.dev/k/use-uncontrolled-state
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="use-uncontrolled-state" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx {3, 6-9}
+"use client"
+
+import { useUncontrolledState } from "@/hooks/use-uncontrolled-state"
+
+export function Component() {
+  const [value, setValue] = useUncontrolledState({
+    defaultProp: "Initial text",
+    onChange: (newValue) => console.log("Value changed:", newValue),
+  })
+
+  return (
+    <input
+      type="text"
+      value={value ?? ""}
+      onChange={(e) => setValue(e.target.value)}
+      placeholder="Type here..."
+    />
+  )
+}
+```
+
+## API Reference
+
+### Parameters
+
+| Name          | Type                 | Description                                                                                | Default Value | Optional |
+| ------------- | -------------------- | ------------------------------------------------------------------------------------------ | ------------- | -------- |
+| `defaultProp` | `T`                  | The initial value for the uncontrolled state.                                              | `undefined`   | Yes      |
+| `onChange`    | `(state: T) => void` | Callback invoked when the state changes (if the new state is different and not undefined). | `undefined`   | Yes      |
+
+### Return Values
+
+| Name       | Type                                                    | Description                                                                                                                            |
+| ---------- | ------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| `state`    | `T \| undefined`                                        | The current uncontrolled state value, initialized with `defaultProp`.                                                                  |
+| `setState` | `(value: React.SetStateAction<T \| undefined>) => void` | A memoized function to update the state. Accepts a new value or a function that receives the previous state and returns the new state. |

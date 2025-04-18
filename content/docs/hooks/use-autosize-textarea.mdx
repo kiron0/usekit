@@ -40,35 +40,33 @@ npx shadcn@latest add https://usekit.kiron.dev/k/use-autosize-textarea
 
 ## Usage
 
-```tsx {3, 8-9}
+```tsx {5, 12-17}
 "use client"
 
-import { useBluetooth } from "@/hooks/use-bluetooth"
+import * as React from "react"
+
+import { useAutosizeTextArea } from "@/hooks/use-autosize-textarea"
 
 export function Component() {
-  const { isSupported, isConnected, device, requestDevice, server, error } =
-    useBluetooth({
-      acceptAllDevices: true,
-      optionalServices: ["battery_service"],
-    })
+  const textAreaRef = React.useRef<HTMLTextAreaElement>(null)
+  const [value, setValue] = React.useState("")
 
-  if (!isSupported) {
-    return <div>Bluetooth is not supported</div>
-  }
+  // Resize textarea when value changes
+  useAutosizeTextArea({
+    ref: textAreaRef,
+    maxHeight: 200, // Max height of 200px
+    borderWidth: 1, // Account for 1px border
+    dependencies: [value], // Re-run effect when value changes
+  })
 
   return (
-    <div>
-      <button type="button" onClick={requestDevice}>
-        Connect to Bluetooth Device
-      </button>
-      {isConnected && <div>Connected to: {device?.name}</div>}
-      {(error as Error) && (
-        <>
-          <p>Error:</p>
-          <pre>{JSON.stringify(error, null, 2)}</pre>
-        </>
-      )}
-    </div>
+    <textarea
+      ref={textAreaRef}
+      value={value}
+      onChange={(e) => setValue(e.target.value)}
+      placeholder="Type here..."
+      style={{ borderWidth: "1px" }}
+    />
   )
 }
 ```
@@ -77,9 +75,9 @@ export function Component() {
 
 ### Parameters
 
-| Name           | Type                             | Description                                                                  | Default Value             |
-| -------------- | -------------------------------- | ---------------------------------------------------------------------------- | ------------------------- |
-| `ref`          | `RefObject<HTMLTextAreaElement>` | A React ref object pointing to the `<textarea>` element to resize.           | **Required**              |
-| `maxHeight`    | `number`                         | The maximum height (in pixels) the textarea can grow to.                     | `Number.MAX_SAFE_INTEGER` |
-| `borderWidth`  | `number`                         | The width (in pixels) of the textarea's border, used for height adjustments. | `0`                       |
-| `dependencies` | `DependencyList`                 | An array of dependencies to trigger resizing when they change.               | `[]` (empty array)        |
+| Name           | Type                             | Description                                                                  | Default Value             | Optional |
+| -------------- | -------------------------------- | ---------------------------------------------------------------------------- | ------------------------- | -------- |
+| `ref`          | `RefObject<HTMLTextAreaElement>` | A React ref object pointing to the `<textarea>` element to resize.           | **Required**              | No       |
+| `maxHeight`    | `number`                         | The maximum height (in pixels) the textarea can grow to.                     | `Number.MAX_SAFE_INTEGER` | Yes      |
+| `borderWidth`  | `number`                         | The width (in pixels) of the textarea's border, used for height adjustments. | `0`                       | Yes      |
+| `dependencies` | `DependencyList`                 | An array of dependencies to trigger resizing when they change.               | `[]` (empty array)        | Yes      |

@@ -1,0 +1,94 @@
+---
+title: useControlledState
+description: Manage a controlled state with the useControlledState hook, providing methods to set it to true, false, or toggle between them.
+---
+
+<ComponentPreview name="use-controlled-state-demo" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://usekit.kiron.dev/k/use-controlled-state
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="use-controlled-state" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx {5, 19-23}
+"use client"
+
+import * as React from "react"
+
+import { useControlledState } from "@/hooks/use-controlled-state"
+
+export function Component() {
+  const [count, setCount] = React.useState(0)
+  return <CounterInput count={count} onChange={setCount} />
+}
+
+function CounterInput({
+  count,
+  onChange,
+}: {
+  count?: number
+  onChange?: (count: number) => void
+}) {
+  const [value, setValue] = useControlledState<number>({
+    prop: count,
+    defaultProp: 0,
+    onChange,
+  })
+
+  return (
+    <div>
+      <button onClick={() => setValue((prev) => (prev ?? 0) + 1)}>
+        Increment
+      </button>
+      <p>Count: {value}</p>
+    </div>
+  )
+}
+```
+
+## API Reference
+
+### Parameters
+
+| Name          | Type                 | Description                                                                                                 | Default Value | Optional |
+| ------------- | -------------------- | ----------------------------------------------------------------------------------------------------------- | ------------- | -------- |
+| `prop`        | `T`                  | The controlled value provided by the parent component. If defined, the hook operates in controlled mode.    | `undefined`   | Yes      |
+| `defaultProp` | `T`                  | The default value used in uncontrolled mode when `prop` is undefined.                                       | `undefined`   | Yes      |
+| `onChange`    | `(state: T) => void` | Callback invoked when the value changes in controlled mode or when `setUncontrolledProp` triggers a change. | `undefined`   | Yes      |
+
+### Return Values
+
+| Name       | Type                                                        | Description                                                                                                                            |
+| ---------- | ----------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| `value`    | `T \| undefined`                                            | The current value, either from `prop` (controlled mode) or internal state (uncontrolled mode).                                         |
+| `setValue` | `(nextValue: React.SetStateAction<T \| undefined>) => void` | A memoized function to update the value. Accepts a new value or a function that receives the previous value and returns the new value. |
