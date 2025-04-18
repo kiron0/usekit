@@ -1,4 +1,4 @@
-import type { JSX } from "react"
+import * as React from "react"
 import {
   Clock,
   Globe,
@@ -12,7 +12,7 @@ import {
   Server,
 } from "lucide-react"
 
-export const iconMap: Record<string, JSX.Element> = {
+export const iconMap: Record<string, React.JSX.Element> = {
   pathname: <Home className="size-5 text-blue-500" />,
   search: <Search className="size-5 text-green-500" />,
   hash: <Hash className="size-5 text-purple-500" />,

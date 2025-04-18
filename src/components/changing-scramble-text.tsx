@@ -1,6 +1,6 @@
 "use client"
 
-import React from "react"
+import * as React from "react"
 
 import { docsConfig } from "@/config/docs"
 import { ScrambleText } from "@/components/scramble-text"

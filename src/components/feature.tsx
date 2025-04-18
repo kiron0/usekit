@@ -1,5 +1,6 @@
 "use client"
 
+import * as React from "react"
 import Link from "next/link"
 import { useSearchParams } from "next/navigation"
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -17,6 +18,7 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
+import { Loading } from "@/components/loading"
 import { notifyError, notifySuccess } from "@/components/toast"
 
 const formSchema = z.object({
@@ -25,7 +27,7 @@ const formSchema = z.object({
 })
 type FormSchema = z.infer<typeof formSchema>
 
-export function Feature() {
+function FeatureSuspense() {
   const searchParams = useSearchParams()
   const hookName = searchParams.get("name")
 
@@ -104,5 +106,13 @@ export function Feature() {
         </form>
       </Form>
     </div>
+  )
+}
+
+export function Feature() {
+  return (
+    <React.Suspense fallback={<Loading />}>
+      <FeatureSuspense />
+    </React.Suspense>
   )
 }
