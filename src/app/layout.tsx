@@ -6,7 +6,6 @@ import { fontMono, fontSans } from "@/lib/fonts"
 import { cn } from "@/lib/utils"
 
 import "@/styles/globals.css"
-import "@/styles/themes.css"
 
 export const metadata: Metadata = {
   title: {
