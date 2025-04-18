@@ -1,8 +1,8 @@
-import path from "node:path"
-import { fileURLToPath } from "node:url"
 import { FlatCompat } from "@eslint/eslintrc"
 import js from "@eslint/js"
 import tsParser from "@typescript-eslint/parser"
+import path from "node:path"
+import { fileURLToPath } from "node:url"
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -26,7 +26,7 @@ const eslintConfig = [
       "@typescript-eslint/no-unused-vars": "off",
       "tailwindcss/no-custom-classname": "off",
       "@typescript-eslint/no-explicit-any": "off",
-      "@typescript-eslint/ban-ts-comment": "warn",
+      "@typescript-eslint/ban-ts-comment": "off",
     },
   },
   {
