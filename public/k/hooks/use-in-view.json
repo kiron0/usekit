@@ -7,7 +7,7 @@
   "files": [
     {
       "path": "registry/hooks/use-in-view.ts",
-      "content": "import * as React from \"react\"\r\n\r\ninterface Options {\r\n  threshold?: number\r\n  rootMargin?: string\r\n}\r\n\r\nexport default function useInView(\r\n  ref: React.RefObject<HTMLElement>,\r\n  { threshold = 0, rootMargin = \"0px\" }: Options = {}\r\n): boolean {\r\n  const [isInView, setIsInView] = React.useState(false)\r\n\r\n  React.useEffect(() => {\r\n    if (!ref.current) return\r\n\r\n    const currentElement = ref.current\r\n\r\n    const observer = new IntersectionObserver(\r\n      ([entry]) => setIsInView(entry.isIntersecting),\r\n      { threshold, rootMargin }\r\n    )\r\n\r\n    observer.observe(currentElement)\r\n    return () => observer.unobserve(currentElement)\r\n  }, [ref, threshold, rootMargin])\r\n\r\n  return isInView\r\n}\r\n",
+      "content": "import * as React from \"react\"\n\ninterface Options {\n  threshold?: number\n  rootMargin?: string\n}\n\nexport default function useInView(\n  ref: React.RefObject<HTMLElement | null>,\n  { threshold = 0, rootMargin = \"0px\" }: Options = {}\n): boolean {\n  const [isInView, setIsInView] = React.useState(false)\n\n  React.useEffect(() => {\n    if (!ref.current) return\n\n    const currentElement = ref.current\n\n    const observer = new IntersectionObserver(\n      ([entry]) => setIsInView(entry.isIntersecting),\n      { threshold, rootMargin }\n    )\n\n    observer.observe(currentElement)\n    return () => observer.unobserve(currentElement)\n  }, [ref, threshold, rootMargin])\n\n  return isInView\n}\n",
       "type": "registry:hook"
     }
   ]

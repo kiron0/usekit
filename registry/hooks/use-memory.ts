@@ -7,7 +7,7 @@ export interface MemoryInfo {
   [Symbol.toStringTag]: "MemoryInfo"
 }
 
-interface UseMemoryOptions {
+interface Options {
   interval?: number
   immediate?: boolean
 }
@@ -17,7 +17,7 @@ type PerformanceMemory = Performance & { memory: MemoryInfo }
 export function useMemory({
   interval = 1000,
   immediate = false,
-}: UseMemoryOptions = {}): {
+}: Options = {}): {
   isSupported: boolean
   memory: MemoryInfo | undefined
 } {

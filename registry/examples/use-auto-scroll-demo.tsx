@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { notifyError } from "@/components/toast"
-import useAutoScroll from "registry/hooks/use-auto-scroll"
+import { useAutoScroll } from "registry/hooks/use-auto-scroll"
 
 interface Message {
   sender: "user" | "ai"
@@ -116,7 +116,7 @@ interface MessageListProps {
 }
 
 const MessageList = ({ messages }: MessageListProps) => {
-  const listRef = useAutoScroll(true, [messages])
+  const listRef = useAutoScroll<HTMLUListElement>(true, [messages])
 
   return (
     <ul

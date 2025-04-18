@@ -21,10 +21,10 @@ export default function UseBluetoothDemo() {
       </Button>
       {isConnected && <div>Connected to: {device?.name}</div>}
       {(error as Error) && (
-        <>
+        <div>
           <p>Error:</p>
           <pre>{JSON.stringify(error, null, 2)}</pre>
-        </>
+        </div>
       )}
     </div>
   )

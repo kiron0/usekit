@@ -1084,9 +1084,7 @@ export const Index: Record<string, any> = {
         target: "",
       },
     ],
-    component: React.lazy(
-      () => import("registry/examples/use-online-status-demo")
-    ),
+    component: React.lazy(() => import("registry/hooks/use-online-status.ts")),
     source: "",
   },
   "use-rerender": {
@@ -1109,7 +1107,7 @@ export const Index: Record<string, any> = {
     registryDependencies: undefined,
     files: [
       {
-        path: "registry/hooks/use-rerender.ts",
+        path: "registry/hooks/use-memory.ts",
         type: "registry:hook",
         target: "",
       },
@@ -1984,22 +1982,6 @@ export const Index: Record<string, any> = {
     ],
     component: React.lazy(
       () => import("registry/examples/use-memory-demo.tsx")
-    ),
-    source: "",
-  },
-  "use-online-status-demo": {
-    name: "use-online-status-demo",
-    type: "registry:example",
-    registryDependencies: undefined,
-    files: [
-      {
-        path: "registry/examples/use-online-status-demo.tsx",
-        type: "registry:example",
-        target: "",
-      },
-    ],
-    component: React.lazy(
-      () => import("registry/examples/use-online-status-demo.tsx")
     ),
     source: "",
   },

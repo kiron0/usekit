@@ -552,16 +552,6 @@ export const hooksExamples: Registry["items"] = [
     ],
   },
   {
-    name: "use-online-status-demo",
-    type: "registry:example",
-    files: [
-      {
-        path: "registry/examples/use-online-status-demo.tsx",
-        type: "registry:example",
-      },
-    ],
-  },
-  {
     name: "use-rerender-demo",
     type: "registry:example",
     files: [

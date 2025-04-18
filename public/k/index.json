@@ -902,7 +902,7 @@
       "files": [
         {
           "type": "registry:hook",
-          "path": "registry/hooks/use-rerender.ts"
+          "path": "registry/hooks/use-memory.ts"
         }
       ]
     }

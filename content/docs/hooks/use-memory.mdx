@@ -1,7 +1,9 @@
 ---
-title: useBoolean
-description: Manage a boolean state with the useBoolean hook, providing methods to set it to true, false, or toggle between them.
+title: useMemory
+description: Monitor the memory usage of a web page with useMemory, providing information about the JavaScript heap size.
 ---
+
+<ComponentPreview name="use-memory-demo" />
 
 ## Installation
 
@@ -15,7 +17,7 @@ description: Manage a boolean state with the useBoolean hook, providing methods 
 <TabsContent value="cli">
 
 ```bash
-npx shadcn@latest add https://usekit.kiron.dev/k/use-boolean
+npx shadcn@latest add https://usekit.kiron.dev/k/use-memory
 ```
 
 </TabsContent>
@@ -26,7 +28,7 @@ npx shadcn@latest add https://usekit.kiron.dev/k/use-boolean
 
 <Step>Copy and paste the following code into your project.</Step>
 
-<ComponentSource name="use-boolean" />
+<ComponentSource name="use-memory" />
 
 <Step>Update the import paths to match your project setup.</Step>
 
@@ -41,26 +43,37 @@ npx shadcn@latest add https://usekit.kiron.dev/k/use-boolean
 ```tsx {3, 6}
 "use client"
 
-import { useBoolean } from "@/hooks/use-boolean"
+import { useMemory } from "@/hooks/use-memory"
 
 export function Component() {
-  const { value, setValue, setTrue, setFalse, toggle } = useBoolean(false)
+  const { isSupported, memory } = useMemory({ interval: 2000, immediate: true })
 
-  // Just an example to use "setValue"
-  const customToggle = () => {
-    setValue((x: boolean) => !x)
+  if (!isSupported) {
+    return <div>Memory API not supported in this browser.</div>
   }
 
   return (
-    <>
-      <p>
-        Value is <code>{value.toString()}</code>
-      </p>
-      <button onClick={setTrue}>set true</button>
-      <button onClick={setFalse}>set false</button>
-      <button onClick={toggle}>toggle</button>
-      <button onClick={customToggle}>custom toggle</button>
-    </>
+    <div>
+      <h1>Memory Usage</h1>
+      {memory ? (
+        <ul>
+          <li>
+            JS Heap Size Limit:{" "}
+            {(memory.jsHeapSizeLimit / 1024 / 1024).toFixed(2)} MB
+          </li>
+          <li>
+            Total JS Heap Size:{" "}
+            {(memory.totalJSHeapSize / 1024 / 1024).toFixed(2)} MB
+          </li>
+          <li>
+            Used JS Heap Size:{" "}
+            {(memory.usedJSHeapSize / 1024 / 1024).toFixed(2)} MB
+          </li>
+        </ul>
+      ) : (
+        <p>Loading memory info...</p>
+      )}
+    </div>
   )
 }
 ```
@@ -69,16 +82,29 @@ export function Component() {
 
 ### Parameters
 
-| Name           | Type      | Description                                                   | Default Value | Optional |
-| -------------- | --------- | ------------------------------------------------------------- | ------------- | -------- |
-| `defaultValue` | `boolean` | The initial value for the boolean state (default is `false`). | `false`       | Yes      |
+| Parameter | Type      | Description                                                  | Default Value | Optional |
+| --------- | --------- | ------------------------------------------------------------ | ------------- | -------- |
+| `options` | `Options` | Configuration for memory polling interval and initial fetch. | `{}`          | Yes      |
 
 ### Return Values
 
-| Name       | Type                                | Description                                   |
-| ---------- | ----------------------------------- | --------------------------------------------- |
-| `setFalse` | `() => void`                        | Function to set the boolean state to `false`. |
-| `setTrue`  | `() => void`                        | Function to set the boolean state to `true`.  |
-| `setValue` | `Dispatch<SetStateAction<boolean>>` | Function to set the boolean state directly.   |
-| `toggle`   | `() => void`                        | Function to toggle the boolean state.         |
-| `value`    | `boolean`                           | The current boolean state value.              |
+| Type                                                        | Description                                                                                                                                                              |
+| ----------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `{ isSupported: boolean; memory: MemoryInfo \| undefined }` | An object containing: - `isSupported`: Whether `performance.memory` is supported. - `memory`: The current memory info, or `undefined` if not yet fetched or unsupported. |
+
+### `MemoryInfo` Interface
+
+| Property               | Type           | Description                                           |
+| ---------------------- | -------------- | ----------------------------------------------------- |
+| `jsHeapSizeLimit`      | `number`       | The maximum size of the JS heap (in bytes).           |
+| `totalJSHeapSize`      | `number`       | The total allocated JS heap size (in bytes).          |
+| `usedJSHeapSize`       | `number`       | The currently used portion of the JS heap (in bytes). |
+| `[Symbol.toStringTag]` | `"MemoryInfo"` | A tag identifying the object as `MemoryInfo`.         |
+
+## Notes
+
+- The `performance.memory` API is only available in Chromium-based browsers (e.g., Chrome, Edge) and is not supported in Firefox or Safari.
+- The hook checks for API support and returns `isSupported: false` if `performance.memory` is unavailable, making it safe for cross-browser use.
+- Memory info is updated at the specified `interval`, and the interval is cleared on component unmount to prevent memory leaks.
+- Marked with `"use client"` for Next.js, ensuring client-side execution.
+- Use this hook judiciously, as frequent polling (small `interval`) may slightly impact performance in resource-constrained environments.

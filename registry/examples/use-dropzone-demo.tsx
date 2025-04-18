@@ -1,6 +1,7 @@
 "use client"
 
 import { useRef } from "react"
+import Image from "next/image"
 
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
@@ -15,7 +16,7 @@ export default function UseDropzoneDemo() {
   })
 
   return (
-    <div className="space-y-4 overflow-hidden text-center">
+    <div className="space-y-4 text-center">
       <div
         ref={dropZoneRef}
         className={cn(
@@ -36,13 +37,29 @@ export default function UseDropzoneDemo() {
       {files && (
         <>
           <p>Here is the filenames dropped:</p>
-          <ul>
+          <div className="mx-auto mb-4 w-2/3">
             {files?.map((file) => (
-              <li key={file.name} className="truncate">
+              <p key={file.name} className="truncate">
                 {file.name}
-              </li>
+              </p>
             ))}
-          </ul>
+          </div>
+          <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
+            {files.length > 0 &&
+              files.map(
+                (file, i) =>
+                  file.type.startsWith("image/") && (
+                    <Image
+                      key={i}
+                      src={URL.createObjectURL(file)}
+                      alt="Preview"
+                      width={1080}
+                      height={1080}
+                      className="aspect-square size-full rounded-lg object-cover ring ring-primary"
+                    />
+                  )
+              )}
+          </div>
           <Button variant="destructive" onClick={clearFiles}>
             Clear files
           </Button>

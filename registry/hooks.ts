@@ -958,7 +958,7 @@ export const hooks: Registry["items"] = [
     type: "registry:hook",
     files: [
       {
-        path: "registry/hooks/use-rerender.ts",
+        path: "registry/hooks/use-memory.ts",
         type: "registry:hook",
       },
     ],

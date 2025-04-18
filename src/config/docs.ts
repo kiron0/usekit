@@ -354,7 +354,6 @@ export const docsConfig: DocsConfig = {
           title: "useInView",
           href: "/docs/hooks/use-in-view",
           items: [],
-          label: "Soon",
         },
         {
           title: "useInputValue",
@@ -370,7 +369,6 @@ export const docsConfig: DocsConfig = {
           title: "useMemory",
           href: "/docs/hooks/use-memory",
           items: [],
-          label: "Soon",
         },
         {
           title: "useStep",
@@ -381,13 +379,11 @@ export const docsConfig: DocsConfig = {
           title: "useRerender",
           href: "/docs/hooks/use-rerender",
           items: [],
-          label: "Soon",
         },
         {
           title: "useOnlineStatus",
           href: "/docs/hooks/use-online-status",
           items: [],
-          label: "Soon",
         },
         {
           title: "useStopwatch",
