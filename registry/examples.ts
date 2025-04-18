@@ -481,4 +481,84 @@ export const hooksExamples: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "use-bluetooth-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/use-bluetooth-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-autosize-textarea-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/use-autosize-textarea-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-callback-ref-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/use-callback-ref-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-controlled-state-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/use-controlled-state-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-uncontrolled-state-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/use-uncontrolled-state-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-in-view-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/use-in-view-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-memory-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/use-memory-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-rerender-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/use-rerender-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
 ]

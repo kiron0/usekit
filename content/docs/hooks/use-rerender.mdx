@@ -1,0 +1,65 @@
+---
+title: useRerender
+description: Force a component to rerender with useRerender, providing a method to trigger the rerender.
+---
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://usekit.kiron.dev/k/use-rerender
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="use-rerender" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx {3, 6}
+"use client"
+
+import { useRerender } from "@/hooks/use-rerender"
+
+export function Component() {
+  const rerender = useRerender()
+  console.log("Component rendered at:", new Date().toISOString())
+
+  return (
+    <div>
+      <h1>Force Re-render Example</h1>
+      <button onClick={rerender}>Re-render Component</button>
+    </div>
+  )
+}
+```
+
+## API Reference
+
+### Return Values
+
+| Type         | Description                                                               |
+| ------------ | ------------------------------------------------------------------------- |
+| `() => void` | A memoized function that, when called, forces the component to re-render. |

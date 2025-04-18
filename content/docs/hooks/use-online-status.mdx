@@ -1,0 +1,64 @@
+---
+title: useOnlineStatus
+description: Detect when the user is online or offline with useOnlineStatus, providing a boolean value.
+---
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://usekit.kiron.dev/k/use-online-status
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="use-online-status" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx {3, 6}
+"use client"
+
+import { useOnlineStatus } from "@/hooks/use-online-status"
+
+export function Component() {
+  const isOnline = useOnlineStatus()
+
+  return (
+    <div>
+      <h1>Network Status</h1>
+      <p>{isOnline ? "You are online" : "You are offline"}</p>
+    </div>
+  )
+}
+```
+
+## API Reference
+
+### Return Values
+
+| Type      | Description                                                                        |
+| --------- | ---------------------------------------------------------------------------------- |
+| `boolean` | `true` if the browser is online (based on `navigator.onLine`); `false` if offline. |

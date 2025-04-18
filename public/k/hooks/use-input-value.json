@@ -7,7 +7,7 @@
   "files": [
     {
       "path": "registry/hooks/use-input-value.ts",
-      "content": "import * as React from \"react\"\n\nexport function useInputValue(initialValue: string) {\n  const [value, setValue] = React.useState(initialValue)\n\n  function onChange(event: React.ChangeEvent<HTMLInputElement>) {\n    setValue(event.currentTarget.value)\n  }\n\n  return {\n    value,\n    onChange,\n  }\n}\n",
+      "content": "import * as React from \"react\"\r\n\r\nexport function useInputValue(initialValue: string) {\r\n  const [value, setValue] = React.useState(initialValue)\r\n\r\n  function onChange(event: React.ChangeEvent<HTMLInputElement>) {\r\n    setValue(event.currentTarget.value)\r\n  }\r\n\r\n  return {\r\n    value,\r\n    onChange,\r\n  }\r\n}\r\n",
       "type": "registry:hook"
     }
   ]

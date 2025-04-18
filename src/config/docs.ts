@@ -38,7 +38,7 @@ export const docsConfig: DocsConfig = {
       ],
     },
     {
-      title: "hooks",
+      title: "Hooks",
       items: [
         {
           title: "useBoolean",
@@ -339,7 +339,6 @@ export const docsConfig: DocsConfig = {
           title: "useBluetooth",
           href: "/docs/hooks/use-bluetooth",
           items: [],
-          label: "Soon",
         },
         {
           title: "useDraggable",
@@ -355,7 +354,6 @@ export const docsConfig: DocsConfig = {
           title: "useInView",
           href: "/docs/hooks/use-in-view",
           items: [],
-          label: "Soon",
         },
         {
           title: "useInputValue",
@@ -371,7 +369,6 @@ export const docsConfig: DocsConfig = {
           title: "useMemory",
           href: "/docs/hooks/use-memory",
           items: [],
-          label: "Soon",
         },
         {
           title: "useStep",
@@ -382,13 +379,11 @@ export const docsConfig: DocsConfig = {
           title: "useRerender",
           href: "/docs/hooks/use-rerender",
           items: [],
-          label: "Soon",
         },
         {
           title: "useOnlineStatus",
           href: "/docs/hooks/use-online-status",
           items: [],
-          label: "Soon",
         },
         {
           title: "useStopwatch",
@@ -399,25 +394,36 @@ export const docsConfig: DocsConfig = {
           title: "useAutosizeTextarea",
           href: "/docs/hooks/use-autosize-textarea",
           items: [],
-          label: "Soon",
         },
         {
           title: "useCallbackRef",
           href: "/docs/hooks/use-callback-ref",
           items: [],
-          label: "Soon",
         },
         {
           title: "useControlledState",
           href: "/docs/hooks/use-controlled-state",
           items: [],
-          label: "Soon",
         },
         {
           title: "useUncontrolledState",
           href: "/docs/hooks/use-uncontrolled-state",
           items: [],
-          label: "Soon",
+        },
+      ],
+    },
+    {
+      title: "Contribute",
+      items: [
+        {
+          title: "Report an issue",
+          href: "/docs/report",
+          items: [],
+        },
+        {
+          title: "Request a feature",
+          href: "/docs/feature",
+          items: [],
         },
       ],
     },

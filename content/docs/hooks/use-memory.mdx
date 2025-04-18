@@ -1,0 +1,110 @@
+---
+title: useMemory
+description: Monitor the memory usage of a web page with useMemory, providing information about the JavaScript heap size.
+---
+
+<ComponentPreview name="use-memory-demo" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://usekit.kiron.dev/k/use-memory
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="use-memory" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx {3, 6}
+"use client"
+
+import { useMemory } from "@/hooks/use-memory"
+
+export function Component() {
+  const { isSupported, memory } = useMemory({ interval: 2000, immediate: true })
+
+  if (!isSupported) {
+    return <div>Memory API not supported in this browser.</div>
+  }
+
+  return (
+    <div>
+      <h1>Memory Usage</h1>
+      {memory ? (
+        <ul>
+          <li>
+            JS Heap Size Limit:{" "}
+            {(memory.jsHeapSizeLimit / 1024 / 1024).toFixed(2)} MB
+          </li>
+          <li>
+            Total JS Heap Size:{" "}
+            {(memory.totalJSHeapSize / 1024 / 1024).toFixed(2)} MB
+          </li>
+          <li>
+            Used JS Heap Size:{" "}
+            {(memory.usedJSHeapSize / 1024 / 1024).toFixed(2)} MB
+          </li>
+        </ul>
+      ) : (
+        <p>Loading memory info...</p>
+      )}
+    </div>
+  )
+}
+```
+
+## API Reference
+
+### Parameters
+
+| Parameter | Type      | Description                                                  | Default Value | Optional |
+| --------- | --------- | ------------------------------------------------------------ | ------------- | -------- |
+| `options` | `Options` | Configuration for memory polling interval and initial fetch. | `{}`          | Yes      |
+
+### Return Values
+
+| Type                                                        | Description                                                                                                                                                              |
+| ----------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `{ isSupported: boolean; memory: MemoryInfo \| undefined }` | An object containing: - `isSupported`: Whether `performance.memory` is supported. - `memory`: The current memory info, or `undefined` if not yet fetched or unsupported. |
+
+### `MemoryInfo` Interface
+
+| Property               | Type           | Description                                           |
+| ---------------------- | -------------- | ----------------------------------------------------- |
+| `jsHeapSizeLimit`      | `number`       | The maximum size of the JS heap (in bytes).           |
+| `totalJSHeapSize`      | `number`       | The total allocated JS heap size (in bytes).          |
+| `usedJSHeapSize`       | `number`       | The currently used portion of the JS heap (in bytes). |
+| `[Symbol.toStringTag]` | `"MemoryInfo"` | A tag identifying the object as `MemoryInfo`.         |
+
+## Notes
+
+- The `performance.memory` API is only available in Chromium-based browsers (e.g., Chrome, Edge) and is not supported in Firefox or Safari.
+- The hook checks for API support and returns `isSupported: false` if `performance.memory` is unavailable, making it safe for cross-browser use.
+- Memory info is updated at the specified `interval`, and the interval is cleared on component unmount to prevent memory leaks.
+- Marked with `"use client"` for Next.js, ensuring client-side execution.
+- Use this hook judiciously, as frequent polling (small `interval`) may slightly impact performance in resource-constrained environments.

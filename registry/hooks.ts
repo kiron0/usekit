@@ -841,19 +841,6 @@ export const hooks: Registry["items"] = [
     ],
   },
   {
-    name: "use-autosize-textarea",
-    title: "Use Autosize Textarea",
-    description:
-      "Automatically adjust the height of a textarea to fit its content with useAutosizeTextarea.",
-    type: "registry:hook",
-    files: [
-      {
-        path: "registry/hooks/use-autosize-textarea.ts",
-        type: "registry:hook",
-      },
-    ],
-  },
-  {
     name: "use-callback-ref",
     title: "Use Callback Ref",
     description:
@@ -893,6 +880,85 @@ export const hooks: Registry["items"] = [
     files: [
       {
         path: "registry/hooks/use-uncontrolled-state.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-bluetooth",
+    title: "Use Bluetooth",
+    description:
+      "Connect to Bluetooth devices and manage their state with useBluetooth.",
+    type: "registry:hook",
+    devDependencies: ["@types/web-bluetooth"],
+    files: [
+      {
+        path: "registry/hooks/use-bluetooth.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-autosize-textarea",
+    title: "Use Autosize Textarea",
+    description:
+      "Automatically resize a textarea to fit its content with useAutosizeTextarea.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-autosize-textarea.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-in-view",
+    title: "Use In View",
+    description:
+      "Detect when an element is in the viewport with useInView, providing options for threshold and root margin.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-in-view.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-online-status",
+    title: "Use Online Status",
+    description:
+      "Detect when the user is online or offline with useOnlineStatus, providing a boolean value.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-online-status.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-rerender",
+    title: "Use Rerender",
+    description:
+      "Force a component to rerender with useRerender, providing a method to trigger the rerender.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-rerender.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-memory",
+    title: "Use Memory",
+    description:
+      "Monitor the memory usage of a web page with useMemory, providing information about the JavaScript heap size.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-memory.ts",
         type: "registry:hook",
       },
     ],

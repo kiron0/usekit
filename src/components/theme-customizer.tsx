@@ -13,7 +13,6 @@ import { useTheme } from "next-themes"
 import { baseColors } from "@/config/colors"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
-import { DialogTitle } from "@/components/ui/dialog"
 import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer"
 import { Label } from "@/components/ui/label"
 import {
@@ -33,7 +32,7 @@ export function ThemeCustomizer() {
           </Button>
         </DrawerTrigger>
         <DrawerContent className="p-6">
-          <DialogTitle className="sr-only">Theme Customizer</DialogTitle>
+          <p className="sr-only">Theme Customizer</p>
           <Customizer />
         </DrawerContent>
       </Drawer>

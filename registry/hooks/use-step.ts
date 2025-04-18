@@ -1,6 +1,6 @@
 import * as React from "react"
 
-interface UseStepActions {
+interface Actions {
   goToNextStep: () => void
   goToPrevStep: () => void
   reset: () => void
@@ -11,7 +11,7 @@ interface UseStepActions {
 
 type SetStepCallbackType = (step: number | ((step: number) => number)) => void
 
-export function useStep(maxStep: number): [number, UseStepActions] {
+export function useStep(maxStep: number): [number, Actions] {
   const [currentStep, setCurrentStep] = React.useState(1)
 
   const canGoToNextStep = currentStep + 1 <= maxStep

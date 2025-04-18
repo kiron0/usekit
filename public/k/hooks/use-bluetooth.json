@@ -1,0 +1,15 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-bluetooth",
+  "type": "registry:hook",
+  "title": "Use Bluetooth",
+  "description": "Connect to Bluetooth devices and manage their state with useBluetooth.",
+  "devDependencies": ["@types/web-bluetooth"],
+  "files": [
+    {
+      "path": "registry/hooks/use-bluetooth.ts",
+      "content": "import * as React from \"react\"\r\n\r\ninterface Props {\r\n  filters?: BluetoothLEScanFilter[]\r\n  optionalServices?: BluetoothServiceUUID[]\r\n  acceptAllDevices?: boolean\r\n  navigator?: Navigator\r\n}\r\n\r\ninterface Returns {\r\n  isSupported: boolean\r\n  isConnected: boolean\r\n  device: BluetoothDevice | undefined\r\n  requestDevice: () => Promise<void>\r\n  server: BluetoothRemoteGATTServer | undefined\r\n  error: Error | null\r\n}\r\n\r\nexport function useBluetooth({\r\n  acceptAllDevices = false,\r\n  filters,\r\n  optionalServices,\r\n  navigator = typeof window !== \"undefined\" ? window.navigator : undefined,\r\n}: Props = {}): Returns {\r\n  const [device, setDevice] = React.useState<BluetoothDevice>()\r\n  const [server, setServer] = React.useState<BluetoothRemoteGATTServer>()\r\n  const [isConnected, setIsConnected] = React.useState(false)\r\n  const [error, setError] = React.useState<Error | null>(null)\r\n\r\n  const isSupported = !!navigator?.bluetooth\r\n\r\n  const reset = React.useCallback(() => {\r\n    setIsConnected(false)\r\n    setDevice(undefined)\r\n    setServer(undefined)\r\n  }, [])\r\n\r\n  const connect = React.useCallback(async () => {\r\n    if (!device?.gatt) return\r\n    try {\r\n      const newServer = await device.gatt.connect()\r\n      setServer(newServer)\r\n      setIsConnected(newServer.connected)\r\n    } catch (err) {\r\n      setError(err instanceof Error ? err : new Error(\"Connection failed\"))\r\n    }\r\n  }, [device])\r\n\r\n  const requestDevice = React.useCallback(async () => {\r\n    if (!isSupported) return\r\n    try {\r\n      const newDevice = await navigator.bluetooth.requestDevice({\r\n        acceptAllDevices: filters?.length ? false : acceptAllDevices,\r\n        filters,\r\n        optionalServices,\r\n      })\r\n      setDevice(newDevice)\r\n      setError(null)\r\n    } catch (err) {\r\n      setError(err instanceof Error ? err : new Error(\"Device request failed\"))\r\n    }\r\n  }, [isSupported, acceptAllDevices, filters, optionalServices, navigator])\r\n\r\n  React.useEffect(() => {\r\n    if (!device) return\r\n    connect()\r\n    const handleDisconnect = () => reset()\r\n    device.addEventListener(\"gattserverdisconnected\", handleDisconnect)\r\n    return () => {\r\n      device.removeEventListener(\"gattserverdisconnected\", handleDisconnect)\r\n      device.gatt?.disconnect()\r\n    }\r\n  }, [device, connect, reset])\r\n\r\n  return {\r\n    isSupported,\r\n    isConnected,\r\n    device,\r\n    requestDevice,\r\n    server,\r\n    error,\r\n  }\r\n}\r\n",
+      "type": "registry:hook"
+    }
+  ]
+}

@@ -3,7 +3,7 @@ import * as React from "react"
 import { useCallbackRef } from "./use-callback-ref"
 import { useUncontrolledState } from "./use-uncontrolled-state"
 
-interface UseControlledStateParams<T> {
+interface Props<T> {
   prop?: T
   defaultProp?: T
   onChange?: (state: T) => void
@@ -13,7 +13,7 @@ export function useControlledState<T>({
   prop,
   defaultProp,
   onChange,
-}: UseControlledStateParams<T>) {
+}: Props<T>) {
   const [uncontrolledProp, setUncontrolledProp] = useUncontrolledState({
     defaultProp,
     onChange,

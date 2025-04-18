@@ -2,12 +2,12 @@
 
 import { useEffect, useRef, useState, type KeyboardEvent } from "react"
 import { generateLoremIpsum } from "@/utils/generate-lorem-ipsum"
-import { toast } from "sonner"
 
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import useAutoScroll from "registry/hooks/use-auto-scroll"
+import { notifyError } from "@/components/toast"
+import { useAutoScroll } from "registry/hooks/use-auto-scroll"
 
 interface Message {
   sender: "user" | "ai"
@@ -26,7 +26,9 @@ export default function UseAutoScrollDemo() {
   const sendMessage = () => {
     const trimmedInput = input.trim()
     if (trimmedInput === "") {
-      return toast.error("Please enter a message.")
+      return notifyError({
+        description: "Please enter a message before sending.",
+      })
     }
 
     const userMessage: Message = { sender: "user", text: trimmedInput }
@@ -114,7 +116,7 @@ interface MessageListProps {
 }
 
 const MessageList = ({ messages }: MessageListProps) => {
-  const listRef = useAutoScroll(true, [messages])
+  const listRef = useAutoScroll<HTMLUListElement>(true, [messages])
 
   return (
     <ul

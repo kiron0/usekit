@@ -1,0 +1,81 @@
+---
+title: useInView
+description: Detect when an element is in the viewport with useInView, providing options for threshold and root margin.
+---
+
+<ComponentPreview name="use-in-view-demo" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://usekit.kiron.dev/k/use-in-view
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="use-in-view" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx {5, 9}
+"use client"
+
+import * as React from "react"
+
+import { useInView } from "@/hooks/use-in-view"
+
+export function Component() {
+  const ref = React.useRef<HTMLDivElement>(null)
+  const isInView = useInView(ref, { threshold: 0.5, rootMargin: "50px" })
+
+  return (
+    <div>
+      <div
+        ref={ref}
+        style={{ height: "100px", background: isInView ? "green" : "red" }}
+      >
+        {isInView ? "Visible" : "Not Visible"}
+      </div>
+      <div style={{ height: "1000px" }}>Scroll down...</div>
+    </div>
+  )
+}
+```
+
+## API Reference
+
+### Parameters
+
+| Parameter | Type                     | Description                                                 | Default Value |
+| --------- | ------------------------ | ----------------------------------------------------------- | ------------- |
+| `ref`     | `RefObject<HTMLElement>` | A React ref object pointing to the HTML element to observe. | **Required**  |
+| `options` | `UseInViewOptions`       | Configuration options for the `IntersectionObserver`.       | `{}`          |
+
+### Return Values
+
+| Name       | Type      | Description                                                                                                                     |
+| ---------- | --------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| `setFalse` | `boolean` | `true` if the referenced element is intersecting with the viewport (or root) based on the specified options; `false` otherwise. |

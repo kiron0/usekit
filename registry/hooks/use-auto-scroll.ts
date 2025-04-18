@@ -7,11 +7,11 @@ interface AutoScrollOptions {
   smoothScroll?: boolean
 }
 
-const useAutoScroll = <T extends ScrollableElement = HTMLUListElement>(
+export function useAutoScroll<T extends ScrollableElement = HTMLUListElement>(
   enabled: boolean,
   deps: React.DependencyList,
   options?: AutoScrollOptions
-): React.RefObject<T | null> => {
+): React.RefObject<T | null> {
   const listRef = React.useRef<T | null>(null)
   const optionsRef = React.useRef(options)
   const cleanupRef = React.useRef<(() => void) | undefined>(undefined)
@@ -34,9 +34,7 @@ const useAutoScroll = <T extends ScrollableElement = HTMLUListElement>(
   return listRef
 }
 
-export default useAutoScroll
-
-export function autoScrollElement(
+function autoScrollElement(
   element: ScrollableElement,
   options?: AutoScrollOptions
 ): () => void {
@@ -104,7 +102,6 @@ export function autoScrollElement(
     }
   }
 
-  // Cast to HTMLElement to access correct addEventListener overloads
   const htmlElement = element as HTMLElement
 
   htmlElement.addEventListener("wheel", handleWheel)

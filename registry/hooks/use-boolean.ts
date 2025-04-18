@@ -1,6 +1,6 @@
 import * as React from "react"
 
-interface UseBooleanReturn {
+interface Return {
   value: boolean
   setValue: React.Dispatch<React.SetStateAction<boolean>>
   setTrue: () => void
@@ -8,7 +8,7 @@ interface UseBooleanReturn {
   toggle: () => void
 }
 
-export function useBoolean(defaultValue = false): UseBooleanReturn {
+export function useBoolean(defaultValue = false): Return {
   if (typeof defaultValue !== "boolean") {
     throw new Error("defaultValue must be `true` or `false`")
   }
