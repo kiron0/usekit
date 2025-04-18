@@ -1,7 +1,9 @@
 ---
-title: useBoolean
-description: Manage a boolean state with the useBoolean hook, providing methods to set it to true, false, or toggle between them.
+title: useInView
+description: Detect when an element is in the viewport with useInView, providing options for threshold and root margin.
 ---
+
+<ComponentPreview name="use-in-view-demo" />
 
 ## Installation
 
@@ -15,7 +17,7 @@ description: Manage a boolean state with the useBoolean hook, providing methods 
 <TabsContent value="cli">
 
 ```bash
-npx shadcn@latest add https://usekit.kiron.dev/k/use-boolean
+npx shadcn@latest add https://usekit.kiron.dev/k/use-in-view
 ```
 
 </TabsContent>
@@ -26,7 +28,7 @@ npx shadcn@latest add https://usekit.kiron.dev/k/use-boolean
 
 <Step>Copy and paste the following code into your project.</Step>
 
-<ComponentSource name="use-boolean" />
+<ComponentSource name="use-in-view" />
 
 <Step>Update the import paths to match your project setup.</Step>
 
@@ -41,44 +43,35 @@ npx shadcn@latest add https://usekit.kiron.dev/k/use-boolean
 ```tsx {3, 6}
 "use client"
 
-import { useBoolean } from "@/hooks/use-boolean"
+import * as React from "react";
+
+import { useInView } from "@/hooks/use-in-view";
 
 export function Component() {
-  const { value, setValue, setTrue, setFalse, toggle } = useBoolean(false)
-
-  // Just an example to use "setValue"
-  const customToggle = () => {
-    setValue((x: boolean) => !x)
-  }
+const ref = React.useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { threshold: 0.5, rootMargin: "50px" });
 
   return (
-    <>
-      <p>
-        Value is <code>{value.toString()}</code>
-      </p>
-      <button onClick={setTrue}>set true</button>
-      <button onClick={setFalse}>set false</button>
-      <button onClick={toggle}>toggle</button>
-      <button onClick={customToggle}>custom toggle</button>
-    </>
-  )
-}
+    <div>
+      <div ref={ref} style={{ height: "100px", background: isInView ? "green" : "red" }}>
+        {isInView ? "Visible" : "Not Visible"}
+      </div>
+      <div style={{ height: "1000px" }}>Scroll down...</div>
+    </div>
+  );
 ```
 
 ## API Reference
 
 ### Parameters
 
-| Name           | Type      | Description                                                   | Default Value | Optional |
-| -------------- | --------- | ------------------------------------------------------------- | ------------- | -------- |
-| `defaultValue` | `boolean` | The initial value for the boolean state (default is `false`). | `false`       | Yes      |
+| Parameter  | Type                              | Description                                                                 | Default Value |
+|------------|-----------------------------------|-----------------------------------------------------------------------------|---------------|
+| `ref`      | `RefObject<HTMLElement>`          | A React ref object pointing to the HTML element to observe.                 | **Required**  |
+| `options`  | `UseInViewOptions`                | Configuration options for the `IntersectionObserver`.                       | `{}`          |
 
 ### Return Values
 
 | Name       | Type                                | Description                                   |
 | ---------- | ----------------------------------- | --------------------------------------------- |
-| `setFalse` | `() => void`                        | Function to set the boolean state to `false`. |
-| `setTrue`  | `() => void`                        | Function to set the boolean state to `true`.  |
-| `setValue` | `Dispatch<SetStateAction<boolean>>` | Function to set the boolean state directly.   |
-| `toggle`   | `() => void`                        | Function to toggle the boolean state.         |
-| `value`    | `boolean`                           | The current boolean state value.              |
+| `setFalse` | `boolean`                           | `true` if the referenced element is intersecting with the viewport (or root) based on the specified options; `false` otherwise. |

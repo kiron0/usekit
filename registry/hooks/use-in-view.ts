@@ -6,7 +6,7 @@ interface Options {
 }
 
 export default function useInView(
-  ref: React.RefObject<HTMLElement>,
+  ref: React.RefObject<HTMLElement | null>,
   { threshold = 0, rootMargin = "0px" }: Options = {}
 ): boolean {
   const [isInView, setIsInView] = React.useState(false)
