@@ -7,7 +7,7 @@
   "files": [
     {
       "path": "registry/hooks/use-rerender.ts",
-      "content": "import * as React from \"react\"\n\nexport function useRerender(): () => void {\n  const [, setCount] = React.useState(0)\n\n  return React.useCallback(() => setCount((prev) => prev + 1), [])\n}\n",
+      "content": "import * as React from \"react\"\r\n\r\nexport function useRerender(): () => void {\r\n  const [, setCount] = React.useState(0)\r\n\r\n  return React.useCallback(() => setCount((prev) => prev + 1), [])\r\n}\r\n",
       "type": "registry:hook"
     }
   ]

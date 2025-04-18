@@ -7,7 +7,7 @@
   "files": [
     {
       "path": "registry/hooks/use-set.ts",
-      "content": "import * as React from \"react\"\n\nexport function useSet<T>(values?: T[]): Set<T> {\n  const setRef = React.useRef<Set<T>>(new Set(values))\n  const [, reRender] = React.useReducer((x) => x + 1, 0)\n\n  setRef.current.add = (...args: Parameters<Set<T>[\"add\"]>) => {\n    const res = Set.prototype.add.apply(setRef.current, args)\n    reRender()\n    return res\n  }\n\n  setRef.current.clear = (...args: Parameters<Set<T>[\"clear\"]>) => {\n    Set.prototype.clear.apply(setRef.current, args)\n    reRender()\n  }\n\n  setRef.current.delete = (...args: Parameters<Set<T>[\"delete\"]>) => {\n    const res = Set.prototype.delete.apply(setRef.current, args)\n    reRender()\n    return res\n  }\n\n  return setRef.current\n}\n",
+      "content": "import * as React from \"react\"\r\n\r\nexport function useSet<T>(values?: T[]): Set<T> {\r\n  const setRef = React.useRef<Set<T>>(new Set(values))\r\n  const [, reRender] = React.useReducer((x) => x + 1, 0)\r\n\r\n  setRef.current.add = (...args: Parameters<Set<T>[\"add\"]>) => {\r\n    const res = Set.prototype.add.apply(setRef.current, args)\r\n    reRender()\r\n    return res\r\n  }\r\n\r\n  setRef.current.clear = (...args: Parameters<Set<T>[\"clear\"]>) => {\r\n    Set.prototype.clear.apply(setRef.current, args)\r\n    reRender()\r\n  }\r\n\r\n  setRef.current.delete = (...args: Parameters<Set<T>[\"delete\"]>) => {\r\n    const res = Set.prototype.delete.apply(setRef.current, args)\r\n    reRender()\r\n    return res\r\n  }\r\n\r\n  return setRef.current\r\n}\r\n",
       "type": "registry:hook"
     }
   ]

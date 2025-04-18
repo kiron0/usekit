@@ -7,7 +7,7 @@
   "files": [
     {
       "path": "registry/hooks/use-lock-body-scroll.ts",
-      "content": "import * as React from \"react\"\n\nexport function useLockBodyScroll() {\n  React.useLayoutEffect((): (() => void) => {\n    const originalStyle: string = window.getComputedStyle(\n      document.body\n    ).overflow\n    document.body.style.overflow = \"hidden\"\n    return () => (document.body.style.overflow = originalStyle)\n  }, [])\n}\n",
+      "content": "import * as React from \"react\"\r\n\r\nexport function useLockBodyScroll() {\r\n  React.useLayoutEffect((): (() => void) => {\r\n    const originalStyle: string = window.getComputedStyle(\r\n      document.body\r\n    ).overflow\r\n    document.body.style.overflow = \"hidden\"\r\n    return () => (document.body.style.overflow = originalStyle)\r\n  }, [])\r\n}\r\n",
       "type": "registry:hook"
     }
   ]

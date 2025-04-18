@@ -7,7 +7,7 @@
   "files": [
     {
       "path": "registry/hooks/use-mutation-observer.ts",
-      "content": "import * as React from \"react\"\n\nexport function useMutationObserver(\n  ref: React.RefObject<HTMLElement | null>,\n  callback: MutationCallback,\n  options = {\n    attributes: true,\n    characterData: true,\n    childList: true,\n    subtree: true,\n  }\n) {\n  React.useEffect(() => {\n    if (ref.current) {\n      const observer = new MutationObserver(callback)\n      observer.observe(ref.current, options)\n      return () => observer.disconnect()\n    }\n  }, [ref, callback, options])\n}\n",
+      "content": "import * as React from \"react\"\r\n\r\nexport function useMutationObserver(\r\n  ref: React.RefObject<HTMLElement | null>,\r\n  callback: MutationCallback,\r\n  options = {\r\n    attributes: true,\r\n    characterData: true,\r\n    childList: true,\r\n    subtree: true,\r\n  }\r\n) {\r\n  React.useEffect(() => {\r\n    if (ref.current) {\r\n      const observer = new MutationObserver(callback)\r\n      observer.observe(ref.current, options)\r\n      return () => observer.disconnect()\r\n    }\r\n  }, [ref, callback, options])\r\n}\r\n",
       "type": "registry:hook"
     }
   ]
