@@ -1,7 +1,8 @@
 "use client"
 
 import Link from "next/link"
-import { allDocs } from "contentlayer/generated"
+
+import { allDocs } from "@/contentlayer/generated"
 
 export function HooksList() {
   return (

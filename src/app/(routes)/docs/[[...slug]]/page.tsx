@@ -1,6 +1,5 @@
 import { Metadata } from "next"
 import { notFound } from "next/navigation"
-import { allDocs } from "contentlayer/generated"
 import { ChevronRightIcon, ExternalLinkIcon } from "lucide-react"
 import { Balancer } from "react-wrap-balancer"
 
@@ -9,6 +8,7 @@ import { getTableOfContents } from "@/lib/toc"
 import { absoluteUrl, cn } from "@/lib/utils"
 import { Mdx } from "@/components/mdx-components"
 import { DashboardTableOfContents } from "@/components/toc"
+import { allDocs } from "@/contentlayer/generated"
 
 import "@/styles/mdx.css"
 

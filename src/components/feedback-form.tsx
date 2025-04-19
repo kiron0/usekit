@@ -23,8 +23,7 @@ import {
   FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-
-import { Editor } from "./rich-text/editor"
+import { Editor } from "@/components/rich-text/editor"
 
 export interface FieldDefinition<T extends FieldValues> {
   name: Path<T>
@@ -36,14 +35,14 @@ export interface FieldDefinition<T extends FieldValues> {
   ) => React.ReactNode
 }
 
-interface FeedbackFormProps<TSchema extends ZodType<any, any, any>> {
-  schema: TSchema
-  fields: FieldDefinition<z.infer<TSchema>>[]
-  onSubmit: (values: z.infer<TSchema>) => void
+interface FeedbackFormProps<T extends ZodType<any, any, any>> {
+  schema: T
+  fields: FieldDefinition<z.infer<T>>[]
+  onSubmit: (values: z.infer<T>) => void
   cancelHref: string
   submitText?: string
   loading?: boolean
-  defaultValues: DefaultValues<z.infer<TSchema>>
+  defaultValues: DefaultValues<z.infer<T>>
 }
 
 export function FeedbackForm<TSchema extends ZodType<any, any, any>>({
@@ -58,7 +57,7 @@ export function FeedbackForm<TSchema extends ZodType<any, any, any>>({
   const form = useForm<z.infer<TSchema>>({
     resolver: zodResolver(schema),
     defaultValues,
-  })
+  }) as UseFormReturn<z.infer<TSchema>>
 
   return (
     <Form {...form}>
@@ -77,7 +76,6 @@ export function FeedbackForm<TSchema extends ZodType<any, any, any>>({
                       <Input placeholder={fieldDef.label} {...field} />
                     ) : fieldDef.type === "textarea" ? (
                       <Editor
-                        placeholder={fieldDef.label}
                         content={field.value}
                         onChange={(value) => field.onChange(value)}
                       />

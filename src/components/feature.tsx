@@ -1,28 +1,22 @@
 "use client"
 
-import * as React from "react"
-import { useSearchParams } from "next/navigation"
+import Link from "next/link"
 
 import { createFormSchema, FormSchema } from "@/lib/schema"
 import { FeedbackForm } from "@/components/feedback-form"
-import { Loading } from "@/components/loading"
 import { notifyError, notifySuccess } from "@/components/toast"
 
 const formSchema = createFormSchema()
 
 export function Feature() {
-  const searchParams = useSearchParams()
-  const hookName = searchParams.get("h")
-
   const onSubmit = (values: FormSchema) => {
     const payload = {
       ...values,
     }
 
     try {
-      console.log(payload)
       notifySuccess({
-        description: "Feature request created successfully",
+        description: "Feature request has been sent successfully",
       })
     } catch (error) {
       notifyError({
@@ -32,7 +26,7 @@ export function Feature() {
   }
 
   return (
-    <React.Suspense fallback={<Loading />}>
+    <div className="space-y-8">
       <FeedbackForm
         schema={formSchema}
         defaultValues={{
@@ -52,9 +46,16 @@ export function Feature() {
           },
         ]}
         onSubmit={onSubmit}
-        cancelHref={hookName ? `/docs/hooks/${hookName}` : "/docs"}
+        cancelHref="/docs"
         submitText="Create"
       />
-    </React.Suspense>
+      <p className="text-sm text-muted-foreground">
+        If you wish to report an issue, we encourage you to{" "}
+        <Link href="/docs/report" className="text-sky-500 underline">
+          visit this page
+        </Link>
+        . Thank you for your feedback!
+      </p>
+    </div>
   )
 }

@@ -7,7 +7,7 @@
   "files": [
     {
       "path": "registry/hooks/use-visibility-change.ts",
-      "content": "import * as React from \"react\"\r\n\r\nexport function useVisibilityChange(): boolean {\r\n  const [isVisible, setIsVisible] = React.useState(() => {\r\n    if (typeof document === \"undefined\") return true\r\n    return document.visibilityState === \"visible\"\r\n  })\r\n\r\n  React.useEffect(() => {\r\n    if (typeof document === \"undefined\") return\r\n\r\n    const handleVisibilityChange = () => {\r\n      setIsVisible(document.visibilityState === \"visible\")\r\n    }\r\n\r\n    document.addEventListener(\"visibilitychange\", handleVisibilityChange)\r\n    return () => {\r\n      document.removeEventListener(\"visibilitychange\", handleVisibilityChange)\r\n    }\r\n  }, [])\r\n\r\n  return isVisible\r\n}\r\n",
+      "content": "import * as React from \"react\"\n\nexport function useVisibilityChange(): boolean {\n  const [isVisible, setIsVisible] = React.useState(() => {\n    if (typeof document === \"undefined\") return true\n    return document.visibilityState === \"visible\"\n  })\n\n  React.useEffect(() => {\n    if (typeof document === \"undefined\") return\n\n    const handleVisibilityChange = () => {\n      setIsVisible(document.visibilityState === \"visible\")\n    }\n\n    document.addEventListener(\"visibilitychange\", handleVisibilityChange)\n    return () => {\n      document.removeEventListener(\"visibilitychange\", handleVisibilityChange)\n    }\n  }, [])\n\n  return isVisible\n}\n",
       "type": "registry:hook"
     }
   ]

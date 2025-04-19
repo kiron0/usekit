@@ -2,7 +2,6 @@
 
 import * as React from "react"
 import { useSearchParams } from "next/navigation"
-import { allDocs } from "contentlayer/generated"
 import { ControllerRenderProps } from "react-hook-form"
 
 import { createFormSchema, FormSchema } from "@/lib/schema"
@@ -10,6 +9,7 @@ import { SelectSearch } from "@/components/ui/select-search"
 import { FeedbackForm, FieldDefinition } from "@/components/feedback-form"
 import { Loading } from "@/components/loading"
 import { notifyError, notifySuccess } from "@/components/toast"
+import { allDocs } from "@/contentlayer/generated"
 
 const formSchema = createFormSchema({ includeHook: true })
 
@@ -38,21 +38,14 @@ export function Report() {
       })
     }
 
-    if (!hookName && !hook) {
-      return notifyError({
-        description: "Please select the hook you want to report.",
-      })
-    }
-
     const payload = {
       ...values,
       hook: hookName || hook,
     }
 
     try {
-      console.log(payload)
       notifySuccess({
-        description: "Report created successfully",
+        description: "Report has been sent successfully",
       })
     } catch (error) {
       notifyError({

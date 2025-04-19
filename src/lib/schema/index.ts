@@ -13,7 +13,15 @@ export const createFormSchema = ({
   }
 
   const hookSchema = {
-    hook: includeHook ? z.string().optional() : z.undefined(),
+    hook: includeHook
+      ? z
+          .string({
+            required_error: "Hook is required",
+          })
+          .min(1, {
+            message: "Hook is required",
+          })
+      : z.undefined(),
   }
 
   return z.object({ ...baseSchema, ...hookSchema })

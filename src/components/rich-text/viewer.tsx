@@ -11,6 +11,7 @@ export function Viewer({ content, style }: ViewerProps) {
     extensions: [StarterKit],
     content: content,
     editable: false,
+    immediatelyRender: false,
   })
 
   if (!editor) return <></>
