@@ -1,10 +1,10 @@
 import Link from "next/link"
-import { Doc } from "contentlayer/generated"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 
 import { NavItem, NavItemWithChildren } from "@/types/nav"
 import { docsConfig } from "@/config/docs"
 import { Button } from "@/components/ui/button"
+import { Doc } from "@/contentlayer/generated"
 
 interface DocsPagerProps {
   doc: Doc

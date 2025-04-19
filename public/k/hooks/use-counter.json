@@ -7,7 +7,7 @@
   "files": [
     {
       "path": "registry/hooks/use-counter.ts",
-      "content": "import * as React from \"react\"\r\n\r\ninterface UseCounterReturn {\r\n  count: number\r\n  increment: () => void\r\n  decrement: () => void\r\n  reset: () => void\r\n  setCount: React.Dispatch<React.SetStateAction<number>>\r\n}\r\n\r\nexport function useCounter(initialValue?: number): UseCounterReturn {\r\n  const [count, setCount] = React.useState(initialValue ?? 0)\r\n\r\n  const increment = React.useCallback(() => {\r\n    setCount((x) => x + 1)\r\n  }, [])\r\n\r\n  const decrement = React.useCallback(() => {\r\n    setCount((x) => x - 1)\r\n  }, [])\r\n\r\n  const reset = React.useCallback(() => {\r\n    setCount(initialValue ?? 0)\r\n  }, [initialValue])\r\n\r\n  return {\r\n    count,\r\n    increment,\r\n    decrement,\r\n    reset,\r\n    setCount,\r\n  }\r\n}\r\n",
+      "content": "import * as React from \"react\"\n\ninterface UseCounterReturn {\n  count: number\n  increment: () => void\n  decrement: () => void\n  reset: () => void\n  setCount: React.Dispatch<React.SetStateAction<number>>\n}\n\nexport function useCounter(initialValue?: number): UseCounterReturn {\n  const [count, setCount] = React.useState(initialValue ?? 0)\n\n  const increment = React.useCallback(() => {\n    setCount((x) => x + 1)\n  }, [])\n\n  const decrement = React.useCallback(() => {\n    setCount((x) => x - 1)\n  }, [])\n\n  const reset = React.useCallback(() => {\n    setCount(initialValue ?? 0)\n  }, [initialValue])\n\n  return {\n    count,\n    increment,\n    decrement,\n    reset,\n    setCount,\n  }\n}\n",
       "type": "registry:hook"
     }
   ]

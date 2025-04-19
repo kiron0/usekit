@@ -47,7 +47,7 @@ export function SelectSearch({
           variant="outline"
           role="combobox"
           aria-expanded={open}
-          className="w-full justify-between border-input bg-transparent px-3 font-normal capitalize outline-none outline-offset-0 hover:bg-transparent focus-visible:outline-[3px]"
+          className="w-full justify-between border-input bg-transparent px-3 font-normal outline-none outline-offset-0 hover:bg-transparent focus-visible:outline-[3px]"
           disabled={disabled}
         >
           <span className={cn("truncate", !value && "text-muted-foreground")}>
@@ -83,7 +83,6 @@ export function SelectSearch({
                     onChange(currentValue === value ? "" : currentValue)
                     setOpen(false)
                   }}
-                  className="capitalize"
                 >
                   {option.label}
                   {value === option.value && (

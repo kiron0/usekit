@@ -7,7 +7,7 @@
   "files": [
     {
       "path": "registry/hooks/use-is-first-render.ts",
-      "content": "import * as React from \"react\"\r\n\r\nexport function useIsFirstRender() {\r\n  const renderRef = React.useRef(true)\r\n\r\n  if (renderRef.current === true) {\r\n    renderRef.current = false\r\n    return true\r\n  }\r\n\r\n  return renderRef.current\r\n}\r\n",
+      "content": "import * as React from \"react\"\n\nexport function useIsFirstRender() {\n  const renderRef = React.useRef(true)\n\n  if (renderRef.current === true) {\n    renderRef.current = false\n    return true\n  }\n\n  return renderRef.current\n}\n",
       "type": "registry:hook"
     }
   ]

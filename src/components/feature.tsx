@@ -1,118 +1,61 @@
 "use client"
 
-import * as React from "react"
 import Link from "next/link"
-import { useSearchParams } from "next/navigation"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm, UseFormReturn } from "react-hook-form"
-import { z } from "zod"
 
-import { Button, buttonVariants } from "@/components/ui/button"
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { Loading } from "@/components/loading"
+import { createFormSchema, FormSchema } from "@/lib/schema"
+import { FeedbackForm } from "@/components/feedback-form"
 import { notifyError, notifySuccess } from "@/components/toast"
 
-const formSchema = z.object({
-  title: z.string().min(1, { message: "Title is required" }),
-  description: z.string().min(1, { message: "Description is required" }),
-})
-type FormSchema = z.infer<typeof formSchema>
+const formSchema = createFormSchema()
 
-function FeatureSuspense() {
-  const searchParams = useSearchParams()
-  const hookName = searchParams.get("name")
-
-  const form = useForm<FormSchema>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      title: "",
-      description: "",
-    },
-  }) as UseFormReturn<FormSchema>
-
+export function Feature() {
   const onSubmit = (values: FormSchema) => {
     const payload = {
       ...values,
     }
 
     try {
-      console.log(payload)
       notifySuccess({
-        description: "Report created successfully",
+        description: "Feature request has been sent successfully",
       })
     } catch (error) {
       notifyError({
-        description: "Error creating report",
+        description: "Error creating feature request",
       })
     }
   }
 
   return (
-    <div>
-      <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-          <div className="space-y-4">
-            <FormField
-              control={form.control}
-              name="title"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Title</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Title" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="description"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Description</FormLabel>
-                  <FormControl>
-                    <Textarea
-                      placeholder="Description"
-                      className="min-h-52"
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          </div>
-          <div className="flex items-center justify-end gap-2">
-            <Link
-              href={hookName ? `/docs/hooks/${hookName}` : "/docs"}
-              className={buttonVariants({
-                variant: "outline",
-              })}
-            >
-              Cancel
-            </Link>
-            <Button type="submit">Create</Button>
-          </div>
-        </form>
-      </Form>
+    <div className="space-y-8">
+      <FeedbackForm
+        schema={formSchema}
+        defaultValues={{
+          title: "",
+          description: "",
+        }}
+        fields={[
+          {
+            name: "title",
+            label: "Title",
+            type: "input",
+          },
+          {
+            name: "description",
+            label: "Description",
+            type: "textarea",
+          },
+        ]}
+        onSubmit={onSubmit}
+        cancelHref="/docs"
+        submitText="Create"
+      />
+      <p className="text-sm text-muted-foreground">
+        If you wish to report an issue, we encourage you to{" "}
+        <Link href="/docs/report" className="text-sky-500 underline">
+          visit this page
+        </Link>
+        . Thank you for your feedback!
+      </p>
     </div>
-  )
-}
-
-export function Feature() {
-  return (
-    <React.Suspense fallback={<Loading />}>
-      <FeatureSuspense />
-    </React.Suspense>
   )
 }

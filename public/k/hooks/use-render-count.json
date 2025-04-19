@@ -7,7 +7,7 @@
   "files": [
     {
       "path": "registry/hooks/use-render-count.ts",
-      "content": "import * as React from \"react\"\r\n\r\ninterface RenderCountReturn {\r\n  count: number\r\n  isStrictMode: boolean\r\n}\r\n\r\nexport function useRenderCount(): RenderCountReturn {\r\n  const renderCount = React.useRef(0)\r\n\r\n  renderCount.current += 1\r\n\r\n  const isStrictMode =\r\n    renderCount.current % 2 === 0 && process.env.NODE_ENV === \"development\"\r\n\r\n  return {\r\n    count: renderCount.current,\r\n    isStrictMode,\r\n  }\r\n}\r\n",
+      "content": "import * as React from \"react\"\n\ninterface RenderCountReturn {\n  count: number\n  isStrictMode: boolean\n}\n\nexport function useRenderCount(): RenderCountReturn {\n  const renderCount = React.useRef(0)\n\n  renderCount.current += 1\n\n  const isStrictMode =\n    renderCount.current % 2 === 0 && process.env.NODE_ENV === \"development\"\n\n  return {\n    count: renderCount.current,\n    isStrictMode,\n  }\n}\n",
       "type": "registry:hook"
     }
   ]

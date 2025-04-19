@@ -7,7 +7,7 @@
   "files": [
     {
       "path": "registry/hooks/use-previous.ts",
-      "content": "import * as React from \"react\"\r\n\r\nexport function usePrevious<T>(\r\n  newValue: T,\r\n  initialPreviousValue?: T | null\r\n): T | null | undefined {\r\n  const previousRef = React.useRef<T | null | undefined>(\r\n    initialPreviousValue ?? null\r\n  )\r\n\r\n  React.useEffect(() => {\r\n    previousRef.current = newValue\r\n  }, [newValue])\r\n\r\n  return previousRef.current\r\n}\r\n",
+      "content": "import * as React from \"react\"\n\nexport function usePrevious<T>(\n  newValue: T,\n  initialPreviousValue?: T | null\n): T | null | undefined {\n  const previousRef = React.useRef<T | null | undefined>(\n    initialPreviousValue ?? null\n  )\n\n  React.useEffect(() => {\n    previousRef.current = newValue\n  }, [newValue])\n\n  return previousRef.current\n}\n",
       "type": "registry:hook"
     }
   ]
