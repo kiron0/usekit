@@ -31,12 +31,12 @@ export function Contribute({ slug }: ContributeProps) {
       {
         text: "Report an issue",
         icon: BugIcon,
-        href: `/docs/report?name=${hookName}`,
+        href: `/docs/report?h=${hookName}`,
       },
       {
         text: "Request a feature",
         icon: LightbulbIcon,
-        href: `/docs/feature?name=${hookName}`,
+        href: `/docs/feature?h=${hookName}`,
       },
     ]
   }, [hookName])

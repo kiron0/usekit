@@ -155,3 +155,12 @@
     0 0 10px hsla(var(--primary)),
     0 0 5px hsla(var(--primary)) !important;
 }
+
+.editor .ProseMirror {
+  @apply max-h-60 min-h-56 overflow-y-auto;
+  padding: 5px 10px;
+}
+
+.ProseMirror:focus {
+  @apply outline-none;
+}
