@@ -17,6 +17,12 @@ export function Report() {
   const searchParams = useSearchParams()
   const hookName = searchParams.get("h")
 
+  const DEFAULT_VALUES = {
+    title: `[bug]: /docs/hooks/${hookName}`,
+    hook: hookName || "",
+    description: `<p>Summary:</p><p>          [Briefly describe the bug you encountered]</p><p></p><p>Documentation:</p><p>          [Link to the documentation page where you encountered the bug]</p><p></p><p>Code:</p><p>          [Link to the code where you encountered the bug]</p><p></p><p>Steps:</p><p>          [Steps to reproduce the bug]</p><p></p><p>Expected:</p><p>          [What did you expect to happen?]</p><p></p><p>Actual:</p><p>          [What actually happened?]</p>`,
+  }
+
   const allHooks = React.useMemo(() => {
     return allDocs
       .filter((doc) => doc.title.startsWith("use"))
@@ -58,11 +64,7 @@ export function Report() {
     <React.Suspense fallback={<Loading />}>
       <FeedbackForm
         schema={formSchema}
-        defaultValues={{
-          title: "",
-          hook: hookName || undefined,
-          description: "",
-        }}
+        defaultValues={DEFAULT_VALUES}
         fields={
           [
             !hookName

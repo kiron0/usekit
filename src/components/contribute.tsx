@@ -36,7 +36,7 @@ export function Contribute({ slug }: ContributeProps) {
       {
         text: "Request a feature",
         icon: LightbulbIcon,
-        href: "/docs/feature",
+        href: `/docs/feature?h=${hookName}`,
       },
     ]
   }, [hookName])
