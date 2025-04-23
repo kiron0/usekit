@@ -561,4 +561,14 @@ export const hooksExamples: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "use-encryption-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/use-encryption-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
 ]

@@ -1,0 +1,16 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-encryption",
+  "type": "registry:hook",
+  "title": "Use Encryption",
+  "description": "Encrypt and decrypt data with the useEncryption hook, providing methods to encrypt and decrypt strings using AES encryption.",
+  "dependencies": ["crypto-js"],
+  "devDependencies": ["@types/crypto-js"],
+  "files": [
+    {
+      "path": "registry/hooks/use-encryption.ts",
+      "content": "import CryptoJS from \"crypto-js\"\n\nconst encrypt = (data: unknown, secret: string): string | false => {\n  try {\n    return CryptoJS.AES.encrypt(JSON.stringify(data), secret).toString()\n  } catch (err) {\n    console.error(err)\n    return false\n  }\n}\n\nconst decrypt = <T>(cipherText: string, secret: string): T | false => {\n  try {\n    const bytes = CryptoJS.AES.decrypt(cipherText, secret)\n    return JSON.parse(bytes.toString(CryptoJS.enc.Utf8)) as T\n  } catch (err) {\n    console.error(err)\n    return false\n  }\n}\n\nexport const useEncryption = () => ({ encrypt, decrypt })\n",
+      "type": "registry:hook"
+    }
+  ]
+}

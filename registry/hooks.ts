@@ -963,6 +963,21 @@ export const hooks: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "use-encryption",
+    title: "Use Encryption",
+    description:
+      "Encrypt and decrypt data with the useEncryption hook, providing methods to encrypt and decrypt strings using AES encryption.",
+    type: "registry:hook",
+    dependencies: ["crypto-js"],
+    devDependencies: ["@types/crypto-js"],
+    files: [
+      {
+        path: "registry/hooks/use-encryption.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
 ]
 
 export default hooks

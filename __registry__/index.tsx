@@ -1115,6 +1115,22 @@ export const Index: Record<string, any> = {
     component: React.lazy(() => import("registry/examples/use-memory-demo")),
     source: "",
   },
+  "use-encryption": {
+    name: "use-encryption",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-encryption.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-encryption-demo")
+    ),
+    source: "",
+  },
   "use-copy-to-clipboard-demo": {
     name: "use-copy-to-clipboard-demo",
     type: "registry:example",
@@ -1998,6 +2014,22 @@ export const Index: Record<string, any> = {
     ],
     component: React.lazy(
       () => import("registry/examples/use-rerender-demo.tsx")
+    ),
+    source: "",
+  },
+  "use-encryption-demo": {
+    name: "use-encryption-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-encryption-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-encryption-demo.tsx")
     ),
     source: "",
   },

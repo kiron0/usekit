@@ -410,6 +410,11 @@ export const docsConfig: DocsConfig = {
           href: "/docs/hooks/use-uncontrolled-state",
           items: [],
         },
+        {
+          title: "useEncryption",
+          href: "/docs/hooks/use-encryption",
+          items: [],
+        },
       ],
     },
     {
