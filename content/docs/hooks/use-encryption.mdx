@@ -1,0 +1,107 @@
+---
+title: useEncryption
+description: Encrypt and decrypt data with the useEncryption hook, providing methods to encrypt and decrypt strings using AES encryption.
+links:
+  Crypto JS: https://github.com/brix/crypto-js
+---
+
+<ComponentPreview name="use-encryption-demo" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://usekit.kiron.dev/k/use-encryption
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Install the package:</Step>
+
+```bash
+npm install crypto-js
+```
+
+If you are using `TypeScript`, you may also need to install the types `@types/crypto-js` as a dev dependency
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="use-encryption" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx {3, 6}
+"use client"
+
+import { useEncryption } from "@/hooks/use-encryption"
+
+export function Component() {
+  const { encrypt, decrypt } = useEncryption()
+
+  const handleEncrypt = () => {
+    const encrypted = encrypt("Sensitive data", "my-secret-key")
+    if (encrypted) {
+      console.log("Encrypted:", encrypted)
+    }
+  }
+
+  const handleDecrypt = () => {
+    const decrypted = decrypt<string>("U2FsdGVkX1...", "my-secret-key")
+    if (decrypted) {
+      console.log("Decrypted:", decrypted)
+    }
+  }
+
+  return (
+    <div>
+      <button onClick={handleEncrypt}>Encrypt Data</button>
+      <button onClick={handleDecrypt}>Decrypt Data</button>
+    </div>
+  )
+}
+```
+
+## API Reference
+
+### Parameters
+
+#### encrypt()
+
+| Name     | Type      | Description                        | Default Value | Optional |
+| -------- | --------- | ---------------------------------- | ------------- | -------- |
+| `data`   | `unknown` | The data to be encrypted           |               | No       |
+| `secret` | `string`  | The secret key used for encryption |               | No       |
+
+#### decrypt()
+
+| Name         | Type     | Description                        | Default Value | Optional |
+| ------------ | -------- | ---------------------------------- | ------------- | -------- |
+| `cipherText` | `string` | The encrypted string to decrypt    |               | No       |
+| `secret`     | `string` | The secret key used for decryption |               | No       |
+
+### Return Values
+
+| Name      | Type                                                     | Description                                    |
+| --------- | -------------------------------------------------------- | ---------------------------------------------- |
+| `encrypt` | `(data: unknown, secret: string) => string \| null`      | Function to encrypt data using AES encryption. |
+| `decrypt` | `(cipherText: string, secret: string) => string \| null` | Function to decrypt data using AES encryption. |
