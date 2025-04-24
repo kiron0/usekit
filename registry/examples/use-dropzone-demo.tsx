@@ -1,7 +1,6 @@
 "use client"
 
 import { useRef } from "react"
-import Image from "next/image"
 
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
@@ -49,7 +48,7 @@ export default function UseDropzoneDemo() {
               files.map(
                 (file, i) =>
                   file.type.startsWith("image/") && (
-                    <Image
+                    <img
                       key={i}
                       src={URL.createObjectURL(file)}
                       alt="Preview"

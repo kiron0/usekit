@@ -1,7 +1,6 @@
 "use client"
 
 import * as React from "react"
-import Image from "next/image"
 
 import { Button } from "@/components/ui/button"
 import { useFetch } from "registry/hooks/use-fetch"
@@ -34,13 +33,11 @@ export default function UseFetchDemo() {
         ) : data ? (
           <div className="flex flex-col items-center justify-center gap-2">
             {data.sprites.other.home.front_shiny ? (
-              <Image
+              <img
                 src={data?.sprites?.other?.home?.front_shiny || ""}
                 alt={data.name}
                 width={200}
                 height={200}
-                placeholder="blur"
-                blurDataURL={data?.sprites?.other?.home?.front_shiny}
                 className="rounded-xl border border-primary"
               />
             ) : (

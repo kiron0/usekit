@@ -1,3 +1,4 @@
+import { Analytics } from "@vercel/analytics/next"
 import NextTopLoader from "nextjs-toploader"
 
 import { THEMES } from "@/config/colors"
@@ -24,6 +25,7 @@ export default function Providers({ children }: ProvidersProps) {
         <TooltipProvider>
           <div className="relative flex min-h-svh flex-col bg-background">
             {children}
+            <Analytics />
           </div>
           <Toaster />
           <NextTopLoader showForHashAnchor={false} />

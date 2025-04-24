@@ -19,6 +19,10 @@ export const siteConfig = {
     "Server Components",
     "Radix UI",
   ],
+  env: {
+    node: process.env.NEXT_PUBLIC_NODE_ENV,
+    apiUrl: process.env.NEXT_PUBLIC_BASE_API_URL,
+  },
 }
 
 export type SiteConfig = typeof siteConfig
