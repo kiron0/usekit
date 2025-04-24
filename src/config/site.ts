@@ -19,6 +19,7 @@ export const siteConfig = {
     "Server Components",
     "Radix UI",
   ],
+  baseApiUrl: "https://api.kiron.dev/api/v1",
 }
 
 export type SiteConfig = typeof siteConfig
