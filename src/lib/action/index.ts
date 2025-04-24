@@ -3,11 +3,12 @@
 import { siteConfig } from "@/config/site"
 
 export async function createReport(data: {
-  name: string
-  message: string
-  email: string
+  type: "report" | "feature"
+  title: string
+  hook?: string
+  description: string
 }) {
-  const result = await fetch(`${siteConfig.baseApiUrl}/report/create-report`, {
+  const result = await fetch(`${siteConfig.env.apiUrl}/report/create-report`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
