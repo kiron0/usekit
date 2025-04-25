@@ -571,4 +571,14 @@ export const hooksExamples: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "use-query-state-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/use-query-state-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
 ]
