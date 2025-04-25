@@ -415,6 +415,11 @@ export const docsConfig: DocsConfig = {
           href: "/docs/hooks/use-encryption",
           items: [],
         },
+        {
+          title: "useQueryState",
+          href: "/docs/hooks/use-query-state",
+          items: [],
+        },
       ],
     },
     {

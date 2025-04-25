@@ -978,6 +978,19 @@ export const hooks: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "use-query-state",
+    title: "Use Query State",
+    description:
+      "Manage query parameters in the URL with the useQueryState hook, providing methods to get, set, and remove query parameters.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-query-state.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
 ]
 
 export default hooks

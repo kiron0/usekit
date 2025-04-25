@@ -1131,6 +1131,22 @@ export const Index: Record<string, any> = {
     ),
     source: "",
   },
+  "use-query-state": {
+    name: "use-query-state",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-query-state.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-query-state-demo")
+    ),
+    source: "",
+  },
   "use-copy-to-clipboard-demo": {
     name: "use-copy-to-clipboard-demo",
     type: "registry:example",
@@ -2030,6 +2046,22 @@ export const Index: Record<string, any> = {
     ],
     component: React.lazy(
       () => import("registry/examples/use-encryption-demo.tsx")
+    ),
+    source: "",
+  },
+  "use-query-state-demo": {
+    name: "use-query-state-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-query-state-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-query-state-demo.tsx")
     ),
     source: "",
   },
