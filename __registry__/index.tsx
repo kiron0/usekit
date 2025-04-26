@@ -1147,6 +1147,66 @@ export const Index: Record<string, any> = {
     ),
     source: "",
   },
+  "use-vibration": {
+    name: "use-vibration",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-vibration.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(() => import("registry/examples/use-vibration-demo")),
+    source: "",
+  },
+  "use-swipe": {
+    name: "use-swipe",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-swipe.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(() => import("registry/examples/use-swipe-demo")),
+    source: "",
+  },
+  "use-fullscreen": {
+    name: "use-fullscreen",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-fullscreen.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-fullscreen-demo")
+    ),
+    source: "",
+  },
+  "use-pinch-zoom": {
+    name: "use-pinch-zoom",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-pinch-zoom.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-pinch-zoom-demo")
+    ),
+    source: "",
+  },
   "use-copy-to-clipboard-demo": {
     name: "use-copy-to-clipboard-demo",
     type: "registry:example",
@@ -2062,6 +2122,68 @@ export const Index: Record<string, any> = {
     ],
     component: React.lazy(
       () => import("registry/examples/use-query-state-demo.tsx")
+    ),
+    source: "",
+  },
+  "use-vibration-demo": {
+    name: "use-vibration-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-vibration-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-vibration-demo.tsx")
+    ),
+    source: "",
+  },
+  "use-swipe-demo": {
+    name: "use-swipe-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-swipe-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(() => import("registry/examples/use-swipe-demo.tsx")),
+    source: "",
+  },
+  "use-fullscreen-demo": {
+    name: "use-fullscreen-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-fullscreen-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-fullscreen-demo.tsx")
+    ),
+    source: "",
+  },
+  "use-pinch-zoom-demo": {
+    name: "use-pinch-zoom-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-pinch-zoom-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-pinch-zoom-demo.tsx")
     ),
     source: "",
   },

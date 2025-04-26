@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-fullscreen",
+  "type": "registry:hook",
+  "title": "Use Fullscreen",
+  "description": "Manage fullscreen mode for a specific element or the entire document with useFullscreen.",
+  "files": [
+    {
+      "path": "registry/hooks/use-fullscreen.ts",
+      "content": "import * as React from \"react\"\r\n\r\nexport interface Return<T extends HTMLElement> {\r\n  elementRef: React.RefObject<T>\r\n  isFullscreen: boolean\r\n  requestFullscreen: () => void\r\n  exitFullscreen: () => void\r\n  toggleFullscreen: () => void\r\n}\r\n\r\nexport function useFullscreen<T extends HTMLElement>(): Return<T> {\r\n  const elementRef = React.useRef<T | null>(null)\r\n  const [isFullscreen, setIsFullscreen] = React.useState<boolean>(false)\r\n\r\n  const requestFullscreen = React.useCallback((): void => {\r\n    const el: any = elementRef.current || document.documentElement\r\n\r\n    const request: (() => Promise<void>) | undefined =\r\n      el.requestFullscreen ||\r\n      el.webkitRequestFullscreen ||\r\n      el.mozRequestFullScreen ||\r\n      el.msRequestFullscreen\r\n\r\n    if (request) {\r\n      request.call(el)\r\n      setIsFullscreen(true)\r\n    }\r\n  }, [])\r\n\r\n  const exitFullscreen = React.useCallback((): void => {\r\n    const exit: (() => Promise<void>) | undefined =\r\n      document.exitFullscreen ||\r\n      (document as any).webkitExitFullscreen ||\r\n      (document as any).mozCancelFullScreen ||\r\n      (document as any).msExitFullscreen\r\n\r\n    if (exit) {\r\n      exit.call(document)\r\n      setIsFullscreen(false)\r\n    }\r\n  }, [])\r\n\r\n  const toggleFullscreen = React.useCallback((): void => {\r\n    if (isFullscreen) {\r\n      exitFullscreen()\r\n    } else {\r\n      requestFullscreen()\r\n    }\r\n  }, [isFullscreen, requestFullscreen, exitFullscreen])\r\n\r\n  return {\r\n    elementRef: elementRef as React.RefObject<T>,\r\n    isFullscreen,\r\n    requestFullscreen,\r\n    exitFullscreen,\r\n    toggleFullscreen,\r\n  }\r\n}\r\n",
+      "type": "registry:hook"
+    }
+  ]
+}

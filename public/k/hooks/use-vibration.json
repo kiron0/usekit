@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-vibration",
+  "type": "registry:hook",
+  "title": "Use Vibration",
+  "description": "Use the useVibration hook to control the vibration of a device, with options for duration and pattern.",
+  "files": [
+    {
+      "path": "registry/hooks/use-vibration.ts",
+      "content": "import * as React from \"react\"\r\n\r\ntype VibrationPattern = number | number[]\r\n\r\ninterface Options {\r\n  loop?: boolean\r\n}\r\n\r\ninterface Return {\r\n  vibrate: (pattern?: VibrationPattern) => void\r\n  stop: () => void\r\n  isSupported: boolean\r\n  isVibrating: boolean\r\n}\r\n\r\nexport function useVibration(\r\n  defaultPattern: VibrationPattern = 100,\r\n  options: Options = {}\r\n): Return {\r\n  const isSupported = React.useMemo(() => \"vibrate\" in navigator, [])\r\n\r\n  const [isVibrating, setIsVibrating] = React.useState(false)\r\n\r\n  const vibrate = React.useCallback(\r\n    (pattern: VibrationPattern = defaultPattern) => {\r\n      if (!isSupported) return\r\n\r\n      try {\r\n        const normalizedPattern = Array.isArray(pattern)\r\n          ? pattern.filter((n) => Number.isFinite(n) && n >= 0)\r\n          : Number.isFinite(pattern) && pattern >= 0\r\n            ? pattern\r\n            : defaultPattern\r\n\r\n        navigator.vibrate(\r\n          options.loop\r\n            ? Array(100).fill(normalizedPattern).flat()\r\n            : normalizedPattern\r\n        )\r\n\r\n        if (!options.loop) {\r\n          setTimeout(\r\n            () => setIsVibrating(false),\r\n            Array.isArray(normalizedPattern)\r\n              ? normalizedPattern.reduce((a, b) => a + b, 0)\r\n              : normalizedPattern\r\n          )\r\n        }\r\n\r\n        setIsVibrating(true)\r\n      } catch (error) {\r\n        console.error(\"Vibration failed:\", error)\r\n      }\r\n    },\r\n    [isSupported, defaultPattern, options.loop]\r\n  )\r\n\r\n  const stop = React.useCallback(() => {\r\n    if (!isSupported) return\r\n\r\n    navigator.vibrate(0)\r\n    setIsVibrating(false)\r\n  }, [isSupported])\r\n\r\n  return { vibrate, stop, isSupported, isVibrating }\r\n}\r\n",
+      "type": "registry:hook"
+    }
+  ]
+}

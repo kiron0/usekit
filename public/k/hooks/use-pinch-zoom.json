@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-pinch-zoom",
+  "type": "registry:hook",
+  "title": "Use Pinch Zoom",
+  "description": "Enable pinch-to-zoom functionality on touch devices with usePinchZoom, providing options for min and max scale.",
+  "files": [
+    {
+      "path": "registry/hooks/use-pinch-zoom.ts",
+      "content": "import * as React from \"react\"\r\n\r\ninterface Options {\r\n  onZoom?: (scale: number) => void\r\n  minScale?: number\r\n  maxScale?: number\r\n}\r\n\r\nexport const usePinchZoom = ({\r\n  onZoom,\r\n  minScale = 0.5,\r\n  maxScale = 3,\r\n}: Options = {}) => {\r\n  const isTouchSupported =\r\n    \"ontouchstart\" in window || navigator.maxTouchPoints > 0\r\n\r\n  const [isSupported, setIsSupported] = React.useState(isTouchSupported)\r\n  const initialDistance = React.useRef<number | null>(null)\r\n  const lastScale = React.useRef(1)\r\n  const [scale, setScale] = React.useState(1)\r\n\r\n  const getDistance = (touches: TouchList) => {\r\n    const [touch1, touch2] = [touches[0], touches[1]]\r\n    const dx = touch2.clientX - touch1.clientX\r\n    const dy = touch2.clientY - touch1.clientY\r\n    return Math.sqrt(dx * dx + dy * dy)\r\n  }\r\n\r\n  const onTouchStart = React.useCallback((e: React.TouchEvent) => {\r\n    if (e.touches.length === 2) {\r\n      initialDistance.current = getDistance(e.touches as unknown as TouchList)\r\n    }\r\n  }, [])\r\n\r\n  const onTouchMove = React.useCallback(\r\n    (e: React.TouchEvent) => {\r\n      if (e.touches.length === 2 && initialDistance.current !== null) {\r\n        const currentDistance = getDistance(e.touches as unknown as TouchList)\r\n        let newScale =\r\n          (currentDistance / initialDistance.current) * lastScale.current\r\n        newScale = Math.min(Math.max(newScale, minScale), maxScale)\r\n\r\n        setScale(newScale)\r\n        onZoom?.(newScale)\r\n      }\r\n    },\r\n    [minScale, maxScale, onZoom]\r\n  )\r\n\r\n  const onTouchEnd = React.useCallback(() => {\r\n    lastScale.current = scale\r\n    initialDistance.current = null\r\n  }, [scale])\r\n\r\n  React.useEffect(() => {\r\n    setIsSupported(isTouchSupported)\r\n  }, [isTouchSupported])\r\n\r\n  if (!isTouchSupported) {\r\n    return {\r\n      isSupported,\r\n    }\r\n  }\r\n\r\n  return {\r\n    scale,\r\n    onTouchStart,\r\n    onTouchMove,\r\n    onTouchEnd,\r\n    isSupported,\r\n  }\r\n}\r\n",
+      "type": "registry:hook"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-swipe",
+  "type": "registry:hook",
+  "title": "Use Swipe",
+  "description": "Detect swipe gestures on touch devices with useSwipe, providing options for direction and threshold.",
+  "files": [
+    {
+      "path": "registry/hooks/use-swipe.ts",
+      "content": "import * as React from \"react\"\r\n\r\ntype SwipeDirection = \"left\" | \"right\" | \"up\" | \"down\"\r\n\r\ninterface Options {\r\n  onSwipe: (direction: SwipeDirection) => void\r\n  threshold?: number\r\n}\r\n\r\nexport const useSwipe = ({ onSwipe, threshold = 50 }: Options) => {\r\n  const startX = React.useRef(0)\r\n  const startY = React.useRef(0)\r\n  const endX = React.useRef(0)\r\n  const endY = React.useRef(0)\r\n\r\n  const onStart = React.useCallback((x: number, y: number) => {\r\n    startX.current = x\r\n    startY.current = y\r\n  }, [])\r\n\r\n  const onMove = React.useCallback((x: number, y: number) => {\r\n    endX.current = x\r\n    endY.current = y\r\n  }, [])\r\n\r\n  const onEnd = React.useCallback(() => {\r\n    const deltaX = endX.current - startX.current\r\n    const deltaY = endY.current - startY.current\r\n\r\n    const isHorizontal = Math.abs(deltaX) > Math.abs(deltaY)\r\n\r\n    if (isHorizontal && Math.abs(deltaX) > threshold) {\r\n      onSwipe(deltaX > 0 ? \"right\" : \"left\")\r\n    } else if (!isHorizontal && Math.abs(deltaY) > threshold) {\r\n      onSwipe(deltaY > 0 ? \"down\" : \"up\")\r\n    }\r\n  }, [onSwipe, threshold])\r\n\r\n  const onTouchStart = React.useCallback(\r\n    (e: React.TouchEvent) => {\r\n      onStart(e.touches[0].clientX, e.touches[0].clientY)\r\n    },\r\n    [onStart]\r\n  )\r\n\r\n  const onTouchMove = React.useCallback(\r\n    (e: React.TouchEvent) => {\r\n      onMove(e.touches[0].clientX, e.touches[0].clientY)\r\n    },\r\n    [onMove]\r\n  )\r\n\r\n  const onTouchEnd = React.useCallback(() => {\r\n    onEnd()\r\n  }, [onEnd])\r\n\r\n  const onMouseMove = React.useCallback(\r\n    (e: MouseEvent) => {\r\n      onMove(e.clientX, e.clientY)\r\n    },\r\n    [onMove]\r\n  )\r\n\r\n  const onMouseUp = React.useCallback(() => {\r\n    onEnd()\r\n    window.removeEventListener(\"mousemove\", onMouseMove)\r\n    window.removeEventListener(\"mouseup\", onMouseUp)\r\n  }, [onEnd, onMouseMove])\r\n\r\n  const onMouseDown = React.useCallback(\r\n    (e: React.MouseEvent) => {\r\n      onStart(e.clientX, e.clientY)\r\n      window.addEventListener(\"mousemove\", onMouseMove)\r\n      window.addEventListener(\"mouseup\", onMouseUp)\r\n    },\r\n    [onStart, onMouseMove, onMouseUp]\r\n  )\r\n\r\n  return {\r\n    onTouchStart,\r\n    onTouchMove,\r\n    onTouchEnd,\r\n    onMouseDown,\r\n  }\r\n}\r\n",
+      "type": "registry:hook"
+    }
+  ]
+}

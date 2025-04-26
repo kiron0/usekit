@@ -991,6 +991,58 @@ export const hooks: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "use-vibration",
+    title: "Use Vibration",
+    description:
+      "Use the useVibration hook to control the vibration of a device, with options for duration and pattern.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-vibration.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-swipe",
+    title: "Use Swipe",
+    description:
+      "Detect swipe gestures on touch devices with useSwipe, providing options for direction and threshold.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-swipe.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-fullscreen",
+    title: "Use Fullscreen",
+    description:
+      "Manage fullscreen mode for a specific element or the entire document with useFullscreen.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-fullscreen.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-pinch-zoom",
+    title: "Use Pinch Zoom",
+    description:
+      "Enable pinch-to-zoom functionality on touch devices with usePinchZoom, providing options for min and max scale.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-pinch-zoom.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
 ]
 
 export default hooks
