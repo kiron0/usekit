@@ -581,4 +581,44 @@ export const hooksExamples: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "use-vibration-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/use-vibration-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-swipe-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/use-swipe-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-fullscreen-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/use-fullscreen-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-pinch-zoom-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/use-pinch-zoom-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
 ]

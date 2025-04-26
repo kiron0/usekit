@@ -20,8 +20,8 @@ export const siteConfig = {
     "Radix UI",
   ],
   env: {
-    node: process.env.NEXT_PUBLIC_NODE_ENV,
-    apiUrl: process.env.NEXT_PUBLIC_BASE_API_URL,
+    node: process.env.NEXT_PUBLIC_NODE_ENV! as "production" | "development",
+    apiUrl: process.env.NEXT_PUBLIC_BASE_API_URL!,
   },
 }
 

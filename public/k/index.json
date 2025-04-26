@@ -931,6 +931,66 @@
           "path": "registry/hooks/use-query-state.ts"
         }
       ]
+    },
+    {
+      "name": "use-vibration",
+      "title": "Use Vibration",
+      "description": "Use the useVibration hook to control the vibration of a device, with options for duration and pattern.",
+      "type": "registry:hook",
+      "files": [
+        {
+          "type": "registry:hook",
+          "path": "registry/hooks/use-vibration.ts"
+        }
+      ]
+    },
+    {
+      "name": "use-swipe",
+      "title": "Use Swipe",
+      "description": "Detect swipe gestures on touch devices with useSwipe, providing options for direction and threshold.",
+      "type": "registry:hook",
+      "files": [
+        {
+          "type": "registry:hook",
+          "path": "registry/hooks/use-swipe.ts"
+        }
+      ]
+    },
+    {
+      "name": "use-fullscreen",
+      "title": "Use Fullscreen",
+      "description": "Manage fullscreen mode for a specific element or the entire document with useFullscreen.",
+      "type": "registry:hook",
+      "files": [
+        {
+          "type": "registry:hook",
+          "path": "registry/hooks/use-fullscreen.ts"
+        }
+      ]
+    },
+    {
+      "name": "use-pinch-zoom",
+      "title": "Use Pinch Zoom",
+      "description": "Enable pinch-to-zoom functionality on touch devices with usePinchZoom, providing options for min and max scale.",
+      "type": "registry:hook",
+      "files": [
+        {
+          "type": "registry:hook",
+          "path": "registry/hooks/use-pinch-zoom.ts"
+        }
+      ]
+    },
+    {
+      "name": "use-prevent-zoom",
+      "title": "Use Prevent Zoom",
+      "description": "Prevent zooming on touch devices with usePreventZoom, providing options for scroll, keyboard, and pinch prevention.",
+      "type": "registry:hook",
+      "files": [
+        {
+          "type": "registry:hook",
+          "path": "registry/hooks/use-prevent-zoom.ts"
+        }
+      ]
     }
   ]
 }

@@ -1,5 +1,7 @@
 import type { MainNavItem, SidebarNavItem } from "@/types/nav"
 
+import { siteConfig } from "./site"
+
 export interface DocsConfig {
   mainNav: MainNavItem[]
   sidebarNav: SidebarNavItem[]
@@ -35,6 +37,16 @@ export const docsConfig: DocsConfig = {
           href: "/docs/hooks",
           items: [],
         },
+        ...(siteConfig.env.node === "development"
+          ? [
+              {
+                title: "Development",
+                href: "/docs/development",
+                items: [],
+                label: "alpha",
+              },
+            ]
+          : []),
       ],
     },
     {
@@ -419,6 +431,65 @@ export const docsConfig: DocsConfig = {
           title: "useQueryState",
           href: "/docs/hooks/use-query-state",
           items: [],
+        },
+        {
+          title: "useVibration",
+          href: "/docs/hooks/use-vibration",
+          items: [],
+          label: "Soon",
+        },
+        {
+          title: "useSwipe",
+          href: "/docs/hooks/use-swipe",
+          items: [],
+          label: "Soon",
+        },
+        {
+          title: "useFullscreen",
+          href: "/docs/hooks/use-fullscreen",
+          items: [],
+          label: "Soon",
+        },
+        {
+          title: "usePreventZoom",
+          href: "/docs/hooks/use-prevent-zoom",
+          items: [],
+        },
+        {
+          title: "usePinchZoom",
+          href: "/docs/hooks/use-pinch-zoom",
+          items: [],
+          label: "Soon",
+        },
+        {
+          title: "useWebSocket",
+          href: "/docs/hooks/use-web-socket",
+          items: [],
+          label: "Soon",
+        },
+        {
+          title: "usePortal",
+          href: "/docs/hooks/use-portal",
+          items: [],
+          label: "Soon",
+        },
+        {
+          title: "useFocusTrap",
+          href: "/docs/hooks/use-focus-trap",
+          items: [],
+          label: "Soon",
+        },
+        {
+          title: "usePrefersDarkMode",
+          href: "/docs/hooks/use-prefers-dark-mode",
+          items: [],
+          label: "Soon",
+        },
+        {
+          title: "useWhyDidYouUpdate",
+          href: "/docs/hooks/use-why-did-you-update",
+          items: [],
+          label: "Soon",
         },
       ],
     },
