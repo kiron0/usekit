@@ -12,7 +12,8 @@ export const usePinchZoom = ({
   maxScale = 3,
 }: Options = {}) => {
   const isTouchSupported =
-    "ontouchstart" in window || navigator.maxTouchPoints > 0
+    (typeof window !== "undefined" && "ontouchstart" in window) ||
+    (typeof navigator !== "undefined" && navigator.maxTouchPoints > 0)
 
   const [isSupported, setIsSupported] = React.useState(isTouchSupported)
   const initialDistance = React.useRef<number | null>(null)
