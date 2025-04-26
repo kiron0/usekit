@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-autosize-textarea",
+  "type": "registry:hook",
+  "title": "Use Autosize Textarea",
+  "description": "Automatically resize a textarea to fit its content with useAutosizeTextarea.",
+  "files": [
+    {
+      "path": "registry/hooks/use-autosize-textarea.ts",
+      "content": "import * as React from \"react\"\n\ninterface Props {\n  ref: React.RefObject<HTMLTextAreaElement | null>\n  maxHeight?: number\n  borderWidth?: number\n  dependencies: React.DependencyList\n}\n\nexport function useAutosizeTextArea({\n  ref,\n  maxHeight = Number.MAX_SAFE_INTEGER,\n  borderWidth = 0,\n  dependencies,\n}: Props) {\n  const originalHeight = React.useRef<number | null>(null)\n\n  React.useLayoutEffect(() => {\n    if (!ref.current) return\n\n    const currentRef = ref.current\n    const borderAdjustment = borderWidth * 2\n\n    if (originalHeight.current === null) {\n      originalHeight.current = currentRef.scrollHeight - borderAdjustment\n    }\n\n    currentRef.style.removeProperty(\"height\")\n    const scrollHeight = currentRef.scrollHeight\n\n    const clampedToMax = Math.min(scrollHeight, maxHeight)\n    const clampedToMin = Math.max(clampedToMax, originalHeight.current)\n\n    currentRef.style.height = `${clampedToMin + borderAdjustment}px`\n    // eslint-disable-next-line react-hooks/exhaustive-deps\n  }, [maxHeight, ref, ...dependencies])\n}\n",
+      "type": "registry:hook"
+    }
+  ]
+}

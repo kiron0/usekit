@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-continuous-retry",
+  "type": "registry:hook",
+  "title": "Use Continuous Retry",
+  "description": "Automates retries of a callback function until it succeeds with useContinuousRetry.",
+  "files": [
+    {
+      "path": "registry/hooks/use-continuous-retry.ts",
+      "content": "import * as React from \"react\"\n\ninterface Options {\n  maxRetries?: number\n}\n\nexport function useContinuousRetry(\n  callback: () => boolean | Promise<boolean>,\n  interval: number = 100,\n  options?: Options\n): boolean {\n  const [hasResolved, setHasResolved] = React.useState(false)\n  const callbackRef = React.useRef(callback)\n  const intervalRef = React.useRef(interval)\n  const optionsRef = React.useRef(options)\n  const retryCountRef = React.useRef(0)\n  const timeoutIdRef = React.useRef(0)\n  const isMountedRef = React.useRef(false)\n\n  React.useEffect(() => {\n    callbackRef.current = callback\n    intervalRef.current = interval\n    optionsRef.current = options\n  })\n\n  React.useEffect(() => {\n    isMountedRef.current = true\n    retryCountRef.current = 0\n    setHasResolved(false)\n\n    const execute = async () => {\n      if (!isMountedRef.current) return\n\n      try {\n        const result = callbackRef.current()\n        const resolved = result instanceof Promise ? await result : result\n\n        if (resolved) {\n          if (isMountedRef.current) setHasResolved(true)\n        } else {\n          scheduleRetry()\n        }\n      } catch (error) {\n        console.error(\"Retry callback failed:\", error)\n        scheduleRetry()\n      }\n    }\n\n    const scheduleRetry = () => {\n      if (!isMountedRef.current) return\n\n      const maxRetries = optionsRef.current?.maxRetries\n      if (maxRetries !== undefined && retryCountRef.current >= maxRetries) {\n        return\n      }\n\n      retryCountRef.current += 1\n      timeoutIdRef.current = window.setTimeout(execute, intervalRef.current)\n    }\n\n    timeoutIdRef.current = window.setTimeout(execute, intervalRef.current)\n\n    return () => {\n      isMountedRef.current = false\n      window.clearTimeout(timeoutIdRef.current)\n    }\n  }, [callback, interval, options])\n\n  return hasResolved\n}\n",
+      "type": "registry:hook"
+    }
+  ]
+}

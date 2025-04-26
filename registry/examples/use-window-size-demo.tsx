@@ -12,7 +12,7 @@ export default function UseWindowSizeDemo() {
           className="rounded-xl border border-primary"
           style={{ width: innerWidth / 4, height: innerHeight / 4 }}
         />
-        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform truncate">
+        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform truncate text-balance text-xs md:text-base">
           <p>Inner W: {innerWidth}px</p>
           <p>Inner H: {innerHeight}px</p>
           <p>Outer W: {outerWidth}px</p>

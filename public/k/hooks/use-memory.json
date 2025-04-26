@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-memory",
+  "type": "registry:hook",
+  "title": "Use Memory",
+  "description": "Monitor the memory usage of a web page with useMemory, providing information about the JavaScript heap size.",
+  "files": [
+    {
+      "path": "registry/hooks/use-memory.ts",
+      "content": "import * as React from \"react\"\n\nexport interface MemoryInfo {\n  readonly jsHeapSizeLimit: number\n  readonly totalJSHeapSize: number\n  readonly usedJSHeapSize: number\n  [Symbol.toStringTag]: \"MemoryInfo\"\n}\n\ninterface Options {\n  interval?: number\n  immediate?: boolean\n}\n\ntype PerformanceMemory = Performance & { memory: MemoryInfo }\n\nexport function useMemory({\n  interval = 1000,\n  immediate = false,\n}: Options = {}): {\n  isSupported: boolean\n  memory: MemoryInfo | undefined\n} {\n  const [memory, setMemory] = React.useState<MemoryInfo>()\n  const isSupported =\n    typeof performance !== \"undefined\" && \"memory\" in performance\n\n  const updateMemory = React.useCallback(() => {\n    if (isSupported) {\n      setMemory((performance as PerformanceMemory).memory)\n    }\n  }, [isSupported])\n\n  React.useEffect(() => {\n    if (!isSupported) return\n\n    if (immediate) updateMemory()\n    const intervalId = setInterval(updateMemory, interval)\n\n    return () => clearInterval(intervalId)\n  }, [isSupported, interval, immediate, updateMemory])\n\n  return { isSupported, memory }\n}\n",
+      "type": "registry:hook"
+    }
+  ]
+}

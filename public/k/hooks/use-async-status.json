@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-async-status",
+  "type": "registry:hook",
+  "title": "Use Async Status",
+  "description": "Track the status of asynchronous operations with useAsyncStatus.",
+  "files": [
+    {
+      "path": "registry/hooks/use-async-status.ts",
+      "content": "import * as React from \"react\"\n\ntype AsyncFunction<TArgs extends unknown[], TData, TError> = (\n  ...args: TArgs\n) => Promise<{ data: TData } | { error: TError }>\n\ntype AsyncStatus<TData, TError> =\n  | { state: \"idle\" }\n  | { state: \"loading\" }\n  | { state: \"success\"; data: TData }\n  | { state: \"error\"; error: TError }\n\ninterface Options<TData, TError> {\n  loading?: React.ReactNode\n  success?: (data: TData) => React.ReactNode\n  error?: (error: TError) => React.ReactNode\n}\n\nexport function useAsyncStatus<TArgs extends unknown[], TData, TError>(\n  asyncFn: AsyncFunction<TArgs, TData, TError> | undefined,\n  options?: Options<TData, TError>\n): [\n  trigger: (...args: TArgs) => Promise<void>,\n  status: AsyncStatus<TData, TError>,\n  data: React.ReactNode | null,\n] {\n  const [status, setStatus] = React.useState<AsyncStatus<TData, TError>>({\n    state: \"idle\",\n  })\n\n  const trigger = React.useCallback(\n    async (...args: TArgs) => {\n      if (typeof asyncFn !== \"function\") {\n        console.error(\"useAsyncStatus: asyncFn is not a function\")\n        setStatus({\n          state: \"error\",\n          error: \"Invalid async function\" as TError,\n        })\n        return\n      }\n\n      try {\n        setStatus({ state: \"loading\" })\n        const result = await asyncFn(...args)\n\n        if (\"error\" in result) {\n          setStatus({ state: \"error\", error: result.error })\n        } else {\n          setStatus({ state: \"success\", data: result.data })\n        }\n      } catch (error) {\n        const normalizedError =\n          error instanceof Error ? error.message : String(error)\n        setStatus({ state: \"error\", error: normalizedError as TError })\n      }\n    },\n    [asyncFn]\n  )\n\n  const data = React.useMemo(() => {\n    switch (status.state) {\n      case \"loading\":\n        return options?.loading || null\n      case \"success\":\n        return options?.success?.(status.data) || null\n      case \"error\":\n        const errorContent =\n          typeof status.error === \"string\" ? status.error : String(status.error)\n        return options?.error?.(errorContent as TError) || null\n      default:\n        return null\n    }\n  }, [status, options])\n\n  return [trigger, status, data]\n}\n",
+      "type": "registry:hook"
+    }
+  ]
+}

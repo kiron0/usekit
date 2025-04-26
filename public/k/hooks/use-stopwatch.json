@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-stopwatch",
+  "type": "registry:hook",
+  "title": "Use Stopwatch",
+  "description": "Create a stopwatch with useStopwatch, providing options to pause, play, reset, and toggle the stopwatch.",
+  "files": [
+    {
+      "path": "registry/hooks/use-stopwatch.ts",
+      "content": "import * as React from \"react\"\n\nconst addLeadingZero = (digit: number): string => {\n  return digit.toString().padStart(2, \"0\")\n}\n\ninterface Stopwatch {\n  current: string\n  isPaused: boolean\n  currentDays: number\n  currentHours: number\n  currentMinutes: number\n  currentSeconds: number\n  elapsedSeconds: number\n  pause: () => void\n  play: () => void\n  reset: () => void\n  togglePause: () => void\n}\n\nexport const useStopwatch = (): Stopwatch => {\n  const [elapsedSeconds, setElapsedSeconds] = React.useState(0)\n  const [paused, setPaused] = React.useState(false)\n\n  React.useEffect(() => {\n    if (paused) {\n      return\n    }\n    const interval = setInterval(() => {\n      setElapsedSeconds((prev) => prev + 1)\n    }, 1000)\n\n    return () => clearInterval(interval)\n  }, [paused])\n\n  const timeComponents = React.useMemo(() => {\n    const days = Math.floor(elapsedSeconds / 86400)\n    const hours = Math.floor((elapsedSeconds % 86400) / 3600)\n    const minutes = Math.floor((elapsedSeconds % 3600) / 60)\n    const seconds = elapsedSeconds % 60\n    return { days, hours, minutes, seconds }\n  }, [elapsedSeconds])\n\n  const { days, hours, minutes, seconds } = timeComponents\n  const divider = \":\"\n  const current = `${addLeadingZero(days)}${divider}${addLeadingZero(hours)}${divider}${addLeadingZero(minutes)}${divider}${addLeadingZero(seconds)}`\n\n  return {\n    current,\n    isPaused: paused,\n    currentDays: days,\n    currentHours: hours,\n    currentMinutes: minutes,\n    currentSeconds: seconds,\n    elapsedSeconds,\n    pause: () => setPaused(true),\n    play: () => setPaused(false),\n    reset: () => {\n      setElapsedSeconds(0)\n    },\n    togglePause: () => setPaused((prev) => !prev),\n  }\n}\n",
+      "type": "registry:hook"
+    }
+  ]
+}

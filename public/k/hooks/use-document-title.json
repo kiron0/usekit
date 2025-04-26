@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-document-title",
+  "type": "registry:hook",
+  "title": "Use Document Title",
+  "description": "Dynamically update the document title. Pass a string, and the document title updates whenever the value changes.",
+  "files": [
+    {
+      "path": "registry/hooks/use-document-title.ts",
+      "content": "import * as React from \"react\"\n\nexport function useDocumentTitle(title: string) {\n  const initial = React.useRef(\n    typeof document !== \"undefined\" ? document.title : \"\"\n  )\n\n  React.useEffect(() => {\n    const initialTitle = initial.current\n    document.title = title\n\n    return () => {\n      document.title = initialTitle\n    }\n  }, [title])\n}\n",
+      "type": "registry:hook"
+    }
+  ]
+}

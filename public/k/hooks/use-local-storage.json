@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-local-storage",
+  "type": "registry:hook",
+  "title": "Use Local Storage",
+  "description": "Store, retrieve, and synchronize data from the browser's localStorage API with useLocalStorage.",
+  "files": [
+    {
+      "path": "registry/hooks/use-local-storage.ts",
+      "content": "import * as React from \"react\"\n\ntype SetStateAction<T> = T | ((prevState: T) => T)\n\nexport function useLocalStorage<T>(\n  key: string,\n  initialValue: T | (() => T)\n): [T, (value: SetStateAction<T>) => void] {\n  const [storedValue, setStoredValue] = React.useState<T>(() => {\n    if (typeof window === \"undefined\") {\n      return typeof initialValue === \"function\"\n        ? (initialValue as () => T)()\n        : initialValue\n    }\n    try {\n      const item = window.localStorage.getItem(key)\n      return item\n        ? JSON.parse(item)\n        : typeof initialValue === \"function\"\n          ? (initialValue as () => T)()\n          : initialValue\n    } catch (error) {\n      console.error(`Error reading localStorage key \"${key}\":`, error)\n      return typeof initialValue === \"function\"\n        ? (initialValue as () => T)()\n        : initialValue\n    }\n  })\n\n  React.useEffect(() => {\n    if (typeof window !== \"undefined\") {\n      try {\n        window.localStorage.setItem(key, JSON.stringify(storedValue))\n      } catch (error) {\n        console.error(`Error setting localStorage key \"${key}\":`, error)\n      }\n    }\n  }, [key, storedValue])\n\n  const handleStorageChange = React.useCallback(\n    (event: StorageEvent) => {\n      if (event.key === key) {\n        try {\n          const newValue = event.newValue\n            ? JSON.parse(event.newValue)\n            : typeof initialValue === \"function\"\n              ? (initialValue as () => T)()\n              : initialValue\n          setStoredValue(newValue)\n        } catch (error) {\n          console.error(\n            `Error parsing new localStorage value for key \"${key}\":`,\n            error\n          )\n        }\n      }\n    },\n    [key, initialValue]\n  )\n\n  React.useEffect(() => {\n    window.addEventListener(\"storage\", handleStorageChange)\n    return () => window.removeEventListener(\"storage\", handleStorageChange)\n  }, [handleStorageChange])\n\n  return [storedValue, setStoredValue]\n}\n",
+      "type": "registry:hook"
+    }
+  ]
+}

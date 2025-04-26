@@ -1,6 +1,4 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
-
 import { toc } from "mdast-util-toc"
 import { remark } from "remark"
 import { visit } from "unist-util-visit"

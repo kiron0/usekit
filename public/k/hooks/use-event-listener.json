@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-event-listener",
+  "type": "registry:hook",
+  "title": "Use Event Listener",
+  "description": "Listen for events on a target element with useEventListener.",
+  "registryDependencies": [
+    "https://usekit.kiron.dev/k/use-isomorphic-layout-effect"
+  ],
+  "files": [
+    {
+      "path": "registry/hooks/use-event-listener.ts",
+      "content": "import * as React from \"react\"\n\nimport { useIsomorphicLayoutEffect } from \"./use-isomorphic-layout-effect\"\n\nfunction useEventListener<K extends keyof MediaQueryListEventMap>(\n  eventName: K,\n  handler: (event: MediaQueryListEventMap[K]) => void,\n  element: React.RefObject<MediaQueryList>,\n  options?: boolean | AddEventListenerOptions\n): void\n\nfunction useEventListener<K extends keyof WindowEventMap>(\n  eventName: K,\n  handler: (event: WindowEventMap[K]) => void,\n  element?: undefined,\n  options?: boolean | AddEventListenerOptions\n): void\n\nfunction useEventListener<\n  K extends keyof HTMLElementEventMap & keyof SVGElementEventMap,\n  T extends Element = K extends keyof HTMLElementEventMap\n    ? HTMLDivElement\n    : SVGElement,\n>(\n  eventName: K,\n  handler:\n    | ((event: HTMLElementEventMap[K]) => void)\n    | ((event: SVGElementEventMap[K]) => void),\n  element: React.RefObject<T | null>,\n  options?: boolean | AddEventListenerOptions\n): void\n\nfunction useEventListener<K extends keyof DocumentEventMap>(\n  eventName: K,\n  handler: (event: DocumentEventMap[K]) => void,\n  element: React.RefObject<Document>,\n  options?: boolean | AddEventListenerOptions\n): void\n\nfunction useEventListener<\n  KW extends keyof WindowEventMap,\n  KH extends keyof HTMLElementEventMap & keyof SVGElementEventMap,\n  KM extends keyof MediaQueryListEventMap,\n  T extends HTMLElement | SVGAElement | MediaQueryList = HTMLElement,\n>(\n  eventName: KW | KH | KM,\n  handler: (\n    event:\n      | WindowEventMap[KW]\n      | HTMLElementEventMap[KH]\n      | SVGElementEventMap[KH]\n      | MediaQueryListEventMap[KM]\n      | Event\n  ) => void,\n  element?: React.RefObject<T>,\n  options?: boolean | AddEventListenerOptions\n) {\n  const savedHandler = React.useRef(handler)\n\n  useIsomorphicLayoutEffect(() => {\n    savedHandler.current = handler\n  }, [handler])\n\n  React.useEffect(() => {\n    const targetElement: T | Window = element?.current ?? window\n\n    if (!targetElement?.addEventListener) {\n      return\n    }\n\n    const listener: typeof handler = (event) => {\n      savedHandler.current(event)\n    }\n\n    targetElement.addEventListener(eventName, listener, options)\n\n    return () => {\n      targetElement.removeEventListener(eventName, listener, options)\n    }\n  }, [eventName, element, options])\n}\n\nexport { useEventListener }\n",
+      "type": "registry:hook"
+    }
+  ]
+}

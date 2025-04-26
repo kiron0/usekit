@@ -1,10 +1,10 @@
 import Link from "next/link"
-import { Doc } from "contentlayer/generated"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 
 import { NavItem, NavItemWithChildren } from "@/types/nav"
 import { docsConfig } from "@/config/docs"
 import { Button } from "@/components/ui/button"
+import { Doc } from "@/contentlayer/generated"
 
 interface DocsPagerProps {
   doc: Doc
@@ -59,7 +59,26 @@ export function getPagerForDoc(doc: Doc) {
 export function flatten(links: NavItemWithChildren[]): NavItem[] {
   return links
     .reduce<NavItem[]>((flat, link) => {
-      return flat.concat(link.items?.length ? flatten(link.items) : link)
+      return flat.concat(
+        link.items?.length
+          ? flatten(
+              link.items
+                .map((item) => ({ ...item }))
+                .sort((a, b) => {
+                  const aStartsWithUse = a.title.toLowerCase().startsWith("use")
+                  const bStartsWithUse = b.title.toLowerCase().startsWith("use")
+
+                  if (aStartsWithUse && bStartsWithUse) {
+                    return a.title.localeCompare(b.title)
+                  }
+
+                  if (aStartsWithUse) return -1
+                  if (bStartsWithUse) return 1
+                  return 0
+                })
+            )
+          : link
+      )
     }, [])
     .filter((link) => !link?.disabled)
 }

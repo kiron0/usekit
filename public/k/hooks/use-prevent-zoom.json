@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-prevent-zoom",
+  "type": "registry:hook",
+  "title": "Use Prevent Zoom",
+  "description": "Prevent zooming on touch devices with usePreventZoom, providing options for scroll, keyboard, and pinch prevention.",
+  "files": [
+    {
+      "path": "registry/hooks/use-prevent-zoom.ts",
+      "content": "import * as React from \"react\"\n\nexport const usePreventZoom = (\n  scrollCheck = true,\n  keyboardCheck = true,\n  pinchCheck = true\n) => {\n  const handleKeydown = React.useCallback(\n    (e: KeyboardEvent) => {\n      if (\n        keyboardCheck &&\n        e.ctrlKey &&\n        [\"61\", \"107\", \"173\", \"109\", \"187\", \"189\"].includes(e.keyCode.toString())\n      ) {\n        e.preventDefault()\n      }\n    },\n    [keyboardCheck]\n  )\n\n  const handleWheel = React.useCallback(\n    (e: WheelEvent) => {\n      if (scrollCheck && e.ctrlKey) {\n        e.preventDefault()\n      }\n    },\n    [scrollCheck]\n  )\n\n  const handleTouchMove = React.useCallback(\n    (e: TouchEvent) => {\n      if (pinchCheck && e.touches.length > 1) {\n        e.preventDefault()\n      }\n    },\n    [pinchCheck]\n  )\n\n  React.useEffect(() => {\n    document.addEventListener(\"keydown\", handleKeydown)\n    document.addEventListener(\"wheel\", handleWheel, { passive: false })\n    document.addEventListener(\"touchmove\", handleTouchMove, { passive: false })\n\n    return () => {\n      document.removeEventListener(\"keydown\", handleKeydown)\n      document.removeEventListener(\"wheel\", handleWheel)\n      document.removeEventListener(\"touchmove\", handleTouchMove)\n    }\n  }, [handleKeydown, handleWheel, handleTouchMove])\n}\n",
+      "type": "registry:hook"
+    }
+  ]
+}

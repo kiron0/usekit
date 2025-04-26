@@ -1,0 +1,89 @@
+---
+title: useMeasureAny
+description: Measure the dimensions of any element with useMeasureAny, providing options to track changes and observe the element.
+---
+
+<ComponentPreview name="use-measure-any-demo" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://usekit.kiron.dev/k/use-measure-any
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Install the following dependencies:</Step>
+
+```bash
+npm install lucide-react
+```
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="use-measure-any" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx {3, 6-10}
+"use client"
+
+import { useMeasureAny } from "@/hooks/use-measure-any"
+
+export function Component() {
+  const { MeasureComponent } = useMeasureAny({
+    borderRadius: 0,
+    actionPosition: "top-right",
+    measurementPosition: "top-right",
+  })
+
+  return (
+    <div>
+      <p>Press and hold to measure distances</p>
+      <MeasureComponent />
+    </div>
+  )
+}
+```
+
+## API Reference
+
+### Parameters
+
+| Name                  | Type                                                           | Description                                      | Default Value   | Optional |
+| --------------------- | -------------------------------------------------------------- | ------------------------------------------------ | --------------- | -------- |
+| `borderRadius`        | `number`                                                       | The radius of the border corners.                | `0.5`           | Yes      |
+| `borderWidth`         | `number`                                                       | The width of the border.                         | `1`             | Yes      |
+| `actionPosition`      | `"top-left" \| "top-right" \| "bottom-left" \| "bottom-right"` | The position of the action button.               | `"top-right"`   | Yes      |
+| `measurementPosition` | `"top-left" \| "top-right" \| "bottom-left" \| "bottom-right"` | The position where the measurement is displayed. | `"bottom-left"` | Yes      |
+| `startMeasure`        | `boolean`                                                      | Whether to start measuring immediately.          | `false`         | Yes      |
+| `ref`                 | `React.RefObject<HTMLDivElement \| null>`                      | A ref to the element that will be measured.      | -               | Yes      |
+
+### Return Values
+
+| Name               | Type              | Description                                                         |
+| ------------------ | ----------------- | ------------------------------------------------------------------- |
+| `measurements`     | `Object`          | An object containing the measured dimensions (e.g., width, height). |
+| `MeasureComponent` | `React.Component` | A React component that can be used to render the measurement UI.    |
+| `reset`            | `() => void`      | A function to reset the measurement points.                         |

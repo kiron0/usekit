@@ -1,0 +1,206 @@
+---
+title: useQueryState
+description: Manage query parameters in the URL with the useQueryState hook, providing methods to get, set, and remove query parameters.
+---
+
+<ComponentPreview name="use-query-state-demo" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://usekit.kiron.dev/k/use-query-state
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+Ensure your project has `Next.js` and `React` installed, as `useQueryState` depends on them.
+
+<ComponentSource name="use-query-state" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx {3, 6-8}
+"use client"
+
+import { useQueryState } from "@/hooks/use-query-state"
+
+export function Component() {
+  const { values, setState } = useQueryState(["search", "page"], {
+    defaults: { page: "1" },
+  })
+
+  // Update single parameter
+  setState({ search: "react hooks" })
+
+  // Update multiple parameters
+  setState({ search: "advanced", page: "2" })
+
+  // Remove parameter
+  setState({ search: null })
+
+  return (
+    <div>
+      <h1>Search: {values.search}</h1>
+      <h2>Page: {values.page}</h2>
+      <button onClick={() => setState({ search: "react hooks" })}>
+        Set Search
+      </button>
+      <button onClick={() => setState({ page: "2" })}>Set Page</button>
+      <button onClick={() => setState({ search: null })}>Remove Search</button>
+    </div>
+  )
+}
+```
+
+## Examples
+
+### Basic Usage
+
+```typescript
+const { values, setState } = useQueryState(["search", "page"], {
+  defaults: { page: "1" },
+})
+
+// Update single parameter
+setState({ search: "react hooks" })
+
+// Update multiple parameters
+setState({ search: "advanced", page: "2" })
+
+// Remove parameter
+setState({ search: null })
+```
+
+### With Validation
+
+```typescript
+const { values, errors } = useQueryState(["page", "limit"], {
+  defaults: { page: "1", limit: "10" },
+  validators: {
+    page: (val) => {
+      const num = parseInt(val)
+      return num > 0 ? num : null
+    },
+    limit: (val) => {
+      const num = parseInt(val)
+      return num > 0 && num <= 100 ? num : null
+    },
+  },
+})
+
+// values.page will be string, but validated as number
+// errors.page will contain message if validation fails
+```
+
+### With Suspense
+
+```typescript
+const { values, isPending, setState } = useQueryState(
+  ['filters'],
+  { suspense: true }
+)
+
+// Updates will use React transitions
+setState({ filters: JSON.stringify(complexFilters) })
+
+// Can show loading state
+{isPending && <LoadingIndicator />}
+```
+
+### Batch Updates
+
+```typescript
+const { batchUpdate } = useQueryState(["sort", "direction", "page"])
+
+// Only updates registered parameters
+batchUpdate({
+  sort: "price",
+  direction: "asc",
+  page: "1",
+  unrelated: "value", // will be ignored
+})
+```
+
+## Use Cases
+
+1. **Search/Filters UI**
+   Perfect for search pages where you want to:
+
+   - Persist filters in URL for bookmarking/sharing
+   - Support back/forward navigation
+   - Validate filter values
+
+2. **Pagination**
+   Manage page numbers in URL while:
+
+   - Validating page ranges
+   - Providing defaults
+   - Supporting direct linking
+
+3. **Complex State Management**
+   When you need to:
+
+   - Coordinate multiple related parameters
+   - Validate interdependent values
+   - Batch updates to prevent multiple renders
+
+4. **Shareable State**
+   For dashboards or visualizations where:
+
+   - Users should be able to share exact views
+   - State needs to survive refresh
+   - Parameters need type safety
+
+5. **Analytics-Friendly Tracking**
+   Automatically tracks user interactions in URL for:
+   - Better analytics without additional code
+   - Reproducing user journeys
+   - A/B testing different states
+
+## API Reference
+
+### Parameters
+
+| Name                    | Type                                             | Description                                        | Default Value | Optional |
+| ----------------------- | ------------------------------------------------ | -------------------------------------------------- | ------------- | -------- |
+| `paramNames`            | `T[]` (array of string literals)                 | Names of query parameters to manage                | -             | No       |
+| `config`                | Object                                           | Configuration object                               | `{}`          | Yes      |
+| `config.defaults`       | `Partial<Record<T, string>>`                     | Default values for parameters                      | `{}`          | Yes      |
+| `config.validators`     | `Partial<Record<T, (value: string) => unknown>>` | Validation functions for each parameter            | `{}`          | Yes      |
+| `config.normalizeEmpty` | `boolean`                                        | Whether to remove empty string values from URL     | `false`       | Yes      |
+| `config.suspense`       | `boolean`                                        | Whether to use React transitions for state updates | `false`       | Yes      |
+
+### Return Values
+
+| Name          | Type                                                                                                                        | Description                                               |
+| ------------- | --------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------- |
+| `values`      | `Record<T, string>`                                                                                                         | Current values of all parameters                          |
+| `errors`      | `Partial<Record<T, string>>`                                                                                                | Validation errors if any                                  |
+| `hasErrors`   | `boolean`                                                                                                                   | Whether any validation errors exist                       |
+| `isPending`   | `boolean`                                                                                                                   | Whether a transition is in progress (when using suspense) |
+| `setState`    | `(updates: Record<string, string \| null \| undefined>, options?: { replace?: boolean, skipTransition?: boolean }) => void` | Function to update one or more parameters                 |
+| `deleteState` | `(key: string, options?: { replace?: boolean, skipTransition?: boolean }) => void`                                          | Function to remove a parameter                            |
+| `batchUpdate` | `(updates: Record<string, string \| null \| undefined>, options?: { replace?: boolean, skipTransition?: boolean }) => void` | Batched update function                                   |

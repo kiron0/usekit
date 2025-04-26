@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-previous",
+  "type": "registry:hook",
+  "title": "Use Previous",
+  "description": "Track the previous value of a variable with usePrevious.",
+  "files": [
+    {
+      "path": "registry/hooks/use-previous.ts",
+      "content": "import * as React from \"react\"\n\nexport function usePrevious<T>(\n  newValue: T,\n  initialPreviousValue?: T | null\n): T | null | undefined {\n  const previousRef = React.useRef<T | null | undefined>(\n    initialPreviousValue ?? null\n  )\n\n  React.useEffect(() => {\n    previousRef.current = newValue\n  }, [newValue])\n\n  return previousRef.current\n}\n",
+      "type": "registry:hook"
+    }
+  ]
+}

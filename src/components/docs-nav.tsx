@@ -20,7 +20,7 @@ export function DocsNav({ config }: { config: DocsConfig }) {
             {item.title}
           </h4>
           {item?.items?.length && (
-            <DocsNavItems items={item.items} pathname={pathname} />
+            <DocsNavItems items={item?.items} pathname={pathname} />
           )}
         </div>
       ))}
@@ -37,49 +37,64 @@ function DocsNavItems({
 }) {
   return items?.length ? (
     <div className="grid grid-flow-row auto-rows-max gap-0.5 text-sm">
-      {items.map((item, index) =>
-        item.href && !item.disabled ? (
-          <Link
-            key={index}
-            href={item.href}
-            className={cn(
-              "group flex h-8 w-full items-center rounded-lg px-2 font-normal text-foreground underline-offset-2 hover:bg-primary/10 hover:text-accent-foreground",
-              item.disabled && "cursor-not-allowed opacity-60",
-              pathname === item.href && "bg-primary/10 font-medium text-primary"
-            )}
-            target={item.external ? "_blank" : ""}
-            rel={item.external ? "noreferrer" : ""}
-          >
-            {item.title}
-            {item.label && (
-              <span
-                className={cn(
-                  "ml-2 rounded-md bg-primary px-1.5 py-0.5 text-xs leading-none text-primary-foreground no-underline group-hover:no-underline",
-                  item.label.toLowerCase() === "soon" &&
-                    "bg-[#adfa1d] text-[#000000]"
-                )}
-              >
-                {item.label}
-              </span>
-            )}
-          </Link>
-        ) : (
-          <span
-            key={index}
-            className={cn(
-              "flex w-full cursor-not-allowed items-center rounded-md p-2 text-muted-foreground hover:underline",
-              item.disabled && "cursor-not-allowed opacity-60"
-            )}
-          >
-            {item.title}
-            {item.label && (
-              <span className="ml-2 rounded-md bg-muted px-1.5 py-0.5 text-xs leading-none text-muted-foreground no-underline group-hover:no-underline">
-                {item.label}
-              </span>
-            )}
-          </span>
-        )
-      )}
+      {items
+        .map((item) => ({ ...item }))
+        .sort((a, b) => {
+          const aStartsWithUse = a.title.toLowerCase().startsWith("use")
+          const bStartsWithUse = b.title.toLowerCase().startsWith("use")
+
+          if (aStartsWithUse && bStartsWithUse) {
+            return a.title.localeCompare(b.title)
+          }
+
+          if (aStartsWithUse) return -1
+          if (bStartsWithUse) return 1
+          return 0
+        })
+        .map((item, index) =>
+          item.href && !item.disabled ? (
+            <Link
+              key={index}
+              href={item.href}
+              className={cn(
+                "group flex h-8 w-full items-center rounded-lg px-2 font-normal text-foreground underline-offset-2 hover:bg-primary/10 hover:text-accent-foreground",
+                item.disabled && "cursor-not-allowed opacity-60",
+                pathname === item.href &&
+                  "bg-primary/10 font-medium text-primary"
+              )}
+              target={item.external ? "_blank" : ""}
+              rel={item.external ? "noreferrer" : ""}
+            >
+              {item.title}
+              {item.label && (
+                <span
+                  className={cn(
+                    "ml-2 rounded-md bg-primary px-1.5 py-0.5 text-xs leading-none text-primary-foreground no-underline group-hover:no-underline",
+                    item.label.toLowerCase() === "soon" &&
+                      "bg-[#adfa1d] text-[#000000]"
+                  )}
+                >
+                  {item.label}
+                </span>
+              )}
+            </Link>
+          ) : (
+            <span
+              key={index}
+              className={cn(
+                "flex w-full cursor-not-allowed items-center rounded-md p-2 text-muted-foreground hover:underline",
+                item.disabled && "cursor-not-allowed opacity-60"
+              )}
+            >
+              {item.title}
+              {item.label && (
+                <span className="ml-2 rounded-md bg-muted px-1.5 py-0.5 text-xs leading-none text-muted-foreground no-underline group-hover:no-underline">
+                  {item.label}
+                </span>
+              )}
+            </span>
+          )
+        )}
     </div>
   ) : null
 }

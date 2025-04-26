@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-map",
+  "type": "registry:hook",
+  "title": "Use Map",
+  "description": "Synchronize and update state based on the Map data structure with useMap.",
+  "files": [
+    {
+      "path": "registry/hooks/use-map.ts",
+      "content": "import * as React from \"react\"\n\nclass ReactiveMap<K, V> extends Map<K, V> {\n  private reRender: () => void\n\n  constructor(reRender: () => void, entries?: Iterable<[K, V]>) {\n    super(entries || [])\n    this.reRender = reRender\n  }\n\n  set(key: K, value: V): this {\n    super.set(key, value)\n    this.reRender()\n    return this\n  }\n\n  delete(key: K): boolean {\n    const result = super.delete(key)\n    this.reRender()\n    return result\n  }\n\n  clear(): void {\n    super.clear()\n    this.reRender()\n  }\n}\n\nexport function useMap<K, V>(initialState?: Iterable<[K, V]>): Map<K, V> {\n  const [, reRender] = React.useReducer((x) => x + 1, 0)\n\n  const mapRef = React.useRef<ReactiveMap<K, V> | null>(null)\n\n  if (!mapRef.current) {\n    mapRef.current = new ReactiveMap(reRender, initialState || [])\n  }\n\n  return mapRef.current\n}\n",
+      "type": "registry:hook"
+    }
+  ]
+}

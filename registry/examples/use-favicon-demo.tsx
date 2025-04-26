@@ -1,8 +1,7 @@
 "use client"
 
 import * as React from "react"
-import Image from "next/image"
-import { favicons } from "@/utils/favicons"
+import { favicons } from "@/utils"
 
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
@@ -24,14 +23,11 @@ export default function UseFaviconDemo() {
             variant={favicon === url ? "secondary" : "outline"}
             onClick={() => setFavicon(url)}
           >
-            <Image
+            <img
               src={url}
               alt={alt}
               width={32}
               height={32}
-              quality={100}
-              placeholder="blur"
-              blurDataURL={url}
               onContextMenu={(e) => e.preventDefault()}
               className="select-none"
             />

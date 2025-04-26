@@ -1,0 +1,71 @@
+---
+title: useCallbackRef
+description: Automatically resize a textarea to fit its content with useAutosizeTextarea.
+---
+
+<ComponentPreview name="use-callback-ref-demo" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://usekit.kiron.dev/k/use-callback-ref
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="use-autosize-textarea" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx {5, 8-10}
+"use client"
+
+import * as React from "react"
+
+import { useCallbackRef } from "@/hooks/use-callback-ref"
+
+export function Component() {
+  const handleClick = useCallbackRef((event: React.MouseEvent) => {
+    console.log("Button clicked!", event)
+  })
+
+  return <button onClick={handleClick}>Click Me</button>
+}
+```
+
+## API Reference
+
+### Parameters
+
+| Name       | Type             | Description                                                                                                             | Default Value | Optional |
+| ---------- | ---------------- | ----------------------------------------------------------------------------------------------------------------------- | ------------- | -------- |
+| `callback` | `T \| undefined` | The callback function to memoize, where `T` is a function type with any arguments and return value. Can be `undefined`. | `undefined`   | Yes      |
+
+### Return Values
+
+| Name          | Type             | Description                                                                                   |
+| ------------- | ---------------- | --------------------------------------------------------------------------------------------- |
+| `callbackRef` | `T \| undefined` | A memoized version of the callback function that always uses the latest `callback` reference. |

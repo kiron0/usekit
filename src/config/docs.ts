@@ -1,5 +1,7 @@
 import type { MainNavItem, SidebarNavItem } from "@/types/nav"
 
+import { siteConfig } from "./site"
+
 export interface DocsConfig {
   mainNav: MainNavItem[]
   sidebarNav: SidebarNavItem[]
@@ -35,10 +37,20 @@ export const docsConfig: DocsConfig = {
           href: "/docs/hooks",
           items: [],
         },
+        ...(siteConfig.env.node === "development"
+          ? [
+              {
+                title: "Development",
+                href: "/docs/development",
+                items: [],
+                label: "alpha",
+              },
+            ]
+          : []),
       ],
     },
     {
-      title: "hooks",
+      title: "Hooks",
       items: [
         {
           title: "useBoolean",
@@ -266,8 +278,8 @@ export const docsConfig: DocsConfig = {
           items: [],
         },
         {
-          title: "useAnyMeasure",
-          href: "/docs/hooks/use-any-measure",
+          title: "useMeasureAny",
+          href: "/docs/hooks/use-measure-any",
           items: [],
         },
         {
@@ -334,13 +346,11 @@ export const docsConfig: DocsConfig = {
           title: "useAutoScroll",
           href: "/docs/hooks/use-auto-scroll",
           items: [],
-          label: "Soon",
         },
         {
           title: "useBluetooth",
           href: "/docs/hooks/use-bluetooth",
           items: [],
-          label: "Soon",
         },
         {
           title: "useDraggable",
@@ -356,7 +366,6 @@ export const docsConfig: DocsConfig = {
           title: "useInView",
           href: "/docs/hooks/use-in-view",
           items: [],
-          label: "Soon",
         },
         {
           title: "useInputValue",
@@ -367,13 +376,11 @@ export const docsConfig: DocsConfig = {
           title: "useLocation",
           href: "/docs/hooks/use-location",
           items: [],
-          label: "Soon",
         },
         {
           title: "useMemory",
           href: "/docs/hooks/use-memory",
           items: [],
-          label: "Soon",
         },
         {
           title: "useStep",
@@ -384,19 +391,120 @@ export const docsConfig: DocsConfig = {
           title: "useRerender",
           href: "/docs/hooks/use-rerender",
           items: [],
-          label: "Soon",
         },
         {
           title: "useOnlineStatus",
           href: "/docs/hooks/use-online-status",
           items: [],
-          label: "Soon",
         },
         {
           title: "useStopwatch",
           href: "/docs/hooks/use-stopwatch",
           items: [],
+        },
+        {
+          title: "useAutosizeTextarea",
+          href: "/docs/hooks/use-autosize-textarea",
+          items: [],
+        },
+        {
+          title: "useCallbackRef",
+          href: "/docs/hooks/use-callback-ref",
+          items: [],
+        },
+        {
+          title: "useControlledState",
+          href: "/docs/hooks/use-controlled-state",
+          items: [],
+        },
+        {
+          title: "useUncontrolledState",
+          href: "/docs/hooks/use-uncontrolled-state",
+          items: [],
+        },
+        {
+          title: "useEncryption",
+          href: "/docs/hooks/use-encryption",
+          items: [],
+        },
+        {
+          title: "useQueryState",
+          href: "/docs/hooks/use-query-state",
+          items: [],
+        },
+        {
+          title: "useVibration",
+          href: "/docs/hooks/use-vibration",
+          items: [],
           label: "Soon",
+        },
+        {
+          title: "useSwipe",
+          href: "/docs/hooks/use-swipe",
+          items: [],
+          label: "Soon",
+        },
+        {
+          title: "useFullscreen",
+          href: "/docs/hooks/use-fullscreen",
+          items: [],
+          label: "Soon",
+        },
+        {
+          title: "usePreventZoom",
+          href: "/docs/hooks/use-prevent-zoom",
+          items: [],
+        },
+        {
+          title: "usePinchZoom",
+          href: "/docs/hooks/use-pinch-zoom",
+          items: [],
+          label: "Soon",
+        },
+        {
+          title: "useWebSocket",
+          href: "/docs/hooks/use-web-socket",
+          items: [],
+          label: "Soon",
+        },
+        {
+          title: "usePortal",
+          href: "/docs/hooks/use-portal",
+          items: [],
+          label: "Soon",
+        },
+        {
+          title: "useFocusTrap",
+          href: "/docs/hooks/use-focus-trap",
+          items: [],
+          label: "Soon",
+        },
+        {
+          title: "usePrefersDarkMode",
+          href: "/docs/hooks/use-prefers-dark-mode",
+          items: [],
+          label: "Soon",
+        },
+        {
+          title: "useWhyDidYouUpdate",
+          href: "/docs/hooks/use-why-did-you-update",
+          items: [],
+          label: "Soon",
+        },
+      ],
+    },
+    {
+      title: "Contribute",
+      items: [
+        {
+          title: "Report an issue",
+          href: "/docs/report",
+          items: [],
+        },
+        {
+          title: "Request a feature",
+          href: "/docs/feature",
+          items: [],
         },
       ],
     },

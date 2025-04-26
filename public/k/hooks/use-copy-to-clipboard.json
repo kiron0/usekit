@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-copy-to-clipboard",
+  "type": "registry:hook",
+  "title": "Use Copy To Clipboard",
+  "description": "Use the useCopyToClipboard hook to copy text to the clipboard and track whether the copy action was successful, with an optional delay to reset the copied state.",
+  "files": [
+    {
+      "path": "registry/hooks/use-copy-to-clipboard.ts",
+      "content": "import * as React from \"react\"\n\ntype CopyFn = (text: string) => Promise<void>\n\nexport function useCopyToClipboard(delay = 2000): [CopyFn, boolean] {\n  const [isCopied, setIsCopied] = React.useState(false)\n\n  React.useEffect(() => {\n    if (!isCopied) return\n\n    const timer = setTimeout(() => {\n      setIsCopied(false)\n    }, delay)\n\n    return () => clearTimeout(timer)\n  }, [isCopied, delay])\n\n  const copy: CopyFn = React.useCallback(async (text) => {\n    if (!navigator?.clipboard) {\n      throw new Error(\"Clipboard not supported\")\n    }\n\n    if (!text) {\n      throw new Error(\"The 'text' argument is required.\")\n    }\n\n    const isPlainText = /^[\\x00-\\x7F]*$/.test(text)\n    const isHtmlText = /<[^>]+>/.test(text)\n    const isMarkdownText = /^#+\\s/.test(text)\n\n    const clipboardItem = new ClipboardItem(\n      isPlainText\n        ? { \"text/plain\": new Blob([text], { type: \"text/plain\" }) }\n        : isHtmlText\n          ? { \"text/html\": new Blob([text], { type: \"text/html\" }) }\n          : isMarkdownText\n            ? { \"text/markdown\": new Blob([text], { type: \"text/markdown\" }) }\n            : { \"text/plain\": new Blob([text], { type: \"text/plain\" }) }\n    )\n\n    try {\n      await navigator.clipboard.write([clipboardItem])\n      setIsCopied(true)\n    } catch (error) {\n      throw new Error(error instanceof Error ? error.message : \"Copy failed\") // Throw error instead of returning false\n    }\n  }, [])\n\n  return [copy, isCopied]\n}\n",
+      "type": "registry:hook"
+    }
+  ]
+}

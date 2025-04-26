@@ -1,0 +1,92 @@
+---
+title: useLocation
+description: A hook that allows you to access and manage the current location in your application
+links:
+  Window Location API: https://developer.mozilla.org/en-US/docs/Web/API/Window/location
+---
+
+<ComponentPreview name="use-location-demo" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://usekit.kiron.dev/k/use-location
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="use-location" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx {3, 6}
+"use client"
+
+import { useLocation } from "@/hooks/use-location"
+
+export function Component() {
+  const location = useLocation()
+
+  const handleNavigate = () => {
+    // Navigation in an event handler (safe)
+    history.pushState({ page: "new" }, "", "/new-path")
+  }
+
+  React.useEffect(() => {
+    // Navigation after render (safe)
+    if (location.pathname === "/") {
+      history.pushState({ page: "home" }, "", "/home")
+    }
+  }, [location.pathname])
+
+  return (
+    <div>
+      <h1>Current Location</h1>
+      <pre>{JSON.stringify(location, null, 2)}</pre>
+      <button onClick={handleNavigate}>Go to New Path</button>
+    </div>
+  )
+}
+```
+
+## API Reference
+
+### Return Values
+
+| Property   | Initial Load (`trigger: "load"`) | After `pushState` (`/new-path`)       | After Back (`popstate`)       | Server-Side Rendering (No Client) |
+| ---------- | -------------------------------- | ------------------------------------- | ----------------------------- | --------------------------------- |
+| `trigger`  | `"load"`                         | `"pushstate"`                         | `"popstate"`                  | `"load"`                          |
+| `state`    | `null`                           | `{ page: "new" }`                     | `null`                        | `null`                            |
+| `length`   | `1`                              | `2`                                   | `2`                           | `1`                               |
+| `hash`     | `""`                             | `""`                                  | `""`                          | `""`                              |
+| `host`     | `"usekit.kiron.dev"`             | `"usekit.kiron.dev"`                  | `"usekit.kiron.dev"`          | `""`                              |
+| `hostname` | `"usekit.kiron.dev"`             | `"usekit.kiron.dev"`                  | `"usekit.kiron.dev"`          | `""`                              |
+| `href`     | `"https://usekit.kiron.dev/"`    | `"https://usekit.kiron.dev/new-path"` | `"https://usekit.kiron.dev/"` | `""`                              |
+| `origin`   | `"https://usekit.kiron.dev"`     | `"https://usekit.kiron.dev"`          | `"https://usekit.kiron.dev"`  | `""`                              |
+| `pathname` | `"/"`                            | `"/new-path"`                         | `"/"`                         | `""`                              |
+| `port`     | `""`                             | `""`                                  | `""`                          | `""`                              |
+| `protocol` | `"https:"`                       | `"https:"`                            | `"https:"`                    | `""`                              |
+| `search`   | `""`                             | `""`                                  | `""`                          | `""`                              |

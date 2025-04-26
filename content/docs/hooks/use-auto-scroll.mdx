@@ -1,0 +1,85 @@
+---
+title: useAutoScroll
+description: Use the useAutoScroll hook to automatically scroll an element into view when it is focused, with optional parameters for behavior and block alignment.
+---
+
+<ComponentPreview name="use-auto-scroll-demo" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://usekit.kiron.dev/k/use-auto-scroll
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="use-auto-scroll" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx {5, 9}
+"use client"
+
+import * as React from "react"
+
+import useAutoScroll from "@/hooks/use-auto-scroll"
+
+export function Component() {
+  const [items, setItems] = React.useState(["Item 1"])
+  const listRef = useAutoScroll(true, [items])
+
+  const addItem = () => setItems([...items, `Item ${items.length + 1}`])
+
+  return (
+    <div>
+      <ul ref={listRef} className="h-40 overflow-y-auto border">
+        {items.map((item) => (
+          <li key={item}>{item}</li>
+        ))}
+      </ul>
+      <button onClick={addItem}>Add Item</button>
+    </div>
+  )
+}
+```
+
+## API Reference
+
+### Parameters
+
+| Name                      | Type                   | Description                            | Default Value | Optional |
+| ------------------------- | ---------------------- | -------------------------------------- | ------------- | -------- |
+| `enabled`                 | `boolean`              | Whether to enable the scroll behavior. | `true`        | No       |
+| `deps`                    | `React.DependencyList` | Dependencies for the effect.           | `[]`          | No       |
+| `options`                 | `AutoScrollOptions`    | Options for the scroll behavior.       | `{}`          | Yes      |
+| `options.smoothScroll`    | `boolean`              | Whether to enable smooth scrolling.    | `true`        | Yes      |
+| `options.scrollThreshold` | `number`               | The scroll threshold in pixels.        | `0`           | Yes      |
+
+### Return Values
+
+| Name  | Type                         | Description                                             |
+| ----- | ---------------------------- | ------------------------------------------------------- |
+| `ref` | `React.RefObject<T \| null>` | A ref to the element that should be scrolled into view. |

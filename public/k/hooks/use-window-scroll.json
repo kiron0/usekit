@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-window-scroll",
+  "type": "registry:hook",
+  "title": "Use Window Scroll",
+  "description": "Track and manipulate the scroll position of a web page with useWindowScroll.",
+  "files": [
+    {
+      "path": "registry/hooks/use-window-scroll.ts",
+      "content": "import * as React from \"react\"\n\ninterface ScrollState {\n  x: number | null\n  y: number | null\n}\n\ninterface ScrollToOptions {\n  top?: number\n  left?: number\n  behavior?: ScrollBehavior\n}\n\ntype ScrollToFunction = (\n  optionsOrX: ScrollToOptions | number,\n  y?: number,\n  behavior?: ScrollBehavior\n) => void\n\nexport function useWindowScroll(): [ScrollState, ScrollToFunction] {\n  const [state, setState] = React.useState<ScrollState>({\n    x: null,\n    y: null,\n  })\n\n  const scrollTo: ScrollToFunction = React.useCallback((...args) => {\n    if (typeof window === \"undefined\") return\n\n    if (typeof args[0] === \"object\") {\n      window.scrollTo(args[0])\n    } else if (typeof args[0] === \"number\" && typeof args[1] === \"number\") {\n      const [x, y, behavior] = args as [\n        number,\n        number,\n        ScrollBehavior | undefined,\n      ]\n      window.scrollTo({ top: y, left: x, behavior })\n    } else {\n      throw new Error(\n        `Invalid arguments passed to scrollTo. See: https://developer.mozilla.org/en-US/docs/Web/API/Window/scrollTo`\n      )\n    }\n  }, [])\n\n  React.useEffect(() => {\n    if (typeof window === \"undefined\") return\n\n    const handleScroll = () => {\n      setState({ x: window.scrollX, y: window.scrollY })\n    }\n\n    handleScroll()\n    window.addEventListener(\"scroll\", handleScroll)\n\n    return () => window.removeEventListener(\"scroll\", handleScroll)\n  }, [])\n\n  return [state, scrollTo]\n}\n",
+      "type": "registry:hook"
+    }
+  ]
+}

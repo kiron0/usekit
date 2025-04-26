@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-intersection-observer",
+  "type": "registry:hook",
+  "title": "Use Intersection Observer",
+  "description": "A hook that provides a way to detect when an element enters or leaves the viewport using the Intersection Observer API.",
+  "files": [
+    {
+      "path": "registry/hooks/use-intersection-observer.ts",
+      "content": "import * as React from \"react\"\n\ninterface Props {\n  threshold?: number | number[]\n  root?: Element | Document | null\n  rootMargin?: string\n}\n\nexport function useIntersectionObserver<T extends Element>(\n  elementRef: React.RefObject<T | null>,\n  { threshold = 0, root = null, rootMargin = \"0%\" }: Props = {}\n): IntersectionObserverEntry | undefined {\n  const [entry, setEntry] = React.useState<IntersectionObserverEntry>()\n\n  const updateEntry = ([entry]: IntersectionObserverEntry[]): void => {\n    setEntry(entry)\n  }\n\n  React.useEffect(() => {\n    const node = elementRef.current\n    const isSupported = !!window.IntersectionObserver\n\n    if (!node || !isSupported) return\n\n    const observer = new IntersectionObserver(updateEntry, {\n      threshold,\n      root,\n      rootMargin,\n    })\n\n    observer.observe(node)\n\n    return () => observer.disconnect()\n  }, [elementRef, threshold, root, rootMargin])\n\n  return entry\n}\n",
+      "type": "registry:hook"
+    }
+  ]
+}

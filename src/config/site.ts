@@ -1,5 +1,6 @@
 export const siteConfig = {
   name: "useKit",
+  url: "https://usekit.kiron.dev",
   description:
     "A collection of reusable react hooks that you can copy and paste into your apps.",
   slogan: "A collection of reusable react hooks",
@@ -18,6 +19,10 @@ export const siteConfig = {
     "Server Components",
     "Radix UI",
   ],
+  env: {
+    node: process.env.NEXT_PUBLIC_NODE_ENV! as "production" | "development",
+    apiUrl: process.env.NEXT_PUBLIC_BASE_API_URL!,
+  },
 }
 
 export type SiteConfig = typeof siteConfig

@@ -7,7 +7,7 @@ description: Track the status of an asynchronous operation with useAsyncStatus.
 
 ## Installation
 
-<Tabs defaultValue="cli">
+<CodeTabs>
 
 <TabsList>
   <TabsTrigger value="cli">CLI</TabsTrigger>
@@ -17,7 +17,7 @@ description: Track the status of an asynchronous operation with useAsyncStatus.
 <TabsContent value="cli">
 
 ```bash
-npx shadcn@latest add https://usekit.kiron.dev/r/use-async-status
+npx shadcn@latest add https://usekit.kiron.dev/k/use-async-status
 ```
 
 </TabsContent>
@@ -30,11 +30,13 @@ npx shadcn@latest add https://usekit.kiron.dev/r/use-async-status
 
 <ComponentSource name="use-async-status" />
 
+<Step>Update the import paths to match your project setup.</Step>
+
 </Steps>
 
 </TabsContent>
 
-</Tabs>
+</CodeTabs>
 
 ## Usage
 
@@ -114,7 +116,7 @@ type AsyncStatus<TData, TError> =
 #### `FeedbackOptions`
 
 ```ts
-type FeedbackOptions<TData, TError> = {
+type options<TData, TError> = {
   loading?: React.ReactNode
   success?: (data: TData) => React.ReactNode
   error?: (error: TError) => React.ReactNode
