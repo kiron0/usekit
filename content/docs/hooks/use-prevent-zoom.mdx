@@ -1,0 +1,51 @@
+---
+title: usePreventZoom
+description: Prevent zooming on touch devices with usePreventZoom, providing options for scroll, keyboard, and pinch prevention.
+---
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://usekit.kiron.dev/k/use-prevent-zoom
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="use-prevent-zoom" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx {3, 6}
+"use client"
+
+import { usePreventZoom } from "@/hooks/use-prevent-zoom"
+
+const App = () => {
+  usePreventZoom() // Prevents keyboard, scroll and pinch zooming
+
+  return <div>Your App</div>
+}
+```

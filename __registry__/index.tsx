@@ -1207,6 +1207,20 @@ export const Index: Record<string, any> = {
     ),
     source: "",
   },
+  "use-prevent-zoom": {
+    name: "use-prevent-zoom",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-prevent-zoom.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(() => import("registry/hooks/use-prevent-zoom.ts")),
+    source: "",
+  },
   "use-copy-to-clipboard-demo": {
     name: "use-copy-to-clipboard-demo",
     type: "registry:example",

@@ -979,6 +979,18 @@
           "path": "registry/hooks/use-pinch-zoom.ts"
         }
       ]
+    },
+    {
+      "name": "use-prevent-zoom",
+      "title": "Use Prevent Zoom",
+      "description": "Prevent zooming on touch devices with usePreventZoom, providing options for scroll, keyboard, and pinch prevention.",
+      "type": "registry:hook",
+      "files": [
+        {
+          "type": "registry:hook",
+          "path": "registry/hooks/use-prevent-zoom.ts"
+        }
+      ]
     }
   ]
 }

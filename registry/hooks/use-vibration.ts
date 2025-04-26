@@ -17,7 +17,14 @@ export function useVibration(
   defaultPattern: VibrationPattern = 100,
   options: Options = {}
 ): Return {
-  const isSupported = React.useMemo(() => "vibrate" in navigator, [])
+  const isMobileDevice = React.useMemo(
+    () => /Mobi|Android/i.test(navigator.userAgent),
+    []
+  )
+  const isSupported = React.useMemo(
+    () => "vibrate" in navigator && isMobileDevice,
+    [isMobileDevice]
+  )
 
   const [isVibrating, setIsVibrating] = React.useState(false)
 

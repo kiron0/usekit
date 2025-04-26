@@ -23,7 +23,7 @@ export default function UseVibrationDemo() {
     setIsAnimating(false)
   }
 
-  if (!isSupported) return <p>Vibration not supported</p>
+  if (!isSupported) return <p>Vibration is not supported on this device.</p>
 
   return (
     <div className="flex flex-col items-center justify-center gap-4">
