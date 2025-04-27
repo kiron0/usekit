@@ -1056,6 +1056,19 @@ export const hooks: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "use-portal",
+    title: "Use Portal",
+    description:
+      "Create and manage portals for rendering content outside the component hierarchy.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-portal.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
 ]
 
 export default hooks

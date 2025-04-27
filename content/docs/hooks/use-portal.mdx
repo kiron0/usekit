@@ -2,3 +2,86 @@
 title: usePortal
 description: Create and manage portals for rendering content outside the component hierarchy.
 ---
+
+<ComponentPreview name="use-portal-demo" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://usekit.kiron.dev/k/use-portal
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="use-portal" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx {5, 10}
+"use client"
+
+import * as React from "react"
+
+import { usePortal } from "@/hooks/use-portal"
+
+export function Component() {
+  const [open, setOpen] = React.useState(false)
+
+  const { Portal } = usePortal()
+
+  return (
+    <div>
+      <button
+        onClick={() => {
+          setOpen((prev) => !prev)
+        }}
+      >
+        Toggle Portal
+      </button>
+
+      {open && (
+        <Portal>
+          <div className="fixed left-0 top-0 flex h-full w-full items-center justify-center bg-black/50">
+            <div className="rounded bg-white p-4 shadow">
+              <h1>Portal Content</h1>
+              <button onClick={() => setOpen(false)}>Close</button>
+            </div>
+          </div>
+        </Portal>
+      )}
+    </div>
+  )
+}
+```
+
+## API Reference
+
+### Return Values
+
+| Name        | Type                        | Description                                              |
+| ----------- | --------------------------- | -------------------------------------------------------- |
+| `Portal`    | `React.ReactPortal \| null` | The portal element.                                      |
+| `container` | `HTMLElement`               | The container element where the portal will be rendered. |

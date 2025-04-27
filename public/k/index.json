@@ -991,6 +991,18 @@
           "path": "registry/hooks/use-prevent-zoom.ts"
         }
       ]
+    },
+    {
+      "name": "use-portal",
+      "title": "Use Portal",
+      "description": "Create and manage portals for rendering content outside the component hierarchy.",
+      "type": "registry:hook",
+      "files": [
+        {
+          "type": "registry:hook",
+          "path": "registry/hooks/use-portal.ts"
+        }
+      ]
     }
   ]
 }

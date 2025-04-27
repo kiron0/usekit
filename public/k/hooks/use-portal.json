@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-portal",
+  "type": "registry:hook",
+  "title": "Use Portal",
+  "description": "Create and manage portals for rendering content outside the component hierarchy.",
+  "files": [
+    {
+      "path": "registry/hooks/use-portal.ts",
+      "content": "import * as React from \"react\"\nimport * as ReactDOM from \"react-dom\"\n\nexport function usePortal() {\n  const [container, setContainer] = React.useState<HTMLElement | null>(null)\n\n  React.useEffect(() => {\n    const portalRoot = (() => {\n      const el = document.createElement(\"div\")\n      document.body.appendChild(el)\n      return el\n    })()\n\n    setContainer(portalRoot)\n\n    return () => {\n      if (portalRoot.parentNode) {\n        portalRoot.parentNode.removeChild(portalRoot)\n      }\n    }\n  }, [])\n\n  const Portal = React.useCallback(\n    ({ children }: { children: React.ReactNode }) =>\n      container ? ReactDOM.createPortal(children, container) : null,\n    [container]\n  )\n\n  return { Portal, container }\n}\n",
+      "type": "registry:hook"
+    }
+  ]
+}

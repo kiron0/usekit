@@ -4,3 +4,79 @@ description: Detect swipe gestures on touch devices with useSwipe, providing opt
 ---
 
 <ComponentPreview name="use-swipe-demo" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://usekit.kiron.dev/k/use-swipe
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="use-swipe" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx {3, 6-10}
+"use client"
+
+import { useSwipe } from "@/hooks/use-swipe"
+
+export function Component() {
+  const handlers = useSwipe({
+    onSwipe: (direction) => {
+      console.log("Swiped:", direction)
+    },
+  })
+
+  return (
+    <div
+      {...handlers}
+      style={{ width: "100%", height: "100vh", backgroundColor: "lightgray" }}
+    >
+      <h1>Swipe in any direction</h1>
+    </div>
+  )
+}
+```
+
+## API Reference
+
+### Parameters
+
+| Name        | Type                          | Description                           | Default Value | Optional |
+| ----------- | ----------------------------- | ------------------------------------- | ------------- | -------- |
+| `onSwipe`   | `(direction: string) => void` | Callback function triggered on swipe. | -             | No       |
+| `threshold` | `number`                      | Minimum distance to trigger a swipe.  | `50`          | Yes      |
+
+### Return Values
+
+| Name           | Type         | Description                |
+| -------------- | ------------ | -------------------------- |
+| `onTouchStart` | `() => void` | Touch start event handler. |
+| `onTouchMove`  | `() => void` | Touch move event handler.  |
+| `onTouchEnd`   | `() => void` | Touch end event handler.   |
+| `onMouseDown`  | `() => void` | Mouse down event handler.  |

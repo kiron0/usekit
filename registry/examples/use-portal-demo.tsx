@@ -6,8 +6,9 @@ import { X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { usePortal } from "registry/hooks/use-portal"
 
-export function Component() {
+export default function UsePortalDemo() {
   const [open, setOpen] = React.useState(false)
+
   const { Portal } = usePortal()
 
   return (

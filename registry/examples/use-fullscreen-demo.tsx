@@ -1,6 +1,5 @@
 "use client"
 
-import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { useFullscreen } from "registry/hooks/use-fullscreen"
 
@@ -14,16 +13,13 @@ export default function UseFullscreenDemo() {
 }
 
 function FullscreenRef() {
-  const { elementRef, toggleFullscreen, isFullscreen } =
+  const { ref, toggleFullscreen, isFullscreen } =
     useFullscreen<HTMLDivElement>()
 
   return (
     <div
-      ref={elementRef}
-      className={cn(
-        "mx-auto flex aspect-video w-2/3 flex-col items-center justify-center gap-2 rounded-lg border text-center",
-        isFullscreen ? "bg-sky-500" : ""
-      )}
+      ref={ref}
+      className="mx-auto flex aspect-video w-2/3 flex-col items-center justify-center gap-2 rounded-lg border text-center"
     >
       On specific area
       <Button onClick={toggleFullscreen}>

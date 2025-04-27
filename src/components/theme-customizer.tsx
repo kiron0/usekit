@@ -92,8 +92,7 @@ export function Customizer() {
 
               return mounted ? (
                 <Button
-                  variant={"outline"}
-                  size="sm"
+                  variant="outline"
                   key={color.name}
                   onClick={() => {
                     setTheme(
@@ -103,8 +102,8 @@ export function Customizer() {
                     )
                   }}
                   className={cn(
-                    "justify-start",
-                    isActive && "border-2 border-primary"
+                    "justify-center text-xs",
+                    isActive && "border border-primary"
                   )}
                   style={
                     {
@@ -116,10 +115,10 @@ export function Customizer() {
                 >
                   <span
                     className={cn(
-                      "mr-1 flex size-5 shrink-0 -translate-x-1 items-center justify-center rounded-full bg-[--theme-primary]"
+                      "flex size-4 shrink-0 items-center justify-center rounded-full bg-[--theme-primary]"
                     )}
                   >
-                    {isActive && <CheckIcon className="size-4 text-white" />}
+                    {isActive && <CheckIcon className="text-white" />}
                   </span>
                   {color.label}
                 </Button>
@@ -147,10 +146,10 @@ export function Customizer() {
                     )
                   }
                   className={cn(
-                    !theme?.includes("dark") && "border-2 border-primary"
+                    !theme?.includes("dark") && "border border-primary"
                   )}
                 >
-                  <SunIcon className="mr-1 -translate-x-1" />
+                  <SunIcon />
                   Light
                 </Button>
                 <Button
@@ -166,10 +165,10 @@ export function Customizer() {
                     )
                   }
                   className={cn(
-                    theme?.includes("dark") && "border-2 border-primary"
+                    theme?.includes("dark") && "border border-primary"
                   )}
                 >
-                  <MoonIcon className="mr-1 -translate-x-1" />
+                  <MoonIcon />
                   Dark
                 </Button>
               </>

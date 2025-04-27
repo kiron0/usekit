@@ -3,12 +3,11 @@
 import { usePinchZoom } from "registry/hooks/use-pinch-zoom"
 
 export default function UsePinchZoomDemo() {
-  const { scale, onTouchStart, onTouchMove, onTouchEnd, isSupported } =
-    usePinchZoom({
-      onZoom: (s) => console.log("Zoom scale:", s),
-      minScale: 0.2,
-      maxScale: 4,
-    })
+  const { scale, isSupported, ...handlers } = usePinchZoom({
+    onZoom: (s) => console.log("Zoom scale:", s),
+    minScale: 0.2,
+    maxScale: 4,
+  })
 
   if (!isSupported) {
     return <div>Pinch zoom is not supported on this device.</div>
@@ -16,9 +15,7 @@ export default function UsePinchZoomDemo() {
 
   return (
     <div
-      onTouchStart={onTouchStart}
-      onTouchMove={onTouchMove}
-      onTouchEnd={onTouchEnd}
+      {...handlers}
       className="flex h-full w-full items-center justify-center overflow-hidden px-3"
     >
       {/* eslint-disable-next-line @next/next/no-img-element */}

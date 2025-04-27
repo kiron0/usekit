@@ -436,19 +436,16 @@ export const docsConfig: DocsConfig = {
           title: "useVibration",
           href: "/docs/hooks/use-vibration",
           items: [],
-          label: "Soon",
         },
         {
           title: "useSwipe",
           href: "/docs/hooks/use-swipe",
           items: [],
-          label: "Soon",
         },
         {
           title: "useFullscreen",
           href: "/docs/hooks/use-fullscreen",
           items: [],
-          label: "Soon",
         },
         {
           title: "usePreventZoom",
@@ -459,7 +456,6 @@ export const docsConfig: DocsConfig = {
           title: "usePinchZoom",
           href: "/docs/hooks/use-pinch-zoom",
           items: [],
-          label: "Soon",
         },
         {
           title: "useWebSocket",
@@ -471,7 +467,6 @@ export const docsConfig: DocsConfig = {
           title: "usePortal",
           href: "/docs/hooks/use-portal",
           items: [],
-          label: "Soon",
         },
         {
           title: "useFocusTrap",

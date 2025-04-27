@@ -4,3 +4,76 @@ description: Use the useVibration hook to control the vibration of a device, wit
 ---
 
 <ComponentPreview name="use-vibration-demo" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://usekit.kiron.dev/k/use-vibration
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="use-vibration" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx {3, 6}
+"use client"
+
+import { useVibration } from "@/hooks/use-vibration"
+
+export function Component() {
+  const { vibrate } = useVibration()
+
+  return (
+    <Button
+      onClick={() => {
+        vibrate(200)
+      }}
+    >
+      Vibration
+    </Button>
+  )
+}
+```
+
+## API Reference
+
+### Parameters
+
+| Name             | Type       | Description                            | Default Value | Optional |
+| ---------------- | ---------- | -------------------------------------- | ------------- | -------- |
+| `defaultPattern` | `number[]` | Default vibration pattern.             | `[100]`       | Yes      |
+| `options.loop`   | `boolean`  | Whether to loop the vibration pattern. | `false`       | Yes      |
+
+### Return Values
+
+| Name          | Type                                                                  | Description                                                         |
+| ------------- | --------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `vibrate`     | `(pattern: number \| number[], options?: { loop?: boolean }) => void` | Function to trigger vibration with a specified pattern and options. |
+| `isVibrating` | `boolean`                                                             | Indicates whether the device is currently vibrating.                |
+| `stop`        | `() => void`                                                          | Function to stop the current vibration.                             |
+| `isSupported` | `boolean`                                                             | Indicates whether the vibration feature is supported on the device. |

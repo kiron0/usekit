@@ -1,20 +1,20 @@
 import * as React from "react"
 
-type VibrationPattern = number | number[]
+type Pattern = number | number[]
 
 interface Options {
   loop?: boolean
 }
 
 interface Return {
-  vibrate: (pattern?: VibrationPattern) => void
+  vibrate: (pattern?: Pattern) => void
   stop: () => void
   isSupported: boolean
   isVibrating: boolean
 }
 
 export function useVibration(
-  defaultPattern: VibrationPattern = 100,
+  defaultPattern: Pattern = 100,
   options: Options = {}
 ): Return {
   const isSupported = React.useMemo(() => "vibrate" in navigator, [])
@@ -22,7 +22,7 @@ export function useVibration(
   const [isVibrating, setIsVibrating] = React.useState(false)
 
   const vibrate = React.useCallback(
-    (pattern: VibrationPattern = defaultPattern) => {
+    (pattern: Pattern = defaultPattern) => {
       if (!isSupported) return
 
       try {

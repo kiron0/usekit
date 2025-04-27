@@ -1221,6 +1221,20 @@ export const Index: Record<string, any> = {
     component: React.lazy(() => import("registry/hooks/use-prevent-zoom.ts")),
     source: "",
   },
+  "use-portal": {
+    name: "use-portal",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-portal.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(() => import("registry/examples/use-portal-demo")),
+    source: "",
+  },
   "use-copy-to-clipboard-demo": {
     name: "use-copy-to-clipboard-demo",
     type: "registry:example",
@@ -2198,6 +2212,22 @@ export const Index: Record<string, any> = {
     ],
     component: React.lazy(
       () => import("registry/examples/use-pinch-zoom-demo.tsx")
+    ),
+    source: "",
+  },
+  "use-portal-demo": {
+    name: "use-portal-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-portal-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-portal-demo.tsx")
     ),
     source: "",
   },
