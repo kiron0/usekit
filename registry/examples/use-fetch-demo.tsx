@@ -33,6 +33,7 @@ export default function UseFetchDemo() {
         ) : data ? (
           <div className="flex flex-col items-center justify-center gap-2">
             {data.sprites.other.home.front_shiny ? (
+              // eslint-disable-next-line @next/next/no-img-element
               <img
                 src={data?.sprites?.other?.home?.front_shiny || ""}
                 alt={data.name}

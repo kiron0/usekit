@@ -1221,6 +1221,66 @@ export const Index: Record<string, any> = {
     component: React.lazy(() => import("registry/hooks/use-prevent-zoom.ts")),
     source: "",
   },
+  "use-portal": {
+    name: "use-portal",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-portal.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(() => import("registry/examples/use-portal-demo")),
+    source: "",
+  },
+  "use-render-debugger": {
+    name: "use-render-debugger",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-render-debugger.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-render-debugger-demo")
+    ),
+    source: "",
+  },
+  "use-focus-trap": {
+    name: "use-focus-trap",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-focus-trap.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-focus-trap-demo")
+    ),
+    source: "",
+  },
+  "use-socket": {
+    name: "use-socket",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-socket.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(() => import("registry/hooks/use-socket.ts")),
+    source: "",
+  },
   "use-copy-to-clipboard-demo": {
     name: "use-copy-to-clipboard-demo",
     type: "registry:example",
@@ -2198,6 +2258,54 @@ export const Index: Record<string, any> = {
     ],
     component: React.lazy(
       () => import("registry/examples/use-pinch-zoom-demo.tsx")
+    ),
+    source: "",
+  },
+  "use-portal-demo": {
+    name: "use-portal-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-portal-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-portal-demo.tsx")
+    ),
+    source: "",
+  },
+  "use-render-debugger-demo": {
+    name: "use-render-debugger-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-render-debugger-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-render-debugger-demo.tsx")
+    ),
+    source: "",
+  },
+  "use-focus-trap-demo": {
+    name: "use-focus-trap-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-focus-trap-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-focus-trap-demo.tsx")
     ),
     source: "",
   },

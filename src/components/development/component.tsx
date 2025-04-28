@@ -1,36 +1,55 @@
 "use client"
 
-import { usePinchZoom } from "registry/hooks/use-pinch-zoom"
+import { useEffect } from "react"
+
+import { Button } from "@/components/ui/button"
+import { useSocket } from "registry/hooks/use-socket"
 
 export function Component() {
-  const { scale, onTouchStart, onTouchMove, onTouchEnd, isSupported } =
-    usePinchZoom({
-      onZoom: (s) => console.log("Zoom scale:", s),
-      minScale: 0.2,
-      maxScale: 4,
-    })
+  const { socket, isConnected, connect, disconnect } = useSocket(
+    "http://localhost:8000",
+    {
+      reconnectionDelay: 5000,
+      reconnection: true,
+    }
+  )
 
-  if (!isSupported) {
-    return <div>Pinch zoom is not supported on this device.</div>
-  }
+  useEffect(() => {
+    if (socket) {
+      socket.on("message", (data) => {
+        console.log("Received message:", data)
+      })
+    }
+
+    return () => {
+      if (socket) {
+        socket.off("message")
+      }
+    }
+  }, [socket])
 
   return (
-    <div
-      onTouchStart={onTouchStart}
-      onTouchMove={onTouchMove}
-      onTouchEnd={onTouchEnd}
-      className="flex h-full w-full items-center justify-center overflow-hidden px-3"
-    >
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        src="/nextjs-icon.png"
-        alt="Zoomable"
-        style={{
-          transform: `scale(${scale})`,
-          transition: "transform 0.1s ease-out",
+    <div className="flex flex-col items-center gap-4 p-4">
+      <div>Status: {isConnected ? "🟢 Connected" : "🔴 Disconnected"}</div>
+      {isConnected ? (
+        <Button variant="destructive" onClick={disconnect}>
+          Disconnect
+        </Button>
+      ) : (
+        <Button onClick={connect}>Connect</Button>
+      )}
+      <Button
+        onClick={() => {
+          if (socket) {
+            socket.emit("message", { message: "Hello from client!" })
+          }
         }}
-        className="h-full w-full"
-      />
+      >
+        Send Message
+      </Button>
+      <p className="text-balance text-muted-foreground">
+        Open the console to see the logs
+      </p>
     </div>
   )
 }

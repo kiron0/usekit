@@ -116,7 +116,7 @@ async function buildRegistryJsonFile(): Promise<void> {
 async function buildRegistry(): Promise<void> {
   return new Promise((resolve, reject) => {
     const process = exec(
-      `bunx --bun shadcn@latest build ${REGISTRY_JSON_FILE_PATH} --output ${REGISTRY_OUTPUT_PATH}`
+      `bunx --bun shadcn@2.5.0 build ${REGISTRY_JSON_FILE_PATH} --output ${REGISTRY_OUTPUT_PATH}`
     )
 
     process.on("exit", (code) => {

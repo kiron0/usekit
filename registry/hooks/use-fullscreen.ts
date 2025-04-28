@@ -1,7 +1,7 @@
 import * as React from "react"
 
-export interface Return<T extends HTMLElement> {
-  elementRef: React.RefObject<T>
+interface Return<T extends HTMLElement> {
+  ref: React.RefObject<T>
   isFullscreen: boolean
   requestFullscreen: () => void
   exitFullscreen: () => void
@@ -49,7 +49,7 @@ export function useFullscreen<T extends HTMLElement>(): Return<T> {
   }, [isFullscreen, requestFullscreen, exitFullscreen])
 
   return {
-    elementRef: elementRef as React.RefObject<T>,
+    ref: elementRef as React.RefObject<T>,
     isFullscreen,
     requestFullscreen,
     exitFullscreen,

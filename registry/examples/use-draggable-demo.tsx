@@ -20,7 +20,7 @@ export default function UseDraggableDemo() {
       <div
         ref={ref}
         className={cn(
-          "z-[999] flex h-24 w-48 cursor-move select-none items-center justify-center rounded-md border border-dashed border-gray-300 border-primary bg-primary/10 text-muted-foreground shadow-md backdrop-blur-sm"
+          "flex h-24 w-48 cursor-move select-none items-center justify-center rounded-md border border-dashed border-gray-300 border-primary bg-primary/10 text-muted-foreground shadow-md backdrop-blur-sm md:z-[999]"
         )}
       >
         {isDragging ? "Dragging..." : "Drag me"}

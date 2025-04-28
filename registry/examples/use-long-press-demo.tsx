@@ -73,10 +73,10 @@ function Demo({ setOpen }: { setOpen: (open: boolean) => void }) {
     return ReactDOM.createPortal(
       <>
         <div
-          className="fixed inset-0 z-[998] bg-black/40 backdrop-blur-sm"
+          className="fixed inset-0 bg-black/40 backdrop-blur-sm md:z-[998]"
           onClick={() => setOpen(false)}
         />
-        <dialog className="fixed left-1/2 right-1/2 top-1/2 z-[999] grid h-60 w-[95%] max-w-lg -translate-x-1/2 -translate-y-1/2 rounded-xl border bg-background p-4 text-muted-foreground shadow-md md:w-full">
+        <dialog className="fixed left-1/2 right-1/2 top-1/2 grid h-60 w-[95%] max-w-lg -translate-x-1/2 -translate-y-1/2 rounded-xl border bg-background p-4 text-muted-foreground shadow-md md:z-[999] md:w-full">
           <div className="relative flex h-full items-center justify-center">
             <X
               size={18}

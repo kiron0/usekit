@@ -1056,6 +1056,59 @@ export const hooks: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "use-portal",
+    title: "Use Portal",
+    description:
+      "Create and manage portals for rendering content outside the component hierarchy.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-portal.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-render-debugger",
+    title: "Use Render Debugger",
+    description:
+      "Logs prop/state changes between renders to help debug unnecessary re-renders.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-render-debugger.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-focus-trap",
+    title: "Use Focus Trap",
+    description:
+      "Trap focus within a specific element, useful for modals and accessibility.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-focus-trap.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-socket",
+    title: "Use Socket",
+    description:
+      "Manage Socket connections, handling messages, errors, and connection states.",
+    type: "registry:hook",
+    dependencies: ["socket.io-client@4.8.1"],
+    files: [
+      {
+        path: "registry/hooks/use-socket.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
 ]
 
 export default hooks

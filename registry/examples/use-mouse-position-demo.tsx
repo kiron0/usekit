@@ -41,7 +41,7 @@ function Demo(props: Position) {
   if (typeof window === "object") {
     return createPortal(
       <dialog
-        className="z-[999] m-2 block rounded-sm border border-dashed border-primary bg-primary/10 p-4 text-muted-foreground shadow-md backdrop-blur"
+        className="m-2 block rounded-sm border border-dashed border-primary bg-primary/10 p-4 text-muted-foreground shadow-md backdrop-blur md:z-[999]"
         style={{
           top: `${props.y}px`,
           left: `${props.x}px`,

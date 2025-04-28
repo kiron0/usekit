@@ -92,7 +92,7 @@ export function Customizer() {
 
               return mounted ? (
                 <Button
-                  variant={"outline"}
+                  variant="outline"
                   size="sm"
                   key={color.name}
                   onClick={() => {
@@ -103,8 +103,8 @@ export function Customizer() {
                     )
                   }}
                   className={cn(
-                    "justify-start",
-                    isActive && "border-2 border-primary"
+                    "justify-center text-xs",
+                    isActive && "border border-primary"
                   )}
                   style={
                     {
@@ -116,10 +116,10 @@ export function Customizer() {
                 >
                   <span
                     className={cn(
-                      "mr-1 flex size-5 shrink-0 -translate-x-1 items-center justify-center rounded-full bg-[--theme-primary]"
+                      "flex size-4 shrink-0 items-center justify-center rounded-full bg-[--theme-primary]"
                     )}
                   >
-                    {isActive && <CheckIcon className="size-4 text-white" />}
+                    {isActive && <CheckIcon className="text-white" />}
                   </span>
                   {color.label}
                 </Button>
@@ -135,7 +135,7 @@ export function Customizer() {
             {mounted ? (
               <>
                 <Button
-                  variant={"outline"}
+                  variant="outline"
                   size="sm"
                   onClick={() =>
                     setTheme(
@@ -146,15 +146,13 @@ export function Customizer() {
                           : `${theme}`
                     )
                   }
-                  className={cn(
-                    !theme?.includes("dark") && "border-2 border-primary"
-                  )}
+                  className={cn(!theme?.includes("dark") && "border-primary")}
                 >
-                  <SunIcon className="mr-1 -translate-x-1" />
+                  <SunIcon />
                   Light
                 </Button>
                 <Button
-                  variant={"outline"}
+                  variant="outline"
                   size="sm"
                   onClick={() =>
                     setTheme(
@@ -165,11 +163,9 @@ export function Customizer() {
                           : `dark-${theme}`
                     )
                   }
-                  className={cn(
-                    theme?.includes("dark") && "border-2 border-primary"
-                  )}
+                  className={cn(theme?.includes("dark") && "border-primary")}
                 >
-                  <MoonIcon className="mr-1 -translate-x-1" />
+                  <MoonIcon />
                   Dark
                 </Button>
               </>

@@ -43,42 +43,23 @@ npx shadcn@latest add https://usekit.kiron.dev/k/use-draggable
 ```tsx {6, 8-15}
 "use client"
 
-import { useStep } from "@/hooks/use-step"
+import { useDraggable } from "@/hooks/use-draggable"
 
 export function Component() {
-  const [currentStep, helpers] = useStep(5)
-
-  const {
-    canGoToPrevStep,
-    canGoToNextStep,
-    goToNextStep,
-    goToPrevStep,
-    reset,
-    setStep,
-  } = helpers
+  const { ref, isDragging } = useDraggable<HTMLDivElement>()
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-      <p>Current step is {currentStep}</p>
-      <p>Can go to previous step {canGoToPrevStep ? "yes" : "no"}</p>
-      <p>Can go to next step {canGoToNextStep ? "yes" : "no"}</p>
-      <button onClick={goToNextStep} type="button">
-        Go to next step
-      </button>
-      <button onClick={goToPrevStep} type="button">
-        Go to previous step
-      </button>
-      <button onClick={reset} type="button">
-        Reset
-      </button>
-      <button
-        onClick={() => {
-          setStep(3)
-        }}
-        type="button"
-      >
-        Set to step 3
-      </button>
+    <div
+      ref={ref}
+      style={{
+        width: "200px",
+        height: "200px",
+        backgroundColor: isDragging ? "lightblue" : "lightcoral",
+        cursor: "grab",
+        userSelect: "none", // Prevent text selection while dragging
+      }}
+    >
+      Drag me!
     </div>
   )
 }

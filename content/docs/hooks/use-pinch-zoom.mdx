@@ -4,3 +4,91 @@ description: Enable pinch-to-zoom functionality on touch devices with usePinchZo
 ---
 
 <ComponentPreview name="use-pinch-zoom-demo" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://usekit.kiron.dev/k/use-pinch-zoom
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="use-pinch-zoom" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx {3, 6-11}
+"use client"
+
+import { usePinchZoom } from "@/hooks/use-pinch-zoom"
+
+export function Component() {
+  const { scale, isSupported, ...handlers } = usePinchZoom({
+    onZoom: (s) => console.log("Zoom scale:", s),
+    minScale: 0.2,
+    maxScale: 4,
+  })
+
+  if (!isSupported) {
+    return <div>Pinch zoom is not supported on this device.</div>
+  }
+
+  return (
+    <div
+      {...handlers}
+      style={{
+        transform: `scale(${scale})`,
+        touchAction: "none",
+        width: "100%",
+        height: "100%",
+        backgroundColor: "lightgray",
+      }}
+    >
+      Pinch to zoom
+    </div>
+  )
+}
+```
+
+## API Reference
+
+### Parameters
+
+| Name       | Type         | Description                            | Default Value | Optional |
+| ---------- | ------------ | -------------------------------------- | ------------- | -------- |
+| `onZoom`   | `() => void` | Callback function when zooming occurs. | `undefined`   | Yes      |
+| `minScale` | `number`     | Minimum zoom scale.                    | `1`           | Yes      |
+| `maxScale` | `number`     | Maximum zoom scale.                    | `3`           | Yes      |
+
+### Return Values
+
+| Name           | Type         | Description                                |
+| -------------- | ------------ | ------------------------------------------ |
+| `scale`        | `number`     | Current zoom scale.                        |
+| `onTouchStart` | `() => void` | Touch start event handler.                 |
+| `onTouchMove`  | `() => void` | Touch move event handler.                  |
+| `onTouchEnd`   | `() => void` | Touch end event handler.                   |
+| `isSupported`  | `boolean`    | Indicates whether pinch zoom is supported. |

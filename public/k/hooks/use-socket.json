@@ -1,0 +1,15 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-socket",
+  "type": "registry:hook",
+  "title": "Use Socket",
+  "description": "Manage Socket connections, handling messages, errors, and connection states.",
+  "dependencies": ["socket.io-client@4.8.1"],
+  "files": [
+    {
+      "path": "registry/hooks/use-socket.ts",
+      "content": "import * as React from \"react\"\nimport * as Socket from \"socket.io-client\"\n\ninterface Options {\n  withCredentials?: boolean\n  transports?: string[]\n  reconnection?: boolean\n  reconnectionDelay?: number // in ms\n  autoConnect?: boolean\n  timeout?: number // in ms\n}\n\ninterface Return {\n  socket: Socket.Socket | null\n  isConnected: boolean\n  connect: () => void\n  disconnect: () => void\n}\n\nexport function useSocket(url: string, options: Options = {}): Return {\n  const [socket, setSocket] = React.useState<Socket.Socket | null>(null)\n  const [isConnected, setIsConnected] = React.useState(false)\n\n  React.useEffect(() => {\n    if (typeof window === \"undefined\") return\n\n    const socketInstance = Socket.io(url, {\n      withCredentials: options.withCredentials ?? true,\n      transports: options.transports ?? [\"websocket\", \"polling\"],\n      reconnection: options.reconnection ?? true,\n      reconnectionDelay: options.reconnectionDelay ?? 1000,\n      autoConnect: options.autoConnect ?? true,\n      timeout: options.timeout ?? 10000,\n    })\n\n    socketInstance.on(\"connect\", () => {\n      setIsConnected(true)\n      console.log(\"Socket connected:\", socketInstance.id)\n    })\n\n    socketInstance.on(\"disconnect\", (reason) => {\n      setIsConnected(false)\n      console.log(\"Socket disconnected:\", reason)\n    })\n\n    socketInstance.on(\"connect_error\", (error) => {\n      setIsConnected(false)\n      console.error(\"Socket connection error:\", error)\n    })\n\n    setSocket(socketInstance)\n\n    return () => {\n      socketInstance.off(\"connect\")\n      socketInstance.off(\"disconnect\")\n      socketInstance.off(\"connect_error\")\n      socketInstance.disconnect()\n    }\n  }, [\n    url,\n    options.withCredentials,\n    options.transports,\n    options.reconnection,\n    options.reconnectionDelay,\n    options.autoConnect,\n    options.timeout,\n  ])\n\n  const connect = React.useCallback(() => {\n    if (socket) {\n      socket.connect()\n    }\n  }, [socket])\n\n  const disconnect = React.useCallback(() => {\n    socket?.disconnect()\n  }, [socket])\n\n  return { socket, isConnected, connect, disconnect }\n}\n",
+      "type": "registry:hook"
+    }
+  ]
+}

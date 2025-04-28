@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-render-debugger",
+  "type": "registry:hook",
+  "title": "Use Render Debugger",
+  "description": "Logs prop/state changes between renders to help debug unnecessary re-renders.",
+  "files": [
+    {
+      "path": "registry/hooks/use-render-debugger.ts",
+      "content": "import * as React from \"react\"\n\nexport function useRenderDebugger<TProps extends Record<string, unknown>>(\n  componentName: string,\n  props: TProps,\n  options?: {\n    trackOnly?: Array<keyof TProps>\n    logger?: (\n      message: string,\n      changes: Record<string, { from: unknown; to: unknown }>\n    ) => void\n  }\n): void {\n  const previousProps = React.useRef<TProps>(props)\n\n  React.useEffect(() => {\n    const { trackOnly, logger = console.log } = options || {}\n\n    const changedProps = Object.entries(props).reduce<\n      Record<string, { from: unknown; to: unknown }>\n    >((acc, [key, value]) => {\n      if (trackOnly && !trackOnly.includes(key)) return acc\n      if (previousProps.current[key] !== value) {\n        acc[key] = { from: previousProps.current[key], to: value }\n      }\n      return acc\n    }, {})\n\n    if (Object.keys(changedProps).length > 0) {\n      logger(\n        `[RenderDebugger] ${componentName} re-rendered due to:`,\n        changedProps\n      )\n    }\n\n    previousProps.current = props\n  }, [componentName, props, options])\n}\n",
+      "type": "registry:hook"
+    }
+  ]
+}

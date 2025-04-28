@@ -2,19 +2,30 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
+import Logo from "@/assets/logo.png"
+import { useTheme } from "next-themes"
 
 import { siteConfig } from "@/config/site"
 import { cn } from "@/lib/utils"
 
-import { Logo } from "./logo"
-
 export function MainNav() {
+  const { theme } = useTheme()
   const pathname = usePathname()
 
   return (
     <div className="mr-4 hidden md:flex">
       <Link href="/" className="mr-4 flex items-center gap-2 lg:mr-6">
-        <Logo />
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={Logo.src}
+          alt="Logo"
+          width={Logo.width}
+          height={Logo.height}
+          className={cn(
+            "w-7",
+            theme?.includes("dark") ? "invert" : "dark:invert"
+          )}
+        />
         <span className="hidden font-bold lg:inline-block">
           {siteConfig.name}
         </span>
