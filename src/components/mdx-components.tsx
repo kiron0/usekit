@@ -1,6 +1,5 @@
 "use client"
 
-import Image from "next/image"
 import Link from "next/link"
 import { useMDXComponent } from "next-contentlayer2/hooks"
 
@@ -235,7 +234,6 @@ const components = {
       {...props}
     />
   ),
-  Image,
   Callout,
   Step: ({ className, ...props }: React.ComponentProps<"h3">) => (
     <h3

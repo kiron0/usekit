@@ -1027,6 +1027,19 @@
           "path": "registry/hooks/use-focus-trap.ts"
         }
       ]
+    },
+    {
+      "name": "use-socket",
+      "title": "Use Socket",
+      "description": "Manage Socket connections, handling messages, errors, and connection states.",
+      "type": "registry:hook",
+      "dependencies": ["socket.io-client@4.8.1"],
+      "files": [
+        {
+          "type": "registry:hook",
+          "path": "registry/hooks/use-socket.ts"
+        }
+      ]
     }
   ]
 }

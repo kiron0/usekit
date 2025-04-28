@@ -1095,6 +1095,20 @@ export const hooks: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "use-socket",
+    title: "Use Socket",
+    description:
+      "Manage Socket connections, handling messages, errors, and connection states.",
+    type: "registry:hook",
+    dependencies: ["socket.io-client@4.8.1"],
+    files: [
+      {
+        path: "registry/hooks/use-socket.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
 ]
 
 export default hooks
