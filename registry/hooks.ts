@@ -1082,6 +1082,19 @@ export const hooks: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "use-focus-trap",
+    title: "Use Focus Trap",
+    description:
+      "Trap focus within a specific element, useful for modals and accessibility.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-focus-trap.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
 ]
 
 export default hooks

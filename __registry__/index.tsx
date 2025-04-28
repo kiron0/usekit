@@ -1251,6 +1251,22 @@ export const Index: Record<string, any> = {
     ),
     source: "",
   },
+  "use-focus-trap": {
+    name: "use-focus-trap",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-focus-trap.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-focus-trap-demo")
+    ),
+    source: "",
+  },
   "use-copy-to-clipboard-demo": {
     name: "use-copy-to-clipboard-demo",
     type: "registry:example",
@@ -2260,6 +2276,22 @@ export const Index: Record<string, any> = {
     ],
     component: React.lazy(
       () => import("registry/examples/use-render-debugger-demo.tsx")
+    ),
+    source: "",
+  },
+  "use-focus-trap-demo": {
+    name: "use-focus-trap-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-focus-trap-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-focus-trap-demo.tsx")
     ),
     source: "",
   },

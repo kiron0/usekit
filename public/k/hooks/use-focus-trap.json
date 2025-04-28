@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-focus-trap",
+  "type": "registry:hook",
+  "title": "Use Focus Trap",
+  "description": "Trap focus within a specific element, useful for modals and accessibility.",
+  "files": [
+    {
+      "path": "registry/hooks/use-focus-trap.ts",
+      "content": "import * as React from \"react\"\r\n\r\nexport function useFocusTrap<T extends HTMLElement>(\r\n  isActive: boolean,\r\n  autoFocusSelector?: string\r\n) {\r\n  const containerRef = React.useRef<T | null>(null)\r\n  const previouslyFocusedElement = React.useRef<HTMLElement | null>(null)\r\n\r\n  React.useEffect(() => {\r\n    if (!isActive) return\r\n\r\n    previouslyFocusedElement.current = document.activeElement as HTMLElement\r\n\r\n    const focusableSelectors = [\r\n      \"a[href]\",\r\n      \"button:not([disabled])\",\r\n      \"textarea:not([disabled])\",\r\n      'input[type=\"text\"]:not([disabled])',\r\n      'input[type=\"email\"]:not([disabled])',\r\n      'input[type=\"radio\"]:not([disabled])',\r\n      'input[type=\"checkbox\"]:not([disabled])',\r\n      \"select:not([disabled])\",\r\n      '[tabindex]:not([tabindex=\"-1\"])',\r\n    ]\r\n\r\n    const getFocusableElements = () => {\r\n      if (!containerRef.current) return []\r\n      return Array.from(\r\n        containerRef.current.querySelectorAll<HTMLElement>(\r\n          focusableSelectors.join(\",\")\r\n        )\r\n      )\r\n    }\r\n\r\n    const handleKeyDown = (e: KeyboardEvent) => {\r\n      if (e.key !== \"Tab\") return\r\n\r\n      const focusableElements = getFocusableElements()\r\n      if (focusableElements.length === 0) return\r\n\r\n      const firstElement = focusableElements[0]\r\n      const lastElement = focusableElements[focusableElements.length - 1]\r\n\r\n      if (e.shiftKey) {\r\n        if (document.activeElement === firstElement) {\r\n          e.preventDefault()\r\n          lastElement.focus()\r\n        }\r\n      } else {\r\n        if (document.activeElement === lastElement) {\r\n          e.preventDefault()\r\n          firstElement.focus()\r\n        }\r\n      }\r\n    }\r\n\r\n    document.addEventListener(\"keydown\", handleKeyDown)\r\n\r\n    const timeout = setTimeout(() => {\r\n      if (autoFocusSelector && containerRef.current) {\r\n        const autoFocusElement =\r\n          containerRef.current.querySelector<HTMLElement>(autoFocusSelector)\r\n        if (autoFocusElement) {\r\n          autoFocusElement.focus()\r\n          return\r\n        }\r\n      }\r\n      const focusableElements = getFocusableElements()\r\n      focusableElements[0]?.focus()\r\n    }, 0)\r\n\r\n    return () => {\r\n      clearTimeout(timeout)\r\n      document.removeEventListener(\"keydown\", handleKeyDown)\r\n      previouslyFocusedElement.current?.focus()\r\n    }\r\n  }, [isActive, autoFocusSelector])\r\n\r\n  return containerRef\r\n}\r\n",
+      "type": "registry:hook"
+    }
+  ]
+}

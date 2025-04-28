@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { useFocusTrap } from "registry/hooks/use-focus-trap"
 
-export function Component() {
+export default function UseFocusTrapDemo() {
   const [isModalOpen, setIsModalOpen] = React.useState(false)
   const modalRef = useFocusTrap<HTMLDivElement>(
     isModalOpen,

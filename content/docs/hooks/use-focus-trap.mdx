@@ -2,3 +2,93 @@
 title: useFocusTrap
 description: Trap focus within a specific element, useful for modals and accessibility.
 ---
+
+<ComponentPreview name="use-focus-trap-demo" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://usekit.kiron.dev/k/use-focus-trap
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="use-focus-trap" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx {5, 9-12}
+"use client"
+
+import * as React from "react"
+
+import { useFocusTrap } from "@/hooks/use-focus-trap"
+
+export function Component() {
+  const [isModalOpen, setIsModalOpen] = React.useState(false)
+  const modalRef = useFocusTrap<HTMLDivElement>(
+    isModalOpen,
+    'input[name="name"]'
+  )
+
+  const openModal = () => setIsModalOpen(true)
+  const closeModal = () => setIsModalOpen(false)
+
+  return (
+    <div>
+      <button onClick={openModal}>Open Modal</button>
+
+      {isModalOpen && (
+        <div
+          ref={modalRef}
+          className="fixed inset-0 flex items-center justify-center bg-black/50"
+        >
+          <div className="rounded bg-white p-4">
+            <h2>Modal Title</h2>
+            <input name="name" placeholder="Enter your name" />
+            <button onClick={closeModal}>Close Modal</button>
+          </div>
+        </div>
+      )}
+    </div>
+  )
+}
+```
+
+## API Reference
+
+### Parameters
+
+| Name                | Type      | Description                        | Default Value | Optional |
+| ------------------- | --------- | ---------------------------------- | ------------- | -------- |
+| `isActive`          | `boolean` | Whether the focus trap is active.  | `false`       | No       |
+| `autoFocusSelector` | `string`  | Selector for the element to focus. | `undefined`   | Yes      |
+
+### Return Values
+
+| Name  | Type                           | Description                                |
+| ----- | ------------------------------ | ------------------------------------------ |
+| `ref` | `React.RefObject<HTMLElement>` | Ref to the element that should trap focus. |

@@ -472,7 +472,6 @@ export const docsConfig: DocsConfig = {
           title: "useFocusTrap",
           href: "/docs/hooks/use-focus-trap",
           items: [],
-          label: "Soon",
         },
         {
           title: "useRenderDebugger",

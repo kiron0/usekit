@@ -641,4 +641,14 @@ export const hooksExamples: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "use-focus-trap-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/use-focus-trap-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
 ]
