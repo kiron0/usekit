@@ -93,6 +93,7 @@ export function Customizer() {
               return mounted ? (
                 <Button
                   variant="outline"
+                  size="sm"
                   key={color.name}
                   onClick={() => {
                     setTheme(
@@ -134,7 +135,7 @@ export function Customizer() {
             {mounted ? (
               <>
                 <Button
-                  variant={"outline"}
+                  variant="outline"
                   size="sm"
                   onClick={() =>
                     setTheme(
@@ -145,15 +146,13 @@ export function Customizer() {
                           : `${theme}`
                     )
                   }
-                  className={cn(
-                    !theme?.includes("dark") && "border border-primary"
-                  )}
+                  className={cn(!theme?.includes("dark") && "border-primary")}
                 >
                   <SunIcon />
                   Light
                 </Button>
                 <Button
-                  variant={"outline"}
+                  variant="outline"
                   size="sm"
                   onClick={() =>
                     setTheme(
@@ -164,9 +163,7 @@ export function Customizer() {
                           : `dark-${theme}`
                     )
                   }
-                  className={cn(
-                    theme?.includes("dark") && "border border-primary"
-                  )}
+                  className={cn(theme?.includes("dark") && "border-primary")}
                 >
                   <MoonIcon />
                   Dark

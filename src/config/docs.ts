@@ -475,16 +475,9 @@ export const docsConfig: DocsConfig = {
           label: "Soon",
         },
         {
-          title: "usePrefersDarkMode",
-          href: "/docs/hooks/use-prefers-dark-mode",
+          title: "useRenderDebugger",
+          href: "/docs/hooks/use-render-debugger",
           items: [],
-          label: "Soon",
-        },
-        {
-          title: "useWhyDidYouUpdate",
-          href: "/docs/hooks/use-why-did-you-update",
-          items: [],
-          label: "Soon",
         },
       ],
     },

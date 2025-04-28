@@ -1069,6 +1069,19 @@ export const hooks: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "use-render-debugger",
+    title: "Use Render Debugger",
+    description:
+      "Logs prop/state changes between renders to help debug unnecessary re-renders.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-render-debugger.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
 ]
 
 export default hooks

@@ -88,29 +88,43 @@ export function CommandMenu({ ...props }: DialogProps) {
           </CommandGroup>
           {docsConfig.sidebarNav.map((group) => (
             <CommandGroup key={group.title} heading={group.title}>
-              {group.items.map((navItem) => (
-                <CommandItem
-                  key={navItem.href}
-                  value={navItem.title}
-                  onSelect={() => {
-                    runCommand(() => router.push(navItem.href as string))
-                  }}
-                >
-                  <Circle />
-                  {navItem.title}
-                  {navItem.label && (
-                    <span
-                      className={cn(
-                        "ml-2 rounded-md bg-primary px-1.5 py-0.5 text-xs leading-none text-primary-foreground no-underline group-hover:no-underline",
-                        navItem.label.toLowerCase() === "soon" &&
-                          "bg-[#adfa1d] text-[#000000]"
-                      )}
-                    >
-                      {navItem.label}
-                    </span>
-                  )}
-                </CommandItem>
-              ))}
+              {group.items
+                .map((item) => ({ ...item }))
+                .sort((a, b) => {
+                  const aStartsWithUse = a.title.toLowerCase().startsWith("use")
+                  const bStartsWithUse = b.title.toLowerCase().startsWith("use")
+
+                  if (aStartsWithUse && bStartsWithUse) {
+                    return a.title.localeCompare(b.title)
+                  }
+
+                  if (aStartsWithUse) return -1
+                  if (bStartsWithUse) return 1
+                  return 0
+                })
+                .map((navItem) => (
+                  <CommandItem
+                    key={navItem.href}
+                    value={navItem.title}
+                    onSelect={() => {
+                      runCommand(() => router.push(navItem.href as string))
+                    }}
+                  >
+                    <Circle />
+                    {navItem.title}
+                    {navItem.label && (
+                      <span
+                        className={cn(
+                          "ml-2 rounded-md bg-primary px-1.5 py-0.5 text-xs leading-none text-primary-foreground no-underline group-hover:no-underline",
+                          navItem.label.toLowerCase() === "soon" &&
+                            "bg-[#adfa1d] text-[#000000]"
+                        )}
+                      >
+                        {navItem.label}
+                      </span>
+                    )}
+                  </CommandItem>
+                ))}
             </CommandGroup>
           ))}
           <CommandSeparator className="mb-1" />

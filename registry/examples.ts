@@ -631,4 +631,14 @@ export const hooksExamples: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "use-render-debugger-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/use-render-debugger-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
 ]

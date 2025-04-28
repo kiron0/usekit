@@ -1,0 +1,80 @@
+---
+title: useRenderDebugger
+description: Logs prop/state changes between renders to help debug unnecessary re-renders.
+---
+
+<ComponentPreview name="use-render-debugger-demo" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://usekit.kiron.dev/k/use-render-debugger
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="use-render-debugger" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx {3, 8-14}
+"use client"
+
+import { useRenderDebugger } from "@/hooks/use-render-debugger"
+
+export function Component() {
+  const [count, setCount] = useState(0)
+
+  useRenderDebugger({
+    componentName: "Component",
+    props: { count },
+    options: {
+      trackOnly: ["count"],
+    },
+  })
+
+  return (
+    <Button
+      onClick={() => {
+        setCount((prev) => prev + 1)
+      }}
+    >
+      Count: {count}
+    </Button>
+  )
+}
+```
+
+## API Reference
+
+### Parameters
+
+| Name                | Type                                                                                 | Description                        | Default Value | Optional |
+| ------------------- | ------------------------------------------------------------------------------------ | ---------------------------------- | ------------- | -------- |
+| `componentName`     | `string`                                                                             | Name of the component for logging. | -             | No       |
+| `props`             | `TProps`                                                                             | Props to be logged.                | -             | No       |
+| `options.trackOnly` | `Array<keyof TProps>`                                                                | Array of prop names to track.      | -             | Yes      |
+| `options.logger`    | `(message: string, changes: Record<string, { from: unknown; to: unknown }>) => void` | Custom logger function.            | `console.log` | Yes      |

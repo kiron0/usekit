@@ -19,7 +19,7 @@ const eslintConfig = [
       "no-console": [
         "error",
         {
-          allow: ["log", "info", "warn", "error"],
+          allow: ["log", "info", "warn", "error", "group", "groupEnd"],
         },
       ],
       "@typescript-eslint/no-require-imports": "off",

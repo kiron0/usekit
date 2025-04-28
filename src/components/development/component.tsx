@@ -1,37 +1,41 @@
 "use client"
 
-import * as React from "react"
-import { X } from "lucide-react"
-
-import { Button } from "@/components/ui/button"
-import { usePortal } from "registry/hooks/use-portal"
+import { useRenderDebugger } from "registry/hooks/use-render-debugger"
 
 export function Component() {
-  const [open, setOpen] = React.useState(false)
-  const { Portal } = usePortal()
+  return (
+    <AnalyticsComponent
+      id="123"
+      data="Hello World"
+      metadata={{ key: "value" }}
+    />
+  )
+}
+
+interface ExpensiveComponentProps {
+  id: string
+  data: any
+  metadata: any
+}
+
+export function AnalyticsComponent({
+  id,
+  data,
+  metadata,
+}: ExpensiveComponentProps) {
+  useRenderDebugger(
+    "ExpensiveComponent",
+    { id, data },
+    {
+      trackOnly: ["id", "data"],
+    }
+  )
 
   return (
-    <div className="flex h-full w-full items-center justify-center p-2 pt-6">
-      <Button onClick={() => setOpen(!open)}>Open Modal</Button>
-      {open && (
-        <Portal>
-          <div className="fixed inset-0 z-[998] bg-black/40 backdrop-blur-sm" />
-          <div className="fixed left-1/2 top-1/2 z-[999] grid h-60 w-[95%] max-w-lg -translate-x-1/2 -translate-y-1/2 rounded-xl border bg-background p-4 text-muted-foreground shadow-md md:w-full">
-            <div className="relative flex h-full items-center justify-center">
-              <X
-                size={18}
-                className="absolute right-1 top-1 cursor-pointer"
-                onClick={() => setOpen(!open)}
-                aria-label="Close modal"
-              />
-              <p className="text-balance text-center">
-                This is a modal rendered in a portal. Click the button to close
-                it or click outside the modal.
-              </p>
-            </div>
-          </div>
-        </Portal>
-      )}
+    <div>
+      <p>ID: {id}</p>
+      <p>Data: {JSON.stringify(data)}</p>
+      <p>Metadata: {JSON.stringify(metadata)}</p>
     </div>
   )
 }

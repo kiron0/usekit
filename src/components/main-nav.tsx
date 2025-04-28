@@ -22,7 +22,7 @@ export function MainNav() {
           width={Logo.width}
           height={Logo.height}
           className={cn(
-            "w-8",
+            "w-7",
             theme?.includes("dark") ? "invert" : "dark:invert"
           )}
         />
