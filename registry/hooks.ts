@@ -141,6 +141,7 @@ export const hooks: Registry["items"] = [
     description:
       "Use the useCopyToClipboard hook to copy text to the clipboard and track whether the copy action was successful, with an optional delay to reset the copied state.",
     type: "registry:hook",
+    registryDependencies: [`${siteConfig.url}/k/use-is-mobile`],
     files: [
       {
         path: "registry/hooks/use-mouse-position.ts",

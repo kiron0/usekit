@@ -45,7 +45,7 @@ export function ThemeCustomizer() {
           </PopoverTrigger>
           <PopoverContent
             align="end"
-            className="z-[999] w-[340px] rounded-[12px] p-6"
+            className="w-[340px] rounded-[12px] p-6"
             sideOffset={10}
           >
             <Customizer />

@@ -1,5 +1,7 @@
 import * as React from "react"
 
+import { useIsMobile } from "./use-is-mobile"
+
 export interface Position {
   x: number
   y: number
@@ -9,10 +11,17 @@ export interface Position {
   elementPositionY?: number
 }
 
-export function useMousePosition<T extends HTMLElement>(): [
-  Position,
-  React.Ref<T>,
-] {
+interface Return<T extends HTMLElement> {
+  state: Position
+  ref: React.Ref<T>
+  isSupported: boolean
+}
+
+export function useMousePosition<T extends HTMLElement>(): Return<T> {
+  const isMobile = useIsMobile()
+
+  const [isSupported, setIsSupported] = React.useState(true)
+
   const [state, setState] = React.useState<Position>({
     x: 0,
     y: 0,
@@ -20,7 +29,12 @@ export function useMousePosition<T extends HTMLElement>(): [
 
   const ref = React.useRef<T>(null)
 
-  React.useLayoutEffect(() => {
+  React.useEffect(() => {
+    if (isMobile) {
+      setIsSupported(false)
+      return
+    }
+
     const handleMouseMove = (event: MouseEvent) => {
       const newState: Position = {
         x: event.pageX,
@@ -49,7 +63,7 @@ export function useMousePosition<T extends HTMLElement>(): [
     document.addEventListener("mousemove", handleMouseMove)
 
     return () => document.removeEventListener("mousemove", handleMouseMove)
-  }, [])
+  }, [isMobile])
 
-  return [state, ref]
+  return { state, ref, isSupported }
 }

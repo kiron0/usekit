@@ -2,12 +2,13 @@
 
 import { useEffect } from "react"
 
+import { siteConfig } from "@/config/site"
 import { Button } from "@/components/ui/button"
 import { useSocket } from "registry/hooks/use-socket"
 
 export function Component() {
   const { socket, isConnected, connect, disconnect } = useSocket(
-    "http://localhost:8000",
+    siteConfig.socketUrl,
     {
       reconnectionDelay: 5000,
       reconnection: true,
@@ -41,7 +42,7 @@ export function Component() {
       <Button
         onClick={() => {
           if (socket) {
-            socket.emit("message", { message: "Hello from client!" })
+            socket.emit("message", { message: "Hello from useKit!" })
           }
         }}
       >

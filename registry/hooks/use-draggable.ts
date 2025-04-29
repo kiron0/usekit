@@ -1,18 +1,27 @@
 import * as React from "react"
 
-interface DragOptions<T extends HTMLElement> {
+interface Options<T extends HTMLElement> {
   canDrag?: (element: T) => boolean
 }
 
+interface Return<T extends HTMLElement> {
+  ref: React.RefObject<T | null>
+  isDragging: boolean
+}
+
 export function useDraggable<T extends HTMLElement>(
-  options: DragOptions<T> = {}
-): { ref: React.RefObject<T>; isDragging: boolean } {
+  options: Options<T> = {}
+): Return<T> {
   const { canDrag } = options
+
   const ref = React.useRef<T>(null)
+
   const [isDragging, setIsDragging] = React.useState(false)
+
   const positionRef = React.useRef({ x: 0, y: 0 })
+
   const eventListeners = React.useRef<{
-    move?: (e: MouseEvent) => void
+    move?: (e: MouseEvent | TouchEvent) => void
     up?: () => void
   }>({})
 
@@ -20,9 +29,11 @@ export function useDraggable<T extends HTMLElement>(
     return () => {
       if (eventListeners.current.move) {
         document.removeEventListener("mousemove", eventListeners.current.move)
+        document.removeEventListener("touchmove", eventListeners.current.move)
       }
       if (eventListeners.current.up) {
         document.removeEventListener("mouseup", eventListeners.current.up)
+        document.removeEventListener("touchend", eventListeners.current.up)
       }
     }
   }, [])
@@ -31,9 +42,11 @@ export function useDraggable<T extends HTMLElement>(
     setIsDragging(false)
     if (eventListeners.current.move) {
       document.removeEventListener("mousemove", eventListeners.current.move)
+      document.removeEventListener("touchmove", eventListeners.current.move)
     }
     if (eventListeners.current.up) {
       document.removeEventListener("mouseup", eventListeners.current.up)
+      document.removeEventListener("touchend", eventListeners.current.up)
     }
     eventListeners.current = {}
   }, [])
@@ -44,15 +57,23 @@ export function useDraggable<T extends HTMLElement>(
     const element = ref.current
     if (!element) return
 
-    const handleMouseDown = (e: MouseEvent) => {
-      if (e.button !== 0) return
+    const handleStart = (e: MouseEvent | TouchEvent) => {
+      const isTouchEvent = e.type === "touchstart"
+      const clientX = isTouchEvent
+        ? (e as TouchEvent).touches[0].clientX
+        : (e as MouseEvent).clientX
+      const clientY = isTouchEvent
+        ? (e as TouchEvent).touches[0].clientY
+        : (e as MouseEvent).clientY
+
+      if (!isTouchEvent && (e as MouseEvent).button !== 0) return
       e.preventDefault()
 
       if (canDrag && !canDrag(element)) return
 
       setIsDragging(true)
-      const startX = e.clientX - positionRef.current.x
-      const startY = e.clientY - positionRef.current.y
+      const startX = clientX - positionRef.current.x
+      const startY = clientY - positionRef.current.y
 
       const rect = element.getBoundingClientRect()
       const elementWidth = element.offsetWidth
@@ -60,10 +81,18 @@ export function useDraggable<T extends HTMLElement>(
       const originalLeft = rect.left - positionRef.current.x
       const originalTop = rect.top - positionRef.current.y
 
-      const moveListener = (e: MouseEvent) => {
+      const moveListener = (e: MouseEvent | TouchEvent) => {
         e.preventDefault()
-        let newX = e.clientX - startX
-        let newY = e.clientY - startY
+        const isTouchMove = e.type === "touchmove"
+        const moveX = isTouchMove
+          ? (e as TouchEvent).touches[0].clientX
+          : (e as MouseEvent).clientX
+        const moveY = isTouchMove
+          ? (e as TouchEvent).touches[0].clientY
+          : (e as MouseEvent).clientY
+
+        let newX = moveX - startX
+        let newY = moveY - startY
 
         const maxX = window.innerWidth - originalLeft - elementWidth
         const minX = -originalLeft
@@ -81,6 +110,8 @@ export function useDraggable<T extends HTMLElement>(
         handleMouseUp()
         document.removeEventListener("mousemove", moveListener)
         document.removeEventListener("mouseup", upListener)
+        document.removeEventListener("touchmove", moveListener)
+        document.removeEventListener("touchend", upListener)
       }
 
       eventListeners.current.move = moveListener
@@ -88,11 +119,17 @@ export function useDraggable<T extends HTMLElement>(
 
       document.addEventListener("mousemove", moveListener)
       document.addEventListener("mouseup", upListener)
+      document.addEventListener("touchmove", moveListener)
+      document.addEventListener("touchend", upListener)
     }
 
-    element.addEventListener("mousedown", handleMouseDown)
-    return () => element.removeEventListener("mousedown", handleMouseDown)
+    element.addEventListener("mousedown", handleStart)
+    element.addEventListener("touchstart", handleStart)
+    return () => {
+      element.removeEventListener("mousedown", handleStart)
+      element.removeEventListener("touchstart", handleStart)
+    }
   }, [ref, canDrag, handleMouseUp])
 
-  return { ref: ref as React.RefObject<T>, isDragging }
+  return { ref, isDragging }
 }

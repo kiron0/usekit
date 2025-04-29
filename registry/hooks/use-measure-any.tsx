@@ -387,7 +387,7 @@ export function useMeasureAny({
             borderRadius: `${borderRadius}px`,
             borderWidth: `${borderWidth}px`,
           }}
-          className="fixed border border-dashed border-primary bg-transparent md:z-[998]"
+          className="fixed z-[48] border border-dashed border-primary bg-transparent md:z-[998]"
         />
         <div
           style={{
@@ -395,7 +395,7 @@ export function useMeasureAny({
               (pos) => pos.name === measurementPosition
             ),
           }}
-          className="pointer-events-none fixed rounded-md border bg-background/50 p-4 text-sm backdrop-blur md:z-[999]"
+          className="pointer-events-none fixed z-[49] rounded-md border bg-background/50 p-4 text-sm backdrop-blur md:z-[999]"
         >
           <div className="flex flex-col gap-1">
             <span>
@@ -417,7 +417,7 @@ export function useMeasureAny({
           style={{
             ...actionPositions.find((pos) => pos.name === actionPosition),
           }}
-          className="fixed flex gap-2 md:z-[999]"
+          className="fixed z-[999] flex gap-2"
         >
           <button
             className="h-8 rounded-md bg-primary px-3 text-xs text-primary-foreground"
