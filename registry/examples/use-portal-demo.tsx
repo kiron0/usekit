@@ -16,8 +16,8 @@ export default function UsePortalDemo() {
       <Button onClick={() => setOpen(!open)}>Open Modal</Button>
       {open && (
         <Portal>
-          <div className="fixed inset-0 bg-black/40 backdrop-blur-sm md:z-[998]" />
-          <div className="fixed left-1/2 top-1/2 grid h-60 w-[95%] max-w-lg -translate-x-1/2 -translate-y-1/2 rounded-xl border bg-background p-4 text-muted-foreground shadow-md md:z-[999] md:w-full">
+          <div className="fixed inset-0 z-[48] bg-black/40 backdrop-blur-sm md:z-[998]" />
+          <div className="fixed left-1/2 top-1/2 z-[49] grid h-60 w-[95%] max-w-lg -translate-x-1/2 -translate-y-1/2 rounded-xl border bg-background p-4 text-muted-foreground shadow-md md:z-[999] md:w-full">
             <div className="relative flex h-full items-center justify-center">
               <X
                 size={18}

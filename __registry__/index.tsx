@@ -155,7 +155,7 @@ export const Index: Record<string, any> = {
   "use-mouse-position": {
     name: "use-mouse-position",
     type: "registry:hook",
-    registryDependencies: undefined,
+    registryDependencies: ["https://usekit.kiron.dev/k/use-is-mobile"],
     files: [
       {
         path: "registry/hooks/use-mouse-position.ts",

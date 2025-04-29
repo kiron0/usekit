@@ -9,13 +9,24 @@ import {
 } from "registry/hooks/use-mouse-position"
 
 export default function UseMousePositionDemo() {
-  const [mouse, ref] = useMousePosition<HTMLParagraphElement>()
+  const {
+    ref,
+    state: mouse,
+    isSupported,
+  } = useMousePosition<HTMLParagraphElement>()
 
   const xIntersecting =
     mouse.elementX && mouse.elementX > 0 && mouse.elementX < 200
   const yIntersecting =
     mouse.elementY && mouse.elementY > 0 && mouse.elementY < 200
   const isIntersecting = xIntersecting && yIntersecting
+
+  if (!isSupported)
+    return (
+      <p className="text-center text-muted-foreground">
+        Mouse position is not supported on this device.{" "}
+      </p>
+    )
 
   return (
     <div>
@@ -41,7 +52,7 @@ function Demo(props: Position) {
   if (typeof window === "object") {
     return createPortal(
       <dialog
-        className="m-2 block rounded-sm border border-dashed border-primary bg-primary/10 p-4 text-muted-foreground shadow-md backdrop-blur md:z-[999]"
+        className="z-[49] m-2 block rounded-sm border border-dashed border-primary bg-primary/10 p-4 text-muted-foreground shadow-md backdrop-blur md:z-[999]"
         style={{
           top: `${props.y}px`,
           left: `${props.x}px`,
