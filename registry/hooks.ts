@@ -61,8 +61,8 @@ export const hooks: Registry["items"] = [
       "Delay function execution with useDebounceCallback, providing options for canceling, flushing, and checking if a call is pending.",
     type: "registry:hook",
     registryDependencies: [`${siteConfig.url}/k/use-unmount`],
-    dependencies: ["lodash.debounce"],
-    devDependencies: ["@types/lodash.debounce"],
+    dependencies: ["lodash.debounce@4.0.8"],
+    devDependencies: ["@types/lodash.debounce@4.0.9"],
     files: [
       {
         path: "registry/hooks/use-debounce-callback.ts",
@@ -891,7 +891,7 @@ export const hooks: Registry["items"] = [
     description:
       "Connect to Bluetooth devices and manage their state with useBluetooth.",
     type: "registry:hook",
-    devDependencies: ["@types/web-bluetooth"],
+    devDependencies: ["@types/web-bluetooth@0.0.21"],
     files: [
       {
         path: "registry/hooks/use-bluetooth.ts",
@@ -970,8 +970,8 @@ export const hooks: Registry["items"] = [
     description:
       "Encrypt and decrypt data with the useEncryption hook, providing methods to encrypt and decrypt strings using AES encryption.",
     type: "registry:hook",
-    dependencies: ["crypto-js"],
-    devDependencies: ["@types/crypto-js"],
+    dependencies: ["crypto-js@4.2.0"],
+    devDependencies: ["@types/crypto-js@4.2.2"],
     files: [
       {
         path: "registry/hooks/use-encryption.ts",

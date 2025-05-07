@@ -1,13 +1,40 @@
-## usekit
+# useKit
+## A collection of reusable react hooks that you can copy and paste into your apps.
 
-Run the commands after clone the repo
+**useKit** is your comprehensive resource for battle-tested React hooks that you can directly copy-paste into your projects. This collection aims to simplify your React development process by providing ready-to-use solutions for common programming challenges.
 
-```bash
-bun install
+![useKit Banner](/public/og.png)
+
+## Why useKit?
+
+- **Reusable Solutions**: Carefully crafted hooks for common development needs
+- **Zero Dependencies**: Copy-paste without worrying about package bloat
+- **Production-Ready**: TypeScript supported and thoroughly tested patterns
+- **Instant Integration**: No installations needed - just copy and go
+- **Community-Driven**: Built for developers, by developers
+
+## Quick Start
+
+1. **Browse the collection** at [useKit](/docs/hooks)
+2. **Copy** the hook that solves your problem
+3. **Paste** into your project's hooks directory
+4. **Customize** as needed for your specific use case
+
+```tsx {2, 5}
+// Example usage for a hypothetical useLocalStorage hook
+import { useLocalStorage } from "@/hooks/use-local-storage"
+
+function DemoComponent() {
+  const [token, setToken] = useLocalStorage("authToken", "")
+
+  return <input value={token} onChange={(e) => setToken(e.target.value)} />
+}
 ```
 
-```bash
-bun dev
-```
+## Features
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **State Management**: Simplify complex state logic
+- **UI Interactions**: Handle animations, gestures, and UI states
+- **Network Operations**: Manage API calls and data fetching
+- **Browser APIs**: Wrap browser functionality in React-way
+- **Utilities**: Common solutions for daily development challenges

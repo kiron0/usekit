@@ -651,4 +651,14 @@ export const hooksExamples: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "use-socket-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/use-socket-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
 ]
