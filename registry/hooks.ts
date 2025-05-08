@@ -1110,6 +1110,18 @@ export const hooks: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "use-merge-refs",
+    title: "Use Merge Refs",
+    description: "Merge multiple refs into a single ref callback.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-merge-refs.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
 ]
 
 export default hooks

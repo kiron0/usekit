@@ -461,7 +461,6 @@ export const docsConfig: DocsConfig = {
           title: "useSocket",
           href: "/docs/hooks/use-socket",
           items: [],
-          label: "Soon",
         },
         {
           title: "usePortal",

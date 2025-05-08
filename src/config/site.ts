@@ -39,7 +39,6 @@ export const siteConfig = {
     node: process.env.NEXT_PUBLIC_NODE_ENV! as "production" | "development",
     apiUrl: process.env.NEXT_PUBLIC_BASE_API_URL!,
   },
-  socketUrl: "wss://api.coffeepalace.co.uk",
 }
 
 export type SiteConfig = typeof siteConfig

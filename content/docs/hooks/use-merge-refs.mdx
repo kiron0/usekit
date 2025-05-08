@@ -1,0 +1,76 @@
+---
+title: useMergeRefs
+description: Merge multiple refs into a single ref callback.
+---
+
+<ComponentPreview name="use-merge-refs-demo" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://usekit.kiron.dev/k/use-merge-refs
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="use-merge-refs" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx {5, 11-15}
+"use client"
+
+import * as React from "react"
+
+import { useMergeRefs } from "@/hooks/use-merge-refs"
+
+export function Component() {
+  const ref1 = useRef<HTMLDivElement>(null)
+  const ref2 = useRef<HTMLDivElement>(null)
+
+  const mergedRef = useMergeRefs(ref1, ref2, (el) => {
+    if (el) {
+      console.log("Callback ref triggered with:", el)
+    }
+  })
+
+  return <div ref={mergedRef}>Merged Refs Div</div>
+}
+```
+
+## API Reference
+
+### Parameters
+
+| Name   | Type    | Description                | Default Value | Optional |
+| ------ | ------- | -------------------------- | ------------- | -------- |
+| `refs` | `Ref[]` | An array of refs to merge. | -             | No       |
+
+### Return Values
+
+| Name        | Type          | Description                                   |
+| ----------- | ------------- | --------------------------------------------- |
+| `mergedRef` | `RefCallback` | A callback ref that merges all provided refs. |

@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "build:registry": "tsx --tsconfig ./tsconfig.scripts.json ./scripts/build-registry.mts && prettier --write --cache .",
+    "build:shadcn": "bunx --bun shadcn@latest build public/k/index.json --output public/k/hooks && prettier --write --cache .",
     "format": "prettier --write --cache .",
     "format:check": "prettier --check --cache .",
     "upgrade": "bunx --bun ncu -x 'tailwindcss contentlayer2 next-contentlayer2 @shikijs/compat unist-builder' -u && bun install",

@@ -3,8 +3,6 @@ title: useSocket
 description: Manage Socket connections, handling messages, errors, and connection states.
 ---
 
-<ComponentPreview name="use-socket-demo" />
-
 ## Installation
 
 <CodeTabs>
@@ -46,32 +44,54 @@ npm install socket.io-client@4.8.1
 
 ## Usage
 
-```tsx {3, 6}
+```tsx {6, 9-12}
 "use client"
 
-import { useEncryption } from "@/hooks/use-encryption"
+import * as React from "react"
+import { url } from "@/config"
+
+import { useSocket } from "@/hooks/use-socket"
 
 export function Component() {
-  const { encrypt, decrypt } = useEncryption()
+  const { socket, isConnected, connect, disconnect } = useSocket(url, {
+    reconnectionDelay: 5000,
+    reconnection: true,
+  })
 
-  const handleEncrypt = () => {
-    const encrypted = encrypt("Sensitive data", "my-secret-key")
-    if (encrypted) {
-      console.log("Encrypted:", encrypted)
+  React.useEffect(() => {
+    if (socket) {
+      socket.on("message", (data) => {
+        console.log("Received message:", data)
+      })
     }
-  }
 
-  const handleDecrypt = () => {
-    const decrypted = decrypt<string>("U2FsdGVkX1...", "my-secret-key")
-    if (decrypted) {
-      console.log("Decrypted:", decrypted)
+    return () => {
+      if (socket) {
+        socket.off("message")
+      }
     }
-  }
+  }, [socket])
 
   return (
     <div>
-      <button onClick={handleEncrypt}>Encrypt Data</button>
-      <button onClick={handleDecrypt}>Decrypt Data</button>
+      <div>Status: {isConnected ? "🟢 Connected" : "🔴 Disconnected"}</div>
+      {isConnected ? (
+        <button variant="destructive" onClick={disconnect}>
+          Disconnect
+        </button>
+      ) : (
+        <button onClick={connect}>Connect</button>
+      )}
+      <button
+        onClick={() => {
+          if (socket) {
+            socket.emit("message", { message: "Hello from useKit!" })
+          }
+        }}
+      >
+        Send Message
+      </button>
+      <p>Open the console to see the logs</p>
     </div>
   )
 }
@@ -81,23 +101,22 @@ export function Component() {
 
 ### Parameters
 
-#### encrypt()
-
-| Name     | Type      | Description                        | Default Value | Optional |
-| -------- | --------- | ---------------------------------- | ------------- | -------- |
-| `data`   | `unknown` | The data to be encrypted           |               | No       |
-| `secret` | `string`  | The secret key used for encryption |               | No       |
-
-#### decrypt()
-
-| Name         | Type     | Description                        | Default Value | Optional |
-| ------------ | -------- | ---------------------------------- | ------------- | -------- |
-| `cipherText` | `string` | The encrypted string to decrypt    |               | No       |
-| `secret`     | `string` | The secret key used for decryption |               | No       |
+| Name                        | Type       | Description                                | Default Value | Optional |
+| --------------------------- | ---------- | ------------------------------------------ | ------------- | -------- |
+| `url`                       | `string`   | The URL of the Socket server.              | -             | No       |
+| `options`                   | `object`   | Socket.IO connection options.              | -             | Yes      |
+| `options.reconnectionDelay` | `number`   | Delay before attempting to reconnect.      | 5000ms        | Yes      |
+| `options.reconnection`      | `boolean`  | Whether to attempt reconnections.          | true          | Yes      |
+| `options.withCredentials`   | `boolean`  | Whether to send credentials with requests. | false         | Yes      |
+| `options.transports`        | `string[]` | Transport methods to use.                  | ["websocket"] | Yes      |
+| `options.autoConnect`       | `boolean`  | Whether to automatically connect.          | true          | Yes      |
+| `options.timeout`           | `number`   | Connection timeout in milliseconds.        | 20000ms       | Yes      |
 
 ### Return Values
 
-| Name      | Type                                                     | Description                                    |
-| --------- | -------------------------------------------------------- | ---------------------------------------------- |
-| `encrypt` | `(data: unknown, secret: string) => string \| null`      | Function to encrypt data using AES encryption. |
-| `decrypt` | `(cipherText: string, secret: string) => string \| null` | Function to decrypt data using AES encryption. |
+| Name          | Type         | Description                                      |
+| ------------- | ------------ | ------------------------------------------------ |
+| `socket`      | `Socket`     | The Socket.IO client instance.                   |
+| `isConnected` | `boolean`    | Indicates if the socket is connected.            |
+| `connect`     | `() => void` | Function to manually connect to the socket.      |
+| `disconnect`  | `() => void` | Function to manually disconnect from the socket. |
