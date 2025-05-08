@@ -478,6 +478,12 @@ export const docsConfig: DocsConfig = {
           href: "/docs/hooks/use-render-debugger",
           items: [],
         },
+        {
+          title: "useMergeRefs",
+          href: "/docs/hooks/use-merge-refs",
+          items: [],
+          label: "New",
+        },
       ],
     },
     {
