@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-merge-refs",
+  "type": "registry:hook",
+  "title": "Use Merge Refs",
+  "description": "Merge multiple refs into a single ref callback.",
+  "files": [
+    {
+      "path": "registry/hooks/use-merge-refs.ts",
+      "content": "import * as React from \"react\"\n\ntype RefType<T> = React.Ref<T> | null | undefined\n\nconst updateRef = <T>(ref: RefType<T>, value: T | null) => {\n  if (typeof ref === \"function\") {\n    ref(value)\n  } else if (ref && \"current\" in ref) {\n    ;(ref as { current: T | null }).current = value\n  }\n}\n\nexport function useMergeRefs<T>(\n  ...refs: Array<RefType<T>>\n): React.RefCallback<T> {\n  const refsRef = React.useRef(refs)\n  refsRef.current = refs\n\n  return React.useCallback((node: T | null) => {\n    for (const ref of refsRef.current) {\n      updateRef(ref, node)\n    }\n  }, [])\n}\n",
+      "type": "registry:hook"
+    }
+  ]
+}

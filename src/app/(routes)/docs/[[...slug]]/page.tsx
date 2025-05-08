@@ -37,7 +37,10 @@ export async function generateMetadata(props: {
   const doc = await getDocFromParams({ params })
 
   if (!doc) {
-    return {}
+    return {
+      title: "Not Found",
+      description: "The page you are looking for doesn't exist.",
+    }
   }
 
   return {

@@ -461,7 +461,6 @@ export const docsConfig: DocsConfig = {
           title: "useSocket",
           href: "/docs/hooks/use-socket",
           items: [],
-          label: "Soon",
         },
         {
           title: "usePortal",
@@ -477,6 +476,12 @@ export const docsConfig: DocsConfig = {
           title: "useRenderDebugger",
           href: "/docs/hooks/use-render-debugger",
           items: [],
+        },
+        {
+          title: "useMergeRefs",
+          href: "/docs/hooks/use-merge-refs",
+          items: [],
+          label: "New",
         },
       ],
     },

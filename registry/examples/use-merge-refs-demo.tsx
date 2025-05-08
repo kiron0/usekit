@@ -10,7 +10,7 @@ import { useMergeRefs } from "registry/hooks/use-merge-refs"
 
 const MAX_LENGTH = 30
 
-export function Component() {
+export default function UseMergeRefsDemo() {
   const [value, setValue] = React.useState("")
   const [error, setError] = React.useState<string | null>(null)
   const focusRef = React.useRef<HTMLInputElement>(null)

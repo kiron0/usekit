@@ -651,4 +651,14 @@ export const hooksExamples: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "use-merge-refs-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/use-merge-refs-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
 ]
