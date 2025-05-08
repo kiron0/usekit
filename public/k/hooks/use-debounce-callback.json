@@ -4,8 +4,8 @@
   "type": "registry:hook",
   "title": "Use Debounce Callback",
   "description": "Delay function execution with useDebounceCallback, providing options for canceling, flushing, and checking if a call is pending.",
-  "dependencies": ["lodash.debounce"],
-  "devDependencies": ["@types/lodash.debounce"],
+  "dependencies": ["lodash.debounce@4.0.8"],
+  "devDependencies": ["@types/lodash.debounce@4.0.9"],
   "registryDependencies": ["https://usekit.kiron.dev/k/use-unmount"],
   "files": [
     {

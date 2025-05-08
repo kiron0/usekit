@@ -4,8 +4,8 @@
   "type": "registry:hook",
   "title": "Use Encryption",
   "description": "Encrypt and decrypt data with the useEncryption hook, providing methods to encrypt and decrypt strings using AES encryption.",
-  "dependencies": ["crypto-js"],
-  "devDependencies": ["@types/crypto-js"],
+  "dependencies": ["crypto-js@4.2.0"],
+  "devDependencies": ["@types/crypto-js@4.2.2"],
   "files": [
     {
       "path": "registry/hooks/use-encryption.ts",

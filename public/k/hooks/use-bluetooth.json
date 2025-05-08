@@ -4,7 +4,7 @@
   "type": "registry:hook",
   "title": "Use Bluetooth",
   "description": "Connect to Bluetooth devices and manage their state with useBluetooth.",
-  "devDependencies": ["@types/web-bluetooth"],
+  "devDependencies": ["@types/web-bluetooth@0.0.21"],
   "files": [
     {
       "path": "registry/hooks/use-bluetooth.ts",
