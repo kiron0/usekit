@@ -483,6 +483,36 @@ export const docsConfig: DocsConfig = {
           items: [],
           label: "New",
         },
+        {
+          title: "useClassName",
+          href: "/docs/hooks/use-classname",
+          items: [],
+          label: "Soon",
+        },
+        {
+          title: "useTimeAgo",
+          href: "/docs/hooks/use-time-ago",
+          items: [],
+          label: "Soon",
+        },
+        {
+          title: "useClock",
+          href: "/docs/hooks/use-clock",
+          items: [],
+          label: "Soon",
+        },
+        {
+          title: "useMultiStepForm",
+          href: "/docs/hooks/use-multi-step-form",
+          items: [],
+          label: "Soon",
+        },
+        {
+          title: "useKeyedArray",
+          href: "/docs/hooks/use-keyed-array",
+          items: [],
+          label: "Soon",
+        },
       ],
     },
     {
