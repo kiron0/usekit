@@ -1,0 +1,111 @@
+---
+title: useMultiStepForm
+description: Manage multi-step forms with the useMultiStepForm hook.
+---
+
+<ComponentPreview name="use-multi-step-form-demo" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://usekit.kiron.dev/k/use-multi-step-form
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="use-multi-step-form" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx {3, 6-15}
+"use client"
+
+import { useMultiStepForm } from "@/hooks/use-multi-step-form"
+
+export function Component() {
+  const {
+    currentStep,
+    totalSteps,
+    isFirstStep,
+    isLastStep,
+    next,
+    previous,
+    goTo,
+    progress,
+  } = useMultiStepForm({ totalSteps: 3 })
+
+  return (
+    <div>
+      <p>
+        Step {currentStep + 1} of {totalSteps}
+      </p>
+
+      <div>
+        {currentStep === 0 && <Step1 />}
+        {currentStep === 1 && <Step2 />}
+        {currentStep === 2 && <Step3 />}
+      </div>
+
+      <div className="mt-4 flex justify-between">
+        <button onClick={previous} disabled={isFirstStep}>
+          Back
+        </button>
+        <button onClick={isLastStep ? () => alert("Submit") : next}>
+          {isLastStep ? "Submit" : "Next"}
+        </button>
+      </div>
+
+      <progress value={progress} max={1} className="mt-2 w-full" />
+    </div>
+  )
+}
+```
+
+## API Reference
+
+### Parameters
+
+| Name           | Type                     | Description                                                          | Default Value | Optional |
+| -------------- | ------------------------ | -------------------------------------------------------------------- | ------------- | -------- |
+| `initialStep`  | `number`                 | The initial step to start from.                                      | `0`           | Yes      |
+| `totalSteps`   | `number`                 | The total number of steps in the form.                               | `1`           | No       |
+| `onStepChange` | `(step: number) => void` | Callback function called when the step changes.                      | `() => {}`    | Yes      |
+| `allowLooping` | `boolean`                | Whether to allow looping back to the first step after the last step. | `false`       | Yes      |
+
+### Return Values
+
+| Name            | Type                     | Description                                          |
+| --------------- | ------------------------ | ---------------------------------------------------- |
+| `currentStep`   | `number`                 | The current step index (0-based).                    |
+| `totalSteps`    | `number`                 | The total number of steps in the form.               |
+| `isFirstStep`   | `boolean`                | Whether the current step is the first step.          |
+| `isLastStep`    | `boolean`                | Whether the current step is the last step.           |
+| `next`          | `() => void`             | Function to go to the next step.                     |
+| `previous`      | `() => void`             | Function to go to the previous step.                 |
+| `goTo`          | `(step: number) => void` | Function to go to a specific step.                   |
+| `progress`      | `number`                 | The progress of the form as a value between 0 and 1. |
+| `canGoNext`     | `boolean`                | Whether the next step can be accessed.               |
+| `canGoPrevious` | `boolean`                | Whether the previous step can be accessed.           |

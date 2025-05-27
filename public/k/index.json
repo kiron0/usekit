@@ -1053,6 +1053,54 @@
           "path": "registry/hooks/use-merge-refs.ts"
         }
       ]
+    },
+    {
+      "name": "use-time-ago",
+      "title": "Use Time Ago",
+      "description": "Format a date into a human-readable 'time ago' format.",
+      "type": "registry:hook",
+      "files": [
+        {
+          "type": "registry:hook",
+          "path": "registry/hooks/use-time-ago.ts"
+        }
+      ]
+    },
+    {
+      "name": "use-clock",
+      "title": "Use Clock",
+      "description": "Display the current time and update it every second.",
+      "type": "registry:hook",
+      "files": [
+        {
+          "type": "registry:hook",
+          "path": "registry/hooks/use-clock.ts"
+        }
+      ]
+    },
+    {
+      "name": "use-multi-step-form",
+      "title": "Use Multi Step Form",
+      "description": "Manage multi-step forms with the useMultiStepForm hook.",
+      "type": "registry:hook",
+      "files": [
+        {
+          "type": "registry:hook",
+          "path": "registry/hooks/use-multi-step-form.ts"
+        }
+      ]
+    },
+    {
+      "name": "use-keyed-array",
+      "title": "Use Keyed Array",
+      "description": "Manage an array of objects with unique keys using the useKeyedArray hook.",
+      "type": "registry:hook",
+      "files": [
+        {
+          "type": "registry:hook",
+          "path": "registry/hooks/use-keyed-array.ts"
+        }
+      ]
     }
   ]
 }

@@ -661,4 +661,34 @@ export const hooksExamples: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "use-time-ago-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/use-time-ago-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-clock-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/use-clock-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-multi-step-form-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/use-multi-step-form-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
 ]

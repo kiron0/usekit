@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-keyed-array",
+  "type": "registry:hook",
+  "title": "Use Keyed Array",
+  "description": "Manage an array of objects with unique keys using the useKeyedArray hook.",
+  "files": [
+    {
+      "path": "registry/hooks/use-keyed-array.ts",
+      "content": "import * as React from \"react\"\n\ntype Keyed<T> = T extends object\n  ? T & { _key: string }\n  : { value: T; _key: string }\n\ninterface Options<T> {\n  getKey?: (item: T, index: number) => string\n}\n\nexport function useKeyedArray<T>(items: T[], options?: Options<T>): Keyed<T>[] {\n  const { getKey } = options || {}\n  const keyMapRef = React.useRef(new WeakMap<object, string>())\n  const counterRef = React.useRef(0)\n\n  return items.map((item, index) => {\n    let key: string\n\n    if (typeof item === \"object\" && item !== null) {\n      const existing = keyMapRef.current.get(item)\n      if (existing) {\n        key = existing\n      } else {\n        key = getKey?.(item, index) ?? `key-${counterRef.current++}`\n        keyMapRef.current.set(item, key)\n      }\n      return { ...(item as object), _key: key } as Keyed<T>\n    } else {\n      key = getKey?.(item, index) ?? `key-${counterRef.current++}`\n      return { value: item, _key: key } as Keyed<T>\n    }\n  })\n}\n",
+      "type": "registry:hook"
+    }
+  ]
+}

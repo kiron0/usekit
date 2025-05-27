@@ -1,0 +1,71 @@
+---
+title: useTimeAgo
+description: Format a date into a human-readable 'time ago' format.
+---
+
+<ComponentPreview name="use-time-ago-demo" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://usekit.kiron.dev/k/use-time-ago
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="use-time-ago" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx {3, 6}
+"use client"
+
+import { useTimeAgo } from "@/hooks/use-time-ago"
+
+export function Component() {
+  const timeAgo = useTimeAgo(new Date("2025-05-01T12:00:00Z"))
+
+  return (
+    <div>
+      <p>Time ago: {timeAgo}</p>
+    </div>
+  )
+}
+```
+
+## API Reference
+
+### Parameters
+
+| Name   | Type   | Description                                  | Default Value | Optional |
+| ------ | ------ | -------------------------------------------- | ------------- | -------- |
+| `date` | `Date` | The date to format into a 'time ago' string. | -             | No       |
+
+### Return Values
+
+| Name      | Type     | Description                    |
+| --------- | -------- | ------------------------------ |
+| `timeAgo` | `string` | The formatted time ago string. |
