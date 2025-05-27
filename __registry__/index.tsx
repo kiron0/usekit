@@ -1297,6 +1297,64 @@ export const Index: Record<string, any> = {
     ),
     source: "",
   },
+  "use-time-ago": {
+    name: "use-time-ago",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-time-ago.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(() => import("registry/examples/use-time-ago-demo")),
+    source: "",
+  },
+  "use-clock": {
+    name: "use-clock",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-clock.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(() => import("registry/examples/use-clock-demo")),
+    source: "",
+  },
+  "use-multi-step-form": {
+    name: "use-multi-step-form",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-multi-step-form.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-multi-step-form-demo")
+    ),
+    source: "",
+  },
+  "use-keyed-array": {
+    name: "use-keyed-array",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-keyed-array.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(() => import("registry/hooks/use-keyed-array.ts")),
+    source: "",
+  },
   "use-copy-to-clipboard-demo": {
     name: "use-copy-to-clipboard-demo",
     type: "registry:example",
@@ -2338,6 +2396,52 @@ export const Index: Record<string, any> = {
     ],
     component: React.lazy(
       () => import("registry/examples/use-merge-refs-demo.tsx")
+    ),
+    source: "",
+  },
+  "use-time-ago-demo": {
+    name: "use-time-ago-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-time-ago-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-time-ago-demo.tsx")
+    ),
+    source: "",
+  },
+  "use-clock-demo": {
+    name: "use-clock-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-clock-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(() => import("registry/examples/use-clock-demo.tsx")),
+    source: "",
+  },
+  "use-multi-step-form-demo": {
+    name: "use-multi-step-form-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-multi-step-form-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-multi-step-form-demo.tsx")
     ),
     source: "",
   },

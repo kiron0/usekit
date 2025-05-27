@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-multi-step-form",
+  "type": "registry:hook",
+  "title": "Use Multi Step Form",
+  "description": "Manage multi-step forms with the useMultiStepForm hook.",
+  "files": [
+    {
+      "path": "registry/hooks/use-multi-step-form.ts",
+      "content": "import * as React from \"react\"\n\ninterface Options {\n  initialStep?: number\n  totalSteps: number\n  onStepChange?: (currentStep: number) => void\n  allowLooping?: boolean\n}\n\ninterface Controls {\n  currentStep: number\n  totalSteps: number\n  isFirstStep: boolean\n  isLastStep: boolean\n  next: () => void\n  previous: () => void\n  goTo: (step: number) => void\n  progress: number\n  canGoNext: boolean\n  canGoPrevious: boolean\n}\n\nexport function useMultiStepForm({\n  initialStep = 0,\n  totalSteps,\n  onStepChange,\n  allowLooping = false,\n}: Options): Controls {\n  const [currentStep, setCurrentStep] = React.useState(() =>\n    Math.min(Math.max(initialStep, 0), totalSteps - 1)\n  )\n\n  const safeSetCurrentStep = React.useCallback(\n    (newStep: number) => {\n      const clampedStep = Math.min(Math.max(newStep, 0), totalSteps - 1)\n      setCurrentStep(clampedStep)\n      onStepChange?.(clampedStep)\n    },\n    [totalSteps, onStepChange]\n  )\n\n  const next = React.useCallback(() => {\n    if (allowLooping && currentStep === totalSteps - 1) {\n      safeSetCurrentStep(0)\n    } else {\n      safeSetCurrentStep(currentStep + 1)\n    }\n  }, [currentStep, totalSteps, allowLooping, safeSetCurrentStep])\n\n  const previous = React.useCallback(() => {\n    if (allowLooping && currentStep === 0) {\n      safeSetCurrentStep(totalSteps - 1)\n    } else {\n      safeSetCurrentStep(currentStep - 1)\n    }\n  }, [currentStep, totalSteps, allowLooping, safeSetCurrentStep])\n\n  const goTo = React.useCallback(\n    (step: number) => {\n      safeSetCurrentStep(step)\n    },\n    [safeSetCurrentStep]\n  )\n\n  const isFirstStep = !allowLooping && currentStep === 0\n  const isLastStep = !allowLooping && currentStep === totalSteps - 1\n  const canGoNext = allowLooping || currentStep < totalSteps - 1\n  const canGoPrevious = allowLooping || currentStep > 0\n\n  const progress = React.useMemo(\n    () => (currentStep + 1) / totalSteps,\n    [currentStep, totalSteps]\n  )\n\n  return {\n    currentStep,\n    totalSteps,\n    isFirstStep,\n    isLastStep,\n    next,\n    previous,\n    goTo,\n    progress,\n    canGoNext,\n    canGoPrevious,\n  }\n}\n",
+      "type": "registry:hook"
+    }
+  ]
+}

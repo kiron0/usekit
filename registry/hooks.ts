@@ -1122,6 +1122,55 @@ export const hooks: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "use-time-ago",
+    title: "Use Time Ago",
+    description: "Format a date into a human-readable 'time ago' format.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-time-ago.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-clock",
+    title: "Use Clock",
+    description: "Display the current time and update it every second.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-clock.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-multi-step-form",
+    title: "Use Multi Step Form",
+    description: "Manage multi-step forms with the useMultiStepForm hook.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-multi-step-form.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-keyed-array",
+    title: "Use Keyed Array",
+    description:
+      "Manage an array of objects with unique keys using the useKeyedArray hook.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-keyed-array.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
 ]
 
 export default hooks

@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-clock",
+  "type": "registry:hook",
+  "title": "Use Clock",
+  "description": "Display the current time and update it every second.",
+  "files": [
+    {
+      "path": "registry/hooks/use-clock.ts",
+      "content": "import * as React from \"react\"\n\ninterface Options {\n  locale?: string | string[]\n  formatOptions?: Intl.DateTimeFormatOptions\n  interval?: number\n  enabled?: boolean\n}\n\nexport function useClock(options?: Options): string {\n  const {\n    locale = \"en-US\",\n    formatOptions = {\n      hour: \"2-digit\",\n      minute: \"2-digit\",\n      second: \"2-digit\",\n      hour12: false,\n    },\n    interval = 1000,\n    enabled = true,\n  } = options || {}\n\n  const getFormattedTime = React.useCallback(() => {\n    return new Intl.DateTimeFormat(locale, formatOptions).format(new Date())\n  }, [locale, formatOptions])\n\n  const [time, setTime] = React.useState<string>(getFormattedTime)\n\n  React.useEffect(() => {\n    if (!enabled) return\n\n    setTime(getFormattedTime())\n\n    const timer = setInterval(() => {\n      setTime(getFormattedTime())\n    }, interval)\n\n    return () => clearInterval(timer)\n  }, [getFormattedTime, interval, enabled])\n\n  return time\n}\n",
+      "type": "registry:hook"
+    }
+  ]
+}

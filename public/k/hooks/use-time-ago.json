@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-time-ago",
+  "type": "registry:hook",
+  "title": "Use Time Ago",
+  "description": "Format a date into a human-readable 'time ago' format.",
+  "files": [
+    {
+      "path": "registry/hooks/use-time-ago.ts",
+      "content": "import * as React from \"react\"\n\ninterface TimeAgoOptions {\n  interval?: number\n  locale?: Intl.LocalesArgument\n}\n\nexport function useTimeAgo(\n  timestamp: Date | number | string,\n  options?: TimeAgoOptions\n): string {\n  const { interval = 60_000, locale = \"en\" } = options || {}\n\n  const formatTimeAgo = React.useCallback(() => {\n    const now = new Date()\n    const date = new Date(timestamp)\n    const seconds = Math.floor((now.getTime() - date.getTime()) / 1000)\n    const absSeconds = Math.abs(seconds)\n\n    const rtf = new Intl.RelativeTimeFormat(locale, { numeric: \"auto\" })\n\n    const ranges: [number, Intl.RelativeTimeFormatUnit][] = [\n      [60, \"second\"],\n      [60 * 60, \"minute\"],\n      [60 * 60 * 24, \"hour\"],\n      [60 * 60 * 24 * 7, \"day\"],\n      [60 * 60 * 24 * 30, \"week\"],\n      [60 * 60 * 24 * 365, \"month\"],\n      [Infinity, \"year\"],\n    ]\n\n    for (let i = 0; i < ranges.length; i++) {\n      const [limit, unit] = ranges[i]\n      if (absSeconds < limit) {\n        const value =\n          i === 0 ? absSeconds : Math.floor(absSeconds / ranges[i - 1][0])\n        return rtf.format(-Math.sign(seconds) * value, unit)\n      }\n    }\n\n    return \"\"\n  }, [timestamp, locale])\n\n  const [timeAgo, setTimeAgo] = React.useState(formatTimeAgo)\n\n  React.useEffect(() => {\n    setTimeAgo(formatTimeAgo())\n\n    const tick = () => setTimeAgo(formatTimeAgo())\n    const id = setInterval(tick, interval)\n    return () => clearInterval(id)\n  }, [formatTimeAgo, interval, timestamp])\n\n  return timeAgo\n}\n",
+      "type": "registry:hook"
+    }
+  ]
+}

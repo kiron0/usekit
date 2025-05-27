@@ -1,0 +1,76 @@
+---
+title: useKeyedArray
+description: Manage an array of objects with unique keys using the useKeyedArray hook.
+---
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://usekit.kiron.dev/k/use-keyed-array
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="use-keyed-array" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx {3, 8-10}
+"use client"
+
+import { useKeyedArray } from "@/hooks/use-keyed-array"
+
+export function Component() {
+  const items = [{ name: "Item 1" }, { name: "Item 2" }, { name: "Item 3" }]
+
+  const keyedItems = useKeyedArray(items, {
+    getKey: (item, index) => `item-${index}`,
+  })
+
+  return (
+    <ul>
+      {keyedItems.map((item) => (
+        <li key={item._key}>{item.name}</li>
+      ))}
+    </ul>
+  )
+}
+```
+
+## API Reference
+
+### Parameters
+
+| Name             | Type                                 | Description                                      | Default Value                    | Optional |
+| ---------------- | ------------------------------------ | ------------------------------------------------ | -------------------------------- | -------- |
+| `items`          | `Array<T>`                           | The array of items to manage.                    | -                                | No       |
+| `options.getKey` | `(item: T, index: number) => string` | Function to generate a unique key for each item. | `(item, index) => String(index)` | Yes      |
+
+### Return Values
+
+| Name         | Type                          | Description                                |
+| ------------ | ----------------------------- | ------------------------------------------ |
+| `keyedItems` | `Array<T & { _key: string }>` | The array of items with unique keys added. |
