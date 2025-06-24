@@ -87,12 +87,10 @@ const [authToken, setAuthToken] = useLocalStorage<string>("auth-token", () =>
 ### Key Differences from `useSessionStorage`
 
 1. **Storage Lifetime**:
-
    - `sessionStorage` data is cleared when the page session ends (e.g., when the tab is closed).
    - `localStorage` persists even after the browser is closed and reopened.
 
 2. **Scope**:
-
    - `sessionStorage` is scoped to the current tab/window.
    - `localStorage` is shared across all tabs/windows of the same origin.
 

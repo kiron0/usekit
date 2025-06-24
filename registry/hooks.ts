@@ -1171,6 +1171,84 @@ export const hooks: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "use-form",
+    title: "Use Form",
+    description:
+      "Manage form state and validation with the useForm hook, providing methods to handle input changes, validation, and submission.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-form.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-infinite-scroll",
+    title: "Use Infinite Scroll",
+    description:
+      "Implement infinite scrolling functionality with the useInfiniteScroll hook, allowing for dynamic loading of content as the user scrolls.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-infinite-scroll.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-breakpoint",
+    title: "Use Breakpoint",
+    description:
+      "Detect and respond to changes in viewport size with the useBreakpoint hook, allowing for responsive design adjustments.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-breakpoint.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-pagination",
+    title: "Use Pagination",
+    description:
+      "Manage pagination state and logic with the usePagination hook, providing methods to navigate through pages and track current page state.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-pagination.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-scroll-direction",
+    title: "Use Scroll Direction",
+    description:
+      "Detect the direction of scrolling (up or down) with the useScrollDirection hook, allowing for dynamic UI adjustments based on scroll behavior.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-scroll-direction.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-scroll-to-top",
+    title: "Use Scroll To Top",
+    description:
+      "Scroll the window or a specific element to the top with the useScrollToTop hook, providing options for smooth scrolling and custom behavior.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-scroll-to-top.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
 ]
 
 export default hooks

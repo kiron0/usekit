@@ -35,10 +35,6 @@ export const siteConfig = {
     "re-usable hooks",
     "re-usable react hooks",
   ],
-  env: {
-    node: process.env.NEXT_PUBLIC_NODE_ENV! as "production" | "development",
-    apiUrl: process.env.NEXT_PUBLIC_BASE_API_URL!,
-  },
 }
 
 export type SiteConfig = typeof siteConfig

@@ -69,32 +69,25 @@ export function Component() {
 ### Key Points
 
 1. **`initialPresent`**:
-
    - The initial state for the `present` value.
    - Defaults to an empty object (`{}`) if not provided.
 
 2. **`state`**:
-
    - The current state (i.e., the `present` value).
 
 3. **`set`**:
-
    - Updates the state by adding the current `present` to the `past` and setting `newPresent` as the new `present`.
 
 4. **`undo`**:
-
    - Reverts to the previous state by moving the last `past` state to `present` and the current `present` to `future`.
 
 5. **`redo`**:
-
    - Reapplies the last undone state by moving the first `future` state to `present` and the current `present` to `past`.
 
 6. **`clear`**:
-
    - Resets the state to the initial `present` value and clears `past` and `future`.
 
 7. **`canUndo`**:
-
    - A boolean indicating whether an undo operation is possible (`past.length > 0`).
 
 8. **`canRedo`**:
@@ -133,25 +126,21 @@ The internal state of the hook is structured as follows:
 ### Example Workflow
 
 1. **Initial State**:
-
    - `past`: `[]`
    - `present`: `{ count: 0 }`
    - `future`: `[]`
 
 2. **After `set({ count: 1 })`**:
-
    - `past`: `[{ count: 0 }]`
    - `present`: `{ count: 1 }`
    - `future`: `[]`
 
 3. **After `undo`**:
-
    - `past`: `[]`
    - `present`: `{ count: 0 }`
    - `future`: `[{ count: 1 }]`
 
 4. **After `redo`**:
-
    - `past`: `[{ count: 0 }]`
    - `present`: `{ count: 1 }`
    - `future`: `[]`

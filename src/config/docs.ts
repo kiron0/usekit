@@ -1,6 +1,6 @@
-import type { MainNavItem, SidebarNavItem } from "@/types/nav"
+import { env } from "@/env"
 
-import { siteConfig } from "./site"
+import type { MainNavItem, SidebarNavItem } from "@/types/nav"
 
 export interface DocsConfig {
   mainNav: MainNavItem[]
@@ -37,7 +37,7 @@ export const docsConfig: DocsConfig = {
           href: "/docs/hooks",
           items: [],
         },
-        ...(siteConfig.env.node === "development"
+        ...(env.NEXT_PUBLIC_NODE_ENV === "development"
           ? [
               {
                 title: "Development",
@@ -486,25 +486,57 @@ export const docsConfig: DocsConfig = {
           title: "useTimeAgo",
           href: "/docs/hooks/use-time-ago",
           items: [],
-          label: "New",
         },
         {
           title: "useClock",
           href: "/docs/hooks/use-clock",
           items: [],
-          label: "New",
         },
         {
           title: "useMultiStepForm",
           href: "/docs/hooks/use-multi-step-form",
           items: [],
-          label: "New",
         },
         {
           title: "useKeyedArray",
           href: "/docs/hooks/use-keyed-array",
           items: [],
-          label: "New",
+        },
+        {
+          title: "useForm",
+          href: "/docs/hooks/use-form",
+          items: [],
+          label: "Soon",
+        },
+        {
+          title: "useInfiniteScroll",
+          href: "/docs/hooks/use-infinite-scroll",
+          items: [],
+          label: "Soon",
+        },
+        {
+          title: "useBreakpoint",
+          href: "/docs/hooks/use-breakpoint",
+          items: [],
+          label: "Soon",
+        },
+        {
+          title: "usePagination",
+          href: "/docs/hooks/use-pagination",
+          items: [],
+          label: "Soon",
+        },
+        {
+          title: "useScrollDirection",
+          href: "/docs/hooks/use-scroll-direction",
+          items: [],
+          label: "Soon",
+        },
+        {
+          title: "useScrollToTop",
+          href: "/docs/hooks/use-scroll-to-top",
+          items: [],
+          label: "Soon",
         },
       ],
     },
