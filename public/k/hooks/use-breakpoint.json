@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-breakpoint",
+  "type": "registry:hook",
+  "title": "Use Breakpoint",
+  "description": "Detect and respond to changes in viewport size with the useBreakpoint hook, allowing for responsive design adjustments.",
+  "files": [
+    {
+      "path": "registry/hooks/use-breakpoint.ts",
+      "content": "import * as React from \"react\"\n\ninterface Breakpoints {\n  sm: number\n  md: number\n  lg: number\n  xl: number\n  \"2xl\": number\n}\n\nconst defaultBreakpoints: Breakpoints = {\n  sm: 640,\n  md: 768,\n  lg: 1024,\n  xl: 1280,\n  \"2xl\": 1536,\n}\n\ntype BreakpointKey = keyof Breakpoints\n\ninterface Return {\n  currentBreakpoint: BreakpointKey | null\n  isAbove: (breakpoint: BreakpointKey) => boolean\n  isBelow: (breakpoint: BreakpointKey) => boolean\n}\n\nexport function useBreakpoint(\n  breakpoints: Partial<Breakpoints> = defaultBreakpoints\n): Return {\n  const [currentBreakpoint, setCurrentBreakpoint] =\n    React.useState<BreakpointKey | null>(null)\n\n  React.useEffect(() => {\n    const mergedBreakpoints = { ...defaultBreakpoints, ...breakpoints }\n\n    const updateBreakpoint = () => {\n      const width = window.innerWidth\n      let bp: BreakpointKey | null = null\n\n      if (width >= mergedBreakpoints[\"2xl\"]) bp = \"2xl\"\n      else if (width >= mergedBreakpoints.xl) bp = \"xl\"\n      else if (width >= mergedBreakpoints.lg) bp = \"lg\"\n      else if (width >= mergedBreakpoints.md) bp = \"md\"\n      else if (width >= mergedBreakpoints.sm) bp = \"sm\"\n\n      setCurrentBreakpoint(bp)\n    }\n\n    // Initialize and set up event listener\n    updateBreakpoint()\n    window.addEventListener(\"resize\", updateBreakpoint)\n\n    return () => window.removeEventListener(\"resize\", updateBreakpoint)\n  }, [breakpoints])\n\n  const isAbove = (breakpoint: BreakpointKey): boolean => {\n    if (!currentBreakpoint) return false\n    const bpOrder: BreakpointKey[] = [\"sm\", \"md\", \"lg\", \"xl\", \"2xl\"]\n    return bpOrder.indexOf(currentBreakpoint) >= bpOrder.indexOf(breakpoint)\n  }\n\n  const isBelow = (breakpoint: BreakpointKey): boolean => {\n    if (!currentBreakpoint) return true\n    const bpOrder: BreakpointKey[] = [\"sm\", \"md\", \"lg\", \"xl\", \"2xl\"]\n    return bpOrder.indexOf(currentBreakpoint) < bpOrder.indexOf(breakpoint)\n  }\n\n  return { currentBreakpoint, isAbove, isBelow }\n}\n",
+      "type": "registry:hook"
+    }
+  ]
+}

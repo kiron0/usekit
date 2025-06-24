@@ -79,7 +79,11 @@ export function Component() {
         )}
       </div>
       <p>Here is the filenames dropped:</p>
-      <ul>{files?.map((file) => <li key={file.name}>{file.name}</li>)}</ul>
+      <ul>
+        {files?.map((file) => (
+          <li key={file.name}>{file.name}</li>
+        ))}
+      </ul>
     </div>
   )
 }

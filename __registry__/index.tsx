@@ -1355,6 +1355,232 @@ export const Index: Record<string, any> = {
     component: React.lazy(() => import("registry/hooks/use-keyed-array.ts")),
     source: "",
   },
+  "use-form": {
+    name: "use-form",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-form.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(() => import("registry/examples/use-form-demo")),
+    source: "",
+  },
+  "use-infinite-scroll": {
+    name: "use-infinite-scroll",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-infinite-scroll.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-infinite-scroll-demo")
+    ),
+    source: "",
+  },
+  "use-breakpoint": {
+    name: "use-breakpoint",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-breakpoint.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-breakpoint-demo")
+    ),
+    source: "",
+  },
+  "use-pagination": {
+    name: "use-pagination",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-pagination.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-pagination-demo")
+    ),
+    source: "",
+  },
+  "use-scroll-direction": {
+    name: "use-scroll-direction",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-scroll-direction.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/hooks/use-scroll-direction.ts")
+    ),
+    source: "",
+  },
+  "use-scroll-to-top": {
+    name: "use-scroll-to-top",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-scroll-to-top.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(() => import("registry/hooks/use-scroll-to-top.ts")),
+    source: "",
+  },
+  "use-execution-time": {
+    name: "use-execution-time",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-execution-time.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-execution-time-demo")
+    ),
+    source: "",
+  },
+  "use-safe-state": {
+    name: "use-safe-state",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-safe-state.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(() => import("registry/hooks/use-safe-state.ts")),
+    source: "",
+  },
+  "use-state-validator": {
+    name: "use-state-validator",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-state-validator.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/hooks/use-state-validator.ts")
+    ),
+    source: "",
+  },
+  "use-memoized-fn": {
+    name: "use-memoized-fn",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-memoized-fn.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(() => import("registry/hooks/use-memoized-fn.ts")),
+    source: "",
+  },
+  "use-text-direction": {
+    name: "use-text-direction",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-text-direction.tsx",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/hooks/use-text-direction.tsx")
+    ),
+    source: "",
+  },
+  "use-page-load-time": {
+    name: "use-page-load-time",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-page-load-time.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(() => import("registry/hooks/use-page-load-time.ts")),
+    source: "",
+  },
+  "use-time-of-day": {
+    name: "use-time-of-day",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-time-of-day.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(() => import("registry/hooks/use-time-of-day.ts")),
+    source: "",
+  },
+  "use-env-check": {
+    name: "use-env-check",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-env-check.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(() => import("registry/hooks/use-env-check.ts")),
+    source: "",
+  },
+  "use-error-boundary": {
+    name: "use-error-boundary",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-error-boundary.tsx",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-error-boundary-demo")
+    ),
+    source: "",
+  },
   "use-copy-to-clipboard-demo": {
     name: "use-copy-to-clipboard-demo",
     type: "registry:example",
@@ -2442,6 +2668,100 @@ export const Index: Record<string, any> = {
     ],
     component: React.lazy(
       () => import("registry/examples/use-multi-step-form-demo.tsx")
+    ),
+    source: "",
+  },
+  "use-form-demo": {
+    name: "use-form-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-form-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(() => import("registry/examples/use-form-demo.tsx")),
+    source: "",
+  },
+  "use-infinite-scroll-demo": {
+    name: "use-infinite-scroll-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-infinite-scroll-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-infinite-scroll-demo.tsx")
+    ),
+    source: "",
+  },
+  "use-breakpoint-demo": {
+    name: "use-breakpoint-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-breakpoint-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-breakpoint-demo.tsx")
+    ),
+    source: "",
+  },
+  "use-pagination-demo": {
+    name: "use-pagination-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-pagination-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-pagination-demo.tsx")
+    ),
+    source: "",
+  },
+  "use-execution-time-demo": {
+    name: "use-execution-time-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-execution-time-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-execution-time-demo.tsx")
+    ),
+    source: "",
+  },
+  "use-error-boundary-demo": {
+    name: "use-error-boundary-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-error-boundary-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-error-boundary-demo.tsx")
     ),
     source: "",
   },

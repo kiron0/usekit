@@ -691,4 +691,64 @@ export const hooksExamples: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "use-form-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/use-form-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-infinite-scroll-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/use-infinite-scroll-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-breakpoint-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/use-breakpoint-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-pagination-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/use-pagination-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-execution-time-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/use-execution-time-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-error-boundary-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/use-error-boundary-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
 ]

@@ -1,6 +1,6 @@
 "use server"
 
-import { siteConfig } from "@/config/site"
+import { env } from "@/env"
 
 export async function createReport(data: {
   type: "report" | "feature"
@@ -8,13 +8,16 @@ export async function createReport(data: {
   hook?: string
   description: string
 }) {
-  const result = await fetch(`${siteConfig.env.apiUrl}/report/create-report`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(data),
-  })
+  const result = await fetch(
+    `${env.NEXT_PUBLIC_BASE_API_URL}/report/create-report`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    }
+  )
 
   const returnData = await result.json()
 

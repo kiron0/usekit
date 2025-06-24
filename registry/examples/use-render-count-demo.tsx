@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button"
 import { useRenderCount } from "registry/hooks/use-render-count"
 
 export default function UseRenderCountDemo() {
-  const { count, isStrictMode } = useRenderCount()
+  const count = useRenderCount()
   const [numberCount, setNumberCount] = React.useState(0)
 
   return (
@@ -14,11 +14,6 @@ export default function UseRenderCountDemo() {
       <p>Count: {numberCount}</p>
       <p>Render Count: {count}</p>
       <Button onClick={() => setNumberCount((c) => c + 1)}>Increment</Button>
-      {isStrictMode && (
-        <p className="text-balance text-center text-muted-foreground">
-          Strict Mode is enabled. This component renders twice on every render.
-        </p>
-      )}
     </div>
   )
 }

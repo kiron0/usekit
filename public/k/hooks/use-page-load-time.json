@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-page-load-time",
+  "type": "registry:hook",
+  "title": "Use Page Load Time",
+  "description": "Measure the time it takes for a page to load with the usePageLoadTime hook, providing insights into performance and user experience.",
+  "files": [
+    {
+      "path": "registry/hooks/use-page-load-time.ts",
+      "content": "import * as React from \"react\"\n\ninterface LoadTiming {\n  navigationStart: number\n  domContentLoaded: number | null\n  load: number | null\n  domComplete: number | null\n  total: number | null\n}\n\ntype PageLoadEvent = \"dom-content-loaded\" | \"load\" | \"complete\"\n\nexport function usePageLoadTime() {\n  const [timings, setTimings] = React.useState<LoadTiming>({\n    navigationStart: Date.now(),\n    domContentLoaded: null,\n    load: null,\n    domComplete: null,\n    total: null,\n  })\n\n  const [isLoaded, setIsLoaded] = React.useState(false)\n\n  const getLoadTime = React.useCallback(\n    (event: PageLoadEvent = \"load\"): number | null => {\n      switch (event) {\n        case \"dom-content-loaded\":\n          return timings.domContentLoaded\n        case \"load\":\n          return timings.load\n        case \"complete\":\n          return timings.domComplete\n        default:\n          return timings.total\n      }\n    },\n    [timings]\n  )\n\n  React.useEffect(() => {\n    if (typeof window === \"undefined\" || !window.PerformanceObserver) {\n      return\n    }\n\n    const observer = new PerformanceObserver((list) => {\n      const entries = list.getEntries()\n      entries.forEach((entry) => {\n        if (entry.entryType === \"navigation\") {\n          const navEntry = entry as PerformanceNavigationTiming\n          setTimings({\n            navigationStart: navEntry.startTime,\n            domContentLoaded: navEntry.domContentLoadedEventEnd,\n            load: navEntry.loadEventEnd,\n            domComplete: navEntry.domComplete,\n            total: navEntry.duration,\n          })\n          setIsLoaded(true)\n        }\n      })\n    })\n\n    observer.observe({ type: \"navigation\", buffered: true })\n    return () => observer.disconnect()\n  }, [])\n\n  return {\n    timings,\n    getLoadTime,\n    isLoaded,\n    loadTime: timings.total,\n  }\n}\n",
+      "type": "registry:hook"
+    }
+  ]
+}

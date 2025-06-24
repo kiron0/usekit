@@ -17,6 +17,7 @@ import { Callout } from "@/components/callout"
 import { CodeBlockCommand } from "@/components/code-block-command"
 import { CodeBlockWrapper } from "@/components/code-block-wrapper"
 import { CodeTabs } from "@/components/code-tabs"
+import { ComingSoon } from "@/components/coming-soon"
 import { ComponentPreview } from "@/components/component-preview"
 import { ComponentSource } from "@/components/component-source"
 import { CopyButton } from "@/components/copy-button"
@@ -44,6 +45,7 @@ const components = {
   CodeTabs,
   Report,
   Feature,
+  ComingSoon,
   CodeBlockWrapper: ({ ...props }) => (
     <CodeBlockWrapper className="rounded-md border" {...props} />
   ),

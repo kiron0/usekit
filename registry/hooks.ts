@@ -1171,6 +1171,201 @@ export const hooks: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "use-form",
+    title: "Use Form",
+    description:
+      "Manage form state and validation with the useForm hook, providing methods to handle input changes, validation, and submission.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-form.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-infinite-scroll",
+    title: "Use Infinite Scroll",
+    description:
+      "Implement infinite scrolling functionality with the useInfiniteScroll hook, allowing for dynamic loading of content as the user scrolls.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-infinite-scroll.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-breakpoint",
+    title: "Use Breakpoint",
+    description:
+      "Detect and respond to changes in viewport size with the useBreakpoint hook, allowing for responsive design adjustments.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-breakpoint.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-pagination",
+    title: "Use Pagination",
+    description:
+      "Manage pagination state and logic with the usePagination hook, providing methods to navigate through pages and track current page state.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-pagination.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-scroll-direction",
+    title: "Use Scroll Direction",
+    description:
+      "Detect the direction of scrolling (up or down) with the useScrollDirection hook, allowing for dynamic UI adjustments based on scroll behavior.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-scroll-direction.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-scroll-to-top",
+    title: "Use Scroll To Top",
+    description:
+      "Scroll the window or a specific element to the top with the useScrollToTop hook, providing options for smooth scrolling and custom behavior.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-scroll-to-top.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-execution-time",
+    title: "Use Execution Time",
+    description:
+      "Measure the execution time of a function with the useExecutionTime hook, providing methods to start, stop, and get the elapsed time.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-execution-time.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-safe-state",
+    title: "Use Safe State",
+    description:
+      "Safely manage state updates in React components with the useSafeState hook, preventing memory leaks and ensuring state consistency.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-safe-state.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-state-validator",
+    title: "Use State Validator",
+    description:
+      "Validate state updates in React components with the useStateValidator hook, providing a way to ensure state changes meet specific criteria before being applied.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-state-validator.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-memoized-fn",
+    title: "Use Memoized Function",
+    description:
+      "Memoize functions to prevent unnecessary re-computations with the useMemoizedFn hook, providing a way to optimize performance in React components.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-memoized-fn.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-text-direction",
+    title: "Use Text Direction",
+    description:
+      "Detect and manage text direction (LTR or RTL) in React components with the useTextDirection hook, providing a way to adapt UI based on language directionality.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-text-direction.tsx",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-page-load-time",
+    title: "Use Page Load Time",
+    description:
+      "Measure the time it takes for a page to load with the usePageLoadTime hook, providing insights into performance and user experience.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-page-load-time.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-time-of-day",
+    title: "Use Time Of Day",
+    description:
+      "Determine the current time of day (morning, afternoon, evening, night) with the useTimeOfDay hook, allowing for dynamic UI adjustments based on the time.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-time-of-day.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-env-check",
+    title: "Use Env Check",
+    description:
+      "Check the environment (development, production, test) in which the application is running with the useEnvCheck hook, allowing for environment-specific logic.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-env-check.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-error-boundary",
+    title: "Use Error Boundary",
+    description:
+      "Handle errors in React components gracefully with the useErrorBoundary hook, providing a way to catch and display errors without crashing the application.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-error-boundary.tsx",
+        type: "registry:hook",
+      },
+    ],
+  },
 ]
 
 export default hooks

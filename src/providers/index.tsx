@@ -1,10 +1,10 @@
 "use client"
 
+import { env } from "@/env"
 import { Analytics } from "@vercel/analytics/next"
 import NextTopLoader from "nextjs-toploader"
 
 import { THEMES } from "@/config/colors"
-import { siteConfig } from "@/config/site"
 import { Toaster } from "@/components/ui/toaster"
 import { TooltipProvider } from "@/components/ui/tooltip"
 import { usePreventZoom } from "registry/hooks/use-prevent-zoom"
@@ -31,7 +31,7 @@ export default function Providers({ children }: ProvidersProps) {
         <TooltipProvider>
           <div className="relative flex min-h-svh flex-col bg-background">
             {children}
-            {siteConfig.env.node === "production" && <Analytics />}
+            {env.NEXT_PUBLIC_NODE_ENV === "production" && <Analytics />}
           </div>
           <Toaster />
           <NextTopLoader showForHashAnchor={false} />
