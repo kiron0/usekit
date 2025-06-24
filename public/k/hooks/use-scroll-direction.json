@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-scroll-direction",
+  "type": "registry:hook",
+  "title": "Use Scroll Direction",
+  "description": "Detect the direction of scrolling (up or down) with the useScrollDirection hook, allowing for dynamic UI adjustments based on scroll behavior.",
+  "files": [
+    {
+      "path": "registry/hooks/use-scroll-direction.ts",
+      "content": "import * as React from \"react\"\n\ntype Direction = \"up\" | \"down\"\n\ninterface Options {\n  initialDirection?: Direction\n  threshold?: number\n  target?: HTMLElement | Window | null\n}\n\nexport function useScrollDirection({\n  initialDirection = \"up\",\n  threshold = 0,\n  target = typeof window !== \"undefined\" ? window : null,\n}: Options = {}) {\n  const [direction, setDirection] = React.useState<Direction>(initialDirection)\n  const lastScrollY = React.useRef(0)\n\n  React.useEffect(() => {\n    const element = target === window ? window : target\n    if (!element) return\n\n    const handleScroll = () => {\n      const currentY =\n        target === window ? window.scrollY : (target as HTMLElement).scrollTop\n\n      const diff = currentY - lastScrollY.current\n\n      if (Math.abs(diff) > threshold) {\n        setDirection(diff > 0 ? \"down\" : \"up\")\n        lastScrollY.current = currentY\n      }\n    }\n\n    element.addEventListener(\"scroll\", handleScroll)\n    return () => element.removeEventListener(\"scroll\", handleScroll)\n  }, [target, threshold])\n\n  return direction\n}\n",
+      "type": "registry:hook"
+    }
+  ]
+}

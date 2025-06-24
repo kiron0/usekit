@@ -1355,6 +1355,94 @@ export const Index: Record<string, any> = {
     component: React.lazy(() => import("registry/hooks/use-keyed-array.ts")),
     source: "",
   },
+  "use-form": {
+    name: "use-form",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-form.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(() => import("registry/hooks/use-form.ts")),
+    source: "",
+  },
+  "use-infinite-scroll": {
+    name: "use-infinite-scroll",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-infinite-scroll.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/hooks/use-infinite-scroll.ts")
+    ),
+    source: "",
+  },
+  "use-breakpoint": {
+    name: "use-breakpoint",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-breakpoint.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(() => import("registry/hooks/use-breakpoint.ts")),
+    source: "",
+  },
+  "use-pagination": {
+    name: "use-pagination",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-pagination.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(() => import("registry/hooks/use-pagination.ts")),
+    source: "",
+  },
+  "use-scroll-direction": {
+    name: "use-scroll-direction",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-scroll-direction.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/hooks/use-scroll-direction.ts")
+    ),
+    source: "",
+  },
+  "use-scroll-to-top": {
+    name: "use-scroll-to-top",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-scroll-to-top.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(() => import("registry/hooks/use-scroll-to-top.ts")),
+    source: "",
+  },
   "use-copy-to-clipboard-demo": {
     name: "use-copy-to-clipboard-demo",
     type: "registry:example",

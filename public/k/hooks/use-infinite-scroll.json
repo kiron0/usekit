@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-infinite-scroll",
+  "type": "registry:hook",
+  "title": "Use Infinite Scroll",
+  "description": "Implement infinite scrolling functionality with the useInfiniteScroll hook, allowing for dynamic loading of content as the user scrolls.",
+  "files": [
+    {
+      "path": "registry/hooks/use-infinite-scroll.ts",
+      "content": "import * as React from \"react\"\n\ninterface Options {\n  onLoadMore: () => void\n  isLoading: boolean\n  hasMore: boolean\n  threshold?: number\n}\n\nexport function useInfiniteScroll({\n  onLoadMore,\n  isLoading,\n  hasMore,\n  threshold = 0.1,\n}: Options) {\n  const observerRef = React.useRef<IntersectionObserver | null>(null)\n  const triggerRef = React.useRef<HTMLDivElement | null>(null)\n\n  const handleIntersection = React.useCallback(\n    (entries: IntersectionObserverEntry[]) => {\n      const [entry] = entries\n      if (entry.isIntersecting && !isLoading && hasMore) {\n        onLoadMore()\n      }\n    },\n    [onLoadMore, isLoading, hasMore]\n  )\n\n  React.useEffect(() => {\n    if (!triggerRef.current) return\n\n    observerRef.current = new IntersectionObserver(handleIntersection, {\n      threshold,\n    })\n    observerRef.current.observe(triggerRef.current)\n\n    return () => {\n      observerRef.current?.disconnect()\n    }\n  }, [handleIntersection, threshold])\n\n  return triggerRef\n}\n",
+      "type": "registry:hook"
+    }
+  ]
+}

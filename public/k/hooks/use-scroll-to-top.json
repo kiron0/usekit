@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-scroll-to-top",
+  "type": "registry:hook",
+  "title": "Use Scroll To Top",
+  "description": "Scroll the window or a specific element to the top with the useScrollToTop hook, providing options for smooth scrolling and custom behavior.",
+  "files": [
+    {
+      "path": "registry/hooks/use-scroll-to-top.ts",
+      "content": "import * as React from \"react\"\n\ninterface Options {\n  target?: HTMLElement | Window | null\n  behavior?: ScrollBehavior // \"auto\" | \"smooth\"\n}\n\nexport function useScrollToTop({\n  target = typeof window !== \"undefined\" ? window : null,\n  behavior = \"auto\",\n}: Options = {}) {\n  React.useEffect(() => {\n    const el = target === window ? window : target\n    if (!el) return\n\n    if (el === window) {\n      window.scrollTo({ top: 0, behavior })\n    } else if (\"scrollTo\" in el) {\n      el.scrollTo({ top: 0, behavior })\n    }\n  }, [target, behavior])\n}\n",
+      "type": "registry:hook"
+    }
+  ]
+}
