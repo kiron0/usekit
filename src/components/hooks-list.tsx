@@ -18,14 +18,6 @@ export function HooksList() {
       }))
   }, [])
 
-  console.log(
-    "hooks",
-    hooks.map((doc) => ({
-      title: doc.title,
-      description: doc.description,
-    }))
-  )
-
   return (
     <div className="space-y-4">
       {hooks.map((doc, i) => (

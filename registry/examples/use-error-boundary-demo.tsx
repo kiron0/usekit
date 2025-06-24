@@ -28,7 +28,7 @@ function ErrorFallback({ reset }: { reset: () => void }) {
   )
 }
 
-export function Component() {
+export default function UseErrorBoundaryDemo() {
   const { ErrorBoundary, hasError, error, resetError } = useErrorBoundary()
 
   return (

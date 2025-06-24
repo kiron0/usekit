@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-env-check",
+  "type": "registry:hook",
+  "title": "Use Env Check",
+  "description": "Check the environment (development, production, test) in which the application is running with the useEnvCheck hook, allowing for environment-specific logic.",
+  "files": [
+    {
+      "path": "registry/hooks/use-env-check.ts",
+      "content": "import * as React from \"react\"\n\ninterface Return {\n  isBrowser: boolean\n  isServer: boolean\n  isTest: boolean\n  isDev: boolean\n  isProd: boolean\n  isEnv: (env: \"browser\" | \"server\" | \"test\" | \"dev\" | \"prod\") => boolean\n}\n\nexport function useEnvCheck(): Return {\n  const env = React.useMemo((): Return => {\n    const isBrowser = typeof window !== \"undefined\"\n    const isServer = !isBrowser\n    const nodeEnv = process.env.NODE_ENV\n    const isTest = nodeEnv === \"test\"\n    const isDev = nodeEnv === \"development\"\n    const isProd = nodeEnv === \"production\"\n\n    return {\n      isBrowser,\n      isServer,\n      isTest,\n      isDev,\n      isProd,\n      isEnv: (env) =>\n        env === \"browser\"\n          ? isBrowser\n          : env === \"server\"\n            ? isServer\n            : env === \"test\"\n              ? isTest\n              : env === \"dev\"\n                ? isDev\n                : isProd,\n    }\n  }, [])\n\n  return env\n}\n",
+      "type": "registry:hook"
+    }
+  ]
+}

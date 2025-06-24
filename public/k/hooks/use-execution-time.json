@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-execution-time",
+  "type": "registry:hook",
+  "title": "Use Execution Time",
+  "description": "Measure the execution time of a function with the useExecutionTime hook, providing methods to start, stop, and get the elapsed time.",
+  "files": [
+    {
+      "path": "registry/hooks/use-execution-time.ts",
+      "content": "import * as React from \"react\"\n\ninterface Return {\n  runWithTiming: <T>(fn: () => T | Promise<T>) => Promise<T>\n  time: number | null\n  isRunning: boolean\n}\n\nexport function useExecutionTime(): Return {\n  const [time, setTime] = React.useState<number | null>(null)\n  const [isRunning, setIsRunning] = React.useState(false)\n  const startTimeRef = React.useRef<number | null>(null)\n\n  const runWithTiming = React.useCallback(\n    async <T>(fn: () => T | Promise<T>): Promise<T> => {\n      setIsRunning(true)\n      startTimeRef.current = performance.now()\n\n      try {\n        const result = await fn()\n        const endTime = performance.now()\n        setTime(endTime - startTimeRef.current)\n        return result\n      } finally {\n        setIsRunning(false)\n        startTimeRef.current = null\n      }\n    },\n    []\n  )\n\n  return {\n    runWithTiming,\n    time,\n    isRunning,\n  }\n}\n",
+      "type": "registry:hook"
+    }
+  ]
+}
