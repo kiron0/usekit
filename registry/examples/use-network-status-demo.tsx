@@ -2,7 +2,7 @@
 
 import { useNetworkStatus } from "registry/hooks/use-network-status"
 
-export function Component() {
+export default function UseNetworkStatusDemo() {
   const { online, effectiveType, downlink } = useNetworkStatus()
 
   return (

@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-worker",
+  "type": "registry:hook",
+  "title": "Use Worker",
+  "description": "Manage web workers in React components with the useWorker hook, providing a way to offload computationally expensive tasks to a separate thread.",
+  "files": [
+    {
+      "path": "registry/hooks/use-worker.ts",
+      "content": "import * as React from \"react\"\n\ninterface Return<T> {\n  result: T | null\n  error: Error | null\n  isRunning: boolean\n  run: (data: any) => void\n}\n\nexport function useWorker<T>(workerScript: string): Return<T> {\n  const [result, setResult] = React.useState<T | null>(null)\n  const [error, setError] = React.useState<Error | null>(null)\n  const [isRunning, setIsRunning] = React.useState(false)\n  const workerRef = React.useRef<Worker | null>(null)\n\n  React.useEffect(() => {\n    workerRef.current = new Worker(workerScript)\n    workerRef.current.onmessage = (e: MessageEvent) => {\n      setResult(e.data)\n      setIsRunning(false)\n    }\n    workerRef.current.onerror = (e: ErrorEvent) => {\n      setError(new Error(e.message))\n      setIsRunning(false)\n    }\n    return () => workerRef.current?.terminate()\n  }, [workerScript])\n\n  const run = React.useCallback((data: any) => {\n    if (workerRef.current) {\n      setIsRunning(true)\n      workerRef.current.postMessage(data)\n    }\n  }, [])\n\n  return { result, error, isRunning, run }\n}\n",
+      "type": "registry:hook"
+    }
+  ]
+}

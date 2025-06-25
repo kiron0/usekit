@@ -598,6 +598,30 @@ export const docsConfig: DocsConfig = {
           items: [],
           label: "New",
         },
+        {
+          title: "useWorker",
+          href: "/docs/hooks/use-worker",
+          items: [],
+          label: "Soon",
+        },
+        {
+          title: "useDeviceDetect",
+          href: "/docs/hooks/use-device-detect",
+          items: [],
+          label: "Soon",
+        },
+        {
+          title: "useUpdateEffect",
+          href: "/docs/hooks/use-update-effect",
+          items: [],
+          label: "Soon",
+        },
+        {
+          title: "useNetworkStatus",
+          href: "/docs/hooks/use-network-status",
+          items: [],
+          label: "Soon",
+        },
       ],
     },
     {

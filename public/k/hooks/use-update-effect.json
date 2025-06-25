@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-update-effect",
+  "type": "registry:hook",
+  "title": "Use Update Effect",
+  "description": "Run effects only when the component updates, not on the initial render, with the useUpdateEffect hook, providing a way to execute code after updates without affecting the initial render.",
+  "files": [
+    {
+      "path": "registry/hooks/use-update-effect.ts",
+      "content": "import * as React from \"react\"\n\nexport function useUpdateEffect(\n  callback: () => void,\n  dependencies: any[]\n): void {\n  const isFirstRender = React.useRef(true)\n\n  React.useEffect(() => {\n    if (isFirstRender.current) {\n      isFirstRender.current = false\n      return\n    }\n    callback()\n    // eslint-disable-next-line react-hooks/exhaustive-deps\n  }, dependencies)\n}\n",
+      "type": "registry:hook"
+    }
+  ]
+}

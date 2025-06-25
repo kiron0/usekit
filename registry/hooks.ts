@@ -1379,6 +1379,58 @@ export const hooks: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "use-device-detect",
+    title: "Use Device Detect",
+    description:
+      "Detect the type of device (mobile, tablet, desktop) and its characteristics with the useDeviceDetect hook, providing a way to adapt UI and functionality based on the device type.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-device-detect.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-network-status",
+    title: "Use Network Status",
+    description:
+      "Monitor the network status (online/offline) and connection type (WiFi, cellular) with the useNetworkStatus hook, providing a way to adapt functionality based on network conditions.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-network-status.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-update-effect",
+    title: "Use Update Effect",
+    description:
+      "Run effects only when the component updates, not on the initial render, with the useUpdateEffect hook, providing a way to execute code after updates without affecting the initial render.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-update-effect.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-worker",
+    title: "Use Worker",
+    description:
+      "Manage web workers in React components with the useWorker hook, providing a way to offload computationally expensive tasks to a separate thread.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-worker.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
 ]
 
 export default hooks
