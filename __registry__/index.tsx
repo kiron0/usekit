@@ -1548,7 +1548,9 @@ export const Index: Record<string, any> = {
         target: "",
       },
     ],
-    component: React.lazy(() => import("registry/hooks/use-time-of-day.ts")),
+    component: React.lazy(
+      () => import("registry/examples/use-time-of-day-demo")
+    ),
     source: "",
   },
   "use-env-check": {
@@ -1579,6 +1581,80 @@ export const Index: Record<string, any> = {
     component: React.lazy(
       () => import("registry/examples/use-error-boundary-demo")
     ),
+    source: "",
+  },
+  "use-dom-ready": {
+    name: "use-dom-ready",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-dom-ready.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(() => import("registry/hooks/use-dom-ready.ts")),
+    source: "",
+  },
+  "use-device-detect": {
+    name: "use-device-detect",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-device-detect.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-device-detect-demo")
+    ),
+    source: "",
+  },
+  "use-network-status": {
+    name: "use-network-status",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-network-status.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-network-status-demo")
+    ),
+    source: "",
+  },
+  "use-update-effect": {
+    name: "use-update-effect",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-update-effect.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(() => import("registry/hooks/use-update-effect.ts")),
+    source: "",
+  },
+  "use-worker": {
+    name: "use-worker",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-worker.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(() => import("registry/hooks/use-worker.ts")),
     source: "",
   },
   "use-copy-to-clipboard-demo": {
@@ -2762,6 +2838,54 @@ export const Index: Record<string, any> = {
     ],
     component: React.lazy(
       () => import("registry/examples/use-error-boundary-demo.tsx")
+    ),
+    source: "",
+  },
+  "use-time-of-day-demo": {
+    name: "use-time-of-day-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-time-of-day-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-time-of-day-demo.tsx")
+    ),
+    source: "",
+  },
+  "use-device-detect-demo": {
+    name: "use-device-detect-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-device-detect-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-device-detect-demo.tsx")
+    ),
+    source: "",
+  },
+  "use-network-status-demo": {
+    name: "use-network-status-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-network-status-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-network-status-demo.tsx")
     ),
     source: "",
   },

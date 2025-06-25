@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-device-detect",
+  "type": "registry:hook",
+  "title": "Use Device Detect",
+  "description": "Detect the type of device (mobile, tablet, desktop) and its characteristics with the useDeviceDetect hook, providing a way to adapt UI and functionality based on the device type.",
+  "files": [
+    {
+      "path": "registry/hooks/use-device-detect.ts",
+      "content": "import * as React from \"react\"\n\ninterface DeviceInfo {\n  isMobile: boolean\n  isTablet: boolean\n  isDesktop: boolean\n  userAgent: string\n}\n\nexport function useDeviceDetect(): DeviceInfo {\n  const [deviceInfo, setDeviceInfo] = React.useState<DeviceInfo>({\n    isMobile: false,\n    isTablet: false,\n    isDesktop: false,\n    userAgent: \"\",\n  })\n\n  React.useEffect(() => {\n    const ua = navigator.userAgent\n    const isMobile =\n      /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(ua)\n    const isTablet =\n      /(ipad|tablet|(android(?!.*mobile))|kindle|playbook|silk)/i.test(ua)\n    const isDesktop = !isMobile && !isTablet\n\n    setDeviceInfo({ isMobile, isTablet, isDesktop, userAgent: ua })\n  }, [])\n\n  return deviceInfo\n}\n",
+      "type": "registry:hook"
+    }
+  ]
+}

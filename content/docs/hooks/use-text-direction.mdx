@@ -3,4 +3,89 @@ title: useTextDirection
 description: Detect and manage text direction (LTR or RTL) in React components with the useTextDirection hook, providing a way to adapt UI based on language directionality.
 ---
 
-<ComingSoon />
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://usekit.kiron.dev/k/use-text-direction
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="use-text-direction" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx {3, 6}
+"use client"
+
+import { useTextDirection } from "@/hooks/use-text-direction"
+
+export function Component() {
+  const direction = useTextDirection({ initialDirection: "auto" })
+
+  return (
+    <div
+      style={{
+        padding: "24px",
+        maxWidth: 500,
+        margin: "0 auto",
+        border: "1px solid #eee",
+        borderRadius: 8,
+        direction,
+      }}
+    >
+      <h2>
+        Current Direction: <code>{direction}</code>
+      </h2>
+      <p>
+        This container's <b>CSS direction</b> is set to <code>{direction}</code>
+        . Try changing your browser or document direction to see it update.
+      </p>
+      <input
+        type="text"
+        placeholder="Type here..."
+        style={{ width: "100%", marginTop: 16, direction }}
+      />
+    </div>
+  )
+}
+```
+
+## API Reference
+
+### Parameters
+
+| Name               | Type                       | Description                                                                            | Default Value              | Optional |
+| ------------------ | -------------------------- | -------------------------------------------------------------------------------------- | -------------------------- | -------- |
+| `initialDirection` | `"ltr" \| "rtl" \| "auto"` | Initial text direction to set. Defaults to `auto`.                                     | `auto`                     | Yes      |
+| `watch`            | `boolean`                  | Whether to watch for changes in text direction. Defaults to `true`.                    | `true`                     | Yes      |
+| `targetElement`    | `HTMLElement \| null`      | Element to observe for text direction changes. Defaults to `document.documentElement`. | `document.documentElement` | Yes      |
+
+### Return Values
+
+| Name        | Type             | Description                                           |
+| ----------- | ---------------- | ----------------------------------------------------- |
+| `direction` | `"ltr" \| "rtl"` | Current text direction. Can be either `ltr` or `rtl`. |

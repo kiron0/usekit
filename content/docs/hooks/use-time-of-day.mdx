@@ -3,4 +3,108 @@ title: useTimeOfDay
 description: Determine the current time of day (morning, afternoon, evening, night) with the useTimeOfDay hook, allowing for dynamic UI adjustments based on the time.
 ---
 
-<ComingSoon />
+<ComponentPreview name="use-time-of-day-demo" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://usekit.kiron.dev/k/use-time-of-day
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="use-time-of-day" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx {3, 6}
+"use client"
+
+import { useTimeOfDay } from "@/hooks/use-time-of-day"
+
+export function Component() {
+  const timeOfDay = useTimeOfDay()
+
+  return (
+    <div
+      style={{
+        padding: "24px",
+        maxWidth: 500,
+        margin: "0 auto",
+        border: "1px solid #eee",
+        borderRadius: 8,
+      }}
+    >
+      <h2>
+        Current Time of Day: <code>{timeOfDay}</code>
+      </h2>
+      <p>
+        The current time of day is dynamically determined and can be used to
+        adjust UI elements accordingly.
+      </p>
+      <p>
+        For example, you can change the background color based on the time of
+        day:
+        <code>
+          backgroundColor:{" "}
+          {timeOfDay === "morning"
+            ? "#FFFAF0"
+            : timeOfDay === "afternoon"
+              ? "#FFFACD"
+              : timeOfDay === "evening"
+                ? "#F0E68C"
+                : "#2F4F4F"}
+        </code>
+      </p>
+      <div
+        style={{
+          padding: "16px",
+          backgroundColor:
+            timeOfDay === "morning"
+              ? "#FFFAF0"
+              : timeOfDay === "afternoon"
+                ? "#FFFACD"
+                : timeOfDay === "evening"
+                  ? "#F0E68C"
+                  : "#2F4F4F",
+          color: "#333",
+          borderRadius: 8,
+        }}
+      >
+        This box changes color based on the time of day.
+      </div>
+    </div>
+  )
+}
+```
+
+## API Reference
+
+### Return Values
+
+| Name        | Type        | Description                                                                          |
+| ----------- | ----------- | ------------------------------------------------------------------------------------ |
+| `timeOfDay` | `TimeOfDay` | The current time of day, which can be `morning`, `afternoon`, `evening`, or `night`. |

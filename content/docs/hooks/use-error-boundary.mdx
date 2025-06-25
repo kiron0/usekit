@@ -4,3 +4,106 @@ description: Handle errors in React components gracefully with the useErrorBound
 ---
 
 <ComponentPreview name="use-error-boundary-demo" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://usekit.kiron.dev/k/use-error-boundary
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="use-error-boundary" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx {5}
+"use client"
+
+import * as React from "react"
+
+import { useErrorBoundary } from "@/hooks/use-error-boundary"
+
+function FaultyComponent() {
+  const [count, setCount] = React.useState(0)
+
+  if (count >= 3) {
+    throw new Error("Count exceeded limit of 3")
+  }
+
+  return (
+    <button
+      onClick={() => setCount(count + 1)}
+      className="rounded bg-blue-500 px-4 py-2 text-white"
+    >
+      Increment Count: {count}
+    </button>
+  )
+}
+
+function ErrorFallback({ reset }: { reset: () => void }) {
+  return (
+    <div className="flex flex-col items-center justify-center gap-3">
+      <h2>Something went wrong!</h2>
+      <button
+        onClick={reset}
+        className="rounded bg-blue-500 px-4 py-2 text-white"
+      >
+        Try Again
+      </button>
+    </div>
+  )
+}
+
+export function Component() {
+  const { ErrorBoundary, hasError, error, resetError } = useErrorBoundary()
+
+  return (
+    <div>
+      <ErrorBoundary fallback={<ErrorFallback reset={resetError} />}>
+        <FaultyComponent />
+      </ErrorBoundary>
+      {hasError && error && (
+        <div>
+          <p>Error: {error.message}</p>
+        </div>
+      )}
+    </div>
+  )
+}
+```
+
+## API Reference
+
+### Return Values
+
+| Name                 | Type                                                        | Description                                                                            |
+| -------------------- | ----------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| `hasError`           | `boolean`                                                   | Indicates if an error has occurred in the boundary.                                    |
+| `error`              | `Error \| null`                                             | The error object if an error has occurred.                                             |
+| `resetError`         | `() => void`                                                | Function to reset the error state in the boundary.                                     |
+| `ErrorBoundary`      | `React.ComponentType`                                       | The ErrorBoundary component that can be used to wrap components.                       |
+| `ErrorBoundaryProps` | `{ children: React.ReactNode, fallback?: React.ReactNode }` | Props for the ErrorBoundary component, including children and an optional fallback UI. |

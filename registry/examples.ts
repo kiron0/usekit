@@ -751,4 +751,34 @@ export const hooksExamples: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "use-time-of-day-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/use-time-of-day-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-device-detect-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/use-device-detect-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-network-status-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/use-network-status-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
 ]

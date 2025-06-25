@@ -1,0 +1,82 @@
+---
+title: useDomReady
+description: Detect when the DOM is fully loaded and ready for manipulation with the useDomReady hook, providing a way to execute code after the DOM is ready.
+---
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://usekit.kiron.dev/k/use-dom-ready
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="use-dom-ready" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx {3, 6-13}
+"use client"
+
+import { useDomReady } from "@/hooks/use-dom-ready"
+
+export function Component() {
+  useDomReady(() => {
+    console.log("DOM is interactive or complete!")
+    // Example: Initialize a DOM-dependent library
+    const element = document.getElementById("my-element")
+    if (element) {
+      element.style.backgroundColor = "blue"
+    }
+  })
+
+  return (
+    <div style={{ padding: "20px", maxWidth: "600px", margin: "0 auto" }}>
+      <p>This component will log a message when the DOM is ready.</p>
+      <div
+        id="my-element"
+        style={{ height: "100px", backgroundColor: "lightgray" }}
+      >
+        My Element
+      </div>
+    </div>
+  )
+}
+```
+
+## API Reference
+
+### Parameters
+
+| Name       | Type         | Description                                | Default Value | Optional |
+| ---------- | ------------ | ------------------------------------------ | ------------- | -------- |
+| `callback` | `() => void` | Function to execute when the DOM is ready. | -             | No       |
+
+### Return Values
+
+| Name         | Type      | Description                                          |
+| ------------ | --------- | ---------------------------------------------------- |
+| `isDomReady` | `boolean` | Indicates whether the DOM is ready for manipulation. |

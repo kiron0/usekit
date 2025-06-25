@@ -1,33 +1,27 @@
 import * as React from "react"
 
-interface EnhancedOptions extends Options {
-  maxVisiblePages?: number
-  resetOnTotalItemsChange?: boolean
-}
-
 interface Options {
   totalItems: number
   itemsPerPage: number
+  maxVisiblePages?: number
+  resetOnTotalItemsChange?: boolean
   initialPage?: number
-}
-
-interface EnhancedReturn extends Return {
-  pageNumbers: number[]
-  canPreviousPage: boolean
-  canNextPage: boolean
-  totalItems: number
-  hasPreviousEllipsis: boolean
-  hasNextEllipsis: boolean
 }
 
 interface Return {
   currentPage: number
   totalPages: number
+  totalItems: number
   nextPage: () => void
   prevPage: () => void
   goToPage: (page: number) => void
   startIndex: number
   endIndex: number
+  pageNumbers: number[]
+  canPreviousPage: boolean
+  canNextPage: boolean
+  hasPreviousEllipsis: boolean
+  hasNextEllipsis: boolean
 }
 
 export function usePagination({
@@ -36,7 +30,7 @@ export function usePagination({
   initialPage = 1,
   maxVisiblePages = 5,
   resetOnTotalItemsChange = true,
-}: EnhancedOptions): EnhancedReturn {
+}: Options): Return {
   const safeItemsPerPage = Math.max(1, itemsPerPage)
   const safeTotalItems = Math.max(0, totalItems)
   const totalPages = Math.max(1, Math.ceil(safeTotalItems / safeItemsPerPage))

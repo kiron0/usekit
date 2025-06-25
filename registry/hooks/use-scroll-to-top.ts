@@ -8,7 +8,7 @@ interface Options {
 export function useScrollToTop({
   target = typeof window !== "undefined" ? window : null,
   behavior = "auto",
-}: Options = {}) {
+}: Options) {
   React.useEffect(() => {
     const el = target === window ? window : target
     if (!el) return

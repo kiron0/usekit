@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-network-status",
+  "type": "registry:hook",
+  "title": "Use Network Status",
+  "description": "Monitor the network status (online/offline) and connection type (WiFi, cellular) with the useNetworkStatus hook, providing a way to adapt functionality based on network conditions.",
+  "files": [
+    {
+      "path": "registry/hooks/use-network-status.ts",
+      "content": "import * as React from \"react\"\n\ninterface NetworkStatus {\n  online: boolean\n  effectiveType?: string\n  downlink?: number\n}\n\ninterface NetworkInformation extends EventTarget {\n  readonly effectiveType?: string\n  readonly downlink?: number\n  addEventListener(type: \"change\", listener: () => void): void\n  removeEventListener(type: \"change\", listener: () => void): void\n}\n\nexport function useNetworkStatus(): NetworkStatus {\n  const getConnection = (): NetworkInformation | undefined => {\n    return typeof navigator !== \"undefined\"\n      ? ((navigator as any).connection ??\n          (navigator as any).mozConnection ??\n          (navigator as any).webkitConnection)\n      : undefined\n  }\n\n  const getStatus = React.useCallback((): NetworkStatus => {\n    const connection = getConnection()\n    return {\n      online: typeof navigator !== \"undefined\" ? navigator.onLine : true,\n      effectiveType: connection?.effectiveType,\n      downlink: connection?.downlink,\n    }\n  }, [])\n\n  const [status, setStatus] = React.useState<NetworkStatus>(getStatus)\n\n  const updateStatus = React.useCallback(() => {\n    setStatus(getStatus())\n  }, [getStatus])\n\n  React.useEffect(() => {\n    if (typeof window === \"undefined\") return\n\n    const connection = getConnection()\n\n    updateStatus()\n    window.addEventListener(\"online\", updateStatus)\n    window.addEventListener(\"offline\", updateStatus)\n    connection?.addEventListener(\"change\", updateStatus)\n\n    return () => {\n      window.removeEventListener(\"online\", updateStatus)\n      window.removeEventListener(\"offline\", updateStatus)\n      connection?.removeEventListener(\"change\", updateStatus)\n    }\n  }, [updateStatus])\n\n  return status\n}\n",
+      "type": "registry:hook"
+    }
+  ]
+}

@@ -3,4 +3,86 @@ title: useStateValidator
 description: Validate state updates in React components with the useStateValidator hook, providing a way to ensure state changes meet specific criteria before being applied.
 ---
 
-<ComingSoon />
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://usekit.kiron.dev/k/use-state-validator
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="use-state-validator" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx {3, 6-13}
+"use client"
+
+import { useStateValidator } from "@/hooks/use-state-validator"
+
+export function Component() {
+  const { state, setState, result } = useStateValidator({
+    initialValue: 0,
+    validator: (value) => value >= 0,
+    onInvalid: () => console.warn("Invalid state value"),
+    onValid: () => console.log("State value is valid"),
+    throwOnInvalid: false,
+    asyncDebounceMs: 300,
+  })
+
+  return (
+    <div style={{ padding: "20px", maxWidth: "600px", margin: "0 auto" }}>
+      <h1>State Validator Example</h1>
+      <p>Current State: {state}</p>
+      <button onClick={() => setState((prev) => prev + 1)}>Increment</button>
+      <button onClick={() => setState((prev) => prev - 1)}>Decrement</button>
+      {result.isPending && <p>Validating...</p>}
+      {!result.isValid && <p style={{ color: "red" }}>Error: {result.error}</p>}
+    </div>
+  )
+}
+```
+
+## API Reference
+
+### Parameters
+
+| Name              | Type                    | Description                                                                                                                     | Default Value | Optional |
+| ----------------- | ----------------------- | ------------------------------------------------------------------------------------------------------------------------------- | ------------- | -------- |
+| `initialValue`    | `T \| `(() => T)`       | The initial value of the state. Can be a value or a function that returns a value.                                              | `undefined`   | Yes      |
+| `validator`       | `(value: T) => boolean` | A function that validates the new state value. It should return `true` if the value is valid, or `false` if it is not.          | -             | No       |
+| `onInvalid`       | `() => void`            | A callback function that is called when the new state value is invalid.                                                         | -             | Yes      |
+| `onValid`         | `() => void`            | A callback function that is called when the new state value is valid.                                                           | -             | Yes      |
+| `throwOnInvalid`  | `boolean`               | If `true`, an error will be thrown when the new state value is invalid. If `false`, the state will not be updated.              | `false`       | Yes      |
+| `asyncDebounceMs` | `number`                | The debounce time in milliseconds for asynchronous validation. If set, the validation will be debounced by this amount of time. | `0`           | Yes      |
+
+### Return Values
+
+| Name       | Type                                                     | Description                                                                                                                                                                                                                 |
+| ---------- | -------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `state`    | `T`                                                      | The current state value.                                                                                                                                                                                                    |
+| `setState` | `(value: T \| ((prevState: T) => T)) => void`            | A function to update the state. It accepts a new value or a function that receives the previous state and returns the new state.                                                                                            |
+| `result`   | `{isValid: boolean, error?: string, isPending: boolean}` | An object containing the validation result. `isValid` indicates if the current state is valid, `error` contains an error message if the state is invalid, and `isPending` indicates if the validation is still in progress. |
