@@ -4,3 +4,74 @@ description: Measure the execution time of a function with the useExecutionTime 
 ---
 
 <ComponentPreview name="use-execution-time-demo" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://usekit.kiron.dev/k/use-execution-time
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="use-execution-time" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx {3, 6}
+"use client"
+
+import { useExecutionTime } from "@/hooks/use-execution-time"
+
+export function Component() {
+  const { runWithTiming, time, isRunning } = useExecutionTime()
+
+  return (
+    <div style={{ padding: "20px", maxWidth: "600px", margin: "0 auto" }}>
+      <button
+        onClick={runWithTiming(() => {
+          // Simulate a function that takes some time to execute
+          for (let i = 0; i < 1e6; i++) {}
+          console.log("Function executed")
+        })}
+      >
+        Run Function
+      </button>
+      <p>Elapsed Time: {time} ms</p>
+      <p>Is Running: {isRunning ? "Yes" : "No"}</p>
+    </div>
+  )
+}
+```
+
+## API Reference
+
+### Return Values
+
+| Name            | Type       | Description                                                                                                   |
+| --------------- | ---------- | ------------------------------------------------------------------------------------------------------------- |
+| `runWithTiming` | `function` | A function that takes a callback and returns a new function that measures the execution time of the callback. |
+| `time`          | `number`   | The elapsed time in milliseconds since the last call to `runWithTiming`.                                      |
+| `isRunning`     | `boolean`  | Indicates whether the timer is currently running.                                                             |

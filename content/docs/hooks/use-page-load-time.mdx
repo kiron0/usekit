@@ -3,4 +3,68 @@ title: usePageLoadTime
 description: Measure the time it takes for a page to load with the usePageLoadTime hook, providing insights into performance and user experience.
 ---
 
-<ComingSoon />
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://usekit.kiron.dev/k/use-page-load-time
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="use-page-load-time" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx {3, 6}
+"use client"
+
+import { usePageLoadTime } from "@/hooks/use-page-load-time"
+
+export function Component() {
+  const { timings, getLoadTime, loadTime, isLoaded } = usePageLoadTime()
+
+  return (
+    <div style={{ padding: "20px", maxWidth: "600px", margin: "0 auto" }}>
+      <p>Page load time: {loadTime ? `${loadTime} ms` : "Calculating..."}</p>
+      <button onClick={getLoadTime} disabled={isLoaded}>
+        {isLoaded ? "Load Time Calculated" : "Calculate Load Time"}
+      </button>
+      <pre>{JSON.stringify(timings, null, 2)}</pre>
+    </div>
+  )
+}
+```
+
+## API Reference
+
+### Return Values
+
+| Name          | Type                                                                                                    | Description                                                                   |
+| ------------- | ------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| `timings`     | `{navigationStart: number, domContentLoaded: number, load: number, domComplete: number, total: number}` | An object containing various timing metrics related to the page load process. |
+| `getLoadTime` | `Function`                                                                                              | Function to trigger the calculation of the page load time.                    |
+| `loadTime`    | `number`                                                                                                | The calculated page load time in milliseconds.                                |
+| `isLoaded`    | `boolean`                                                                                               | Indicates whether the load time has been calculated.                          |

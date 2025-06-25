@@ -4,3 +4,89 @@ description: Detect and respond to changes in viewport size with the useBreakpoi
 ---
 
 <ComponentPreview name="use-breakpoint-demo" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://usekit.kiron.dev/k/use-breakpoint
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="use-breakpoint" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx {5, 8}
+"use client"
+
+import * as React from "react"
+
+import { useBreakpoint } from "@/hooks/use-breakpoint"
+
+export function Component() {
+  const { currentBreakpoint, isAbove } = useBreakpoint()
+
+  return (
+    <div>
+      <h2>Current Breakpoint: {currentBreakpoint}</h2>
+      <div
+        style={{
+          padding: isAbove("xl") ? "40px" : "20px",
+          fontSize: isAbove("2xl") ? "24px" : "16px",
+          backgroundColor: isAbove("lg") ? "#e3f2fd" : "#fff8e1",
+        }}
+      >
+        {isAbove("2xl")
+          ? "Extra Large Desktop View"
+          : isAbove("xl")
+            ? "Desktop View"
+            : isAbove("lg")
+              ? "Laptop View"
+              : isAbove("md")
+                ? "Tablet View"
+                : "Mobile View"}
+      </div>
+    </div>
+  )
+}
+```
+
+## API Reference
+
+### Parameters
+
+| Name          | Type                                  | Description                                        | Default Value | Optional |
+| ------------- | ------------------------------------- | -------------------------------------------------- | ------------- | -------- |
+| `breakpoints` | `Partial<Record<Breakpoint, number>>` | Custom breakpoints to override the default values. | `{}`          | Yes      |
+
+### Return Values
+
+| Name                | Type                                  | Description                                                                                 |
+| ------------------- | ------------------------------------- | ------------------------------------------------------------------------------------------- |
+| `currentBreakpoint` | `Breakpoint \| null`                  | The current breakpoint based on the viewport width. Returns `null` if no breakpoints match. |
+| `isAbove`           | `(breakpoint: Breakpoint) => boolean` | Function to check if the current viewport width is above the specified breakpoint.          |
+| `isBelow`           | `(breakpoint: Breakpoint) => boolean` | Function to check if the current viewport width is below the specified breakpoint.          |

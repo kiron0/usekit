@@ -1581,6 +1581,20 @@ export const Index: Record<string, any> = {
     ),
     source: "",
   },
+  "use-dom-ready": {
+    name: "use-dom-ready",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-dom-ready.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(() => import("registry/hooks/use-dom-ready.ts")),
+    source: "",
+  },
   "use-copy-to-clipboard-demo": {
     name: "use-copy-to-clipboard-demo",
     type: "registry:example",

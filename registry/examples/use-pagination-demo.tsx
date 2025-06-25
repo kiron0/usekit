@@ -44,6 +44,8 @@ export default function UsePaginationDemo() {
     pageNumbers,
     canNextPage,
     canPreviousPage,
+    hasPreviousEllipsis,
+    hasNextEllipsis,
     totalItems,
   } = usePagination({
     totalItems: sampleData.length,
@@ -122,7 +124,7 @@ export default function UsePaginationDemo() {
         </Button>
 
         <div className="flex gap-1">
-          {currentPage > 1 && pageNumbers[0] !== 1 && (
+          {hasPreviousEllipsis && (
             <Button variant="outline" disabled>
               ...
             </Button>
@@ -137,13 +139,11 @@ export default function UsePaginationDemo() {
               {page}
             </Button>
           ))}
-          {currentPage < totalPages &&
-            pageNumbers[pageNumbers.length - 1] !==
-              Math.ceil(totalItems / itemsPerPage) && (
-              <Button variant="outline" disabled>
-                ...
-              </Button>
-            )}
+          {hasNextEllipsis && (
+            <Button variant="outline" disabled>
+              ...
+            </Button>
+          )}
         </div>
 
         <Button size="icon" onClick={nextPage} disabled={!canNextPage}>

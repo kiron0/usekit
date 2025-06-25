@@ -4,3 +4,234 @@ description: Manage form state and validation with the useForm hook, providing m
 ---
 
 <ComponentPreview name="use-form-demo" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://usekit.kiron.dev/k/use-form
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="use-form" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx {5, 16-67}
+"use client"
+
+import * as React from "react"
+
+import { FormErrors, useForm } from "@/hooks/use-form"
+
+interface FormValues {
+  firstName: string
+  lastName: string
+  email: string
+  password: string
+  confirmPassword: string
+}
+
+export function Component() {
+  const {
+    values,
+    errors,
+    touched,
+    handleChange,
+    handleBlur,
+    handleSubmit,
+    isSubmitting,
+    setFieldValue,
+  } = useForm<FormValues>({
+    initialValues: {
+      firstName: "",
+      lastName: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
+    },
+    validate: (values) => {
+      const errors: FormErrors<FormValues> = {}
+
+      if (!values.firstName) {
+        errors.firstName = "First name is required"
+      }
+
+      if (!values.lastName) {
+        errors.lastName = "Last name is required"
+      }
+
+      if (!values.email) {
+        errors.email = "Email is required"
+      } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email)) {
+        errors.email = "Email is invalid"
+      }
+
+      if (!values.password) {
+        errors.password = "Password is required"
+      } else if (values.password.length < 8) {
+        errors.password = "Password must be at least 8 characters"
+      }
+
+      if (values.password !== values.confirmPassword) {
+        errors.confirmPassword = "Passwords must match"
+      }
+
+      return errors
+    },
+    onSubmit: async (values) => {
+      // Simulate API call
+      await new Promise((resolve) => setTimeout(resolve, 1000))
+      alert(`Registration successful for ${values.email}`)
+    },
+  })
+
+  // Example of programmatically setting a value
+  const fillSampleData = () => {
+    setFieldValue("firstName", "John")
+    setFieldValue("lastName", "Doe")
+    setFieldValue("email", "john.doe@example.com")
+    setFieldValue("password", "secure123")
+    setFieldValue("confirmPassword", "secure123")
+  }
+
+  return (
+    <div style={{ maxWidth: "400px", margin: "0 auto" }}>
+      <h2>User Registration</h2>
+      <form onSubmit={handleSubmit}>
+        <div style={{ marginBottom: "16px" }}>
+          <label htmlFor="firstName">First Name</label>
+          <input
+            type="text"
+            id="firstName"
+            name="firstName"
+            value={values.firstName}
+            onChange={handleChange}
+            onBlur={handleBlur}
+          />
+          {touched.firstName && errors.firstName && (
+            <div style={{ color: "red" }}>{errors.firstName}</div>
+          )}
+        </div>
+
+        <div style={{ marginBottom: "16px" }}>
+          <label htmlFor="lastName">Last Name</label>
+          <input
+            type="text"
+            id="lastName"
+            name="lastName"
+            value={values.lastName}
+            onChange={handleChange}
+            onBlur={handleBlur}
+          />
+          {touched.lastName && errors.lastName && (
+            <div style={{ color: "red" }}>{errors.lastName}</div>
+          )}
+        </div>
+
+        <div style={{ marginBottom: "16px" }}>
+          <label htmlFor="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            value={values.email}
+            onChange={handleChange}
+            onBlur={handleBlur}
+          />
+          {touched.email && errors.email && (
+            <div style={{ color: "red" }}>{errors.email}</div>
+          )}
+        </div>
+
+        <div style={{ marginBottom: "16px" }}>
+          <label htmlFor="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            value={values.password}
+            onChange={handleChange}
+            onBlur={handleBlur}
+          />
+          {touched.password && errors.password && (
+            <div style={{ color: "red" }}>{errors.password}</div>
+          )}
+        </div>
+
+        <div style={{ marginBottom: "16px" }}>
+          <label htmlFor="confirmPassword">Confirm Password</label>
+          <input
+            type="password"
+            id="confirmPassword"
+            name="confirmPassword"
+            value={values.confirmPassword}
+            onChange={handleChange}
+            onBlur={handleBlur}
+          />
+          {touched.confirmPassword && errors.confirmPassword && (
+            <div style={{ color: "red" }}>{errors.confirmPassword}</div>
+          )}
+        </div>
+
+        <div style={{ marginBottom: "16px", display: "flex", gap: "8px" }}>
+          <button type="submit" disabled={isSubmitting}>
+            {isSubmitting ? "Submitting..." : "Register"}
+          </button>
+          <button type="button" onClick={fillSampleData}>
+            Fill Sample Data
+          </button>
+        </div>
+      </form>
+    </div>
+  )
+}
+```
+
+## API Reference
+
+### Parameters
+
+| Name            | Type                           | Description                                                              | Default Value | Optional |
+| --------------- | ------------------------------ | ------------------------------------------------------------------------ | ------------- | -------- |
+| `initialValues` | `Partial<T>`                   | Initial values for the form fields.                                      | -             | No       |
+| `validate`      | `(values: T) => FormErrors<T>` | Validation function that returns an object with field errors.            | -             | No       |
+| `onSubmit`      | `(values: T) => Promise<void>` | Function to call when the form is submitted. It should return a promise. | -             | No       |
+
+### Return Values
+
+| Name            | Type                                                      | Description                                                                                                                            |
+| --------------- | --------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| `values`        | `T`                                                       | Current values of the form fields.                                                                                                     |
+| `errors`        | `FormErrors<T>`                                           | Current validation errors for the form fields.                                                                                         |
+| `touched`       | `Partial<Record<keyof T, boolean>>`                       | Tracks whether each field has been touched (focused and blurred).                                                                      |
+| `handleChange`  | `(e: React.ChangeEvent<HTMLInputElement>) => void`        | Function to handle input changes. It updates the corresponding field value in `values`.                                                |
+| `handleBlur`    | `(e: React.FocusEvent<HTMLInputElement>) => void`         | Function to handle input blur events. It marks the field as touched in `touched`.                                                      |
+| `handleSubmit`  | `(e?: React.FormEvent<HTMLFormElement>) => Promise<void>` | Function to handle form submission. It validates the form and calls `onSubmit` if there are no errors.                                 |
+| `setFieldValue` | `(field: keyof T, value: T[keyof T]) => void`             | Function to programmatically set a field value. It updates the corresponding field in `values` and clears any errors for that field.   |
+| `setFieldError` | `(field: keyof T, error: string                           | null) => void`                                                                                                                         | Function to set a specific field error. It updates the `errors` object for the specified field. |
+| `resetForm`     | `() => void`                                              | Function to reset the form to its initial state. It clears all field values, errors, and touched states.                               |
+| `isSubmitting`  | `boolean`                                                 | Indicates whether the form is currently being submitted. It is set to `true` when `handleSubmit` is called and reset after submission. |

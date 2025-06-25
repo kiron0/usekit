@@ -3,4 +3,81 @@ title: useScrollDirection
 description: Detect the direction of scrolling (up or down) with the useScrollDirection hook, allowing for dynamic UI adjustments based on scroll behavior.
 ---
 
-<ComingSoon />
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://usekit.kiron.dev/k/use-scroll-direction
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="use-scroll-direction" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx {3, 6-10}
+"use client"
+
+import { useScrollDirection } from "@/hooks/use-scroll-direction"
+
+export function Component() {
+  const direction = useScrollDirection({
+    initialDirection: "up", // or "down"
+    threshold: 50, // Minimum scroll distance to trigger a change
+    target: window, // Element to observe, defaults to window
+  })
+
+  return (
+    <div style={{ padding: "20px", maxWidth: "600px", margin: "0 auto" }}>
+      <p>Current scroll direction: {direction}</p>
+      <div
+        style={{
+          height: "2000px",
+          background: "linear-gradient(to bottom, #f0f0f0, #d0d0d0)",
+        }}
+      >
+        Scroll down or up to see the direction change.
+      </div>
+    </div>
+  )
+}
+```
+
+## API Reference
+
+### Parameters
+
+| Name               | Type          | Description                                                                  | Default Value | Optional |
+| ------------------ | ------------- | ---------------------------------------------------------------------------- | ------------- | -------- |
+| `initialDirection` | `up \| down`  | Initial scroll direction, either "up" or "down".                             | `"up"`        | Yes      |
+| `threshold`        | `number`      | Minimum scroll distance to trigger a direction change.                       | `50`          | Yes      |
+| `target`           | `HTMLElement` | Element to observe for scroll events. If not provided, defaults to `window`. | `undefined`   | Yes      |
+
+### Return Values
+
+| Name        | Type         | Description                                      |
+| ----------- | ------------ | ------------------------------------------------ |
+| `direction` | `up \| down` | Current scroll direction, either "up" or "down". |

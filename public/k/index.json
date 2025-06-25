@@ -1281,6 +1281,18 @@
           "path": "registry/hooks/use-error-boundary.tsx"
         }
       ]
+    },
+    {
+      "name": "use-dom-ready",
+      "title": "Use DOM Ready",
+      "description": "Detect when the DOM is fully loaded and ready for manipulation with the useDomReady hook, providing a way to execute code after the DOM is ready.",
+      "type": "registry:hook",
+      "files": [
+        {
+          "type": "registry:hook",
+          "path": "registry/hooks/use-dom-ready.ts"
+        }
+      ]
     }
   ]
 }

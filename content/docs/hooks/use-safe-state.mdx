@@ -3,4 +3,70 @@ title: useSafeState
 description: Safely manage state updates in React components with the useSafeState hook, preventing memory leaks and ensuring state consistency.
 ---
 
-<ComingSoon />
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://usekit.kiron.dev/k/use-safe-state
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="use-safe-state" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx {3, 6}
+"use client"
+
+import { useSafeState } from "@/hooks/use-safe-state"
+
+export function Component() {
+  const [state, setState] = useSafeState<string>("Initial Value")
+
+  return (
+    <div style={{ padding: "20px", maxWidth: "600px", margin: "0 auto" }}>
+      <p>Current State: {state}</p>
+      <button onClick={() => setState("Updated Value")}>Update State</button>
+    </div>
+  )
+}
+```
+
+## API Reference
+
+### Parameters
+
+| Name                  | Type      | Description                                               | Default Value | Optional |
+| --------------------- | --------- | --------------------------------------------------------- | ------------- | -------- |
+| `initialValue`        | `T`       | The initial state value.                                  | `undefined`   | Yes      |
+| `logUnmountedUpdates` | `boolean` | Whether to log updates after the component has unmounted. | `false`       | Yes      |
+
+### Return Values
+
+| Name       | Type                 | Description                         |
+| ---------- | -------------------- | ----------------------------------- |
+| `state`    | `T`                  | The current state value.            |
+| `setState` | `(value: T) => void` | Function to update the state value. |

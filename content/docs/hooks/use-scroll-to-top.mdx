@@ -3,4 +3,82 @@ title: useScrollToTop
 description: Scroll the window or a specific element to the top with the useScrollToTop hook, providing options for smooth scrolling and custom behavior.
 ---
 
-<ComingSoon />
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://usekit.kiron.dev/k/use-scroll-to-top
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="use-scroll-to-top" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx {3, 6-9}
+"use client"
+
+import { useScrollToTop } from "@/hooks/use-scroll-to-top"
+
+export function Component() {
+  const scrollToTop = useScrollToTop({
+    target: window, // Element to scroll, defaults to window
+    behavior: "smooth", // Scrolling behavior, can be "auto" or "smooth"
+  })
+
+  return (
+    <div style={{ padding: "20px", maxWidth: "600px", margin: "0 auto" }}>
+      <p>Click the button to scroll to the top of the page.</p>
+      <button onClick={scrollToTop} style={{ padding: "10px 20px" }}>
+        Scroll to Top
+      </button>
+      <div
+        style={{
+          height: "2000px",
+          background: "linear-gradient(to bottom, #f0f0f0, #d0d0d0)",
+        }}
+      >
+        Scroll down to see the effect
+      </div>
+    </div>
+  )
+}
+```
+
+## API Reference
+
+### Parameters
+
+| Name       | Type                  | Description                                                                    | Default Value | Optional |
+| ---------- | --------------------- | ------------------------------------------------------------------------------ | ------------- | -------- |
+| `target`   | `Window` or `Element` | The element to scroll to the top. Defaults to `window`.                        | `window`      | Yes      |
+| `behavior` | `ScrollBehavior`      | The scrolling behavior, either `"auto"` or `"smooth"`. Defaults to `"smooth"`. | `"smooth"`    | Yes      |
+
+### Return Values
+
+| Name          | Type         | Description                                       |
+| ------------- | ------------ | ------------------------------------------------- |
+| `scrollToTop` | `() => void` | Function to scroll the target element to the top. |

@@ -4,3 +4,123 @@ description: Manage pagination state and logic with the usePagination hook, prov
 ---
 
 <ComponentPreview name="use-pagination-demo" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://usekit.kiron.dev/k/use-pagination
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="use-pagination" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx {3, 6-25}
+"use client"
+
+import { usePagination } from "@/hooks/use-pagination"
+
+export function Component() {
+  const {
+    currentPage,
+    totalPages,
+    nextPage,
+    prevPage,
+    goToPage,
+    startIndex,
+    endIndex,
+    pageNumbers,
+    canPreviousPage,
+    canNextPage,
+    hasPreviousEllipsis,
+    hasNextEllipsis,
+  } = usePagination({
+    totalItems: 100, // Total number of items to paginate
+    itemsPerPage: 10, // Number of items per page
+    maxVisiblePages: 5, // Maximum number of visible page numbers
+    resetOnTotalItemsChange: true, // Reset pagination when total items change
+    initialPage: 1, // Initial page number to start from
+  })
+
+  return (
+    <div style={{ padding: "20px", maxWidth: "600px", margin: "0 auto" }}>
+      <p>Current Page: {currentPage}</p>
+      <p>Total Pages: {totalPages}</p>
+      <p>
+        Items {startIndex + 1} - {endIndex + 1} of {totalItems}
+      </p>
+      <div>
+        <button onClick={prevPage} disabled={!canPreviousPage}>
+          Previous
+        </button>
+        {hasPreviousEllipsis && <span>...</span>}
+        {pageNumbers.map((page) => (
+          <button
+            key={page}
+            onClick={() => goToPage(page)}
+            disabled={currentPage === page}
+          >
+            {page}
+          </button>
+        ))}
+        {hasNextEllipsis && <span>...</span>}
+        <button onClick={nextPage} disabled={!canNextPage}>
+          Next
+        </button>
+      </div>
+    </div>
+  )
+}
+```
+
+## API Reference
+
+### Parameters
+
+| Name                  | Type       | Description                                       | Default Value | Optional |
+| --------------------- | ---------- | ------------------------------------------------- | ------------- | -------- |
+| `totalItems`          | `number`   | Total number of items to paginate.                | `0`           | No       |
+| `itemsPerPage`        | `number`   | Number of items per page.                         | `10`          | No       |
+| `initialPage`         | `number`   | Initial page number to start from.                | `1`           | Yes      |
+| `pageNumbers`         | `number[]` | Array of page numbers to display in pagination.   | `[]`          | Yes      |
+| `canPreviousPage`     | `boolean`  | Whether to allow navigation to the previous page. | `true`        | Yes      |
+| `canNextPage`         | `boolean`  | Whether to allow navigation to the next page.     | `true`        | Yes      |
+| `hasPreviousEllipsis` | `boolean`  | Whether to show an ellipsis for previous pages.   | `false`       | Yes      |
+| `hasNextEllipsis`     | `boolean`  | Whether to show an ellipsis for next pages.       | `false`       | Yes      |
+
+### Return Values
+
+| Name          | Type                     | Description                                                      |
+| ------------- | ------------------------ | ---------------------------------------------------------------- |
+| `currentPage` | `number`                 | The current page number.                                         |
+| `totalPages`  | `number`                 | The total number of pages based on the item count and page size. |
+| `nextPage`    | `() => void`             | Function to navigate to the next page.                           |
+| `prevPage`    | `() => void`             | Function to navigate to the previous page.                       |
+| `goToPage`    | `(page: number) => void` | Function to navigate to a specific page.                         |
+| `startIndex`  | `number`                 | The index of the first item on the current page.                 |
+| `endIndex`    | `number`                 | The index of the last item on the current page.                  |

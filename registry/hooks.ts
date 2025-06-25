@@ -1366,6 +1366,19 @@ export const hooks: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "use-dom-ready",
+    title: "Use DOM Ready",
+    description:
+      "Detect when the DOM is fully loaded and ready for manipulation with the useDomReady hook, providing a way to execute code after the DOM is ready.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-dom-ready.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
 ]
 
 export default hooks

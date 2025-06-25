@@ -3,4 +3,71 @@ title: useEnvCheck
 description: Check the environment (development, production, test) in which the application is running with the useEnvCheck hook, allowing for environment-specific logic.
 ---
 
-<ComingSoon />
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://usekit.kiron.dev/k/use-env-check
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="use-env-check" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx {3, 6}
+"use client"
+
+import { useEnvCheck } from "@/hooks/use-env-check"
+
+export function Component() {
+  const { isBrowser, isDev, isProd, isEnv } = useEnvCheck()
+
+  if (isEnv("dev")) {
+    console.log("Running in development mode")
+  }
+
+  return (
+    <div>
+      {isBrowser && <p>Rendered in browser</p>}
+      {isProd && <p>Optimized for production</p>}
+    </div>
+  )
+}
+```
+
+## API Reference
+
+### Return Values
+
+| Name        | Type                                                                   | Description                                                             |
+| ----------- | ---------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+| `isBrowser` | `boolean`                                                              | Indicates if the code is running in a browser environment.              |
+| `isServer`  | `boolean`                                                              | Indicates if the code is running in a server environment.               |
+| `isTest`    | `boolean`                                                              | Indicates if the code is running in a test environment.                 |
+| `isDev`     | `boolean`                                                              | Indicates if the code is running in a development environment.          |
+| `isProd`    | `boolean`                                                              | Indicates if the code is running in a production environment.           |
+| `isEnv`     | `(env: "browser" \| "server" \| "dev" \| "prod" \| "test") => boolean` | Function to check if the current environment matches the specified one. |
