@@ -1,0 +1,69 @@
+---
+title: useUpdateEffect
+description: Run effects only when the component updates, not on the initial render, with the useUpdateEffect hook, providing a way to execute code after updates without affecting the initial render.
+---
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://usekit.kiron.dev/k/use-update-effect
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="use-update-effect" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx {3, 6}
+"use client"
+
+import { useUpdateEffect } from "@/hooks/use-update-effect"
+
+export function Component() {
+  const [count, setCount] = React.useState(0)
+
+  useUpdateEffect(() => {
+    console.log("Component updated, count:", count)
+  }, [count])
+
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <button onClick={() => setCount(count + 1)}>Increment</button>
+    </div>
+  )
+}
+```
+
+## API Reference
+
+### Parameters
+
+| Name       | Type                   | Description                                          | Default Value | Optional |
+| ---------- | ---------------------- | ---------------------------------------------------- | ------------- | -------- |
+| `callback` | `() => void`           | Function to run on component updates.                | -             | No       |
+| `deps`     | `React.DependencyList` | Dependencies for the effect, similar to `useEffect`. | `[]`          | Yes      |

@@ -1,0 +1,71 @@
+---
+title: useDeviceDetect
+description: Detect the type of device (mobile, tablet, desktop) and its characteristics with the useDeviceDetect hook, providing a way to adapt UI and functionality based on the device type.
+---
+
+<ComponentPreview name="use-device-detect-demo" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://usekit.kiron.dev/k/use-device-detect
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="use-device-detect" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx {3, 6}
+"use client"
+
+import { useDeviceDetect } from "@/hooks/use-device-detect"
+
+export function Component() {
+  const { isMobile, isTablet, isDesktop, userAgent } = useDeviceDetect()
+
+  return (
+    <div>
+      <p>
+        Device Type: {isMobile ? "Mobile" : isTablet ? "Tablet" : "Desktop"}
+      </p>
+      <p>User Agent: {userAgent}</p>
+    </div>
+  )
+}
+```
+
+## API Reference
+
+### Return Values
+
+| Name        | Type      | Description                                 |
+| ----------- | --------- | ------------------------------------------- |
+| `isMobile`  | `boolean` | Indicates if the device is a mobile device. |
+| `isTablet`  | `boolean` | Indicates if the device is a tablet.        |
+| `isDesktop` | `boolean` | Indicates if the device is a desktop.       |
+| `userAgent` | `string`  | The user agent string of the device.        |

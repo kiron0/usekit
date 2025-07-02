@@ -1,0 +1,87 @@
+---
+title: useWorker
+description: Manage web workers in React components with the useWorker hook, providing a way to offload computationally expensive tasks to a separate thread.
+---
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://usekit.kiron.dev/k/use-worker
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="use-worker" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx {3, 6-8}
+"use client"
+
+import { useWorker } from "@/hooks/use-worker"
+
+export function Component() {
+  const { result, error, isRunning, run } = useWorker<string>({
+    workerScript: "/path/to/your/worker.js",
+  })
+
+  const handleRunWorker = async () => {
+    try {
+      await run("Hello from main thread")
+      console.log("Worker result:", result)
+    } catch (err) {
+      console.error("Worker error:", err)
+    }
+  }
+
+  return (
+    <div>
+      <button onClick={handleRunWorker} disabled={isRunning}>
+        Run Worker
+      </button>
+      {error && <p>Error: {error.message}</p>}
+      {result && <p>Result: {result}</p>}
+    </div>
+  )
+}
+```
+
+## API Reference
+
+### Parameters
+
+| Name           | Type     | Description                              | Default Value | Optional |
+| -------------- | -------- | ---------------------------------------- | ------------- | -------- |
+| `workerScript` | `string` | The URL of the worker script to be used. | -             | No       |
+
+### Return Values
+
+| Name        | Type                           | Description                           |
+| ----------- | ------------------------------ | ------------------------------------- |
+| `result`    | `T \| null`                    | The result from the worker.           |
+| `error`     | `Error \| null`                | Error object if the worker fails.     |
+| `isRunning` | `boolean`                      | Function to terminate the worker.     |
+| `run`       | `(data: any) => Promise<void>` | Function to run the worker with data. |

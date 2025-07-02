@@ -1,0 +1,69 @@
+---
+title: useNetworkStatus
+description: Monitor the network status (online/offline) and connection type (WiFi, cellular) with the useNetworkStatus hook, providing a way to adapt functionality based on network conditions.
+---
+
+<ComponentPreview name="use-network-status-demo" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://usekit.kiron.dev/k/use-network-status
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="use-network-status" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx {3, 6}
+"use client"
+
+import { useNetworkStatus } from "@/hooks/use-network-status"
+
+export function Component() {
+  const { online, effectiveType, downlink } = useNetworkStatus()
+
+  return (
+    <div>
+      <p>Online: {online ? "Yes" : "No"}</p>
+      <p>Connection Type: {effectiveType}</p>
+      <p>Downlink Speed: {downlink} Mbps</p>
+    </div>
+  )
+}
+```
+
+## API Reference
+
+### Return Values
+
+| Name            | Type      | Description                                                |
+| --------------- | --------- | ---------------------------------------------------------- |
+| `online`        | `boolean` | Indicates if the device is online.                         |
+| `effectiveType` | `string`  | The type of network connection (e.g., 'wifi', 'cellular'). |
+| `downlink`      | `number`  | The effective bandwidth estimate in Mbps.                  |
