@@ -586,39 +586,20 @@ export const docsConfig: DocsConfig = {
           title: "useWorker",
           href: "/docs/hooks/use-worker",
           items: [],
-          label: "New",
         },
         {
           title: "useDeviceDetect",
           href: "/docs/hooks/use-device-detect",
           items: [],
-          label: "New",
         },
         {
           title: "useUpdateEffect",
           href: "/docs/hooks/use-update-effect",
           items: [],
-          label: "New",
         },
         {
           title: "useNetworkStatus",
           href: "/docs/hooks/use-network-status",
-          items: [],
-          label: "New",
-        },
-      ],
-    },
-    {
-      title: "Contribute",
-      items: [
-        {
-          title: "Report an issue",
-          href: "/docs/report",
-          items: [],
-        },
-        {
-          title: "Request a feature",
-          href: "/docs/feature",
           items: [],
         },
       ],

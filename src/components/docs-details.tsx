@@ -35,12 +35,15 @@ export function DocsDetails({ doc, toc }: DocsDetailsProps) {
             <div className="text-foreground">{doc.title}</div>
           </div>
           <div className="space-y-2">
-            <ScrambleText
-              text={doc.title}
-              className={cn(
-                "h-10 w-fit scroll-m-20 text-3xl font-bold tracking-tight"
-              )}
-            />
+            <div className="flex items-center justify-between space-x-2">
+              <ScrambleText
+                text={doc.title}
+                className={cn(
+                  "h-10 w-fit scroll-m-20 text-3xl font-bold tracking-tight"
+                )}
+              />
+              <DocsPager doc={doc} variant="secondary" />
+            </div>
             {doc.description && (
               <p className="text-base text-muted-foreground">
                 <Balancer>{doc.description}</Balancer>

@@ -1,16 +1,18 @@
 import Link from "next/link"
-import { ChevronLeft, ChevronRight } from "lucide-react"
+import { ArrowLeft, ArrowRight } from "lucide-react"
 
 import { NavItem, NavItemWithChildren } from "@/types/nav"
 import { docsConfig } from "@/config/docs"
-import { Button } from "@/components/ui/button"
+import { cn } from "@/lib/utils"
+import { buttonVariants } from "@/components/ui/button"
 import { Doc } from "@/contentlayer/generated"
 
 interface DocsPagerProps {
   doc: Doc
+  variant?: "default" | "secondary"
 }
 
-export function DocsPager({ doc }: DocsPagerProps) {
+export function DocsPager({ doc, variant = "default" }: DocsPagerProps) {
   const pager = getPagerForDoc(doc)
 
   if (!pager) {
@@ -18,22 +20,36 @@ export function DocsPager({ doc }: DocsPagerProps) {
   }
 
   return (
-    <div className="flex flex-row flex-wrap items-center justify-between gap-4 md:flex-nowrap">
+    <div
+      className={cn(
+        "flex flex-row flex-wrap items-center justify-between md:flex-nowrap",
+        variant === "default" ? "gap-4" : "gap-2"
+      )}
+    >
       {pager?.prev?.href && (
-        <Button variant="ghost" asChild>
-          <Link href={pager.prev.href}>
-            <ChevronLeft />
-            {pager.prev.title}
-          </Link>
-        </Button>
+        <Link
+          href={pager.prev.href}
+          className={buttonVariants({
+            size: variant === "default" ? "default" : "sm",
+            variant: "secondary",
+          })}
+        >
+          <ArrowLeft />
+          {variant === "default" ? pager.prev.title : null}
+        </Link>
       )}
       {pager?.next?.href && (
-        <Button variant="ghost" className="ml-auto" asChild>
-          <Link href={pager.next.href}>
-            {pager.next.title}
-            <ChevronRight />
-          </Link>
-        </Button>
+        <Link
+          href={pager.next.href}
+          className={buttonVariants({
+            size: variant === "default" ? "default" : "sm",
+            variant: "secondary",
+            className: "ml-auto",
+          })}
+        >
+          {variant === "default" ? pager.next.title : null}
+          <ArrowRight />
+        </Link>
       )}
     </div>
   )
