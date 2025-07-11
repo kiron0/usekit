@@ -2,8 +2,14 @@
 
 import * as React from "react"
 import Link from "next/link"
-import { usePathname } from "next/navigation"
-import { BugIcon, LightbulbIcon, type LucideProps } from "lucide-react"
+import {
+  BugIcon,
+  LightbulbIcon,
+  PencilIcon,
+  type LucideProps,
+} from "lucide-react"
+
+import { getGithubFileUrl, getGitHubIssueUrl } from "@/lib/github"
 
 interface ContributeProps {
   slug: string
@@ -18,32 +24,33 @@ interface ContributeLink {
 }
 
 export function Contribute({ slug }: ContributeProps) {
-  const pathname = usePathname()
-
-  const hookName = React.useMemo(() => {
-    const parts = slug.split("/")
-    const hookName = parts[parts.length - 1]
-    return hookName
-  }, [slug])
-
   const contributeLinks = React.useMemo<ContributeLink[]>(() => {
     return [
       {
         text: "Report an issue",
         icon: BugIcon,
-        href: `/docs/report?h=${hookName}`,
+        href: getGitHubIssueUrl({
+          title: `[bug]: ${slug === "/docs" ? "/docs/index" : slug}`,
+          labels: ["bug", "documentation"],
+          template: "bug_report.md",
+        }),
       },
       {
         text: "Request a feature",
         icon: LightbulbIcon,
-        href: `/docs/feature?h=${hookName}`,
+        href: getGitHubIssueUrl({
+          title: `[feat]: ${slug === "/docs" ? "/docs/index" : slug}`,
+          labels: ["enhancement"],
+          template: "feature_request.md",
+        }),
+      },
+      {
+        text: "Edit this page",
+        icon: PencilIcon,
+        href: getGithubFileUrl(slug),
       },
     ]
-  }, [hookName])
-
-  if (!pathname.startsWith("/docs/hooks/")) {
-    return null
-  }
+  }, [slug])
 
   return (
     <div className="space-y-2">
@@ -53,6 +60,8 @@ export function Contribute({ slug }: ContributeProps) {
           <li key={index} className="mt-0 pt-2">
             <Link
               href={link.href}
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center text-sm text-muted-foreground transition-colors hover:text-foreground"
             >
               <link.icon className="mr-2 size-4" />

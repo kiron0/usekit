@@ -2,7 +2,6 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import Logo from "@/assets/logo.png"
 import { useTheme } from "next-themes"
 
 import { siteConfig } from "@/config/site"
@@ -17,10 +16,8 @@ export function MainNav() {
       <Link href="/" className="mr-4 flex items-center gap-2 lg:mr-6">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src={Logo.src}
+          src="/logo.png"
           alt="Logo"
-          width={Logo.width}
-          height={Logo.height}
           className={cn(
             "w-7",
             theme?.includes("dark") ? "invert" : "dark:invert"

@@ -10,7 +10,7 @@ export const siteConfig = {
   links: {
     portfolio: "https://kiron.dev",
     twitter: "https://twitter.com/hashtagkiron",
-    github: "https://github.com/kiron0",
+    github: "https://github.com/kiron0/usekit",
   },
   keywords: [
     "react",
