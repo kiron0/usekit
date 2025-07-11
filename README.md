@@ -50,7 +50,7 @@ import { useLocalStorage } from "@/hooks/use-local-storage"
 
 function DemoComponent() {
   const [token, setToken] = useLocalStorage("authToken", "")
-  return <input value={token} onChange={e => setToken(e.target.value)} />
+  return <input value={token} onChange={(e) => setToken(e.target.value)} />
 }
 ```
 
@@ -59,6 +59,7 @@ function DemoComponent() {
 ```bash
 npx shadcn@latest add https://usekit.kiron.dev/k/[hookName]
 ```
+
 Replace `[hookName]` with the name of the hook you want to add (e.g., `use-local-storage`).
 
 ---
@@ -116,6 +117,7 @@ cd usekit
   bun install
   ```
 - Run the development server and test your changes.
+
 ### 4.1. Set Up Environment Variables
 
 - Create a `.env` file at the root of the project with the following content:
@@ -133,6 +135,7 @@ cd usekit
   ```
 
 ### 4.2. Build for Production
+
 - Before committing, run the following command to build the current registry for production readiness:
 
   ```bash
@@ -150,9 +153,6 @@ cd usekit
 - Follow the existing code style. Use Prettier and ESLint for formatting and linting.
 - TypeScript is required for all hooks.
 
-We welcome your ideas, feedback, and contributions! Star ⭐ the repo to support the project.
----
-
 ## 👤 Author & Credits
 
 - **Author:** [Toufiq Hasan Kiron](https://kiron.dev) ([Twitter](https://twitter.com/hashtagkiron), [GitHub](https://github.com/kiron0))
@@ -160,8 +160,6 @@ We welcome your ideas, feedback, and contributions! Star ⭐ the repo to support
 
 ---
 
-<p align="center">
-  <b>Happy Coding! 🚀</b>
-</p>
+## We welcome your ideas, feedback, and contributions! Star ⭐ the repo to support the project.
 
----
+## Happy Coding! 🚀
