@@ -78,7 +78,9 @@ export function DocsDetails({ doc, toc }: DocsDetailsProps) {
           <div className="sticky top-20 -mt-6 h-[calc(100vh-3.5rem)] pt-4">
             <div className="no-scrollbar h-full space-y-4 overflow-auto pb-10">
               {doc.toc && <DashboardTableOfContents toc={toc} />}
-              <Contribute slug={doc.slug} />
+              {doc.slug.includes("/docs/hooks/") && (
+                <Contribute slug={doc.slug} />
+              )}
             </div>
           </div>
         </div>

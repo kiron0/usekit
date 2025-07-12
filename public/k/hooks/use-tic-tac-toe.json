@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-tic-tac-toe",
+  "type": "registry:hook",
+  "title": "Use Tic Tac Toe",
+  "description": "A simple Tic Tac Toe game implemented as a React hook, allowing users to play the game with a friend or against the computer.",
+  "files": [
+    {
+      "path": "registry/hooks/use-tic-tac-toe.ts",
+      "content": "import * as React from \"react\"\n\ntype Player = \"X\" | \"O\"\ntype Cell = Player | null\n\ninterface GameState {\n  board: Cell[]\n  currentPlayer: Player\n  winner: Player | null\n  isDraw: boolean\n  gameOver: boolean\n}\n\ninterface PlayerNames {\n  X?: string\n  O?: string\n}\n\nexport function useTicTacToe(playerNames?: PlayerNames) {\n  const initialState: GameState = {\n    board: Array(9).fill(null),\n    currentPlayer: \"X\",\n    winner: null,\n    isDraw: false,\n    gameOver: false,\n  }\n\n  const [state, setState] = React.useState<GameState>(initialState)\n\n  const checkWinner = (board: Cell[]): Player | null => {\n    const winPatterns = [\n      [0, 1, 2],\n      [3, 4, 5],\n      [6, 7, 8],\n      [0, 3, 6],\n      [1, 4, 7],\n      [2, 5, 8],\n      [0, 4, 8],\n      [2, 4, 6],\n    ]\n\n    for (const [a, b, c] of winPatterns) {\n      if (board[a] && board[a] === board[b] && board[b] === board[c]) {\n        return board[a]\n      }\n    }\n\n    return null\n  }\n\n  const makeMove = (index: number) => {\n    setState((prev) => {\n      if (prev.board[index] || prev.gameOver) return prev\n\n      const newBoard = [...prev.board]\n      newBoard[index] = prev.currentPlayer\n      const winner = checkWinner(newBoard)\n      const isDraw = !winner && newBoard.every(Boolean)\n      const gameOver = !!winner || isDraw\n\n      return {\n        board: newBoard,\n        currentPlayer: prev.currentPlayer === \"X\" ? \"O\" : \"X\",\n        winner,\n        isDraw,\n        gameOver,\n      }\n    })\n  }\n\n  const resetGame = () => setState(initialState)\n\n  return {\n    board: state.board,\n    currentPlayer: state.currentPlayer,\n    winner: state.winner,\n    isDraw: state.isDraw,\n    gameOver: state.gameOver,\n    makeMove,\n    resetGame,\n    playerNames: {\n      X: playerNames?.X || \"Player X\",\n      O: playerNames?.O || \"Player O\",\n    },\n  }\n}\n",
+      "type": "registry:hook"
+    }
+  ]
+}

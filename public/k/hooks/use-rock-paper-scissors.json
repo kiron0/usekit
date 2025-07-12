@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-rock-paper-scissors",
+  "type": "registry:hook",
+  "title": "Use Rock Paper Scissors",
+  "description": "A simple Rock Paper Scissors game implemented as a React hook, allowing users to play against the computer.",
+  "files": [
+    {
+      "path": "registry/hooks/use-rock-paper-scissors.ts",
+      "content": "import * as React from \"react\"\n\ntype Choice = \"rock\" | \"paper\" | \"scissors\"\ntype Result = \"win\" | \"lose\" | \"draw\" | null\n\nconst choices: Choice[] = [\"rock\", \"paper\", \"scissors\"]\n\nconst getRandomChoice = (): Choice =>\n  choices[Math.floor(Math.random() * choices.length)]\n\nconst getResult = (player: Choice, computer: Choice): Result => {\n  if (player === computer) return \"draw\"\n  if (\n    (player === \"rock\" && computer === \"scissors\") ||\n    (player === \"paper\" && computer === \"rock\") ||\n    (player === \"scissors\" && computer === \"paper\")\n  ) {\n    return \"win\"\n  }\n  return \"lose\"\n}\n\nexport function useRockPaperScissors() {\n  const [playerChoice, setPlayerChoice] = React.useState<Choice | null>(null)\n  const [computerChoice, setComputerChoice] = React.useState<Choice | null>(\n    null\n  )\n  const [result, setResult] = React.useState<Result>(null)\n  const [score, setScore] = React.useState({ wins: 0, losses: 0, draws: 0 })\n\n  const play = React.useCallback((choice: Choice) => {\n    const computer = getRandomChoice()\n    const outcome = getResult(choice, computer)\n\n    setPlayerChoice(choice)\n    setComputerChoice(computer)\n    setResult(outcome)\n\n    setScore((prev) => ({\n      wins: prev.wins + (outcome === \"win\" ? 1 : 0),\n      losses: prev.losses + (outcome === \"lose\" ? 1 : 0),\n      draws: prev.draws + (outcome === \"draw\" ? 1 : 0),\n    }))\n  }, [])\n\n  const reset = () => {\n    setPlayerChoice(null)\n    setComputerChoice(null)\n    setResult(null)\n    setScore({ wins: 0, losses: 0, draws: 0 })\n  }\n\n  return {\n    playerChoice,\n    computerChoice,\n    result,\n    score,\n    play,\n    reset,\n  }\n}\n",
+      "type": "registry:hook"
+    }
+  ]
+}

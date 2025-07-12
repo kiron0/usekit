@@ -781,4 +781,55 @@ export const hooksExamples: Registry["items"] = [
       },
     ],
   },
+
+  {
+    name: "use-number-game-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/use-number-game-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-tic-tac-toe-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/use-tic-tac-toe-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-snake-game-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/use-snake-game-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-memory-game-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/use-memory-game-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-rock-paper-scissors-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/use-rock-paper-scissors-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
 ]

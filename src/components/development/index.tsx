@@ -27,7 +27,7 @@ export function Development() {
         <div className="absolute right-4 top-4 space-x-2">
           <RerenderComponent onClick={() => setKey((prev) => prev + 1)} />
         </div>
-        <div className="flex h-full w-full items-center justify-center p-2 pt-6">
+        <div className="flex h-full w-full items-center justify-center p-6">
           <React.Suspense
             fallback={
               <div className="flex w-full items-center justify-center text-sm text-muted-foreground">

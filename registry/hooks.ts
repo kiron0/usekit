@@ -1431,6 +1431,71 @@ export const hooks: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "use-number-game",
+    title: "Use Number Game",
+    description:
+      "A simple number guessing game implemented as a React hook, allowing users to guess a randomly generated number within a specified range.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-number-game.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-tic-tac-toe",
+    title: "Use Tic Tac Toe",
+    description:
+      "A simple Tic Tac Toe game implemented as a React hook, allowing users to play the game with a friend or against the computer.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-tic-tac-toe.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-snake-game",
+    title: "Use Snake Game",
+    description:
+      "A simple Snake game implemented as a React hook, allowing users to play the game with customizable settings.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-snake-game.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-memory-game",
+    title: "Use Memory Game",
+    description:
+      "A simple Memory game implemented as a React hook, allowing users to match pairs of cards.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-memory-game.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-rock-paper-scissors",
+    title: "Use Rock Paper Scissors",
+    description:
+      "A simple Rock Paper Scissors game implemented as a React hook, allowing users to play against the computer.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-rock-paper-scissors.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
 ]
 
 export default hooks

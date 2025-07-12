@@ -50,7 +50,7 @@ export function useStateValidator<T>(
           return Promise.resolve(
             result.success
               ? true
-              : result.error.errors[0]?.message || "Invalid value"
+              : result.error.issues[0]?.message || "Invalid value"
           )
         }
         const result = (validator as Validator<T>)(value)

@@ -1657,6 +1657,86 @@ export const Index: Record<string, any> = {
     component: React.lazy(() => import("registry/hooks/use-worker.ts")),
     source: "",
   },
+  "use-number-game": {
+    name: "use-number-game",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-number-game.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-number-game-demo")
+    ),
+    source: "",
+  },
+  "use-tic-tac-toe": {
+    name: "use-tic-tac-toe",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-tic-tac-toe.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-tic-tac-toe-demo")
+    ),
+    source: "",
+  },
+  "use-snake-game": {
+    name: "use-snake-game",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-snake-game.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-snake-game-demo")
+    ),
+    source: "",
+  },
+  "use-memory-game": {
+    name: "use-memory-game",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-memory-game.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-memory-game-demo")
+    ),
+    source: "",
+  },
+  "use-rock-paper-scissors": {
+    name: "use-rock-paper-scissors",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-rock-paper-scissors.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-rock-paper-scissors-demo")
+    ),
+    source: "",
+  },
   "use-copy-to-clipboard-demo": {
     name: "use-copy-to-clipboard-demo",
     type: "registry:example",
@@ -2886,6 +2966,86 @@ export const Index: Record<string, any> = {
     ],
     component: React.lazy(
       () => import("registry/examples/use-network-status-demo.tsx")
+    ),
+    source: "",
+  },
+  "use-number-game-demo": {
+    name: "use-number-game-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-number-game-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-number-game-demo.tsx")
+    ),
+    source: "",
+  },
+  "use-tic-tac-toe-demo": {
+    name: "use-tic-tac-toe-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-tic-tac-toe-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-tic-tac-toe-demo.tsx")
+    ),
+    source: "",
+  },
+  "use-snake-game-demo": {
+    name: "use-snake-game-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-snake-game-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-snake-game-demo.tsx")
+    ),
+    source: "",
+  },
+  "use-memory-game-demo": {
+    name: "use-memory-game-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-memory-game-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-memory-game-demo.tsx")
+    ),
+    source: "",
+  },
+  "use-rock-paper-scissors-demo": {
+    name: "use-rock-paper-scissors-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-rock-paper-scissors-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-rock-paper-scissors-demo.tsx")
     ),
     source: "",
   },
