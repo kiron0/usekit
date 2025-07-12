@@ -604,5 +604,40 @@ export const docsConfig: DocsConfig = {
         },
       ],
     },
+    {
+      title: "Game Hooks",
+      items: [
+        {
+          title: "useNumberGame",
+          href: "/docs/hooks/use-number-game",
+          items: [],
+          label: "Soon",
+        },
+        {
+          title: "useTicTacToe",
+          href: "/docs/hooks/use-tic-tac-toe",
+          items: [],
+          label: "Soon",
+        },
+        {
+          title: "useSnakeGame",
+          href: "/docs/hooks/use-snake-game",
+          items: [],
+          label: "Soon",
+        },
+        {
+          title: "useMemoryGame",
+          href: "/docs/hooks/use-memory-game",
+          items: [],
+          label: "Soon",
+        },
+        {
+          title: "useRockPaperScissors",
+          href: "/docs/hooks/use-rock-paper-scissors",
+          items: [],
+          label: "Soon",
+        },
+      ],
+    },
   ],
 }
