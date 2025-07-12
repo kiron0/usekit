@@ -32,8 +32,8 @@ import { useNumberGame } from "registry/hooks/use-number-game"
 
 const createGuessSchema = (min: number, max: number) => {
   return z.object({
-    number: z.coerce
-      .number({ invalid_type_error: "Enter a number" })
+    number: z
+      .number()
       .min(min, { message: `Number must be at least ${min}` })
       .max(max, { message: `Number should not exceed ${max}` }),
   })
