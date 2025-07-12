@@ -2,6 +2,7 @@
 
 import * as React from "react"
 
+import { useConfetti } from "@/hooks/use-confetti"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -21,6 +22,9 @@ export default function UseMemoryGameDemo() {
     isGameComplete,
     matches,
   } = useMemoryGame(symbols)
+  const [confettiTrigger, setConfettiTrigger] = React.useState(false)
+
+  useConfetti(confettiTrigger, 200)
 
   const handleSymbolsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value)
@@ -39,6 +43,13 @@ export default function UseMemoryGameDemo() {
   const handleRestart = () => {
     resetGame()
   }
+
+  React.useEffect(() => {
+    if (isGameComplete) {
+      setConfettiTrigger(true)
+      setTimeout(() => setConfettiTrigger(false), 2000)
+    }
+  }, [isGameComplete])
 
   return (
     <div className="flex w-full max-w-md flex-col items-center gap-6">
@@ -93,7 +104,7 @@ export default function UseMemoryGameDemo() {
         ))}
       </div>
       {isGameComplete && (
-        <div className="text-xl font-bold text-green-700">🎉 You won!</div>
+        <p className="text-xl font-bold text-green-700">🎉 You won!</p>
       )}
       {isStarted && <Button onClick={handleRestart}>Restart</Button>}
     </div>
