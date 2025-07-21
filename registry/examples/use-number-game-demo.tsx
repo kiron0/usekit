@@ -35,13 +35,14 @@ const createGuessSchema = (min: number, max: number) => {
     number: z
       .number()
       .min(min, { message: `Number must be at least ${min}` })
-      .max(max, { message: `Number should not exceed ${max}` }),
+      .max(max, { message: `Number should not exceed ${max}` })
+      .or(z.undefined()),
   })
 }
 
 const DEFAULT_VALUE = {
   maxAttempts: 10,
-  revealTarget: true,
+  revealTarget: false,
   min: 1,
   max: 100,
 }
@@ -68,7 +69,7 @@ export default function UseNumberGameDemo() {
 
   const form = useForm<GuessFormValues>({
     resolver: zodResolver(guessSchema),
-    defaultValues: { number: 0 },
+    defaultValues: { number: value[0] },
   })
 
   const {
@@ -90,7 +91,9 @@ export default function UseNumberGameDemo() {
   })
 
   const onSubmit = (values: GuessFormValues) => {
-    makeGuess(values.number)
+    if (typeof values.number === "number") {
+      makeGuess(values.number)
+    }
     form.reset()
   }
 
@@ -131,7 +134,7 @@ export default function UseNumberGameDemo() {
           <p className="text-lg font-semibold">
             {hasWon ? "🎊 Congratulations!" : "💀 Better luck next time!"}
           </p>
-          <Button onClick={handleReset} variant="destructive">
+          <Button onClick={handleReset} variant="secondary">
             Play Again
           </Button>
         </div>
@@ -148,7 +151,13 @@ export default function UseNumberGameDemo() {
                       <Input
                         type="number"
                         placeholder={`Guess a number between ${value[0]} and ${value[1]}!`}
-                        {...field}
+                        min={value[0]}
+                        max={value[1]}
+                        value={field.value}
+                        onChange={(e) => {
+                          const val = e.target.value
+                          field.onChange(parseInt(val))
+                        }}
                       />
                     </FormControl>
                     <Button

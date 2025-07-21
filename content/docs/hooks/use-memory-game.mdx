@@ -4,3 +4,160 @@ description: A simple Memory game implemented as a React hook, allowing users to
 ---
 
 <ComponentPreview name="use-memory-game-demo" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://usekit.kiron.dev/k/use-memory-game
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="use-memory-game" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx {3, 8-17}
+"use client"
+
+import { useMemoryGame } from "@/hooks/use-memory-game"
+
+const symbols = ["🙂", "😌", "😍", "🥰"]
+
+export function Component() {
+  const {
+    cards,
+    flipCard,
+    startGame,
+    resetGame,
+    isGameComplete,
+    matches,
+    totalPairs,
+    isStarted,
+  } = useMemoryGame(symbols)
+
+  return (
+    <div>
+      <h1>Memory Game</h1>
+      {!isStarted && (
+        <button
+          style={{
+            padding: "8px 16px",
+            borderRadius: 4,
+            background: "#222",
+            color: "#fff",
+            border: "none",
+            cursor: "pointer",
+          }}
+          onClick={startGame}
+        >
+          Start Game
+        </button>
+      )}
+      {isStarted && (
+        <div>
+          Matches: {matches} / {totalPairs}
+        </div>
+      )}
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(4, 40px)",
+          gap: "4px",
+        }}
+      >
+        {cards.map((card) => (
+          <button
+            key={card.id}
+            onClick={() => flipCard(card.id)}
+            disabled={card.isFlipped || card.isMatched || !isStarted}
+            style={{
+              width: 40,
+              height: 40,
+              fontSize: 20,
+              borderRadius: 4,
+              background: card.isFlipped || card.isMatched ? "#3182ce" : "#eee",
+              color: card.isFlipped || card.isMatched ? "#fff" : "#222",
+              border: "1px solid #ccc",
+              cursor:
+                card.isFlipped || card.isMatched || !isStarted
+                  ? "not-allowed"
+                  : "pointer",
+              margin: 2,
+            }}
+          >
+            {card.isFlipped || card.isMatched ? card.value : "❓"}
+          </button>
+        ))}
+      </div>
+      {isGameComplete && <div>🎉 You won!</div>}
+      {isStarted && (
+        <button
+          style={{
+            padding: "8px 16px",
+            borderRadius: 4,
+            background: "#e53e3e",
+            color: "#fff",
+            border: "none",
+            cursor: "pointer",
+          }}
+          onClick={resetGame}
+        >
+          Restart
+        </button>
+      )}
+    </div>
+  )
+}
+```
+
+## API Reference
+
+### Parameters
+
+| Name     | Type       | Description                                | Default Value | Optional |
+| -------- | ---------- | ------------------------------------------ | ------------- | -------- |
+| `values` | `string[]` | Array of unique values for the card pairs. | —             | No       |
+
+### Return Values
+
+| Name             | Type                                                                      | Description                          |
+| ---------------- | ------------------------------------------------------------------------- | ------------------------------------ |
+| `cards`          | `{ id: number; value: string; isFlipped: boolean; isMatched: boolean }[]` | Array of cards with their state.     |
+| `flipCard`       | `(cardId: number) => void`                                                | Function to flip a card by its id.   |
+| `startGame`      | `() => void`                                                              | Function to start the game.          |
+| `resetGame`      | `() => void`                                                              | Function to reset the game.          |
+| `isGameComplete` | `boolean`                                                                 | Whether all pairs have been matched. |
+| `matches`        | `number`                                                                  | Number of matched pairs.             |
+| `totalPairs`     | `number`                                                                  | Total number of pairs in the game.   |
+| `isStarted`      | `boolean`                                                                 | Whether the game has started.        |
+
+## Notes
+
+- The hook manages the game state, including card flipping, matching, and completion.
+- Provide an array of unique values (e.g., emojis, strings) to generate pairs.
+- The game starts when you call `startGame` and can be reset with `resetGame`.
+- Designed for React and Next.js client components.

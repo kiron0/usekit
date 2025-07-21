@@ -4,3 +4,144 @@ description: A simple Rock Paper Scissors game implemented as a React hook, allo
 ---
 
 <ComponentPreview name="use-rock-paper-scissors-demo" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://usekit.kiron.dev/k/use-rock-paper-scissors
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="use-rock-paper-scissors" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx {3, 6-7}
+"use client"
+
+import { useRockPaperScissors } from "@/hooks/use-rock-paper-scissors"
+
+export function Component() {
+  const { playerChoice, computerChoice, result, score, play, reset } =
+    useRockPaperScissors()
+
+  return (
+    <div>
+      <h1>Rock Paper Scissors</h1>
+      <div>
+        <button
+          onClick={() => play("rock")}
+          style={{
+            padding: "8px 16px",
+            borderRadius: 4,
+            background: "#222",
+            color: "#fff",
+            border: "none",
+            cursor: "pointer",
+            marginRight: 8,
+          }}
+        >
+          Rock
+        </button>
+        <button
+          onClick={() => play("paper")}
+          style={{
+            padding: "8px 16px",
+            borderRadius: 4,
+            background: "#222",
+            color: "#fff",
+            border: "none",
+            cursor: "pointer",
+            marginRight: 8,
+          }}
+        >
+          Paper
+        </button>
+        <button
+          onClick={() => play("scissors")}
+          style={{
+            padding: "8px 16px",
+            borderRadius: 4,
+            background: "#222",
+            color: "#fff",
+            border: "none",
+            cursor: "pointer",
+          }}
+        >
+          Scissors
+        </button>
+      </div>
+      {result && (
+        <div>
+          <p>You chose: {playerChoice}</p>
+          <p>Computer chose: {computerChoice}</p>
+          <p>Result: {result}</p>
+        </div>
+      )}
+      <div>
+        <p>Wins: {score.wins}</p>
+        <p>Losses: {score.losses}</p>
+        <p>Draws: {score.draws}</p>
+      </div>
+      <button
+        onClick={reset}
+        style={{
+          padding: "8px 16px",
+          borderRadius: 4,
+          background: "#e53e3e",
+          color: "#fff",
+          border: "none",
+          cursor: "pointer",
+          marginTop: 8,
+        }}
+      >
+        Reset Game
+      </button>
+    </div>
+  )
+}
+```
+
+## API Reference
+
+### Return Values
+
+| Name             | Type                                                | Description                           |
+| ---------------- | --------------------------------------------------- | ------------------------------------- |
+| `playerChoice`   | `"rock" \| "paper" \| "scissors" \| null`           | The player's current choice.          |
+| `computerChoice` | `"rock" \| "paper" \| "scissors" \| null`           | The computer's current choice.        |
+| `result`         | `"win" \| "lose" \| "draw" \| null`                 | The result of the current round.      |
+| `score`          | `{ wins: number; losses: number; draws: number }`   | The current score.                    |
+| `play`           | `(choice: "rock" \| "paper" \| "scissors") => void` | Function to play a round.             |
+| `reset`          | `() => void`                                        | Function to reset the game and score. |
+
+## Notes
+
+- The hook manages the game state, including player and computer choices, result, and score.
+- Call `play("rock" | "paper" | "scissors")` to play a round.
+- The score is tracked across rounds until you call `reset`.
+- Designed for React and Next.js client components.
