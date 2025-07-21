@@ -4,3 +4,157 @@ description: A simple number guessing game implemented as a React hook, allowing
 ---
 
 <ComponentPreview name="use-number-game-demo" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://usekit.kiron.dev/k/use-number-game
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="use-number-game" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx {3, 6-18}
+"use client"
+
+import { useNumberGame } from "@/hooks/use-number-game"
+
+export function Component() {
+  const {
+    guess,
+    message,
+    attempts,
+    makeGuess,
+    resetGame,
+    gameOver,
+    hasWon,
+    hasLost,
+    targetNumber,
+    history,
+    maxAttempts,
+  } = useNumberGame({ maxAttempts: 10, revealTarget: false, min: 1, max: 100 })
+
+  return (
+    <div>
+      <h1>Number Guessing Game</h1>
+      <p>{message}</p>
+      {!gameOver && (
+        <form
+          onSubmit={(e) => {
+            e.preventDefault()
+            const value = Number(e.target.elements.guess.value)
+            makeGuess(value)
+            e.target.reset()
+          }}
+        >
+          <input name="guess" type="number" min={1} max={100} />
+          <button
+            type="submit"
+            style={{
+              padding: "8px 16px",
+              borderRadius: 4,
+              background: "#222",
+              color: "#fff",
+              border: "none",
+              cursor: "pointer",
+              marginLeft: 8,
+            }}
+          >
+            Guess
+          </button>
+        </form>
+      )}
+      {gameOver && (
+        <button
+          onClick={resetGame}
+          style={{
+            padding: "8px 16px",
+            borderRadius: 4,
+            background: "#e53e3e",
+            color: "#fff",
+            border: "none",
+            cursor: "pointer",
+          }}
+        >
+          Play Again
+        </button>
+      )}
+      <div>
+        Attempts: {attempts} / {maxAttempts}
+      </div>
+      {history.length > 0 && (
+        <ul>
+          {history.map((entry, i) => (
+            <li key={i}>
+              {entry.guess}: {entry.label}
+            </li>
+          ))}
+        </ul>
+      )}
+      {hasWon && <div>🎉 You won!</div>}
+      {hasLost && <div>❌ You lost! The number was {targetNumber}.</div>}
+    </div>
+  )
+}
+```
+
+## API Reference
+
+### Parameters
+
+| Name           | Type      | Description                                          | Default Value | Optional |
+| -------------- | --------- | ---------------------------------------------------- | ------------- | -------- |
+| `maxAttempts`  | `number`  | Maximum number of guesses allowed.                   | `10`          | Yes      |
+| `revealTarget` | `boolean` | Whether to reveal the target number during the game. | `false`       | Yes      |
+| `min`          | `number`  | Minimum value for the random number.                 | `1`           | Yes      |
+| `max`          | `number`  | Maximum value for the random number.                 | `100`         | Yes      |
+
+### Return Values
+
+| Name           | Type                                 | Description                                         |
+| -------------- | ------------------------------------ | --------------------------------------------------- |
+| `guess`        | `number \| null`                     | The last guessed number.                            |
+| `message`      | `string`                             | Message describing the current game state.          |
+| `attempts`     | `number`                             | Number of attempts made.                            |
+| `makeGuess`    | `(guess: number) => void`            | Function to make a guess.                           |
+| `resetGame`    | `() => void`                         | Function to reset the game.                         |
+| `gameOver`     | `boolean`                            | Whether the game is over.                           |
+| `hasWon`       | `boolean`                            | Whether the player has won.                         |
+| `hasLost`      | `boolean`                            | Whether the player has lost.                        |
+| `targetNumber` | `number`                             | The target number (only if `revealTarget` is true). |
+| `history`      | `{ guess: number; label: string }[]` | Array of previous guesses and their results.        |
+| `maxAttempts`  | `number`                             | The maximum number of attempts allowed.             |
+
+## Notes
+
+- The hook manages the game state, including attempts, win/loss, and guess history.
+- You can customize the range and number of attempts.
+- Set `revealTarget` to `true` to show the target number during the game (useful for debugging or demos).
+- The game resets automatically when the configuration changes.
+- Designed for React and Next.js client components.

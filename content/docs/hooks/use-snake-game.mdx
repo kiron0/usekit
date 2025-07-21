@@ -4,3 +4,124 @@ description: A simple Snake game implemented as a React hook, allowing users to 
 ---
 
 <ComponentPreview name="use-snake-game-demo" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://usekit.kiron.dev/k/use-snake-game
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="use-snake-game" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx {3, 6-15}
+"use client"
+
+import { useSnakeGame } from "@/hooks/use-snake-game"
+
+export function Component() {
+  const {
+    snake,
+    food,
+    isGameOver,
+    score,
+    resetGame,
+    gridSize,
+    isRunning,
+    startGame,
+  } = useSnakeGame()
+
+  return (
+    <div>
+      <h1>Snake Game</h1>
+      <div>Score: {score}</div>
+      {/* Render your grid here using snake and food positions */}
+      {!isRunning && !isGameOver && (
+        <button
+          style={{
+            padding: "8px 16px",
+            borderRadius: 4,
+            background: "#222",
+            color: "#fff",
+            border: "none",
+            cursor: "pointer",
+          }}
+          onClick={startGame}
+        >
+          Start Game
+        </button>
+      )}
+      {isGameOver && (
+        <button
+          style={{
+            padding: "8px 16px",
+            borderRadius: 4,
+            background: "#e53e3e",
+            color: "#fff",
+            border: "none",
+            cursor: "pointer",
+          }}
+          onClick={resetGame}
+        >
+          Restart Game
+        </button>
+      )}
+    </div>
+  )
+}
+```
+
+## API Reference
+
+### Parameters
+
+| Name    | Type     | Description                        | Default Value | Optional |
+| ------- | -------- | ---------------------------------- | ------------- | -------- |
+| `speed` | `number` | Speed of the snake in ms per move. | `150`         | Yes      |
+
+### Return Values
+
+| Name         | Type                                  | Description                                |
+| ------------ | ------------------------------------- | ------------------------------------------ |
+| `snake`      | `{ x: number; y: number }[]`          | Array of positions representing the snake. |
+| `food`       | `{ x: number; y: number }`            | Position of the food.                      |
+| `isGameOver` | `boolean`                             | Whether the game is over.                  |
+| `isRunning`  | `boolean`                             | Whether the game is currently running.     |
+| `score`      | `number`                              | The current score.                         |
+| `direction`  | `"UP" \| "DOWN" \| "LEFT" \| "RIGHT"` | Current direction of the snake.            |
+| `startGame`  | `() => void`                          | Function to start the game.                |
+| `resetGame`  | `() => void`                          | Function to reset the game.                |
+| `gridSize`   | `number`                              | The size of the grid (width and height).   |
+
+## Notes
+
+- The hook manages the game state, including snake position, food, score, and game over state.
+- Use keyboard arrow keys to control the snake's direction.
+- The game grid is square and its size is defined by `gridSize` (default 20).
+- Designed for React and Next.js client components.

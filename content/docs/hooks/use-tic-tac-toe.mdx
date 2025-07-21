@@ -4,3 +4,142 @@ description: A simple Tic Tac Toe game implemented as a React hook, allowing use
 ---
 
 <ComponentPreview name="use-tic-tac-toe-demo" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://usekit.kiron.dev/k/use-tic-tac-toe
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="use-tic-tac-toe" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx {3, 6-15}
+"use client"
+
+import { useTicTacToe } from "@/hooks/use-tic-tac-toe"
+
+export function Component() {
+  const {
+    board,
+    currentPlayer,
+    winner,
+    isDraw,
+    gameOver,
+    makeMove,
+    resetGame,
+    playerNames,
+  } = useTicTacToe({ X: "Alice", O: "Bob" })
+
+  return (
+    <div>
+      <h1>Tic Tac Toe</h1>
+      <div>
+        {gameOver
+          ? winner
+            ? `${playerNames[winner]} wins!`
+            : "It's a draw!"
+          : `${playerNames[currentPlayer]}'s turn`}
+      </div>
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(3, 40px)",
+          gap: "4px",
+        }}
+      >
+        {board.map((cell, idx) => (
+          <button
+            key={idx}
+            onClick={() => makeMove(idx)}
+            disabled={!!cell || gameOver}
+            style={{
+              width: 40,
+              height: 40,
+              fontSize: 20,
+              borderRadius: 4,
+              background: cell ? "#3182ce" : "#eee",
+              color: cell ? "#fff" : "#222",
+              border: "1px solid #ccc",
+              cursor: !!cell || gameOver ? "not-allowed" : "pointer",
+              margin: 2,
+            }}
+          >
+            {cell}
+          </button>
+        ))}
+      </div>
+      {gameOver && (
+        <button
+          onClick={resetGame}
+          style={{
+            padding: "8px 16px",
+            borderRadius: 4,
+            background: "#e53e3e",
+            color: "#fff",
+            border: "none",
+            cursor: "pointer",
+            marginTop: 8,
+          }}
+        >
+          Play Again
+        </button>
+      )}
+    </div>
+  )
+}
+```
+
+## API Reference
+
+### Parameters
+
+| Name          | Type                         | Description               | Default Value                      | Optional |
+| ------------- | ---------------------------- | ------------------------- | ---------------------------------- | -------- |
+| `playerNames` | `{ X?: string; O?: string }` | Names for player X and O. | `{ X: "Player X", O: "Player O" }` | Yes      |
+
+### Return Values
+
+| Name            | Type                       | Description                                    |
+| --------------- | -------------------------- | ---------------------------------------------- |
+| `board`         | `(string \| null)[]`       | The current board state (9 cells).             |
+| `currentPlayer` | `"X" \| "O"`               | The player whose turn it is.                   |
+| `winner`        | `"X" \| "O" \| null`       | The winner, if any.                            |
+| `isDraw`        | `boolean`                  | Whether the game ended in a draw.              |
+| `gameOver`      | `boolean`                  | Whether the game is over.                      |
+| `makeMove`      | `(index: number) => void`  | Function to make a move at a given cell index. |
+| `resetGame`     | `() => void`               | Function to reset the game.                    |
+| `playerNames`   | `{ X: string; O: string }` | The resolved player names.                     |
+
+## Notes
+
+- The hook manages the game state, including board, current player, winner, and draw state.
+- You can provide custom player names via the `playerNames` parameter.
+- The board is a flat array of 9 cells (row-major order).
+- Designed for React and Next.js client components.

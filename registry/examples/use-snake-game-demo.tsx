@@ -33,7 +33,7 @@ export default function UseSnakeGameDemo() {
     <div className="flex w-full flex-col items-center gap-4 p-4">
       <div className="text-lg font-bold">Score: {score}</div>
       <div
-        className="grid rounded-xl border bg-transparent p-2"
+        className="grid w-full rounded-xl border bg-transparent p-2"
         style={{ gridTemplateColumns: `repeat(${gridSize}, 1fr)` }}
       >
         {Array.from({ length: gridSize * gridSize }).map((_, index) => {
