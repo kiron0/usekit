@@ -110,7 +110,7 @@ export default function UseNumberGameDemo() {
   }, [hasWon])
 
   return (
-    <div className="flex w-full max-w-md flex-col items-center justify-center gap-6">
+    <div className="flex w-full flex-col items-center justify-center gap-6">
       <div className="space-y-2 text-center">
         <h1 className="text-2xl font-bold">Number Guessing Game</h1>
         <p className="text-base font-medium">{!gameOver && message}</p>

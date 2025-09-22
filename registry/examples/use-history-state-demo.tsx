@@ -83,7 +83,7 @@ function Form({ addItem }: FormProps) {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="w-full max-w-md space-y-2">
+    <form onSubmit={handleSubmit} className="w-full space-y-2">
       <Input
         value={input}
         onChange={(e) => setInput(e.target.value)}

@@ -40,7 +40,7 @@ export default function UseTicTacToeDemo() {
   }, [gameOver, winner])
 
   return (
-    <div className="mx-auto w-full max-w-md px-4 py-8 md:py-10">
+    <div className="mx-auto w-full px-4 py-8 md:py-10">
       <div className="space-y-6">
         <h1 className="text-center text-3xl font-extrabold tracking-tight">
           Tic Tac Toe

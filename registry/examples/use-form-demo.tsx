@@ -81,7 +81,7 @@ export default function UseFormDemo() {
   }
 
   return (
-    <div className="mx-auto w-full max-w-md">
+    <div className="mx-auto w-full">
       <h2 className="mb-6 text-center text-lg font-bold underline underline-offset-4">
         User Registration
       </h2>

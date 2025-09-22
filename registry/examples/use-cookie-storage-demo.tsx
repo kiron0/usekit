@@ -29,7 +29,7 @@ export default function UseCookieStorageDemo() {
   )
 
   return (
-    <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+    <div className="grid w-full grid-cols-1 gap-4 md:grid-cols-2">
       <div className="space-y-2">
         <Label>Username</Label>
         <Input

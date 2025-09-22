@@ -49,7 +49,7 @@ export default function UseRockPaperScissorsDemo() {
   }, [result])
 
   return (
-    <div className="flex w-full max-w-md flex-col items-center gap-6">
+    <div className="flex w-full flex-col items-center gap-6">
       <div className="space-y-1 text-center">
         <h2 className="text-2xl font-bold">Rock Paper Scissors</h2>
         <p className="text-sm text-muted-foreground">

@@ -17,7 +17,7 @@ export default function UseAutosizeTextareaDemo() {
   })
 
   return (
-    <div className="w-full max-w-md">
+    <div className="w-full">
       <Textarea
         ref={textAreaRef}
         value={value}

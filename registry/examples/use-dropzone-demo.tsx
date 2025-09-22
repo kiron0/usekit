@@ -15,11 +15,11 @@ export default function UseDropzoneDemo() {
   })
 
   return (
-    <div className="space-y-4 text-center">
+    <div className="w-full space-y-4 text-center">
       <div
         ref={dropZoneRef}
         className={cn(
-          "mx-auto flex aspect-video h-40 max-w-full items-center justify-center rounded-2xl border-2 border-dashed p-4",
+          "mx-auto flex aspect-video h-40 w-full items-center justify-center rounded-2xl border-2 border-dashed p-4",
           isOverDropZone
             ? "border-blue-500 bg-neutral-400/0"
             : "border-neutral-500 bg-neutral-400/15"

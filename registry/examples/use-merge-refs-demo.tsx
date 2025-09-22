@@ -67,7 +67,7 @@ export default function UseMergeRefsDemo() {
   }, [value.length])
 
   return (
-    <div className="mx-auto w-full max-w-md space-y-4">
+    <div className="mx-auto w-full space-y-4">
       <div className="relative">
         <Input
           ref={mergedRef}
