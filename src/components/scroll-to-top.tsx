@@ -1,6 +1,6 @@
 "use client"
 
-import { MoveUp } from "lucide-react"
+import { ChevronUp } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import { useWindowScroll } from "registry/hooks/use-window-scroll"
@@ -18,8 +18,13 @@ export function ScrollToTop() {
 
   return (
     <div className="fixed bottom-5 right-5 z-[49]">
-      <Button variant="secondary" size="icon" onClick={scrollToTop}>
-        <MoveUp size={24} />
+      <Button
+        variant="secondary"
+        size="icon"
+        className="rounded-xl"
+        onClick={scrollToTop}
+      >
+        <ChevronUp className="size-4" />
       </Button>
     </div>
   )

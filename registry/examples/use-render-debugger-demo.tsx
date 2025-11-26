@@ -20,7 +20,7 @@ export default function UseRenderDebuggerDemo() {
   }
 
   return (
-    <div className="w-full max-w-md space-y-6">
+    <div className="w-full space-y-6">
       <ProfileDisplay
         name={profile.name}
         email={profile.email}

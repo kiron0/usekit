@@ -7,7 +7,7 @@ export default function UseBreakpointDemo() {
   const { currentBreakpoint, isAbove, isBelow } = useBreakpoint()
 
   return (
-    <div className="mx-auto w-full max-w-xl space-y-5">
+    <div className="mx-auto w-full space-y-5">
       <div className="mb-5 rounded bg-secondary p-2">
         <h3>Current Breakpoint: {currentBreakpoint || "Unknown"}</h3>
         <div className="flex gap-2">

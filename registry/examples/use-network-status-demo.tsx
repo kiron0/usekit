@@ -6,7 +6,7 @@ export default function UseNetworkStatusDemo() {
   const { online, effectiveType, downlink } = useNetworkStatus()
 
   return (
-    <div className="w-full max-w-sm rounded-md bg-secondary p-4 text-secondary-foreground">
+    <div className="w-full rounded-md bg-secondary p-4 text-secondary-foreground">
       <h2 className="mb-2 text-center text-lg font-semibold underline underline-offset-4">
         Network Status
       </h2>

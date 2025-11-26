@@ -51,7 +51,7 @@ export default function UseInfiniteScrollDemo() {
   })
 
   return (
-    <div className="mx-auto max-h-[60vh] w-full max-w-sm overflow-y-auto">
+    <div className="mx-auto max-h-[60vh] w-full overflow-y-auto">
       <h3 className="mb-6 text-center text-lg font-bold underline underline-offset-4">
         Infinite Scroll Demo
       </h3>

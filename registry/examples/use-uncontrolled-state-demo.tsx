@@ -14,7 +14,7 @@ export default function UseUncontrolledStateDemo() {
   })
 
   return (
-    <div className="flex w-full max-w-xs flex-col items-center justify-center gap-4 text-center">
+    <div className="flex w-full flex-col items-center justify-center gap-4 text-center">
       <p>Uncontrolled state: {value}</p>
       <Input
         type="text"

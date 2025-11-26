@@ -57,7 +57,7 @@ export default function UsePaginationDemo() {
   const currentItems = sampleData.slice(startIndex, endIndex)
 
   return (
-    <div className="mx-auto w-full max-w-xl space-y-6">
+    <div className="mx-auto w-full space-y-6">
       <h1 className="text-center text-xl font-bold">
         Pagination Demo (100 items)
       </h1>

@@ -21,11 +21,7 @@ export default function UseClickAwayDemo() {
 
   return (
     <>
-      <div>
-        <Button className="link" onClick={handleOpenModal}>
-          Open Modal
-        </Button>
-      </div>
+      <Button onClick={handleOpenModal}>Open Modal</Button>
       {isOpen &&
         ReactDOM.createPortal(
           <>

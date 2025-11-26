@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { ArrowLeft, ArrowRight } from "lucide-react"
+import { ChevronLeft, ChevronRight } from "lucide-react"
 
 import { NavItem, NavItemWithChildren } from "@/types/nav"
 import { docsConfig } from "@/config/docs"
@@ -34,7 +34,7 @@ export function DocsPager({ doc, variant = "default" }: DocsPagerProps) {
             variant: "secondary",
           })}
         >
-          <ArrowLeft />
+          <ChevronLeft />
           {variant === "default" ? pager.prev.title : null}
         </Link>
       )}
@@ -48,7 +48,7 @@ export function DocsPager({ doc, variant = "default" }: DocsPagerProps) {
           })}
         >
           {variant === "default" ? pager.next.title : null}
-          <ArrowRight />
+          <ChevronRight />
         </Link>
       )}
     </div>

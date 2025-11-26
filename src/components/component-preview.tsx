@@ -8,6 +8,7 @@ import { CopyButton } from "@/components/copy-button"
 import { Icons } from "@/components/icons"
 
 import { Index } from "../../__registry__"
+import { ComponentPreviewFull } from "./component-preview-full"
 import { RerenderComponent } from "./rerender-component"
 
 interface ComponentPreviewProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -27,6 +28,7 @@ export function ComponentPreview({
   ...props
 }: ComponentPreviewProps) {
   const [key, setKey] = React.useState(0)
+  const [open, setOpen] = React.useState(false)
 
   const Codes = React.Children.toArray(children) as React.ReactElement<
     any,
@@ -89,6 +91,9 @@ export function ComponentPreview({
           <div className="absolute right-4 top-4 space-x-2">
             <CopyButton value={codeString} />
             <RerenderComponent onClick={() => setKey((prev) => prev + 1)} />
+            <ComponentPreviewFull name={name} open={open} setOpen={setOpen}>
+              <PreviewComponent Preview={Preview} />
+            </ComponentPreviewFull>
           </div>
           <div
             key={key}
@@ -101,16 +106,7 @@ export function ComponentPreview({
               }
             )}
           >
-            <React.Suspense
-              fallback={
-                <div className="flex w-full items-center justify-center text-sm text-muted-foreground">
-                  <Icons.spinner className="mr-2 size-4 animate-spin" />
-                  Loading...
-                </div>
-              }
-            >
-              {Preview}
-            </React.Suspense>
+            <PreviewComponent Preview={Preview} />
           </div>
         </TabsContent>
         <TabsContent value="code">
@@ -122,5 +118,20 @@ export function ComponentPreview({
         </TabsContent>
       </Tabs>
     </div>
+  )
+}
+
+function PreviewComponent({ Preview }: { Preview: React.ReactNode }) {
+  return (
+    <React.Suspense
+      fallback={
+        <div className="flex w-full items-center justify-center text-sm text-muted-foreground">
+          <Icons.spinner className="mr-2 size-4 animate-spin" />
+          Loading...
+        </div>
+      }
+    >
+      {Preview}
+    </React.Suspense>
   )
 }

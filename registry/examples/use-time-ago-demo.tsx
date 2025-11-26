@@ -13,7 +13,7 @@ export default function UseTimeAgoDemo() {
   const timeAgo = useTimeAgo(date || DEFAULT_DATE)
 
   return (
-    <div className="flex w-full max-w-xs flex-col items-start gap-4">
+    <div className="flex w-full flex-col items-start gap-4">
       {timeAgo ? (
         <p className="text-sm text-muted-foreground">Last updated: {timeAgo}</p>
       ) : (
