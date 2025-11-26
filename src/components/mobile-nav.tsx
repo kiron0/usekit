@@ -2,18 +2,26 @@
 
 import * as React from "react"
 import Link, { LinkProps } from "next/link"
+import { VisuallyHidden } from "@radix-ui/react-visually-hidden"
 import { useRouter } from "nextjs-toploader/app"
 
 import { docsConfig } from "@/config/docs"
 import { cn } from "@/lib/utils"
 import { useMetaColor } from "@/hooks/use-meta-color"
 import { Button } from "@/components/ui/button"
-import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer"
+import {
+  Drawer,
+  DrawerContent,
+  DrawerDescription,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@/components/ui/drawer"
 import { Separator } from "@/components/ui/separator"
 
 export function MobileNav() {
   const [open, setOpen] = React.useState(false)
   const { setMetaColor, metaColor } = useMetaColor()
+  const firstFocusableRef = React.useRef<HTMLAnchorElement>(null)
 
   const onOpenChange = React.useCallback(
     (open: boolean) => {
@@ -22,6 +30,19 @@ export function MobileNav() {
     },
     [setMetaColor, metaColor]
   )
+  const handleOpenAutoFocus = React.useCallback((event: Event) => {
+    event.preventDefault()
+    firstFocusableRef.current?.focus()
+  }, [])
+
+  let assignedInitialFocus = false
+  const reserveInitialFocusRef = () => {
+    if (assignedInitialFocus) {
+      return undefined
+    }
+    assignedInitialFocus = true
+    return firstFocusableRef
+  }
 
   return (
     <Drawer open={open} onOpenChange={onOpenChange}>
@@ -47,8 +68,16 @@ export function MobileNav() {
           <span className="sr-only">Toggle Menu</span>
         </Button>
       </DrawerTrigger>
-      <DrawerContent className="max-h-[60svh] p-0">
-        <p className="sr-only">Mobile navigation</p>
+      <DrawerContent
+        className="max-h-[60svh] p-0"
+        onOpenAutoFocus={handleOpenAutoFocus}
+      >
+        <VisuallyHidden>
+          <DrawerTitle>Mobile navigation</DrawerTitle>
+          <DrawerDescription>
+            Browse docs, hooks, and resources
+          </DrawerDescription>
+        </VisuallyHidden>
         <div className="overflow-auto p-6">
           <div className="flex flex-col gap-y-3">
             {docsConfig.mainNav.map(
@@ -58,6 +87,7 @@ export function MobileNav() {
                     key={item.href}
                     href={item.href}
                     onOpenChange={setOpen}
+                    ref={reserveInitialFocusRef()}
                   >
                     {item.title}
                   </MobileLink>
@@ -96,6 +126,7 @@ export function MobileNav() {
                               href={item.href}
                               onOpenChange={setOpen}
                               className="text-muted-foreground"
+                              ref={reserveInitialFocusRef()}
                             >
                               {item.title}
                               {item.label && (
@@ -130,25 +161,23 @@ interface MobileLinkProps extends LinkProps {
   className?: string
 }
 
-function MobileLink({
-  href,
-  onOpenChange,
-  className,
-  children,
-  ...props
-}: MobileLinkProps) {
-  const router = useRouter()
-  return (
-    <Link
-      href={href}
-      onClick={() => {
-        router.push(href.toString())
-        onOpenChange?.(false)
-      }}
-      className={cn("text-base", className)}
-      {...props}
-    >
-      {children}
-    </Link>
-  )
-}
+const MobileLink = React.forwardRef<HTMLAnchorElement, MobileLinkProps>(
+  ({ href, onOpenChange, className, children, ...props }, ref) => {
+    const router = useRouter()
+    return (
+      <Link
+        ref={ref}
+        href={href}
+        onClick={() => {
+          router.push(href.toString())
+          onOpenChange?.(false)
+        }}
+        className={cn("text-base", className)}
+        {...props}
+      >
+        {children}
+      </Link>
+    )
+  }
+)
+MobileLink.displayName = "MobileLink"

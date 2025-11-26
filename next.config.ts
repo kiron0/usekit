@@ -2,6 +2,7 @@ import type { NextConfig } from "next"
 import { createContentlayerPlugin } from "next-contentlayer2"
 
 const nextConfig: NextConfig = {
+  turbopack: {},
   async redirects() {
     return [
       {
