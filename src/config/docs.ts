@@ -73,6 +73,18 @@ export const docsConfig: DocsConfig = {
           items: [],
         },
         {
+          title: "useAccessibleLabels",
+          href: "/docs/hooks/use-accessible-labels",
+          items: [],
+          label: "New",
+        },
+        {
+          title: "useConsentGate",
+          href: "/docs/hooks/use-consent-gate",
+          items: [],
+          label: "New",
+        },
+        {
           title: "useMounted",
           href: "/docs/hooks/use-mounted",
           items: [],
@@ -371,6 +383,12 @@ export const docsConfig: DocsConfig = {
           title: "useInputValue",
           href: "/docs/hooks/use-input-value",
           items: [],
+        },
+        {
+          title: "useMaskedInput",
+          href: "/docs/hooks/use-masked-input",
+          items: [],
+          label: "New",
         },
         {
           title: "useLocation",

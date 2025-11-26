@@ -426,6 +426,22 @@ export const Index: Record<string, any> = {
     ),
     source: "",
   },
+  "use-consent-gate": {
+    name: "use-consent-gate",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-consent-gate.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-consent-gate-demo")
+    ),
+    source: "",
+  },
   "use-is-client": {
     name: "use-is-client",
     type: "registry:hook",
@@ -903,6 +919,22 @@ export const Index: Record<string, any> = {
     ],
     component: React.lazy(
       () => import("registry/examples/use-input-value-demo")
+    ),
+    source: "",
+  },
+  "use-masked-input": {
+    name: "use-masked-input",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-masked-input.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-masked-input-demo")
     ),
     source: "",
   },
@@ -2432,6 +2464,38 @@ export const Index: Record<string, any> = {
     ],
     component: React.lazy(
       () => import("registry/examples/use-input-value-demo.tsx")
+    ),
+    source: "",
+  },
+  "use-consent-gate-demo": {
+    name: "use-consent-gate-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-consent-gate-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-consent-gate-demo.tsx")
+    ),
+    source: "",
+  },
+  "use-masked-input-demo": {
+    name: "use-masked-input-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-masked-input-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-masked-input-demo.tsx")
     ),
     source: "",
   },

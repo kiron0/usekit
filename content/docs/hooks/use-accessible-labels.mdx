@@ -1,0 +1,114 @@
+---
+title: useAccessibleLabels
+description: Auto-generate resilient aria-label props, enforce fallbacks, and warn in development when a control is missing accessible text.
+---
+
+<ComponentPreview name="use-accessible-labels-demo" />
+
+## Installation
+
+<CodeTabs>
+  <TabsList>
+    <TabsTrigger value="cli">CLI</TabsTrigger>
+    <TabsTrigger value="manual">Manual</TabsTrigger>
+  </TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://usekit.kiron.dev/k/use-accessible-labels
+```
+
+</TabsContent>
+
+  <TabsContent value="manual">
+    <Steps>
+      <Step>Copy and paste the following code into your project.</Step>
+      <ComponentSource name="use-accessible-labels" />
+      <Step>Update the import paths to match your project setup.</Step>
+    </Steps>
+  </TabsContent>
+</CodeTabs>
+
+## Usage
+
+```tsx {11-18}
+"use client"
+
+import * as React from "react"
+
+import { useAccessibleLabels } from "@/hooks/use-accessible-labels"
+import { Button } from "@/components/ui/button"
+import { Switch } from "@/components/ui/switch"
+
+export function NotificationsToggle() {
+  const [enabled, setEnabled] = React.useState(false)
+  const analytics = useAccessibleLabels({
+    label: "Allow anonymous analytics",
+    description: "We only collect usage trends — never personal data.",
+  })
+
+  const assistant = useAccessibleLabels({
+    fallback: () => (enabled ? "Disable AI assistant" : "Enable AI assistant"),
+  })
+
+  return (
+    <div className="space-y-4">
+      <Switch
+        {...analytics.ariaProps}
+        checked={enabled}
+        onCheckedChange={setEnabled}
+      />
+      <Button
+        {...assistant.ariaProps}
+        onClick={() => setEnabled((prev) => !prev)}
+      >
+        Toggle assistant
+      </Button>
+    </div>
+  )
+}
+```
+
+- Pass any visible label when you have one — the hook maps it to `aria-label`.
+- If the UI is icon-only, provide a `fallback` so screen readers still announce the control.
+- You can opt into `labelledBy` / `describedBy` when you already render external `<label>` or helper text elements.
+
+In development, the hook warns whenever a control is missing both a label and `labelledBy`, helping large component libraries catch regressions before they ship.
+
+## API Reference
+
+### Parameters
+
+| Name      | Type                         | Description                           | Default |
+| --------- | ---------------------------- | ------------------------------------- | ------- |
+| `options` | `UseAccessibleLabelsOptions` | Configuration object described below. | `—`     |
+
+### Options
+
+| Name          | Type                     | Description                                                          | Default         |
+| ------------- | ------------------------ | -------------------------------------------------------------------- | --------------- |
+| `id`          | `string`                 | Force a deterministic `id`. Defaults to a generated id.              | generated       |
+| `label`       | `string`                 | Visible copy that becomes `aria-label`.                              | `""`            |
+| `labelledBy`  | `string`                 | Supply an existing element id instead of `aria-label`.               | `undefined`     |
+| `fallback`    | `string \| () => string` | Lazy string used when `label` is missing (e.g., icon-only controls). | `undefined`     |
+| `description` | `string`                 | Optional inline description mapped to `aria-description`.            | `undefined`     |
+| `describedBy` | `string`                 | Reference an external helper-text id via `aria-describedby`.         | `undefined`     |
+| `prefix`      | `string`                 | Customize the generated id prefix (defaults to `usekit-a11y`).       | `"usekit-a11y"` |
+| `warn`        | `boolean`                | Disable dev-time warnings when set to `false`.                       | `true`          |
+
+### Return Value
+
+| Name              | Type                                                                     | Description                                                |
+| ----------------- | ------------------------------------------------------------------------ | ---------------------------------------------------------- |
+| `id`              | `string`                                                                 | The resolved id used for the control.                      |
+| `ariaProps`       | `{ id: string; "aria-label"?: string; "aria-labelledby"?: string; ... }` | Spread onto any interactive element.                       |
+| `labelText`       | `string \| undefined`                                                    | Final string that was used for `aria-label`, if any.       |
+| `descriptionText` | `string \| undefined`                                                    | Inline description text (mirrors `aria-description`).      |
+| `missingLabel`    | `boolean`                                                                | `true` when neither `label` nor `labelledBy` was provided. |
+
+## When to use
+
+- Component libraries that need consistent ARIA coverage without duplicating logic.
+- Icon-only buttons, toggle groups, or floating action buttons that still need text announcements.
+- GDPR / compliance-heavy surfaces where UI copy changes frequently and you want a safety net that warns when labels disappear.

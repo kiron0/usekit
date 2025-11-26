@@ -442,6 +442,36 @@ export const hooksExamples: Registry["items"] = [
     ],
   },
   {
+    name: "use-accessible-labels-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/use-accessible-labels-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-consent-gate-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/use-consent-gate-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-masked-input-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/use-masked-input-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
     name: "use-step-demo",
     type: "registry:example",
     files: [

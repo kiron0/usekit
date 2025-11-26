@@ -42,6 +42,19 @@ export const hooks: Registry["items"] = [
     ],
   },
   {
+    name: "use-accessible-labels",
+    title: "Use Accessible Labels",
+    description:
+      "Auto-generate resilient aria-label props, wire up fallbacks, and warn in development when required labels are missing.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-accessible-labels.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
     name: "use-unmount",
     title: "Use Unmount",
     description:
@@ -363,6 +376,19 @@ export const hooks: Registry["items"] = [
     files: [
       {
         path: "registry/hooks/use-cookie-storage.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-consent-gate",
+    title: "Use Consent Gate",
+    description:
+      "Manage user consent for analytics or other third-party features before enabling them.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-consent-gate.ts",
         type: "registry:hook",
       },
     ],
@@ -773,6 +799,19 @@ export const hooks: Registry["items"] = [
     files: [
       {
         path: "registry/hooks/use-input-value.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-masked-input",
+    title: "Use Masked Input",
+    description:
+      "Declarative input masking supporting complex international patterns, caret control, and paste handling.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-masked-input.ts",
         type: "registry:hook",
       },
     ],

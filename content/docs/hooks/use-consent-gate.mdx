@@ -1,0 +1,114 @@
+---
+title: useConsentGate
+description: Manage user consent for analytics or other gated features with a single hook.
+---
+
+<ComponentPreview name="use-consent-gate-demo" />
+
+## Installation
+
+<CodeTabs>
+  <TabsList>
+    <TabsTrigger value="cli">CLI</TabsTrigger>
+    <TabsTrigger value="manual">Manual</TabsTrigger>
+  </TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://usekit.kiron.dev/k/use-consent-gate
+```
+
+</TabsContent>
+
+  <TabsContent value="manual">
+    <Steps>
+      <Step>Copy and paste the following code into your project.</Step>
+      <ComponentSource name="use-consent-gate" />
+      <Step>Update the import paths to match your project setup.</Step>
+    </Steps>
+  </TabsContent>
+</CodeTabs>
+
+## Usage
+
+```tsx {12}
+"use client"
+
+import * as React from "react"
+
+import { useConsentGate } from "@/hooks/use-consent-gate"
+import { Button } from "@/components/ui/button"
+import { Switch } from "@/components/ui/switch"
+
+const FEATURES = ["analytics", "ads"] as const
+
+export function ConsentModal() {
+  const { allowed, request, revoke } = useConsentGate(FEATURES)
+
+  return (
+    <div className="space-y-4">
+      {FEATURES.map((feature) => (
+        <label key={feature} className="flex items-center justify-between">
+          <span className="capitalize">{feature}</span>
+          <Switch
+            checked={allowed(feature)}
+            onCheckedChange={(checked) => request(feature, checked)}
+          />
+        </label>
+      ))}
+
+      <div className="flex gap-2">
+        <Button size="sm" onClick={() => FEATURES.forEach((f) => request(f))}>
+          Allow all
+        </Button>
+        <Button
+          size="sm"
+          variant="outline"
+          onClick={() => FEATURES.forEach((f) => revoke(f))}
+        >
+          Revoke all
+        </Button>
+      </div>
+    </div>
+  )
+}
+```
+
+The hook keeps a consent map for every feature you pass in. You can persist grants between sessions (default) or disable persistence entirely for sandbox flows.
+
+## API Reference
+
+### Parameters
+
+| Name       | Type                    | Description                                                            | Default |
+| ---------- | ----------------------- | ---------------------------------------------------------------------- | ------- |
+| `features` | `string[]`              | List of feature flags you want to gate (e.g., `["analytics", "ads"]`). | —       |
+| `options`  | `UseConsentGateOptions` | Optional configuration described below.                                | `{}`    |
+
+### Options
+
+| Name           | Type                               | Description                                               | Default            |
+| -------------- | ---------------------------------- | --------------------------------------------------------- | ------------------ |
+| `storageKey`   | `string`                           | LocalStorage key used to persist approvals.               | `"usekit:consent"` |
+| `initialState` | `Partial<Record<string, boolean>>` | Preload server-known consent values.                      | `{}`               |
+| `persist`      | `boolean`                          | Disable persistence when `false` (state stays in memory). | `true`             |
+| `serialize`    | `(state) => string`                | Custom serialization strategy.                            | `JSON.stringify`   |
+| `deserialize`  | `(value) => ConsentState`          | Custom deserialization strategy.                          | `JSON.parse`       |
+
+### Return Value
+
+| Name                         | Type                                           | Description                                            |
+| ---------------------------- | ---------------------------------------------- | ------------------------------------------------------ |
+| `allowed(feature)`           | `(feature: string) => boolean`                 | Check whether a specific feature is currently granted. |
+| `request(feature, granted?)` | `(feature: string, granted?: boolean) => void` | Resolve consent (defaults to `true`).                  |
+| `revoke(feature)`            | `(feature: string) => void`                    | Shorthand for `request(feature, false)`.               |
+| `consents`                   | `Record<string, boolean>`                      | Raw map of feature -> grant state.                     |
+| `allowedFeatures`            | `string[]`                                     | List of slugs that are currently allowed.              |
+| `allGranted`                 | `boolean`                                      | `true` when every feature passed in has been granted.  |
+
+## When to use
+
+- Gate analytics, ads, or chat widgets until the user opts in (GDPR/CCPA).
+- Centralize consent prompts across multiple components (hero, banners, modals).
+- Quickly disable sensitive third-party scripts in privacy-first environments.

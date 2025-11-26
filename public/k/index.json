@@ -344,6 +344,18 @@
       ]
     },
     {
+      "name": "use-consent-gate",
+      "title": "Use Consent Gate",
+      "description": "Manage user consent for analytics or other third-party features before enabling them.",
+      "type": "registry:hook",
+      "files": [
+        {
+          "type": "registry:hook",
+          "path": "registry/hooks/use-consent-gate.ts"
+        }
+      ]
+    },
+    {
       "name": "use-is-client",
       "title": "Use Is Client",
       "description": "Determine whether the code is running on the client-side or server-side with useIsClient.",
@@ -730,6 +742,18 @@
         {
           "type": "registry:hook",
           "path": "registry/hooks/use-input-value.ts"
+        }
+      ]
+    },
+    {
+      "name": "use-masked-input",
+      "title": "Use Masked Input",
+      "description": "Declarative input masking supporting complex international patterns, caret control, and paste handling.",
+      "type": "registry:hook",
+      "files": [
+        {
+          "type": "registry:hook",
+          "path": "registry/hooks/use-masked-input.ts"
         }
       ]
     },
