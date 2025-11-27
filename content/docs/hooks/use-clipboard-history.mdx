@@ -1,0 +1,95 @@
+---
+title: useClipboardHistory
+description: Maintain a local clipboard history with dedupe, manual push helpers, and secure clear support.
+---
+
+<ComponentPreview name="use-clipboard-history-demo" />
+
+## Installation
+
+<CodeTabs>
+  <TabsList>
+    <TabsTrigger value="cli">CLI</TabsTrigger>
+    <TabsTrigger value="manual">Manual</TabsTrigger>
+  </TabsList>
+
+  <TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://usekit.kiron.dev/k/use-clipboard-history
+```
+
+  </TabsContent>
+
+  <TabsContent value="manual">
+    <Steps>
+      <Step>Copy and paste the following code into your project.</Step>
+      <ComponentSource name="use-clipboard-history" />
+      <Step>Update the import paths to match your project structure.</Step>
+    </Steps>
+  </TabsContent>
+</CodeTabs>
+
+## Usage
+
+```tsx {5,10-15,19-21}
+"use client"
+
+import * as React from "react"
+
+import { useClipboardHistory } from "@/hooks/use-clipboard-history"
+
+export function ClipboardPanel() {
+  const { list, push, pushFromClipboard, clear } = useClipboardHistory({
+    size: 5,
+    secureClear: true,
+  })
+
+  const [value, setValue] = React.useState("")
+
+  return (
+    <div>
+      <textarea
+        value={value}
+        onChange={(event) => setValue(event.target.value)}
+      />
+      <button onClick={() => push(value)}>Save snippet</button>
+      <button onClick={pushFromClipboard}>Capture clipboard</button>
+      <button onClick={clear}>Secure clear</button>
+
+      <ul>
+        {list.map((entry) => (
+          <li key={entry}>{entry}</li>
+        ))}
+      </ul>
+    </div>
+  )
+}
+```
+
+## API Reference
+
+### Parameters
+
+| Name                  | Type      | Description                                                 | Default Value                | Optional |
+| --------------------- | --------- | ----------------------------------------------------------- | ---------------------------- | -------- |
+| `options.size`        | `number`  | Maximum number of entries to keep.                          | `10`                         | Yes      |
+| `options.storageKey`  | `string`  | LocalStorage key used to persist history.                   | `"usekit:clipboard-history"` | Yes      |
+| `options.secureClear` | `boolean` | When true, attempts to wipe the OS clipboard when clearing. | `false`                      | Yes      |
+| `options.dedupe`      | `boolean` | Remove duplicates and move re-inserted items to the front.  | `true`                       | Yes      |
+
+### Return Values
+
+| Name                  | Type                      | Description                                                           |
+| --------------------- | ------------------------- | --------------------------------------------------------------------- |
+| `list`                | `string[]`                | Ordered history (newest first).                                       |
+| `push(value)`         | `(value: string) => void` | Adds a value to history, applying dedupe and size constraints.        |
+| `pushFromClipboard()` | `() => Promise<void>`     | Reads `navigator.clipboard` and stores the text.                      |
+| `clear()`             | `() => Promise<void>`     | Clears history and optionally wipes the clipboard (if `secureClear`). |
+
+## Notes
+
+- Uses `localStorage` to persist history between reloads.
+- Clipboard APIs require secure contexts and user permission. The hook logs a warning if the browser denies access.
+- `secureClear` attempts to write an empty string to the clipboard, but browsers may block it without gesture.
+- Works great for editors, note-taking UIs, or any app where users copy/paste snippets frequently.

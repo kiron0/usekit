@@ -48,6 +48,22 @@ export const Index: Record<string, any> = {
     ),
     source: "",
   },
+  "use-accessible-labels": {
+    name: "use-accessible-labels",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-accessible-labels.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-accessible-labels-demo")
+    ),
+    source: "",
+  },
   "use-unmount": {
     name: "use-unmount",
     type: "registry:hook",
@@ -1771,6 +1787,166 @@ export const Index: Record<string, any> = {
     ),
     source: "",
   },
+  "use-task-queue": {
+    name: "use-task-queue",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-task-queue.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-task-queue-demo")
+    ),
+    source: "",
+  },
+  "use-adaptive-language": {
+    name: "use-adaptive-language",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-adaptive-language.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-adaptive-language-demo")
+    ),
+    source: "",
+  },
+  "use-progressive-upload": {
+    name: "use-progressive-upload",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-progressive-upload.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-progressive-upload-demo")
+    ),
+    source: "",
+  },
+  "use-network-quality": {
+    name: "use-network-quality",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-network-quality.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-network-quality-demo")
+    ),
+    source: "",
+  },
+  "use-secure-storage": {
+    name: "use-secure-storage",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-secure-storage.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-secure-storage-demo")
+    ),
+    source: "",
+  },
+  "use-responsive-grid": {
+    name: "use-responsive-grid",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-responsive-grid.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-responsive-grid-demo")
+    ),
+    source: "",
+  },
+  "use-form-autosave": {
+    name: "use-form-autosave",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-form-autosave.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-form-autosave-demo")
+    ),
+    source: "",
+  },
+  "use-memory-leak-guard": {
+    name: "use-memory-leak-guard",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-memory-leak-guard.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-memory-leak-guard-demo")
+    ),
+    source: "",
+  },
+  "use-clipboard-history": {
+    name: "use-clipboard-history",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-clipboard-history.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-clipboard-history-demo")
+    ),
+    source: "",
+  },
+  "use-pwa-install": {
+    name: "use-pwa-install",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-pwa-install.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-pwa-install-demo")
+    ),
+    source: "",
+  },
   "use-copy-to-clipboard-demo": {
     name: "use-copy-to-clipboard-demo",
     type: "registry:example",
@@ -2467,6 +2643,22 @@ export const Index: Record<string, any> = {
     ),
     source: "",
   },
+  "use-accessible-labels-demo": {
+    name: "use-accessible-labels-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-accessible-labels-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-accessible-labels-demo.tsx")
+    ),
+    source: "",
+  },
   "use-consent-gate-demo": {
     name: "use-consent-gate-demo",
     type: "registry:example",
@@ -3128,6 +3320,166 @@ export const Index: Record<string, any> = {
     ],
     component: React.lazy(
       () => import("registry/examples/use-rock-paper-scissors-demo.tsx")
+    ),
+    source: "",
+  },
+  "use-task-queue-demo": {
+    name: "use-task-queue-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-task-queue-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-task-queue-demo.tsx")
+    ),
+    source: "",
+  },
+  "use-adaptive-language-demo": {
+    name: "use-adaptive-language-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-adaptive-language-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-adaptive-language-demo.tsx")
+    ),
+    source: "",
+  },
+  "use-progressive-upload-demo": {
+    name: "use-progressive-upload-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-progressive-upload-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-progressive-upload-demo.tsx")
+    ),
+    source: "",
+  },
+  "use-network-quality-demo": {
+    name: "use-network-quality-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-network-quality-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-network-quality-demo.tsx")
+    ),
+    source: "",
+  },
+  "use-secure-storage-demo": {
+    name: "use-secure-storage-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-secure-storage-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-secure-storage-demo.tsx")
+    ),
+    source: "",
+  },
+  "use-responsive-grid-demo": {
+    name: "use-responsive-grid-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-responsive-grid-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-responsive-grid-demo.tsx")
+    ),
+    source: "",
+  },
+  "use-form-autosave-demo": {
+    name: "use-form-autosave-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-form-autosave-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-form-autosave-demo.tsx")
+    ),
+    source: "",
+  },
+  "use-memory-leak-guard-demo": {
+    name: "use-memory-leak-guard-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-memory-leak-guard-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-memory-leak-guard-demo.tsx")
+    ),
+    source: "",
+  },
+  "use-clipboard-history-demo": {
+    name: "use-clipboard-history-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-clipboard-history-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-clipboard-history-demo.tsx")
+    ),
+    source: "",
+  },
+  "use-pwa-install-demo": {
+    name: "use-pwa-install-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-pwa-install-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-pwa-install-demo.tsx")
     ),
     source: "",
   },

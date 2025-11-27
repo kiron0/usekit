@@ -1,0 +1,185 @@
+---
+title: useProgressiveUpload
+description: Chunked upload that adapts chunk size on poor networks and resumes on reconnect for large file uploads on flaky mobile networks.
+---
+
+<ComponentPreview name="use-progressive-upload-demo" />
+
+## Installation
+
+<CodeTabs>
+  <TabsList>
+    <TabsTrigger value="cli">CLI</TabsTrigger>
+    <TabsTrigger value="manual">Manual</TabsTrigger>
+  </TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://usekit.kiron.dev/k/use-progressive-upload
+```
+
+</TabsContent>
+
+  <TabsContent value="manual">
+    <Steps>
+      <Step>Copy and paste the following code into your project.</Step>
+      <ComponentSource name="use-progressive-upload" />
+      <Step>Update the import paths to match your project setup.</Step>
+    </Steps>
+  </TabsContent>
+</CodeTabs>
+
+## Usage
+
+```tsx {5,10-16}
+"use client"
+
+import * as React from "react"
+
+import { useProgressiveUpload } from "@/hooks/use-progressive-upload"
+
+export function Component() {
+  const [file, setFile] = React.useState<File | null>(null)
+
+  const { start, pause, resume, progress, isUploading, isPaused } =
+    useProgressiveUpload(file, {
+      endpoint: "/api/upload",
+      onProgress: (progress) => {
+        console.log(`Upload progress: ${progress}%`)
+      },
+    })
+
+  return (
+    <div>
+      <input
+        type="file"
+        onChange={(e) => setFile(e.target.files?.[0] || null)}
+      />
+      <button onClick={start} disabled={!file || isUploading}>
+        Upload
+      </button>
+      {isPaused && <button onClick={resume}>Resume</button>}
+    </div>
+  )
+}
+```
+
+## API Reference
+
+### Parameters
+
+| Name           | Type                          | Description                                               | Default Value           | Optional |
+| -------------- | ----------------------------- | --------------------------------------------------------- | ----------------------- | -------- |
+| `file`         | `File \| null`                | The file to upload.                                       | —                       | No       |
+| `options`      | `UseProgressiveUploadOptions` | Configuration object for the progressive upload.          | —                       | No       |
+| `endpoint`     | `string`                      | Server endpoint URL for chunk uploads.                    | —                       | No       |
+| `onProgress`   | `(progress: number) => void`  | Callback fired when upload progress changes (0-100).      | —                       | Yes      |
+| `chunkSize`    | `number`                      | Initial chunk size in bytes.                              | `256 * 1024`            | Yes      |
+| `minChunkSize` | `number`                      | Minimum chunk size when adapting to poor networks.        | `64 * 1024`             | Yes      |
+| `maxChunkSize` | `number`                      | Maximum chunk size when adapting to good networks.        | `2 * 1024 * 1024`       | Yes      |
+| `maxRetries`   | `number`                      | Maximum number of retry attempts per chunk.               | `3`                     | Yes      |
+| `retryDelay`   | `number`                      | Delay in milliseconds between retries.                    | `1000`                  | Yes      |
+| `storageKey`   | `string`                      | localStorage key for persisting upload state.             | `"usekit:upload-state"` | Yes      |
+| `persistState` | `boolean`                     | Whether to persist upload state for resume functionality. | `true`                  | Yes      |
+
+### Return Values
+
+| Name          | Type                  | Description                                    |
+| ------------- | --------------------- | ---------------------------------------------- |
+| `start`       | `() => Promise<void>` | Start or resume the upload process.            |
+| `pause`       | `() => void`          | Pause the current upload.                      |
+| `resume`      | `() => void`          | Resume a paused upload.                        |
+| `progress`    | `number`              | Upload progress percentage (0-100).            |
+| `isUploading` | `boolean`             | Whether an upload is currently in progress.    |
+| `isPaused`    | `boolean`             | Whether the upload is currently paused.        |
+| `error`       | `Error \| null`       | Error object if upload failed, null otherwise. |
+
+## Features
+
+### Adaptive Chunk Sizing
+
+The hook automatically adjusts chunk size based on network performance:
+
+- **Decreases chunk size** when failure rate > 30% or upload speed < 50KB/s
+- **Increases chunk size** when failure rate < 10% and upload speed > 200KB/s
+- Chunk size stays within `minChunkSize` and `maxChunkSize` bounds
+
+### Resume Functionality
+
+- Upload state is persisted to localStorage (if `persistState: true`)
+- On resume, only remaining chunks are uploaded
+- Automatically handles network reconnection scenarios
+
+### Error Handling
+
+- Automatic retry with exponential backoff
+- Configurable retry attempts and delays
+- Error state exposed for UI feedback
+
+## Examples
+
+### Basic file upload
+
+```tsx
+const { start, progress, isUploading } = useProgressiveUpload(file, {
+  endpoint: "/api/upload",
+  onProgress: (p) => console.log(`${p}%`),
+})
+
+await start()
+```
+
+### Pause and resume
+
+```tsx
+const { start, pause, resume, isPaused } = useProgressiveUpload(file, {
+  endpoint: "/api/upload",
+})
+
+// User clicks pause
+pause()
+
+// Later, user clicks resume
+resume() // Automatically continues from last successful chunk
+```
+
+### Custom chunk configuration
+
+```tsx
+const { start } = useProgressiveUpload(file, {
+  endpoint: "/api/upload",
+  chunkSize: 512 * 1024, // Start with 512KB chunks
+  minChunkSize: 128 * 1024, // Never go below 128KB
+  maxChunkSize: 4 * 1024 * 1024, // Can go up to 4MB on fast networks
+  maxRetries: 5, // More retries for unreliable networks
+})
+```
+
+### Server-side chunk handling
+
+Your server endpoint should handle chunked uploads. Example structure:
+
+```typescript
+// POST /api/upload
+// FormData fields:
+// - chunk: Blob (the file chunk)
+// - chunkIndex: number (0-based index)
+// - totalChunks: number
+// - fileId: string (unique identifier for the file)
+// - fileName: string
+// - fileSize: number
+
+// Server should:
+// 1. Store each chunk with the fileId and chunkIndex
+// 2. When all chunks are received, reassemble the file
+// 3. Return success response for each chunk
+```
+
+## Notes
+
+- The hook generates a unique file ID based on file name, size, and last modified date
+- Upload state is cleared automatically when upload completes successfully
+- Chunk size adaptation happens gradually (75% decrease, 25% increase) to avoid sudden changes
+- The hook uses `AbortController` for proper cleanup on unmount or cancellation
+- For production use, ensure your server endpoint properly handles chunked uploads and can reassemble files

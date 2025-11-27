@@ -1535,6 +1535,138 @@ export const hooks: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "use-task-queue",
+    title: "Use Task Queue",
+    description:
+      "Serializes async tasks with concurrency limit and priority support for rate-limiting uploads/downloads and sequencing animations.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-task-queue.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-adaptive-language",
+    title: "Use Adaptive Language",
+    description:
+      "Switch UI text & formatting based on user preference, locale, and context for multi-lingual apps with runtime language switching.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-adaptive-language.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-progressive-upload",
+    title: "Use Progressive Upload",
+    description:
+      "Chunked upload that adapts chunk size on poor networks and resumes on reconnect for large file uploads on flaky mobile networks.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-progressive-upload.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-network-quality",
+    title: "Use Network Quality",
+    description:
+      "Measure RTT, throughput and categorize connection quality for adaptive behaviors like adjusting video quality or deferring sync on poor networks.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-network-quality.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-secure-storage",
+    title: "Use Secure Storage",
+    description:
+      "Transparent encryption layer for local/session storage with key rotation and optional server-backed key retrieval for tokens and sensitive settings.",
+    type: "registry:hook",
+    dependencies: ["crypto-js@4.2.0"],
+    devDependencies: ["@types/crypto-js@4.2.2"],
+    files: [
+      {
+        path: "registry/hooks/use-secure-storage.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-responsive-grid",
+    title: "Use Responsive Grid",
+    description:
+      "Layout helper that returns responsive column counts and item sizing for masonry-like grids.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-responsive-grid.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-form-autosave",
+    title: "Use Form Autosave",
+    description:
+      "Auto-save form drafts with debounce control, conflict detection, and restore helpers for long forms and editors.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-form-autosave.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-memory-leak-guard",
+    title: "Use Memory Leak Guard",
+    description:
+      "Detects runaway timers and detached DOM refs in development, warning with helpful stack traces.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-memory-leak-guard.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-clipboard-history",
+    title: "Use Clipboard History",
+    description:
+      "Maintain a local clipboard history with dedupe, optional secure clear, and helpers to push items programmatically.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-clipboard-history.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-pwa-install",
+    title: "Use PWA Install",
+    description:
+      "Detect installability, track prompt attempts, and provide a safe helper to trigger the PWA install flow.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-pwa-install.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
 ]
 
 export default hooks

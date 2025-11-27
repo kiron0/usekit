@@ -872,4 +872,104 @@ export const hooksExamples: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "use-task-queue-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/use-task-queue-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-adaptive-language-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/use-adaptive-language-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-progressive-upload-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/use-progressive-upload-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-network-quality-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/use-network-quality-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-secure-storage-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/use-secure-storage-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-responsive-grid-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/use-responsive-grid-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-form-autosave-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/use-form-autosave-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-memory-leak-guard-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/use-memory-leak-guard-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-clipboard-history-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/use-clipboard-history-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-pwa-install-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/use-pwa-install-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
 ]

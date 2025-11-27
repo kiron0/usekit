@@ -2,6 +2,8 @@
 
 This checklist captures every place a hook touches in the repo so any contributor (human or AI) can wire it up end‑to‑end without guesswork.
 
+CHECK FOR DUPLICATES BEFORE YOU START. (by name, description, etc.)
+
 ## 1. Decide the hook metadata up front
 
 - **Slug / file names:** lower-case with dashes (e.g. `use-masked-input`).

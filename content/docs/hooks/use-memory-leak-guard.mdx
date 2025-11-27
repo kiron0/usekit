@@ -1,0 +1,100 @@
+---
+title: useMemoryLeakGuard
+description: Detect runaway timers and detached DOM refs in development builds, warning with contextual stack traces.
+---
+
+<ComponentPreview name="use-memory-leak-guard-demo" />
+
+## Installation
+
+<CodeTabs>
+  <TabsList>
+    <TabsTrigger value="cli">CLI</TabsTrigger>
+    <TabsTrigger value="manual">Manual</TabsTrigger>
+  </TabsList>
+
+  <TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://usekit.kiron.dev/k/use-memory-leak-guard
+```
+
+  </TabsContent>
+
+  <TabsContent value="manual">
+    <Steps>
+      <Step>Copy and paste the following code into your project.</Step>
+      <ComponentSource name="use-memory-leak-guard" />
+      <Step>Update the import paths to match your project.</Step>
+    </Steps>
+  </TabsContent>
+</CodeTabs>
+
+## Usage
+
+```tsx {5,10-14}
+"use client"
+
+import * as React from "react"
+
+import { useMemoryLeakGuard } from "@/hooks/use-memory-leak-guard"
+
+export function Component() {
+  const retainedPanelRef = React.useRef<Element | null>(null)
+
+  useMemoryLeakGuard({
+    refs: [retainedPanelRef],
+    timerThresholdMs: 30_000,
+    domCheckIntervalMs: 5000,
+  })
+
+  React.useEffect(() => {
+    const id = window.setInterval(() => {
+      // expensive polling…
+    }, 2000)
+
+    return () => window.clearInterval(id)
+  }, [])
+
+  return (
+    <section>
+      <button
+        onClick={() => {
+          // Force a “leak”: keep a reference to a node that will be removed.
+          const target = document.getElementById("panel")
+          if (target) retainedPanelRef.current = target
+        }}
+      >
+        Capture panel ref
+      </button>
+    </section>
+  )
+}
+```
+
+## API Reference
+
+### Parameters
+
+| Name                         | Type                                 | Description                                                                       | Default Value | Optional |
+| ---------------------------- | ------------------------------------ | --------------------------------------------------------------------------------- | ------------- | -------- |
+| `options.refs`               | `React.RefObject<Element \| null>[]` | Refs to watch for detached DOM nodes.                                             | `[]`          | Yes      |
+| `options.timerThresholdMs`   | `number`                             | How long a timer can live before a warning. Applies to intervals and long delays. | `60000`       | Yes      |
+| `options.domCheckIntervalMs` | `number`                             | How often refs are checked for detachment (ms).                                   | `3000`        | Yes      |
+| `options.flushOnUnload`      | `boolean`                            | Warn about active intervals during `beforeunload`.                                | `false`       | Yes      |
+
+### Behavior
+
+| Concern               | Action                                                                                                   |
+| --------------------- | -------------------------------------------------------------------------------------------------------- |
+| Runaway intervals     | Logs a warning when an interval survives longer than `timerThresholdMs`.                                 |
+| Long-delayed timeouts | Warns when `setTimeout` delay exceeds `timerThresholdMs`.                                                |
+| Detached refs         | Checks supplied refs and warns if their node is no longer inside `document.body` while still referenced. |
+| Production builds     | The hook is a no-op when `process.env.NODE_ENV === "production"`.                                        |
+
+## Notes
+
+- Timers are globally patched once per app runtime. Warnings include stack traces captured at creation time to show where the timer originated.
+- Ref detection relies on refs you opt into via `options.refs`. Whenever you intentionally retain DOM nodes (portals, manual caching) remember to release them when appropriate.
+- `useMemoryLeakGuard` only reports issues— it does not automatically clear timers or refs.
+- Combine with React DevTools profiler for a fuller picture of memory growth.

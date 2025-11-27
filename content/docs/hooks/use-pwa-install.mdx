@@ -1,0 +1,84 @@
+---
+title: usePWAInstall
+description: Detect when your app is installable as a PWA and trigger the install prompt while tracking attempts.
+---
+
+<ComponentPreview name="use-pwa-install-demo" />
+
+## Installation
+
+<CodeTabs>
+  <TabsList>
+    <TabsTrigger value="cli">CLI</TabsTrigger>
+    <TabsTrigger value="manual">Manual</TabsTrigger>
+  </TabsList>
+
+  <TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://usekit.kiron.dev/k/use-pwa-install
+```
+
+  </TabsContent>
+
+  <TabsContent value="manual">
+    <Steps>
+      <Step>Copy and paste the following code into your project.</Step>
+      <ComponentSource name="use-pwa-install" />
+      <Step>Update the import paths to match your project structure.</Step>
+    </Steps>
+  </TabsContent>
+</CodeTabs>
+
+## Usage
+
+```tsx {5,8-9}
+"use client"
+
+import * as React from "react"
+
+import { usePWAInstall } from "@/hooks/use-pwa-install"
+
+export function InstallBanner() {
+  const { canInstall, isInstalled, promptCount, promptInstall } =
+    usePWAInstall()
+
+  const handleInstall = async () => {
+    const outcome = await promptInstall()
+    console.log("user choice:", outcome)
+  }
+
+  if (!canInstall || isInstalled) {
+    return null
+  }
+
+  return (
+    <div className="rounded-lg border bg-card p-4">
+      <p>Install this app for an improved, full-screen experience.</p>
+      <button onClick={handleInstall}>Install</button>
+      <p className="text-xs text-muted-foreground">
+        Prompt shown {promptCount} time(s)
+      </p>
+    </div>
+  )
+}
+```
+
+## API Reference
+
+### Return Value
+
+| Name              | Type                                                        | Description                                                                   |
+| ----------------- | ----------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| `canInstall`      | `boolean`                                                   | `true` when the browser raised `beforeinstallprompt` and the prompt is ready. |
+| `isInstalled`     | `boolean`                                                   | `true` when the app already runs in standalone mode or after `appinstalled`.  |
+| `promptCount`     | `number`                                                    | Number of times `promptInstall` has been triggered (stored in localStorage).  |
+| `promptInstall()` | `() => Promise<"accepted" \| "dismissed" \| "unavailable">` | Triggers the install prompt and resolves with the user's choice.              |
+
+## Notes
+
+- The browser only fires `beforeinstallprompt` when your PWA meets installability criteria (served over HTTPS, has manifest + service worker, etc.).
+- `promptInstall` returns `"unavailable"` if the prompt event isn't ready—use `canInstall` to disable buttons.
+- Use `promptCount` to avoid nagging users repeatedly.
+- The hook automatically listens for the global `appinstalled` event to update `isInstalled`.
+- Because `navigator.clipboard` and install prompts require user gestures, always trigger `promptInstall` from a button click.
