@@ -451,6 +451,18 @@ export const docsConfig: DocsConfig = {
           label: "New",
         },
         {
+          title: "useSmartPlaceholder",
+          href: "/docs/hooks/use-smart-placeholder",
+          items: [],
+          label: "New",
+        },
+        {
+          title: "useTimeTravel",
+          href: "/docs/hooks/use-time-travel",
+          items: [],
+          label: "New",
+        },
+        {
           title: "useLocation",
           href: "/docs/hooks/use-location",
           items: [],

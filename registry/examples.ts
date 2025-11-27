@@ -972,4 +972,24 @@ export const hooksExamples: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "use-smart-placeholder-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/use-smart-placeholder-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-time-travel-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/use-time-travel-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
 ]

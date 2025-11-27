@@ -138,6 +138,22 @@ export const Index: Record<string, any> = {
     component: React.lazy(() => import("registry/examples/use-timeout-demo")),
     source: "",
   },
+  "use-time-travel": {
+    name: "use-time-travel",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-time-travel.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-time-travel-demo")
+    ),
+    source: "",
+  },
   "use-document-title": {
     name: "use-document-title",
     type: "registry:hook",
@@ -1947,6 +1963,22 @@ export const Index: Record<string, any> = {
     ),
     source: "",
   },
+  "use-smart-placeholder": {
+    name: "use-smart-placeholder",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-smart-placeholder.tsx",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-smart-placeholder-demo")
+    ),
+    source: "",
+  },
   "use-copy-to-clipboard-demo": {
     name: "use-copy-to-clipboard-demo",
     type: "registry:example",
@@ -3480,6 +3512,38 @@ export const Index: Record<string, any> = {
     ],
     component: React.lazy(
       () => import("registry/examples/use-pwa-install-demo.tsx")
+    ),
+    source: "",
+  },
+  "use-smart-placeholder-demo": {
+    name: "use-smart-placeholder-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-smart-placeholder-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-smart-placeholder-demo.tsx")
+    ),
+    source: "",
+  },
+  "use-time-travel-demo": {
+    name: "use-time-travel-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-time-travel-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-time-travel-demo.tsx")
     ),
     source: "",
   },

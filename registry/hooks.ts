@@ -123,6 +123,19 @@ export const hooks: Registry["items"] = [
     ],
   },
   {
+    name: "use-time-travel",
+    title: "Use Time Travel",
+    description:
+      "Snapshot and restore component state trees to replay tricky UI bugs or compare interim states.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-time-travel.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
     name: "use-document-title",
     title: "Use Document Title",
     description:
@@ -1663,6 +1676,19 @@ export const hooks: Registry["items"] = [
     files: [
       {
         path: "registry/hooks/use-pwa-install.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-smart-placeholder",
+    title: "Use Smart Placeholder",
+    description:
+      "Generate context-aware skeleton placeholders for text, cards, lists, or avatars without hand-writing markup.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-smart-placeholder.tsx",
         type: "registry:hook",
       },
     ],

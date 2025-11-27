@@ -1,0 +1,78 @@
+---
+title: useSmartPlaceholder
+description: Generate context-aware skeleton placeholders (text, avatars, cards, lists) without hand-coding markup.
+---
+
+<ComponentPreview name="use-smart-placeholder-demo" />
+
+## Installation
+
+<CodeTabs>
+  <TabsList>
+    <TabsTrigger value="cli">CLI</TabsTrigger>
+    <TabsTrigger value="manual">Manual</TabsTrigger>
+  </TabsList>
+
+  <TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://usekit.kiron.dev/k/use-smart-placeholder
+```
+
+  </TabsContent>
+
+  <TabsContent value="manual">
+    <Steps>
+      <Step>Copy and paste the following code into your project.</Step>
+      <ComponentSource name="use-smart-placeholder" />
+      <Step>Update the import paths to match your project.</Step>
+    </Steps>
+  </TabsContent>
+</CodeTabs>
+
+## Usage
+
+```tsx {5,11,13-19}
+"use client"
+
+import * as React from "react"
+
+import { useSmartPlaceholder } from "@/hooks/use-smart-placeholder"
+
+export function SkeletonCard() {
+  const placeholder = useSmartPlaceholder("card", {
+    tone: "soft",
+  })
+
+  return (
+    <article className="rounded-xl border bg-card p-4">
+      {placeholder.render()}
+    </article>
+  )
+}
+```
+
+## API Reference
+
+### Parameters
+
+| Name                               | Type                                                    | Description                              | Default Value       |
+| ---------------------------------- | ------------------------------------------------------- | ---------------------------------------- | ------------------- |
+| `type`                             | `"text" \| "avatar" \| "thumbnail" \| "card" \| "list"` | Controls overall layout preset.          | `"text"`            |
+| `options.lines`                    | `number`                                                | Number of lines (for text/list presets). | `3`                 |
+| `options.tone`                     | `"default" \| "soft" \| "contrast"`                     | Background intensity.                    | `"default"`         |
+| `options.shape`                    | `"text" \| "avatar" \| "thumbnail" \| "card"`           | Override skeleton shape.                 | derived from `type` |
+| `options.width` / `options.height` | `string`                                                | Force specific dimensions.               | random widths       |
+
+### Return Value
+
+| Name     | Type              | Description                                                     |
+| -------- | ----------------- | --------------------------------------------------------------- |
+| `render` | `() => ReactNode` | Call to render the placeholder node(s) for the configured type. |
+
+## Notes
+
+- Text placeholders randomize widths for more “organic” look; call `render()` again (or re-render component) to regenerate.
+- Use `type="list"` for repeating rows (icon + text) and `type="card"` for more immersive content blocks.
+- Customize width/height when integrating with constrained layouts (e.g., thumbnails).
+- The hook returns React nodes; compose them with your existing layout wrappers or surface them conditionally while real data loads.
