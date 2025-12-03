@@ -1979,6 +1979,100 @@ export const Index: Record<string, any> = {
     ),
     source: "",
   },
+  "use-diff-editor": {
+    name: "use-diff-editor",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-diff-editor.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-diff-editor-demo")
+    ),
+    source: "",
+  },
+  "use-native-share": {
+    name: "use-native-share",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-native-share.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-native-share-demo")
+    ),
+    source: "",
+  },
+  "use-page-transition": {
+    name: "use-page-transition",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-page-transition.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-page-transition-demo")
+    ),
+    source: "",
+  },
+  "use-view-time": {
+    name: "use-view-time",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-view-time.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(() => import("registry/examples/use-view-time-demo")),
+    source: "",
+  },
+  "use-section-tracker": {
+    name: "use-section-tracker",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-section-tracker.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-section-tracker-demo")
+    ),
+    source: "",
+  },
+  "use-tiny-redux": {
+    name: "use-tiny-redux",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-tiny-redux.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-tiny-redux-demo")
+    ),
+    source: "",
+  },
   "use-copy-to-clipboard-demo": {
     name: "use-copy-to-clipboard-demo",
     type: "registry:example",
@@ -3544,6 +3638,102 @@ export const Index: Record<string, any> = {
     ],
     component: React.lazy(
       () => import("registry/examples/use-time-travel-demo.tsx")
+    ),
+    source: "",
+  },
+  "use-diff-editor-demo": {
+    name: "use-diff-editor-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-diff-editor-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-diff-editor-demo.tsx")
+    ),
+    source: "",
+  },
+  "use-native-share-demo": {
+    name: "use-native-share-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-native-share-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-native-share-demo.tsx")
+    ),
+    source: "",
+  },
+  "use-page-transition-demo": {
+    name: "use-page-transition-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-page-transition-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-page-transition-demo.tsx")
+    ),
+    source: "",
+  },
+  "use-view-time-demo": {
+    name: "use-view-time-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-view-time-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-view-time-demo.tsx")
+    ),
+    source: "",
+  },
+  "use-section-tracker-demo": {
+    name: "use-section-tracker-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-section-tracker-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-section-tracker-demo.tsx")
+    ),
+    source: "",
+  },
+  "use-tiny-redux-demo": {
+    name: "use-tiny-redux-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-tiny-redux-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-tiny-redux-demo.tsx")
     ),
     source: "",
   },

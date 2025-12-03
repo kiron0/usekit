@@ -1693,6 +1693,84 @@ export const hooks: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "use-diff-editor",
+    title: "Use Diff Editor",
+    description:
+      "Side-by-side diff state and merge helpers for text and JSON, ideal for admin tools and CMS review screens.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-diff-editor.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-native-share",
+    title: "Use Native Share",
+    description:
+      "Wrapper around the Web Share API that exposes a simple share(data) helper with optional fallbacks when navigator.share is unavailable.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-native-share.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-page-transition",
+    title: "Use Page Transition",
+    description:
+      "Tracks navigation transitions in SPAs and browser-driven navigations so you can show optimistic loaders and skeletons.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-page-transition.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-view-time",
+    title: "Use View Time",
+    description:
+      "Measure how long a component stays visible in the viewport so you can understand real engagement, not just impressions.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-view-time.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-section-tracker",
+    title: "Use Section Tracker",
+    description:
+      "Track which scroll section is currently active in view, similar to docs websites with synchronized sidebar navigation.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-section-tracker.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-tiny-redux",
+    title: "Use Tiny Redux",
+    description:
+      "Minimal global store with get, set, and subscribe that stays tiny but supports derived state and concurrent React.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-tiny-redux.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
 ]
 
 export default hooks

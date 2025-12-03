@@ -1,0 +1,102 @@
+---
+title: usePageTransition
+description: Tracks navigation transitions (SPA routing and browser-driven navigations) so you can show optimistic loaders and skeleton UIs.
+---
+
+<ComponentPreview name="use-page-transition-demo" />
+
+## Installation
+
+<CodeTabs>
+  <TabsList>
+    <TabsTrigger value="cli">CLI</TabsTrigger>
+    <TabsTrigger value="manual">Manual</TabsTrigger>
+  </TabsList>
+
+  <TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://usekit.kiron.dev/k/use-page-transition
+```
+
+  </TabsContent>
+
+  <TabsContent value="manual">
+    <Steps>
+      <Step>Copy and paste the following code into your project.</Step>
+      <ComponentSource name="use-page-transition" />
+      <Step>Update the import paths to match your project.</Step>
+    </Steps>
+  </TabsContent>
+</CodeTabs>
+
+## Usage
+
+```tsx {5,8}
+"use client"
+
+import * as React from "react"
+
+import { usePageTransition } from "@/hooks/use-page-transition"
+
+export function LayoutWithSpinner({ children }: { children: React.ReactNode }) {
+  const { isTransitioning } = usePageTransition({ minDuration: 200 })
+
+  return (
+    <div className="relative">
+      {isTransitioning && (
+        <div className="absolute inset-x-0 top-0 z-10 h-0.5 animate-pulse bg-gradient-to-r from-sky-500 via-violet-500 to-emerald-500" />
+      )}
+      {children}
+    </div>
+  )
+}
+```
+
+## API Reference
+
+### `usePageTransition(options?)`
+
+#### Parameters
+
+| Name          | Type                       | Description                                                                       | Optional | Default |
+| ------------- | -------------------------- | --------------------------------------------------------------------------------- | -------- | ------- |
+| `options`     | `UsePageTransitionOptions` | Configuration object for transition behavior.                                     | Yes      | `{}`    |
+| `minDuration` | `number`                   | Minimum time in milliseconds a transition should remain visible to avoid flicker. | Yes      | `150`   |
+
+#### Return value
+
+| Name              | Type      | Description                                                            |
+| ----------------- | --------- | ---------------------------------------------------------------------- |
+| `isTransitioning` | `boolean` | `true` while a navigation or route transition is considered in-flight. |
+
+### Events tracked
+
+The hook wires into multiple browser signals to infer “page transitions”:
+
+- **SPA routing**
+  - Patches `history.pushState` and `history.replaceState`.
+  - Listens to `popstate` for back/forward navigations.
+- **Browser-driven navigations**
+  - `beforeunload` and `pagehide` start a transition.
+  - `pageshow` and `visibilitychange` (back to `visible`) clear transitions.
+
+In all cases, transitions are debounced with `minDuration` so your loaders do not flicker for ultra-fast route changes.
+
+### Types
+
+```ts
+interface UsePageTransitionOptions {
+  minDuration?: number
+}
+
+interface UsePageTransitionResult {
+  isTransitioning: boolean
+}
+```
+
+## Notes
+
+- Designed for SPA-style routing where you want a global “page is changing” flag without coupling to a specific router.
+- For frameworks that already expose navigation events (e.g., Next.js App Router, React Router), you can combine those with `usePageTransition` or rely on the hook’s history/visibility detection as a drop-in solution.
+- Use it to drive top-level progress bars, blur overlays, skeleton pages, or to temporarily disable critical actions during transitions.

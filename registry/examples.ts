@@ -992,4 +992,64 @@ export const hooksExamples: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "use-diff-editor-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/use-diff-editor-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-native-share-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/use-native-share-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-page-transition-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/use-page-transition-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-view-time-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/use-view-time-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-section-tracker-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/use-section-tracker-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-tiny-redux-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/use-tiny-redux-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
 ]

@@ -463,6 +463,42 @@ export const docsConfig: DocsConfig = {
           label: "New",
         },
         {
+          title: "useDiffEditor",
+          href: "/docs/hooks/use-diff-editor",
+          items: [],
+          label: "New",
+        },
+        {
+          title: "useNativeShare",
+          href: "/docs/hooks/use-native-share",
+          items: [],
+          label: "New",
+        },
+        {
+          title: "usePageTransition",
+          href: "/docs/hooks/use-page-transition",
+          items: [],
+          label: "New",
+        },
+        {
+          title: "useViewTime",
+          href: "/docs/hooks/use-view-time",
+          items: [],
+          label: "New",
+        },
+        {
+          title: "useSectionTracker",
+          href: "/docs/hooks/use-section-tracker",
+          items: [],
+          label: "New",
+        },
+        {
+          title: "useTinyRedux",
+          href: "/docs/hooks/use-tiny-redux",
+          items: [],
+          label: "New",
+        },
+        {
           title: "useLocation",
           href: "/docs/hooks/use-location",
           items: [],

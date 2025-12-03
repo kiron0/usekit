@@ -1,0 +1,133 @@
+---
+title: useSectionTracker
+description: Track which scroll section is active, just like docs sites that sync the sidebar with the content scroller.
+---
+
+<ComponentPreview name="use-section-tracker-demo" />
+
+## Installation
+
+<CodeTabs>
+  <TabsList>
+    <TabsTrigger value="cli">CLI</TabsTrigger>
+    <TabsTrigger value="manual">Manual</TabsTrigger>
+  </TabsList>
+
+  <TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://usekit.kiron.dev/k/use-section-tracker
+```
+
+  </TabsContent>
+
+  <TabsContent value="manual">
+    <Steps>
+      <Step>Copy and paste the following code into your project.</Step>
+      <ComponentSource name="use-section-tracker" />
+      <Step>Update the import paths to match your project.</Step>
+    </Steps>
+  </TabsContent>
+</CodeTabs>
+
+## Usage
+
+```tsx {5-8,16-18}
+"use client"
+
+import * as React from "react"
+
+import {
+  useSectionTracker,
+  type TrackedSectionConfig,
+} from "@/hooks/use-section-tracker"
+
+export function DocsLayout({ children }: { children: React.ReactNode }) {
+  const sections = ["introduction", "setup", "usage"].map((id) => ({
+    id,
+    ref: React.useRef<HTMLElement | null>(null),
+  }))
+
+  const { activeSection } = useSectionTracker(
+    sections as TrackedSectionConfig[]
+  )
+
+  return (
+    <div className="grid gap-4 md:grid-cols-[200px,minmax(0,1fr)]">
+      <nav className="space-y-1 text-sm">
+        {sections.map((section) => (
+          <button
+            key={section.id}
+            type="button"
+            className={
+              activeSection === section.id
+                ? "font-semibold"
+                : "text-muted-foreground"
+            }
+          >
+            {section.id}
+          </button>
+        ))}
+      </nav>
+      <div>{children}</div>
+    </div>
+  )
+}
+```
+
+## API Reference
+
+### `useSectionTracker(sections, options?)`
+
+Given a list of section refs, returns the `id` of the section that is currently considered “active” in the viewport.
+
+#### Parameters
+
+| Name         | Type                       | Description                                                                                  | Optional | Default              |
+| ------------ | -------------------------- | -------------------------------------------------------------------------------------------- | -------- | -------------------- |
+| `sections`   | `TrackedSectionConfig[]`   | Array of section descriptors (`{ id, ref }`). Each `ref` should point to a scrollable block. | No       | —                    |
+| `options`    | `UseSectionTrackerOptions` | Configuration object for intersection behavior.                                              | Yes      | `{}`                 |
+| `rootMargin` | `string`                   | Margin around the viewport used for IntersectionObserver (e.g. `"0px 0px -40% 0px"`).        | Yes      | `"0px 0px -40% 0px"` |
+| `threshold`  | `number`                   | Minimum intersection ratio (0–1) before a section is considered for activation.              | Yes      | `0`                  |
+
+#### Return value
+
+The hook returns an object `{ activeSection }`:
+
+| Name            | Type             | Description                                                            |
+| --------------- | ---------------- | ---------------------------------------------------------------------- |
+| `activeSection` | `string \| null` | The `id` of the currently active section, or `null` when none qualify. |
+
+### Types
+
+```ts
+export interface TrackedSectionConfig {
+  id: string
+  ref: React.RefObject<HTMLElement | null>
+}
+
+export interface UseSectionTrackerOptions {
+  rootMargin?: string
+  threshold?: number
+}
+
+export interface UseSectionTrackerResult {
+  activeSection: string | null
+}
+```
+
+## How it works
+
+- Uses `IntersectionObserver` to watch each section element and record:
+  - Latest `intersectionRatio`
+  - Its `boundingClientRect.top` relative to the viewport.
+- On each observer callback, it:
+  - Filters to sections whose ratio is above `threshold` and whose top is within the viewport.
+  - Picks the section whose top is closest to the top of the viewport.
+  - Updates `activeSection` only when the winning `id` changes.
+
+## Notes
+
+- Ideal for docs layouts, marketing pages, and long-form content with a synchronized sidebar.
+- For best results, ensure each tracked element has enough vertical space (e.g., entire content blocks rather than small headings).
+- Pair with smooth scrolling (e.g., `element.scrollIntoView({ behavior: "smooth" })`) in your nav buttons to create a polished experience.

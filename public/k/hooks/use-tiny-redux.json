@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-tiny-redux",
+  "type": "registry:hook",
+  "title": "Use Tiny Redux",
+  "description": "Minimal global store with get, set, and subscribe that stays tiny but supports derived state and concurrent React.",
+  "files": [
+    {
+      "path": "registry/hooks/use-tiny-redux.ts",
+      "content": "\"use client\"\r\n\r\nimport * as React from \"react\"\r\n\r\ntype Listener = () => void\r\n\r\nexport interface TinyReduxStore<TState> {\r\n  get: () => TState\r\n  set: (updater: TState | ((prev: TState) => TState)) => void\r\n  subscribe: (listener: Listener) => () => void\r\n}\r\n\r\nexport function createTinyReduxStore<TState>(\r\n  initialState: TState\r\n): TinyReduxStore<TState> {\r\n  let state = initialState\r\n  const listeners = new Set<Listener>()\r\n\r\n  const get = () => state\r\n\r\n  const set: TinyReduxStore<TState>[\"set\"] = (updater) => {\r\n    const next =\r\n      typeof updater === \"function\"\r\n        ? (updater as (prev: TState) => TState)(state)\r\n        : updater\r\n\r\n    if (Object.is(next, state)) return\r\n    state = next\r\n    listeners.forEach((listener) => listener())\r\n  }\r\n\r\n  const subscribe: TinyReduxStore<TState>[\"subscribe\"] = (listener) => {\r\n    listeners.add(listener)\r\n    return () => {\r\n      listeners.delete(listener)\r\n    }\r\n  }\r\n\r\n  return { get, set, subscribe }\r\n}\r\n\r\nexport interface UseTinyReduxOptions<TState> {\r\n  selector?: (state: TState) => unknown\r\n}\r\n\r\nexport function useTinyRedux<TState>(\r\n  store: TinyReduxStore<TState>,\r\n  options: UseTinyReduxOptions<TState> = {}\r\n) {\r\n  const { selector } = options\r\n\r\n  const getSnapshot = React.useCallback(() => {\r\n    const value = store.get()\r\n    return selector ? selector(value) : value\r\n  }, [selector, store])\r\n\r\n  const state = React.useSyncExternalStore(\r\n    store.subscribe,\r\n    getSnapshot,\r\n    getSnapshot\r\n  )\r\n\r\n  return React.useMemo(\r\n    () => ({\r\n      state,\r\n      get: store.get,\r\n      set: store.set,\r\n      subscribe: store.subscribe,\r\n    }),\r\n    [state, store.get, store.set, store.subscribe]\r\n  )\r\n}\r\n",
+      "type": "registry:hook"
+    }
+  ]
+}

@@ -1,0 +1,117 @@
+---
+title: useTinyRedux
+description: Minimal global store for your component tree with get, set, and subscribe, wired into React via useSyncExternalStore.
+---
+
+<ComponentPreview name="use-tiny-redux-demo" />
+
+## Installation
+
+<CodeTabs>
+  <TabsList>
+    <TabsTrigger value="cli">CLI</TabsTrigger>
+    <TabsTrigger value="manual">Manual</TabsTrigger>
+  </TabsList>
+
+  <TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://usekit.kiron.dev/k/use-tiny-redux
+```
+
+  </TabsContent>
+
+  <TabsContent value="manual">
+    <Steps>
+      <Step>Copy and paste the following code into your project.</Step>
+      <ComponentSource name="use-tiny-redux" />
+      <Step>Update the import paths to match your project.</Step>
+    </Steps>
+  </TabsContent>
+</CodeTabs>
+
+## Usage
+
+```tsx {5,9,12}
+"use client"
+
+import * as React from "react"
+
+import { createTinyReduxStore, useTinyRedux } from "@/hooks/use-tiny-redux"
+
+type AppState = { count: number }
+
+const counterStore = createTinyReduxStore<AppState>({ count: 0 })
+
+export function Counter() {
+  const { state, set } = useTinyRedux(counterStore)
+
+  return (
+    <button onClick={() => set((prev) => ({ count: prev.count + 1 }))}>
+      Clicked {state.count} times
+    </button>
+  )
+}
+```
+
+## API Reference
+
+### Store: `createTinyReduxStore(initialState)`
+
+Creates a tiny global store with the classic Redux-style API:
+
+```ts
+type TinyReduxStore<TState> = {
+  get: () => TState
+  set: (updater: TState | ((prev: TState) => TState)) => void
+  subscribe: (listener: () => void) => () => void
+}
+```
+
+#### Parameters
+
+| Name           | Type     | Description                  |
+| -------------- | -------- | ---------------------------- |
+| `initialState` | `TState` | Initial state for the store. |
+
+#### Return value
+
+| Name    | Type                     | Description                               |
+| ------- | ------------------------ | ----------------------------------------- |
+| `store` | `TinyReduxStore<TState>` | Store exposing `{ get, set, subscribe }`. |
+
+### Hook: `useTinyRedux(store, options?)`
+
+#### Parameters
+
+| Name       | Type                          | Description                                                                   | Optional |
+| ---------- | ----------------------------- | ----------------------------------------------------------------------------- | -------- |
+| `store`    | `TinyReduxStore<TState>`      | Store created via `createTinyReduxStore`.                                     | No       |
+| `options`  | `UseTinyReduxOptions<TState>` | Configuration for derived state.                                              | Yes      |
+| `selector` | `(state: TState) => unknown`  | Optional selector to subscribe to a derived slice instead of the whole state. | Yes      |
+
+#### Return value
+
+`useTinyRedux` returns an object that keeps your component in sync with the store:
+
+| Name        | Type                                                      | Description                                            |
+| ----------- | --------------------------------------------------------- | ------------------------------------------------------ |
+| `state`     | `unknown` \| `TState`                                     | Current store value (or selector output, if provided). |
+| `get`       | `() => TState`                                            | Direct reference to `store.get`.                       |
+| `set`       | `(updater: TState \| ((prev: TState) => TState)) => void` | Direct reference to `store.set`.                       |
+| `subscribe` | `(listener: () => void) => () => void`                    | Direct reference to `store.subscribe`.                 |
+
+### Types
+
+```ts
+interface UseTinyReduxOptions<TState> {
+  selector?: (state: TState) => unknown
+}
+```
+
+## Notes
+
+- The store is intentionally tiny: no reducers, actions, or middleware—just `{ get, set, subscribe }`.
+- `useTinyRedux` is built on `useSyncExternalStore`, making it safe for concurrent React and avoiding tearing.
+- You can create multiple stores for different concerns (e.g., `counterStore`, `themeStore`) without any providers.
+- For more complex apps, treat this as a building block: you can wrap it with typed actions or domain-specific hooks.

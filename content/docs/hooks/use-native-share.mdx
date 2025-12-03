@@ -1,0 +1,123 @@
+---
+title: useNativeShare
+description: Wrapper around navigator.share() with a simple share(data) helper and ergonomic fallbacks when the Web Share API is unavailable.
+---
+
+<ComponentPreview name="use-native-share-demo" />
+
+## Installation
+
+<CodeTabs>
+  <TabsList>
+    <TabsTrigger value="cli">CLI</TabsTrigger>
+    <TabsTrigger value="manual">Manual</TabsTrigger>
+  </TabsList>
+
+  <TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://usekit.kiron.dev/k/use-native-share
+```
+
+  </TabsContent>
+
+  <TabsContent value="manual">
+    <Steps>
+      <Step>Copy and paste the following code into your project.</Step>
+      <ComponentSource name="use-native-share" />
+      <Step>Update the import paths to match your project.</Step>
+    </Steps>
+  </TabsContent>
+</CodeTabs>
+
+## Usage
+
+```tsx {5,8}
+"use client"
+
+import * as React from "react"
+
+import { useNativeShare } from "@/hooks/use-native-share"
+
+export function ShareButton() {
+  const { canShare, isSharing, error, share } = useNativeShare()
+
+  const handleClick = async () => {
+    await share({
+      title: "Check this out",
+      text: "Found a neat hook collection.",
+      url: "https://usekit.kiron.dev",
+    })
+  }
+
+  return (
+    <div className="space-y-2">
+      <button onClick={handleClick} disabled={!canShare || isSharing}>
+        {isSharing ? "Sharing…" : "Share"}
+      </button>
+      {!canShare && (
+        <p className="text-xs text-muted-foreground">
+          Native sharing is not supported in this browser.
+        </p>
+      )}
+      {error && <p className="text-xs text-destructive">{error.message}</p>}
+    </div>
+  )
+}
+```
+
+## API Reference
+
+### `useNativeShare(options?)`
+
+#### Parameters
+
+| Name         | Type                                         | Description                                                                                           | Optional |
+| ------------ | -------------------------------------------- | ----------------------------------------------------------------------------------------------------- | -------- |
+| `options`    | `UseNativeShareOptions`                      | Configuration object for customizing fallback behavior.                                               | Yes      |
+| `onFallback` | `(data: ShareData) => void \| Promise<void>` | Called when native share is unavailable or not allowed; ideal for clipboard or “copy link” fallbacks. | Yes      |
+
+#### Return value
+
+The hook returns an object `{ canShare, isSharing, error, share }`:
+
+| Name        | Type                                 | Description                                                                                         |
+| ----------- | ------------------------------------ | --------------------------------------------------------------------------------------------------- |
+| `canShare`  | `boolean`                            | `true` when `navigator.share` is available in the current environment.                              |
+| `isSharing` | `boolean`                            | `true` while a share attempt is in-flight.                                                          |
+| `error`     | `Error \| null`                      | Last non-cancellation error thrown by `share(data)`, if any.                                        |
+| `share`     | `(data: ShareData) => Promise<void>` | Attempts to use `navigator.share`, then falls back to `onFallback` when native share is not usable. |
+
+### `ShareData`
+
+The `share(data)` helper accepts a subset of the Web Share API payload:
+
+```ts
+interface ShareData {
+  title?: string
+  text?: string
+  url?: string
+  files?: File[]
+}
+```
+
+Files are only honored when the browser supports Level 2 of the Web Share API.
+
+### Options
+
+```ts
+interface UseNativeShareOptions {
+  onFallback?: (data: ShareData) => void | Promise<void>
+}
+```
+
+- **`onFallback`**: Run when native share is not supported or when it rejects with a non-user-cancel error. Common choices:
+  - Copy a composed payload to the clipboard.
+  - Open a mailto: link or custom share dialog.
+  - Log/share to in-app activity feeds instead of the OS sheet.
+
+## Notes
+
+- The hook only treats genuine errors as failures; user cancellations (e.g., dismissing the sheet) do not set `error`.
+- `canShare` reflects whether `navigator.share` exists, but the hook also checks `navigator.canShare` when available to guard against unsupported payloads.
+- For admin tools and CMS dashboards, combine `useNativeShare` with a clipboard fallback so desktop browsers still have a “copy share payload” affordance.
