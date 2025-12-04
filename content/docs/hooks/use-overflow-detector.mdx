@@ -1,0 +1,239 @@
+---
+title: useOverflowDetector
+description: Detect horizontal/vertical overflow of any container with real-time updates using ResizeObserver.
+---
+
+<ComponentPreview name="use-overflow-detector-demo" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://usekit.kiron.dev/k/use-overflow-detector
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="use-overflow-detector" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx {3, 6}
+"use client"
+
+import { useOverflowDetector } from "@/hooks/use-overflow-detector"
+
+export function OverflowExample() {
+  const { hasOverflow, ref } = useOverflowDetector()
+
+  return (
+    <div ref={ref} className="w-64 overflow-auto">
+      {hasOverflow.horizontal && <p>Horizontal overflow detected!</p>}
+      {hasOverflow.vertical && <p>Vertical overflow detected!</p>}
+      <div className="w-96">Wide content that overflows</div>
+    </div>
+  )
+}
+```
+
+## Examples
+
+### **Example 1: Basic Overflow Detection**
+
+This example shows how to detect overflow in a container.
+
+```tsx
+"use client"
+
+import { useOverflowDetector } from "@/hooks/use-overflow-detector"
+
+export function BasicOverflow() {
+  const { hasOverflow, ref } = useOverflowDetector()
+
+  return (
+    <div>
+      <div ref={ref} className="h-32 w-64 overflow-auto border">
+        <div className="h-48 w-96 bg-primary/10">Content that overflows</div>
+      </div>
+      <p>Horizontal: {hasOverflow.horizontal ? "Yes" : "No"}</p>
+      <p>Vertical: {hasOverflow.vertical ? "Yes" : "No"}</p>
+    </div>
+  )
+}
+```
+
+### **Example 2: Conditional Styling Based on Overflow**
+
+This example applies different styles when overflow is detected.
+
+```tsx
+"use client"
+
+import { cn } from "@/lib/utils"
+import { useOverflowDetector } from "@/hooks/use-overflow-detector"
+
+export function StyledOverflow() {
+  const { hasOverflow, ref } = useOverflowDetector()
+
+  return (
+    <div
+      ref={ref}
+      className={cn(
+        "h-32 w-64 overflow-auto border p-4",
+        hasOverflow.horizontal && "border-red-500",
+        hasOverflow.vertical && "border-blue-500"
+      )}
+    >
+      <div className="h-48 w-96">Content</div>
+    </div>
+  )
+}
+```
+
+### **Example 3: Show Scroll Indicators**
+
+This example shows scroll indicators when overflow is detected.
+
+```tsx
+"use client"
+
+import { useOverflowDetector } from "@/hooks/use-overflow-detector"
+
+export function ScrollIndicators() {
+  const { hasOverflow, ref } = useOverflowDetector()
+
+  return (
+    <div className="relative">
+      {hasOverflow.horizontal && (
+        <div className="absolute right-0 top-0 bg-primary/20 px-2 py-1 text-xs">
+          →
+        </div>
+      )}
+      {hasOverflow.vertical && (
+        <div className="absolute bottom-0 left-0 bg-primary/20 px-2 py-1 text-xs">
+          ↓
+        </div>
+      )}
+      <div ref={ref} className="h-32 w-64 overflow-auto border">
+        <div className="h-48 w-96">Content</div>
+      </div>
+    </div>
+  )
+}
+```
+
+### **Example 4: Dynamic Content with Overflow Detection**
+
+This example detects overflow when content changes dynamically.
+
+```tsx
+"use client"
+
+import * as React from "react"
+
+import { useOverflowDetector } from "@/hooks/use-overflow-detector"
+
+export function DynamicContent() {
+  const [items, setItems] = React.useState(5)
+  const { hasOverflow, ref } = useOverflowDetector()
+
+  return (
+    <div>
+      <button onClick={() => setItems(items + 5)}>Add Items</button>
+      <div ref={ref} className="h-32 w-64 overflow-auto border">
+        {Array.from({ length: items }, (_, i) => (
+          <div key={i}>Item {i + 1}</div>
+        ))}
+      </div>
+      {hasOverflow.any && (
+        <p className="text-sm text-muted-foreground">Container has overflow</p>
+      )}
+    </div>
+  )
+}
+```
+
+### **Example 5: Responsive Overflow Detection**
+
+This example detects overflow in a responsive container.
+
+```tsx
+"use client"
+
+import { useOverflowDetector } from "@/hooks/use-overflow-detector"
+
+export function ResponsiveOverflow() {
+  const { hasOverflow, ref } = useOverflowDetector()
+
+  return (
+    <div className="w-full max-w-md">
+      <div
+        ref={ref}
+        className="overflow-auto border p-4"
+        style={{ maxHeight: "200px" }}
+      >
+        <div className="whitespace-nowrap">
+          This is a very long text that will cause horizontal overflow when the
+          container is narrow
+        </div>
+        <div className="mt-4">
+          {Array.from({ length: 10 }, (_, i) => (
+            <div key={i}>Line {i + 1}</div>
+          ))}
+        </div>
+      </div>
+      <div className="mt-2 text-sm">
+        <span
+          className={hasOverflow.horizontal ? "text-red-600" : "text-green-600"}
+        >
+          H: {hasOverflow.horizontal ? "Overflow" : "OK"}
+        </span>{" "}
+        <span
+          className={hasOverflow.vertical ? "text-red-600" : "text-green-600"}
+        >
+          V: {hasOverflow.vertical ? "Overflow" : "OK"}
+        </span>
+      </div>
+    </div>
+  )
+}
+```
+
+## API Reference
+
+### Return Values
+
+| Name          | Type                                                       | Description                                                          |
+| ------------- | ---------------------------------------------------------- | -------------------------------------------------------------------- |
+| `hasOverflow` | `{ horizontal: boolean; vertical: boolean; any: boolean }` | Object indicating overflow state in each direction.                  |
+| `ref`         | `(node: HTMLElement \| null) => void`                      | Ref callback to attach to the container element you want to monitor. |
+
+### `hasOverflow` Properties
+
+| Name         | Type      | Description                                   |
+| ------------ | --------- | --------------------------------------------- |
+| `horizontal` | `boolean` | `true` if content overflows horizontally.     |
+| `vertical`   | `boolean` | `true` if content overflows vertically.       |
+| `any`        | `boolean` | `true` if content overflows in any direction. |

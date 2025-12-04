@@ -75,7 +75,7 @@ export default function UseSecureStorageDemo() {
   return (
     <div className="w-full space-y-6">
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-        <Card>
+        <Card className="w-full bg-transparent">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <Lock className="h-5 w-5" />
@@ -193,7 +193,7 @@ export default function UseSecureStorageDemo() {
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="w-full bg-transparent">
           <CardHeader>
             <CardTitle>Raw Storage</CardTitle>
             <CardDescription>
@@ -225,7 +225,7 @@ export default function UseSecureStorageDemo() {
         </Card>
       </div>
 
-      <Card>
+      <Card className="w-full bg-transparent">
         <CardHeader>
           <CardTitle>Features</CardTitle>
         </CardHeader>

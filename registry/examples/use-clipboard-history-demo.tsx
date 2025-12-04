@@ -54,15 +54,15 @@ export default function UseClipboardHistoryDemo() {
 
   return (
     <div className="w-full space-y-6">
-      <Card>
-        <CardHeader>
+      <Card className="w-full border-none bg-transparent p-0">
+        <CardHeader className="p-0">
           <CardTitle>Clipboard History</CardTitle>
           <CardDescription>
             Capture snippets manually or read the real clipboard to store past
             entries.
           </CardDescription>
         </CardHeader>
-        <CardContent className="space-y-6">
+        <CardContent className="space-y-6 p-0">
           <div className="space-y-3">
             <Label htmlFor="clipboard-snippet">Snippet</Label>
             <Textarea

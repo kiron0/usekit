@@ -31,7 +31,7 @@ export default function UsePageTransitionDemo() {
 
   return (
     <div className="w-full space-y-6">
-      <Card className="relative overflow-hidden">
+      <Card className="relative w-full overflow-hidden border-none bg-transparent p-0">
         {isTransitioning && (
           <div className="pointer-events-none absolute inset-0 z-10 flex items-center justify-center bg-background/70 backdrop-blur-sm">
             <div className="flex items-center gap-2 rounded-full border bg-background px-4 py-1.5 text-xs font-medium">
@@ -41,7 +41,7 @@ export default function UsePageTransitionDemo() {
           </div>
         )}
 
-        <CardHeader className="flex flex-col justify-between gap-3 lg:flex-row">
+        <CardHeader className="flex flex-col justify-between gap-3 p-0 lg:flex-row">
           <div>
             <CardTitle className="flex items-center gap-2">
               <Route className="h-5 w-5" />
@@ -62,7 +62,7 @@ export default function UsePageTransitionDemo() {
             </Badge>
           </div>
         </CardHeader>
-        <CardContent className="space-y-4">
+        <CardContent className="space-y-4 p-0">
           <div className="flex flex-wrap items-center justify-between gap-3">
             <div className="text-sm text-muted-foreground">
               Simulated route:{" "}

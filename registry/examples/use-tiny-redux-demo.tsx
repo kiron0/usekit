@@ -105,8 +105,8 @@ function UserPanel() {
 export default function UseTinyReduxDemo() {
   return (
     <div className="w-full space-y-6">
-      <Card>
-        <CardHeader>
+      <Card className="w-full border-none bg-transparent p-0">
+        <CardHeader className="p-0">
           <CardTitle className="flex items-center gap-2 text-sm">
             Tiny Redux Store
           </CardTitle>
@@ -116,7 +116,7 @@ export default function UseTinyReduxDemo() {
             <code>useTinyRedux</code>.
           </CardDescription>
         </CardHeader>
-        <CardContent className="space-y-4">
+        <CardContent className="space-y-4 p-0">
           <div className="grid gap-3 md:grid-cols-2">
             <CounterPanel />
             <UserPanel />

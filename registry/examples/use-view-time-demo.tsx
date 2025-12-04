@@ -82,8 +82,8 @@ export default function UseViewTimeDemo() {
 
   return (
     <div className="w-full space-y-6">
-      <Card>
-        <CardHeader className="flex flex-col justify-between gap-3 lg:flex-row">
+      <Card className="w-full border-none bg-transparent p-0">
+        <CardHeader className="flex flex-col justify-between gap-3 p-0 lg:flex-row">
           <div>
             <CardTitle className="flex items-center gap-2">
               <Timer className="h-5 w-5" />
@@ -103,7 +103,7 @@ export default function UseViewTimeDemo() {
             Reset timers
           </Button>
         </CardHeader>
-        <CardContent key={key} className="space-y-4">
+        <CardContent key={key} className="space-y-4 p-0">
           <ScrollArea className="h-60 rounded-md border bg-muted/40 p-3">
             <div className="space-y-3">
               {ITEMS.map((item) => (

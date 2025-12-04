@@ -1151,6 +1151,22 @@ export const Index: Record<string, any> = {
     component: React.lazy(() => import("registry/hooks/use-online-status.ts")),
     source: "",
   },
+  "use-overflow-detector": {
+    name: "use-overflow-detector",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-overflow-detector.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-overflow-detector-demo")
+    ),
+    source: "",
+  },
   "use-rerender": {
     name: "use-rerender",
     type: "registry:hook",
@@ -1995,6 +2011,22 @@ export const Index: Record<string, any> = {
     ),
     source: "",
   },
+  "use-payload-diff-guard": {
+    name: "use-payload-diff-guard",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-payload-diff-guard.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-payload-diff-guard-demo")
+    ),
+    source: "",
+  },
   "use-native-share": {
     name: "use-native-share",
     type: "registry:hook",
@@ -2292,6 +2324,22 @@ export const Index: Record<string, any> = {
     ],
     component: React.lazy(
       () => import("registry/examples/use-orientation-demo.tsx")
+    ),
+    source: "",
+  },
+  "use-overflow-detector-demo": {
+    name: "use-overflow-detector-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-overflow-detector-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-overflow-detector-demo.tsx")
     ),
     source: "",
   },
@@ -3734,6 +3782,22 @@ export const Index: Record<string, any> = {
     ],
     component: React.lazy(
       () => import("registry/examples/use-tiny-redux-demo.tsx")
+    ),
+    source: "",
+  },
+  "use-payload-diff-guard-demo": {
+    name: "use-payload-diff-guard-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-payload-diff-guard-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-payload-diff-guard-demo.tsx")
     ),
     source: "",
   },

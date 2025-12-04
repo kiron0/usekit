@@ -11,6 +11,64 @@ import { Input } from "@/components/ui/input"
 import { CopyButton } from "@/components/copy-button"
 import { allDocs } from "@/contentlayer/generated"
 
+interface HookCardProps {
+  id: string
+  index: number
+  title: string
+  description?: string
+  label?: string
+  href: string
+}
+
+export function HookCard({
+  id,
+  index,
+  title,
+  description,
+  label,
+  href,
+}: HookCardProps) {
+  return (
+    <Link
+      key={id}
+      href={href}
+      className="group relative block h-full rounded-2xl border border-border/60 bg-card/80 p-5 shadow-sm shadow-black/5 transition hover:-translate-y-1 hover:border-primary/50 hover:shadow-primary/20"
+    >
+      <div className="flex items-start justify-between gap-3">
+        <div className="inline-flex items-center gap-2 rounded-full border border-border/70 bg-background/70 px-2.5 py-1 text-xs font-semibold text-muted-foreground">
+          <span className="text-foreground">{index}</span>
+          <span>hook</span>
+        </div>
+        <ArrowUpRight className="size-4 text-muted-foreground transition group-hover:text-primary" />
+      </div>
+      <div className="mt-4 space-y-2">
+        <div className="flex flex-wrap items-center gap-2">
+          <h3 className="text-lg font-semibold text-foreground">{title}</h3>
+          {label && (
+            <span
+              className={cn(
+                "rounded-md bg-primary px-1.5 py-0.5 text-[11px] font-medium uppercase leading-none text-primary-foreground",
+                label.toLowerCase() === "soon" && "bg-[#adfa1d] text-[#000000]"
+              )}
+            >
+              {label}
+            </span>
+          )}
+        </div>
+        {description && (
+          <p className="line-clamp-3 text-sm text-muted-foreground">
+            {description.slice(0, 60)}...
+          </p>
+        )}
+      </div>
+      <div className="mt-5 flex items-center gap-2 text-xs font-medium uppercase tracking-[0.3em] text-muted-foreground">
+        <span>Read docs</span>
+        <div className="h-px flex-1 bg-border/80" />
+      </div>
+    </Link>
+  )
+}
+
 export function HooksList() {
   const docsConfigHooksMap = React.useMemo(() => {
     return new Map(
@@ -110,46 +168,15 @@ export function HooksList() {
       </div>
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         {filteredHooks.map((doc, i) => (
-          <Link
+          <HookCard
             key={doc.id}
+            id={doc.id}
+            index={i + 1}
+            title={doc.title}
+            description={doc.description}
+            label={doc.label}
             href={`/docs/${doc.slug}`}
-            className="group relative block h-full rounded-2xl border border-border/60 bg-card/80 p-5 shadow-sm shadow-black/5 transition hover:-translate-y-1 hover:border-primary/50 hover:shadow-primary/20"
-          >
-            <div className="flex items-start justify-between gap-3">
-              <div className="inline-flex items-center gap-2 rounded-full border border-border/70 bg-background/70 px-2.5 py-1 text-xs font-semibold text-muted-foreground">
-                <span className="text-foreground">{i + 1}</span>
-                <span>hook</span>
-              </div>
-              <ArrowUpRight className="size-4 text-muted-foreground transition group-hover:text-primary" />
-            </div>
-            <div className="mt-4 space-y-2">
-              <div className="flex flex-wrap items-center gap-2">
-                <h3 className="text-lg font-semibold text-foreground">
-                  {doc.title}
-                </h3>
-                {doc.label && (
-                  <span
-                    className={cn(
-                      "rounded-md bg-primary px-1.5 py-0.5 text-[11px] font-medium uppercase leading-none text-primary-foreground",
-                      doc.label.toLowerCase() === "soon" &&
-                        "bg-[#adfa1d] text-[#000000]"
-                    )}
-                  >
-                    {doc.label}
-                  </span>
-                )}
-              </div>
-              {doc.description && (
-                <p className="line-clamp-3 text-sm text-muted-foreground">
-                  {doc.description?.slice(0, 60)}...
-                </p>
-              )}
-            </div>
-            <div className="mt-5 flex items-center gap-2 text-xs font-medium uppercase tracking-[0.3em] text-muted-foreground">
-              <span>Read docs</span>
-              <div className="h-px flex-1 bg-border/80" />
-            </div>
-          </Link>
+          />
         ))}
         {!filteredHooks.length && (
           <div className="col-span-full rounded-2xl border border-dashed border-border/70 bg-background/70 p-8 text-center text-sm text-muted-foreground">

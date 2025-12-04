@@ -31,7 +31,7 @@ export default function UseAccessibleLabelsDemo() {
   })
 
   return (
-    <div className="space-y-6">
+    <div className="w-full space-y-6">
       <div className="space-y-3 rounded-lg border p-4">
         <div className="flex items-center justify-between">
           <Label htmlFor={analyticsA11y.ariaProps.id}>

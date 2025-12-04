@@ -33,6 +33,11 @@ export const docsConfig: DocsConfig = {
           items: [],
         },
         {
+          title: "Changelog",
+          href: "/docs/changelog",
+          items: [],
+        },
+        {
           title: "Hooks",
           href: "/docs/hooks",
           items: [],
@@ -469,6 +474,12 @@ export const docsConfig: DocsConfig = {
           label: "New",
         },
         {
+          title: "usePayloadDiffGuard",
+          href: "/docs/hooks/use-payload-diff-guard",
+          items: [],
+          label: "New",
+        },
+        {
           title: "useNativeShare",
           href: "/docs/hooks/use-native-share",
           items: [],
@@ -522,6 +533,12 @@ export const docsConfig: DocsConfig = {
           title: "useOnlineStatus",
           href: "/docs/hooks/use-online-status",
           items: [],
+        },
+        {
+          title: "useOverflowDetector",
+          href: "/docs/hooks/use-overflow-detector",
+          items: [],
+          label: "New",
         },
         {
           title: "useStopwatch",

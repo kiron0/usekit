@@ -932,6 +932,18 @@
       ]
     },
     {
+      "name": "use-overflow-detector",
+      "title": "Use Overflow Detector",
+      "description": "Detect horizontal/vertical overflow of any container with real-time updates using ResizeObserver.",
+      "type": "registry:hook",
+      "files": [
+        {
+          "type": "registry:hook",
+          "path": "registry/hooks/use-overflow-detector.ts"
+        }
+      ]
+    },
+    {
       "name": "use-rerender",
       "title": "Use Rerender",
       "description": "Force a component to rerender with useRerender, providing a method to trigger the rerender.",
@@ -1593,6 +1605,18 @@
         {
           "type": "registry:hook",
           "path": "registry/hooks/use-diff-editor.ts"
+        }
+      ]
+    },
+    {
+      "name": "use-payload-diff-guard",
+      "title": "Use Payload Diff Guard",
+      "description": "Deep-diff two JSON payloads (DB vs input) and expose helpers to prevent unnecessary submissions when nothing changed.",
+      "type": "registry:hook",
+      "files": [
+        {
+          "type": "registry:hook",
+          "path": "registry/hooks/use-payload-diff-guard.ts"
         }
       ]
     },

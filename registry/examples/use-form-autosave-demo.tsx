@@ -161,8 +161,8 @@ export default function UseFormAutosaveDemo() {
 
   return (
     <div className="w-full space-y-6">
-      <Card>
-        <CardHeader className="flex flex-col gap-3 lg:flex-row lg:items-center">
+      <Card className="w-full border-none bg-transparent p-0">
+        <CardHeader className="flex flex-col gap-3 p-0 lg:flex-row lg:items-center">
           <div>
             <CardTitle>Application Form</CardTitle>
             <CardDescription>
@@ -185,7 +185,7 @@ export default function UseFormAutosaveDemo() {
             </div>
           </div>
         </CardHeader>
-        <CardContent className="space-y-6">
+        <CardContent className="space-y-6 p-0">
           <div className="grid gap-4 md:grid-cols-2">
             <div className="space-y-2">
               <Label htmlFor="first-name">First name</Label>

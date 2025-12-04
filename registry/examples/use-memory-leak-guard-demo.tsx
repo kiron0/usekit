@@ -64,8 +64,8 @@ export default function UseMemoryLeakGuardDemo() {
 
   return (
     <div className="w-full space-y-6">
-      <Card>
-        <CardHeader className="flex flex-col justify-between gap-2 lg:flex-row">
+      <Card className="w-full border-none bg-transparent p-0">
+        <CardHeader className="flex flex-col justify-between gap-2 p-0 lg:flex-row">
           <div>
             <CardTitle>Memory Leak Playground</CardTitle>
             <CardDescription>
@@ -77,7 +77,7 @@ export default function UseMemoryLeakGuardDemo() {
             {intervalCount} runaway interval{intervalCount === 1 ? "" : "s"}
           </Badge>
         </CardHeader>
-        <CardContent className="space-y-6">
+        <CardContent className="space-y-6 p-0">
           <section className="space-y-3">
             <h3 className="flex items-center gap-2 text-sm font-semibold">
               <Cpu className="h-4 w-4 text-muted-foreground" />

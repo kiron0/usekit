@@ -25,8 +25,8 @@ export default function UseSmartPlaceholderDemo() {
 
   return (
     <div className="w-full space-y-6">
-      <Card>
-        <CardHeader className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+      <Card className="w-full border-none bg-transparent p-0">
+        <CardHeader className="flex flex-col gap-3 p-0 md:flex-row md:items-center md:justify-between">
           <div>
             <CardTitle>Smart Placeholders</CardTitle>
             <p className="text-sm text-muted-foreground">
@@ -38,7 +38,7 @@ export default function UseSmartPlaceholderDemo() {
             Seed {seed.toFixed(3)}
           </Badge>
         </CardHeader>
-        <CardContent className="space-y-6">
+        <CardContent className="space-y-6 p-0">
           <div className="flex gap-2 overflow-x-auto">
             {TYPES.map((type) => {
               const isActive = type === variant

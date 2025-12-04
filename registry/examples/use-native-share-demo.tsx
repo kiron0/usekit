@@ -44,8 +44,8 @@ export default function UseNativeShareDemo() {
 
   return (
     <div className="w-full space-y-6">
-      <Card>
-        <CardHeader className="flex flex-col justify-between gap-3 lg:flex-row">
+      <Card className="w-full border-none bg-transparent p-0">
+        <CardHeader className="flex flex-col justify-between gap-3 p-0 lg:flex-row">
           <div>
             <CardTitle className="flex items-center gap-2">
               <Share2 className="h-5 w-5" />
@@ -72,7 +72,7 @@ export default function UseNativeShareDemo() {
             )}
           </div>
         </CardHeader>
-        <CardContent className="space-y-6">
+        <CardContent className="space-y-6 p-0">
           <div className="grid gap-4 md:grid-cols-2">
             <div className="space-y-3">
               <div className="space-y-2">

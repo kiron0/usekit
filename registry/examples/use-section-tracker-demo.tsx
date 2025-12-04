@@ -60,7 +60,7 @@ export default function UseSectionTrackerDemo() {
 
   return (
     <div className="grid w-full grid-cols-1 gap-4 md:grid-cols-[220px,minmax(0,1fr)]">
-      <Card className="h-full">
+      <Card className="w-full bg-transparent">
         <CardHeader>
           <CardTitle className="flex items-center gap-2 text-sm">
             <BookOpen className="h-4 w-4" />
@@ -95,15 +95,15 @@ export default function UseSectionTrackerDemo() {
           })}
           <div className="pt-2 text-xs text-muted-foreground">
             Active section:{" "}
-            <Badge variant="outline" className="ml-1">
+            <Badge variant="outline" className="mt-1">
               {activeSection ?? "None"}
             </Badge>
           </div>
         </CardContent>
       </Card>
 
-      <Card className="h-full">
-        <CardContent className="pt-4">
+      <Card className="w-full bg-transparent">
+        <CardContent>
           <ScrollArea className="h-64 rounded-md border bg-muted/40 p-4">
             <div className="space-y-8 text-sm">
               {SECTIONS.map((section) => (

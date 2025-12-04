@@ -142,6 +142,16 @@ export const hooksExamples: Registry["items"] = [
     ],
   },
   {
+    name: "use-overflow-detector-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/use-overflow-detector-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
     name: "use-window-size-demo",
     type: "registry:example",
     files: [
@@ -1048,6 +1058,16 @@ export const hooksExamples: Registry["items"] = [
     files: [
       {
         path: "registry/examples/use-tiny-redux-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-payload-diff-guard-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/use-payload-diff-guard-demo.tsx",
         type: "registry:example",
       },
     ],

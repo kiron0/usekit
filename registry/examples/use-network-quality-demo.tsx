@@ -51,7 +51,7 @@ export default function UseNetworkQualityDemo() {
   return (
     <div className="w-full space-y-6">
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-        <Card>
+        <Card className="w-full bg-transparent">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <Wifi className="h-5 w-5" />
@@ -110,7 +110,7 @@ export default function UseNetworkQualityDemo() {
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="w-full bg-transparent">
           <CardHeader>
             <CardTitle>Settings</CardTitle>
             <CardDescription>Configure measurement behavior</CardDescription>
@@ -159,7 +159,7 @@ export default function UseNetworkQualityDemo() {
         </Card>
       </div>
 
-      <Card>
+      <Card className="w-full bg-transparent">
         <CardHeader>
           <CardTitle>Quality Thresholds</CardTitle>
           <CardDescription>How network quality is categorized</CardDescription>

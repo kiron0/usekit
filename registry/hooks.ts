@@ -991,6 +991,19 @@ export const hooks: Registry["items"] = [
     ],
   },
   {
+    name: "use-overflow-detector",
+    title: "Use Overflow Detector",
+    description:
+      "Detect horizontal/vertical overflow of any container with real-time updates using ResizeObserver.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-overflow-detector.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
     name: "use-rerender",
     title: "Use Rerender",
     description:
@@ -1702,6 +1715,19 @@ export const hooks: Registry["items"] = [
     files: [
       {
         path: "registry/hooks/use-diff-editor.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-payload-diff-guard",
+    title: "Use Payload Diff Guard",
+    description:
+      "Deep-diff two JSON payloads (DB vs input) and expose helpers to prevent unnecessary submissions when nothing changed.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-payload-diff-guard.ts",
         type: "registry:hook",
       },
     ],

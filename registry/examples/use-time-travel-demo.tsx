@@ -88,8 +88,8 @@ export default function UseTimeTravelDemo() {
 
   return (
     <div className="w-full space-y-6">
-      <Card>
-        <CardHeader className="flex flex-col justify-between gap-3 lg:flex-row">
+      <Card className="w-full border-none bg-transparent p-0">
+        <CardHeader className="flex flex-col justify-between gap-3 p-0 lg:flex-row">
           <div>
             <CardTitle>Time Travel Debugger</CardTitle>
             <CardDescription>
@@ -102,7 +102,7 @@ export default function UseTimeTravelDemo() {
             {history.length} snapshots
           </Badge>
         </CardHeader>
-        <CardContent className="space-y-6">
+        <CardContent className="space-y-6 p-0">
           <div className="grid gap-4">
             <div className="flex flex-col gap-2">
               <Label htmlFor="title">Title</Label>

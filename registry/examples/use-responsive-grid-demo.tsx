@@ -111,8 +111,8 @@ export default function UseResponsiveGridDemo() {
   })
 
   return (
-    <div className="space-y-6">
-      <Card>
+    <div className="w-full space-y-6">
+      <Card className="w-full bg-transparent">
         <CardHeader>
           <CardTitle>Playground</CardTitle>
           <CardDescription>
@@ -213,8 +213,7 @@ export default function UseResponsiveGridDemo() {
           </div>
         </CardContent>
       </Card>
-
-      <Card>
+      <Card className="w-full bg-transparent">
         <CardHeader className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <CardTitle>Responsive Grid</CardTitle>
@@ -234,7 +233,7 @@ export default function UseResponsiveGridDemo() {
             {photos.map((photo) => (
               <article
                 key={photo.id}
-                className="flex flex-col rounded-xl border bg-card text-card-foreground shadow-sm"
+                className="flex flex-col rounded-xl border shadow-sm"
                 style={{
                   ...itemStyle,
                   height: photo.height,

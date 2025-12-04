@@ -34,8 +34,8 @@ export default function UsePWAInstallDemo() {
 
   return (
     <div className="w-full space-y-6">
-      <Card>
-        <CardHeader className="flex flex-col gap-2 lg:flex-row lg:items-center lg:justify-between">
+      <Card className="w-full border-none bg-transparent p-0">
+        <CardHeader className="flex flex-col gap-2 p-0 lg:flex-row lg:items-center lg:justify-between">
           <div>
             <CardTitle>PWA Install Manager</CardTitle>
             <CardDescription>
@@ -49,7 +49,7 @@ export default function UsePWAInstallDemo() {
             <Badge variant="outline">Prompts shown: {promptCount}</Badge>
           </div>
         </CardHeader>
-        <CardContent className="space-y-6">
+        <CardContent className="space-y-6 p-0">
           <section className="space-y-3">
             <div className="flex items-center gap-2 text-sm font-semibold text-muted-foreground">
               <Download className="h-4 w-4" />

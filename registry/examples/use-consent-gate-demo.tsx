@@ -42,8 +42,8 @@ export default function UseConsentGateDemo() {
 
   return (
     <div className="w-full space-y-4">
-      <Card className="w-full">
-        <CardHeader className="flex w-full flex-col justify-between gap-4 lg:flex-row">
+      <Card className="w-full border-none bg-transparent p-0">
+        <CardHeader className="flex w-full flex-col justify-between gap-4 p-0 lg:flex-row">
           <div>
             <CardTitle>Consent center</CardTitle>
             <CardDescription>
@@ -62,7 +62,7 @@ export default function UseConsentGateDemo() {
             )}
           </Badge>
         </CardHeader>
-        <CardContent className="space-y-4">
+        <CardContent className="space-y-4 p-0">
           {FEATURES.map((feature) => (
             <div
               key={feature.key}
@@ -82,7 +82,7 @@ export default function UseConsentGateDemo() {
             </div>
           ))}
         </CardContent>
-        <CardFooter className="flex flex-wrap gap-2">
+        <CardFooter className="flex flex-wrap gap-2 p-0">
           <Button size="sm" onClick={enableAll}>
             Allow everything
           </Button>
