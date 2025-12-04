@@ -80,8 +80,8 @@ export function ClipboardPanel() {
 
 ### Return Values
 
-| Name                  | Type                      | Description                                                           |
-| --------------------- | ------------------------- | --------------------------------------------------------------------- |
+| Name          | Type                      | Description                                                           |
+| ------------- | ------------------------- | --------------------------------------------------------------------- |
 | `list`        | `string[]`                | Ordered history (newest first).                                       |
 | `push(value)` | `(value: string) => void` | Adds a value to history, applying dedupe and size constraints.        |
 | `pull()`      | `() => Promise<void>`     | Reads `navigator.clipboard` and stores the text.                      |
