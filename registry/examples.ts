@@ -1072,4 +1072,34 @@ export const hooksExamples: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "use-dark-mode-schedule-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/use-dark-mode-schedule-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-breadcrumbs-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/use-breadcrumbs-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-smart-tooltip-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/use-smart-tooltip-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
 ]

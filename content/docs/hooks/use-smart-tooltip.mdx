@@ -1,0 +1,221 @@
+---
+title: useSmartTooltip
+description: Tooltip that adjusts position intelligently based on space with auto-flip, collision detection, and prefersDirection option.
+---
+
+<ComponentPreview name="use-smart-tooltip-demo" />
+
+## Installation
+
+<CodeTabs>
+  <TabsList>
+    <TabsTrigger value="cli">CLI</TabsTrigger>
+    <TabsTrigger value="manual">Manual</TabsTrigger>
+  </TabsList>
+
+  <TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://usekit.kiron.dev/k/use-smart-tooltip
+```
+
+  </TabsContent>
+
+  <TabsContent value="manual">
+    <Steps>
+      <Step>Copy and paste the following code into your project.</Step>
+      <ComponentSource name="use-smart-tooltip" />
+      <Step>Update the import paths to match your project.</Step>
+    </Steps>
+  </TabsContent>
+</CodeTabs>
+
+## Usage
+
+### Basic Example
+
+```tsx {5,8-25}
+"use client"
+
+import * as React from "react"
+import { createPortal } from "react-dom"
+
+import { useSmartTooltip } from "@/hooks/use-smart-tooltip"
+
+export function SmartTooltipExample() {
+  const { triggerRef, tooltipRef, position, isVisible, show, hide } =
+    useSmartTooltip({
+      prefersDirection: "top",
+      enableCollisionDetection: true,
+    })
+
+  return (
+    <>
+      <button
+        ref={triggerRef as React.RefObject<HTMLButtonElement>}
+        onMouseEnter={show}
+        onMouseLeave={hide}
+      >
+        Hover me
+      </button>
+      {isVisible && position && typeof window !== "undefined" && (
+        <>
+          {createPortal(
+            <div
+              ref={tooltipRef as React.RefObject<HTMLDivElement>}
+              style={{
+                position: "fixed",
+                left: `${position.x}px`,
+                top: `${position.y}px`,
+                zIndex: 9999,
+              }}
+            >
+              Tooltip content
+            </div>,
+            document.body
+          )}
+        </>
+      )}
+    </>
+  )
+}
+```
+
+### With Different Preferred Directions
+
+```tsx {5,8-15}
+"use client"
+
+import * as React from "react"
+
+import { useSmartTooltip } from "@/hooks/use-smart-tooltip"
+
+export function DirectionExample() {
+  const { triggerRef, tooltipRef, position, isVisible, show, hide } =
+    useSmartTooltip({
+      prefersDirection: "bottom",
+      offset: 12,
+      viewportPadding: 16,
+    })
+
+  return (
+    <button
+      ref={triggerRef as React.RefObject<HTMLButtonElement>}
+      onMouseEnter={show}
+      onMouseLeave={hide}
+    >
+      Prefer bottom
+    </button>
+  )
+}
+```
+
+### Disable Collision Detection
+
+```tsx {5,8-10}
+"use client"
+
+import * as React from "react"
+
+import { useSmartTooltip } from "@/hooks/use-smart-tooltip"
+
+export function NoCollisionExample() {
+  const { triggerRef, tooltipRef, position, isVisible, show, hide } =
+    useSmartTooltip({
+      prefersDirection: "right",
+      enableCollisionDetection: false,
+    })
+
+  return (
+    <button
+      ref={triggerRef as React.RefObject<HTMLButtonElement>}
+      onMouseEnter={show}
+      onMouseLeave={hide}
+    >
+      No auto-flip
+    </button>
+  )
+}
+```
+
+## API Reference
+
+### `useSmartTooltip(options)`
+
+Tooltip hook that intelligently adjusts position based on available space with collision detection and auto-flip.
+
+#### Options
+
+```ts
+interface UseSmartTooltipOptions {
+  prefersDirection?: TooltipSide
+  offset?: number
+  viewportPadding?: number
+  enableCollisionDetection?: boolean
+}
+```
+
+| Name                       | Type          | Description                                                                     | Default |
+| -------------------------- | ------------- | ------------------------------------------------------------------------------- | ------- |
+| `prefersDirection`         | `TooltipSide` | Preferred direction for the tooltip. The tooltip will try this direction first. | `"top"` |
+| `offset`                   | `number`      | Offset in pixels from the trigger element.                                      | `8`     |
+| `viewportPadding`          | `number`      | Padding from viewport edges in pixels.                                          | `8`     |
+| `enableCollisionDetection` | `boolean`     | Whether to enable collision detection and auto-flip.                            | `true`  |
+
+#### Return value
+
+```ts
+interface UseSmartTooltipReturn {
+  triggerRef: React.RefObject<HTMLElement>
+  tooltipRef: React.RefObject<HTMLElement>
+  position: TooltipPosition | null
+  isVisible: boolean
+  show: () => void
+  hide: () => void
+  toggle: () => void
+}
+```
+
+| Name         | Type                           | Description                                   |
+| ------------ | ------------------------------ | --------------------------------------------- |
+| `triggerRef` | `React.RefObject<HTMLElement>` | Ref to attach to the trigger element.         |
+| `tooltipRef` | `React.RefObject<HTMLElement>` | Ref to attach to the tooltip content element. |
+| `position`   | `TooltipPosition \| null`      | Calculated tooltip position.                  |
+| `isVisible`  | `boolean`                      | Whether the tooltip should be visible.        |
+| `show`       | `() => void`                   | Show the tooltip.                             |
+| `hide`       | `() => void`                   | Hide the tooltip.                             |
+| `toggle`     | `() => void`                   | Toggle the tooltip visibility.                |
+
+### `TooltipPosition`
+
+```ts
+interface TooltipPosition {
+  side: TooltipSide
+  x: number
+  y: number
+  flipped: boolean
+}
+```
+
+| Name      | Type          | Description                                                             |
+| --------- | ------------- | ----------------------------------------------------------------------- |
+| `side`    | `TooltipSide` | Current side of the tooltip (`"top"`, `"bottom"`, `"left"`, `"right"`). |
+| `x`       | `number`      | X coordinate in pixels (relative to viewport).                          |
+| `y`       | `number`      | Y coordinate in pixels (relative to viewport).                          |
+| `flipped` | `boolean`     | Whether the tooltip was flipped from the preferred direction.           |
+
+### `TooltipSide`
+
+```ts
+type TooltipSide = "top" | "bottom" | "left" | "right"
+```
+
+## Notes
+
+- The hook automatically calculates the best position based on available viewport space.
+- When `enableCollisionDetection` is `true`, the tooltip will automatically flip to the opposite side if there's not enough space.
+- The hook tries all four directions (starting with `prefersDirection`) to find the best fit.
+- Position updates automatically on window resize and scroll events.
+- The tooltip should be rendered using a portal (e.g., `createPortal`) to ensure proper positioning.
+- Both `triggerRef` and `tooltipRef` must be attached to DOM elements for position calculation to work.
+- The `position` values are in viewport coordinates (fixed positioning), so use `position: fixed` when rendering the tooltip.

@@ -1,0 +1,184 @@
+---
+title: useDarkModeSchedule
+description: Automatically switches themes based on schedules with custom start/end times, system-preference fallback, and smooth transitions.
+---
+
+<ComponentPreview name="use-dark-mode-schedule-demo" />
+
+## Installation
+
+<CodeTabs>
+  <TabsList>
+    <TabsTrigger value="cli">CLI</TabsTrigger>
+    <TabsTrigger value="manual">Manual</TabsTrigger>
+  </TabsList>
+
+  <TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://usekit.kiron.dev/k/use-dark-mode-schedule
+```
+
+  </TabsContent>
+
+  <TabsContent value="manual">
+    <Steps>
+      <Step>Copy and paste the following code into your project.</Step>
+      <ComponentSource name="use-dark-mode-schedule" />
+      <Step>Update the import paths to match your project.</Step>
+    </Steps>
+  </TabsContent>
+</CodeTabs>
+
+## Usage
+
+### Basic Example
+
+```tsx {5,8-13}
+"use client"
+
+import * as React from "react"
+
+import { useDarkModeSchedule } from "@/hooks/use-dark-mode-schedule"
+
+export function ThemeScheduleExample() {
+  const { currentTheme, isDarkMode, isScheduleActive, timeUntilSwitch } =
+    useDarkModeSchedule({
+      darkStartTime: "18:00", // 6 PM
+      darkEndTime: "06:00", // 6 AM
+      fallbackToSystem: true,
+    })
+
+  return (
+    <div>
+      <p>Current theme: {currentTheme}</p>
+      <p>Dark mode active: {isDarkMode ? "Yes" : "No"}</p>
+      <p>Schedule active: {isScheduleActive ? "Yes" : "No"}</p>
+      <p>
+        Next switch in:{" "}
+        {timeUntilSwitch
+          ? `${Math.floor(timeUntilSwitch / 60000)} minutes`
+          : "Manual override"}
+      </p>
+    </div>
+  )
+}
+```
+
+### With next-themes Integration
+
+```tsx {6,11-19}
+"use client"
+
+import * as React from "react"
+import { useTheme } from "next-themes"
+
+import { useDarkModeSchedule } from "@/hooks/use-dark-mode-schedule"
+
+export function NextThemesIntegration() {
+  const { setTheme: setNextTheme } = useTheme()
+
+  const { currentTheme, isDarkMode, reset } = useDarkModeSchedule({
+    darkStartTime: "20:00",
+    darkEndTime: "07:00",
+    fallbackToSystem: true,
+    smoothTransition: true,
+    setTheme: (theme) => {
+      setNextTheme(theme === "system" ? "system" : theme)
+    },
+  })
+
+  return (
+    <div>
+      <p>Theme: {currentTheme}</p>
+      <button onClick={reset}>Reset to schedule</button>
+    </div>
+  )
+}
+```
+
+### Manual Override
+
+```tsx {5,8-11}
+"use client"
+
+import * as React from "react"
+
+import { useDarkModeSchedule } from "@/hooks/use-dark-mode-schedule"
+
+export function ManualOverrideExample() {
+  const { setTheme, reset, currentTheme } = useDarkModeSchedule({
+    darkStartTime: "18:00",
+    darkEndTime: "06:00",
+  })
+
+  return (
+    <div>
+      <p>Current theme: {currentTheme}</p>
+      <button onClick={() => setTheme("light")}>Force Light</button>
+      <button onClick={() => setTheme("dark")}>Force Dark</button>
+      <button onClick={() => setTheme("system")}>Use System</button>
+      <button onClick={reset}>Reset to Schedule</button>
+    </div>
+  )
+}
+```
+
+## API Reference
+
+### `useDarkModeSchedule(options)`
+
+Automatically switches themes based on custom schedules with support for system preference fallback and smooth transitions.
+
+#### Options
+
+```ts
+interface UseDarkModeScheduleOptions {
+  darkStartTime?: string
+  darkEndTime?: string
+  fallbackToSystem?: boolean
+  smoothTransition?: boolean
+  setTheme?: (theme: "light" | "dark" | "system") => void
+  checkInterval?: number
+}
+```
+
+| Name               | Type                                             | Description                                                                             | Default   |
+| ------------------ | ------------------------------------------------ | --------------------------------------------------------------------------------------- | --------- |
+| `darkStartTime`    | `string`                                         | Start time for dark mode in 24-hour format (HH:mm).                                     | `"18:00"` |
+| `darkEndTime`      | `string`                                         | End time for dark mode in 24-hour format (HH:mm).                                       | `"06:00"` |
+| `fallbackToSystem` | `boolean`                                        | Whether to fall back to system preference when schedule is not active.                  | `true`    |
+| `smoothTransition` | `boolean`                                        | Whether to use smooth transitions when switching themes.                                | `false`   |
+| `setTheme`         | `(theme: "light" \| "dark" \| "system") => void` | Custom theme setter function. If not provided, uses document.documentElement.classList. | –         |
+| `checkInterval`    | `number`                                         | Check interval in milliseconds.                                                         | `60000`   |
+
+#### Return value
+
+```ts
+interface UseDarkModeScheduleReturn {
+  currentTheme: "light" | "dark" | "system"
+  isDarkMode: boolean
+  isScheduleActive: boolean
+  timeUntilSwitch: number | null
+  setTheme: (theme: "light" | "dark" | "system") => void
+  reset: () => void
+}
+```
+
+| Name               | Type                                             | Description                                                            |
+| ------------------ | ------------------------------------------------ | ---------------------------------------------------------------------- |
+| `currentTheme`     | `"light" \| "dark" \| "system"`                  | Current effective theme based on schedule and system preference.       |
+| `isDarkMode`       | `boolean`                                        | Whether dark mode is currently active according to the schedule.       |
+| `isScheduleActive` | `boolean`                                        | Whether the schedule is currently active (within dark mode hours).     |
+| `timeUntilSwitch`  | `number \| null`                                 | Time until next theme switch in milliseconds, or `null` if overridden. |
+| `setTheme`         | `(theme: "light" \| "dark" \| "system") => void` | Manually override the schedule and set theme.                          |
+| `reset`            | `() => void`                                     | Reset to automatic schedule-based switching.                           |
+
+## Notes
+
+- The hook works independently but can integrate with `next-themes` by passing a custom `setTheme` function.
+- When `fallbackToSystem` is `true`, the hook respects the user's system preference outside of scheduled hours.
+- Time ranges can span midnight (e.g., `darkStartTime: "22:00"` to `darkEndTime: "06:00"`).
+- The hook checks the current time at the specified `checkInterval` (default: 1 minute) and updates accordingly.
+- Manual overrides via `setTheme` persist until `reset()` is called.
+- Smooth transitions apply CSS transitions to the root element when switching themes.

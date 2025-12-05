@@ -2105,6 +2105,54 @@ export const Index: Record<string, any> = {
     ),
     source: "",
   },
+  "use-dark-mode-schedule": {
+    name: "use-dark-mode-schedule",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-dark-mode-schedule.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-dark-mode-schedule-demo")
+    ),
+    source: "",
+  },
+  "use-breadcrumbs": {
+    name: "use-breadcrumbs",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-breadcrumbs.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-breadcrumbs-demo")
+    ),
+    source: "",
+  },
+  "use-smart-tooltip": {
+    name: "use-smart-tooltip",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-smart-tooltip.tsx",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-smart-tooltip-demo")
+    ),
+    source: "",
+  },
   "use-copy-to-clipboard-demo": {
     name: "use-copy-to-clipboard-demo",
     type: "registry:example",
@@ -3798,6 +3846,54 @@ export const Index: Record<string, any> = {
     ],
     component: React.lazy(
       () => import("registry/examples/use-payload-diff-guard-demo.tsx")
+    ),
+    source: "",
+  },
+  "use-dark-mode-schedule-demo": {
+    name: "use-dark-mode-schedule-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-dark-mode-schedule-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-dark-mode-schedule-demo.tsx")
+    ),
+    source: "",
+  },
+  "use-breadcrumbs-demo": {
+    name: "use-breadcrumbs-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-breadcrumbs-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-breadcrumbs-demo.tsx")
+    ),
+    source: "",
+  },
+  "use-smart-tooltip-demo": {
+    name: "use-smart-tooltip-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-smart-tooltip-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-smart-tooltip-demo.tsx")
     ),
     source: "",
   },

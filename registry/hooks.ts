@@ -1797,6 +1797,45 @@ export const hooks: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "use-dark-mode-schedule",
+    title: "Use Dark Mode Schedule",
+    description:
+      "Automatically switches themes based on schedules with custom start/end times, system-preference fallback, and smooth transitions.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-dark-mode-schedule.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-breadcrumbs",
+    title: "Use Breadcrumbs",
+    description:
+      "Manage breadcrumb navigation rules with push/pop/replace operations, auto-generation from URL, and customizable labels.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-breadcrumbs.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-smart-tooltip",
+    title: "Use Smart Tooltip",
+    description:
+      "Tooltip that adjusts position intelligently based on space with auto-flip, collision detection, and prefersDirection option.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-smart-tooltip.tsx",
+        type: "registry:hook",
+      },
+    ],
+  },
 ]
 
 export default hooks

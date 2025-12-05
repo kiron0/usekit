@@ -711,6 +711,24 @@ export const docsConfig: DocsConfig = {
           items: [],
         },
         {
+          title: "useDarkModeSchedule",
+          href: "/docs/hooks/use-dark-mode-schedule",
+          items: [],
+          label: "New",
+        },
+        {
+          title: "useBreadcrumbs",
+          href: "/docs/hooks/use-breadcrumbs",
+          items: [],
+          label: "New",
+        },
+        {
+          title: "useSmartTooltip",
+          href: "/docs/hooks/use-smart-tooltip",
+          items: [],
+          label: "New",
+        },
+        {
           title: "useEnvCheck",
           href: "/docs/hooks/use-env-check",
           items: [],
