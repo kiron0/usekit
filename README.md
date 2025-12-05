@@ -57,7 +57,7 @@ function DemoComponent() {
 ### Method 2: Using shadcn CLI (Recommended)
 
 ```bash
-npx shadcn@latest add https://usekit.kiron.dev/k/[hookName]
+npx uselab@latest add [hookName]
 ```
 
 Replace `[hookName]` with the name of the hook you want to add (e.g., `use-local-storage`).

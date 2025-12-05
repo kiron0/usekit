@@ -1,0 +1,247 @@
+---
+title: useDependencyGraph
+description: Build a runtime graph of which components depend on which stores/hooks to spot tight coupling and analyze architectural patterns.
+---
+
+<ComponentPreview name="use-dependency-graph-demo" />
+
+## Installation
+
+<CodeTabs>
+  <TabsList>
+    <TabsTrigger value="cli">CLI</TabsTrigger>
+    <TabsTrigger value="manual">Manual</TabsTrigger>
+  </TabsList>
+
+  <TabsContent value="cli">
+
+```bash
+npx uselab@latest add use-dependency-graph
+```
+
+  </TabsContent>
+
+  <TabsContent value="manual">
+    <Steps>
+      <Step>Copy and paste the following code into your project.</Step>
+      <ComponentSource name="use-dependency-graph" />
+      <Step>Update the import paths to match your project.</Step>
+    </Steps>
+  </TabsContent>
+</CodeTabs>
+
+## Usage
+
+```tsx {5,8-10,24-26}
+"use client"
+
+import * as React from "react"
+
+import { useDependencyGraph } from "@/hooks/use-dependency-graph"
+
+function UserProfile() {
+  const { registerHook, registerContext } = useDependencyGraph({
+    componentName: "UserProfile",
+  })
+
+  const auth = useAuth()
+  const data = useFetch("/api/user")
+
+  React.useEffect(() => {
+    registerHook("useFetch")
+    registerContext("AuthContext")
+  }, [registerHook, registerContext])
+
+  return <div>...</div>
+}
+
+function Dashboard() {
+  const { getInspectorOutput } = useDependencyGraph({
+    componentName: "Dashboard",
+  })
+
+  // Later, analyze the entire dependency graph
+  const analysis = getInspectorOutput()
+  console.log("Coupling score:", analysis.metrics.couplingScore)
+  console.log("Recommendations:", analysis.recommendations)
+
+  return <div>...</div>
+}
+```
+
+## API Reference
+
+### `useDependencyGraph(options?)`
+
+| Name            | Type      | Description                                                         | Default       |
+| --------------- | --------- | ------------------------------------------------------------------- | ------------- |
+| `componentName` | `string`  | Component name to register (auto-detected if not provided).         | Auto-detected |
+| `autoTrack`     | `boolean` | Whether to automatically track hook dependencies (not implemented). | `false`       |
+| `filePath`      | `string`  | Custom file path for the component.                                 | —             |
+
+### Return value
+
+| Name                 | Type                                                                                                  | Description                                                                |
+| -------------------- | ----------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| `registerDependency` | `(targetName: string, targetType: DependencyNode["type"], edgeType?: DependencyEdge["type"]) => void` | Register a generic dependency relationship.                                |
+| `registerHook`       | `(hookName: string, metadata?: Record<string, unknown>) => void`                                      | Register that this component uses a specific hook.                         |
+| `registerStore`      | `(storeName: string, metadata?: Record<string, unknown>) => void`                                     | Register that this component consumes a specific store.                    |
+| `registerContext`    | `(contextName: string, metadata?: Record<string, unknown>) => void`                                   | Register that this component consumes a specific context.                  |
+| `getGraph`           | `() => DependencyGraph`                                                                               | Get the raw dependency graph structure.                                    |
+| `getInspectorOutput` | `() => InspectorOutput`                                                                               | Get analyzed inspector output with metrics, clusters, and recommendations. |
+| `clear`              | `() => void`                                                                                          | Clear all tracked dependencies (useful for testing or resetting analysis). |
+| `exportGraph`        | `() => string`                                                                                        | Export the complete graph and analysis as JSON string.                     |
+| `downloadGraph`      | `(filename?: string) => void`                                                                         | Download the graph and analysis as a JSON file.                            |
+
+### Inspector Output
+
+The `getInspectorOutput()` method returns an `InspectorOutput` object with the following structure:
+
+```ts
+interface InspectorOutput {
+  graph: DependencyGraph
+  metrics: {
+    totalNodes: number
+    totalEdges: number
+    components: number
+    hooks: number
+    stores: number
+    contexts: number
+    maxDependencies: number
+    minDependencies: number
+    avgDependencies: number
+    couplingScore: number // 0-1, higher = more tightly coupled
+  }
+  clusters: Array<{
+    nodes: string[]
+    type: "tightly-coupled" | "loosely-coupled" | "isolated"
+    score: number
+  }>
+  recommendations: string[]
+}
+```
+
+### Dependency Graph Structure
+
+```ts
+interface DependencyGraph {
+  nodes: Map<string, DependencyNode>
+  edges: DependencyEdge[]
+  timestamp: number
+}
+
+interface DependencyNode {
+  id: string
+  name: string
+  type: "component" | "hook" | "store" | "context"
+  filePath?: string
+  lineNumber?: number
+  metadata?: Record<string, unknown>
+}
+
+interface DependencyEdge {
+  from: string // source node ID
+  to: string // target node ID
+  type: "uses" | "provides" | "consumes" | "depends-on"
+  weight?: number // optional coupling strength indicator
+}
+```
+
+## Examples
+
+### Basic Usage
+
+Track dependencies in your components:
+
+```tsx
+function ShoppingCart() {
+  const { registerHook, registerStore } = useDependencyGraph({
+    componentName: "ShoppingCart",
+  })
+
+  const cart = useCartStore()
+  const data = useFetch("/api/cart")
+
+  React.useEffect(() => {
+    registerHook("useFetch")
+    registerStore("CartStore")
+  }, [registerHook, registerStore])
+
+  return <div>...</div>
+}
+```
+
+### Analyzing Architecture
+
+Get insights about your application's coupling:
+
+```tsx
+function ArchitectureAnalyzer() {
+  const { getInspectorOutput, downloadGraph } = useDependencyGraph()
+
+  const handleAnalyze = () => {
+    const output = getInspectorOutput()
+
+    // Check coupling score
+    if (output.metrics.couplingScore > 0.7) {
+      console.warn("High coupling detected!")
+    }
+
+    // Review recommendations
+    output.recommendations.forEach((rec) => {
+      console.log("💡", rec)
+    })
+
+    // Download as JSON file
+    downloadGraph("architecture-analysis.json")
+  }
+
+  return <button onClick={handleAnalyze}>Analyze Architecture</button>
+}
+```
+
+### Identifying Tightly Coupled Clusters
+
+Find components that are too tightly coupled:
+
+```tsx
+function CouplingInspector() {
+  const { getInspectorOutput } = useDependencyGraph()
+
+  const output = getInspectorOutput()
+  const tightClusters = output.clusters.filter(
+    (c) => c.type === "tightly-coupled"
+  )
+
+  return (
+    <div>
+      <h3>Tightly Coupled Clusters</h3>
+      {tightClusters.map((cluster, idx) => (
+        <div key={idx}>
+          <p>
+            Cluster {idx + 1}: {cluster.nodes.length} nodes
+          </p>
+          <p>Score: {cluster.score.toFixed(2)}</p>
+        </div>
+      ))}
+    </div>
+  )
+}
+```
+
+## Notes
+
+- The hook maintains a global dependency graph across all components using it. This allows you to analyze the entire application's dependency structure.
+- Component names are auto-detected from stack traces in development mode, but it's recommended to provide explicit `componentName` values for better accuracy.
+- The coupling score (0-1) is calculated based on average dependencies and edge density. Higher scores indicate tighter coupling.
+- Clusters are automatically identified by analyzing connected components. Tightly coupled clusters may benefit from refactoring.
+- Use `exportGraph()` to save analysis results for later review or to share with your team.
+- The hook is designed for development and architectural analysis. Consider clearing the graph periodically or using it only in development builds.
+
+## Use Cases
+
+- **Architectural Analysis**: Understand how components are connected and identify potential refactoring opportunities.
+- **Code Reviews**: Visualize dependencies before reviewing code to spot tight coupling early.
+- **Refactoring Planning**: Identify which components need to be refactored together based on coupling scores.
+- **Documentation**: Generate dependency graphs to document your application's architecture.
+- **Performance Optimization**: Find components with excessive dependencies that might benefit from optimization.

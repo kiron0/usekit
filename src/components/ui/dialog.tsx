@@ -53,7 +53,8 @@ const DialogVariants = cva(
 )
 
 interface DialogContentProps
-  extends React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content>,
+  extends
+    React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content>,
     VariantProps<typeof DialogVariants> {}
 
 const DialogContent = React.forwardRef<

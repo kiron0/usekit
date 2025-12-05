@@ -32,7 +32,7 @@ Update `registry/hooks.ts` by adding a new object inside the `hooks` array:
 | `registryDependencies`             | optional | Array of other registry packages if the hook re-exports them.             |
 | `dependencies` / `devDependencies` | optional | npm packages the hook needs.                                              |
 
-This entry powers the public registry endpoint and ensures `npx shadcn@latest add https://usekit.kiron.dev/k/<slug>` works.
+This entry powers the public registry endpoint and ensures `npx uselab@latest add <slug>` works.
 
 ## 4. Build an interactive demo
 

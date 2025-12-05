@@ -68,6 +68,18 @@ export const docsConfig: DocsConfig = {
           items: [],
         },
         {
+          title: "useDependencyGraph",
+          href: "/docs/hooks/use-dependency-graph",
+          items: [],
+          label: "New",
+        },
+        {
+          title: "useConsoleCapture",
+          href: "/docs/hooks/use-console-capture",
+          items: [],
+          label: "New",
+        },
+        {
           title: "useFetch",
           href: "/docs/hooks/use-fetch",
           items: [],

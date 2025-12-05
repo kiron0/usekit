@@ -1698,6 +1698,30 @@
           "path": "registry/hooks/use-breadcrumbs.ts"
         }
       ]
+    },
+    {
+      "name": "use-dependency-graph",
+      "title": "Use Dependency Graph",
+      "description": "Build a runtime graph of which components depend on which stores/hooks to spot tight coupling and analyze architectural patterns.",
+      "type": "registry:hook",
+      "files": [
+        {
+          "type": "registry:hook",
+          "path": "registry/hooks/use-dependency-graph.ts"
+        }
+      ]
+    },
+    {
+      "name": "use-console-capture",
+      "title": "Use Console Capture",
+      "description": "Capture browser console logs and display them in the UI. Filter by whole project, current component, specific path, or disable.",
+      "type": "registry:hook",
+      "files": [
+        {
+          "type": "registry:hook",
+          "path": "registry/hooks/use-console-capture.ts"
+        }
+      ]
     }
   ]
 }

@@ -1818,6 +1818,32 @@ export const hooks: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "use-dependency-graph",
+    title: "Use Dependency Graph",
+    description:
+      "Build a runtime graph of which components depend on which stores/hooks to spot tight coupling and analyze architectural patterns.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-dependency-graph.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-console-capture",
+    title: "Use Console Capture",
+    description:
+      "Capture browser console logs and display them in the UI. Filter by whole project, current component, specific path, or disable.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-console-capture.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
 ]
 
 export default hooks

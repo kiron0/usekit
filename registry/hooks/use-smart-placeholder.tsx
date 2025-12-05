@@ -107,8 +107,9 @@ export type SmartPlaceholderType =
   | "card"
   | "list"
 
-export interface UseSmartPlaceholderOptions
-  extends VariantProps<typeof baseSkeleton> {
+export interface UseSmartPlaceholderOptions extends VariantProps<
+  typeof baseSkeleton
+> {
   lines?: number
   width?: string
   height?: string
