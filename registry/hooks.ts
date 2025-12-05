@@ -1823,19 +1823,6 @@ export const hooks: Registry["items"] = [
       },
     ],
   },
-  {
-    name: "use-smart-tooltip",
-    title: "Use Smart Tooltip",
-    description:
-      "Tooltip that adjusts position intelligently based on space with auto-flip, collision detection, and prefersDirection option.",
-    type: "registry:hook",
-    files: [
-      {
-        path: "registry/hooks/use-smart-tooltip.tsx",
-        type: "registry:hook",
-      },
-    ],
-  },
 ]
 
 export default hooks

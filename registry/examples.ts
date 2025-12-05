@@ -1092,14 +1092,4 @@ export const hooksExamples: Registry["items"] = [
       },
     ],
   },
-  {
-    name: "use-smart-tooltip-demo",
-    type: "registry:example",
-    files: [
-      {
-        path: "registry/examples/use-smart-tooltip-demo.tsx",
-        type: "registry:example",
-      },
-    ],
-  },
 ]

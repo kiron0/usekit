@@ -10,25 +10,42 @@ export function NotFound() {
   const router = useRouter()
 
   return (
-    <div className="container mx-auto flex h-full items-center px-6 py-12">
-      <div className="mx-auto flex max-w-sm flex-col items-center text-center">
-        <p className="rounded-full bg-muted p-3 text-sm font-medium">
-          <AlertTriangleIcon className="size-6" />
-        </p>
-        <h1 className="mt-3 text-2xl font-semibold md:text-3xl">
-          Page not found
-        </h1>
-        <p className="mt-4 text-muted-foreground">
-          The page you are looking for doesn&apos;t exist.
-        </p>
-        <div className="mt-6 flex items-center gap-x-3">
-          <Button onClick={() => router.back()} className={buttonVariants()}>
+    <div className="container mx-auto flex h-[calc(100vh-3.5rem)] items-center px-6 py-12">
+      <div className="mx-auto w-full max-w-md text-center">
+        <div className="mb-8 flex justify-center">
+          <div className="relative">
+            <div className="absolute inset-0 animate-pulse rounded-full bg-destructive/20 blur-xl" />
+            <div className="relative rounded-full bg-gradient-to-br from-destructive/10 to-destructive/5 p-4 ring-2 ring-destructive/20">
+              <AlertTriangleIcon className="size-12 text-destructive" />
+            </div>
+          </div>
+        </div>
+        <div className="space-y-2">
+          <h1 className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">
+            <span className="bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">
+              404
+            </span>
+          </h1>
+          <h2 className="text-xl font-semibold text-foreground sm:text-2xl">
+            Page not found
+          </h2>
+          <p className="mx-auto max-w-sm text-base text-muted-foreground sm:text-lg">
+            The page you are looking for doesn&apos;t exist or has been moved.
+          </p>
+        </div>
+        <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
+          <Button onClick={() => router.back()}>
             <ChevronLeftIcon className="size-4" />
-            <span>Go back</span>
+            Go back
           </Button>
-          <Link href="/" className={buttonVariants({ variant: "outline" })}>
+          <Link
+            href="/"
+            className={buttonVariants({
+              variant: "outline",
+            })}
+          >
             <HouseIcon className="size-4" />
-            <span>Take me home</span>
+            Take me home
           </Link>
         </div>
       </div>

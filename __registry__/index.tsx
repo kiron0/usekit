@@ -2137,22 +2137,6 @@ export const Index: Record<string, any> = {
     ),
     source: "",
   },
-  "use-smart-tooltip": {
-    name: "use-smart-tooltip",
-    type: "registry:hook",
-    registryDependencies: undefined,
-    files: [
-      {
-        path: "registry/hooks/use-smart-tooltip.tsx",
-        type: "registry:hook",
-        target: "",
-      },
-    ],
-    component: React.lazy(
-      () => import("registry/examples/use-smart-tooltip-demo")
-    ),
-    source: "",
-  },
   "use-copy-to-clipboard-demo": {
     name: "use-copy-to-clipboard-demo",
     type: "registry:example",
@@ -3878,22 +3862,6 @@ export const Index: Record<string, any> = {
     ],
     component: React.lazy(
       () => import("registry/examples/use-breadcrumbs-demo.tsx")
-    ),
-    source: "",
-  },
-  "use-smart-tooltip-demo": {
-    name: "use-smart-tooltip-demo",
-    type: "registry:example",
-    registryDependencies: undefined,
-    files: [
-      {
-        path: "registry/examples/use-smart-tooltip-demo.tsx",
-        type: "registry:example",
-        target: "",
-      },
-    ],
-    component: React.lazy(
-      () => import("registry/examples/use-smart-tooltip-demo.tsx")
     ),
     source: "",
   },

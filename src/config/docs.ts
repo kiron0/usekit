@@ -723,12 +723,6 @@ export const docsConfig: DocsConfig = {
           label: "New",
         },
         {
-          title: "useSmartTooltip",
-          href: "/docs/hooks/use-smart-tooltip",
-          items: [],
-          label: "New",
-        },
-        {
           title: "useEnvCheck",
           href: "/docs/hooks/use-env-check",
           items: [],
