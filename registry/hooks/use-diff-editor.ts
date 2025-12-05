@@ -198,10 +198,10 @@ export function useDiffEditor<T = unknown>(
   const diffs = React.useMemo<TextDiffLine[] | JsonDiffEntry[]>(() => {
     if (kind === "text") {
       const leftText = isTextPair(left, right)
-        ? left
+        ? String(left)
         : JSON.stringify(left, null, 2)
       const rightText = isTextPair(left, right)
-        ? right
+        ? String(right)
         : JSON.stringify(right, null, 2)
       return diffText(leftText, rightText)
     }
@@ -232,7 +232,3 @@ export function useDiffEditor<T = unknown>(
     [kind, diffs, merge]
   )
 }
-
-export type { JsonDiffEntry, TextDiffLine, UseDiffEditorResult }
-
-export type { JsonDiffEntry, TextDiffLine, UseDiffEditorResult }
