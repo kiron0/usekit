@@ -1,5 +1,3 @@
-"use client"
-
 import * as React from "react"
 
 const DEFAULT_DEBOUNCE_MS = 1200

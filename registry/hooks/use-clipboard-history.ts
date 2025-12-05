@@ -1,5 +1,3 @@
-"use client"
-
 import * as React from "react"
 
 const DEFAULT_STORAGE_KEY = "usekit:clipboard-history"
