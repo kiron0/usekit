@@ -1,0 +1,135 @@
+---
+title: useFormAutosave
+description: Automatically save complex form drafts with debounce, conflict detection, and restore helpers.
+---
+
+<ComponentPreview name="use-form-autosave-demo" />
+
+## Installation
+
+<CodeTabs>
+  <TabsList>
+    <TabsTrigger value="cli">CLI</TabsTrigger>
+    <TabsTrigger value="manual">Manual</TabsTrigger>
+  </TabsList>
+
+  <TabsContent value="cli">
+
+```bash
+npx uselab@latest add use-form-autosave
+```
+
+  </TabsContent>
+
+  <TabsContent value="manual">
+    <Steps>
+      <Step>Copy and paste the following code into your project.</Step>
+      <ComponentSource name="use-form-autosave" />
+      <Step>Update the import paths to match your project structure.</Step>
+    </Steps>
+  </TabsContent>
+</CodeTabs>
+
+## Usage
+
+```tsx {5,21-23}
+"use client"
+
+import * as React from "react"
+
+import { useFormAutosave } from "@/hooks/use-form-autosave"
+
+interface ApplicationForm {
+  applicant: { name: string; email: string }
+  summary: string
+  sections: Array<{ id: string; text: string }>
+}
+
+const INITIAL_VALUES: ApplicationForm = {
+  applicant: { name: "", email: "" },
+  summary: "",
+  sections: [],
+}
+
+export function ApplicationFormPage() {
+  const [values, setValues] = React.useState<ApplicationForm>(INITIAL_VALUES)
+  const autosave = useFormAutosave("application-form", values, {
+    debounceMs: 1500,
+  })
+
+  const handleRestore = () => {
+    const draft = autosave.restore()
+    if (draft) setValues(draft)
+  }
+
+  return (
+    <form className="space-y-4">
+      {/* form fields */}
+      <footer className="flex items-center gap-3 text-sm text-muted-foreground">
+        <span>
+          {autosave.isSaving
+            ? "Saving…"
+            : autosave.savedAt
+              ? `Saved at ${new Date(autosave.savedAt).toLocaleTimeString()}`
+              : "Draft not saved yet"}
+        </span>
+        <button
+          type="button"
+          onClick={handleRestore}
+          disabled={!autosave.hasDraft}
+        >
+          Restore draft
+        </button>
+        <button
+          type="button"
+          onClick={autosave.clear}
+          disabled={!autosave.hasDraft}
+        >
+          Clear draft
+        </button>
+      </footer>
+    </form>
+  )
+}
+```
+
+## API Reference
+
+### Parameters
+
+| Name                    | Type      | Description                                                        | Default Value  | Optional |
+| ----------------------- | --------- | ------------------------------------------------------------------ | -------------- | -------- |
+| `name`                  | `string`  | Identifier used for the storage key (`usekit:form-autosave:name`). | —              | No       |
+| `values`                | `T`       | Any serializable form data (objects, arrays, deeply nested).       | —              | No       |
+| `options.debounceMs`    | `number`  | Delay (ms) before persisting after changes.                        | `1200`         | Yes      |
+| `options.storage`       | `Storage` | Custom storage (e.g., `sessionStorage`).                           | `localStorage` | Yes      |
+| `options.enabled`       | `boolean` | Toggle autosave logic.                                             | `true`         | Yes      |
+| `options.flushOnUnload` | `boolean` | Flush pending drafts automatically when the page hides or unloads. | `false`        | Yes      |
+
+### Return Values
+
+| Name          | Type                          | Description                                                    |
+| ------------- | ----------------------------- | -------------------------------------------------------------- |
+| `savedAt`     | `number \| null`              | Timestamp of the last persisted draft.                         |
+| `isSaving`    | `boolean`                     | `true` while a debounce cycle is writing to storage.           |
+| `hasDraft`    | `boolean`                     | `true` if a draft exists in storage.                           |
+| `hasConflict` | `boolean`                     | `true` when another session saved newer data.                  |
+| `conflict`    | `AutosaveConflict<T> \| null` | The conflicting draft payload and metadata.                    |
+| `restore()`   | `() => T \| null`             | Returns the stored values so you can hydrate your form.        |
+| `clear()`     | `() => void`                  | Removes the draft and resets metadata.                         |
+| `flush()`     | `() => void`                  | Persists the current `values` immediately, bypassing debounce. |
+
+## Conflict detection
+
+- Each session receives a unique `sessionId`. When storage is modified from a different session (another tab, device, etc.), the hook surfaces `hasConflict` and the conflicting values.
+- Use the `conflict` payload to preview or merge incoming drafts. Calling `restore()` resolves the conflict and hydrates your form with the remote values.
+- A `storage` event listener keeps tabs in sync, even without manual refresh.
+
+## Tips
+
+- Works with arbitrarily nested data; the hook serializes using `JSON.stringify`.
+- Pair with schema validators: autosave the raw draft, then validate before final submission.
+- Use a `storage` namespace (`name`) per form instance (e.g., `"application-form"` or `"editor:doc-123"`).
+- When using server-rendered routes, the hook remains inert during SSR and activates on the client.
+- For remote persistence, hook into `storage` option with a custom adapter that proxies to IndexedDB or `localforage`.
+- Call `flush()` whenever you need an immediate save (e.g., before submitting or navigating away), or enable `flushOnUnload` to automate that behavior.

@@ -48,6 +48,22 @@ export const Index: Record<string, any> = {
     ),
     source: "",
   },
+  "use-accessible-labels": {
+    name: "use-accessible-labels",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-accessible-labels.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-accessible-labels-demo")
+    ),
+    source: "",
+  },
   "use-unmount": {
     name: "use-unmount",
     type: "registry:hook",
@@ -65,7 +81,7 @@ export const Index: Record<string, any> = {
   "use-debounce-callback": {
     name: "use-debounce-callback",
     type: "registry:hook",
-    registryDependencies: ["https://usekit.kiron.dev/k/use-unmount"],
+    registryDependencies: ["use-unmount"],
     files: [
       {
         path: "registry/hooks/use-debounce-callback.ts",
@@ -122,6 +138,22 @@ export const Index: Record<string, any> = {
     component: React.lazy(() => import("registry/examples/use-timeout-demo")),
     source: "",
   },
+  "use-time-travel": {
+    name: "use-time-travel",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-time-travel.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-time-travel-demo")
+    ),
+    source: "",
+  },
   "use-document-title": {
     name: "use-document-title",
     type: "registry:hook",
@@ -155,7 +187,7 @@ export const Index: Record<string, any> = {
   "use-mouse-position": {
     name: "use-mouse-position",
     type: "registry:hook",
-    registryDependencies: ["https://usekit.kiron.dev/k/use-is-mobile"],
+    registryDependencies: ["use-is-mobile"],
     files: [
       {
         path: "registry/hooks/use-mouse-position.ts",
@@ -423,6 +455,22 @@ export const Index: Record<string, any> = {
     ],
     component: React.lazy(
       () => import("registry/examples/use-cookie-storage-demo")
+    ),
+    source: "",
+  },
+  "use-consent-gate": {
+    name: "use-consent-gate",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-consent-gate.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-consent-gate-demo")
     ),
     source: "",
   },
@@ -847,9 +895,7 @@ export const Index: Record<string, any> = {
   "use-event-listener": {
     name: "use-event-listener",
     type: "registry:hook",
-    registryDependencies: [
-      "https://usekit.kiron.dev/k/use-isomorphic-layout-effect",
-    ],
+    registryDependencies: ["use-isomorphic-layout-effect"],
     files: [
       {
         path: "registry/hooks/use-event-listener.ts",
@@ -879,7 +925,7 @@ export const Index: Record<string, any> = {
   "use-dropzone": {
     name: "use-dropzone",
     type: "registry:hook",
-    registryDependencies: ["https://usekit.kiron.dev/k/use-event-listener"],
+    registryDependencies: ["use-event-listener"],
     files: [
       {
         path: "registry/hooks/use-dropzone.ts",
@@ -903,6 +949,22 @@ export const Index: Record<string, any> = {
     ],
     component: React.lazy(
       () => import("registry/examples/use-input-value-demo")
+    ),
+    source: "",
+  },
+  "use-masked-input": {
+    name: "use-masked-input",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-masked-input.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-masked-input-demo")
     ),
     source: "",
   },
@@ -997,10 +1059,7 @@ export const Index: Record<string, any> = {
   "use-controlled-state": {
     name: "use-controlled-state",
     type: "registry:hook",
-    registryDependencies: [
-      "https://usekit.kiron.dev/k/use-callback-ref",
-      "https://usekit.kiron.dev/k/use-uncontrolled-state",
-    ],
+    registryDependencies: ["use-callback-ref", "use-uncontrolled-state"],
     files: [
       {
         path: "registry/hooks/use-controlled-state.ts",
@@ -1016,7 +1075,7 @@ export const Index: Record<string, any> = {
   "use-uncontrolled-state": {
     name: "use-uncontrolled-state",
     type: "registry:hook",
-    registryDependencies: ["https://usekit.kiron.dev/k/use-callback-ref"],
+    registryDependencies: ["use-callback-ref"],
     files: [
       {
         path: "registry/hooks/use-uncontrolled-state.ts",
@@ -1085,6 +1144,22 @@ export const Index: Record<string, any> = {
       },
     ],
     component: React.lazy(() => import("registry/hooks/use-online-status.ts")),
+    source: "",
+  },
+  "use-overflow-detector": {
+    name: "use-overflow-detector",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-overflow-detector.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-overflow-detector-demo")
+    ),
     source: "",
   },
   "use-rerender": {
@@ -1739,6 +1814,324 @@ export const Index: Record<string, any> = {
     ),
     source: "",
   },
+  "use-task-queue": {
+    name: "use-task-queue",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-task-queue.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-task-queue-demo")
+    ),
+    source: "",
+  },
+  "use-adaptive-language": {
+    name: "use-adaptive-language",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-adaptive-language.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-adaptive-language-demo")
+    ),
+    source: "",
+  },
+  "use-progressive-upload": {
+    name: "use-progressive-upload",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-progressive-upload.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-progressive-upload-demo")
+    ),
+    source: "",
+  },
+  "use-network-quality": {
+    name: "use-network-quality",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-network-quality.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-network-quality-demo")
+    ),
+    source: "",
+  },
+  "use-secure-storage": {
+    name: "use-secure-storage",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-secure-storage.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-secure-storage-demo")
+    ),
+    source: "",
+  },
+  "use-responsive-grid": {
+    name: "use-responsive-grid",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-responsive-grid.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-responsive-grid-demo")
+    ),
+    source: "",
+  },
+  "use-form-autosave": {
+    name: "use-form-autosave",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-form-autosave.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-form-autosave-demo")
+    ),
+    source: "",
+  },
+  "use-memory-leak-guard": {
+    name: "use-memory-leak-guard",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-memory-leak-guard.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-memory-leak-guard-demo")
+    ),
+    source: "",
+  },
+  "use-clipboard-history": {
+    name: "use-clipboard-history",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-clipboard-history.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-clipboard-history-demo")
+    ),
+    source: "",
+  },
+  "use-pwa-install": {
+    name: "use-pwa-install",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-pwa-install.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-pwa-install-demo")
+    ),
+    source: "",
+  },
+  "use-smart-placeholder": {
+    name: "use-smart-placeholder",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-smart-placeholder.tsx",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-smart-placeholder-demo")
+    ),
+    source: "",
+  },
+  "use-diff-editor": {
+    name: "use-diff-editor",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-diff-editor.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-diff-editor-demo")
+    ),
+    source: "",
+  },
+  "use-payload-diff-guard": {
+    name: "use-payload-diff-guard",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-payload-diff-guard.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-payload-diff-guard-demo")
+    ),
+    source: "",
+  },
+  "use-native-share": {
+    name: "use-native-share",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-native-share.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-native-share-demo")
+    ),
+    source: "",
+  },
+  "use-page-transition": {
+    name: "use-page-transition",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-page-transition.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-page-transition-demo")
+    ),
+    source: "",
+  },
+  "use-view-time": {
+    name: "use-view-time",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-view-time.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(() => import("registry/examples/use-view-time-demo")),
+    source: "",
+  },
+  "use-section-tracker": {
+    name: "use-section-tracker",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-section-tracker.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-section-tracker-demo")
+    ),
+    source: "",
+  },
+  "use-tiny-redux": {
+    name: "use-tiny-redux",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-tiny-redux.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-tiny-redux-demo")
+    ),
+    source: "",
+  },
+  "use-dark-mode-schedule": {
+    name: "use-dark-mode-schedule",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-dark-mode-schedule.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-dark-mode-schedule-demo")
+    ),
+    source: "",
+  },
+  "use-breadcrumbs": {
+    name: "use-breadcrumbs",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-breadcrumbs.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-breadcrumbs-demo")
+    ),
+    source: "",
+  },
   "use-copy-to-clipboard-demo": {
     name: "use-copy-to-clipboard-demo",
     type: "registry:example",
@@ -1958,6 +2351,22 @@ export const Index: Record<string, any> = {
     ],
     component: React.lazy(
       () => import("registry/examples/use-orientation-demo.tsx")
+    ),
+    source: "",
+  },
+  "use-overflow-detector-demo": {
+    name: "use-overflow-detector-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-overflow-detector-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-overflow-detector-demo.tsx")
     ),
     source: "",
   },
@@ -2432,6 +2841,54 @@ export const Index: Record<string, any> = {
     ],
     component: React.lazy(
       () => import("registry/examples/use-input-value-demo.tsx")
+    ),
+    source: "",
+  },
+  "use-accessible-labels-demo": {
+    name: "use-accessible-labels-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-accessible-labels-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-accessible-labels-demo.tsx")
+    ),
+    source: "",
+  },
+  "use-consent-gate-demo": {
+    name: "use-consent-gate-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-consent-gate-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-consent-gate-demo.tsx")
+    ),
+    source: "",
+  },
+  "use-masked-input-demo": {
+    name: "use-masked-input-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-masked-input-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-masked-input-demo.tsx")
     ),
     source: "",
   },
@@ -3064,6 +3521,342 @@ export const Index: Record<string, any> = {
     ],
     component: React.lazy(
       () => import("registry/examples/use-rock-paper-scissors-demo.tsx")
+    ),
+    source: "",
+  },
+  "use-task-queue-demo": {
+    name: "use-task-queue-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-task-queue-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-task-queue-demo.tsx")
+    ),
+    source: "",
+  },
+  "use-adaptive-language-demo": {
+    name: "use-adaptive-language-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-adaptive-language-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-adaptive-language-demo.tsx")
+    ),
+    source: "",
+  },
+  "use-progressive-upload-demo": {
+    name: "use-progressive-upload-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-progressive-upload-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-progressive-upload-demo.tsx")
+    ),
+    source: "",
+  },
+  "use-network-quality-demo": {
+    name: "use-network-quality-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-network-quality-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-network-quality-demo.tsx")
+    ),
+    source: "",
+  },
+  "use-secure-storage-demo": {
+    name: "use-secure-storage-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-secure-storage-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-secure-storage-demo.tsx")
+    ),
+    source: "",
+  },
+  "use-responsive-grid-demo": {
+    name: "use-responsive-grid-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-responsive-grid-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-responsive-grid-demo.tsx")
+    ),
+    source: "",
+  },
+  "use-form-autosave-demo": {
+    name: "use-form-autosave-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-form-autosave-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-form-autosave-demo.tsx")
+    ),
+    source: "",
+  },
+  "use-memory-leak-guard-demo": {
+    name: "use-memory-leak-guard-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-memory-leak-guard-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-memory-leak-guard-demo.tsx")
+    ),
+    source: "",
+  },
+  "use-clipboard-history-demo": {
+    name: "use-clipboard-history-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-clipboard-history-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-clipboard-history-demo.tsx")
+    ),
+    source: "",
+  },
+  "use-pwa-install-demo": {
+    name: "use-pwa-install-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-pwa-install-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-pwa-install-demo.tsx")
+    ),
+    source: "",
+  },
+  "use-smart-placeholder-demo": {
+    name: "use-smart-placeholder-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-smart-placeholder-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-smart-placeholder-demo.tsx")
+    ),
+    source: "",
+  },
+  "use-time-travel-demo": {
+    name: "use-time-travel-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-time-travel-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-time-travel-demo.tsx")
+    ),
+    source: "",
+  },
+  "use-diff-editor-demo": {
+    name: "use-diff-editor-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-diff-editor-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-diff-editor-demo.tsx")
+    ),
+    source: "",
+  },
+  "use-native-share-demo": {
+    name: "use-native-share-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-native-share-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-native-share-demo.tsx")
+    ),
+    source: "",
+  },
+  "use-page-transition-demo": {
+    name: "use-page-transition-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-page-transition-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-page-transition-demo.tsx")
+    ),
+    source: "",
+  },
+  "use-view-time-demo": {
+    name: "use-view-time-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-view-time-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-view-time-demo.tsx")
+    ),
+    source: "",
+  },
+  "use-section-tracker-demo": {
+    name: "use-section-tracker-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-section-tracker-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-section-tracker-demo.tsx")
+    ),
+    source: "",
+  },
+  "use-tiny-redux-demo": {
+    name: "use-tiny-redux-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-tiny-redux-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-tiny-redux-demo.tsx")
+    ),
+    source: "",
+  },
+  "use-payload-diff-guard-demo": {
+    name: "use-payload-diff-guard-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-payload-diff-guard-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-payload-diff-guard-demo.tsx")
+    ),
+    source: "",
+  },
+  "use-dark-mode-schedule-demo": {
+    name: "use-dark-mode-schedule-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-dark-mode-schedule-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-dark-mode-schedule-demo.tsx")
+    ),
+    source: "",
+  },
+  "use-breadcrumbs-demo": {
+    name: "use-breadcrumbs-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-breadcrumbs-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-breadcrumbs-demo.tsx")
     ),
     source: "",
   },

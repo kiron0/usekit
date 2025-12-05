@@ -1,0 +1,186 @@
+---
+title: useSecureStorage
+description: Transparent encryption layer for local/session storage with key rotation and optional server-backed key retrieval for tokens and sensitive settings.
+---
+
+<ComponentPreview name="use-secure-storage-demo" />
+
+## Installation
+
+<CodeTabs>
+  <TabsList>
+    <TabsTrigger value="cli">CLI</TabsTrigger>
+    <TabsTrigger value="manual">Manual</TabsTrigger>
+  </TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx uselab@latest add use-secure-storage
+```
+
+</TabsContent>
+
+  <TabsContent value="manual">
+    <Steps>
+      <Step>Install the package:</Step>
+
+```bash
+npm install crypto-js@4.2.0
+```
+
+```bash
+npm install -D @types/crypto-js@4.2.2
+```
+
+      <Step>Copy and paste the following code into your project.</Step>
+      <ComponentSource name="use-secure-storage" />
+      <Step>Update the import paths to match your project setup.</Step>
+    </Steps>
+
+  </TabsContent>
+</CodeTabs>
+
+## Usage
+
+```tsx {5,8-12}
+"use client"
+
+import * as React from "react"
+
+import { useSecureStorage } from "@/hooks/use-secure-storage"
+
+export function Component() {
+  const {
+    value: token,
+    setValue: setToken,
+    remove: removeToken,
+  } = useSecureStorage("auth-token", "", {
+    storageType: "localStorage",
+    ttl: 3600000, // 1 hour
+  })
+
+  return (
+    <div>
+      <button onClick={() => setToken("secret-token-123")}>Store Token</button>
+      <button onClick={removeToken}>Clear Token</button>
+    </div>
+  )
+}
+```
+
+## API Reference
+
+### Parameters
+
+| Name                | Type                                 | Description                                                       | Default Value    | Optional |
+| ------------------- | ------------------------------------ | ----------------------------------------------------------------- | ---------------- | -------- |
+| `name`              | `string`                             | Storage key name.                                                 | —                | No       |
+| `initialValue`      | `T \| (() => T)`                     | Initial value or function that returns initial value.             | —                | No       |
+| `options`           | `UseSecureStorageOptions`            | Configuration object for secure storage.                          | `{}`             | Yes      |
+| `storageType`       | `"localStorage" \| "sessionStorage"` | Type of storage to use.                                           | `"localStorage"` | Yes      |
+| `ttl`               | `number`                             | Time-to-live in milliseconds. Value expires after this duration.  | `undefined`      | Yes      |
+| `rotateKeyFn`       | `() => Promise<string> \| string`    | Function to retrieve a new encryption key for rotation.           | `undefined`      | Yes      |
+| `serverKeyEndpoint` | `string`                             | Server endpoint URL to fetch encryption key from.                 | `undefined`      | Yes      |
+| `encryptionKey`     | `string`                             | Static encryption key (if provided, overrides other key sources). | `undefined`      | Yes      |
+
+### Return Values
+
+| Name       | Type                                 | Description                                                    |
+| ---------- | ------------------------------------ | -------------------------------------------------------------- |
+| `value`    | `T`                                  | Current decrypted value from storage.                          |
+| `setValue` | `(value: SetStateAction<T>) => void` | Function to store an encrypted value. Returns a promise.       |
+| `remove`   | `() => void`                         | Function to remove the stored value and clear encryption keys. |
+
+## Key Management
+
+The hook supports multiple key sources with the following priority:
+
+1. **Static key** (`encryptionKey`) - Highest priority, always used if provided
+2. **Server key** (`serverKeyEndpoint`) - Fetched from server endpoint
+3. **Rotated key** (`rotateKeyFn`) - Generated via rotation function
+4. **Local key** - Automatically generated and stored locally (default)
+
+Keys are versioned to support rotation. When rotating keys, the hook increments the version and stores the new key separately.
+
+## Examples
+
+### Basic secure storage
+
+```tsx
+const {
+  value: token,
+  setValue: setToken,
+  remove: removeToken,
+} = useSecureStorage("auth-token", "")
+
+// Store encrypted value
+await setToken("my-secret-token")
+
+// Value is automatically decrypted when read
+console.log(token) // "my-secret-token"
+```
+
+### With TTL (Time-to-Live)
+
+```tsx
+const { value: session, setValue: setSession } = useSecureStorage(
+  "user-session",
+  null,
+  {
+    ttl: 3600000, // Expires after 1 hour
+  }
+)
+
+// Value automatically expires and is removed after TTL
+```
+
+### Server-backed key retrieval
+
+```tsx
+const { value: sensitiveData, setValue: setSensitiveData } = useSecureStorage(
+  "data",
+  "",
+  {
+    serverKeyEndpoint: "/api/encryption-key",
+  }
+)
+
+// Key is fetched from server on first use
+```
+
+### Key rotation
+
+```tsx
+const { value, setValue } = useSecureStorage("data", "", {
+  rotateKeyFn: async () => {
+    // Fetch new key from server or generate
+    const response = await fetch("/api/new-key")
+    const { key } = await response.json()
+    return key
+  },
+})
+```
+
+### Session storage
+
+```tsx
+const { value: tempData, setValue: setTempData } = useSecureStorage(
+  "temp",
+  "",
+  {
+    storageType: "sessionStorage",
+    ttl: 1800000, // 30 minutes
+  }
+)
+```
+
+## Notes
+
+- Values are automatically encrypted using AES encryption before storage
+- Encryption keys are stored separately and versioned for rotation support
+- TTL expiration is checked every second; expired values are automatically removed
+- The hook handles storage events for cross-tab synchronization
+- If decryption fails (e.g., wrong key), the hook falls back to `initialValue`
+- Server-backed keys are fetched once and cached; rotation requires manual key update
+- For production use, consider using a secure key management service for encryption keys

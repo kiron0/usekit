@@ -1,0 +1,153 @@
+---
+title: useNetworkQuality
+description: Measure RTT, throughput and categorize connection quality for adaptive behaviors like adjusting video quality or deferring sync on poor networks.
+---
+
+<ComponentPreview name="use-network-quality-demo" />
+
+## Installation
+
+<CodeTabs>
+  <TabsList>
+    <TabsTrigger value="cli">CLI</TabsTrigger>
+    <TabsTrigger value="manual">Manual</TabsTrigger>
+  </TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx uselab@latest add use-network-quality
+```
+
+</TabsContent>
+
+  <TabsContent value="manual">
+    <Steps>
+      <Step>Copy and paste the following code into your project.</Step>
+      <ComponentSource name="use-network-quality" />
+      <Step>Update the import paths to match your project setup.</Step>
+    </Steps>
+  </TabsContent>
+</CodeTabs>
+
+## Usage
+
+```tsx {5,8-10}
+"use client"
+
+import * as React from "react"
+
+import { useNetworkQuality } from "@/hooks/use-network-quality"
+
+export function Component() {
+  const { rtt, downKbps, upKbps, category } = useNetworkQuality({
+    sampleInterval: 5000,
+  })
+
+  return (
+    <div>
+      <p>Network Quality: {category}</p>
+      <p>RTT: {rtt ? `${Math.round(rtt)}ms` : "N/A"}</p>
+      <p>
+        Download: {downKbps ? `${(downKbps / 1000).toFixed(2)} Mbps` : "N/A"}
+      </p>
+    </div>
+  )
+}
+```
+
+## API Reference
+
+### Parameters
+
+| Name             | Type                       | Description                                            | Default Value                          | Optional |
+| ---------------- | -------------------------- | ------------------------------------------------------ | -------------------------------------- | -------- |
+| `options`        | `UseNetworkQualityOptions` | Configuration object for network quality measurement.  | —                                      | No       |
+| `sampleInterval` | `number`                   | Interval in milliseconds between quality measurements. | `5000`                                 | Yes      |
+| `testEndpoint`   | `string`                   | URL endpoint to use for network measurements.          | `"https://www.google.com/favicon.ico"` | Yes      |
+| `enabled`        | `boolean`                  | Whether to enable network quality monitoring.          | `true`                                 | Yes      |
+
+### Return Values
+
+| Name          | Type                     | Description                                                                    |
+| ------------- | ------------------------ | ------------------------------------------------------------------------------ |
+| `rtt`         | `number \| null`         | Round Trip Time in milliseconds.                                               |
+| `downKbps`    | `number \| null`         | Download throughput in kilobits per second.                                    |
+| `upKbps`      | `number \| null`         | Upload throughput in kilobits per second.                                      |
+| `category`    | `NetworkQualityCategory` | Quality category: `"excellent"`, `"good"`, `"fair"`, `"poor"`, or `"unknown"`. |
+| `isMeasuring` | `boolean`                | Whether a measurement is currently in progress.                                |
+| `error`       | `Error \| null`          | Error object if measurement failed, null otherwise.                            |
+
+### Quality Categories
+
+| Category    | Criteria                                            |
+| ----------- | --------------------------------------------------- |
+| `excellent` | RTT < 50ms, Download > 5 Mbps, Upload > 2 Mbps      |
+| `good`      | RTT < 100ms, Download > 2 Mbps, Upload > 1 Mbps     |
+| `fair`      | RTT < 200ms, Download > 500 Kbps, Upload > 200 Kbps |
+| `poor`      | Below fair thresholds                               |
+| `unknown`   | No measurements available                           |
+
+## Examples
+
+### Adaptive video quality
+
+```tsx
+const { category, downKbps } = useNetworkQuality()
+
+const videoQuality = React.useMemo(() => {
+  switch (category) {
+    case "excellent":
+      return "1080p"
+    case "good":
+      return "720p"
+    case "fair":
+      return "480p"
+    default:
+      return "360p"
+  }
+}, [category])
+```
+
+### Defer sync on poor networks
+
+```tsx
+const { category } = useNetworkQuality()
+
+const shouldSync = React.useMemo(() => {
+  return category === "excellent" || category === "good"
+}, [category])
+
+React.useEffect(() => {
+  if (shouldSync) {
+    syncData()
+  }
+}, [shouldSync])
+```
+
+### Custom measurement interval
+
+```tsx
+const { rtt, category } = useNetworkQuality({
+  sampleInterval: 10000, // Measure every 10 seconds
+  enabled: true,
+})
+```
+
+### Disable monitoring
+
+```tsx
+const { category } = useNetworkQuality({
+  enabled: false, // Disable automatic monitoring
+})
+```
+
+## Notes
+
+- RTT is measured using HEAD/GET requests to the test endpoint
+- Download speed is measured by downloading a test resource and calculating throughput
+- Upload speed measurement may fail if the test endpoint doesn't support POST requests
+- Measurements are performed periodically based on `sampleInterval`
+- The hook automatically re-measures when the device comes back online
+- Network quality categorization uses a weighted scoring system based on all available metrics
+- Some measurements may fail due to CORS or endpoint restrictions; the hook handles these gracefully

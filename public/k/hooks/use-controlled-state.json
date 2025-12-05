@@ -4,10 +4,7 @@
   "type": "registry:hook",
   "title": "Use Controlled State",
   "description": "Manage a controlled state with the useControlledState hook, providing methods to set it to true, false, or toggle between them",
-  "registryDependencies": [
-    "https://usekit.kiron.dev/k/use-callback-ref",
-    "https://usekit.kiron.dev/k/use-uncontrolled-state"
-  ],
+  "registryDependencies": ["use-callback-ref", "use-uncontrolled-state"],
   "files": [
     {
       "path": "registry/hooks/use-controlled-state.ts",

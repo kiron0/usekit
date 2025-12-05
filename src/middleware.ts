@@ -4,7 +4,7 @@ import { env } from "@/env"
 
 const pathnames = ["/docs/development"]
 
-export function proxy(request: NextRequest) {
+export function middleware(request: NextRequest) {
   if (
     env.NEXT_PUBLIC_NODE_ENV === "production" &&
     pathnames.includes(request.nextUrl.pathname)

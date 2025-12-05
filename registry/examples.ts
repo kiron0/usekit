@@ -142,6 +142,16 @@ export const hooksExamples: Registry["items"] = [
     ],
   },
   {
+    name: "use-overflow-detector-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/use-overflow-detector-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
     name: "use-window-size-demo",
     type: "registry:example",
     files: [
@@ -437,6 +447,36 @@ export const hooksExamples: Registry["items"] = [
     files: [
       {
         path: "registry/examples/use-input-value-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-accessible-labels-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/use-accessible-labels-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-consent-gate-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/use-consent-gate-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-masked-input-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/use-masked-input-demo.tsx",
         type: "registry:example",
       },
     ],
@@ -838,6 +878,216 @@ export const hooksExamples: Registry["items"] = [
     files: [
       {
         path: "registry/examples/use-rock-paper-scissors-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-task-queue-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/use-task-queue-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-adaptive-language-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/use-adaptive-language-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-progressive-upload-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/use-progressive-upload-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-network-quality-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/use-network-quality-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-secure-storage-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/use-secure-storage-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-responsive-grid-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/use-responsive-grid-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-form-autosave-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/use-form-autosave-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-memory-leak-guard-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/use-memory-leak-guard-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-clipboard-history-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/use-clipboard-history-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-pwa-install-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/use-pwa-install-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-smart-placeholder-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/use-smart-placeholder-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-time-travel-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/use-time-travel-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-diff-editor-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/use-diff-editor-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-native-share-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/use-native-share-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-page-transition-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/use-page-transition-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-view-time-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/use-view-time-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-section-tracker-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/use-section-tracker-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-tiny-redux-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/use-tiny-redux-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-payload-diff-guard-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/use-payload-diff-guard-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-dark-mode-schedule-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/use-dark-mode-schedule-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-breadcrumbs-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/use-breadcrumbs-demo.tsx",
         type: "registry:example",
       },
     ],

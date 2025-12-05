@@ -1,0 +1,116 @@
+---
+title: useTimeTravel
+description: Snapshot, rewind, and reapply component state trees to replay UI bugs without reproducing them from scratch.
+---
+
+<ComponentPreview name="use-time-travel-demo" />
+
+## Installation
+
+<CodeTabs>
+  <TabsList>
+    <TabsTrigger value="cli">CLI</TabsTrigger>
+    <TabsTrigger value="manual">Manual</TabsTrigger>
+  </TabsList>
+
+  <TabsContent value="cli">
+
+```bash
+npx uselab@latest add use-time-travel
+```
+
+  </TabsContent>
+
+  <TabsContent value="manual">
+    <Steps>
+      <Step>Copy and paste the following code into your project.</Step>
+      <ComponentSource name="use-time-travel" />
+      <Step>Update the import paths to match your project.</Step>
+    </Steps>
+  </TabsContent>
+</CodeTabs>
+
+## Usage
+
+```tsx {5,16-22}
+"use client"
+
+import * as React from "react"
+
+import { useTimeTravel } from "@/hooks/use-time-travel"
+
+type DebugState = {
+  form: { title: string; summary: string }
+  step: number
+}
+
+export function DebugPanel() {
+  const [form, setForm] = React.useState({ title: "", summary: "" })
+  const [step, setStep] = React.useState(1)
+
+  const { snapshot, restore, history } = useTimeTravel<DebugState>(
+    "debug-panel",
+    {
+      resolver: () => ({ form, step }),
+      onRestore: (state) => {
+        setForm(state.form)
+        setStep(state.step)
+      },
+    }
+  )
+
+  return (
+    <div>
+      <button onClick={() => snapshot(undefined, { label: `Step ${step}` })}>
+        Snapshot
+      </button>
+      <button onClick={() => restore()}>
+        Restore latest ({history.length})
+      </button>
+    </div>
+  )
+}
+```
+
+## API Reference
+
+### `useTimeTravel(id, options?)`
+
+| Name                 | Type                      | Description                                                              | Default |
+| -------------------- | ------------------------- | ------------------------------------------------------------------------ | ------- |
+| `id`                 | `string`                  | Unique key used to group snapshots for a component or screen.            | —       |
+| `options.maxHistory` | `number`                  | Maximum number of snapshots to retain before older ones are dropped.     | `20`    |
+| `options.resolver`   | `() => TState`            | Fallback function used when `snapshot()` is called without passing data. | —       |
+| `options.onRestore`  | `(state: TState) => void` | Callback fired whenever `restore()` successfully resolves a snapshot.    | —       |
+
+### Return value
+
+| Name       | Type                                                                                   | Description                                                                                                                 |
+| ---------- | -------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| `history`  | `TimeTravelSnapshot<TState>[]`                                                         | Ordered list (oldest → newest) of captured states.                                                                          |
+| `snapshot` | `(state?: TState \| () => TState, options?: { label?: string }) => TimeTravelSnapshot` | Captures the provided state (or the resolver output) into the timeline. Pass an optional `label` for easier identification. |
+| `restore`  | `(index?: number, apply?: (state: TState) => void) => TState \| undefined`             | Returns the snapshot at `index` (defaults to latest). Runs `apply` or `onRestore` with the cloned state.                    |
+| `clear`    | `() => void`                                                                           | Removes every snapshot for the hook `id`.                                                                                   |
+
+### Snapshot metadata
+
+Each entry inside `history` looks like:
+
+```ts
+type TimeTravelSnapshot<TState> = {
+  id: string
+  version: number
+  timestamp: number
+  label?: string
+  state: TState
+}
+```
+
+Use the `label` to highlight business milestones (e.g., “Before mutation”, “After API patch”).
+
+## Notes
+
+- The hook deep-clones payloads via `structuredClone` when available (falls back to JSON cloning) so restored states do not mutate the original reference.
+- Provide a `resolver` when you always want to capture the same composite tree (form state, derived values, etc.)—call `snapshot()` with no arguments to reuse it.
+- You can store multiple debugger timelines on the same screen by passing different `id` values.
+- Combine `history` with your own UI (lists, chips, keyboard shortcuts) to build bespoke QA workflows.

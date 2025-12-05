@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-section-tracker",
+  "type": "registry:hook",
+  "title": "Use Section Tracker",
+  "description": "Track which scroll section is currently active in view, similar to docs websites with synchronized sidebar navigation.",
+  "files": [
+    {
+      "path": "registry/hooks/use-section-tracker.ts",
+      "content": "import * as React from \"react\"\n\nexport interface TrackedSectionConfig {\n  id: string\n  ref: React.RefObject<HTMLElement | null>\n}\n\nexport interface UseSectionTrackerOptions {\n  rootMargin?: string\n  threshold?: number\n}\n\nexport interface UseSectionTrackerResult {\n  activeSection: string | null\n}\n\nfunction isBrowser() {\n  return typeof window !== \"undefined\" && typeof document !== \"undefined\"\n}\n\nexport function useSectionTracker(\n  sections: TrackedSectionConfig[],\n  options: UseSectionTrackerOptions = {}\n): UseSectionTrackerResult {\n  const { rootMargin = \"0px 0px -40% 0px\", threshold = 0 } = options\n\n  const [activeSection, setActiveSection] = React.useState<string | null>(null)\n  const visibilityRef = React.useRef<\n    Record<string, { ratio: number; top: number }>\n  >({})\n\n  React.useEffect(() => {\n    if (!isBrowser()) return\n    if (!sections.length) return\n\n    const elementToId = new Map<Element, string>()\n    const visibility = visibilityRef.current\n\n    const observer = new IntersectionObserver(\n      (entries) => {\n        let nextActive = activeSection\n        let bestTop = Number.POSITIVE_INFINITY\n\n        for (const entry of entries) {\n          const id = elementToId.get(entry.target)\n          if (!id) continue\n\n          visibility[id] = {\n            ratio: entry.intersectionRatio,\n            top: entry.boundingClientRect.top,\n          }\n        }\n\n        for (const [id, state] of Object.entries(visibility)) {\n          if (state.ratio <= threshold) continue\n          const top = state.top\n          if (top < 0 || top > window.innerHeight) continue\n          if (top < bestTop) {\n            bestTop = top\n            nextActive = id\n          }\n        }\n\n        if (nextActive !== activeSection) {\n          setActiveSection(nextActive ?? null)\n        }\n      },\n      {\n        root: null,\n        rootMargin,\n        threshold,\n      }\n    )\n\n    for (const section of sections) {\n      const node = section.ref.current\n      if (!node) continue\n      elementToId.set(node, section.id)\n      observer.observe(node)\n    }\n\n    return () => {\n      observer.disconnect()\n    }\n    // eslint-disable-next-line react-hooks/exhaustive-deps\n  }, [activeSection, rootMargin, threshold])\n\n  return { activeSection }\n}\n",
+      "type": "registry:hook"
+    }
+  ]
+}

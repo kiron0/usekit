@@ -1,0 +1,134 @@
+---
+title: useTaskQueue
+description: Serializes async tasks with concurrency limit and priority support for rate-limiting uploads/downloads and sequencing animations.
+---
+
+<ComponentPreview name="use-task-queue-demo" />
+
+## Installation
+
+<CodeTabs>
+  <TabsList>
+    <TabsTrigger value="cli">CLI</TabsTrigger>
+    <TabsTrigger value="manual">Manual</TabsTrigger>
+  </TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx uselab@latest add use-task-queue
+```
+
+</TabsContent>
+
+  <TabsContent value="manual">
+    <Steps>
+      <Step>Copy and paste the following code into your project.</Step>
+      <ComponentSource name="use-task-queue" />
+      <Step>Update the import paths to match your project setup.</Step>
+    </Steps>
+  </TabsContent>
+</CodeTabs>
+
+## Usage
+
+```tsx {5,8}
+"use client"
+
+import * as React from "react"
+
+import { useTaskQueue } from "@/hooks/use-task-queue"
+
+export function Component() {
+  const { enqueue, cancelAll } = useTaskQueue({ concurrency: 3 })
+
+  const handleUpload = async (file: File) => {
+    // Enqueue upload task with priority
+    await enqueue(
+      async () => {
+        // Upload logic here
+        const formData = new FormData()
+        formData.append("file", file)
+        return fetch("/api/upload", {
+          method: "POST",
+          body: formData,
+        })
+      },
+      { priority: 1 }
+    )
+  }
+
+  return <button onClick={() => cancelAll()}>Cancel All Uploads</button>
+}
+```
+
+## API Reference
+
+### Parameters
+
+| Name          | Type                  | Description                                          | Default Value | Optional |
+| ------------- | --------------------- | ---------------------------------------------------- | ------------- | -------- |
+| `options`     | `UseTaskQueueOptions` | Configuration object for the task queue.             | —             | No       |
+| `concurrency` | `number`              | Maximum number of tasks that can run simultaneously. | —             | No       |
+
+### Options
+
+| Name          | Type     | Description                                                     | Default Value |
+| ------------- | -------- | --------------------------------------------------------------- | ------------- |
+| `concurrency` | `number` | Maximum number of concurrent tasks. Must be a positive integer. | —             |
+
+### Enqueue Options
+
+| Name       | Type     | Description                                                 | Default Value |
+| ---------- | -------- | ----------------------------------------------------------- | ------------- |
+| `priority` | `number` | Task priority. Higher numbers execute first. Defaults to 0. | `0`           |
+
+### Return Values
+
+| Name        | Type                                                                  | Description                                                                         |
+| ----------- | --------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| `enqueue`   | `<T>(task: () => Promise<T>, options?: EnqueueOptions) => Promise<T>` | Enqueues an async task and returns a promise that resolves when the task completes. |
+| `cancelAll` | `() => void`                                                          | Cancels all pending tasks (running tasks will complete).                            |
+
+## Examples
+
+### Rate-limiting API calls
+
+```tsx
+const { enqueue } = useTaskQueue({ concurrency: 2 })
+
+// Only 2 API calls will run at a time
+const fetchData = async (id: string) => {
+  return enqueue(async () => {
+    const response = await fetch(`/api/data/${id}`)
+    return response.json()
+  })
+}
+```
+
+### Priority-based task sequencing
+
+```tsx
+const { enqueue } = useTaskQueue({ concurrency: 1 })
+
+// High priority tasks execute first
+await enqueue(highPriorityTask, { priority: 10 })
+await enqueue(lowPriorityTask, { priority: 1 })
+await enqueue(mediumPriorityTask, { priority: 5 })
+// Execution order: highPriorityTask -> mediumPriorityTask -> lowPriorityTask
+```
+
+### Animation sequencing
+
+```tsx
+const { enqueue } = useTaskQueue({ concurrency: 1 })
+
+// Sequence animations one at a time
+const animate = async (element: HTMLElement) => {
+  return enqueue(async () => {
+    element.style.opacity = "0"
+    await new Promise((resolve) => setTimeout(resolve, 300))
+    element.style.opacity = "1"
+  })
+}
+```

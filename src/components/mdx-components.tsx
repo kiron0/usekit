@@ -14,6 +14,7 @@ import {
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Callout } from "@/components/callout"
+import { ChangelogNewHooks } from "@/components/changelog-new-hooks"
 import { CodeBlockCommand } from "@/components/code-block-command"
 import { CodeBlockWrapper } from "@/components/code-block-wrapper"
 import { CodeTabs } from "@/components/code-tabs"
@@ -40,6 +41,7 @@ const components = {
   ComponentPreview,
   Development,
   HooksList,
+  ChangelogNewHooks,
   CodeTabs,
   ComingSoon,
   CodeBlockWrapper: ({ ...props }) => (

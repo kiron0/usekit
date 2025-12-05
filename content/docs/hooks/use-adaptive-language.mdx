@@ -1,0 +1,147 @@
+---
+title: useAdaptiveLanguage
+description: Switch UI text & formatting based on user preference, locale, and context for multi-lingual apps with runtime language switching.
+---
+
+<ComponentPreview name="use-adaptive-language-demo" />
+
+## Installation
+
+<CodeTabs>
+  <TabsList>
+    <TabsTrigger value="cli">CLI</TabsTrigger>
+    <TabsTrigger value="manual">Manual</TabsTrigger>
+  </TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx uselab@latest add use-adaptive-language
+```
+
+</TabsContent>
+
+  <TabsContent value="manual">
+    <Steps>
+      <Step>Copy and paste the following code into your project.</Step>
+      <ComponentSource name="use-adaptive-language" />
+      <Step>Update the import paths to match your project setup.</Step>
+    </Steps>
+  </TabsContent>
+</CodeTabs>
+
+## Usage
+
+```tsx {5,8-13}
+"use client"
+
+import * as React from "react"
+
+import { useAdaptiveLanguage } from "@/hooks/use-adaptive-language"
+
+export function Component() {
+  const { locale, setLocale } = useAdaptiveLanguage({
+    supportedLocales: ["en", "es", "fr", "de"],
+    defaultLocale: "en",
+    detectBrowserLocale: true,
+    persist: true,
+  })
+
+  return (
+    <div>
+      <p>Current locale: {locale}</p>
+      <button onClick={() => setLocale("es")}>Switch to Spanish</button>
+    </div>
+  )
+}
+```
+
+## API Reference
+
+### Parameters
+
+| Name                  | Type                         | Description                                                                 | Default Value          | Optional |
+| --------------------- | ---------------------------- | --------------------------------------------------------------------------- | ---------------------- | -------- |
+| `options`             | `UseAdaptiveLanguageOptions` | Configuration object for the adaptive language hook.                        | —                      | No       |
+| `supportedLocales`    | `string[]`                   | Array of locale codes (e.g., `["en", "es", "fr"]`) that your app supports.  | —                      | No       |
+| `defaultLocale`       | `string`                     | Fallback locale if browser detection fails and no stored preference exists. | First supported locale | Yes      |
+| `storageKey`          | `string`                     | localStorage key for persisting user preference.                            | `"usekit:locale"`      | Yes      |
+| `persist`             | `boolean`                    | Whether to persist locale preference to localStorage.                       | `true`                 | Yes      |
+| `detectBrowserLocale` | `boolean`                    | Whether to automatically detect and use browser/system locale.              | `true`                 | Yes      |
+
+### Return Values
+
+| Name          | Type                          | Description                                                                |
+| ------------- | ----------------------------- | -------------------------------------------------------------------------- |
+| `locale`      | `string`                      | Current active locale code.                                                |
+| `setLocale`   | `(locale: string) => void`    | Function to change the active locale. Validates against supported locales. |
+| `isSupported` | `(locale: string) => boolean` | Check if a locale is in the supported list.                                |
+
+## Locale Detection Priority
+
+The hook determines the initial locale in the following order:
+
+1. **localStorage** (if `persist: true`) - Previously saved user preference
+2. **defaultLocale** - Explicitly provided fallback
+3. **Browser detection** (if `detectBrowserLocale: true`) - Matches browser/system language
+4. **First supported locale** - Fallback to the first item in `supportedLocales`
+
+## Examples
+
+### Basic usage with persistence
+
+```tsx
+const { locale, setLocale } = useAdaptiveLanguage({
+  supportedLocales: ["en", "es", "fr"],
+  persist: true, // Saves preference to localStorage
+})
+```
+
+### Disable browser detection
+
+```tsx
+const { locale, setLocale } = useAdaptiveLanguage({
+  supportedLocales: ["en", "es"],
+  defaultLocale: "en",
+  detectBrowserLocale: false, // Always use defaultLocale
+})
+```
+
+### Multi-tab synchronization
+
+```tsx
+// The hook automatically syncs locale changes across browser tabs
+// via the storage event API when persist: true
+const { locale } = useAdaptiveLanguage({
+  supportedLocales: ["en", "es", "fr"],
+  persist: true,
+})
+```
+
+### Integration with i18n libraries
+
+```tsx
+import { useTranslation } from "react-i18next"
+
+import { useAdaptiveLanguage } from "@/hooks/use-adaptive-language"
+
+function MyComponent() {
+  const { locale, setLocale } = useAdaptiveLanguage({
+    supportedLocales: ["en", "es", "fr"],
+  })
+  const { i18n } = useTranslation()
+
+  React.useEffect(() => {
+    i18n.changeLanguage(locale)
+  }, [locale, i18n])
+
+  return <button onClick={() => setLocale("es")}>Español</button>
+}
+```
+
+## Notes
+
+- The hook automatically updates `document.documentElement.lang` when the locale changes, which helps with screen readers and SEO.
+- Browser locale detection matches both full locale codes (e.g., `"en-US"`) and language codes (e.g., `"en"`).
+- If localStorage is unavailable (e.g., private browsing), the hook gracefully falls back to other detection methods.
+- Invalid locale changes are ignored with a console warning.

@@ -1,0 +1,95 @@
+---
+title: useMaskedInput
+description: Declarative input masking supporting complex international patterns, caret management, and paste handling.
+---
+
+<ComponentPreview name="use-masked-input-demo" />
+
+## Installation
+
+<CodeTabs>
+  <TabsList>
+    <TabsTrigger value="cli">CLI</TabsTrigger>
+    <TabsTrigger value="manual">Manual</TabsTrigger>
+  </TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx uselab@latest add use-masked-input
+```
+
+</TabsContent>
+
+  <TabsContent value="manual">
+    <Steps>
+      <Step>Copy and paste the following code into your project.</Step>
+      <ComponentSource name="use-masked-input" />
+      <Step>Update the import paths to match your project setup.</Step>
+    </Steps>
+  </TabsContent>
+</CodeTabs>
+
+## Usage
+
+```tsx {5,11-18}
+"use client"
+
+import * as React from "react"
+
+import { useMaskedInput } from "@/hooks/use-masked-input"
+import { Input } from "@/components/ui/input"
+
+export function Component() {
+  const phoneRef = React.useRef<HTMLInputElement>(null)
+
+  useMaskedInput(phoneRef, "+99 (999) 999-9999", {
+    onAccept(value) {
+      console.log("raw value", value)
+    },
+    onComplete(value) {
+      console.log("completed mask", value)
+    },
+  })
+
+  return (
+    <Input ref={phoneRef} inputMode="tel" placeholder="+12 (555) 123-4567" />
+  )
+}
+```
+
+## API Reference
+
+### Parameters
+
+| Name          | Type                                | Description                                                               | Default Value | Optional |
+| ------------- | ----------------------------------- | ------------------------------------------------------------------------- | ------------- | -------- |
+| `ref`         | `React.RefObject<HTMLInputElement>` | Reference to the input element that should receive masking behavior.      | —             | No       |
+| `maskPattern` | `string \| Array<string \| RegExp>` | String mask or declarative token list describing the desired input shape. | —             | No       |
+| `options`     | `UseMaskedInputOptions`             | Configuration object for placeholder characters and lifecycle callbacks.  | `{}`          | Yes      |
+
+### Options
+
+| Name              | Type                      | Description                                                              | Default Value |
+| ----------------- | ------------------------- | ------------------------------------------------------------------------ | ------------- |
+| `placeholderChar` | `string`                  | Optional character to surface remaining slots (e.g., `_` or `•`).        | `""`          |
+| `onAccept`        | `(value: string) => void` | Fired whenever a character is accepted; receives the unmasked raw value. | —             |
+| `onComplete`      | `(value: string) => void` | Fired when every dynamic token in the pattern has been satisfied.        | —             |
+
+### Return Values
+
+| Name     | Type                        | Description                                                              |
+| -------- | --------------------------- | ------------------------------------------------------------------------ |
+| `mask`   | `(value: string) => string` | Utility to format arbitrary input using the same mask declaratively.     |
+| `unmask` | `(value: string) => string` | Removes literals from a masked value, returning only the raw characters. |
+
+## Mask tokens
+
+| Token | Meaning                      |
+| ----- | ---------------------------- |
+| `9`   | Any digit (`0-9`).           |
+| `A`   | Alpha characters (`A-Z`).    |
+| `X`   | Alphanumeric (`A-Z`, `0-9`). |
+| `*`   | Any character.               |
+
+You can also pass custom `RegExp` instances inside an array mask for fully bespoke patterns (e.g., country-specific IBAN segments or custom currency groupings).

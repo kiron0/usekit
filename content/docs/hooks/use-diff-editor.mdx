@@ -1,0 +1,157 @@
+---
+title: useDiffEditor
+description: Side-by-side diff state and merge helpers for text and JSON, ideal for admin tools and CMS review flows.
+---
+
+<ComponentPreview name="use-diff-editor-demo" />
+
+## Installation
+
+<CodeTabs>
+  <TabsList>
+    <TabsTrigger value="cli">CLI</TabsTrigger>
+    <TabsTrigger value="manual">Manual</TabsTrigger>
+  </TabsList>
+
+  <TabsContent value="cli">
+
+```bash
+npx uselab@latest add use-diff-editor
+```
+
+  </TabsContent>
+
+  <TabsContent value="manual">
+    <Steps>
+      <Step>Copy and paste the following code into your project.</Step>
+      <ComponentSource name="use-diff-editor" />
+      <Step>Update the import paths to match your project.</Step>
+    </Steps>
+  </TabsContent>
+</CodeTabs>
+
+## Usage
+
+```tsx {5,13}
+"use client"
+
+import * as React from "react"
+
+import { useDiffEditor } from "@/hooks/use-diff-editor"
+
+export function ContentReviewDiff() {
+  const [draft, setDraft] = React.useState("Welcome to the editor.")
+  const [incoming, setIncoming] = React.useState(
+    "Welcome to the editor.\nThis copy was updated by marketing."
+  )
+
+  const { kind, diffs, merge } = useDiffEditor(draft, incoming)
+
+  const [merged, setMerged] = React.useState("")
+
+  return (
+    <div className="space-y-3">
+      <textarea
+        value={draft}
+        onChange={(event) => setDraft(event.target.value)}
+      />
+      <textarea
+        value={incoming}
+        onChange={(event) => setIncoming(event.target.value)}
+      />
+      <button onClick={() => setMerged(merge.acceptLeft())}>
+        Keep current
+      </button>
+      <button onClick={() => setMerged(merge.acceptRight())}>
+        Accept incoming
+      </button>
+      <pre>{merged}</pre>
+      <small>Mode: {kind}</small>
+      <small>Diff entries: {diffs.length}</small>
+    </div>
+  )
+}
+```
+
+## API Reference
+
+### `useDiffEditor(left, right)`
+
+Ideal for review tools where you want to keep the host component in control of UI while delegating diff/merge logic to a hook.
+
+#### Parameters
+
+| Name    | Type | Description                                                                                   |
+| ------- | ---- | --------------------------------------------------------------------------------------------- |
+| `left`  | `T`  | Current value. Can be plain text, JSON-like data, or any serializable structure.              |
+| `right` | `T`  | Incoming value to compare against (e.g. remote version, collaborator edit, or staged change). |
+
+#### Return value
+
+The hook returns an object `{ kind, diffs, merge }`:
+
+| Name    | Type                                | Description                                                                                  |
+| ------- | ----------------------------------- | -------------------------------------------------------------------------------------------- |
+| `kind`  | `"text" \| "json"`                  | Detected mode based on the inputs.                                                           |
+| `diffs` | `TextDiffLine[] \| JsonDiffEntry[]` | Line-level text diff when `kind === "text"`, or path-level JSON diff when `kind === "json"`. |
+| `merge` | `DiffMergeHelpers<T>`               | Helpers for building merged values without re-implementing diff logic in each component.     |
+
+### Text diffs
+
+When both `left` and `right` are strings (or when non-JSON data is coerced into text), `kind` is `"text"` and `diffs` is:
+
+```ts
+type DiffChangeType = "added" | "removed" | "changed" | "unchanged"
+
+interface TextDiffLine {
+  leftIndex: number | null
+  rightIndex: number | null
+  leftValue: string | null
+  rightValue: string | null
+  type: DiffChangeType
+}
+```
+
+Use this to render a side-by-side diff UI with per-line highlighting.
+
+### JSON diffs
+
+When both inputs look JSON-like (objects, arrays, primitives), `kind` is `"json"` and `diffs` becomes:
+
+```ts
+interface JsonDiffEntry {
+  path: string // e.g. "meta.slug" or "items[0].title"
+  leftValue: unknown
+  rightValue: unknown
+  type: "added" | "removed" | "changed"
+}
+```
+
+Only changed paths are included; unchanged branches are omitted to keep review UIs focused.
+
+### Merge helpers
+
+```ts
+interface DiffMergeHelpers<T> {
+  acceptLeft(): T
+  acceptRight(): T
+  custom<TResult = T>(
+    resolver: (context: {
+      kind: "text" | "json"
+      left: T
+      right: T
+      diffs: TextDiffLine[] | JsonDiffEntry[]
+    }) => TResult
+  ): TResult
+}
+```
+
+- **`acceptLeft()`**: Keep the current value as-is.
+- **`acceptRight()`**: Replace with the incoming value.
+- **`custom()`**: Build bespoke merge strategies (e.g. “prefer right for changed fields, left for removals”) from the host component.
+
+## Notes
+
+- Text diffing is line-based and optimized for readability over minimal patches—perfect for copy review and note-taking tools.
+- JSON diffing walks objects/arrays recursively and emits a flat list of changed paths for table-style review UIs.
+- For admin tools and CMS screens, combine `useDiffEditor` with your own layout primitives (`Tabs`, `SplitPane`, etc.) to create tailored approval workflows.

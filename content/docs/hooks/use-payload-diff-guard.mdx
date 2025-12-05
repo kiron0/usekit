@@ -1,0 +1,214 @@
+---
+title: usePayloadDiffGuard
+description: Deep-diff DB vs form payloads and prevent unnecessary submissions when nothing actually changed.
+---
+
+<ComponentPreview name="use-payload-diff-guard-demo" />
+
+## Installation
+
+<CodeTabs>
+  <TabsList>
+    <TabsTrigger value="cli">CLI</TabsTrigger>
+    <TabsTrigger value="manual">Manual</TabsTrigger>
+  </TabsList>
+
+  <TabsContent value="cli">
+
+```bash
+npx uselab@latest add use-payload-diff-guard
+```
+
+  </TabsContent>
+
+  <TabsContent value="manual">
+    <Steps>
+      <Step>Copy and paste the following code into your project.</Step>
+      <ComponentSource name="use-payload-diff-guard" />
+      <Step>Update the import paths to match your project.</Step>
+    </Steps>
+  </TabsContent>
+</CodeTabs>
+
+## Usage
+
+```tsx {5,33-38}
+"use client"
+
+import * as React from "react"
+
+import { usePayloadDiffGuard } from "@/hooks/use-payload-diff-guard"
+
+interface UserPayload {
+  id: string
+  name: string
+  email: string
+  role: string
+  profile: {
+    bio: string
+    location: string
+  }
+}
+
+const dbUser: UserPayload = {
+  id: "user_123",
+  name: "Ada Lovelace",
+  email: "ada@example.com",
+  role: "admin",
+  profile: {
+    bio: "First computer programmer.",
+    location: "London",
+  },
+}
+
+export function UserSettingsForm() {
+  const [formUser, setFormUser] = React.useState<UserPayload>(dbUser)
+  const [status, setStatus] = React.useState("Idle")
+
+  const { hasChanges, isPristine, diffs, preventSubmit } =
+    usePayloadDiffGuard<UserPayload>(dbUser, formUser, {
+      ignorePath: (path) =>
+        // path is strongly typed as: "id" | "name" | "email" | "role" | "profile" | "profile.bio" | "profile.location"
+        path === "profile.bio",
+    })
+
+  async function handleSubmit(event: React.FormEvent) {
+    event.preventDefault()
+    const didSubmit = await preventSubmit(async () => {
+      // Only called when there are actual changes
+      await saveUserToServer(formUser)
+      setStatus("Saved changes to server")
+    })
+
+    if (!didSubmit) {
+      setStatus("Skipped submit – no changes detected")
+    }
+  }
+
+  return (
+    <form onSubmit={handleSubmit}>
+      {/* your form fields here, wired to formUser + setFormUser */}
+      <button type="submit" disabled={isPristine}>
+        {isPristine ? "Nothing to submit" : "Save changes"}
+      </button>
+      <p>{status}</p>
+      <p>Changed paths: {diffs.map((d) => d.path).join(", ")}</p>
+    </form>
+  )
+}
+```
+
+## API Reference
+
+### `usePayloadDiffGuard(dbPayload, inputPayload, options?)`
+
+Designed for forms and admin tools where you want to detect _structural_ and _value_ changes between a canonical payload (DB / server) and a local input payload before firing network calls.
+
+#### Parameters
+
+```ts
+type PayloadPath<T> = /* derived string-union of JSON-style paths */
+
+interface PayloadDiffEntry<T> {
+  path: PayloadPath<T>
+  dbValue: unknown
+  inputValue: unknown
+  type: "added" | "removed" | "changed"
+}
+
+interface UsePayloadDiffGuardOptions<T> {
+  ignorePath?: (path: PayloadPath<T>, entry: PayloadDiffEntry<T>) => boolean
+}
+```
+
+| Name           | Type                             | Description                                                            |
+| -------------- | -------------------------------- | ---------------------------------------------------------------------- |
+| `dbPayload`    | `T`                              | Canonical payload, usually what you fetched from your API or database. |
+| `inputPayload` | `T`                              | Current local payload, usually your form state.                        |
+| `options`      | `UsePayloadDiffGuardOptions<T>?` | Optional configuration to ignore noisy paths.                          |
+
+#### Return value
+
+```ts
+interface UsePayloadDiffGuardResult<T> {
+  hasChanges: boolean
+  isPristine: boolean
+  diffs: PayloadDiffEntry<T>[]
+  changedPaths: PayloadPath<T>[]
+  added: PayloadDiffEntry<T>[]
+  removed: PayloadDiffEntry<T>[]
+  changed: PayloadDiffEntry<T>[]
+  preventSubmit: (onSubmit: () => void | Promise<void>) => Promise<boolean>
+}
+```
+
+| Name            | Type                             | Description                                                                                              |
+| --------------- | -------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| `hasChanges`    | `boolean`                        | `true` if there is at least one structural or value difference between the two payloads.                 |
+| `isPristine`    | `boolean`                        | Convenience inverse of `hasChanges`, ideal for disabling submit buttons.                                 |
+| `diffs`         | `PayloadDiffEntry<T>[]`          | Flat list of all differences with JSON-style paths like `user.email` or `items[0].price`.                |
+| `changedPaths`  | `PayloadPath<T>[]`               | Unique list of changed paths derived from `diffs`, strongly typed per payload shape.                     |
+| `added`         | `PayloadDiffEntry<T>[]`          | Entries where the input introduced a new value that DB did not have.                                     |
+| `removed`       | `PayloadDiffEntry<T>[]`          | Entries where DB had a value and the input removed it.                                                   |
+| `changed`       | `PayloadDiffEntry<T>[]`          | Entries where both sides exist but values differ.                                                        |
+| `preventSubmit` | `(onSubmit) => Promise<boolean>` | Helper that skips your callback when there are no changes and returns whether a submission actually ran. |
+
+## Notes
+
+- The diff algorithm walks objects and arrays recursively, building stable JSON paths (e.g. `profile.bio`, `items[2].sku`).
+- Only changed paths are emitted—unchanged branches are omitted so review UIs stay focused.
+- `ignorePath` lets you exclude noisy fields such as timestamps, transient client-only fields, or analytics metadata.
+
+## Examples
+
+### Ignore multiple specific paths
+
+```tsx
+const ignored: PayloadPath<UserPayload>[] = [
+  "profile.bio",
+  "profile.location",
+  "email",
+]
+
+const result = usePayloadDiffGuard<UserPayload>(dbUser, formUser, {
+  ignorePath: (path) => ignored.includes(path),
+})
+```
+
+### Ignore an entire subtree (e.g. `profile.*`)
+
+```tsx
+const result = usePayloadDiffGuard<UserPayload>(dbUser, formUser, {
+  ignorePath: (path) => path === "profile" || path.startsWith("profile."),
+})
+```
+
+### Use `preventSubmit` to skip no-op API calls
+
+```tsx
+const { isPristine, preventSubmit } = usePayloadDiffGuard<UserPayload>(
+  dbUser,
+  formUser
+)
+
+async function handleSubmit(event: React.FormEvent) {
+  event.preventDefault()
+
+  const didSubmit = await preventSubmit(async () => {
+    await saveUserToServer(formUser)
+  })
+
+  if (!didSubmit) {
+    toast("Nothing changed, skipping request.")
+  }
+}
+
+return (
+  <form onSubmit={handleSubmit}>
+    {/* fields ... */}
+    <button type="submit" disabled={isPristine}>
+      {isPristine ? "Nothing to submit" : "Save changes"}
+    </button>
+  </form>
+)
+```

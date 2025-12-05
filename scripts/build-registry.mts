@@ -1,4 +1,4 @@
-import { exec } from "child_process"
+import { spawn } from "child_process"
 import { promises as fs } from "fs"
 import path from "path"
 
@@ -115,13 +115,33 @@ async function buildRegistryJsonFile(): Promise<void> {
 
 async function buildRegistry(): Promise<void> {
   return new Promise((resolve, reject) => {
-    const process = exec(
-      `bunx --bun shadcn@2.5.0 build ${REGISTRY_JSON_FILE_PATH} --output ${REGISTRY_OUTPUT_PATH}`
+    const childProcess = spawn(
+      "bunx",
+      [
+        "uselab@latest",
+        "build",
+        "--registry",
+        REGISTRY_JSON_FILE_PATH,
+        "--output",
+        REGISTRY_OUTPUT_PATH,
+      ],
+      {
+        cwd: process.cwd(),
+        stdio: "inherit",
+        shell: false,
+      }
     )
 
-    process.on("exit", (code) => {
-      if (code === 0) resolve()
-      else reject(new Error(`Process exited with code ${code}`))
+    childProcess.on("exit", (code) => {
+      if (code === 0) {
+        resolve()
+      } else {
+        reject(new Error(`Process exited with code ${code}`))
+      }
+    })
+
+    childProcess.on("error", (error) => {
+      reject(new Error(`Failed to start process: ${error.message}`))
     })
   })
 }

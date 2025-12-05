@@ -1,0 +1,169 @@
+---
+title: useResponsiveGrid
+description: Layout helper that returns responsive column counts and item sizing for adaptive masonry or grid layouts.
+---
+
+<ComponentPreview name="use-responsive-grid-demo" />
+
+## Installation
+
+<CodeTabs>
+  <TabsList>
+    <TabsTrigger value="cli">CLI</TabsTrigger>
+    <TabsTrigger value="manual">Manual</TabsTrigger>
+  </TabsList>
+
+  <TabsContent value="cli">
+
+```bash
+npx uselab@latest add use-responsive-grid
+```
+
+  </TabsContent>
+
+  <TabsContent value="manual">
+    <Steps>
+      <Step>Copy and paste the following code into your project.</Step>
+      <ComponentSource name="use-responsive-grid" />
+      <Step>Update the import paths to match your project structure.</Step>
+    </Steps>
+  </TabsContent>
+</CodeTabs>
+
+## Usage
+
+```tsx {5,15-18}
+"use client"
+
+import * as React from "react"
+
+import { useResponsiveGrid } from "@/hooks/use-responsive-grid"
+
+const breakpoints = [
+  { minWidth: 0, columns: 1 },
+  { minWidth: 640, columns: 2 },
+  { minWidth: 900, columns: 3 },
+  { minWidth: 1200, columns: 4 },
+]
+
+export function Gallery() {
+  const { columns, itemStyle, containerStyle } = useResponsiveGrid({
+    breakpoints,
+    gap: 24,
+    layout: "masonry",
+  })
+
+  return (
+    <div style={containerStyle}>
+      {Array.from({ length: 8 }).map((_, index) => (
+        <div key={index} style={itemStyle} className="rounded-md bg-muted p-4">
+          Item {index + 1}
+        </div>
+      ))}
+    </div>
+  )
+}
+```
+
+## API Reference
+
+### Parameters
+
+| Name             | Type                     | Description                                                                              | Default Value | Optional |
+| ---------------- | ------------------------ | ---------------------------------------------------------------------------------------- | ------------- | -------- |
+| `breakpoints`    | `ResponsiveBreakpoint[]` | Array of `{ minWidth, columns }` rules, evaluated from smallest to largest screen width. | —             | No       |
+| `gap`            | `number`                 | Gap between grid items (in pixels).                                                      | `16`          | Yes      |
+| `defaultColumns` | `number`                 | Fallback column count for SSR or widths below the first breakpoint.                      | `1`           | Yes      |
+| `layout`         | `"flex" \| "masonry"`    | Choose between a flex-based grid or CSS column masonry layout.                           | `"flex"`      | Yes      |
+
+### Return Values
+
+| Name             | Type                  | Description                                                           |
+| ---------------- | --------------------- | --------------------------------------------------------------------- |
+| `columns`        | `number`              | Current number of columns that match the viewport width.              |
+| `gap`            | `number`              | Gap passed to the hook.                                               |
+| `layout`         | `"flex" \| "masonry"` | Currently applied layout mode.                                        |
+| `containerStyle` | `React.CSSProperties` | Styles to spread on the outer wrapper (flex or column masonry).       |
+| `itemStyle`      | `React.CSSProperties` | Styles for each item (width/flex for grid, break-inside for masonry). |
+
+## Breakpoint Tips
+
+- Breakpoints are sorted automatically, so you can pass them in any order.
+- Each breakpoint represents the minimum width where the column count becomes active.
+- Always provide a baseline rule (e.g., `{ minWidth: 0, columns: 1 }`) to guarantee a valid layout.
+- When used with flexbox, ensure your container uses `display: flex` and `flex-wrap: wrap` to honor item widths.
+- For CSS Grid layouts, you can still use `columns` to derive `grid-template-columns: repeat(columns, minmax(0, 1fr))`.
+
+## Examples
+
+### Masonry-style gallery
+
+```tsx
+const { columns, itemStyle, gap } = useResponsiveGrid({
+  breakpoints: [
+    { minWidth: 0, columns: 1 },
+    { minWidth: 768, columns: 2 },
+    { minWidth: 1024, columns: 3 },
+  ],
+  gap: 18,
+})
+
+return (
+  <div style={containerStyle}>
+    {photos.map((photo) => (
+      <figure key={photo.id} style={itemStyle}>
+        <img src={photo.src} alt={photo.alt} className="w-full rounded-lg" />
+      </figure>
+    ))}
+  </div>
+)
+```
+
+### Dashboard cards
+
+```tsx
+const { columns, containerStyle, itemStyle } = useResponsiveGrid({
+  breakpoints: [
+    { minWidth: 0, columns: 1 },
+    { minWidth: 600, columns: 2 },
+    { minWidth: 900, columns: 3 },
+  ],
+})
+
+return (
+  <div
+    style={{
+      ...containerStyle,
+      display: "grid",
+      gap: 16,
+      gridTemplateColumns: `repeat(${columns}, minmax(0, 1fr))`,
+    }}
+  >
+    {widgets.map((widget) => (
+      <Widget key={widget.id} data={widget} style={itemStyle} />
+    ))}
+  </div>
+)
+```
+
+### Custom gaps per theme
+
+```tsx
+const gap = useIsCompactMode() ? 12 : 24
+const { containerStyle, itemStyle } = useResponsiveGrid({ breakpoints, gap })
+
+return (
+  <div style={containerStyle}>
+    {items.map((item) => (
+      <Card key={item.id} style={itemStyle} />
+    ))}
+  </div>
+)
+```
+
+## Notes
+
+- The hook runs both on mount and on every resize; avoid passing unstable breakpoint arrays (wrap them in `useMemo` if needed).
+- Works in SSR environments by falling back to `defaultColumns` until the client width is known.
+- `itemStyle` uses `calc()` to subtract gaps, ensuring items fill the row without overflow.
+- You can combine the returned `columns` with CSS Grid templates for traditional grids, or use `itemStyle` with flexbox for masonry-style layouts.

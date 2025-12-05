@@ -1,0 +1,321 @@
+---
+title: useBreadcrumbs
+description: Manage breadcrumb navigation rules with push/pop/replace operations, auto-generation from URL, and customizable labels.
+---
+
+<ComponentPreview name="use-breadcrumbs-demo" />
+
+## Installation
+
+<CodeTabs>
+  <TabsList>
+    <TabsTrigger value="cli">CLI</TabsTrigger>
+    <TabsTrigger value="manual">Manual</TabsTrigger>
+  </TabsList>
+
+  <TabsContent value="cli">
+
+```bash
+npx uselab@latest add use-breadcrumbs
+```
+
+  </TabsContent>
+
+  <TabsContent value="manual">
+    <Steps>
+      <Step>Copy and paste the following code into your project.</Step>
+      <ComponentSource name="use-breadcrumbs" />
+      <Step>Update the import paths to match your project.</Step>
+    </Steps>
+  </TabsContent>
+</CodeTabs>
+
+## Usage
+
+### Basic Example (Plain React)
+
+```tsx {5,8-10}
+"use client"
+
+import * as React from "react"
+
+import { useBreadcrumbs } from "@/hooks/use-breadcrumbs"
+
+export function BreadcrumbExample() {
+  const { items, push, pop, replace, navigate } = useBreadcrumbs({
+    autoGenerate: true,
+  })
+
+  return (
+    <nav>
+      {items.map((item, index) => (
+        <a
+          key={item.href}
+          href={item.href}
+          onClick={(e) => {
+            e.preventDefault()
+            navigate(item.href)
+          }}
+        >
+          {item.label}
+        </a>
+      ))}
+    </nav>
+  )
+}
+```
+
+### With Next.js
+
+```tsx {7,10-17}
+"use client"
+
+import * as React from "react"
+import Link from "next/link"
+import { usePathname, useRouter } from "next/navigation"
+
+import { useBreadcrumbs } from "@/hooks/use-breadcrumbs"
+
+export function NextBreadcrumbExample() {
+  const router = useRouter()
+  const pathname = usePathname()
+
+  const { items } = useBreadcrumbs({
+    autoGenerate: true,
+    navigate: (href) => router.push(href),
+    getPathname: () => pathname,
+  })
+
+  return (
+    <nav>
+      {items.map((item) => (
+        <Link key={item.href} href={item.href}>
+          {item.label}
+        </Link>
+      ))}
+    </nav>
+  )
+}
+```
+
+### With React Router
+
+```tsx {6,9-16}
+"use client"
+
+import * as React from "react"
+import { useLocation, useNavigate } from "react-router-dom"
+
+import { useBreadcrumbs } from "@/hooks/use-breadcrumbs"
+
+export function ReactRouterBreadcrumbExample() {
+  const navigate = useNavigate()
+  const location = useLocation()
+
+  const { items } = useBreadcrumbs({
+    autoGenerate: true,
+    navigate: (href) => navigate(href),
+    getPathname: () => location.pathname,
+  })
+
+  return (
+    <nav>
+      {items.map((item) => (
+        <a
+          key={item.href}
+          href={item.href}
+          onClick={(e) => {
+            e.preventDefault()
+            navigate(item.href)
+          }}
+        >
+          {item.label}
+        </a>
+      ))}
+    </nav>
+  )
+}
+```
+
+### Custom Label Generation
+
+```tsx {5,8-18}
+"use client"
+
+import * as React from "react"
+
+import { useBreadcrumbs } from "@/hooks/use-breadcrumbs"
+
+export function CustomLabelExample() {
+  const { items } = useBreadcrumbs({
+    autoGenerate: true,
+    generateLabel: (segment, index, segments) => {
+      const labels: Record<string, string> = {
+        dashboard: "Dashboard",
+        settings: "Settings",
+        profile: "User Profile",
+      }
+      return labels[segment] || segment
+    },
+  })
+
+  return (
+    <nav>
+      {items.map((item) => (
+        <span key={item.href}>{item.label}</span>
+      ))}
+    </nav>
+  )
+}
+```
+
+### Manual Breadcrumb Management
+
+```tsx {5,8-14}
+"use client"
+
+import * as React from "react"
+
+import { useBreadcrumbs } from "@/hooks/use-breadcrumbs"
+
+export function ManualBreadcrumbExample() {
+  const { items, push, pop, replace, setItems, reset } = useBreadcrumbs({
+    autoGenerate: false,
+    items: [
+      { label: "Home", href: "/" },
+      { label: "Products", href: "/products" },
+    ],
+  })
+
+  const handleAddCategory = () => {
+    push({ label: "Electronics", href: "/products/electronics" })
+  }
+
+  const handleRemoveLast = () => {
+    pop()
+  }
+
+  const handleUpdateLast = () => {
+    replace({ label: "Updated", href: "/products/updated" })
+  }
+
+  return (
+    <div>
+      <nav>
+        {items.map((item) => (
+          <span key={item.href}>{item.label} / </span>
+        ))}
+      </nav>
+      <button onClick={handleAddCategory}>Add Category</button>
+      <button onClick={handleRemoveLast}>Remove Last</button>
+      <button onClick={handleUpdateLast}>Update Last</button>
+      <button onClick={reset}>Reset</button>
+    </div>
+  )
+}
+```
+
+### With Base Path
+
+```tsx {5,8-12}
+"use client"
+
+import * as React from "react"
+
+import { useBreadcrumbs } from "@/hooks/use-breadcrumbs"
+
+export function BasePathExample() {
+  const { items } = useBreadcrumbs({
+    autoGenerate: true,
+    basePath: "/app",
+    maxDepth: 5,
+  })
+
+  return (
+    <nav>
+      {items.map((item) => (
+        <a key={item.href} href={item.href}>
+          {item.label}
+        </a>
+      ))}
+    </nav>
+  )
+}
+```
+
+## API Reference
+
+### `useBreadcrumbs(options)`
+
+Manage breadcrumb navigation with push/pop/replace operations, auto-generation from URL, and customizable labels.
+
+#### Options
+
+```ts
+interface UseBreadcrumbsOptions {
+  items?: BreadcrumbItem[]
+  generateLabel?: (segment: string, index: number, segments: string[]) => string
+  autoGenerate?: boolean
+  basePath?: string
+  maxDepth?: number
+}
+```
+
+| Name            | Type                                                             | Description                                                                          | Default                |
+| --------------- | ---------------------------------------------------------------- | ------------------------------------------------------------------------------------ | ---------------------- |
+| `items`         | `BreadcrumbItem[]`                                               | Initial breadcrumb items. If not provided, will auto-generate from current pathname. | –                      |
+| `generateLabel` | `(segment: string, index: number, segments: string[]) => string` | Custom label generator function for auto-generated breadcrumbs.                      | `defaultGenerateLabel` |
+| `autoGenerate`  | `boolean`                                                        | Whether to auto-generate breadcrumbs from the current URL pathname.                  | `true`                 |
+| `basePath`      | `string`                                                         | Base path to exclude from auto-generated breadcrumbs (e.g., "/app").                 | –                      |
+| `maxDepth`      | `number`                                                         | Maximum depth for auto-generated breadcrumbs.                                        | `10`                   |
+| `navigate`      | `(href: string) => void`                                         | Custom navigation function. If not provided, uses window.location.href.              | –                      |
+| `getPathname`   | `() => string`                                                   | Custom pathname getter. If not provided, uses window.location.pathname.              | –                      |
+
+#### Return value
+
+```ts
+interface UseBreadcrumbsReturn {
+  items: BreadcrumbItem[]
+  push: (item: BreadcrumbItem) => void
+  pop: () => void
+  replace: (item: BreadcrumbItem) => void
+  setItems: (items: BreadcrumbItem[]) => void
+  reset: () => void
+  navigate: (href: string) => void
+}
+```
+
+| Name       | Type                                | Description                                                                |
+| ---------- | ----------------------------------- | -------------------------------------------------------------------------- |
+| `items`    | `BreadcrumbItem[]`                  | Current breadcrumb items.                                                  |
+| `push`     | `(item: BreadcrumbItem) => void`    | Push a new breadcrumb item to the stack.                                   |
+| `pop`      | `() => void`                        | Pop the last breadcrumb item from the stack.                               |
+| `replace`  | `(item: BreadcrumbItem) => void`    | Replace the last breadcrumb item with a new one.                           |
+| `setItems` | `(items: BreadcrumbItem[]) => void` | Replace all breadcrumb items.                                              |
+| `reset`    | `() => void`                        | Reset breadcrumbs to initial state or auto-generate from current pathname. |
+| `navigate` | `(href: string) => void`            | Navigate to a breadcrumb item's href using Next.js router.                 |
+
+### `BreadcrumbItem`
+
+```ts
+interface BreadcrumbItem {
+  label: string
+  href: string
+}
+```
+
+| Name    | Type     | Description                       |
+| ------- | -------- | --------------------------------- |
+| `label` | `string` | Display label for the breadcrumb. |
+| `href`  | `string` | URL path for navigation.          |
+
+## Notes
+
+- The hook automatically updates breadcrumbs when the pathname changes if `autoGenerate` is `true`.
+- The default label generator converts kebab-case segments to Title Case (e.g., "user-profile" → "User Profile").
+- When using `basePath`, the base path is excluded from auto-generated breadcrumbs but included in hrefs.
+- The hook works with plain React by default, using `window.location.pathname` and `window.location.href`.
+- For Next.js, pass `navigate: (href) => router.push(href)` and `getPathname: () => usePathname()`.
+- For React Router, pass `navigate: (href) => navigate(href)` and `getPathname: () => location.pathname`.
+- `pop()` will not remove the last item if there's only one breadcrumb remaining (typically "Home").
+- `reset()` restores breadcrumbs to their initial state or regenerates them from the current pathname.

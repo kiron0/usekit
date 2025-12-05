@@ -4,7 +4,7 @@
   "type": "registry:hook",
   "title": "Use Mouse Position",
   "description": "Use the useCopyToClipboard hook to copy text to the clipboard and track whether the copy action was successful, with an optional delay to reset the copied state.",
-  "registryDependencies": ["https://usekit.kiron.dev/k/use-is-mobile"],
+  "registryDependencies": ["use-is-mobile"],
   "files": [
     {
       "path": "registry/hooks/use-mouse-position.ts",

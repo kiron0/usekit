@@ -1,5 +1,3 @@
-import { siteConfig } from "@/config/site"
-
 import { type Registry } from "./schema"
 
 export const hooks: Registry["items"] = [
@@ -42,6 +40,19 @@ export const hooks: Registry["items"] = [
     ],
   },
   {
+    name: "use-accessible-labels",
+    title: "Use Accessible Labels",
+    description:
+      "Auto-generate resilient aria-label props, wire up fallbacks, and warn in development when required labels are missing.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-accessible-labels.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
     name: "use-unmount",
     title: "Use Unmount",
     description:
@@ -60,7 +71,7 @@ export const hooks: Registry["items"] = [
     description:
       "Delay function execution with useDebounceCallback, providing options for canceling, flushing, and checking if a call is pending.",
     type: "registry:hook",
-    registryDependencies: [`${siteConfig.url}/k/use-unmount`],
+    registryDependencies: ["use-unmount"],
     dependencies: ["lodash.debounce@4.0.8"],
     devDependencies: ["@types/lodash.debounce@4.0.9"],
     files: [
@@ -110,6 +121,19 @@ export const hooks: Registry["items"] = [
     ],
   },
   {
+    name: "use-time-travel",
+    title: "Use Time Travel",
+    description:
+      "Snapshot and restore component state trees to replay tricky UI bugs or compare interim states.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-time-travel.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
     name: "use-document-title",
     title: "Use Document Title",
     description:
@@ -141,7 +165,7 @@ export const hooks: Registry["items"] = [
     description:
       "Use the useCopyToClipboard hook to copy text to the clipboard and track whether the copy action was successful, with an optional delay to reset the copied state.",
     type: "registry:hook",
-    registryDependencies: [`${siteConfig.url}/k/use-is-mobile`],
+    registryDependencies: ["use-is-mobile"],
     files: [
       {
         path: "registry/hooks/use-mouse-position.ts",
@@ -363,6 +387,19 @@ export const hooks: Registry["items"] = [
     files: [
       {
         path: "registry/hooks/use-cookie-storage.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-consent-gate",
+    title: "Use Consent Gate",
+    description:
+      "Manage user consent for analytics or other third-party features before enabling them.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-consent-gate.ts",
         type: "registry:hook",
       },
     ],
@@ -730,7 +767,7 @@ export const hooks: Registry["items"] = [
     title: "Use Event Listener",
     description: "Listen for events on a target element with useEventListener.",
     type: "registry:hook",
-    registryDependencies: [`${siteConfig.url}/k/use-isomorphic-layout-effect`],
+    registryDependencies: ["use-isomorphic-layout-effect"],
     files: [
       {
         path: "registry/hooks/use-event-listener.ts",
@@ -757,7 +794,7 @@ export const hooks: Registry["items"] = [
     description:
       "Drag and drop files into a dropzone with useDropzone, providing options to customize the dropzone.",
     type: "registry:hook",
-    registryDependencies: [`${siteConfig.url}/k/use-event-listener`],
+    registryDependencies: ["use-event-listener"],
     files: [
       {
         path: "registry/hooks/use-dropzone.ts",
@@ -773,6 +810,19 @@ export const hooks: Registry["items"] = [
     files: [
       {
         path: "registry/hooks/use-input-value.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-masked-input",
+    title: "Use Masked Input",
+    description:
+      "Declarative input masking supporting complex international patterns, caret control, and paste handling.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-masked-input.ts",
         type: "registry:hook",
       },
     ],
@@ -860,10 +910,7 @@ export const hooks: Registry["items"] = [
     description:
       "Manage a controlled state with the useControlledState hook, providing methods to set it to true, false, or toggle between them",
     type: "registry:hook",
-    registryDependencies: [
-      `${siteConfig.url}/k/use-callback-ref`,
-      `${siteConfig.url}/k/use-uncontrolled-state`,
-    ],
+    registryDependencies: ["use-callback-ref", "use-uncontrolled-state"],
     files: [
       {
         path: "registry/hooks/use-controlled-state.ts",
@@ -877,7 +924,7 @@ export const hooks: Registry["items"] = [
     description:
       "Manage an uncontrolled state with the useUncontrolledState hook, providing methods to set it to true, false, or toggle between them",
     type: "registry:hook",
-    registryDependencies: [`${siteConfig.url}/k/use-callback-ref`],
+    registryDependencies: ["use-callback-ref"],
     files: [
       {
         path: "registry/hooks/use-uncontrolled-state.ts",
@@ -934,6 +981,19 @@ export const hooks: Registry["items"] = [
     files: [
       {
         path: "registry/hooks/use-online-status.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-overflow-detector",
+    title: "Use Overflow Detector",
+    description:
+      "Detect horizontal/vertical overflow of any container with real-time updates using ResizeObserver.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-overflow-detector.ts",
         type: "registry:hook",
       },
     ],
@@ -1492,6 +1552,268 @@ export const hooks: Registry["items"] = [
     files: [
       {
         path: "registry/hooks/use-rock-paper-scissors.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-task-queue",
+    title: "Use Task Queue",
+    description:
+      "Serializes async tasks with concurrency limit and priority support for rate-limiting uploads/downloads and sequencing animations.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-task-queue.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-adaptive-language",
+    title: "Use Adaptive Language",
+    description:
+      "Switch UI text & formatting based on user preference, locale, and context for multi-lingual apps with runtime language switching.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-adaptive-language.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-progressive-upload",
+    title: "Use Progressive Upload",
+    description:
+      "Chunked upload that adapts chunk size on poor networks and resumes on reconnect for large file uploads on flaky mobile networks.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-progressive-upload.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-network-quality",
+    title: "Use Network Quality",
+    description:
+      "Measure RTT, throughput and categorize connection quality for adaptive behaviors like adjusting video quality or deferring sync on poor networks.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-network-quality.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-secure-storage",
+    title: "Use Secure Storage",
+    description:
+      "Transparent encryption layer for local/session storage with key rotation and optional server-backed key retrieval for tokens and sensitive settings.",
+    type: "registry:hook",
+    dependencies: ["crypto-js@4.2.0"],
+    devDependencies: ["@types/crypto-js@4.2.2"],
+    files: [
+      {
+        path: "registry/hooks/use-secure-storage.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-responsive-grid",
+    title: "Use Responsive Grid",
+    description:
+      "Layout helper that returns responsive column counts and item sizing for masonry-like grids.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-responsive-grid.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-form-autosave",
+    title: "Use Form Autosave",
+    description:
+      "Auto-save form drafts with debounce control, conflict detection, and restore helpers for long forms and editors.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-form-autosave.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-memory-leak-guard",
+    title: "Use Memory Leak Guard",
+    description:
+      "Detects runaway timers and detached DOM refs in development, warning with helpful stack traces.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-memory-leak-guard.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-clipboard-history",
+    title: "Use Clipboard History",
+    description:
+      "Maintain a local clipboard history with dedupe, optional secure clear, and helpers to push items programmatically.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-clipboard-history.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-pwa-install",
+    title: "Use PWA Install",
+    description:
+      "Detect installability, track prompt attempts, and provide a safe helper to trigger the PWA install flow.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-pwa-install.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-smart-placeholder",
+    title: "Use Smart Placeholder",
+    description:
+      "Generate context-aware skeleton placeholders for text, cards, lists, or avatars without hand-writing markup.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-smart-placeholder.tsx",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-diff-editor",
+    title: "Use Diff Editor",
+    description:
+      "Side-by-side diff state and merge helpers for text and JSON, ideal for admin tools and CMS review screens.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-diff-editor.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-payload-diff-guard",
+    title: "Use Payload Diff Guard",
+    description:
+      "Deep-diff two JSON payloads (DB vs input) and expose helpers to prevent unnecessary submissions when nothing changed.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-payload-diff-guard.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-native-share",
+    title: "Use Native Share",
+    description:
+      "Wrapper around the Web Share API that exposes a simple share(data) helper with optional fallbacks when navigator.share is unavailable.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-native-share.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-page-transition",
+    title: "Use Page Transition",
+    description:
+      "Tracks navigation transitions in SPAs and browser-driven navigations so you can show optimistic loaders and skeletons.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-page-transition.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-view-time",
+    title: "Use View Time",
+    description:
+      "Measure how long a component stays visible in the viewport so you can understand real engagement, not just impressions.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-view-time.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-section-tracker",
+    title: "Use Section Tracker",
+    description:
+      "Track which scroll section is currently active in view, similar to docs websites with synchronized sidebar navigation.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-section-tracker.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-tiny-redux",
+    title: "Use Tiny Redux",
+    description:
+      "Minimal global store with get, set, and subscribe that stays tiny but supports derived state and concurrent React.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-tiny-redux.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-dark-mode-schedule",
+    title: "Use Dark Mode Schedule",
+    description:
+      "Automatically switches themes based on schedules with custom start/end times, system-preference fallback, and smooth transitions.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-dark-mode-schedule.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-breadcrumbs",
+    title: "Use Breadcrumbs",
+    description:
+      "Manage breadcrumb navigation rules with push/pop/replace operations, auto-generation from URL, and customizable labels.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-breadcrumbs.ts",
         type: "registry:hook",
       },
     ],
