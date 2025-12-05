@@ -1818,6 +1818,19 @@ export const hooks: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "use-dependency-graph",
+    title: "Use Dependency Graph",
+    description:
+      "Build a runtime graph of which components depend on which stores/hooks to spot tight coupling and analyze architectural patterns.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-dependency-graph.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
 ]
 
 export default hooks

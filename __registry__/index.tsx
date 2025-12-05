@@ -2132,6 +2132,22 @@ export const Index: Record<string, any> = {
     ),
     source: "",
   },
+  "use-dependency-graph": {
+    name: "use-dependency-graph",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-dependency-graph.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-dependency-graph-demo")
+    ),
+    source: "",
+  },
   "use-copy-to-clipboard-demo": {
     name: "use-copy-to-clipboard-demo",
     type: "registry:example",
@@ -3857,6 +3873,22 @@ export const Index: Record<string, any> = {
     ],
     component: React.lazy(
       () => import("registry/examples/use-breadcrumbs-demo.tsx")
+    ),
+    source: "",
+  },
+  "use-dependency-graph-demo": {
+    name: "use-dependency-graph-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-dependency-graph-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-dependency-graph-demo.tsx")
     ),
     source: "",
   },
