@@ -74,6 +74,12 @@ export const docsConfig: DocsConfig = {
           label: "New",
         },
         {
+          title: "useConsoleCapture",
+          href: "/docs/hooks/use-console-capture",
+          items: [],
+          label: "New",
+        },
+        {
           title: "useFetch",
           href: "/docs/hooks/use-fetch",
           items: [],

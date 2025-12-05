@@ -1102,4 +1102,14 @@ export const hooksExamples: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "use-console-capture-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/use-console-capture-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
 ]

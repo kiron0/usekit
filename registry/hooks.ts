@@ -1831,6 +1831,19 @@ export const hooks: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "use-console-capture",
+    title: "Use Console Capture",
+    description:
+      "Capture browser console logs and display them in the UI. Filter by whole project, current component, specific path, or disable.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-console-capture.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
 ]
 
 export default hooks

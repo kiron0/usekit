@@ -1,0 +1,301 @@
+---
+title: useConsoleCapture
+description: Capture browser console logs and display them in the UI. Filter by whole project, current component, specific path, or disable.
+---
+
+<ComponentPreview name="use-console-capture-demo" />
+
+## Installation
+
+<CodeTabs>
+  <TabsList>
+    <TabsTrigger value="cli">CLI</TabsTrigger>
+    <TabsTrigger value="manual">Manual</TabsTrigger>
+  </TabsList>
+
+  <TabsContent value="cli">
+
+```bash
+npx uselab@latest add use-console-capture
+```
+
+  </TabsContent>
+
+  <TabsContent value="manual">
+    <Steps>
+      <Step>Copy and paste the following code into your project.</Step>
+      <ComponentSource name="use-console-capture" />
+      <Step>Update the import paths to match your project.</Step>
+    </Steps>
+  </TabsContent>
+</CodeTabs>
+
+## Usage
+
+```tsx {5,8-12}
+"use client"
+
+import * as React from "react"
+
+import { useConsoleCapture } from "@/hooks/use-console-capture"
+
+function LogViewer() {
+  const { logs, clear, setScope, enable, disable, isEnabled } =
+    useConsoleCapture({
+      scope: "all",
+      enabled: true,
+    })
+
+  return (
+    <div>
+      <button onClick={() => setScope("all")}>Capture All Logs</button>
+      <button onClick={() => setScope("current")}>
+        Capture Current Component
+      </button>
+      <button
+        onClick={() => setScope("path", { componentPath: "/components" })}
+      >
+        Capture by Path
+      </button>
+      <button onClick={disable}>Disable</button>
+      <button onClick={clear}>Clear Logs</button>
+
+      <div>
+        {logs.map((log) => (
+          <div key={log.id}>
+            [{log.level}] {log.message}
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+```
+
+## API Reference
+
+### `useConsoleCapture(options?)`
+
+| Name            | Type           | Description                                                       | Default                                     |
+| --------------- | -------------- | ----------------------------------------------------------------- | ------------------------------------------- |
+| `scope`         | `CaptureScope` | Capture scope: "all", "current", "path", or "disabled".           | `"all"`                                     |
+| `componentPath` | `string`       | Component path for "path" scope filtering.                        | —                                           |
+| `componentName` | `string`       | Component name for "current" scope filtering.                     | —                                           |
+| `maxLogs`       | `number`       | Maximum number of logs to store before removing oldest.           | `1000`                                      |
+| `levels`        | `LogLevel[]`   | Log levels to capture: ["log", "info", "warn", "error", "debug"]. | `["log", "info", "warn", "error", "debug"]` |
+| `enabled`       | `boolean`      | Whether to enable console capture.                                | `true`                                      |
+
+### Return value
+
+| Name        | Type                                                                                          | Description                                   |
+| ----------- | --------------------------------------------------------------------------------------------- | --------------------------------------------- |
+| `logs`      | `ConsoleLog[]`                                                                                | Array of captured console logs.               |
+| `clear`     | `() => void`                                                                                  | Clear all captured logs.                      |
+| `setScope`  | `(scope: CaptureScope, options?: { componentPath?: string; componentName?: string }) => void` | Change the capture scope.                     |
+| `enable`    | `() => void`                                                                                  | Enable console capture.                       |
+| `disable`   | `() => void`                                                                                  | Disable console capture.                      |
+| `isEnabled` | `boolean`                                                                                     | Whether console capture is currently enabled. |
+| `scope`     | `CaptureScope`                                                                                | Current capture scope.                        |
+
+### Capture Scopes
+
+```ts
+type CaptureScope = "all" | "current" | "path" | "disabled"
+```
+
+- **`all`**: Capture all console logs from the entire application
+- **`current`**: Capture logs only from the current component (by component name or path)
+- **`path`**: Capture logs from components matching a specific path pattern
+- **`disabled`**: Disable console capture
+
+### Log Level
+
+```ts
+type LogLevel = "log" | "info" | "warn" | "error" | "debug"
+```
+
+### Console Log Structure
+
+```ts
+interface ConsoleLog {
+  id: string
+  level: LogLevel
+  message: string
+  args: unknown[]
+  timestamp: number
+  componentPath?: string
+  componentName?: string
+  stack?: string
+}
+```
+
+## Examples
+
+### Capture All Logs
+
+```tsx
+function App() {
+  const { logs } = useConsoleCapture({
+    scope: "all",
+    enabled: true,
+  })
+
+  return (
+    <div>
+      {logs.map((log) => (
+        <div key={log.id}>
+          [{log.level}] {log.message}
+        </div>
+      ))}
+    </div>
+  )
+}
+```
+
+### Capture Current Component Only
+
+```tsx
+function MyComponent() {
+  const { logs } = useConsoleCapture({
+    scope: "current",
+    componentName: "MyComponent",
+  })
+
+  const handleClick = () => {
+    console.log("Button clicked")
+  }
+
+  return (
+    <div>
+      <button onClick={handleClick}>Click me</button>
+      <div>
+        {logs.map((log) => (
+          <div key={log.id}>{log.message}</div>
+        ))}
+      </div>
+    </div>
+  )
+}
+```
+
+### Filter by Component Path
+
+```tsx
+function LogViewer() {
+  const { logs, setScope } = useConsoleCapture({
+    scope: "path",
+    componentPath: "/components/utils",
+  })
+
+  return (
+    <div>
+      <button
+        onClick={() => setScope("path", { componentPath: "/components/utils" })}
+      >
+        Filter by Path
+      </button>
+      {/* Display logs */}
+    </div>
+  )
+}
+```
+
+### Dynamic Scope Control
+
+```tsx
+function ConsolePanel() {
+  const { logs, setScope, enable, disable, isEnabled, scope } =
+    useConsoleCapture()
+
+  return (
+    <div>
+      <select
+        value={scope}
+        onChange={(e) => setScope(e.target.value as CaptureScope)}
+      >
+        <option value="all">All Logs</option>
+        <option value="current">Current Component</option>
+        <option value="path">By Path</option>
+        <option value="disabled">Disabled</option>
+      </select>
+
+      <button onClick={isEnabled ? disable : enable}>
+        {isEnabled ? "Disable" : "Enable"}
+      </button>
+
+      <div>
+        {logs.map((log) => (
+          <div key={log.id}>
+            <span>[{log.level}]</span>
+            <span>{log.message}</span>
+            {log.componentName && <span>from {log.componentName}</span>}
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+```
+
+### Filter Specific Log Levels
+
+```tsx
+function ErrorViewer() {
+  const { logs } = useConsoleCapture({
+    scope: "all",
+    levels: ["error", "warn"], // Only capture errors and warnings
+  })
+
+  return (
+    <div>
+      <h3>Errors and Warnings</h3>
+      {logs.map((log) => (
+        <div
+          key={log.id}
+          className={log.level === "error" ? "error" : "warning"}
+        >
+          {log.message}
+        </div>
+      ))}
+    </div>
+  )
+}
+```
+
+### Limit Log History
+
+```tsx
+function CompactLogViewer() {
+  const { logs } = useConsoleCapture({
+    scope: "all",
+    maxLogs: 50, // Keep only last 50 logs
+  })
+
+  return (
+    <div>
+      {logs.map((log) => (
+        <div key={log.id}>{log.message}</div>
+      ))}
+    </div>
+  )
+}
+```
+
+## Notes
+
+- The hook intercepts console methods (`console.log`, `console.error`, etc.) and captures logs while still allowing them to appear in the browser console.
+- Component path and name detection uses stack trace analysis, which may not work perfectly in all environments (especially after minification).
+- When multiple instances of the hook are used, they share the same log store globally.
+- The hook automatically restores original console methods when disabled or unmounted.
+- Logs are stored in memory and cleared when the page is refreshed.
+- Use `maxLogs` to prevent memory issues in long-running applications.
+- The `path` scope uses string matching, so partial paths will match (e.g., "/components" matches "/components/utils/Button.tsx").
+
+## Use Cases
+
+- **Development Debugging**: Display console logs directly in your UI during development.
+- **Error Monitoring**: Capture and display errors in a user-friendly way.
+- **Component Debugging**: Isolate logs from specific components during development.
+- **Log Analytics**: Collect and analyze console logs for debugging purposes.
+- **Production Debugging**: Allow users to report issues with captured console logs.
+- **Testing**: Verify that components log expected messages during testing.
