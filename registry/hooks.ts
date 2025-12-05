@@ -1,5 +1,3 @@
-import { siteConfig } from "@/config/site"
-
 import { type Registry } from "./schema"
 
 export const hooks: Registry["items"] = [
@@ -73,7 +71,7 @@ export const hooks: Registry["items"] = [
     description:
       "Delay function execution with useDebounceCallback, providing options for canceling, flushing, and checking if a call is pending.",
     type: "registry:hook",
-    registryDependencies: [`${siteConfig.url}/k/use-unmount`],
+    registryDependencies: ["use-unmount"],
     dependencies: ["lodash.debounce@4.0.8"],
     devDependencies: ["@types/lodash.debounce@4.0.9"],
     files: [
@@ -167,7 +165,7 @@ export const hooks: Registry["items"] = [
     description:
       "Use the useCopyToClipboard hook to copy text to the clipboard and track whether the copy action was successful, with an optional delay to reset the copied state.",
     type: "registry:hook",
-    registryDependencies: [`${siteConfig.url}/k/use-is-mobile`],
+    registryDependencies: ["use-is-mobile"],
     files: [
       {
         path: "registry/hooks/use-mouse-position.ts",
@@ -769,7 +767,7 @@ export const hooks: Registry["items"] = [
     title: "Use Event Listener",
     description: "Listen for events on a target element with useEventListener.",
     type: "registry:hook",
-    registryDependencies: [`${siteConfig.url}/k/use-isomorphic-layout-effect`],
+    registryDependencies: ["use-isomorphic-layout-effect"],
     files: [
       {
         path: "registry/hooks/use-event-listener.ts",
@@ -796,7 +794,7 @@ export const hooks: Registry["items"] = [
     description:
       "Drag and drop files into a dropzone with useDropzone, providing options to customize the dropzone.",
     type: "registry:hook",
-    registryDependencies: [`${siteConfig.url}/k/use-event-listener`],
+    registryDependencies: ["use-event-listener"],
     files: [
       {
         path: "registry/hooks/use-dropzone.ts",
@@ -912,10 +910,7 @@ export const hooks: Registry["items"] = [
     description:
       "Manage a controlled state with the useControlledState hook, providing methods to set it to true, false, or toggle between them",
     type: "registry:hook",
-    registryDependencies: [
-      `${siteConfig.url}/k/use-callback-ref`,
-      `${siteConfig.url}/k/use-uncontrolled-state`,
-    ],
+    registryDependencies: ["use-callback-ref", "use-uncontrolled-state"],
     files: [
       {
         path: "registry/hooks/use-controlled-state.ts",
@@ -929,7 +924,7 @@ export const hooks: Registry["items"] = [
     description:
       "Manage an uncontrolled state with the useUncontrolledState hook, providing methods to set it to true, false, or toggle between them",
     type: "registry:hook",
-    registryDependencies: [`${siteConfig.url}/k/use-callback-ref`],
+    registryDependencies: ["use-callback-ref"],
     files: [
       {
         path: "registry/hooks/use-uncontrolled-state.ts",

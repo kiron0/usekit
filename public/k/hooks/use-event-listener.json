@@ -4,9 +4,7 @@
   "type": "registry:hook",
   "title": "Use Event Listener",
   "description": "Listen for events on a target element with useEventListener.",
-  "registryDependencies": [
-    "https://usekit.kiron.dev/k/use-isomorphic-layout-effect"
-  ],
+  "registryDependencies": ["use-isomorphic-layout-effect"],
   "files": [
     {
       "path": "registry/hooks/use-event-listener.ts",

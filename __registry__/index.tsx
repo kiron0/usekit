@@ -81,7 +81,7 @@ export const Index: Record<string, any> = {
   "use-debounce-callback": {
     name: "use-debounce-callback",
     type: "registry:hook",
-    registryDependencies: ["https://usekit.kiron.dev/k/use-unmount"],
+    registryDependencies: ["use-unmount"],
     files: [
       {
         path: "registry/hooks/use-debounce-callback.ts",
@@ -187,7 +187,7 @@ export const Index: Record<string, any> = {
   "use-mouse-position": {
     name: "use-mouse-position",
     type: "registry:hook",
-    registryDependencies: ["https://usekit.kiron.dev/k/use-is-mobile"],
+    registryDependencies: ["use-is-mobile"],
     files: [
       {
         path: "registry/hooks/use-mouse-position.ts",
@@ -895,9 +895,7 @@ export const Index: Record<string, any> = {
   "use-event-listener": {
     name: "use-event-listener",
     type: "registry:hook",
-    registryDependencies: [
-      "https://usekit.kiron.dev/k/use-isomorphic-layout-effect",
-    ],
+    registryDependencies: ["use-isomorphic-layout-effect"],
     files: [
       {
         path: "registry/hooks/use-event-listener.ts",
@@ -927,7 +925,7 @@ export const Index: Record<string, any> = {
   "use-dropzone": {
     name: "use-dropzone",
     type: "registry:hook",
-    registryDependencies: ["https://usekit.kiron.dev/k/use-event-listener"],
+    registryDependencies: ["use-event-listener"],
     files: [
       {
         path: "registry/hooks/use-dropzone.ts",
@@ -1061,10 +1059,7 @@ export const Index: Record<string, any> = {
   "use-controlled-state": {
     name: "use-controlled-state",
     type: "registry:hook",
-    registryDependencies: [
-      "https://usekit.kiron.dev/k/use-callback-ref",
-      "https://usekit.kiron.dev/k/use-uncontrolled-state",
-    ],
+    registryDependencies: ["use-callback-ref", "use-uncontrolled-state"],
     files: [
       {
         path: "registry/hooks/use-controlled-state.ts",
@@ -1080,7 +1075,7 @@ export const Index: Record<string, any> = {
   "use-uncontrolled-state": {
     name: "use-uncontrolled-state",
     type: "registry:hook",
-    registryDependencies: ["https://usekit.kiron.dev/k/use-callback-ref"],
+    registryDependencies: ["use-callback-ref"],
     files: [
       {
         path: "registry/hooks/use-uncontrolled-state.ts",
