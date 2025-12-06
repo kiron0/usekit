@@ -2164,6 +2164,22 @@ export const Index: Record<string, any> = {
     ),
     source: "",
   },
+  "use-submit-lock": {
+    name: "use-submit-lock",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-submit-lock.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-submit-lock-demo")
+    ),
+    source: "",
+  },
   "use-copy-to-clipboard-demo": {
     name: "use-copy-to-clipboard-demo",
     type: "registry:example",
@@ -3921,6 +3937,22 @@ export const Index: Record<string, any> = {
     ],
     component: React.lazy(
       () => import("registry/examples/use-console-capture-demo.tsx")
+    ),
+    source: "",
+  },
+  "use-submit-lock-demo": {
+    name: "use-submit-lock-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-submit-lock-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-submit-lock-demo.tsx")
     ),
     source: "",
   },

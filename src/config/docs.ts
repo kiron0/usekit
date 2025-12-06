@@ -167,6 +167,12 @@ export const docsConfig: DocsConfig = {
           items: [],
         },
         {
+          title: "useSubmitLock",
+          href: "/docs/hooks/use-submit-lock",
+          items: [],
+          label: "New",
+        },
+        {
           title: "useScript",
           href: "/docs/hooks/use-script",
           items: [],

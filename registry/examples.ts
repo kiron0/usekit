@@ -1112,4 +1112,14 @@ export const hooksExamples: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "use-submit-lock-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/use-submit-lock-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
 ]

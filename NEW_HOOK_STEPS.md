@@ -15,8 +15,7 @@ Keep these three strings consistent—they are reused in the following steps.
 ## 2. Implement the hook
 
 1. Create `registry/hooks/<slug>.ts`. Export the hook (named with camelCase, e.g. `export function useMaskedInput() { ... }`).
-2. If the file needs the `use client` pragma, place it on the first line.
-3. Prefer co-locating helper types/functions inside the same file unless they are reused elsewhere.
+2. Prefer co-locating helper types/functions inside the same file unless they are reused elsewhere.
 
 ## 3. Register the hook with the registry CLI
 

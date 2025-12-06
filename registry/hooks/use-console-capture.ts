@@ -1,5 +1,3 @@
-"use client"
-
 /* eslint-disable no-console */
 import * as React from "react"
 

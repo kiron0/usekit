@@ -1722,6 +1722,18 @@
           "path": "registry/hooks/use-console-capture.ts"
         }
       ]
+    },
+    {
+      "name": "use-submit-lock",
+      "title": "Use Submit Lock",
+      "description": "Prevent double submissions by locking form submissions. Common solution for preventing duplicate form submissions.",
+      "type": "registry:hook",
+      "files": [
+        {
+          "type": "registry:hook",
+          "path": "registry/hooks/use-submit-lock.ts"
+        }
+      ]
     }
   ]
 }

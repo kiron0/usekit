@@ -34,9 +34,7 @@ npx uselab@latest add use-dark-mode-schedule
 
 ### Basic Example
 
-```tsx {5,8-13}
-"use client"
-
+```tsx {3, 6-11}
 import * as React from "react"
 
 import { useDarkModeSchedule } from "@/hooks/use-dark-mode-schedule"
@@ -67,9 +65,7 @@ export function ThemeScheduleExample() {
 
 ### With next-themes Integration
 
-```tsx {6,11-19}
-"use client"
-
+```tsx {4, 9-17}
 import * as React from "react"
 import { useTheme } from "next-themes"
 
@@ -99,9 +95,7 @@ export function NextThemesIntegration() {
 
 ### Manual Override
 
-```tsx {5,8-11}
-"use client"
-
+```tsx {3, 6-9}
 import * as React from "react"
 
 import { useDarkModeSchedule } from "@/hooks/use-dark-mode-schedule"

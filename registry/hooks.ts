@@ -1844,6 +1844,19 @@ export const hooks: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "use-submit-lock",
+    title: "Use Submit Lock",
+    description:
+      "Prevent double submissions by locking form submissions. Common solution for preventing duplicate form submissions.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-submit-lock.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
 ]
 
 export default hooks

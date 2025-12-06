@@ -34,9 +34,7 @@ npx uselab@latest add use-breadcrumbs
 
 ### Basic Example (Plain React)
 
-```tsx {5,8-10}
-"use client"
-
+```tsx {3, 6-8}
 import * as React from "react"
 
 import { useBreadcrumbs } from "@/hooks/use-breadcrumbs"
@@ -67,9 +65,7 @@ export function BreadcrumbExample() {
 
 ### With Next.js
 
-```tsx {7,10-17}
-"use client"
-
+```tsx {5, 8-15}
 import * as React from "react"
 import Link from "next/link"
 import { usePathname, useRouter } from "next/navigation"
@@ -100,9 +96,7 @@ export function NextBreadcrumbExample() {
 
 ### With React Router
 
-```tsx {6,9-16}
-"use client"
-
+```tsx {4, 7-14}
 import * as React from "react"
 import { useLocation, useNavigate } from "react-router-dom"
 
@@ -139,9 +133,7 @@ export function ReactRouterBreadcrumbExample() {
 
 ### Custom Label Generation
 
-```tsx {5,8-18}
-"use client"
-
+```tsx {3, 6-16}
 import * as React from "react"
 
 import { useBreadcrumbs } from "@/hooks/use-breadcrumbs"
@@ -171,9 +163,7 @@ export function CustomLabelExample() {
 
 ### Manual Breadcrumb Management
 
-```tsx {5,8-14}
-"use client"
-
+```tsx {3, 6-12}
 import * as React from "react"
 
 import { useBreadcrumbs } from "@/hooks/use-breadcrumbs"
@@ -217,9 +207,7 @@ export function ManualBreadcrumbExample() {
 
 ### With Base Path
 
-```tsx {5,8-12}
-"use client"
-
+```tsx {3, 6-10}
 import * as React from "react"
 
 import { useBreadcrumbs } from "@/hooks/use-breadcrumbs"
