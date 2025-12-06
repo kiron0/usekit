@@ -1414,6 +1414,18 @@ export const hooks: Registry["items"] = [
     ],
   },
   {
+    name: "use-dev-flag",
+    title: "Use Dev Flag",
+    description: "Enable behaviors ONLY in dev mode.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-dev-flag.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
     name: "use-error-boundary",
     title: "Use Error Boundary",
     description:
@@ -1840,6 +1852,57 @@ export const hooks: Registry["items"] = [
     files: [
       {
         path: "registry/hooks/use-console-capture.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-submit-lock",
+    title: "Use Submit Lock",
+    description:
+      "Prevent double submissions by locking form submissions. Common solution for preventing duplicate form submissions.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-submit-lock.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-on-enter-submit",
+    title: "Use On Enter Submit",
+    description:
+      "Submit form when pressing Enter — but only if valid. Automatically handles form validation before submission.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-on-enter-submit.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-scroll-blocker",
+    title: "Use Scroll Blocker",
+    description:
+      "Block background scrolling when popup/modals are open. Useful every day!",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-scroll-blocker.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-anchor-scroll",
+    title: "Use Anchor Scroll",
+    description: "Scroll smoothly to any anchor ID without changing the URL.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-anchor-scroll.ts",
         type: "registry:hook",
       },
     ],

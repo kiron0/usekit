@@ -1,0 +1,149 @@
+---
+title: useDevFlag
+description: Enable behaviors ONLY in dev mode.
+---
+
+<ComponentPreview name="use-dev-flag-demo" />
+
+## Installation
+
+<CodeTabs>
+  <TabsList>
+    <TabsTrigger value="cli">CLI</TabsTrigger>
+    <TabsTrigger value="manual">Manual</TabsTrigger>
+  </TabsList>
+
+  <TabsContent value="cli">
+
+```bash
+npx uselab@latest add use-dev-flag
+```
+
+  </TabsContent>
+
+  <TabsContent value="manual">
+    <Steps>
+      <Step>Copy and paste the following code into your project.</Step>
+      <ComponentSource name="use-dev-flag" />
+      <Step>Update the import paths to match your project setup.</Step>
+    </Steps>
+  </TabsContent>
+</CodeTabs>
+
+## Usage
+
+```tsx {1, 4}
+import { useDevFlag } from "@/hooks/use-dev-flag"
+
+function DebugPanel() {
+  const isDev = useDevFlag()
+
+  if (!isDev) return null
+
+  return <div>Debug information only visible in dev mode</div>
+}
+```
+
+The hook provides a simple boolean flag that&apos;s `true` only in development mode, perfect for conditionally enabling debug tools, dev features, or testing utilities.
+
+## API Reference
+
+### `useDevFlag()`
+
+Returns a boolean indicating if the application is running in development mode.
+
+| Return Type | Description                                                 |
+| ----------- | ----------------------------------------------------------- |
+| `boolean`   | `true` when `NODE_ENV === "development"`, otherwise `false` |
+
+## Examples
+
+### Conditional Debug Tools
+
+```tsx
+import { useDevFlag } from "@/hooks/use-dev-flag"
+
+function App() {
+  const isDev = useDevFlag()
+
+  return (
+    <div>
+      <MainContent />
+      {isDev && <DebugPanel />}
+    </div>
+  )
+}
+```
+
+### Dev-Only Logging
+
+```tsx
+import * as React from "react"
+
+import { useDevFlag } from "@/hooks/use-dev-flag"
+
+function Component() {
+  const isDev = useDevFlag()
+  const [data, setData] = React.useState(null)
+
+  React.useEffect(() => {
+    if (isDev) {
+      console.log("Component mounted with data:", data)
+    }
+  }, [data, isDev])
+
+  return <div>{/* Component content */}</div>
+}
+```
+
+### Development Features
+
+```tsx
+import { useDevFlag } from "@/hooks/use-dev-flag"
+
+function Settings() {
+  const isDev = useDevFlag()
+
+  return (
+    <div>
+      <h2>Settings</h2>
+      {isDev && (
+        <div>
+          <button>Reset Database</button>
+          <button>Load Test Data</button>
+        </div>
+      )}
+    </div>
+  )
+}
+```
+
+### Performance Monitoring
+
+```tsx
+import * as React from "react"
+
+import { useDevFlag } from "@/hooks/use-dev-flag"
+
+function ExpensiveComponent() {
+  const isDev = useDevFlag()
+  const startTime = React.useRef(Date.now())
+
+  React.useEffect(() => {
+    if (isDev) {
+      const duration = Date.now() - startTime.current
+      console.log(`Component render took ${duration}ms`)
+    }
+  })
+
+  return <div>{/* Component content */}</div>
+}
+```
+
+## Notes
+
+- Returns `true` when `process.env.NODE_ENV === "development"`
+- Simple and lightweight - just returns a boolean
+- Perfect for conditionally rendering debug tools, dev features, or logging
+- Use this instead of checking `process.env.NODE_ENV` directly in components
+- The value is memoized and won&apos;t change during the component lifecycle

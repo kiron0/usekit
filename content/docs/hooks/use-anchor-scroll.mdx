@@ -1,0 +1,122 @@
+---
+title: useAnchorScroll
+description: Scroll smoothly to any anchor ID without changing the URL.
+---
+
+<ComponentPreview name="use-anchor-scroll-demo" />
+
+## Installation
+
+<CodeTabs>
+  <TabsList>
+    <TabsTrigger value="cli">CLI</TabsTrigger>
+    <TabsTrigger value="manual">Manual</TabsTrigger>
+  </TabsList>
+
+  <TabsContent value="cli">
+
+```bash
+npx uselab@latest add use-anchor-scroll
+```
+
+  </TabsContent>
+
+  <TabsContent value="manual">
+    <Steps>
+      <Step>Copy and paste the following code into your project.</Step>
+      <ComponentSource name="use-anchor-scroll" />
+      <Step>Update the import paths to match your project setup.</Step>
+    </Steps>
+  </TabsContent>
+</CodeTabs>
+
+## Usage
+
+```tsx {1, 4}
+import { useAnchorScroll } from "@/hooks/use-anchor-scroll"
+
+function Navigation() {
+  const { scrollToId } = useAnchorScroll()
+
+  return (
+    <nav>
+      <button onClick={() => scrollToId("about")}>About</button>
+      <button onClick={() => scrollToId("contact")}>Contact</button>
+    </nav>
+  )
+}
+```
+
+The hook provides a simple way to scroll to elements by their ID without modifying the URL, making it perfect for single-page applications where you want smooth scrolling navigation without hash changes.
+
+## API Reference
+
+### `useAnchorScroll()`
+
+Returns an object with one method:
+
+| Name         | Type                   | Description                                       |
+| ------------ | ---------------------- | ------------------------------------------------- |
+| `scrollToId` | `(id: string) => void` | Scrolls smoothly to the element with the given ID |
+
+### Parameters
+
+#### `scrollToId(id: string)`
+
+- **`id`** (required): The ID of the element to scroll to. The element must exist in the DOM and have the matching `id` attribute.
+
+## Examples
+
+### Basic Navigation
+
+```tsx
+import { useAnchorScroll } from "@/hooks/use-anchor-scroll"
+
+function TableOfContents() {
+  const { scrollToId } = useAnchorScroll()
+
+  return (
+    <ul>
+      <li>
+        <button onClick={() => scrollToId("introduction")}>Introduction</button>
+      </li>
+      <li>
+        <button onClick={() => scrollToId("features")}>Features</button>
+      </li>
+      <li>
+        <button onClick={() => scrollToId("conclusion")}>Conclusion</button>
+      </li>
+    </ul>
+  )
+}
+```
+
+### With Error Handling
+
+```tsx
+import { useAnchorScroll } from "@/hooks/use-anchor-scroll"
+
+function SafeNavigation() {
+  const { scrollToId } = useAnchorScroll()
+
+  const handleScroll = (id: string) => {
+    const element = document.getElementById(id)
+    if (element) {
+      scrollToId(id)
+    } else {
+      console.warn(`Element with id "${id}" not found`)
+    }
+  }
+
+  return (
+    <button onClick={() => handleScroll("section-1")}>Go to Section 1</button>
+  )
+}
+```
+
+## Notes
+
+- The hook uses `scrollIntoView` with `behavior: "smooth"` for smooth scrolling animations
+- The URL is not modified, unlike traditional anchor links (`<a href="#id">`)
+- If the element with the given ID doesn&apos;t exist, the function silently returns without error
+- Works in browser environments only (checks for `window` before executing)

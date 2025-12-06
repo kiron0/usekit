@@ -26,7 +26,7 @@ export default function UseSmartPlaceholderDemo() {
   return (
     <div className="w-full space-y-6">
       <Card className="w-full border-none bg-transparent p-0">
-        <CardHeader className="flex flex-col gap-3 p-0 md:flex-row md:items-center md:justify-between">
+        <CardHeader className="flex flex-col gap-3 p-0">
           <div>
             <CardTitle>Smart Placeholders</CardTitle>
             <p className="text-sm text-muted-foreground">

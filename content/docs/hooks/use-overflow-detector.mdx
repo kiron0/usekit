@@ -40,9 +40,7 @@ npx uselab@latest add use-overflow-detector
 
 ## Usage
 
-```tsx {3, 6}
-"use client"
-
+```tsx {1, 4}
 import { useOverflowDetector } from "@/hooks/use-overflow-detector"
 
 export function OverflowExample() {
@@ -65,8 +63,6 @@ export function OverflowExample() {
 This example shows how to detect overflow in a container.
 
 ```tsx
-"use client"
-
 import { useOverflowDetector } from "@/hooks/use-overflow-detector"
 
 export function BasicOverflow() {
@@ -89,8 +85,6 @@ export function BasicOverflow() {
 This example applies different styles when overflow is detected.
 
 ```tsx
-"use client"
-
 import { cn } from "@/lib/utils"
 import { useOverflowDetector } from "@/hooks/use-overflow-detector"
 
@@ -117,8 +111,6 @@ export function StyledOverflow() {
 This example shows scroll indicators when overflow is detected.
 
 ```tsx
-"use client"
-
 import { useOverflowDetector } from "@/hooks/use-overflow-detector"
 
 export function ScrollIndicators() {
@@ -149,8 +141,6 @@ export function ScrollIndicators() {
 This example detects overflow when content changes dynamically.
 
 ```tsx
-"use client"
-
 import * as React from "react"
 
 import { useOverflowDetector } from "@/hooks/use-overflow-detector"
@@ -180,8 +170,6 @@ export function DynamicContent() {
 This example detects overflow in a responsive container.
 
 ```tsx
-"use client"
-
 import { useOverflowDetector } from "@/hooks/use-overflow-detector"
 
 export function ResponsiveOverflow() {

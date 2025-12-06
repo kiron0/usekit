@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-scroll-blocker",
+  "type": "registry:hook",
+  "title": "Use Scroll Blocker",
+  "description": "Block background scrolling when popup/modals are open. Useful every day!",
+  "files": [
+    {
+      "path": "registry/hooks/use-scroll-blocker.ts",
+      "content": "import * as React from \"react\"\n\nexport interface UseScrollBlockerReturn {\n  block: () => void\n  unblock: () => void\n}\n\nlet scrollBlockCount = 0\nlet scrollPosition = 0\n\nfunction blockScroll() {\n  if (scrollBlockCount === 0) {\n    scrollPosition = window.scrollY\n    document.body.style.overflow = \"hidden\"\n    document.body.style.position = \"fixed\"\n    document.body.style.top = `-${scrollPosition}px`\n    document.body.style.width = \"100%\"\n  }\n  scrollBlockCount++\n}\n\nfunction unblockScroll() {\n  if (scrollBlockCount > 0) {\n    scrollBlockCount--\n    if (scrollBlockCount === 0) {\n      document.body.style.overflow = \"\"\n      document.body.style.position = \"\"\n      document.body.style.top = \"\"\n      document.body.style.width = \"\"\n      window.scrollTo(0, scrollPosition)\n    }\n  }\n}\n\nexport function useScrollBlocker(): UseScrollBlockerReturn {\n  const isBlockedRef = React.useRef(false)\n\n  const block = React.useCallback(() => {\n    if (!isBlockedRef.current) {\n      blockScroll()\n      isBlockedRef.current = true\n    }\n  }, [])\n\n  const unblock = React.useCallback(() => {\n    if (isBlockedRef.current) {\n      unblockScroll()\n      isBlockedRef.current = false\n    }\n  }, [])\n\n  React.useEffect(() => {\n    return () => {\n      if (isBlockedRef.current) {\n        unblockScroll()\n        isBlockedRef.current = false\n      }\n    }\n  }, [])\n\n  return { block, unblock }\n}\n",
+      "type": "registry:hook"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-submit-lock",
+  "type": "registry:hook",
+  "title": "Use Submit Lock",
+  "description": "Prevent double submissions by locking form submissions. Common solution for preventing duplicate form submissions.",
+  "files": [
+    {
+      "path": "registry/hooks/use-submit-lock.ts",
+      "content": "import * as React from \"react\"\n\nexport interface UseSubmitLockOptions {\n  initialLocked?: boolean\n  autoUnlockDelay?: number\n}\n\nexport interface UseSubmitLockReturn {\n  locked: boolean\n  lock: () => void\n  unlock: () => void\n  toggle: () => void\n}\n\nexport function useSubmitLock(\n  options: UseSubmitLockOptions = {}\n): UseSubmitLockReturn {\n  const { initialLocked = false, autoUnlockDelay } = options\n\n  const [locked, setLocked] = React.useState(initialLocked)\n  const autoUnlockTimeoutRef = React.useRef<NodeJS.Timeout | null>(null)\n\n  const lock = React.useCallback(() => {\n    setLocked(true)\n\n    if (autoUnlockTimeoutRef.current) {\n      clearTimeout(autoUnlockTimeoutRef.current)\n    }\n\n    if (autoUnlockDelay !== undefined && autoUnlockDelay > 0) {\n      autoUnlockTimeoutRef.current = setTimeout(() => {\n        setLocked(false)\n      }, autoUnlockDelay)\n    }\n  }, [autoUnlockDelay])\n\n  const unlock = React.useCallback(() => {\n    setLocked(false)\n\n    if (autoUnlockTimeoutRef.current) {\n      clearTimeout(autoUnlockTimeoutRef.current)\n      autoUnlockTimeoutRef.current = null\n    }\n  }, [])\n\n  const toggle = React.useCallback(() => {\n    setLocked((prev) => {\n      const newLocked = !prev\n\n      if (autoUnlockTimeoutRef.current) {\n        clearTimeout(autoUnlockTimeoutRef.current)\n      }\n\n      if (newLocked && autoUnlockDelay !== undefined && autoUnlockDelay > 0) {\n        autoUnlockTimeoutRef.current = setTimeout(() => {\n          setLocked(false)\n        }, autoUnlockDelay)\n      }\n\n      return newLocked\n    })\n  }, [autoUnlockDelay])\n\n  React.useEffect(() => {\n    return () => {\n      if (autoUnlockTimeoutRef.current) {\n        clearTimeout(autoUnlockTimeoutRef.current)\n      }\n    }\n  }, [])\n\n  return {\n    locked,\n    lock,\n    unlock,\n    toggle,\n  }\n}\n",
+      "type": "registry:hook"
+    }
+  ]
+}

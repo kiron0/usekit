@@ -40,9 +40,7 @@ npx uselab@latest add use-memory
 
 ## Usage
 
-```tsx {3, 6}
-"use client"
-
+```tsx {1, 4}
 import { useMemory } from "@/hooks/use-memory"
 
 export function Component() {
@@ -106,5 +104,5 @@ export function Component() {
 - The `performance.memory` API is only available in Chromium-based browsers (e.g., Chrome, Edge) and is not supported in Firefox or Safari.
 - The hook checks for API support and returns `isSupported: false` if `performance.memory` is unavailable, making it safe for cross-browser use.
 - Memory info is updated at the specified `interval`, and the interval is cleared on component unmount to prevent memory leaks.
-- Marked with `"use client"` for Next.js, ensuring client-side execution.
+- Marked with `` for Next.js, ensuring client-side execution.
 - Use this hook judiciously, as frequent polling (small `interval`) may slightly impact performance in resource-constrained environments.

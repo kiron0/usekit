@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-dev-flag",
+  "type": "registry:hook",
+  "title": "Use Dev Flag",
+  "description": "Enable behaviors ONLY in dev mode.",
+  "files": [
+    {
+      "path": "registry/hooks/use-dev-flag.ts",
+      "content": "import * as React from \"react\"\n\nexport function useDevFlag(): boolean {\n  return React.useMemo(() => {\n    return process.env.NODE_ENV === \"development\"\n  }, [])\n}\n",
+      "type": "registry:hook"
+    }
+  ]
+}

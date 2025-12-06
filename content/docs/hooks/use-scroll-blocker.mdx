@@ -1,0 +1,179 @@
+---
+title: useScrollBlocker
+description: Block background scrolling when popup/modals are open. Useful every day!
+---
+
+<ComponentPreview name="use-scroll-blocker-demo" />
+
+## Installation
+
+<CodeTabs>
+  <TabsList>
+    <TabsTrigger value="cli">CLI</TabsTrigger>
+    <TabsTrigger value="manual">Manual</TabsTrigger>
+  </TabsList>
+
+  <TabsContent value="cli">
+
+```bash
+npx uselab@latest add use-scroll-blocker
+```
+
+  </TabsContent>
+
+  <TabsContent value="manual">
+    <Steps>
+      <Step>Copy and paste the following code into your project.</Step>
+      <ComponentSource name="use-scroll-blocker" />
+      <Step>Update the import paths to match your project setup.</Step>
+    </Steps>
+  </TabsContent>
+</CodeTabs>
+
+## Usage
+
+```tsx {3, 7}
+import * as React from "react"
+
+import { useScrollBlocker } from "@/hooks/use-scroll-blocker"
+
+function Modal() {
+  const [isOpen, setIsOpen] = React.useState(false)
+  const { block, unblock } = useScrollBlocker()
+
+  const handleOpen = () => {
+    setIsOpen(true)
+    block()
+  }
+
+  const handleClose = () => {
+    setIsOpen(false)
+    unblock()
+  }
+
+  return (
+    <>
+      <button onClick={handleOpen}>Open Modal</button>
+      {isOpen && (
+        <div className="modal">
+          <button onClick={handleClose}>Close</button>
+        </div>
+      )}
+    </>
+  )
+}
+```
+
+The hook provides manual control over scroll blocking, allowing you to block and unblock scrolling at the right moments in your component lifecycle.
+
+## API Reference
+
+### `useScrollBlocker()`
+
+Returns an object with two methods:
+
+| Name      | Type         | Description                                       |
+| --------- | ------------ | ------------------------------------------------- |
+| `block`   | `() => void` | Block background scrolling and preserve position  |
+| `unblock` | `() => void` | Unblock background scrolling and restore position |
+
+## Examples
+
+### Basic Modal
+
+```tsx
+import { useScrollBlocker } from "@/hooks/use-scroll-blocker"
+
+function MyModal() {
+  const [open, setOpen] = React.useState(false)
+  const { block, unblock } = useScrollBlocker()
+
+  React.useEffect(() => {
+    if (open) {
+      block()
+    } else {
+      unblock()
+    }
+  }, [open, block, unblock])
+
+  return (
+    <>
+      <button onClick={() => setOpen(true)}>Open</button>
+      {open && (
+        <div className="modal">
+          <button onClick={() => setOpen(false)}>Close</button>
+        </div>
+      )}
+    </>
+  )
+}
+```
+
+### With Dialog Component
+
+```tsx
+import { useScrollBlocker } from "@/hooks/use-scroll-blocker"
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog"
+
+function MyDialog() {
+  const [open, setOpen] = React.useState(false)
+  const { block, unblock } = useScrollBlocker()
+
+  React.useEffect(() => {
+    if (open) {
+      block()
+    } else {
+      unblock()
+    }
+  }, [open, block, unblock])
+
+  return (
+    <Dialog open={open} onOpenChange={setOpen}>
+      <DialogTrigger>Open Dialog</DialogTrigger>
+      <DialogContent>
+        <p>Dialog content</p>
+      </DialogContent>
+    </Dialog>
+  )
+}
+```
+
+### Multiple Modals
+
+```tsx
+function App() {
+  const [modal1Open, setModal1Open] = React.useState(false)
+  const [modal2Open, setModal2Open] = React.useState(false)
+  const { block, unblock } = useScrollBlocker()
+
+  React.useEffect(() => {
+    if (modal1Open || modal2Open) {
+      block()
+    } else {
+      unblock()
+    }
+  }, [modal1Open, modal2Open, block, unblock])
+
+  return (
+    <>
+      <button onClick={() => setModal1Open(true)}>Open Modal 1</button>
+      <button onClick={() => setModal2Open(true)}>Open Modal 2</button>
+      {/* modals */}
+    </>
+  )
+}
+```
+
+## When to use
+
+- Modals and dialogs that overlay the page
+- Popups and dropdowns that should prevent background scrolling
+- Mobile menus and drawers
+- Any overlay component that needs to lock the background
+
+## Notes
+
+- The hook preserves scroll position and restores it when unblocking
+- Multiple calls to `block()` are handled correctly — scroll only unblocks when all instances call `unblock()`
+- Automatically cleans up if the component unmounts while blocked
+- Works with nested modals — each modal can independently block/unblock

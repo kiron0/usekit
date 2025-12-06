@@ -47,7 +47,7 @@ export default function Home() {
           <ChangingScrambleText />
           <Balancer className="max-w-2xl px-4 text-sm text-muted-foreground md:text-lg">
             A collection of reusable react hooks that you can easily copy and
-            paste into your apps or add directly through the shadcn CLI.
+            paste into your apps or add directly through the uselab CLI.
           </Balancer>
         </div>
         <div className="flex items-center gap-2">

@@ -44,9 +44,7 @@ npx uselab@latest add use-prevent-zoom
 
 ### Basic Usage
 
-```tsx {3, 6}
-"use client"
-
+```tsx {1, 4}
 import { usePreventZoom } from "@/hooks/use-prevent-zoom"
 
 const App = () => {
@@ -64,9 +62,7 @@ const App = () => {
 
 ### Global Zoom Control
 
-```tsx {3, 6-7}
-"use client"
-
+```tsx {1, 4-5}
 import { usePreventZoom } from "@/hooks/use-prevent-zoom"
 
 const App = () => {
@@ -86,9 +82,7 @@ const App = () => {
 
 ### Element-Specific Zoom Control
 
-```tsx {5, 8}
-"use client"
-
+```tsx {3, 6}
 import { useRef } from "react"
 
 import { usePreventZoom } from "@/hooks/use-prevent-zoom"
@@ -123,9 +117,7 @@ const App = () => {
 
 ### Custom Options
 
-```tsx {3, 6-11}
-"use client"
-
+```tsx {1, 4-9}
 import { usePreventZoom } from "@/hooks/use-prevent-zoom"
 
 const App = () => {

@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-render-lock",
+  "type": "registry:hook",
+  "title": "Use Render Lock",
+  "description": "Prevent rendering until certain conditions are ready.",
+  "files": [
+    {
+      "path": "registry/hooks/use-render-lock.ts",
+      "content": "import * as React from \"react\"\n\nexport function useRenderLock(initialLocked = true) {\n  const [locked, setLocked] = React.useState(initialLocked)\n\n  const lock = React.useCallback(() => {\n    setLocked(true)\n  }, [])\n\n  const unlock = React.useCallback(() => {\n    setLocked(false)\n  }, [])\n\n  return {\n    locked,\n    lock,\n    unlock,\n  }\n}\n",
+      "type": "registry:hook"
+    }
+  ]
+}

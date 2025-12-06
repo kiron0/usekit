@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-anchor-scroll",
+  "type": "registry:hook",
+  "title": "Use Anchor Scroll",
+  "description": "Scroll smoothly to any anchor ID without changing the URL.",
+  "files": [
+    {
+      "path": "registry/hooks/use-anchor-scroll.ts",
+      "content": "import * as React from \"react\"\n\nexport function useAnchorScroll() {\n  const scrollToId = React.useCallback((id: string) => {\n    if (typeof window === \"undefined\") return\n\n    const element = document.getElementById(id)\n    if (!element) return\n\n    element.scrollIntoView({\n      behavior: \"smooth\",\n      block: \"start\",\n    })\n  }, [])\n\n  return { scrollToId }\n}\n",
+      "type": "registry:hook"
+    }
+  ]
+}
