@@ -33,6 +33,11 @@ export const docsConfig: DocsConfig = {
           items: [],
         },
         {
+          title: "CLI",
+          href: "/docs/cli",
+          items: [],
+        },
+        {
           title: "Changelog",
           href: "/docs/changelog",
           items: [],
@@ -169,6 +174,24 @@ export const docsConfig: DocsConfig = {
         {
           title: "useSubmitLock",
           href: "/docs/hooks/use-submit-lock",
+          items: [],
+          label: "New",
+        },
+        {
+          title: "useOnEnterSubmit",
+          href: "/docs/hooks/use-on-enter-submit",
+          items: [],
+          label: "New",
+        },
+        {
+          title: "useScrollBlocker",
+          href: "/docs/hooks/use-scroll-blocker",
+          items: [],
+          label: "New",
+        },
+        {
+          title: "useAnchorScroll",
+          href: "/docs/hooks/use-anchor-scroll",
           items: [],
           label: "New",
         },
@@ -744,6 +767,12 @@ export const docsConfig: DocsConfig = {
           title: "useEnvCheck",
           href: "/docs/hooks/use-env-check",
           items: [],
+        },
+        {
+          title: "useDevFlag",
+          href: "/docs/hooks/use-dev-flag",
+          items: [],
+          label: "New",
         },
         {
           title: "useErrorBoundary",

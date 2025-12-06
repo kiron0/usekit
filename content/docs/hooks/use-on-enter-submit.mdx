@@ -1,0 +1,185 @@
+---
+title: useOnEnterSubmit
+description: Submit form when pressing Enter — but only if valid. Automatically handles form validation before submission.
+---
+
+<ComponentPreview name="use-on-enter-submit-demo" />
+
+## Installation
+
+<CodeTabs>
+  <TabsList>
+    <TabsTrigger value="cli">CLI</TabsTrigger>
+    <TabsTrigger value="manual">Manual</TabsTrigger>
+  </TabsList>
+
+  <TabsContent value="cli">
+
+```bash
+npx uselab@latest add use-on-enter-submit
+```
+
+  </TabsContent>
+
+  <TabsContent value="manual">
+    <Steps>
+      <Step>Copy and paste the following code into your project.</Step>
+      <ComponentSource name="use-on-enter-submit" />
+      <Step>Update the import paths to match your project.</Step>
+    </Steps>
+  </TabsContent>
+</CodeTabs>
+
+## Usage
+
+```tsx {3, 14}
+import * as React from "react"
+
+import { useOnEnterSubmit } from "@/hooks/use-on-enter-submit"
+
+function ContactForm() {
+  const formRef = React.useRef<HTMLFormElement>(null)
+  const [email, setEmail] = React.useState("")
+  const [message, setMessage] = React.useState("")
+
+  const handleSubmit = () => {
+    console.log("Form submitted:", { email, message })
+  }
+
+  useOnEnterSubmit(formRef, handleSubmit)
+
+  return (
+    <form ref={formRef}>
+      <input
+        type="email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        required
+      />
+      <textarea
+        value={message}
+        onChange={(e) => setMessage(e.target.value)}
+        required
+      />
+      <button type="submit">Submit</button>
+    </form>
+  )
+}
+```
+
+The hook automatically:
+
+- Listens for Enter key presses on form inputs
+- Checks form validity using native HTML5 validation
+- Only calls your submit function if the form is valid
+- Excludes textarea fields (allows Shift+Enter for new lines)
+
+## API Reference
+
+### `useOnEnterSubmit(ref, submit, options?)`
+
+| Parameter | Type                                                                          | Description                                                          |
+| --------- | ----------------------------------------------------------------------------- | -------------------------------------------------------------------- |
+| `ref`     | `React.RefObject<HTMLFormElement \| HTMLInputElement \| HTMLTextAreaElement>` | React ref to the form element or any input/textarea within the form. |
+| `submit`  | `() => void`                                                                  | Function to call when Enter is pressed and the form is valid.        |
+| `options` | `UseOnEnterSubmitOptions`                                                     | Optional configuration object (see below).                           |
+
+### Options
+
+| Name             | Type      | Description                                          | Default |
+| ---------------- | --------- | ---------------------------------------------------- | ------- |
+| `preventDefault` | `boolean` | Whether to prevent default form submission behavior. | `true`  |
+| `checkValidity`  | `boolean` | Whether to check form validity before submitting.    | `true`  |
+
+### Return value
+
+This hook returns `void`.
+
+## Examples
+
+### With React Hook Form
+
+```tsx
+import { useForm } from "react-hook-form"
+
+import { useOnEnterSubmit } from "@/hooks/use-on-enter-submit"
+
+function MyForm() {
+  const formRef = React.useRef<HTMLFormElement>(null)
+  const form = useForm()
+
+  const onSubmit = (data: any) => {
+    console.log("Submitted:", data)
+  }
+
+  const handleEnterSubmit = () => {
+    form.handleSubmit(onSubmit)()
+  }
+
+  useOnEnterSubmit(formRef, handleEnterSubmit)
+
+  return (
+    <form ref={formRef} onSubmit={form.handleSubmit(onSubmit)}>
+      {/* form fields */}
+    </form>
+  )
+}
+```
+
+### With Custom Validation
+
+```tsx
+function CustomForm() {
+  const formRef = React.useRef<HTMLFormElement>(null)
+  const [errors, setErrors] = React.useState<Record<string, string>>({})
+
+  const validate = () => {
+    // Your custom validation logic
+    const newErrors: Record<string, string> = {}
+    // ... validation
+    setErrors(newErrors)
+    return Object.keys(newErrors).length === 0
+  }
+
+  const handleSubmit = () => {
+    if (validate()) {
+      console.log("Form is valid, submitting...")
+    }
+  }
+
+  useOnEnterSubmit(formRef, handleSubmit, { checkValidity: false })
+
+  return <form ref={formRef}>{/* form fields */}</form>
+}
+```
+
+### Disable Default Behavior
+
+```tsx
+function MyForm() {
+  const formRef = React.useRef<HTMLFormElement>(null)
+
+  const handleSubmit = () => {
+    // Custom submission logic
+  }
+
+  // Allow default form submission behavior
+  useOnEnterSubmit(formRef, handleSubmit, { preventDefault: false })
+
+  return <form ref={formRef}>{/* form fields */}</form>
+}
+```
+
+## When to use
+
+- Forms where users expect Enter key to submit
+- Improving form UX by reducing clicks
+- Ensuring validation before submission
+- Building accessible forms that work with keyboard navigation
+
+## Notes
+
+- The hook automatically excludes textarea fields to allow multi-line input
+- Works with native HTML5 validation attributes (`required`, `pattern`, `type="email"`, etc.)
+- Modifier keys (Shift, Ctrl, Alt, Meta) are ignored — only plain Enter triggers submission
+- The hook finds the form element automatically if you pass a ref to an input/textarea

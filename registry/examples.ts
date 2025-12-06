@@ -802,6 +802,16 @@ export const hooksExamples: Registry["items"] = [
     ],
   },
   {
+    name: "use-dev-flag-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/use-dev-flag-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
     name: "use-time-of-day-demo",
     type: "registry:example",
     files: [
@@ -1118,6 +1128,36 @@ export const hooksExamples: Registry["items"] = [
     files: [
       {
         path: "registry/examples/use-submit-lock-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-on-enter-submit-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/use-on-enter-submit-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-scroll-blocker-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/use-scroll-blocker-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-anchor-scroll-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/use-anchor-scroll-demo.tsx",
         type: "registry:example",
       },
     ],

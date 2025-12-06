@@ -1644,6 +1644,20 @@ export const Index: Record<string, any> = {
     component: React.lazy(() => import("registry/hooks/use-env-check.ts")),
     source: "",
   },
+  "use-dev-flag": {
+    name: "use-dev-flag",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-dev-flag.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(() => import("registry/examples/use-dev-flag-demo")),
+    source: "",
+  },
   "use-error-boundary": {
     name: "use-error-boundary",
     type: "registry:hook",
@@ -2177,6 +2191,54 @@ export const Index: Record<string, any> = {
     ],
     component: React.lazy(
       () => import("registry/examples/use-submit-lock-demo")
+    ),
+    source: "",
+  },
+  "use-on-enter-submit": {
+    name: "use-on-enter-submit",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-on-enter-submit.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-on-enter-submit-demo")
+    ),
+    source: "",
+  },
+  "use-scroll-blocker": {
+    name: "use-scroll-blocker",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-scroll-blocker.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-scroll-blocker-demo")
+    ),
+    source: "",
+  },
+  "use-anchor-scroll": {
+    name: "use-anchor-scroll",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-anchor-scroll.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-anchor-scroll-demo")
     ),
     source: "",
   },
@@ -3444,6 +3506,22 @@ export const Index: Record<string, any> = {
     ),
     source: "",
   },
+  "use-dev-flag-demo": {
+    name: "use-dev-flag-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-dev-flag-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-dev-flag-demo.tsx")
+    ),
+    source: "",
+  },
   "use-time-of-day-demo": {
     name: "use-time-of-day-demo",
     type: "registry:example",
@@ -3953,6 +4031,54 @@ export const Index: Record<string, any> = {
     ],
     component: React.lazy(
       () => import("registry/examples/use-submit-lock-demo.tsx")
+    ),
+    source: "",
+  },
+  "use-on-enter-submit-demo": {
+    name: "use-on-enter-submit-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-on-enter-submit-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-on-enter-submit-demo.tsx")
+    ),
+    source: "",
+  },
+  "use-scroll-blocker-demo": {
+    name: "use-scroll-blocker-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-scroll-blocker-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-scroll-blocker-demo.tsx")
+    ),
+    source: "",
+  },
+  "use-anchor-scroll-demo": {
+    name: "use-anchor-scroll-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-anchor-scroll-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-anchor-scroll-demo.tsx")
     ),
     source: "",
   },

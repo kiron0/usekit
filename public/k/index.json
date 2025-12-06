@@ -1326,6 +1326,18 @@
       ]
     },
     {
+      "name": "use-dev-flag",
+      "title": "Use Dev Flag",
+      "description": "Enable behaviors ONLY in dev mode.",
+      "type": "registry:hook",
+      "files": [
+        {
+          "type": "registry:hook",
+          "path": "registry/hooks/use-dev-flag.ts"
+        }
+      ]
+    },
+    {
       "name": "use-error-boundary",
       "title": "Use Error Boundary",
       "description": "Handle errors in React components gracefully with the useErrorBoundary hook, providing a way to catch and display errors without crashing the application.",
@@ -1732,6 +1744,42 @@
         {
           "type": "registry:hook",
           "path": "registry/hooks/use-submit-lock.ts"
+        }
+      ]
+    },
+    {
+      "name": "use-on-enter-submit",
+      "title": "Use On Enter Submit",
+      "description": "Submit form when pressing Enter — but only if valid. Automatically handles form validation before submission.",
+      "type": "registry:hook",
+      "files": [
+        {
+          "type": "registry:hook",
+          "path": "registry/hooks/use-on-enter-submit.ts"
+        }
+      ]
+    },
+    {
+      "name": "use-scroll-blocker",
+      "title": "Use Scroll Blocker",
+      "description": "Block background scrolling when popup/modals are open. Useful every day!",
+      "type": "registry:hook",
+      "files": [
+        {
+          "type": "registry:hook",
+          "path": "registry/hooks/use-scroll-blocker.ts"
+        }
+      ]
+    },
+    {
+      "name": "use-anchor-scroll",
+      "title": "Use Anchor Scroll",
+      "description": "Scroll smoothly to any anchor ID without changing the URL.",
+      "type": "registry:hook",
+      "files": [
+        {
+          "type": "registry:hook",
+          "path": "registry/hooks/use-anchor-scroll.ts"
         }
       ]
     }

@@ -1,0 +1,264 @@
+---
+title: uselab
+description: Use the uselab CLI to add hooks to your project.
+---
+
+## Installation
+
+```bash
+npm install -g uselab
+```
+
+Or run directly without installing:
+
+```bash
+npx uselab@latest --help
+```
+
+## init
+
+Use the `init` command to initialize configuration and set up the hooks directory for a new project.
+
+The `init` command creates a `uselab.json` configuration file and determines the hooks directory based on your project structure.
+
+```bash
+npx uselab@latest init
+```
+
+**Options**
+
+| Option             | Description              | Default     |
+| ------------------ | ------------------------ | ----------- |
+| `-c, --cwd <path>` | The working directory    | current cwd |
+| `-h, --help`       | Display help for command | —           |
+
+**Behavior**
+
+- Creates/updates `uselab.json` in the project root
+- Determines hooks directory (`src/hooks` if `src` exists, otherwise `hooks/`)
+- Requires `package.json` in the working directory
+
+**Examples**
+
+```bash
+npx uselab@latest init
+```
+
+```bash
+npx uselab@latest init --cwd /path/to/project
+```
+
+## add
+
+Use the `add` command to add hooks and dependencies to your project.
+
+```bash
+npx uselab@latest add [hook]
+```
+
+**Options**
+
+| Option             | Description                                   | Default     |
+| ------------------ | --------------------------------------------- | ----------- |
+| `[hook]`           | Hook name in kebab-case or camelCase          | —           |
+| `-y, --yes`        | Skip confirmation prompts (implies overwrite) | `false`     |
+| `--overwrite`      | Overwrite existing hook files if they exist   | `false`     |
+| `-c, --cwd <path>` | The working directory                         | current cwd |
+| `-h, --help`       | Display help for command                      | —           |
+
+**Behavior**
+
+1. Fetches the hook from the UseKit registry
+2. Installs it to your hooks directory
+3. Installs any required dependencies
+4. Creates the hooks directory if it doesn&apos;t exist
+
+**Examples**
+
+```bash
+npx uselab@latest add use-network-status
+```
+
+```bash
+npx uselab@latest add useToggle --yes
+```
+
+```bash
+npx uselab@latest add use-counter --overwrite
+```
+
+```bash
+npx uselab@latest add use-network-status --cwd /path/to/project
+```
+
+## list
+
+Use the `list` command to list all available hooks from the registry.
+
+```bash
+npx uselab@latest list
+```
+
+**Options**
+
+| Option             | Description              | Default     |
+| ------------------ | ------------------------ | ----------- |
+| `-c, --cwd <path>` | The working directory    | current cwd |
+| `-h, --help`       | Display help for command | —           |
+
+**Behavior**
+
+- Fetches registry index from `https://usekit.kiron.dev`
+- Prints name, title, and description for each hook
+- Shows popular hooks and directs you to the registry for the complete list
+
+**Examples**
+
+```bash
+npx uselab@latest list
+```
+
+```bash
+npx uselab@latest list --cwd /path/to/project
+```
+
+## build
+
+Use the `build` command to generate registry JSON files from a registry source.
+
+```bash
+npx uselab@latest build --registry registry.json --output dist
+```
+
+**Options**
+
+| Option                  | Description                   | Default     |
+| ----------------------- | ----------------------------- | ----------- |
+| `-r, --registry <path>` | Required: input registry JSON | —           |
+| `-o, --output <path>`   | Required: output directory    | —           |
+| `-c, --cwd <path>`      | The working directory         | current cwd |
+| `-h, --help`            | Display help for command      | —           |
+
+**Behavior**
+
+- Reads registry JSON file
+- Validates entries
+- Emits per-hook JSON files to the output directory
+
+**Examples**
+
+```bash
+npx uselab@latest build --registry registry.json --output dist
+```
+
+```bash
+npx uselab@latest build --registry registry.json --output dist --cwd /path/to/project
+```
+
+## Command Reference
+
+### Global Options
+
+| Option          | Description  |
+| --------------- | ------------ |
+| `-v, --version` | Show version |
+| `-h, --help`    | Show help    |
+
+### add [hook]
+
+Add a hook to your project.
+
+- `[hook]` accepts kebab-case or camelCase (e.g., `use-network-status`, `useNetworkStatus`, `useToggle`)
+- `-y, --yes` — skip confirmation prompts (implies overwrite when files exist)
+- `--overwrite` — overwrite existing hook files if they already exist
+- `-c, --cwd <path>` — working directory (default: current cwd)
+
+**Examples:**
+
+```bash
+npx uselab@latest add use-network-status
+```
+
+```bash
+npx uselab@latest add useToggle --yes
+```
+
+```bash
+npx uselab@latest add use-counter --overwrite
+```
+
+```bash
+npx uselab@latest add use-network-status --cwd /path/to/project
+```
+
+### init
+
+Initialize configuration.
+
+- `-c, --cwd <path>` — working directory (default: current cwd)
+- Behavior: creates/updates `uselab.json`; determines hooks dir (`src/hooks` if `src` exists, otherwise `hooks/`); requires `package.json` in cwd
+
+**Examples:**
+
+```bash
+npx uselab@latest init
+```
+
+```bash
+npx uselab@latest init --cwd /path/to/project
+```
+
+### list
+
+List available hooks.
+
+- `-c, --cwd <path>` — working directory (default: current cwd)
+- Behavior: fetches registry index from `https://usekit.kiron.dev`; prints name/title/description
+
+**Examples:**
+
+```bash
+npx uselab@latest list
+```
+
+```bash
+npx uselab@latest list --cwd /path/to/project
+```
+
+### build
+
+Build registry files from a registry JSON.
+
+- `-r, --registry <path>` — required: input registry JSON
+- `-o, --output <path>` — required: output directory
+- `-c, --cwd <path>` — optional working directory (default: current cwd)
+- Behavior: reads registry JSON, validates entries, emits per-hook JSON files
+
+**Examples:**
+
+```bash
+npx uselab@latest build --registry registry.json --output dist
+```
+
+```bash
+npx uselab@latest build --registry registry.json --output dist --cwd /path/to/project
+```
+
+## Configuration
+
+The CLI creates a `uselab.json` file in your project root:
+
+```json
+{
+  "hooksDir": "src/hooks"
+}
+```
+
+### Hooks Directory
+
+By default, hooks are installed to:
+
+- `src/hooks/` if a `src` directory exists
+- `hooks/` in the project root otherwise
+
+You can customize this in the `uselab.json` configuration file.

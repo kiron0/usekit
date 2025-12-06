@@ -2,7 +2,9 @@
 
 This checklist captures every place a hook touches in the repo so any contributor (human or AI) can wire it up end‑to‑end without guesswork.
 
-CHECK FOR DUPLICATES BEFORE YOU START. (by name, description, etc.)
+CHECK FOR DUPLICATES BEFORE YOU START. (by name, description, etc.), MAKE SURE THE HOOK IS NOT ALREADY IMPLEMENTED.
+
+NO COMMENTS IN THE HOOK FILE.
 
 ## 1. Decide the hook metadata up front
 
