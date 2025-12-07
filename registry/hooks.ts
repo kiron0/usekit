@@ -163,7 +163,7 @@ export const hooks: Registry["items"] = [
     name: "use-mouse-position",
     title: "Use Mouse Position",
     description:
-      "Use the useCopyToClipboard hook to copy text to the clipboard and track whether the copy action was successful, with an optional delay to reset the copied state.",
+      "Track the mouse position on the page with useMousePosition, providing both page coordinates and element-relative coordinates.",
     type: "registry:hook",
     registryDependencies: ["use-is-mobile"],
     files: [
@@ -213,7 +213,7 @@ export const hooks: Registry["items"] = [
   },
   {
     name: "use-fetch",
-    title: "Use Battery",
+    title: "Use Fetch",
     description:
       "Fetch data with accurate states, caching, and no stale responses using useFetch.",
     type: "registry:hook",
@@ -908,7 +908,7 @@ export const hooks: Registry["items"] = [
     name: "use-controlled-state",
     title: "Use Controlled State",
     description:
-      "Manage a controlled state with the useControlledState hook, providing methods to set it to true, false, or toggle between them",
+      "Manage a controlled state with the useControlledState hook, supporting both controlled and uncontrolled modes with automatic switching.",
     type: "registry:hook",
     registryDependencies: ["use-callback-ref", "use-uncontrolled-state"],
     files: [
@@ -922,7 +922,7 @@ export const hooks: Registry["items"] = [
     name: "use-uncontrolled-state",
     title: "Use Uncontrolled State",
     description:
-      "Manage an uncontrolled state with the useUncontrolledState hook, providing methods to set it to true, false, or toggle between them",
+      "Manage an uncontrolled state with the useUncontrolledState hook, providing optimized state updates with change callbacks.",
     type: "registry:hook",
     registryDependencies: ["use-callback-ref"],
     files: [
@@ -1245,6 +1245,20 @@ export const hooks: Registry["items"] = [
     ],
   },
   {
+    name: "use-form-disable",
+    title: "Use Form Disable",
+    description:
+      "Disable all form controls during submit with support for react-hook-form and zod.",
+    type: "registry:hook",
+    dependencies: ["react-hook-form"],
+    files: [
+      {
+        path: "registry/hooks/use-form-disable.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
     name: "use-infinite-scroll",
     title: "Use Infinite Scroll",
     description:
@@ -1421,6 +1435,19 @@ export const hooks: Registry["items"] = [
     files: [
       {
         path: "registry/hooks/use-dev-flag.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-dev-menu",
+    title: "Use Dev Menu",
+    description:
+      "Debug menu triggered by keyboard shortcut with open and close controls.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-dev-menu.ts",
         type: "registry:hook",
       },
     ],

@@ -1,6 +1,6 @@
 ---
 title: uselab
-description: Use the uselab CLI to add hooks to your project.
+description: A command-line tool for installing UseKit hooks into your React projects. Simplify your hook installation process with a simple command.
 ---
 
 ## Installation
@@ -9,248 +9,589 @@ description: Use the uselab CLI to add hooks to your project.
 npm install -g uselab
 ```
 
-Or run directly without installing:
+Or run directly without installation:
 
 ```bash
 npx uselab@latest --help
 ```
 
-## init
+## Quick Start
 
-Use the `init` command to initialize configuration and set up the hooks directory for a new project.
+1. **Initialize your project:**
 
-The `init` command creates a `uselab.json` configuration file and determines the hooks directory based on your project structure.
+   ```bash
+   npx uselab@latest init
+   ```
 
-```bash
-npx uselab@latest init
-```
+2. **Install a hook:**
 
-**Options**
+   ```bash
+   npx uselab@latest add use-network-status
+   ```
 
-| Option             | Description              | Default     |
-| ------------------ | ------------------------ | ----------- |
-| `-c, --cwd <path>` | The working directory    | current cwd |
-| `-h, --help`       | Display help for command | —           |
+3. **View available hooks:**
 
-**Behavior**
+   ```bash
+   npx uselab@latest list
+   ```
 
-- Creates/updates `uselab.json` in the project root
-- Determines hooks directory (`src/hooks` if `src` exists, otherwise `hooks/`)
-- Requires `package.json` in the working directory
+---
 
-**Examples**
+## Commands
 
-```bash
-npx uselab@latest init
-```
+### `add` - Install Hooks
 
-```bash
-npx uselab@latest init --cwd /path/to/project
-```
+Install one or more hooks from the registry, URL, or local file path.
 
-## add
-
-Use the `add` command to add hooks and dependencies to your project.
+#### Syntax
 
 ```bash
-npx uselab@latest add [hook]
+npx uselab@latest add [options] [hooks...]
 ```
 
-**Options**
+#### Arguments
 
-| Option             | Description                                   | Default     |
-| ------------------ | --------------------------------------------- | ----------- |
-| `[hook]`           | Hook name in kebab-case or camelCase          | —           |
-| `-y, --yes`        | Skip confirmation prompts (implies overwrite) | `false`     |
-| `--overwrite`      | Overwrite existing hook files if they exist   | `false`     |
-| `-c, --cwd <path>` | The working directory                         | current cwd |
-| `-h, --help`       | Display help for command                      | —           |
+- `[hooks...]` - Hook name(s), URL(s), or local path(s) (space-separated)
+  - **Registry names:** Accepts kebab-case or camelCase format
+    - Examples: `use-network-status`, `useToggle`, `useCounter`
 
-**Behavior**
+  - **URLs:** Full URL to a hook JSON file
+    - Examples: `https://example.com/hooks/use-custom.json`
 
-1. Fetches the hook from the UseKit registry
-2. Installs it to your hooks directory
-3. Installs any required dependencies
-4. Creates the hooks directory if it doesn&apos;t exist
+  - **Local paths:** Relative or absolute path to a local hook JSON file
+    - Examples: `./hooks/use-custom.json`, `../shared/use-utils.json`
 
-**Examples**
+#### Options
 
-```bash
-npx uselab@latest add use-network-status
-```
+| Option              | Description                                                       | Default           |
+| ------------------- | ----------------------------------------------------------------- | ----------------- |
+| `-y, --yes`         | Skip confirmation prompts. Implies `--overwrite` when files exist | `false`           |
+| `--overwrite`       | Overwrite existing hook files if they already exist               | `false`           |
+| `-c, --cwd <path>`  | Working directory for resolving package.json and hooks directory  | Current directory |
+| `-p, --path <path>` | Custom installation path (overrides hooks config)                 | Uses config       |
 
-```bash
-npx uselab@latest add useToggle --yes
-```
+#### Examples
 
-```bash
-npx uselab@latest add use-counter --overwrite
-```
-
-```bash
-npx uselab@latest add use-network-status --cwd /path/to/project
-```
-
-## list
-
-Use the `list` command to list all available hooks from the registry.
-
-```bash
-npx uselab@latest list
-```
-
-**Options**
-
-| Option             | Description              | Default     |
-| ------------------ | ------------------------ | ----------- |
-| `-c, --cwd <path>` | The working directory    | current cwd |
-| `-h, --help`       | Display help for command | —           |
-
-**Behavior**
-
-- Fetches registry index from `https://usekit.kiron.dev`
-- Prints name, title, and description for each hook
-- Shows popular hooks and directs you to the registry for the complete list
-
-**Examples**
-
-```bash
-npx uselab@latest list
-```
-
-```bash
-npx uselab@latest list --cwd /path/to/project
-```
-
-## build
-
-Use the `build` command to generate registry JSON files from a registry source.
-
-```bash
-npx uselab@latest build --registry registry.json --output dist
-```
-
-**Options**
-
-| Option                  | Description                   | Default     |
-| ----------------------- | ----------------------------- | ----------- |
-| `-r, --registry <path>` | Required: input registry JSON | —           |
-| `-o, --output <path>`   | Required: output directory    | —           |
-| `-c, --cwd <path>`      | The working directory         | current cwd |
-| `-h, --help`            | Display help for command      | —           |
-
-**Behavior**
-
-- Reads registry JSON file
-- Validates entries
-- Emits per-hook JSON files to the output directory
-
-**Examples**
-
-```bash
-npx uselab@latest build --registry registry.json --output dist
-```
-
-```bash
-npx uselab@latest build --registry registry.json --output dist --cwd /path/to/project
-```
-
-## Command Reference
-
-### Global Options
-
-| Option          | Description  |
-| --------------- | ------------ |
-| `-v, --version` | Show version |
-| `-h, --help`    | Show help    |
-
-### add [hook]
-
-Add a hook to your project.
-
-- `[hook]` accepts kebab-case or camelCase (e.g., `use-network-status`, `useNetworkStatus`, `useToggle`)
-- `-y, --yes` — skip confirmation prompts (implies overwrite when files exist)
-- `--overwrite` — overwrite existing hook files if they already exist
-- `-c, --cwd <path>` — working directory (default: current cwd)
-
-**Examples:**
+**Install a single hook:**
 
 ```bash
 npx uselab@latest add use-network-status
 ```
 
 ```bash
-npx uselab@latest add useToggle --yes
+npx uselab@latest add useToggle
 ```
 
 ```bash
-npx uselab@latest add use-counter --overwrite
+npx uselab@latest add use-counter
+```
+
+**Install multiple hooks:**
+
+```bash
+npx uselab@latest add use-counter use-toggle use-network-status
 ```
 
 ```bash
-npx uselab@latest add use-network-status --cwd /path/to/project
+npx uselab@latest add useBattery useCounter useToggle
 ```
 
-### init
+**Skip confirmation prompts:**
 
-Initialize configuration.
+```bash
+npx uselab@latest add use-counter --yes
+```
 
-- `-c, --cwd <path>` — working directory (default: current cwd)
-- Behavior: creates/updates `uselab.json`; determines hooks dir (`src/hooks` if `src` exists, otherwise `hooks/`); requires `package.json` in cwd
+```bash
+npx uselab@latest add use-toggle -y
+```
 
-**Examples:**
+**Overwrite existing files:**
+
+```bash
+npx uselab@latest add use-network-status --overwrite
+```
+
+```bash
+npx uselab@latest add use-counter --overwrite --yes
+```
+
+**Specify working directory:**
+
+```bash
+npx uselab@latest add use-toggle --cwd /path/to/project
+```
+
+```bash
+npx uselab@latest add use-counter -c ./my-project
+```
+
+**Custom installation path:**
+
+```bash
+npx uselab@latest add use-counter --path src/custom/hooks
+```
+
+```bash
+npx uselab@latest add use-toggle -p lib/hooks
+```
+
+**Install from URL:**
+
+```bash
+npx uselab@latest add https://example.com/hooks/use-custom.json
+```
+
+```bash
+npx uselab@latest add https://cdn.example.com/hooks/use-utils.json
+```
+
+**Install from local file:**
+
+```bash
+npx uselab@latest add ./local-hooks/use-custom.json
+```
+
+```bash
+npx uselab@latest add ../shared-hooks/use-utils.json
+```
+
+```bash
+npx uselab@latest add /absolute/path/to/hook.json
+```
+
+**Combined options:**
+
+```bash
+npx uselab@latest add use-counter use-toggle --yes --path src/hooks
+```
+
+```bash
+npx uselab@latest add use-network-status --overwrite --cwd ./project
+```
+
+#### Notes
+
+- URLs and local paths must point to valid JSON files matching the registry hook format
+- Multiple hooks are installed sequentially with progress tracking
+- Running `add` without arguments displays usage instructions and examples
+- The `--yes` flag automatically overwrites existing files without prompting
+
+---
+
+### `init` - Initialize Project
+
+Initialize uselab configuration in your project by creating a `uselab.json` file.
+
+#### Syntax
+
+```bash
+npx uselab@latest init [options]
+```
+
+#### Options
+
+| Option             | Description                                                    | Default           |
+| ------------------ | -------------------------------------------------------------- | ----------------- |
+| `-c, --cwd <path>` | Working directory used to locate package.json and write config | Current directory |
+
+#### Examples
+
+**Initialize in current directory:**
 
 ```bash
 npx uselab@latest init
 ```
 
+**Initialize in specific directory:**
+
 ```bash
 npx uselab@latest init --cwd /path/to/project
 ```
 
-### list
-
-List available hooks.
-
-- `-c, --cwd <path>` — working directory (default: current cwd)
-- Behavior: fetches registry index from `https://usekit.kiron.dev`; prints name/title/description
-
-**Examples:**
-
 ```bash
-npx uselab@latest list
+npx uselab@latest init -c ./my-project
 ```
 
-```bash
-npx uselab@latest list --cwd /path/to/project
-```
+#### Output
 
-### build
-
-Build registry files from a registry JSON.
-
-- `-r, --registry <path>` — required: input registry JSON
-- `-o, --output <path>` — required: output directory
-- `-c, --cwd <path>` — optional working directory (default: current cwd)
-- Behavior: reads registry JSON, validates entries, emits per-hook JSON files
-
-**Examples:**
-
-```bash
-npx uselab@latest build --registry registry.json --output dist
-```
-
-```bash
-npx uselab@latest build --registry registry.json --output dist --cwd /path/to/project
-```
-
-## Configuration
-
-The CLI creates a `uselab.json` file in your project root:
+Creates a `uselab.json` file in your project root:
 
 ```json
 {
-  "hooksDir": "src/hooks"
+  "hooks": "src/hooks"
+}
+```
+
+---
+
+### `view` - Preview Hook Details
+
+View detailed information about hook(s) before installing, including code preview, dependencies, and file structure.
+
+#### Syntax
+
+```bash
+npx uselab@latest view [options] [hooks...]
+```
+
+#### Arguments
+
+- `[hooks...]` - Hook name(s) to view (space-separated, optional)
+  - Shows usage help if omitted
+
+  - Accepts kebab-case or camelCase format
+
+#### Options
+
+| Option              | Description                     | Default |
+| ------------------- | ------------------------------- | ------- |
+| `--format <format>` | Output format: `code` or `json` | `code`  |
+
+#### Examples
+
+**View a single hook:**
+
+```bash
+npx uselab@latest view use-network-status
+```
+
+```bash
+npx uselab@latest view useToggle
+```
+
+```bash
+npx uselab@latest view use-counter
+```
+
+**View multiple hooks:**
+
+```bash
+npx uselab@latest view use-counter use-toggle
+```
+
+```bash
+npx uselab@latest view use-network-status useBattery useCounter
+```
+
+**View as JSON:**
+
+```bash
+npx uselab@latest view use-network-status --format json
+```
+
+```bash
+npx uselab@latest view use-counter --format json
+```
+
+**View multiple hooks as JSON:**
+
+```bash
+npx uselab@latest view use-counter use-toggle --format json
+```
+
+#### Output Format
+
+**Code format (default):**
+
+- Human-readable format with syntax highlighting
+- Shows code preview, dependencies, and file structure
+- Displays installation instructions
+
+**JSON format:**
+
+- Complete hook data as JSON
+- Includes all hook metadata and file contents
+- Useful for programmatic access or integration
+
+---
+
+### `list` - List Available Hooks
+
+List all available hooks from the UseKit registry with filtering and pagination support.
+
+#### Syntax
+
+```bash
+npx uselab@latest list [options]
+```
+
+#### Options
+
+| Option                  | Description                                                  | Default          |
+| ----------------------- | ------------------------------------------------------------ | ---------------- |
+| `-q, --query <query>`   | Filter hooks by query (searches in name, title, description) | None (shows all) |
+| `-l, --limit <number>`  | Maximum number of results to show                            | `100`            |
+| `-o, --offset <number>` | Number of results to skip for pagination                     | `0`              |
+| `--skip-limit`          | Ignore pagination and show all results                       | `false`          |
+| `--format <format>`     | Output format: `table` or `json`                             | `table`          |
+
+#### Examples
+
+**List all hooks:**
+
+```bash
+npx uselab@latest list
+```
+
+**Filter by query:**
+
+```bash
+npx uselab@latest list --query network
+```
+
+```bash
+npx uselab@latest list -q "state management"
+```
+
+```bash
+npx uselab@latest list --query counter
+```
+
+**Limit results:**
+
+```bash
+npx uselab@latest list --limit 20
+```
+
+```bash
+npx uselab@latest list -l 50
+```
+
+**Pagination:**
+
+```bash
+npx uselab@latest list --offset 10
+```
+
+```bash
+npx uselab@latest list --limit 20 --offset 10
+```
+
+```bash
+npx uselab@latest list -l 10 -o 20
+```
+
+**Filter with pagination:**
+
+```bash
+npx uselab@latest list --query network --limit 10 --offset 10
+```
+
+```bash
+npx uselab@latest list -q network -l 20 -o 0
+```
+
+**Show all results (ignore pagination):**
+
+```bash
+npx uselab@latest list --skip-limit
+```
+
+```bash
+npx uselab@latest list --query network --skip-limit
+```
+
+```bash
+npx uselab@latest list -q "state" --skip-limit
+```
+
+**JSON output:**
+
+```bash
+npx uselab@latest list --format json
+```
+
+```bash
+npx uselab@latest list --format json --limit 10
+```
+
+```bash
+npx uselab@latest list -q network --format json
+```
+
+**Combined options:**
+
+```bash
+npx uselab@latest list --query network --limit 20 --offset 10 --format json
+```
+
+```bash
+npx uselab@latest list -q counter --skip-limit --format json
+```
+
+#### Output Format
+
+**Table format (default):**
+
+- Human-readable list with hook names, titles, and descriptions
+- Shows pagination information
+- Displays total count and current range
+
+**JSON format:**
+
+- Array of hook objects with only essential fields:
+
+  ```json
+  [
+    {
+      "name": "use-network-status",
+      "title": "Use Network Status",
+      "description": "Monitor network status..."
+    }
+  ]
+  ```
+
+---
+
+### `search` - Search Hooks
+
+Search for hooks in the registry with query filtering and pagination support. Similar to `list` but optimized for searching.
+
+#### Syntax
+
+```bash
+npx uselab@latest search [options]
+```
+
+#### Options
+
+| Option                  | Description                                                | Default          |
+| ----------------------- | ---------------------------------------------------------- | ---------------- |
+| `-q, --query <query>`   | Search query string (searches in name, title, description) | None (shows all) |
+| `-l, --limit <number>`  | Maximum number of results to display                       | `100`            |
+| `-o, --offset <number>` | Number of results to skip for pagination                   | `0`              |
+| `--skip-limit`          | Ignore pagination and show all results                     | `false`          |
+
+#### Examples
+
+**Search all hooks:**
+
+```bash
+npx uselab@latest search
+```
+
+**Search with query:**
+
+```bash
+npx uselab@latest search network
+```
+
+```bash
+npx uselab@latest search -q network
+```
+
+```bash
+npx uselab@latest search --query "state management"
+```
+
+**Limit search results:**
+
+```bash
+npx uselab@latest search --limit 10
+```
+
+```bash
+npx uselab@latest search -l 20
+```
+
+```bash
+npx uselab@latest search network --limit 5
+```
+
+**Pagination:**
+
+```bash
+npx uselab@latest search --offset 10
+```
+
+```bash
+npx uselab@latest search --limit 20 --offset 10
+```
+
+```bash
+npx uselab@latest search network -l 10 -o 5
+```
+
+**Filter with pagination:**
+
+```bash
+npx uselab@latest search --query network --limit 20 --offset 10
+```
+
+```bash
+npx uselab@latest search -q "state" -l 15 -o 0
+```
+
+**Show all results (ignore pagination):**
+
+```bash
+npx uselab@latest search --skip-limit
+```
+
+```bash
+npx uselab@latest search network --skip-limit
+```
+
+```bash
+npx uselab@latest search -q "state management" --skip-limit
+```
+
+**Combined options:**
+
+```bash
+npx uselab@latest search --query network --limit 20 --offset 10
+```
+
+```bash
+npx uselab@latest search -q counter --skip-limit
+```
+
+#### Differences from `list`
+
+- `search` is optimized for finding hooks with queries
+- `list` supports JSON output format, `search` does not
+- Both support the same filtering and pagination options
+- `search` uses fuzzy matching for better discovery
+
+---
+
+## Global Options
+
+Available for all commands:
+
+| Option          | Description                         |
+| --------------- | ----------------------------------- |
+| `-v, --version` | Show the current version            |
+| `-h, --help`    | Show help information for a command |
+
+### Examples
+
+```bash
+npx uselab@latest --version
+```
+
+```bash
+npx uselab@latest --help
+```
+
+```bash
+npx uselab@latest add --help
+```
+
+```bash
+npx uselab@latest list --help
+```
+
+---
+
+## Configuration
+
+The CLI creates a `uselab.json` file in your project root when you run `init`:
+
+```json
+{
+  "hooks": "src/hooks"
 }
 ```
 
@@ -261,4 +602,94 @@ By default, hooks are installed to:
 - `src/hooks/` if a `src` directory exists
 - `hooks/` in the project root otherwise
 
-You can customize this in the `uselab.json` configuration file.
+You can customize this in the `uselab.json` configuration file, or use the `--path` option when installing hooks.
+
+### Configuration Options
+
+| Option  | Description                      | Default                 |
+| ------- | -------------------------------- | ----------------------- |
+| `hooks` | Relative path to hooks directory | `src/hooks` or `hooks/` |
+
+---
+
+## Hook Sources
+
+The `add` command supports three types of hook sources:
+
+### 1. Registry Hooks
+
+Install hooks from the official UseKit registry:
+
+```bash
+npx uselab@latest add use-network-status
+```
+
+```bash
+npx uselab@latest add useToggle
+```
+
+### 2. URL Hooks
+
+Install hooks from a remote URL:
+
+```bash
+npx uselab@latest add https://example.com/hooks/use-custom.json
+```
+
+```bash
+npx uselab@latest add https://cdn.example.com/hooks/use-utils.json
+```
+
+**Requirements:**
+
+- URL must point to a valid JSON file
+- JSON must match the registry hook format
+- File must be accessible via HTTP/HTTPS
+
+### 3. Local File Hooks
+
+Install hooks from a local file path:
+
+```bash
+npx uselab@latest add ./local-hooks/use-custom.json
+```
+
+```bash
+npx uselab@latest add ../shared-hooks/use-utils.json
+```
+
+```bash
+npx uselab@latest add /absolute/path/to/hook.json
+```
+
+**Requirements:**
+
+- Path must point to a valid JSON file
+- JSON must match the registry hook format
+- File must be readable
+
+---
+
+## Available Hooks
+
+Visit [hooks](/docs/hooks) to browse all available hooks.
+
+You can also use the CLI to explore:
+
+List all hooks
+
+```bash
+npx uselab@latest list
+```
+
+Search for hooks
+
+```bash
+npx uselab@latest search network
+```
+
+View hook details
+
+```bash
+npx uselab@latest view use-network-status
+```

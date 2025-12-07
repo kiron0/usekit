@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "use-fetch",
   "type": "registry:hook",
-  "title": "Use Battery",
+  "title": "Use Fetch",
   "description": "Fetch data with accurate states, caching, and no stale responses using useFetch.",
   "files": [
     {

@@ -1446,6 +1446,22 @@ export const Index: Record<string, any> = {
     component: React.lazy(() => import("registry/examples/use-form-demo")),
     source: "",
   },
+  "use-form-disable": {
+    name: "use-form-disable",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-form-disable.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-form-disable-demo")
+    ),
+    source: "",
+  },
   "use-infinite-scroll": {
     name: "use-infinite-scroll",
     type: "registry:hook",
@@ -1656,6 +1672,20 @@ export const Index: Record<string, any> = {
       },
     ],
     component: React.lazy(() => import("registry/examples/use-dev-flag-demo")),
+    source: "",
+  },
+  "use-dev-menu": {
+    name: "use-dev-menu",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-dev-menu.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(() => import("registry/examples/use-dev-menu-demo")),
     source: "",
   },
   "use-error-boundary": {
@@ -3426,6 +3456,22 @@ export const Index: Record<string, any> = {
     component: React.lazy(() => import("registry/examples/use-form-demo.tsx")),
     source: "",
   },
+  "use-form-disable-demo": {
+    name: "use-form-disable-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-form-disable-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-form-disable-demo.tsx")
+    ),
+    source: "",
+  },
   "use-infinite-scroll-demo": {
     name: "use-infinite-scroll-demo",
     type: "registry:example",
@@ -3519,6 +3565,22 @@ export const Index: Record<string, any> = {
     ],
     component: React.lazy(
       () => import("registry/examples/use-dev-flag-demo.tsx")
+    ),
+    source: "",
+  },
+  "use-dev-menu-demo": {
+    name: "use-dev-menu-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-dev-menu-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-dev-menu-demo.tsx")
     ),
     source: "",
   },

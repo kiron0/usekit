@@ -3,7 +3,7 @@
   "name": "use-controlled-state",
   "type": "registry:hook",
   "title": "Use Controlled State",
-  "description": "Manage a controlled state with the useControlledState hook, providing methods to set it to true, false, or toggle between them",
+  "description": "Manage a controlled state with the useControlledState hook, supporting both controlled and uncontrolled modes with automatic switching.",
   "registryDependencies": ["use-callback-ref", "use-uncontrolled-state"],
   "files": [
     {

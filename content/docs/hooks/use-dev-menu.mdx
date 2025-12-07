@@ -1,0 +1,228 @@
+---
+title: useDevMenu
+description: Debug menu triggered by keyboard shortcut with open and close controls.
+---
+
+<ComponentPreview name="use-dev-menu-demo" />
+
+## Installation
+
+<CodeTabs>
+  <TabsList>
+    <TabsTrigger value="cli">CLI</TabsTrigger>
+    <TabsTrigger value="manual">Manual</TabsTrigger>
+  </TabsList>
+
+  <TabsContent value="cli">
+
+```bash
+npx uselab@latest add use-dev-menu
+```
+
+  </TabsContent>
+
+  <TabsContent value="manual">
+    <Steps>
+      <Step>Copy and paste the following code into your project.</Step>
+      <ComponentSource name="use-dev-menu" />
+      <Step>Update the import paths to match your project setup.</Step>
+    </Steps>
+  </TabsContent>
+</CodeTabs>
+
+## Usage
+
+### Basic Usage
+
+```tsx {1, 4}
+import { useDevMenu } from "@/hooks/use-dev-menu"
+
+function App() {
+  const { open, close, isOpen } = useDevMenu()
+
+  return (
+    <div>
+      <button onClick={open}>Open Dev Menu</button>
+      {isOpen && (
+        <div className="dev-menu">
+          <h2>Developer Menu</h2>
+          <button onClick={close}>Close</button>
+        </div>
+      )}
+    </div>
+  )
+}
+```
+
+### With Custom Keyboard Shortcut
+
+```tsx {1, 4-6}
+import { useDevMenu } from "@/hooks/use-dev-menu"
+
+function App() {
+  const { open, close, isOpen } = useDevMenu({
+    shortcut: ["Control", "Shift", "M"],
+  })
+
+  return (
+    <div>
+      <button onClick={open}>Open Dev Menu</button>
+      {isOpen && (
+        <div className="dev-menu">
+          <h2>Developer Menu</h2>
+          <button onClick={close}>Close</button>
+        </div>
+      )}
+    </div>
+  )
+}
+```
+
+### With Dialog Component
+
+```tsx {1, 10}
+import { useDevMenu } from "@/hooks/use-dev-menu"
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog"
+
+function App() {
+  const { open, close, isOpen } = useDevMenu()
+
+  return (
+    <div>
+      <button onClick={open}>Open Dev Menu</button>
+      <Dialog open={isOpen} onOpenChange={close}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Developer Menu</DialogTitle>
+          </DialogHeader>
+          <div>
+            <p>Debug tools and development utilities</p>
+            <button onClick={close}>Close</button>
+          </div>
+        </DialogContent>
+      </Dialog>
+    </div>
+  )
+}
+```
+
+### Conditionally Enable
+
+```tsx {2, 6-8}
+import { useDevFlag } from "@/hooks/use-dev-flag"
+import { useDevMenu } from "@/hooks/use-dev-menu"
+
+function App() {
+  const isDev = useDevFlag()
+  const { open, close, isOpen } = useDevMenu({
+    enabled: isDev,
+  })
+
+  return (
+    <div>
+      {isDev && (
+        <>
+          <button onClick={open}>Open Dev Menu</button>
+          {isOpen && (
+            <div className="dev-menu">
+              <h2>Developer Menu</h2>
+              <button onClick={close}>Close</button>
+            </div>
+          )}
+        </>
+      )}
+    </div>
+  )
+}
+```
+
+## API Reference
+
+### Parameters
+
+| Parameter | Type      | Description                        |
+| --------- | --------- | ---------------------------------- |
+| `options` | `Options` | Configuration options for the hook |
+
+### Options
+
+| Option     | Type       | Default                     | Description                                                                      |
+| ---------- | ---------- | --------------------------- | -------------------------------------------------------------------------------- |
+| `shortcut` | `string[]` | `["Control", "Shift", "D"]` | Keyboard shortcut keys. Supports "Control", "Shift", "Alt", "Meta", and any key. |
+| `enabled`  | `boolean`  | `true`                      | Whether the keyboard shortcut is enabled                                         |
+
+### Returns
+
+| Property | Type         | Description                            |
+| -------- | ------------ | -------------------------------------- |
+| `open`   | `() => void` | Function to open the dev menu          |
+| `close`  | `() => void` | Function to close the dev menu         |
+| `isOpen` | `boolean`    | Whether the dev menu is currently open |
+
+## Examples
+
+### Custom Shortcut Keys
+
+```tsx
+import { useDevMenu } from "@/hooks/use-dev-menu"
+
+function App() {
+  const { open, close, isOpen } = useDevMenu({
+    shortcut: ["Meta", "K"],
+  })
+
+  return (
+    <div>
+      <button onClick={open}>Open Dev Menu (Cmd+K)</button>
+      {isOpen && (
+        <div className="dev-menu">
+          <h2>Developer Menu</h2>
+          <button onClick={close}>Close</button>
+        </div>
+      )}
+    </div>
+  )
+}
+```
+
+### Programmatic Control
+
+```tsx
+import { useDevMenu } from "@/hooks/use-dev-menu"
+
+function App() {
+  const { open, close, isOpen } = useDevMenu()
+
+  React.useEffect(() => {
+    if (someCondition) {
+      open()
+    } else {
+      close()
+    }
+  }, [someCondition, open, close])
+
+  return (
+    <div>
+      {isOpen && (
+        <div className="dev-menu">
+          <h2>Developer Menu</h2>
+          <button onClick={close}>Close</button>
+        </div>
+      )}
+    </div>
+  )
+}
+```
+
+## Notes
+
+- Default keyboard shortcut is `Ctrl+Shift+D` (or `Cmd+Shift+D` on Mac)
+- Keyboard shortcut is automatically ignored when typing in input fields, textareas, or contenteditable elements
+- Use the `enabled` option to conditionally enable/disable the keyboard shortcut
+- The `open` and `close` functions can be called programmatically for custom triggers
+- The `isOpen` state can be used to conditionally render the dev menu UI

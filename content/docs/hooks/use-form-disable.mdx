@@ -1,0 +1,205 @@
+---
+title: useFormDisable
+description: Disable all form controls during submit with support for react-hook-form and zod.
+---
+
+<ComponentPreview name="use-form-disable-demo" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx uselab@latest add use-form-disable
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="use-form-disable" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+<Step>Install required dependencies:</Step>
+
+```bash
+npm install react-hook-form
+```
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+### With react-hook-form
+
+```tsx {3, 14-16}
+import { useForm } from "react-hook-form"
+
+import { useFormDisable } from "@/hooks/use-form-disable"
+
+export function ContactForm() {
+  const form = useForm({
+    defaultValues: {
+      name: "",
+      email: "",
+      message: "",
+    },
+  })
+
+  const { disabled } = useFormDisable({
+    formState: form.formState,
+  })
+
+  const onSubmit = async (data: any) => {
+    await submitForm(data)
+  }
+
+  return (
+    <form onSubmit={form.handleSubmit(onSubmit)}>
+      <fieldset disabled={disabled}>
+        <input {...form.register("name")} placeholder="Name" />
+        <input {...form.register("email")} placeholder="Email" />
+        <textarea {...form.register("message")} placeholder="Message" />
+        <button type="submit">{disabled ? "Submitting..." : "Submit"}</button>
+      </fieldset>
+    </form>
+  )
+}
+```
+
+### With react-hook-form and zod
+
+```tsx {6, 24-26}
+import * as React from "react"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { useForm } from "react-hook-form"
+import { z } from "zod"
+
+import { useFormDisable } from "@/hooks/use-form-disable"
+
+const formSchema = z.object({
+  name: z.string().min(1, "Name is required"),
+  email: z.string().email("Invalid email address"),
+  message: z.string().min(1, "Message is required"),
+})
+
+export function ContactForm() {
+  const form = useForm({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      name: "",
+      email: "",
+      message: "",
+    },
+  })
+
+  const { disabled } = useFormDisable({
+    formState: form.formState,
+  })
+
+  const onSubmit = async (data: z.infer<typeof formSchema>) => {
+    await submitForm(data)
+  }
+
+  return (
+    <form onSubmit={form.handleSubmit(onSubmit)}>
+      <fieldset disabled={disabled}>
+        <input {...form.register("name")} placeholder="Name" />
+        <input {...form.register("email")} placeholder="Email" />
+        <textarea {...form.register("message")} placeholder="Message" />
+        <button type="submit">{disabled ? "Submitting..." : "Submit"}</button>
+      </fieldset>
+    </form>
+  )
+}
+```
+
+### With manual isSubmitting state
+
+```tsx {3, 8-10}
+import * as React from "react"
+
+import { useFormDisable } from "@/hooks/use-form-disable"
+
+export function ContactForm() {
+  const [isSubmitting, setIsSubmitting] = React.useState(false)
+
+  const { disabled } = useFormDisable({
+    isSubmitting,
+  })
+
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    setIsSubmitting(true)
+    try {
+      await submitForm(new FormData(e.currentTarget))
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
+
+  return (
+    <form onSubmit={onSubmit}>
+      <fieldset disabled={disabled}>
+        <input name="name" placeholder="Name" />
+        <input name="email" placeholder="Email" />
+        <textarea name="message" placeholder="Message" />
+        <button type="submit">{disabled ? "Submitting..." : "Submit"}</button>
+      </fieldset>
+    </form>
+  )
+}
+```
+
+## API Reference
+
+### Parameters
+
+| Parameter | Type      | Description                        |
+| --------- | --------- | ---------------------------------- |
+| `options` | `Options` | Configuration options for the hook |
+
+### Options
+
+| Option         | Type                        | Description                                                                                       |
+| -------------- | --------------------------- | ------------------------------------------------------------------------------------------------- |
+| `isSubmitting` | `boolean \| undefined`      | Manual submission state. If provided, takes precedence over `formState`.                          |
+| `formState`    | `UseFormState \| undefined` | react-hook-form formState object. Should include `isSubmitting` and/or `isValidating` properties. |
+
+### UseFormState
+
+| Property             | Type                   | Description                                |
+| -------------------- | ---------------------- | ------------------------------------------ |
+| `isSubmitting`       | `boolean \| undefined` | Whether the form is currently submitting   |
+| `isValidating`       | `boolean \| undefined` | Whether the form is currently validating   |
+| `isSubmitSuccessful` | `boolean \| undefined` | Whether the form submission was successful |
+
+### Returns
+
+| Property   | Type      | Description                                                                                     |
+| ---------- | --------- | ----------------------------------------------------------------------------------------------- |
+| `disabled` | `boolean` | Whether form controls should be disabled. Returns `true` when form is submitting or validating. |
+
+## Notes
+
+- The hook automatically detects submission state from react-hook-form&apos;s `formState.isSubmitting` or `formState.isValidating`
+- If both `isSubmitting` and `formState` are provided, `isSubmitting` takes precedence
+- Works seamlessly with zod validation through react-hook-form resolvers
+- Wrap form controls in a `<fieldset disabled={disabled}>` to disable all controls at once, or apply `disabled={disabled}` to individual controls
+- The hook returns `false` by default if no submission state is detected

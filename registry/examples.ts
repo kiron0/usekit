@@ -752,6 +752,16 @@ export const hooksExamples: Registry["items"] = [
     ],
   },
   {
+    name: "use-form-disable-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/use-form-disable-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
     name: "use-infinite-scroll-demo",
     type: "registry:example",
     files: [
@@ -807,6 +817,16 @@ export const hooksExamples: Registry["items"] = [
     files: [
       {
         path: "registry/examples/use-dev-flag-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-dev-menu-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/use-dev-menu-demo.tsx",
         type: "registry:example",
       },
     ],
