@@ -31,7 +31,7 @@ export function useDevMenu(options: Options = {}): Return {
   }, [])
 
   React.useEffect(() => {
-    if (!enabled) return
+    if (!enabled || typeof document === "undefined") return
 
     const handleKeyDown = (event: KeyboardEvent) => {
       const target = event.target as HTMLElement

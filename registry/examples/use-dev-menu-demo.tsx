@@ -81,7 +81,9 @@ export default function UseDevMenuDemo() {
                             User Agent:
                           </span>
                           <span className="text-xs">
-                            {navigator.userAgent.slice(0, 30)}...
+                            {typeof navigator !== "undefined"
+                              ? `${navigator.userAgent.slice(0, 30)}...`
+                              : "N/A"}
                           </span>
                         </div>
                         <div className="flex justify-between">
@@ -89,7 +91,9 @@ export default function UseDevMenuDemo() {
                             Viewport:
                           </span>
                           <span className="text-xs">
-                            {window.innerWidth} × {window.innerHeight}
+                            {typeof window !== "undefined"
+                              ? `${window.innerWidth} × ${window.innerHeight}`
+                              : "N/A"}
                           </span>
                         </div>
                       </div>
