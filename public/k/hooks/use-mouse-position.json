@@ -3,7 +3,7 @@
   "name": "use-mouse-position",
   "type": "registry:hook",
   "title": "Use Mouse Position",
-  "description": "Use the useCopyToClipboard hook to copy text to the clipboard and track whether the copy action was successful, with an optional delay to reset the copied state.",
+  "description": "Track the mouse position on the page with useMousePosition, providing both page coordinates and element-relative coordinates.",
   "registryDependencies": ["use-is-mobile"],
   "files": [
     {

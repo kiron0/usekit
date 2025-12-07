@@ -692,6 +692,12 @@ export const docsConfig: DocsConfig = {
           items: [],
         },
         {
+          title: "useFormDisable",
+          href: "/docs/hooks/use-form-disable",
+          items: [],
+          label: "New",
+        },
+        {
           title: "useInfiniteScroll",
           href: "/docs/hooks/use-infinite-scroll",
           items: [],
@@ -771,6 +777,12 @@ export const docsConfig: DocsConfig = {
         {
           title: "useDevFlag",
           href: "/docs/hooks/use-dev-flag",
+          items: [],
+          label: "New",
+        },
+        {
+          title: "useDevMenu",
+          href: "/docs/hooks/use-dev-menu",
           items: [],
           label: "New",
         },

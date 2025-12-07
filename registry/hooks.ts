@@ -1245,6 +1245,20 @@ export const hooks: Registry["items"] = [
     ],
   },
   {
+    name: "use-form-disable",
+    title: "Use Form Disable",
+    description:
+      "Disable all form controls during submit with support for react-hook-form and zod.",
+    type: "registry:hook",
+    dependencies: ["react-hook-form"],
+    files: [
+      {
+        path: "registry/hooks/use-form-disable.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
     name: "use-infinite-scroll",
     title: "Use Infinite Scroll",
     description:
@@ -1421,6 +1435,19 @@ export const hooks: Registry["items"] = [
     files: [
       {
         path: "registry/hooks/use-dev-flag.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-dev-menu",
+    title: "Use Dev Menu",
+    description:
+      "Debug menu triggered by keyboard shortcut with open and close controls.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-dev-menu.ts",
         type: "registry:hook",
       },
     ],
