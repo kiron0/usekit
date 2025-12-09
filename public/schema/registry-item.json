@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The name of the hook. This is used to identify the hook in the registry. It should be unique for your registry."
+    },
+    "type": {
+      "type": "string",
+      "enum": ["registry:hook"],
+      "description": "The type of the item. Must be 'registry:hook' for useKit hooks."
+    },
+    "description": {
+      "type": "string",
+      "description": "The description of the hook. This is used to provide a brief overview of the hook."
+    },
+    "title": {
+      "type": "string",
+      "description": "The human-readable title for your hook. Keep it short and descriptive."
+    },
+    "dependencies": {
+      "type": "array",
+      "description": "An array of NPM dependencies required by the hook.",
+      "items": {
+        "type": "string"
+      }
+    },
+    "devDependencies": {
+      "type": "array",
+      "description": "An array of NPM dev dependencies required by the hook.",
+      "items": {
+        "type": "string"
+      }
+    },
+    "registryDependencies": {
+      "type": "array",
+      "description": "An array of registry hooks that this hook depends on. Use the name of the hook to reference other hooks in the registry.",
+      "items": {
+        "type": "string"
+      }
+    },
+    "files": {
+      "type": "array",
+      "description": "The main payload of the registry hook. This is an array of files that are part of the hook. Each file is an object with a path, content, and type.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "description": "The path to the file relative to the registry root."
+          },
+          "content": {
+            "type": "string",
+            "description": "The content of the file."
+          },
+          "type": {
+            "type": "string",
+            "enum": ["registry:hook"],
+            "description": "The type of the file. Must be 'registry:hook' for useKit hooks."
+          }
+        },
+        "required": ["path", "type"]
+      }
+    }
+  },
+  "required": ["name", "type"]
+}

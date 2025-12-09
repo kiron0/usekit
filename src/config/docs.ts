@@ -95,6 +95,18 @@ export const docsConfig: DocsConfig = {
           items: [],
         },
         {
+          title: "useA11yAnnouncer",
+          href: "/docs/hooks/use-a11y-announcer",
+          items: [],
+          label: "New",
+        },
+        {
+          title: "useCsvImport",
+          href: "/docs/hooks/use-csv-import",
+          items: [],
+          label: "New",
+        },
+        {
           title: "useAccessibleLabels",
           href: "/docs/hooks/use-accessible-labels",
           items: [],
@@ -180,6 +192,12 @@ export const docsConfig: DocsConfig = {
         {
           title: "useOnEnterSubmit",
           href: "/docs/hooks/use-on-enter-submit",
+          items: [],
+          label: "New",
+        },
+        {
+          title: "useOptimisticQueue",
+          href: "/docs/hooks/use-optimistic-queue",
           items: [],
           label: "New",
         },
@@ -443,6 +461,12 @@ export const docsConfig: DocsConfig = {
           label: "New",
         },
         {
+          title: "useTableExportCSV",
+          href: "/docs/hooks/use-table-export-csv",
+          items: [],
+          label: "New",
+        },
+        {
           title: "useAdaptiveLanguage",
           href: "/docs/hooks/use-adaptive-language",
           items: [],
@@ -487,6 +511,12 @@ export const docsConfig: DocsConfig = {
         {
           title: "useClipboardHistory",
           href: "/docs/hooks/use-clipboard-history",
+          items: [],
+          label: "New",
+        },
+        {
+          title: "useClipboardGuard",
+          href: "/docs/hooks/use-clipboard-guard",
           items: [],
           label: "New",
         },

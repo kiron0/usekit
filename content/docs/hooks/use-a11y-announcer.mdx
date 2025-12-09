@@ -1,0 +1,95 @@
+---
+title: useA11yAnnouncer
+description: Central ARIA live announcer for accessibility messages.
+---
+
+<ComponentPreview name="use-a11y-announcer-demo" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx uselab@latest add use-a11y-announcer
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="use-a11y-announcer" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx {3, 6}
+import * as React from "react"
+
+import { useA11yAnnouncer } from "@/hooks/use-a11y-announcer"
+
+export function Component() {
+  const { announce } = useA11yAnnouncer()
+  const [message, setMessage] = React.useState("Form submitted successfully")
+
+  return (
+    <div>
+      <input
+        value={message}
+        onChange={(e) => setMessage(e.target.value)}
+        aria-label="Announcement text"
+      />
+      <button onClick={() => announce(message, "polite")}>
+        Announce (polite)
+      </button>
+      <button onClick={() => announce(message, "assertive")}>
+        Announce (assertive)
+      </button>
+    </div>
+  )
+}
+```
+
+### Key Points
+
+1. **`useA11yAnnouncer()`**:
+   - Creates shared ARIA live regions (`polite` and `assertive`) appended to `document.body`.
+   - Returns `announce(text, politeness)` to announce messages for screen readers.
+   - Politeness defaults to `"polite"`. Use `"assertive"` for urgent messages.
+
+2. **Behavior**:
+   - Uses visually hidden live regions; calling `announce` briefly clears then sets text to ensure it is read.
+   - Safe for multiple calls; the hook reuses the same polite/assertive nodes.
+
+---
+
+## API Reference
+
+### Return Values
+
+| Name       | Type                                                           | Description                                           |
+| ---------- | -------------------------------------------------------------- | ----------------------------------------------------- |
+| `announce` | `(text: string, politeness?: "polite" \| "assertive") => void` | Announces text via the chosen politeness live region. |
+
+## Use Cases
+
+- Announce form submission success/fail messages.
+- Screen reader cues for navigation changes (e.g., tab changes, modal open/close).
+- Status updates for background tasks or live validations.

@@ -40,10 +40,13 @@ npx uselab@latest add use-snake-game
 
 ## Usage
 
-```tsx {1, 4-13}
-import { useSnakeGame } from "@/hooks/use-snake-game"
+```tsx {3, 7-17}
+import * as React from "react"
+
+import { Difficulty, useSnakeGame } from "@/hooks/use-snake-game"
 
 export function Component() {
+  const [level, setLevel] = React.useState<Difficulty>(Difficulty.NORMAL)
   const {
     snake,
     food,
@@ -53,12 +56,37 @@ export function Component() {
     gridSize,
     isRunning,
     startGame,
-  } = useSnakeGame()
+    level: currentLevel,
+  } = useSnakeGame(level)
 
   return (
     <div>
       <h1>Snake Game</h1>
       <div>Score: {score}</div>
+      <div>
+        Difficulty:
+        {Object.values(Difficulty).map((lvl) => (
+          <button
+            key={lvl}
+            onClick={() => {
+              if (lvl !== level) {
+                setLevel(lvl)
+                resetGame()
+              }
+            }}
+            style={{
+              marginLeft: 8,
+              padding: "6px 10px",
+              borderRadius: 6,
+              border: "1px solid #ccc",
+              background: currentLevel === lvl ? "#111" : "#222",
+              color: "#fff",
+            }}
+          >
+            {lvl}
+          </button>
+        ))}
+      </div>
       {/* Render your grid here using snake and food positions */}
       {!isRunning && !isGameOver && (
         <button
@@ -99,9 +127,9 @@ export function Component() {
 
 ### Parameters
 
-| Name    | Type     | Description                        | Default Value | Optional |
-| ------- | -------- | ---------------------------------- | ------------- | -------- |
-| `speed` | `number` | Speed of the snake in ms per move. | `150`         | Yes      |
+| Name    | Type                           | Description                           | Default Value | Optional |
+| ------- | ------------------------------ | ------------------------------------- | ------------- | -------- |
+| `level` | `"easy" \| "normal" \| "hard"` | Difficulty preset that controls speed | `"normal"`    | Yes      |
 
 ### Return Values
 
@@ -116,6 +144,7 @@ export function Component() {
 | `startGame`  | `() => void`                          | Function to start the game.                |
 | `resetGame`  | `() => void`                          | Function to reset the game.                |
 | `gridSize`   | `number`                              | The size of the grid (width and height).   |
+| `level`      | `"easy" \| "normal" \| "hard"`        | Current difficulty in use.                 |
 
 ## Notes
 

@@ -1,0 +1,120 @@
+---
+title: useTableExportCSV
+description: Export table data to CSV with customizable columns.
+---
+
+<ComponentPreview name="use-table-export-csv-demo" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx uselab@latest add use-table-export-csv
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="use-table-export-csv" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx {1, 11}
+import { useTableExportCSV } from "@/hooks/use-table-export-csv"
+
+interface Product {
+  id: number
+  name: string
+  price: number
+  category: string
+}
+
+export function Component() {
+  const { exportCSV } = useTableExportCSV<Product>()
+  const products: Product[] = [
+    { id: 1, name: "Laptop", price: 999.99, category: "Electronics" },
+    { id: 2, name: "Mouse", price: 29.99, category: "Accessories" },
+  ]
+
+  const columns = [
+    { key: "id" as const, header: "ID" },
+    { key: "name" as const, header: "Product Name" },
+    {
+      key: "price" as const,
+      header: "Price",
+      accessor: (row: Product) => `$${row.price.toFixed(2)}`,
+    },
+    { key: "category" as const, header: "Category" },
+  ]
+
+  const handleExport = () => {
+    exportCSV(products, columns, "products-export")
+  }
+
+  return <button onClick={handleExport}>Export to CSV</button>
+}
+```
+
+### Key Points
+
+1. **`exportCSV(rows, columns, filename?)`**:
+   - Exports table data to a CSV file that downloads automatically.
+   - `rows`: Array of data objects to export.
+   - `columns`: Array of column definitions with `key`, `header`, and optional `accessor`.
+   - `filename`: Optional filename (defaults to "export.csv").
+   - Columns must be provided; if rows are empty, a CSV with headers only is generated.
+
+2. **Column Definition**:
+   - `key`: Property name from the row object or a string identifier.
+   - `header`: Display name for the CSV header.
+   - `accessor`: Optional function to transform the value before export.
+
+3. **Automatic Formatting**:
+   - Values are automatically quoted and escaped for CSV compatibility.
+   - Special characters are properly handled.
+
+---
+
+## API Reference
+
+### Return Values
+
+| Name        | Type                                                           | Description                           |
+| ----------- | -------------------------------------------------------------- | ------------------------------------- |
+| `exportCSV` | `(rows: T[], columns: Column<T>[], filename?: string) => void` | Exports the table data to a CSV file. |
+
+### Column Interface
+
+| Name       | Type                                      | Description                                                       |
+| ---------- | ----------------------------------------- | ----------------------------------------------------------------- |
+| `key`      | `keyof T`                                 | The property key from the row object.                             |
+| `header`   | `string`                                  | The display name for the CSV header column.                       |
+| `accessor` | `(row: T) => string \| number` (optional) | Optional function to transform or format the value before export. |
+
+## Use Cases
+
+- **Data Export**: Export table data for reporting or analysis.
+- **User Reports**: Allow users to download their data in CSV format.
+- **Data Backup**: Export data before making bulk changes.
+- **Integration**: Export data for import into other systems.

@@ -2272,6 +2272,86 @@ export const Index: Record<string, any> = {
     ),
     source: "",
   },
+  "use-optimistic-queue": {
+    name: "use-optimistic-queue",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-optimistic-queue.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-optimistic-queue-demo")
+    ),
+    source: "",
+  },
+  "use-table-export-csv": {
+    name: "use-table-export-csv",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-table-export-csv.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-table-export-csv-demo")
+    ),
+    source: "",
+  },
+  "use-csv-import": {
+    name: "use-csv-import",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-csv-import.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-csv-import-demo")
+    ),
+    source: "",
+  },
+  "use-clipboard-guard": {
+    name: "use-clipboard-guard",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-clipboard-guard.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-clipboard-guard-demo")
+    ),
+    source: "",
+  },
+  "use-a11y-announcer": {
+    name: "use-a11y-announcer",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-a11y-announcer.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-a11y-announcer-demo")
+    ),
+    source: "",
+  },
   "use-copy-to-clipboard-demo": {
     name: "use-copy-to-clipboard-demo",
     type: "registry:example",
@@ -4141,6 +4221,86 @@ export const Index: Record<string, any> = {
     ],
     component: React.lazy(
       () => import("registry/examples/use-anchor-scroll-demo.tsx")
+    ),
+    source: "",
+  },
+  "use-optimistic-queue-demo": {
+    name: "use-optimistic-queue-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-optimistic-queue-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-optimistic-queue-demo.tsx")
+    ),
+    source: "",
+  },
+  "use-table-export-csv-demo": {
+    name: "use-table-export-csv-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-table-export-csv-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-table-export-csv-demo.tsx")
+    ),
+    source: "",
+  },
+  "use-csv-import-demo": {
+    name: "use-csv-import-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-csv-import-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-csv-import-demo.tsx")
+    ),
+    source: "",
+  },
+  "use-clipboard-guard-demo": {
+    name: "use-clipboard-guard-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-clipboard-guard-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-clipboard-guard-demo.tsx")
+    ),
+    source: "",
+  },
+  "use-a11y-announcer-demo": {
+    name: "use-a11y-announcer-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-a11y-announcer-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-a11y-announcer-demo.tsx")
     ),
     source: "",
   },

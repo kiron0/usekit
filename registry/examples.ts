@@ -1182,4 +1182,54 @@ export const hooksExamples: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "use-optimistic-queue-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/use-optimistic-queue-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-table-export-csv-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/use-table-export-csv-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-csv-import-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/use-csv-import-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-clipboard-guard-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/use-clipboard-guard-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-a11y-announcer-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/use-a11y-announcer-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
 ]
