@@ -5,6 +5,7 @@ import { CheckIcon, ClipboardIcon } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 import { Button, type ButtonProps } from "@/components/ui/button"
+import { notifySuccess } from "@/components/toast"
 
 interface CopyButtonProps extends ButtonProps {
   value: string
@@ -19,21 +20,24 @@ export function CopyButton({
 }: CopyButtonProps) {
   const [hasCopied, setHasCopied] = React.useState(false)
 
-  React.useEffect(() => {
+  const handleCopy = () => {
+    navigator.clipboard.writeText(value)
+    setHasCopied(true)
+    notifySuccess({
+      title: "Copied",
+      description: "Copied to clipboard successfully",
+    })
     setTimeout(() => {
       setHasCopied(false)
     }, 2000)
-  }, [hasCopied])
+  }
 
   return (
     <Button
       size="icon"
       variant={variant}
       className={cn("relative z-10 size-6 [&_svg]:size-3", className)}
-      onClick={() => {
-        navigator.clipboard.writeText(value)
-        setHasCopied(true)
-      }}
+      onClick={handleCopy}
       {...props}
     >
       <span className="sr-only">Copy</span>

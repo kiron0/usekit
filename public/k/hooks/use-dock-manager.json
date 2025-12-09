@@ -1,5 +1,5 @@
 {
-  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "$schema": "https://ui.uselab.com/schema/registry-item.json",
   "name": "use-dock-manager",
   "type": "registry:hook",
   "title": "Use Dock Manager",

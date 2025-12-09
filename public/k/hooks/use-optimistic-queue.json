@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-optimistic-queue",
+  "type": "registry:hook",
+  "title": "Use Optimistic Queue",
+  "description": "Queue optimistic updates and handle confirmations/rollbacks.",
+  "files": [
+    {
+      "path": "registry/hooks/use-optimistic-queue.ts",
+      "content": "import * as React from \"react\"\n\ninterface QueuedAction<T> {\n  id: string\n  action: T\n  rollback?: () => void\n}\n\nexport function useOptimisticQueue<T>() {\n  const [queue, setQueue] = React.useState<QueuedAction<T>[]>([])\n  const baseId = React.useId()\n  const counterRef = React.useRef(0)\n\n  const generateId = React.useCallback(() => {\n    counterRef.current += 1\n    return `${baseId}-${counterRef.current}`\n  }, [baseId])\n\n  const enqueue = React.useCallback(\n    (action: T, rollback?: () => void) => {\n      const id = generateId()\n      setQueue((prev) => [...prev, { id, action, rollback }])\n      return id\n    },\n    [generateId]\n  )\n\n  const confirm = React.useCallback((id: string) => {\n    setQueue((prev) => prev.filter((item) => item.id !== id))\n  }, [])\n\n  const rollback = React.useCallback((id: string) => {\n    setQueue((prev) => {\n      const item = prev.find((item) => item.id === id)\n      if (item?.rollback) {\n        try {\n          item.rollback()\n        } catch (error) {\n          console.error(\"Error executing rollback:\", error)\n        }\n      }\n      return prev.filter((item) => item.id !== id)\n    })\n  }, [])\n\n  const clear = React.useCallback(() => {\n    setQueue([])\n  }, [])\n\n  const actionsQueue = React.useMemo(\n    () => queue.map((item) => item.action),\n    [queue]\n  )\n\n  return {\n    enqueue,\n    confirm,\n    rollback,\n    clear,\n    queue: actionsQueue,\n    pending: queue,\n    size: queue.length,\n  }\n}\n",
+      "type": "registry:hook"
+    }
+  ]
+}

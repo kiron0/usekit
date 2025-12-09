@@ -9,18 +9,31 @@ interface Position {
 
 const GRID_SIZE = 20
 
+export enum Difficulty {
+  EASY = "easy",
+  NORMAL = "normal",
+  HARD = "hard",
+}
+
+const LEVEL_SPEED: Record<Difficulty, number> = {
+  [Difficulty.EASY]: 220,
+  [Difficulty.NORMAL]: 150,
+  [Difficulty.HARD]: 100,
+}
+
 const getRandomPosition = (): Position => ({
   x: Math.floor(Math.random() * GRID_SIZE),
   y: Math.floor(Math.random() * GRID_SIZE),
 })
 
-export function useSnakeGame(speed: number = 150) {
+export function useSnakeGame(level: Difficulty = Difficulty.NORMAL) {
   const [snake, setSnake] = React.useState<Position[]>([{ x: 10, y: 10 }])
   const [food, setFood] = React.useState<Position>(getRandomPosition)
   const [direction, setDirection] = React.useState<Direction>("RIGHT")
   const [isGameOver, setIsGameOver] = React.useState(false)
   const [score, setScore] = React.useState(0)
   const [isRunning, setIsRunning] = React.useState(false)
+  const speed = LEVEL_SPEED[level]
 
   const directionRef = React.useRef(direction)
   directionRef.current = direction
@@ -128,5 +141,6 @@ export function useSnakeGame(speed: number = 150) {
     startGame,
     resetGame,
     gridSize: GRID_SIZE,
+    level,
   }
 }

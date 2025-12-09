@@ -91,7 +91,7 @@ async function buildRegistryJsonFile(): Promise<void> {
   await fs.unlink(REGISTRY_JSON_PATH).catch(() => {})
 
   const fixedRegistry = {
-    $schema: "https://ui.shadcn.com/schema/registry.json",
+    $schema: "https://usekit.kiron.dev/schema/registry.json",
     ...registry,
     // @ts-ignore
     items: registryItems.registryItems

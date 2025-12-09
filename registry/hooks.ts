@@ -1934,6 +1934,67 @@ export const hooks: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "use-optimistic-queue",
+    title: "Use Optimistic Queue",
+    description: "Queue optimistic updates and handle confirmations/rollbacks.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-optimistic-queue.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-table-export-csv",
+    title: "Use Table Export CSV",
+    description: "Export table data to CSV/XLSX with customizable columns.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-table-export-csv.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-csv-import",
+    title: "Use CSV Import",
+    description: "Parse CSV uploads into typed rows with preview & error map.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-csv-import.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-clipboard-guard",
+    title: "Use Clipboard Guard",
+    description:
+      "Sanitize and control clipboard reads/writes in high-security UIs.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-clipboard-guard.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-a11y-announcer",
+    title: "Use A11y Announcer",
+    description: "Central ARIA live announcer for accessibility messages.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-a11y-announcer.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
 ]
 
 export default hooks

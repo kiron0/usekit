@@ -1,0 +1,133 @@
+---
+title: useClipboardGuard
+description: Sanitize and control clipboard reads/writes in high-security UIs.
+---
+
+<ComponentPreview name="use-clipboard-guard-demo" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx uselab@latest add use-clipboard-guard
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="use-clipboard-guard" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx {1, 4-14}
+import { useClipboardGuard } from "@/hooks/use-clipboard-guard"
+
+export function Component() {
+  const { copy, paste } = useClipboardGuard({
+    sanitizeFn: (text) => {
+      return text.replace(/[<>]/g, "")
+    },
+    onCopy: (sanitized) => {
+      console.log("Copied:", sanitized)
+    },
+    onPaste: (sanitized) => {
+      console.log("Pasted:", sanitized)
+    },
+  })
+
+  const handleCopy = async () => {
+    const success = await copy("Hello <script>alert('xss')</script>")
+    if (success) {
+      console.log("Text copied successfully")
+    }
+  }
+
+  const handlePaste = async () => {
+    const text = await paste()
+    if (text) {
+      console.log("Pasted text:", text)
+    }
+  }
+
+  return (
+    <div>
+      <button onClick={handleCopy}>Copy (Sanitized)</button>
+      <button onClick={handlePaste}>Paste (Sanitized)</button>
+    </div>
+  )
+}
+```
+
+### Key Points
+
+1. **`useClipboardGuard(options?)`**:
+   - Provides sanitized clipboard operations for secure UIs.
+   - Automatically sanitizes text before copying and after pasting.
+   - Supports custom sanitization functions and callbacks.
+
+2. **Options**:
+   - `sanitizeFn`: Custom function to sanitize clipboard text (default removes control characters).
+   - `onCopy`: Callback fired after successful copy with sanitized text.
+   - `onPaste`: Callback fired after successful paste with sanitized text.
+
+3. **Security**:
+   - Default sanitization removes control characters (`\x00-\x1F`, `\x7F-\x9F`).
+   - Custom sanitization functions can remove XSS vectors, HTML tags, etc.
+   - All clipboard operations are sanitized automatically.
+
+4. **Error Handling**:
+   - Returns `false` if copy fails, `null` if paste fails.
+   - Errors are logged to console for debugging.
+
+---
+
+## API Reference
+
+### Parameters
+
+| Name      | Type                    | Description                                     | Default Value | Optional |
+| --------- | ----------------------- | ----------------------------------------------- | ------------- | -------- |
+| `options` | `ClipboardGuardOptions` | Configuration options for clipboard operations. | `{}`          | Yes      |
+
+### Options
+
+| Name         | Type                       | Description                                                                     |
+| ------------ | -------------------------- | ------------------------------------------------------------------------------- |
+| `sanitizeFn` | `(text: string) => string` | Custom function to sanitize clipboard text. Default removes control characters. |
+| `onCopy`     | `(text: string) => void`   | Callback fired after successful copy with the sanitized text.                   |
+| `onPaste`    | `(text: string) => void`   | Callback fired after successful paste with the sanitized text.                  |
+
+### Return Values
+
+| Name    | Type                                 | Description                                                                            |
+| ------- | ------------------------------------ | -------------------------------------------------------------------------------------- |
+| `copy`  | `(text: string) => Promise<boolean>` | Copies sanitized text to clipboard. Returns `true` on success, `false` on failure.     |
+| `paste` | `() => Promise<string \| null>`      | Pastes and sanitizes text from clipboard. Returns sanitized text or `null` on failure. |
+
+## Use Cases
+
+- **High-Security UIs**: Prevent XSS attacks through clipboard operations.
+- **Content Management**: Sanitize user-generated content before clipboard operations.
+- **Data Protection**: Remove sensitive information from clipboard data.
+- **Compliance**: Ensure clipboard data meets security requirements.

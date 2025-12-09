@@ -1,0 +1,165 @@
+---
+title: useCsvImport
+description: Parse CSV uploads into typed rows with preview & error map.
+---
+
+<ComponentPreview name="use-csv-import-demo" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx uselab@latest add use-csv-import
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="use-csv-import" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage (with drag & drop)
+
+```tsx {3, 13-20}
+import * as React from "react"
+
+import { useCsvImport } from "@/hooks/use-csv-import"
+
+interface UserRow {
+  name: string
+  email: string
+  age: string
+}
+
+export function Component() {
+  const [file, setFile] = React.useState<File | null>(null)
+  const { headers, rows, errors, loading } = useCsvImport<UserRow>(file, {
+    delimiter: ",",
+    skipEmptyLines: true,
+  })
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFile(e.target.files?.[0] || null)
+  }
+
+  return (
+    <div
+      ref={dropRef}
+      onClick={() => inputRef.current?.click()}
+      role="button"
+      tabIndex={0}
+      style={{
+        border: isOverDropZone ? "2px dashed #6b46c1" : "2px dashed #ccc",
+        padding: 16,
+        borderRadius: 12,
+      }}
+    >
+      <input
+        ref={inputRef}
+        type="file"
+        accept=".csv"
+        onChange={handleFileChange}
+        style={{ display: "none" }}
+      />
+      <p>
+        {isOverDropZone
+          ? "Drop CSV here"
+          : "Drag & drop CSV or click to browse"}
+      </p>
+      {loading && <p>Parsing...</p>}
+      {errors.size > 0 && (
+        <div>
+          {Array.from(errors.entries()).map(([line, error]) => (
+            <p key={line}>
+              Line {line}: {error}
+            </p>
+          ))}
+        </div>
+      )}
+      <div>
+        <p>Headers: {headers.join(", ")}</p>
+      </div>
+      <ul>
+        {rows.map((row, i) => (
+          <li key={i}>
+            {row.name} - {row.email}
+          </li>
+        ))}
+      </ul>
+    </div>
+  )
+}
+```
+
+### Key Points
+
+1. **`useCsvImport<T>(file, options?)`**:
+   - Parses a CSV file and returns typed rows with error tracking.
+   - Automatically re-parses when the file changes.
+   - Returns `rows`, `errors`, and `loading` state.
+
+2. **Options**:
+   - `delimiter`: CSV delimiter (default: `","`).
+   - `skipEmptyLines`: Whether to skip empty lines (default: `true`).
+
+3. **Error Handling**:
+   - `errors` is a `Map<number, string>` where the key is the line number and the value is the error message.
+   - Errors are reported for column count mismatches and parse failures.
+
+4. **Type Safety**:
+   - The hook is generic and infers types from the provided interface.
+   - Rows are typed based on the CSV headers.
+
+---
+
+## API Reference
+
+### Parameters
+
+| Name      | Type               | Description                                               | Default Value | Optional |
+| --------- | ------------------ | --------------------------------------------------------- | ------------- | -------- |
+| `file`    | `File \| null`     | The CSV file to parse. Set to `null` to clear the import. | -             | No       |
+| `options` | `CsvImportOptions` | Configuration options for parsing.                        | `{}`          | Yes      |
+
+### Options
+
+| Name             | Type      | Description                                 | Default Value |
+| ---------------- | --------- | ------------------------------------------- | ------------- |
+| `delimiter`      | `string`  | The CSV delimiter character.                | `","`         |
+| `skipEmptyLines` | `boolean` | Whether to skip empty lines during parsing. | `true`        |
+
+### Return Values
+
+| Name      | Type                  | Description                                                          |
+| --------- | --------------------- | -------------------------------------------------------------------- |
+| `rows`    | `T[]`                 | Array of parsed rows, typed according to the generic type parameter. |
+| `errors`  | `Map<number, string>` | Map of line numbers to error messages for rows that failed to parse. |
+| `loading` | `boolean`             | Whether the CSV file is currently being parsed.                      |
+| `headers` | `string[]`            | Headers parsed from the first row (BOM-stripped).                    |
+
+## Use Cases
+
+- **Data Import**: Import user data from CSV files.
+- **Bulk Upload**: Process multiple records at once.
+- **Data Migration**: Import data from legacy systems.
+- **User Onboarding**: Allow users to import their existing data.

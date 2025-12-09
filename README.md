@@ -54,7 +54,7 @@ function DemoComponent() {
 }
 ```
 
-### Method 2: Using shadcn CLI (Recommended)
+### Method 2: Using uselab CLI (Recommended)
 
 ```bash
 npx uselab@latest add [hookName]
@@ -153,10 +153,9 @@ cd usekit
 - Follow the existing code style. Use Prettier and ESLint for formatting and linting.
 - TypeScript is required for all hooks.
 
-## 👤 Author & Credits
+## 👤 Author
 
 - **Author:** [Toufiq Hasan Kiron](https://kiron.dev) ([Twitter](https://twitter.com/hashtagkiron), [GitHub](https://github.com/kiron0))
-- **Inspired by:** [shadcn/ui](https://ui.shadcn.com)
 
 ---
 

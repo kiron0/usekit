@@ -1,0 +1,127 @@
+---
+title: useOptimisticQueue
+description: Queue optimistic updates and handle confirmations/rollbacks.
+---
+
+<ComponentPreview name="use-optimistic-queue-demo" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx uselab@latest add use-optimistic-queue
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="use-optimistic-queue" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx {3, 7-8}
+import * as React from "react"
+
+import { useOptimisticQueue } from "@/hooks/use-optimistic-queue"
+
+export function Component() {
+  const [items, setItems] = React.useState<string[]>([])
+  const { enqueue, confirm, rollback, pending, size } =
+    useOptimisticQueue<string>()
+
+  const handleAddItem = async (item: string) => {
+    const actionId = enqueue(item, () => {
+      setItems((prev) => prev.filter((i) => i !== item))
+    })
+
+    setItems((prev) => [...prev, item])
+
+    try {
+      await saveToServer(item)
+      confirm(actionId)
+    } catch (error) {
+      rollback(actionId)
+    }
+  }
+
+  return (
+    <div>
+      <p>Pending actions: {size}</p>
+      {items.map((item) => (
+        <div key={item}>{item}</div>
+      ))}
+    </div>
+  )
+}
+```
+
+### Key Points
+
+1. **`enqueue(action, rollback?)`**:
+   - Adds an action to the optimistic queue and returns a unique ID.
+   - Optionally accepts a rollback function that will be called if the action needs to be reverted.
+   - The action is immediately available in the queue.
+
+2. **`confirm(id)`**:
+   - Confirms a queued action by removing it from the queue.
+   - Use this when the server confirms the action was successful.
+
+3. **`rollback(id)`**:
+   - Rolls back a queued action by calling its rollback function (if provided) and removing it from the queue.
+   - Use this when the server rejects the action or an error occurs.
+
+4. **`queue`**:
+   - An array of all actions currently in the queue (without metadata).
+
+5. **`pending`**:
+   - An array of all pending actions with their IDs and rollback functions.
+
+6. **`size`**:
+   - The number of pending actions in the queue.
+
+7. **`clear()`**:
+   - Clears all pending actions from the queue without calling rollback functions.
+
+---
+
+## API Reference
+
+### Return Values
+
+| Name       | Type                                                      | Description                                                                                  |
+| ---------- | --------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| `enqueue`  | `(action: T, rollback?: () => void) => string`            | Adds an action to the queue and returns a unique ID. Optionally accepts a rollback function. |
+| `confirm`  | `(id: string) => void`                                    | Confirms a queued action by removing it from the queue.                                      |
+| `rollback` | `(id: string) => void`                                    | Rolls back a queued action by calling its rollback function and removing it from the queue.  |
+| `clear`    | `() => void`                                              | Clears all pending actions from the queue without calling rollback functions.                |
+| `queue`    | `T[]`                                                     | An array of all actions currently in the queue.                                              |
+| `pending`  | `Array<{ id: string, action: T, rollback?: () => void }>` | An array of all pending actions with their IDs and rollback functions.                       |
+| `size`     | `number`                                                  | The number of pending actions in the queue.                                                  |
+
+## Use Cases
+
+- **Optimistic UI Updates**: Show changes immediately while waiting for server confirmation.
+- **Form Submissions**: Display submitted data optimistically, then confirm or rollback based on server response.
+- **Real-time Collaboration**: Queue local changes before syncing with the server.
+- **Offline Support**: Queue actions when offline and process them when connection is restored.

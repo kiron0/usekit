@@ -1,5 +1,5 @@
 {
-  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "$schema": "https://usekit.kiron.dev/schema/registry.json",
   "name": "useKit",
   "homepage": "https://usekit.kiron.dev",
   "items": [
@@ -1805,6 +1805,66 @@
         {
           "type": "registry:hook",
           "path": "registry/hooks/use-anchor-scroll.ts"
+        }
+      ]
+    },
+    {
+      "name": "use-optimistic-queue",
+      "title": "Use Optimistic Queue",
+      "description": "Queue optimistic updates and handle confirmations/rollbacks.",
+      "type": "registry:hook",
+      "files": [
+        {
+          "type": "registry:hook",
+          "path": "registry/hooks/use-optimistic-queue.ts"
+        }
+      ]
+    },
+    {
+      "name": "use-table-export-csv",
+      "title": "Use Table Export CSV",
+      "description": "Export table data to CSV/XLSX with customizable columns.",
+      "type": "registry:hook",
+      "files": [
+        {
+          "type": "registry:hook",
+          "path": "registry/hooks/use-table-export-csv.ts"
+        }
+      ]
+    },
+    {
+      "name": "use-csv-import",
+      "title": "Use CSV Import",
+      "description": "Parse CSV uploads into typed rows with preview & error map.",
+      "type": "registry:hook",
+      "files": [
+        {
+          "type": "registry:hook",
+          "path": "registry/hooks/use-csv-import.ts"
+        }
+      ]
+    },
+    {
+      "name": "use-clipboard-guard",
+      "title": "Use Clipboard Guard",
+      "description": "Sanitize and control clipboard reads/writes in high-security UIs.",
+      "type": "registry:hook",
+      "files": [
+        {
+          "type": "registry:hook",
+          "path": "registry/hooks/use-clipboard-guard.ts"
+        }
+      ]
+    },
+    {
+      "name": "use-a11y-announcer",
+      "title": "Use A11y Announcer",
+      "description": "Central ARIA live announcer for accessibility messages.",
+      "type": "registry:hook",
+      "files": [
+        {
+          "type": "registry:hook",
+          "path": "registry/hooks/use-a11y-announcer.ts"
         }
       ]
     }
