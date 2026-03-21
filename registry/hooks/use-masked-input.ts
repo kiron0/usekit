@@ -30,11 +30,15 @@ export function useMaskedInput(
   maskPattern: MaskPattern,
   options: UseMaskedInputOptions = {}
 ) {
+  const {
+    placeholderChar = "",
+    onAccept,
+    onComplete,
+  } = options
   const tokens = React.useMemo(
     () => normalizePattern(maskPattern),
     [maskPattern]
   )
-  const placeholderChar = options.placeholderChar ?? ""
 
   const applyMask = React.useCallback(
     (value: string) => {
@@ -55,9 +59,9 @@ export function useMaskedInput(
         const caret = masked.value.length
         input.setSelectionRange(caret, caret)
       })
-      options.onAccept?.(masked.raw)
+      onAccept?.(masked.raw)
       if (masked.complete) {
-        options.onComplete?.(masked.raw)
+        onComplete?.(masked.raw)
       }
     }
 
@@ -80,7 +84,7 @@ export function useMaskedInput(
       input.removeEventListener("input", handleInput)
       input.removeEventListener("paste", handlePaste)
     }
-  }, [ref, applyMask, options.onAccept, options.onComplete])
+  }, [ref, applyMask, onAccept, onComplete])
 
   return {
     mask: (value: string) => applyMask(value).value,

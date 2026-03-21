@@ -41,8 +41,7 @@ export function useIdle(ms: number = 1000 * 60): boolean {
       setIdle(true)
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const handleEvent = throttle((e: Event) => {
+    const handleEvent = throttle(() => {
       setIdle(false)
 
       if (timeoutId.current !== undefined) {
@@ -53,7 +52,7 @@ export function useIdle(ms: number = 1000 * 60): boolean {
 
     const handleVisibilityChange = () => {
       if (!document.hidden) {
-        handleEvent(new Event("visibilitychange"))
+        handleEvent()
       }
     }
 
