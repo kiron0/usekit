@@ -1232,4 +1232,44 @@ export const hooksExamples: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "use-wake-lock-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/use-wake-lock-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-broadcast-channel-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/use-broadcast-channel-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-idle-callback-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/use-idle-callback-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-web-lock-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/use-web-lock-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
 ]

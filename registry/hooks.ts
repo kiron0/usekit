@@ -1995,6 +1995,58 @@ export const hooks: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "use-wake-lock",
+    title: "Use Wake Lock",
+    description:
+      "Manage the Screen Wake Lock API with visibility-aware reacquisition and simple request/release helpers.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-wake-lock.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-broadcast-channel",
+    title: "Use Broadcast Channel",
+    description:
+      "Send ephemeral messages across same-origin tabs with a small BroadcastChannel wrapper.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-broadcast-channel.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-idle-callback",
+    title: "Use Idle Callback",
+    description:
+      "Schedule low-priority work with requestIdleCallback and explicit start/cancel controls.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-idle-callback.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-web-lock",
+    title: "Use Web Lock",
+    description:
+      "Coordinate exclusive browser work across tabs with a small Web Locks API wrapper.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-web-lock.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
 ]
 
 export default hooks

@@ -1,0 +1,91 @@
+---
+title: useBroadcastChannel
+description: Share live messages across tabs with a small React wrapper around the BroadcastChannel API, including message state, cleanup, and error handling.
+---
+
+<ComponentPreview name="use-broadcast-channel-demo" />
+
+## Installation
+
+<CodeTabs>
+  <TabsList>
+    <TabsTrigger value="cli">CLI</TabsTrigger>
+    <TabsTrigger value="manual">Manual</TabsTrigger>
+  </TabsList>
+
+  <TabsContent value="cli">
+
+```bash
+npx uselab@latest add use-broadcast-channel
+```
+
+  </TabsContent>
+
+  <TabsContent value="manual">
+    <Steps>
+      <Step>Copy and paste the following code into your project.</Step>
+      <ComponentSource name="use-broadcast-channel" />
+      <Step>Update the import paths to match your project.</Step>
+    </Steps>
+  </TabsContent>
+</CodeTabs>
+
+## Usage
+
+```tsx {1, 4}
+import { useBroadcastChannel } from "@/hooks/use-broadcast-channel"
+
+export function PresencePing() {
+  const { lastMessage, postMessage } =
+    useBroadcastChannel<string>("presence-room")
+
+  return (
+    <div className="space-y-2">
+      <button onClick={() => postMessage("editor-opened")}>Send ping</button>
+      <p>{lastMessage || "No messages yet"}</p>
+    </div>
+  )
+}
+```
+
+## API Reference
+
+### `useBroadcastChannel(name, options?)`
+
+#### Parameters
+
+| Name      | Type                            | Description                                                  | Optional |
+| --------- | ------------------------------- | ------------------------------------------------------------ | -------- |
+| `name`    | `string`                        | Channel name shared by every tab that should communicate.    | No       |
+| `options` | `UseBroadcastChannelOptions<T>` | Optional callbacks for received messages and receive errors. | Yes      |
+
+#### Return value
+
+The hook returns an object `{ isSupported, isClosed, lastMessage, error, postMessage, close }`:
+
+| Name          | Type                      | Description                                                   |
+| ------------- | ------------------------- | ------------------------------------------------------------- |
+| `isSupported` | `boolean`                 | Whether `BroadcastChannel` exists in the current environment. |
+| `isClosed`    | `boolean`                 | Whether the current channel instance has been closed.         |
+| `lastMessage` | `T \| null`               | Most recent received message payload.                         |
+| `error`       | `Error \| null`           | Last send or receive error.                                   |
+| `postMessage` | `(message: T) => boolean` | Sends a message and returns whether dispatch succeeded.       |
+| `close`       | `() => void`              | Closes the channel and detaches message handlers.             |
+
+### Options
+
+```ts
+interface UseBroadcastChannelOptions<T> {
+  onMessage?: (data: T) => void
+  onMessageError?: (event: Event) => void
+}
+```
+
+- `onMessage`: Runs whenever a message is received on the active channel.
+- `onMessageError`: Runs when the browser reports a message deserialization or delivery failure.
+
+## Notes
+
+- This hook is a good fit for cross-tab presence, ephemeral notifications, optimistic sync, or “draft changed in another tab” warnings.
+- `BroadcastChannel` is best for same-origin tabs and windows. It does not replace server pub/sub for cross-device communication.
+- If you need persistence, pair it with storage or a backend event stream instead of treating broadcast messages as durable state.

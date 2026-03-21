@@ -1,0 +1,97 @@
+---
+title: useWakeLock
+description: Manage the Screen Wake Lock API with simple request and release helpers, plus automatic release and reacquire behavior around tab visibility changes.
+---
+
+<ComponentPreview name="use-wake-lock-demo" />
+
+## Installation
+
+<CodeTabs>
+  <TabsList>
+    <TabsTrigger value="cli">CLI</TabsTrigger>
+    <TabsTrigger value="manual">Manual</TabsTrigger>
+  </TabsList>
+
+  <TabsContent value="cli">
+
+```bash
+npx uselab@latest add use-wake-lock
+```
+
+  </TabsContent>
+
+  <TabsContent value="manual">
+    <Steps>
+      <Step>Copy and paste the following code into your project.</Step>
+      <ComponentSource name="use-wake-lock" />
+      <Step>Update the import paths to match your project.</Step>
+    </Steps>
+  </TabsContent>
+</CodeTabs>
+
+## Usage
+
+```tsx {1, 4}
+import { useWakeLock } from "@/hooks/use-wake-lock"
+
+export function ReaderMode() {
+  const { isSupported, isActive, request, release } = useWakeLock()
+
+  return (
+    <div className="space-y-2">
+      <button
+        onClick={() => void request()}
+        disabled={!isSupported || isActive}
+      >
+        Keep screen awake
+      </button>
+      <button onClick={() => void release()} disabled={!isActive}>
+        Release
+      </button>
+    </div>
+  )
+}
+```
+
+## API Reference
+
+### `useWakeLock(options?)`
+
+#### Parameters
+
+| Name      | Type                 | Description                                        | Optional |
+| --------- | -------------------- | -------------------------------------------------- | -------- |
+| `options` | `UseWakeLockOptions` | Controls automatic release and reacquire behavior. | Yes      |
+
+#### Return value
+
+The hook returns an object `{ isSupported, isActive, error, request, release }`:
+
+| Name          | Type                     | Description                                                  |
+| ------------- | ------------------------ | ------------------------------------------------------------ |
+| `isSupported` | `boolean`                | Whether the Screen Wake Lock API is available.               |
+| `isActive`    | `boolean`                | Whether a wake lock is currently held.                       |
+| `error`       | `Error \| null`          | The last request or release error.                           |
+| `request`     | `() => Promise<boolean>` | Requests a wake lock and returns whether it became active.   |
+| `release`     | `() => Promise<void>`    | Releases the current wake lock and clears the desired state. |
+
+### Options
+
+```ts
+interface UseWakeLockOptions {
+  autoReleaseOnHidden?: boolean
+  reacquireOnVisible?: boolean
+  type?: "screen"
+}
+```
+
+- `autoReleaseOnHidden`: Releases the wake lock when the page becomes hidden. Defaults to `true`.
+- `reacquireOnVisible`: Re-requests the wake lock when the page becomes visible again after a hidden transition. Defaults to `true`.
+- `type`: Wake lock type to request. The web platform currently supports `"screen"`.
+
+## Notes
+
+- Wake locks are ideal for kiosk flows, route navigation, scanning, or long-form reading interfaces.
+- Browsers can still release a wake lock for platform reasons such as battery saver or OS policy, so treat `isActive` as live state instead of assuming the request persists forever.
+- Keep a fallback UX for unsupported browsers because this API is not universally available.

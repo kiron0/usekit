@@ -1,0 +1,96 @@
+---
+title: useIdleCallback
+description: Schedule low-priority work through requestIdleCallback with a small React wrapper that exposes pending state, timeout awareness, and cancellation.
+---
+
+<ComponentPreview name="use-idle-callback-demo" />
+
+## Installation
+
+<CodeTabs>
+  <TabsList>
+    <TabsTrigger value="cli">CLI</TabsTrigger>
+    <TabsTrigger value="manual">Manual</TabsTrigger>
+  </TabsList>
+
+  <TabsContent value="cli">
+
+```bash
+npx uselab@latest add use-idle-callback
+```
+
+  </TabsContent>
+
+  <TabsContent value="manual">
+    <Steps>
+      <Step>Copy and paste the following code into your project.</Step>
+      <ComponentSource name="use-idle-callback" />
+      <Step>Update the import paths to match your project.</Step>
+    </Steps>
+  </TabsContent>
+</CodeTabs>
+
+## Usage
+
+```tsx {1, 4}
+import { useIdleCallback } from "@/hooks/use-idle-callback"
+
+export function WarmCacheButton() {
+  const { isPending, start, cancel } = useIdleCallback(
+    (deadline) => {
+      console.log("Time budget:", deadline.timeRemaining())
+    },
+    { autoStart: false, timeout: 500 }
+  )
+
+  return (
+    <div className="space-y-2">
+      <button onClick={start} disabled={isPending}>
+        Schedule warm-up
+      </button>
+      <button onClick={cancel}>Cancel</button>
+    </div>
+  )
+}
+```
+
+## API Reference
+
+### `useIdleCallback(callback, options?)`
+
+#### Parameters
+
+| Name       | Type                                   | Description                                         | Optional |
+| ---------- | -------------------------------------- | --------------------------------------------------- | -------- |
+| `callback` | `(deadline: IdleDeadlineLike) => void` | Runs when the browser grants idle time.             | No       |
+| `options`  | `UseIdleCallbackOptions`               | Controls automatic scheduling and timeout behavior. | Yes      |
+
+#### Return value
+
+The hook returns an object `{ isSupported, isPending, didTimeout, start, cancel }`:
+
+| Name          | Type            | Description                                                                                         |
+| ------------- | --------------- | --------------------------------------------------------------------------------------------------- |
+| `isSupported` | `boolean`       | Whether `requestIdleCallback` is available.                                                         |
+| `isPending`   | `boolean`       | Whether an idle callback is currently scheduled.                                                    |
+| `didTimeout`  | `boolean`       | Whether the last callback ran because the timeout elapsed rather than because the browser was idle. |
+| `start`       | `() => boolean` | Schedules the idle callback and returns whether scheduling succeeded.                               |
+| `cancel`      | `() => void`    | Cancels any pending idle callback.                                                                  |
+
+### Options
+
+```ts
+interface UseIdleCallbackOptions {
+  timeout?: number
+  autoStart?: boolean
+}
+```
+
+- `timeout`: Maximum wait time before the browser must run the callback.
+- `autoStart`: Whether the hook should schedule immediately on mount. Defaults to `true`.
+
+## Notes
+
+- This is best for non-urgent work such as cache warming, speculative transforms, analytics flushing, and deferred indexing.
+- Avoid putting user-visible state updates behind idle callbacks unless you have a clear timeout strategy.
+- Support varies, so keep a fallback path for environments that do not expose this API.

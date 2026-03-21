@@ -846,6 +846,30 @@ export const docsConfig: DocsConfig = {
           href: "/docs/hooks/use-network-status",
           items: [],
         },
+        {
+          title: "useWakeLock",
+          href: "/docs/hooks/use-wake-lock",
+          items: [],
+          label: "New",
+        },
+        {
+          title: "useBroadcastChannel",
+          href: "/docs/hooks/use-broadcast-channel",
+          items: [],
+          label: "New",
+        },
+        {
+          title: "useIdleCallback",
+          href: "/docs/hooks/use-idle-callback",
+          items: [],
+          label: "New",
+        },
+        {
+          title: "useWebLock",
+          href: "/docs/hooks/use-web-lock",
+          items: [],
+          label: "New",
+        },
       ],
     },
     {
