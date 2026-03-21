@@ -1,6 +1,7 @@
 "use client"
 
-import { useRef } from "react"
+import Image from "next/image"
+import { useEffect, useMemo, useRef } from "react"
 
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
@@ -13,6 +14,25 @@ export default function UseDropzoneDemo() {
       console.log("Dropped files:", files)
     },
   })
+  const imagePreviews = useMemo(
+    () =>
+      (files ?? [])
+        .filter((file) => file.type.startsWith("image/"))
+        .map((file) => ({
+          id: `${file.name}-${file.size}-${file.lastModified}`,
+          name: file.name,
+          url: URL.createObjectURL(file),
+        })),
+    [files]
+  )
+
+  useEffect(() => {
+    return () => {
+      imagePreviews.forEach((preview) => {
+        URL.revokeObjectURL(preview.url)
+      })
+    }
+  }, [imagePreviews])
 
   return (
     <div className="w-full space-y-4 text-center">
@@ -44,20 +64,20 @@ export default function UseDropzoneDemo() {
             ))}
           </div>
           <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
-            {files.length > 0 &&
-              files.map(
-                (file, i) =>
-                  file.type.startsWith("image/") && (
-                    <img
-                      key={i}
-                      src={URL.createObjectURL(file)}
-                      alt="Preview"
-                      width={1080}
-                      height={1080}
-                      className="aspect-square size-full rounded-lg object-cover ring ring-primary"
-                    />
-                  )
-              )}
+            {imagePreviews.map((preview) => (
+              <div
+                key={preview.id}
+                className="relative aspect-square size-full overflow-hidden rounded-lg ring ring-primary"
+              >
+                <Image
+                  src={preview.url}
+                  alt={`${preview.name} preview`}
+                  fill
+                  unoptimized
+                  className="object-cover"
+                />
+              </div>
+            ))}
           </div>
           <Button variant="destructive" onClick={clearFiles}>
             Clear files

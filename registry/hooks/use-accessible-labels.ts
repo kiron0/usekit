@@ -72,7 +72,6 @@ export function useAccessibleLabels(
   React.useEffect(() => {
     if (!isDev || !warn) return
     if (missingLabel) {
-      // eslint-disable-next-line no-console
       console.warn(
         `[useAccessibleLabels] Missing label or labelledBy for control "${generatedId}". Provide a label, labelledBy, or fallback text to ensure accessibility.`
       )
