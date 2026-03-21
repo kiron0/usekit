@@ -193,8 +193,7 @@ export function useBreadcrumbs(
         window.location.href = href
       }
     },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    []
+    [customNavigate]
   )
 
   return {

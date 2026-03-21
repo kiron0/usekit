@@ -27,13 +27,15 @@ export function useSessionStorage<T>(
         : initialValue
     }
   })
+  const storedValueRef = React.useRef(storedValue)
 
   const setValue = React.useCallback(
     (value: SetStateAction<T>) => {
       try {
         const valueToStore =
-          value instanceof Function ? value(storedValue) : value
+          value instanceof Function ? value(storedValueRef.current) : value
 
+        storedValueRef.current = valueToStore
         setStoredValue(valueToStore)
 
         if (typeof window !== "undefined") {
@@ -43,7 +45,7 @@ export function useSessionStorage<T>(
         console.error(`Error setting sessionStorage key "${key}":`, error)
       }
     },
-    [key, storedValue]
+    [key]
   )
 
   const handleStorageChange = React.useCallback(
@@ -57,6 +59,7 @@ export function useSessionStorage<T>(
               : initialValue
 
           setStoredValue(newValue)
+          storedValueRef.current = newValue
         } catch (error) {
           console.error(
             `Error parsing new sessionStorage value for key "${key}":`,
@@ -72,6 +75,10 @@ export function useSessionStorage<T>(
     window.addEventListener("storage", handleStorageChange)
     return () => window.removeEventListener("storage", handleStorageChange)
   }, [handleStorageChange])
+
+  React.useEffect(() => {
+    storedValueRef.current = storedValue
+  }, [storedValue])
 
   return [storedValue, setValue]
 }

@@ -103,7 +103,6 @@ export function useProgressiveUpload(
 
   const abortControllerRef = React.useRef<AbortController | null>(null)
   const currentChunkSizeRef = React.useRef(initialChunkSize)
-  const uploadStateRef = React.useRef<UploadState | null>(null)
   const isPausedRef = React.useRef(false)
   const performanceMetricsRef = React.useRef<{
     successful: number
@@ -226,27 +225,28 @@ export function useProgressiveUpload(
 
     let state = getStoredState(fileId, storageKey)
     if (!state) {
-      const totalChunks = Math.ceil(file.size / currentChunkSizeRef.current)
+      currentChunkSizeRef.current = initialChunkSize
+      const sessionChunkSize = currentChunkSizeRef.current
+      const totalChunks = Math.ceil(file.size / sessionChunkSize)
       state = {
         fileId,
         totalChunks,
         uploadedChunks: [],
-        chunkSize: currentChunkSizeRef.current,
+        chunkSize: sessionChunkSize,
         lastChunkIndex: 0,
       }
     } else {
       currentChunkSizeRef.current = state.chunkSize
     }
 
-    uploadStateRef.current = state
-
     try {
       const uploadedSet = new Set(state.uploadedChunks)
+      const stableChunkSize = state.chunkSize
       let uploadedBytes = 0
 
       for (const chunkIndex of state.uploadedChunks) {
-        const chunkStart = chunkIndex * state.chunkSize
-        const chunkEnd = Math.min(chunkStart + state.chunkSize, file.size)
+        const chunkStart = chunkIndex * stableChunkSize
+        const chunkEnd = Math.min(chunkStart + stableChunkSize, file.size)
         uploadedBytes += chunkEnd - chunkStart
       }
 
@@ -263,11 +263,8 @@ export function useProgressiveUpload(
           continue
         }
 
-        const chunkStart = chunkIndex * currentChunkSizeRef.current
-        const chunkEnd = Math.min(
-          chunkStart + currentChunkSizeRef.current,
-          file.size
-        )
+        const chunkStart = chunkIndex * stableChunkSize
+        const chunkEnd = Math.min(chunkStart + stableChunkSize, file.size)
         const chunk = file.slice(chunkStart, chunkEnd)
 
         await uploadChunk(chunk, chunkIndex, state.totalChunks, fileId)
@@ -277,7 +274,6 @@ export function useProgressiveUpload(
 
         state.uploadedChunks = Array.from(uploadedSet)
         state.lastChunkIndex = chunkIndex + 1
-        state.chunkSize = currentChunkSizeRef.current
 
         saveState(state, storageKey, persistState)
 
@@ -302,7 +298,14 @@ export function useProgressiveUpload(
     } finally {
       setIsUploading(false)
     }
-  }, [file, onProgress, storageKey, persistState, uploadChunk])
+  }, [
+    file,
+    initialChunkSize,
+    onProgress,
+    storageKey,
+    persistState,
+    uploadChunk,
+  ])
 
   const pause = React.useCallback(() => {
     isPausedRef.current = true

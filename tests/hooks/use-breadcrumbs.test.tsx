@@ -60,4 +60,38 @@ describe("useBreadcrumbs", () => {
     })
     expect(result.current.items[0]).toEqual({ label: "Home", href: "/docs" })
   })
+
+  it("uses the latest navigate callback after rerender", () => {
+    const firstNavigate = vi.fn()
+    const secondNavigate = vi.fn()
+
+    const { result, rerender } = renderHook(
+      ({ navigate }) =>
+        useBreadcrumbs({
+          basePath: "/docs",
+          getPathname: () => "/docs/hooks/use-counter",
+          navigate,
+        }),
+      {
+        initialProps: {
+          navigate: firstNavigate,
+        },
+      }
+    )
+
+    act(() => {
+      result.current.navigate("/docs/first")
+    })
+
+    expect(firstNavigate).toHaveBeenCalledWith("/docs/first")
+
+    rerender({ navigate: secondNavigate })
+
+    act(() => {
+      result.current.navigate("/docs/second")
+    })
+
+    expect(secondNavigate).toHaveBeenCalledWith("/docs/second")
+    expect(firstNavigate).toHaveBeenCalledTimes(1)
+  })
 })

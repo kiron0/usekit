@@ -42,4 +42,27 @@ describe("useLocation", () => {
     expect(result.current.search).toBe("?section=hooks")
     expect(result.current.state).toEqual({ page: "api" })
   })
+
+  it("patches history events only once across multiple hook instances", () => {
+    const dispatchSpy = vi.spyOn(window, "dispatchEvent")
+
+    const first = renderHook(() => useLocation())
+    const second = renderHook(() => useLocation())
+
+    act(() => {
+      history.pushState({ page: "docs" }, "", "/docs")
+      vi.runAllTimers()
+    })
+
+    const pushStateDispatches = dispatchSpy.mock.calls.filter(
+      ([event]) => event.type === "pushstate"
+    )
+
+    expect(pushStateDispatches).toHaveLength(1)
+    expect(first.result.current.pathname).toBe("/docs")
+    expect(second.result.current.pathname).toBe("/docs")
+
+    first.unmount()
+    second.unmount()
+  })
 })

@@ -34,4 +34,17 @@ describe("useCookieStorage", () => {
 
     expect(result.current[0]).toBe("hello")
   })
+
+  it("applies back-to-back functional updates against the latest state", () => {
+    const { result } = renderHook(() =>
+      useCookieStorage("counter", "a", { path: "/" })
+    )
+
+    act(() => {
+      result.current[1]((prev) => `${prev}b`)
+      result.current[1]((prev) => `${prev}c`)
+    })
+
+    expect(result.current[0]).toBe("abc")
+  })
 })
