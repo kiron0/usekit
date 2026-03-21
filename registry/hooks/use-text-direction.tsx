@@ -104,7 +104,10 @@ export const TextDirectionProvider: React.FC<{
   children: React.ReactNode
   direction?: TextDirection
 }> = ({ children, direction = "auto" }) => {
-  const detectedDirection = useTextDirection({ initialDirection: direction })
+  const detectedDirection = useTextDirection({
+    initialDirection: direction,
+    watch: direction === "auto",
+  })
 
   return <div dir={detectedDirection}>{children}</div>
 }

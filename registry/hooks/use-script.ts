@@ -90,11 +90,7 @@ export function useScript(src: string, options?: Options): ScriptStatus {
 
     return () => {
       removeEventListeners()
-      if (
-        script &&
-        optionsRef.current?.removeOnUnmount &&
-        !document.querySelector(`script[src="${src}"]`)
-      ) {
+      if (script && optionsRef.current?.removeOnUnmount) {
         script.remove()
       }
     }

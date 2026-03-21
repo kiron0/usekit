@@ -55,7 +55,6 @@ export async function generateMetadata(): Promise<Metadata> {
       shortcut: "/favicon-16x16.png",
       apple: "/apple-touch-icon.png",
     },
-    manifest: `${BASE_URL}/site.webmanifest`,
   }
 }
 

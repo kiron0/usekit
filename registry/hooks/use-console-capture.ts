@@ -1,7 +1,18 @@
 /* eslint-disable no-console */
 import * as React from "react"
 
-export type LogLevel = "log" | "info" | "warn" | "error" | "debug"
+export type LogLevel =
+  | "log"
+  | "info"
+  | "warn"
+  | "error"
+  | "debug"
+  | "trace"
+  | "table"
+  | "group"
+  | "groupCollapsed"
+  | "groupEnd"
+  | "clear"
 
 export interface ConsoleLog {
   id: string
@@ -41,24 +52,74 @@ export interface UseConsoleCaptureReturn {
 const logStore: ConsoleLog[] = []
 const listeners = new Set<() => void>()
 let logIdCounter = 0
-let isCapturing = false
-let currentScope: CaptureScope = "disabled"
-let scopeComponentPath: string | undefined
-let scopeComponentName: string | undefined
 let maxLogs = 1000
-let enabledLevels: LogLevel[] = ["log", "info", "warn", "error", "debug"]
 
-const originalConsole = {
-  log: console.log.bind(console),
-  info: console.info.bind(console),
-  warn: console.warn.bind(console),
-  error: console.error.bind(console),
-  debug: console.debug.bind(console),
+type CaptureSession = {
+  enabled: boolean
+  scope: CaptureScope
+  componentPath?: string
+  componentName?: string
+  levels: Set<LogLevel>
+  maxLogs: number
+}
+
+const sessions = new Map<symbol, CaptureSession>()
+let anySessionEnabled = false
+let anySessionNeedsComponentInfo = false
+let enabledLevelsSet = new Set<LogLevel>()
+
+function recomputeDerivedSessionState() {
+  anySessionEnabled = false
+  anySessionNeedsComponentInfo = false
+  enabledLevelsSet = new Set<LogLevel>()
+
+  // To avoid dropping older logs too early, prefer the largest maxLogs across sessions.
+  let computedMaxLogs = 0
+
+  for (const session of sessions.values()) {
+    if (!session.enabled) continue
+    anySessionEnabled = true
+    if (session.scope !== "all") anySessionNeedsComponentInfo = true
+    for (const lvl of session.levels) enabledLevelsSet.add(lvl)
+    computedMaxLogs = Math.max(computedMaxLogs, session.maxLogs)
+  }
+
+  // Keep existing default if no sessions are active
+  if (computedMaxLogs > 0) maxLogs = computedMaxLogs
+}
+
+type ConsoleMethodName =
+  | "log"
+  | "info"
+  | "warn"
+  | "error"
+  | "debug"
+  | "trace"
+  | "table"
+  | "group"
+  | "groupCollapsed"
+  | "groupEnd"
+  | "clear"
+
+const CAPTURE_FLAG = Symbol.for("useConsoleCapture.interceptor")
+
+// The latest underlying console methods (can be updated if something overwrites console.*)
+const nativeConsole: Partial<
+  Record<ConsoleMethodName, (...args: unknown[]) => void>
+> = {
+  log: console.log?.bind(console),
+  info: console.info?.bind(console),
+  warn: console.warn?.bind(console),
+  error: console.error?.bind(console),
+  debug: console.debug?.bind(console),
   trace: console.trace?.bind(console),
-  table: console.table?.bind(console),
+  table: console.table?.bind(console) as unknown as (
+    ...args: unknown[]
+  ) => void,
   group: console.group?.bind(console),
-  groupEnd: console.groupEnd?.bind(console),
   groupCollapsed: console.groupCollapsed?.bind(console),
+  groupEnd: console.groupEnd?.bind(console),
+  clear: console.clear?.bind(console),
 }
 
 let isIntercepted = false
@@ -105,12 +166,13 @@ function getComponentInfo(): {
 }
 
 function shouldCapture(
+  scope: CaptureScope,
+  scopeComponentPath: string | undefined,
+  scopeComponentName: string | undefined,
   componentPath?: string,
   componentName?: string
 ): boolean {
-  if (!isCapturing) return false
-
-  switch (currentScope) {
+  switch (scope) {
     case "disabled":
       return false
     case "all":
@@ -128,26 +190,23 @@ function shouldCapture(
   }
 }
 
-function captureLog(level: LogLevel, message: string, args: unknown[]): void {
-  if (!shouldCapture() && currentScope !== "all") {
-    const info = getComponentInfo()
-    if (!shouldCapture(info.componentPath, info.componentName)) {
-      return
-    }
-  }
+function captureLog(
+  level: LogLevel,
+  message: string,
+  args: unknown[],
+  info?: { componentPath?: string; componentName?: string; stack?: string }
+): void {
+  if (!enabledLevelsSet.has(level)) return
 
-  if (!enabledLevels.includes(level)) return
-
-  const info = getComponentInfo()
   const log: ConsoleLog = {
     id: `log-${++logIdCounter}`,
     level,
     message,
     args,
     timestamp: Date.now(),
-    componentPath: info.componentPath,
-    componentName: info.componentName,
-    stack: info.stack,
+    componentPath: info?.componentPath,
+    componentName: info?.componentName,
+    stack: info?.stack,
   }
 
   logStore.push(log)
@@ -185,99 +244,154 @@ function serializeArgs(args: unknown[]): string {
     .join(" ")
 }
 
-function createConsoleInterceptor(level: LogLevel) {
-  return function interceptedConsole(...args: unknown[]) {
-    if (originalConsole[level]) {
-      originalConsole[level](...args)
+function createConsoleInterceptor(level: ConsoleMethodName) {
+  const interceptor = function interceptedConsole(...args: unknown[]) {
+    // Capture first so a throwing native console implementation can't drop logs.
+    // (We still call native in a try/catch to preserve typical console behavior.)
+    const logLevel = level as LogLevel
+    if (anySessionEnabled && enabledLevelsSet.has(logLevel)) {
+      let info: ReturnType<typeof getComponentInfo> | undefined
+      let didComputeInfo = false
+
+      let shouldStore = false
+      for (const session of sessions.values()) {
+        if (!session.enabled) continue
+        if (!session.levels.has(logLevel)) continue
+
+        if (session.scope === "all") {
+          shouldStore = true
+          break
+        }
+
+        if (!anySessionNeedsComponentInfo) continue
+
+        if (!didComputeInfo) {
+          info = getComponentInfo()
+          didComputeInfo = true
+        }
+
+        // If we can't resolve component info, "current/path" can't match reliably.
+        if (!info) continue
+
+        if (
+          shouldCapture(
+            session.scope,
+            session.componentPath,
+            session.componentName,
+            info.componentPath,
+            info.componentName
+          )
+        ) {
+          shouldStore = true
+          break
+        }
+      }
+
+      if (shouldStore) {
+        const message = serializeArgs(args)
+        captureLog(logLevel, message, args, info)
+      }
     }
 
-    if (isCapturing) {
-      const message = serializeArgs(args)
-      captureLog(level, message, args)
+    // Always call the latest underlying implementation
+    const native = nativeConsole[level]
+    // Guard against accidental self-reference (would cause infinite recursion)
+    if (native && native !== interceptor) {
+      try {
+        native(...args)
+      } catch {
+        // Swallow to avoid breaking app code on custom/hostile console impls
+      }
     }
   }
+  ;(interceptor as any)[CAPTURE_FLAG] = true
+  return interceptor
 }
 
 function setupConsoleInterception() {
   if (typeof window === "undefined") return
 
-  if (isIntercepted) {
+  // Idempotent, but also resilient: even if already installed, re-assert our descriptors.
+  // (Some environments re-define console methods during HMR/devtools attach.)
+  const methods: ConsoleMethodName[] = [
+    "log",
+    "info",
+    "warn",
+    "error",
+    "debug",
+    "trace",
+    "table",
+    "group",
+    "groupCollapsed",
+    "groupEnd",
+    "clear",
+  ]
+
+  const installMethod = (method: ConsoleMethodName) => {
+    const existingDesc = Object.getOwnPropertyDescriptor(console, method)
+
+    // Prefer reading the data-descriptor value directly to avoid triggering our own getter.
+    const existingValue =
+      existingDesc && "value" in existingDesc
+        ? (existingDesc as any).value
+        : undefined
+
+    // If already our interceptor via getter/setter, keep it
+    if (existingDesc?.get && existingDesc?.set) {
+      const current = existingDesc.get.call(console)
+      if (current && (current as any)[CAPTURE_FLAG]) {
+        // Still mark as intercepted so lint is satisfied and state stays consistent
+        isIntercepted = true
+        return
+      }
+    }
+
+    // Keep the latest native implementation (only if it is not our interceptor)
+    if (
+      typeof existingValue === "function" &&
+      !(existingValue as any)[CAPTURE_FLAG]
+    ) {
+      nativeConsole[method] = existingValue.bind(console)
+    }
+
+    const interceptor = createConsoleInterceptor(method)
+
     try {
-      Object.defineProperty(console, "log", {
-        value: createConsoleInterceptor("log"),
-        writable: true,
+      Object.defineProperty(console, method, {
         configurable: true,
-      })
-      Object.defineProperty(console, "info", {
-        value: createConsoleInterceptor("info"),
-        writable: true,
-        configurable: true,
-      })
-      Object.defineProperty(console, "warn", {
-        value: createConsoleInterceptor("warn"),
-        writable: true,
-        configurable: true,
-      })
-      Object.defineProperty(console, "error", {
-        value: createConsoleInterceptor("error"),
-        writable: true,
-        configurable: true,
-      })
-      Object.defineProperty(console, "debug", {
-        value: createConsoleInterceptor("debug"),
-        writable: true,
-        configurable: true,
+        enumerable: true,
+        get() {
+          return interceptor
+        },
+        set(next) {
+          if (typeof next === "function" && !(next as any)[CAPTURE_FLAG]) {
+            nativeConsole[method] = next.bind(console)
+          }
+        },
       })
     } catch {
-      console.log = createConsoleInterceptor("log")
-      console.info = createConsoleInterceptor("info")
-      console.warn = createConsoleInterceptor("warn")
-      console.error = createConsoleInterceptor("error")
-      console.debug = createConsoleInterceptor("debug")
+      // Fallback: direct assignment (less resilient to later overwrites)
+      ;(console as any)[method] = interceptor
     }
-    return
   }
 
-  try {
-    Object.defineProperty(console, "log", {
-      value: createConsoleInterceptor("log"),
-      writable: true,
-      configurable: true,
-    })
+  methods.forEach(installMethod)
 
-    Object.defineProperty(console, "info", {
-      value: createConsoleInterceptor("info"),
-      writable: true,
-      configurable: true,
-    })
+  // Mark interception installed (used by lint + useful signal for callers)
+  isIntercepted = true
 
-    Object.defineProperty(console, "warn", {
-      value: createConsoleInterceptor("warn"),
-      writable: true,
-      configurable: true,
-    })
-
-    Object.defineProperty(console, "error", {
-      value: createConsoleInterceptor("error"),
-      writable: true,
-      configurable: true,
-    })
-
-    Object.defineProperty(console, "debug", {
-      value: createConsoleInterceptor("debug"),
-      writable: true,
-      configurable: true,
-    })
-
-    if (typeof window !== "undefined") {
+  // Add global error handlers once
+  if (typeof window !== "undefined") {
+    const w = window as any
+    if (!w.__consoleCaptureErrorHandler) {
       const errorHandler = (event: ErrorEvent) => {
-        if (isCapturing && enabledLevels.includes("error")) {
+        if (anySessionEnabled && enabledLevelsSet.has("error")) {
           captureLog("error", `Uncaught Error: ${event.message}`, [event.error])
         }
       }
 
       const rejectionHandler = (event: PromiseRejectionEvent) => {
-        if (isCapturing && enabledLevels.includes("error")) {
+        if (anySessionEnabled && enabledLevelsSet.has("error")) {
           captureLog("error", `Unhandled Promise Rejection: ${event.reason}`, [
             event.reason,
           ])
@@ -286,18 +400,9 @@ function setupConsoleInterception() {
 
       window.addEventListener("error", errorHandler)
       window.addEventListener("unhandledrejection", rejectionHandler)
-      ;(window as any).__consoleCaptureErrorHandler = errorHandler
-      ;(window as any).__consoleCaptureRejectionHandler = rejectionHandler
+      w.__consoleCaptureErrorHandler = errorHandler
+      w.__consoleCaptureRejectionHandler = rejectionHandler
     }
-
-    isIntercepted = true
-  } catch (error) {
-    console.log = createConsoleInterceptor("log")
-    console.info = createConsoleInterceptor("info")
-    console.warn = createConsoleInterceptor("warn")
-    console.error = createConsoleInterceptor("error")
-    console.debug = createConsoleInterceptor("debug")
-    isIntercepted = true
   }
 }
 
@@ -309,7 +414,19 @@ export function useConsoleCapture(
     componentPath,
     componentName,
     maxLogs: maxLogsOption = 1000,
-    levels = ["log", "info", "warn", "error", "debug"],
+    levels = [
+      "log",
+      "info",
+      "warn",
+      "error",
+      "debug",
+      "trace",
+      "table",
+      "group",
+      "groupCollapsed",
+      "groupEnd",
+      "clear",
+    ],
     enabled = true,
   } = options
 
@@ -318,39 +435,88 @@ export function useConsoleCapture(
   const [currentScopeState, setCurrentScopeState] =
     React.useState<CaptureScope>(scope)
 
-  const isFirstMount = React.useRef(true)
+  const initialEnabledRef = React.useRef(isEnabledState)
+  const initialScopeRef = React.useRef(currentScopeState)
+
+  const sessionIdRef = React.useRef<symbol | null>(null)
+  const componentPathRef = React.useRef<string | undefined>(componentPath)
+  const componentNameRef = React.useRef<string | undefined>(componentName)
+  const levelsRef = React.useRef<Set<LogLevel>>(new Set(levels))
+  const maxLogsRef = React.useRef<number>(maxLogsOption)
+
+  levelsRef.current = new Set(levels)
+  maxLogsRef.current = maxLogsOption
+
+  // Keep component path/name in sync with incoming props unless user overrides via setScope().
+  // We treat "override" as: componentPathRef/componentNameRef no longer equals the last provided props.
+  const lastProvidedComponentPathRef = React.useRef<string | undefined>(
+    componentPath
+  )
+  const lastProvidedComponentNameRef = React.useRef<string | undefined>(
+    componentName
+  )
+
+  React.useEffect(() => {
+    const prevProvidedPath = lastProvidedComponentPathRef.current
+    const prevProvidedName = lastProvidedComponentNameRef.current
+
+    if (componentPathRef.current === prevProvidedPath) {
+      componentPathRef.current = componentPath
+    }
+    if (componentNameRef.current === prevProvidedName) {
+      componentNameRef.current = componentName
+    }
+
+    lastProvidedComponentPathRef.current = componentPath
+    lastProvidedComponentNameRef.current = componentName
+  }, [componentPath, componentName])
 
   React.useLayoutEffect(() => {
     setupConsoleInterception()
-    maxLogs = maxLogsOption
-    enabledLevels = levels
+    if (!sessionIdRef.current)
+      sessionIdRef.current = Symbol("useConsoleCapture")
 
-    if (isFirstMount.current && enabled) {
-      currentScope = scope
-      scopeComponentPath = componentPath
-      scopeComponentName = componentName
-      isCapturing = true
-      isFirstMount.current = false
+    const id = sessionIdRef.current
+    sessions.set(id, {
+      enabled: initialEnabledRef.current,
+      scope: initialScopeRef.current,
+      componentPath: componentPathRef.current,
+      componentName: componentNameRef.current,
+      levels: levelsRef.current,
+      maxLogs: maxLogsRef.current,
+    })
+    recomputeDerivedSessionState()
+
+    return () => {
+      sessions.delete(id)
+      recomputeDerivedSessionState()
     }
-  }, [enabled, scope, componentPath, componentName, maxLogsOption, levels])
+  }, [])
 
   React.useEffect(() => {
-    maxLogs = maxLogsOption
-    enabledLevels = levels
-  }, [maxLogsOption, levels])
+    const id = sessionIdRef.current
+    if (!id) return
+    const existing = sessions.get(id)
+    if (!existing) return
 
-  React.useEffect(() => {
-    setupConsoleInterception()
-
-    if (isEnabledState) {
-      currentScope = currentScopeState
-      scopeComponentPath = componentPath
-      scopeComponentName = componentName
-      isCapturing = true
-    } else {
-      isCapturing = false
-    }
-  }, [isEnabledState, currentScopeState, componentPath, componentName])
+    sessions.set(id, {
+      ...existing,
+      enabled: isEnabledState,
+      scope: currentScopeState,
+      componentPath: componentPathRef.current,
+      componentName: componentNameRef.current,
+      levels: levelsRef.current,
+      maxLogs: maxLogsRef.current,
+    })
+    recomputeDerivedSessionState()
+  }, [
+    isEnabledState,
+    currentScopeState,
+    componentPath,
+    componentName,
+    maxLogsOption,
+    levels,
+  ])
 
   React.useEffect(() => {
     const updateLogs = () => {
@@ -375,10 +541,23 @@ export function useConsoleCapture(
       newScope: CaptureScope,
       options?: { componentPath?: string; componentName?: string }
     ) => {
-      currentScope = newScope
-      scopeComponentPath = options?.componentPath ?? componentPath
-      scopeComponentName = options?.componentName ?? componentName
+      // Update local state first; global session sync happens via effect.
+      componentPathRef.current = options?.componentPath ?? componentPath
+      componentNameRef.current = options?.componentName ?? componentName
       setCurrentScopeState(newScope)
+
+      // Ensure we don't miss logs if scope value stays the same (no state change => no effect run).
+      const id = sessionIdRef.current
+      if (!id) return
+      const existing = sessions.get(id)
+      if (!existing) return
+      sessions.set(id, {
+        ...existing,
+        scope: newScope,
+        componentPath: componentPathRef.current,
+        componentName: componentNameRef.current,
+      })
+      recomputeDerivedSessionState()
     },
     [componentPath, componentName]
   )

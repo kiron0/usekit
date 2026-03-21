@@ -4,8 +4,14 @@ class ReactiveMap<K, V> extends Map<K, V> {
   private reRender: () => void
 
   constructor(reRender: () => void, entries?: Iterable<[K, V]>) {
-    super(entries || [])
+    super()
     this.reRender = reRender
+
+    if (entries) {
+      for (const [key, value] of entries) {
+        super.set(key, value)
+      }
+    }
   }
 
   set(key: K, value: V): this {

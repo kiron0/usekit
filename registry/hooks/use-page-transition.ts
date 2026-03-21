@@ -53,6 +53,7 @@ export function usePageTransition(
     if (!isBrowser()) return
     clearTimer()
     startTimeRef.current = performance.now()
+    isTransitioningRef.current = true
     scheduleMicrotask(() => {
       setTransitioning(true)
     })

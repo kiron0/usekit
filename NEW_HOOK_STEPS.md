@@ -19,7 +19,16 @@ Keep these three strings consistent—they are reused in the following steps.
 1. Create `registry/hooks/<slug>.ts`. Export the hook (named with camelCase, e.g. `export function useMaskedInput() { ... }`).
 2. Prefer co-locating helper types/functions inside the same file unless they are reused elsewhere.
 
-## 3. Register the hook with the registry CLI
+## 3. Add a direct hook test
+
+1. Create `tests/hooks/<slug>.test.tsx`.
+2. Test observable behavior only. Do not test internal implementation details.
+3. Prefer deterministic assertions:
+   - use fake timers for interval, timeout, debounce, throttle, countdown, or stopwatch behavior
+   - mock browser APIs narrowly when the hook depends on `matchMedia`, `localStorage`, `navigator`, `IntersectionObserver`, `Worker`, or similar globals
+4. Each new hook should ship with its own direct behavior test. Do not rely on smoke coverage for newly added hooks.
+
+## 4. Register the hook with the registry CLI
 
 Update `registry/hooks.ts` by adding a new object inside the `hooks` array:
 
@@ -35,7 +44,7 @@ Update `registry/hooks.ts` by adding a new object inside the `hooks` array:
 
 This entry powers the public registry endpoint and ensures `npx uselab@latest add <slug>` works.
 
-## 4. Build an interactive demo
+## 5. Build an interactive demo
 
 1. Create `registry/examples/<slug>-demo.tsx`. It must be a client component that imports the hook from `registry/hooks/<slug>` and showcases typical usage.
 2. Add a matching entry to `registry/examples.ts`:
@@ -48,7 +57,7 @@ This entry powers the public registry endpoint and ensures `npx uselab@latest ad
    ```
 3. Keep demos minimal but self-explanatory—prefer small local state over external dependencies.
 
-## 5. Document the hook (MDX page)
+## 6. Document the hook (MDX page)
 
 1. Add `content/docs/hooks/<slug>.mdx` with frontmatter:
    ```md
@@ -66,7 +75,7 @@ This entry powers the public registry endpoint and ensures `npx uselab@latest ad
 
 The docs renderer automatically maps `content/docs/hooks/<slug>.mdx` to `/docs/hooks/<slug>`.
 
-## 6. Surface the doc in the sidebar
+## 7. Surface the doc in the sidebar
 
 In `src/config/docs.ts`, find the `"Hooks"` section inside `sidebarNav`. Append a new item object:
 
@@ -81,16 +90,19 @@ In `src/config/docs.ts`, find the `"Hooks"` section inside `sidebarNav`. Append 
 
 The `DocsNav` component automatically sorts entries that begin with “use”, so you only need to ensure `href` matches the MDX route.
 
-## 7. (Optional) Highlight the hook elsewhere
+## 8. (Optional) Highlight the hook elsewhere
 
 - If the hook needs to appear on marketing pages or hero sections, update the relevant component (e.g. `src/app/page.tsx`) manually.
 - Remove the `"New"` badge from `docsConfig` once the hook is no longer new.
 
-## 8. Verify everything locally
+## 9. Verify everything locally
 
-1. `bun run lint` – catches type issues in the new hook/demo.
-2. `bun run build:registry` – runs `scripts/build-registry.mts` (via `tsx` per `package.json`) and formats the generated files so the registry CLI stays in sync.
-3. `bun run dev` – open `http://localhost:3000/docs/hooks/<slug>` and verify:
+1. `npm run test` – confirm the new direct hook test passes with the full suite.
+2. `npm run lint` – run ESLint across the repo.
+3. `npm run typecheck` – validate source-level TypeScript types.
+4. `npm run build:registry` – runs `scripts/build-registry.mts` (via `tsx` per `package.json`) and formats the generated files so the registry CLI stays in sync.
+5. `npm run build` – confirm the docs app still builds cleanly.
+6. `npm run dev` – open `http://localhost:3000/docs/hooks/<slug>` and verify:
    - Demo renders via `<ComponentPreview>`.
    - Sidebar link navigates correctly.
    - Code snippets reference the right import paths.
@@ -100,6 +112,7 @@ The `DocsNav` component automatically sorts entries that begin with “use”, s
 | Concern                    | Path to edit                                 | Key fields                                          |
 | -------------------------- | -------------------------------------------- | --------------------------------------------------- |
 | Hook implementation        | `registry/hooks/<slug>.ts`                   | Exported hook code.                                 |
+| Hook behavior test         | `tests/hooks/<slug>.test.tsx`                | Deterministic behavior coverage.                    |
 | Registry metadata          | `registry/hooks.ts`                          | `name`, `title`, `description`, `files`, deps.      |
 | Demo component             | `registry/examples/<slug>-demo.tsx`          | Default export React component.                     |
 | Demo registration          | `registry/examples.ts`                       | `name: "<slug>-demo"`, `files[].path`.              |
@@ -107,4 +120,4 @@ The `DocsNav` component automatically sorts entries that begin with “use”, s
 | Sidebar link               | `src/config/docs.ts`                         | `{ title, href: "/docs/hooks/<slug>", items: [] }`. |
 | Route renderer (reference) | `src/app/(routes)/docs/[[...slug]]/page.tsx` | No changes needed; consumes MDX.                    |
 
-Follow these steps sequentially and every new hook will ship with code, docs, demo, and navigation wired up correctly.
+Follow these steps sequentially and every new hook will ship with code, tests, docs, demo, and navigation wired up correctly.
