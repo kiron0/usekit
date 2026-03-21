@@ -64,7 +64,7 @@ export function useContinuousRetry(
       isMountedRef.current = false
       window.clearTimeout(timeoutIdRef.current)
     }
-  }, [callback, interval, options])
+  }, [callback, interval, options?.maxRetries])
 
   return hasResolved
 }

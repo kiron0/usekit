@@ -1,0 +1,23 @@
+{
+  "extends": "./tsconfig.json",
+  "include": [
+    "next-env.d.ts",
+    "contentlayer.config.ts",
+    "next.config.ts",
+    "tailwind.config.ts",
+    "vitest.config.ts",
+    "scripts/**/*.ts",
+    "scripts/**/*.mts",
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "registry/**/*.ts",
+    "registry/**/*.tsx"
+  ],
+  "exclude": [
+    "node_modules",
+    ".next",
+    "tests",
+    "public",
+    "__registry__"
+  ]
+}

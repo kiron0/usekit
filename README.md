@@ -73,85 +73,15 @@ Replace `[hookName]` with the name of the hook you want to add (e.g., `use-local
 
 ---
 
-## 🤝 Contributing & Community
+## 🤝 Community
 
 - **Request a Feature:** [Open a feature request](https://github.com/kiron0/useKit/issues/new?labels=enhancement&template=feature_request.md)
 - **Report a Bug:** [Report a bug](https://github.com/kiron0/useKit/issues/new?labels=bug&template=bug_report.md)
 - **GitHub Issues:** [View all issues](https://github.com/kiron0/useKit/issues)
 - **Discussions:** [Join the discussion](https://github.com/kiron0/useKit/discussions)
+- **Contributing Guide:** See [CONTRIBUTING.md](./CONTRIBUTING.md)
 
 ---
-
-## 🧑‍💻 How to Contribute
-
-We welcome contributions from everyone! Here’s how you can get started:
-
-### 1. Fork & Clone
-
-- Fork the repository on GitHub and clone it to your local machine.
-
-```bash
-git clone https://github.com/kiron0/usekit.git
-cd usekit
-```
-
-### 2. Explore the Project Structure
-
-- **registry/hooks/**: Main directory for reusable hooks. Add new hooks here.
-- **registry/**: Demo and registry files for hooks. Add demo files in `registry/examples/` and register new hooks in `registry/hooks.ts`.
-- **content/docs/hooks/**: Documentation in MDX format. Add or update docs for your hook here.
-- **public/**: Static assets (images, icons, etc.).
-- **scripts/**: Build and utility scripts.
-
-### 3. Add a New Hook
-
-1. Create your hook in `registry/hooks/` (e.g., `use-my-hook.ts`).
-2. Add a demo in `registry/examples/` (e.g., `use-my-hook-demo.tsx`) (Optional but Recommended).
-3. Register your hook in `registry/hooks.ts`.
-4. Write documentation in `content/docs/hooks/` (e.g., `use-my-hook.mdx`).
-
-### 4. Run & Test
-
-- Install dependencies:
-  ```bash
-  bun install
-  ```
-- Run the development server and test your changes.
-
-### 4.1. Set Up Environment Variables
-
-- Create a `.env` file at the root of the project with the following content:
-
-  ```
-  NEXT_PUBLIC_NODE_ENV=development
-  ```
-
-- You can now visit the `/docs/development` route to test your example of a hook.
-
-- Start the development server:
-
-  ```bash
-  bun run dev
-  ```
-
-### 4.2. Build for Production
-
-- Before committing, run the following command to build the current registry for production readiness:
-
-  ```bash
-  bun run build:registry
-  ```
-
-### 5. Commit & PR
-
-1. Create a new branch for your feature or fix.
-2. Commit your changes with a descriptive message.
-3. Push to your fork and open a Pull Request (PR) against the `dev` branch.
-
-### 6. Code Style
-
-- Follow the existing code style. Use Prettier and ESLint for formatting and linting.
-- TypeScript is required for all hooks.
 
 ## 👤 Author
 

@@ -25,30 +25,38 @@ export function useDebounceCallback<T extends (...args: any) => ReturnType<T>>(
   delay = 500,
   options?: DebounceOptions
 ): DebouncedState<T> {
-  const debouncedFunc = React.useRef<ReturnType<typeof debounce>>(null)
+  const isPendingRef = React.useRef(false)
 
   useUnmount(() => {
-    if (debouncedFunc.current) {
-      debouncedFunc.current.cancel()
-    }
+    isPendingRef.current = false
   })
 
   const debounced = React.useMemo(() => {
-    const debouncedFuncInstance = debounce(func, delay, options)
+    const debouncedFuncInstance = debounce(
+      (...args: Parameters<T>) => {
+        isPendingRef.current = false
+        return func(...args)
+      },
+      delay,
+      options
+    )
 
     const wrappedFunc: DebouncedState<T> = (...args: Parameters<T>) => {
+      isPendingRef.current = true
       return debouncedFuncInstance(...args)
     }
 
     wrappedFunc.cancel = () => {
+      isPendingRef.current = false
       debouncedFuncInstance.cancel()
     }
 
     wrappedFunc.isPending = () => {
-      return !!debouncedFunc.current
+      return isPendingRef.current
     }
 
     wrappedFunc.flush = () => {
+      isPendingRef.current = false
       return debouncedFuncInstance.flush()
     }
 
@@ -56,8 +64,10 @@ export function useDebounceCallback<T extends (...args: any) => ReturnType<T>>(
   }, [func, delay, options])
 
   React.useEffect(() => {
-    debouncedFunc.current = debounce(func, delay, options)
-  }, [func, delay, options])
+    return () => {
+      debounced.cancel()
+    }
+  }, [debounced])
 
   return debounced
 }

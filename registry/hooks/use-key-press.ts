@@ -117,7 +117,9 @@ const checkCombination = (
 ) => {
   return keys.every((key) =>
     modifierKeys.has(key)
-      ? event[`${key.toLowerCase()}Key` as keyof KeyboardEvent]
+      ? key === "Control"
+        ? event.ctrlKey
+        : event[`${key.toLowerCase()}Key` as keyof KeyboardEvent]
       : event.key === Keys[key]
   )
 }
