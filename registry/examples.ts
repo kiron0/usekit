@@ -1272,4 +1272,24 @@ export const hooksExamples: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "use-reduced-motion-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/use-reduced-motion-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-permission-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/use-permission-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
 ]

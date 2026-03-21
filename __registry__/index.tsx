@@ -2412,6 +2412,38 @@ export const Index: Record<string, any> = {
     component: React.lazy(() => import("registry/examples/use-web-lock-demo")),
     source: "",
   },
+  "use-reduced-motion": {
+    name: "use-reduced-motion",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-reduced-motion.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-reduced-motion-demo")
+    ),
+    source: "",
+  },
+  "use-permission": {
+    name: "use-permission",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-permission.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-permission-demo")
+    ),
+    source: "",
+  },
   "use-copy-to-clipboard-demo": {
     name: "use-copy-to-clipboard-demo",
     type: "registry:example",
@@ -4425,6 +4457,38 @@ export const Index: Record<string, any> = {
     ],
     component: React.lazy(
       () => import("registry/examples/use-web-lock-demo.tsx")
+    ),
+    source: "",
+  },
+  "use-reduced-motion-demo": {
+    name: "use-reduced-motion-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-reduced-motion-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-reduced-motion-demo.tsx")
+    ),
+    source: "",
+  },
+  "use-permission-demo": {
+    name: "use-permission-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-permission-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-permission-demo.tsx")
     ),
     source: "",
   },

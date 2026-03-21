@@ -2047,6 +2047,32 @@ export const hooks: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "use-reduced-motion",
+    title: "Use Reduced Motion",
+    description:
+      "Track the user's reduced-motion preference for accessibility-aware UI behavior.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-reduced-motion.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-permission",
+    title: "Use Permission",
+    description:
+      "Query and react to browser permission state changes with a small Permissions API wrapper.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-permission.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
 ]
 
 export default hooks

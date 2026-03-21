@@ -870,6 +870,18 @@ export const docsConfig: DocsConfig = {
           items: [],
           label: "New",
         },
+        {
+          title: "useReducedMotion",
+          href: "/docs/hooks/use-reduced-motion",
+          items: [],
+          label: "New",
+        },
+        {
+          title: "usePermission",
+          href: "/docs/hooks/use-permission",
+          items: [],
+          label: "New",
+        },
       ],
     },
     {

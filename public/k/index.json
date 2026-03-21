@@ -1915,6 +1915,30 @@
           "path": "registry/hooks/use-web-lock.ts"
         }
       ]
+    },
+    {
+      "name": "use-reduced-motion",
+      "title": "Use Reduced Motion",
+      "description": "Track the user's reduced-motion preference for accessibility-aware UI behavior.",
+      "type": "registry:hook",
+      "files": [
+        {
+          "type": "registry:hook",
+          "path": "registry/hooks/use-reduced-motion.ts"
+        }
+      ]
+    },
+    {
+      "name": "use-permission",
+      "title": "Use Permission",
+      "description": "Query and react to browser permission state changes with a small Permissions API wrapper.",
+      "type": "registry:hook",
+      "files": [
+        {
+          "type": "registry:hook",
+          "path": "registry/hooks/use-permission.ts"
+        }
+      ]
     }
   ]
 }
