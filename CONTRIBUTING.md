@@ -7,7 +7,7 @@ Thanks for contributing to `usekit`.
 1. Install dependencies:
 
 ```bash
-npm install
+npm install --legacy-peer-deps
 ```
 
 2. Create `.env` with:
