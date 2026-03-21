@@ -14,4 +14,19 @@ describe("useLockBodyScroll", () => {
     unmount()
     expect(document.body.style.overflow).toBe("scroll")
   })
+
+  it("keeps scrolling locked until the last consumer unmounts", () => {
+    document.body.style.overflow = "scroll"
+
+    const first = renderHook(() => useLockBodyScroll())
+    const second = renderHook(() => useLockBodyScroll())
+
+    expect(document.body.style.overflow).toBe("hidden")
+
+    first.unmount()
+    expect(document.body.style.overflow).toBe("hidden")
+
+    second.unmount()
+    expect(document.body.style.overflow).toBe("scroll")
+  })
 })

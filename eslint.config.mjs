@@ -47,6 +47,7 @@ const eslintConfig = [
     ignores: [
       "node_modules/",
       ".next/",
+      ".vercel/",
       ".contentlayer/",
       "__registry__/",
       "dist/",

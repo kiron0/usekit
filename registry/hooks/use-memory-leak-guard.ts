@@ -26,6 +26,13 @@ const timerRegistry: Map<TimerHandle, TimerRecord> =
     : new Map()
 
 let timersPatched = false
+let timerPatchConsumerCount = 0
+let originalTimerMethods: {
+  setTimeout: typeof window.setTimeout
+  clearTimeout: typeof window.clearTimeout
+  setInterval: typeof window.setInterval
+  clearInterval: typeof window.clearInterval
+} | null = null
 
 function captureStack(label: string): string | undefined {
   try {
@@ -45,6 +52,12 @@ function patchTimers() {
   const originalClearTimeout = window.clearTimeout.bind(window)
   const originalSetInterval = window.setInterval.bind(window)
   const originalClearInterval = window.clearInterval.bind(window)
+  originalTimerMethods = {
+    setTimeout: window.setTimeout,
+    clearTimeout: window.clearTimeout,
+    setInterval: window.setInterval,
+    clearInterval: window.clearInterval,
+  }
   const performanceNow =
     typeof performance !== "undefined" && performance.now
       ? () => performance.now()
@@ -170,6 +183,24 @@ function patchTimers() {
   timersPatched = true
 }
 
+function restoreTimers() {
+  if (
+    !timersPatched ||
+    typeof window === "undefined" ||
+    !originalTimerMethods
+  ) {
+    return
+  }
+
+  window.setTimeout = originalTimerMethods.setTimeout
+  window.clearTimeout = originalTimerMethods.clearTimeout
+  window.setInterval = originalTimerMethods.setInterval
+  window.clearInterval = originalTimerMethods.clearInterval
+
+  originalTimerMethods = null
+  timersPatched = false
+}
+
 export interface UseMemoryLeakGuardOptions {
   refs?: Array<React.RefObject<Element | null>>
   timerThresholdMs?: number
@@ -190,6 +221,7 @@ export function useMemoryLeakGuard(
   React.useEffect(() => {
     if (!isDev || typeof window === "undefined") return
     patchTimers()
+    timerPatchConsumerCount += 1
 
     const now =
       typeof performance !== "undefined" && performance.now
@@ -247,6 +279,10 @@ export function useMemoryLeakGuard(
 
     return () => {
       window.clearInterval(timerId)
+      timerPatchConsumerCount = Math.max(timerPatchConsumerCount - 1, 0)
+      if (timerPatchConsumerCount === 0) {
+        restoreTimers()
+      }
     }
   }, [timerThresholdMs])
 

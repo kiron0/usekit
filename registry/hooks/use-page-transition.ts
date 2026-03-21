@@ -8,8 +8,65 @@ export interface UsePageTransitionResult {
   isTransitioning: boolean
 }
 
+const HISTORY_EVENT_PATCH_MARKER = Symbol.for("usekit.history-events.patched")
+
+type HistoryMethod = "pushState" | "replaceState"
+type HistoryFunction = History["pushState"] | History["replaceState"]
+
+declare global {
+  interface WindowEventMap {
+    pushstate: CustomEvent<{ state: unknown }>
+    replacestate: CustomEvent<{ state: unknown }>
+  }
+}
+
+type PatchedHistoryFunction = {
+  [HISTORY_EVENT_PATCH_MARKER]?: true
+}
+
 function isBrowser() {
   return typeof window !== "undefined" && typeof document !== "undefined"
+}
+
+function ensureHistoryEventsPatched(): void {
+  if (!isBrowser()) {
+    return
+  }
+
+  const patchHistoryMethod = (method: HistoryMethod) => {
+    const currentMethod = history[method] as HistoryFunction &
+      PatchedHistoryFunction
+
+    if (currentMethod[HISTORY_EVENT_PATCH_MARKER]) {
+      return
+    }
+
+    const originalMethod = history[method]
+
+    const patchedMethod = function (
+      this: History,
+      data: unknown,
+      title: string,
+      url?: string | null
+    ) {
+      const result = originalMethod.apply(this, [data, title, url])
+      window.dispatchEvent(
+        new CustomEvent<{ state: unknown }>(method.toLowerCase(), {
+          detail: { state: data },
+        })
+      )
+      return result
+    }
+
+    ;(patchedMethod as typeof patchedMethod & PatchedHistoryFunction)[
+      HISTORY_EVENT_PATCH_MARKER
+    ] = true
+
+    history[method] = patchedMethod as History[typeof method]
+  }
+
+  patchHistoryMethod("pushState")
+  patchHistoryMethod("replaceState")
 }
 
 function scheduleMicrotask(callback: () => void) {
@@ -30,12 +87,6 @@ export function usePageTransition(
   const isTransitioningRef = React.useRef(false)
   const startTimeRef = React.useRef<number | null>(null)
   const timeoutRef = React.useRef<number | null>(null)
-  const originalPushStateRef = React.useRef<typeof history.pushState | null>(
-    null
-  )
-  const originalReplaceStateRef = React.useRef<
-    typeof history.replaceState | null
-  >(null)
 
   const clearTimer = React.useCallback(() => {
     if (timeoutRef.current !== null) {
@@ -86,6 +137,8 @@ export function usePageTransition(
   React.useEffect(() => {
     if (!isBrowser()) return
 
+    ensureHistoryEventsPatched()
+
     const handleVisibility = () => {
       if (document.visibilityState === "hidden") {
         startTransition()
@@ -111,30 +164,23 @@ export function usePageTransition(
       window.requestAnimationFrame(endTransition)
     }
 
+    const handlePushState = () => {
+      startTransition()
+      window.requestAnimationFrame(endTransition)
+    }
+
+    const handleReplaceState = () => {
+      startTransition()
+      window.requestAnimationFrame(endTransition)
+    }
+
     document.addEventListener("visibilitychange", handleVisibility)
     window.addEventListener("beforeunload", handleBeforeUnload)
     window.addEventListener("pagehide", handlePageHide)
     window.addEventListener("pageshow", handlePageShow)
     window.addEventListener("popstate", handlePopState)
-
-    originalPushStateRef.current = history.pushState
-    originalReplaceStateRef.current = history.replaceState
-
-    history.pushState = ((...args: Parameters<typeof history.pushState>) => {
-      const result = originalPushStateRef.current?.apply(history, args)
-      startTransition()
-      window.requestAnimationFrame(endTransition)
-      return result
-    }) as typeof history.pushState
-
-    history.replaceState = ((
-      ...args: Parameters<typeof history.replaceState>
-    ) => {
-      const result = originalReplaceStateRef.current?.apply(history, args)
-      startTransition()
-      window.requestAnimationFrame(endTransition)
-      return result
-    }) as typeof history.replaceState
+    window.addEventListener("pushstate", handlePushState)
+    window.addEventListener("replacestate", handleReplaceState)
 
     return () => {
       document.removeEventListener("visibilitychange", handleVisibility)
@@ -142,15 +188,10 @@ export function usePageTransition(
       window.removeEventListener("pagehide", handlePageHide)
       window.removeEventListener("pageshow", handlePageShow)
       window.removeEventListener("popstate", handlePopState)
+      window.removeEventListener("pushstate", handlePushState)
+      window.removeEventListener("replacestate", handleReplaceState)
 
       clearTimer()
-
-      if (originalPushStateRef.current) {
-        history.pushState = originalPushStateRef.current
-      }
-      if (originalReplaceStateRef.current) {
-        history.replaceState = originalReplaceStateRef.current
-      }
     }
   }, [clearTimer, endTransition, startTransition])
 

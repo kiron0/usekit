@@ -1995,6 +1995,110 @@ export const hooks: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "use-wake-lock",
+    title: "Use Wake Lock",
+    description:
+      "Manage the Screen Wake Lock API with visibility-aware reacquisition and simple request/release helpers.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-wake-lock.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-broadcast-channel",
+    title: "Use Broadcast Channel",
+    description:
+      "Send ephemeral messages across same-origin tabs with a small BroadcastChannel wrapper.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-broadcast-channel.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-idle-callback",
+    title: "Use Idle Callback",
+    description:
+      "Schedule low-priority work with requestIdleCallback and explicit start/cancel controls.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-idle-callback.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-web-lock",
+    title: "Use Web Lock",
+    description:
+      "Coordinate exclusive browser work across tabs with a small Web Locks API wrapper.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-web-lock.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-reduced-motion",
+    title: "Use Reduced Motion",
+    description:
+      "Track the user's reduced-motion preference for accessibility-aware UI behavior.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-reduced-motion.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-permission",
+    title: "Use Permission",
+    description:
+      "Query and react to browser permission state changes with a small Permissions API wrapper.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-permission.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-wordle-game",
+    title: "Use Wordle Game",
+    description:
+      "Run a Wordle-style guessing game with duplicate-letter scoring and keyboard state.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-wordle-game.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
+  {
+    name: "use-2048-game",
+    title: "Use 2048 Game",
+    description:
+      "Manage 2048-style board merging, score tracking, and game-over state in React.",
+    type: "registry:hook",
+    files: [
+      {
+        path: "registry/hooks/use-2048-game.ts",
+        type: "registry:hook",
+      },
+    ],
+  },
 ]
 
 export default hooks

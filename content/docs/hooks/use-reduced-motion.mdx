@@ -1,0 +1,67 @@
+---
+title: useReducedMotion
+description: Track the user's prefers-reduced-motion setting so animation-heavy UI can adapt to accessibility preferences.
+---
+
+<ComponentPreview name="use-reduced-motion-demo" />
+
+## Installation
+
+<CodeTabs>
+  <TabsList>
+    <TabsTrigger value="cli">CLI</TabsTrigger>
+    <TabsTrigger value="manual">Manual</TabsTrigger>
+  </TabsList>
+
+  <TabsContent value="cli">
+
+```bash
+npx uselab@latest add use-reduced-motion
+```
+
+  </TabsContent>
+
+  <TabsContent value="manual">
+    <Steps>
+      <Step>Copy and paste the following code into your project.</Step>
+      <ComponentSource name="use-reduced-motion" />
+      <Step>Update the import paths to match your project.</Step>
+    </Steps>
+  </TabsContent>
+</CodeTabs>
+
+## Usage
+
+```tsx {1, 4}
+import { useReducedMotion } from "@/hooks/use-reduced-motion"
+
+export function MotionAwareCard() {
+  const prefersReducedMotion = useReducedMotion()
+
+  return (
+    <div
+      className={
+        prefersReducedMotion ? "" : "transition-transform hover:-translate-y-1"
+      }
+    >
+      Content
+    </div>
+  )
+}
+```
+
+## API Reference
+
+### `useReducedMotion()`
+
+#### Return value
+
+| Name         | Type      | Description                                  |
+| ------------ | --------- | -------------------------------------------- |
+| return value | `boolean` | `true` when the user prefers reduced motion. |
+
+## Notes
+
+- This hook is useful for hover motion, autoplay effects, carousels, particle systems, and long-running interface transitions.
+- Treat it as an accessibility input, not a visual preference toggle.
+- Pair it with simpler affordances instead of removing feedback entirely.

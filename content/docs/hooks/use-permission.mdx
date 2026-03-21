@@ -1,0 +1,75 @@
+---
+title: usePermission
+description: Query and track browser permission state with a small React wrapper around the Permissions API.
+---
+
+<ComponentPreview name="use-permission-demo" />
+
+## Installation
+
+<CodeTabs>
+  <TabsList>
+    <TabsTrigger value="cli">CLI</TabsTrigger>
+    <TabsTrigger value="manual">Manual</TabsTrigger>
+  </TabsList>
+
+  <TabsContent value="cli">
+
+```bash
+npx uselab@latest add use-permission
+```
+
+  </TabsContent>
+
+  <TabsContent value="manual">
+    <Steps>
+      <Step>Copy and paste the following code into your project.</Step>
+      <ComponentSource name="use-permission" />
+      <Step>Update the import paths to match your project.</Step>
+    </Steps>
+  </TabsContent>
+</CodeTabs>
+
+## Usage
+
+```tsx {1, 4}
+import { usePermission } from "@/hooks/use-permission"
+
+export function PermissionGate() {
+  const { state, refresh } = usePermission("notifications")
+
+  return (
+    <div className="space-y-2">
+      <p>Notifications: {state || "unknown"}</p>
+      <button onClick={() => void refresh()}>Refresh</button>
+    </div>
+  )
+}
+```
+
+## API Reference
+
+### `usePermission(name)`
+
+#### Parameters
+
+| Name   | Type     | Description                                            | Optional |
+| ------ | -------- | ------------------------------------------------------ | -------- |
+| `name` | `string` | Permission name passed to the browser Permissions API. | No       |
+
+#### Return value
+
+The hook returns an object `{ isSupported, state, error, refresh }`:
+
+| Name          | Type                                                       | Description                                         |
+| ------------- | ---------------------------------------------------------- | --------------------------------------------------- |
+| `isSupported` | `boolean`                                                  | Whether `navigator.permissions` exists.             |
+| `state`       | `"granted" \| "denied" \| "prompt" \| null`                | Current permission state, or `null` if unavailable. |
+| `error`       | `Error \| null`                                            | Last query error.                                   |
+| `refresh`     | `() => Promise<"granted" \| "denied" \| "prompt" \| null>` | Re-queries the permission state.                    |
+
+## Notes
+
+- This hook is useful for notifications, geolocation, camera, microphone, and clipboard-capable flows.
+- Browser support and permission names vary, so keep feature-specific fallbacks.
+- Use it to explain blocked features before prompting the user to take action.

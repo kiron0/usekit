@@ -1,14 +1,20 @@
 import * as React from "react"
 
 const isClient = typeof window === "object"
+const HISTORY_EVENT_PATCH_MARKER = Symbol.for("usekit.history-events.patched")
 
 type HistoryMethod = "pushState" | "replaceState"
+type HistoryFunction = History["pushState"] | History["replaceState"]
 
 declare global {
   interface WindowEventMap {
     pushstate: CustomEvent<{ state: unknown }>
     replacestate: CustomEvent<{ state: unknown }>
   }
+}
+
+type PatchedHistoryFunction = {
+  [HISTORY_EVENT_PATCH_MARKER]?: true
 }
 
 const on = (
@@ -23,25 +29,43 @@ const off = (
   listener: (event: Event) => void
 ) => obj.removeEventListener(type, listener)
 
-const patchHistoryMethod = (method: HistoryMethod) => {
-  const original = history[method]
-
-  history[method] = function (
-    this: History,
-    data: unknown,
-    title: string,
-    url?: string | null
-  ) {
-    const result = original.apply(this, [data, title, url])
-    const event = new CustomEvent<{ state: unknown }>(method.toLowerCase(), {
-      detail: { state: data },
-    })
-    window.dispatchEvent(event)
-    return result
+function ensureHistoryEventsPatched(): void {
+  if (!isClient) {
+    return
   }
-}
 
-if (isClient) {
+  const patchHistoryMethod = (method: HistoryMethod) => {
+    const currentMethod = history[method] as HistoryFunction &
+      PatchedHistoryFunction
+
+    if (currentMethod[HISTORY_EVENT_PATCH_MARKER]) {
+      return
+    }
+
+    const originalMethod = history[method]
+
+    const patchedMethod = function (
+      this: History,
+      data: unknown,
+      title: string,
+      url?: string | null
+    ) {
+      const result = originalMethod.apply(this, [data, title, url])
+      window.dispatchEvent(
+        new CustomEvent<{ state: unknown }>(method.toLowerCase(), {
+          detail: { state: data },
+        })
+      )
+      return result
+    }
+
+    ;(patchedMethod as typeof patchedMethod & PatchedHistoryFunction)[
+      HISTORY_EVENT_PATCH_MARKER
+    ] = true
+
+    history[method] = patchedMethod as History[typeof method]
+  }
+
   patchHistoryMethod("pushState")
   patchHistoryMethod("replaceState")
 }
@@ -119,6 +143,8 @@ export const useLocation = (): LocationState => {
     if (!isClient) {
       return
     }
+
+    ensureHistoryEventsPatched()
 
     const handleChange = (trigger: string) => {
       setTimeout(() => {

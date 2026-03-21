@@ -9,6 +9,27 @@ describe("useMemoryLeakGuard", () => {
     vi.restoreAllMocks()
   })
 
+  it("restores the original timer globals after unmount", () => {
+    const originalSetTimeout = window.setTimeout
+    const originalClearTimeout = window.clearTimeout
+    const originalSetInterval = window.setInterval
+    const originalClearInterval = window.clearInterval
+
+    const { unmount } = renderHook(() => useMemoryLeakGuard())
+
+    expect(window.setTimeout).not.toBe(originalSetTimeout)
+    expect(window.clearTimeout).not.toBe(originalClearTimeout)
+    expect(window.setInterval).not.toBe(originalSetInterval)
+    expect(window.clearInterval).not.toBe(originalClearInterval)
+
+    unmount()
+
+    expect(window.setTimeout).toBe(originalSetTimeout)
+    expect(window.clearTimeout).toBe(originalClearTimeout)
+    expect(window.setInterval).toBe(originalSetInterval)
+    expect(window.clearInterval).toBe(originalClearInterval)
+  })
+
   it("warns when a tracked ref points to a detached dom node", () => {
     const warnSpy = vi.spyOn(console, "warn").mockImplementation(() => {})
     const setIntervalSpy = vi

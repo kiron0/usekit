@@ -2352,6 +2352,128 @@ export const Index: Record<string, any> = {
     ),
     source: "",
   },
+  "use-wake-lock": {
+    name: "use-wake-lock",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-wake-lock.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(() => import("registry/examples/use-wake-lock-demo")),
+    source: "",
+  },
+  "use-broadcast-channel": {
+    name: "use-broadcast-channel",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-broadcast-channel.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-broadcast-channel-demo")
+    ),
+    source: "",
+  },
+  "use-idle-callback": {
+    name: "use-idle-callback",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-idle-callback.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-idle-callback-demo")
+    ),
+    source: "",
+  },
+  "use-web-lock": {
+    name: "use-web-lock",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-web-lock.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(() => import("registry/examples/use-web-lock-demo")),
+    source: "",
+  },
+  "use-reduced-motion": {
+    name: "use-reduced-motion",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-reduced-motion.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-reduced-motion-demo")
+    ),
+    source: "",
+  },
+  "use-permission": {
+    name: "use-permission",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-permission.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-permission-demo")
+    ),
+    source: "",
+  },
+  "use-wordle-game": {
+    name: "use-wordle-game",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-wordle-game.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-wordle-game-demo")
+    ),
+    source: "",
+  },
+  "use-2048-game": {
+    name: "use-2048-game",
+    type: "registry:hook",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/hooks/use-2048-game.ts",
+        type: "registry:hook",
+        target: "",
+      },
+    ],
+    component: React.lazy(() => import("registry/examples/use-2048-game-demo")),
+    source: "",
+  },
   "use-copy-to-clipboard-demo": {
     name: "use-copy-to-clipboard-demo",
     type: "registry:example",
@@ -4301,6 +4423,134 @@ export const Index: Record<string, any> = {
     ],
     component: React.lazy(
       () => import("registry/examples/use-a11y-announcer-demo.tsx")
+    ),
+    source: "",
+  },
+  "use-wake-lock-demo": {
+    name: "use-wake-lock-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-wake-lock-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-wake-lock-demo.tsx")
+    ),
+    source: "",
+  },
+  "use-broadcast-channel-demo": {
+    name: "use-broadcast-channel-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-broadcast-channel-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-broadcast-channel-demo.tsx")
+    ),
+    source: "",
+  },
+  "use-idle-callback-demo": {
+    name: "use-idle-callback-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-idle-callback-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-idle-callback-demo.tsx")
+    ),
+    source: "",
+  },
+  "use-web-lock-demo": {
+    name: "use-web-lock-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-web-lock-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-web-lock-demo.tsx")
+    ),
+    source: "",
+  },
+  "use-reduced-motion-demo": {
+    name: "use-reduced-motion-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-reduced-motion-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-reduced-motion-demo.tsx")
+    ),
+    source: "",
+  },
+  "use-permission-demo": {
+    name: "use-permission-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-permission-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-permission-demo.tsx")
+    ),
+    source: "",
+  },
+  "use-wordle-game-demo": {
+    name: "use-wordle-game-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-wordle-game-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-wordle-game-demo.tsx")
+    ),
+    source: "",
+  },
+  "use-2048-game-demo": {
+    name: "use-2048-game-demo",
+    type: "registry:example",
+    registryDependencies: undefined,
+    files: [
+      {
+        path: "registry/examples/use-2048-game-demo.tsx",
+        type: "registry:example",
+        target: "",
+      },
+    ],
+    component: React.lazy(
+      () => import("registry/examples/use-2048-game-demo.tsx")
     ),
     source: "",
   },

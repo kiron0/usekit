@@ -52,3 +52,5 @@ next-env.d.ts
 
 # contentlayer
 .contentlayer
+
+enhance.md

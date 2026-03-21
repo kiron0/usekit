@@ -46,4 +46,33 @@ describe("usePageTransition", () => {
 
     expect(result.current.isTransitioning).toBe(false)
   })
+
+  it("keeps remaining instances subscribed after another instance unmounts", async () => {
+    const first = renderHook(() => usePageTransition({ minDuration: 50 }))
+    const patchedPushState = history.pushState
+    const second = renderHook(() => usePageTransition({ minDuration: 50 }))
+
+    expect(history.pushState).toBe(patchedPushState)
+
+    first.unmount()
+
+    act(() => {
+      history.pushState({}, "", "#multi-instance")
+    })
+
+    await act(async () => {
+      await Promise.resolve()
+    })
+
+    expect(second.result.current.isTransitioning).toBe(true)
+
+    await act(async () => {
+      await vi.advanceTimersByTimeAsync(50)
+      await Promise.resolve()
+    })
+
+    expect(second.result.current.isTransitioning).toBe(false)
+
+    second.unmount()
+  })
 })

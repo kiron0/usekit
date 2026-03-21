@@ -102,6 +102,9 @@ type ConsoleMethodName =
   | "clear"
 
 const CAPTURE_FLAG = Symbol.for("useConsoleCapture.interceptor")
+const originalConsoleDescriptors: Partial<
+  Record<ConsoleMethodName, PropertyDescriptor | undefined>
+> = {}
 
 // The latest underlying console methods (can be updated if something overwrites console.*)
 const nativeConsole: Partial<
@@ -123,10 +126,9 @@ const nativeConsole: Partial<
 }
 
 let isIntercepted = false
-
-if (typeof window !== "undefined") {
-  setupConsoleInterception()
-}
+let globalErrorHandler: ((event: ErrorEvent) => void) | null = null
+let globalRejectionHandler: ((event: PromiseRejectionEvent) => void) | null =
+  null
 
 function getComponentInfo(): {
   componentPath?: string
@@ -309,10 +311,8 @@ function createConsoleInterceptor(level: ConsoleMethodName) {
 }
 
 function setupConsoleInterception() {
-  if (typeof window === "undefined") return
+  if (typeof window === "undefined" || isIntercepted) return
 
-  // Idempotent, but also resilient: even if already installed, re-assert our descriptors.
-  // (Some environments re-define console methods during HMR/devtools attach.)
   const methods: ConsoleMethodName[] = [
     "log",
     "info",
@@ -329,24 +329,13 @@ function setupConsoleInterception() {
 
   const installMethod = (method: ConsoleMethodName) => {
     const existingDesc = Object.getOwnPropertyDescriptor(console, method)
+    originalConsoleDescriptors[method] = existingDesc
 
-    // Prefer reading the data-descriptor value directly to avoid triggering our own getter.
     const existingValue =
       existingDesc && "value" in existingDesc
         ? (existingDesc as any).value
-        : undefined
+        : (console[method] as unknown)
 
-    // If already our interceptor via getter/setter, keep it
-    if (existingDesc?.get && existingDesc?.set) {
-      const current = existingDesc.get.call(console)
-      if (current && (current as any)[CAPTURE_FLAG]) {
-        // Still mark as intercepted so lint is satisfied and state stays consistent
-        isIntercepted = true
-        return
-      }
-    }
-
-    // Keep the latest native implementation (only if it is not our interceptor)
     if (
       typeof existingValue === "function" &&
       !(existingValue as any)[CAPTURE_FLAG]
@@ -376,34 +365,73 @@ function setupConsoleInterception() {
   }
 
   methods.forEach(installMethod)
-
-  // Mark interception installed (used by lint + useful signal for callers)
   isIntercepted = true
 
-  // Add global error handlers once
-  if (typeof window !== "undefined") {
-    const w = window as any
-    if (!w.__consoleCaptureErrorHandler) {
-      const errorHandler = (event: ErrorEvent) => {
-        if (anySessionEnabled && enabledLevelsSet.has("error")) {
-          captureLog("error", `Uncaught Error: ${event.message}`, [event.error])
-        }
-      }
-
-      const rejectionHandler = (event: PromiseRejectionEvent) => {
-        if (anySessionEnabled && enabledLevelsSet.has("error")) {
-          captureLog("error", `Unhandled Promise Rejection: ${event.reason}`, [
-            event.reason,
-          ])
-        }
-      }
-
-      window.addEventListener("error", errorHandler)
-      window.addEventListener("unhandledrejection", rejectionHandler)
-      w.__consoleCaptureErrorHandler = errorHandler
-      w.__consoleCaptureRejectionHandler = rejectionHandler
+  globalErrorHandler = (event: ErrorEvent) => {
+    if (anySessionEnabled && enabledLevelsSet.has("error")) {
+      captureLog("error", `Uncaught Error: ${event.message}`, [event.error])
     }
   }
+
+  globalRejectionHandler = (event: PromiseRejectionEvent) => {
+    if (anySessionEnabled && enabledLevelsSet.has("error")) {
+      captureLog("error", `Unhandled Promise Rejection: ${event.reason}`, [
+        event.reason,
+      ])
+    }
+  }
+
+  window.addEventListener("error", globalErrorHandler)
+  window.addEventListener("unhandledrejection", globalRejectionHandler)
+}
+
+function teardownConsoleInterception() {
+  if (typeof window === "undefined" || !isIntercepted) {
+    return
+  }
+
+  const methods: ConsoleMethodName[] = [
+    "log",
+    "info",
+    "warn",
+    "error",
+    "debug",
+    "trace",
+    "table",
+    "group",
+    "groupCollapsed",
+    "groupEnd",
+    "clear",
+  ]
+
+  methods.forEach((method) => {
+    const originalDescriptor = originalConsoleDescriptors[method]
+
+    if (originalDescriptor) {
+      if ("value" in originalDescriptor) {
+        Object.defineProperty(console, method, {
+          ...originalDescriptor,
+          value: nativeConsole[method] ?? originalDescriptor.value,
+        })
+      } else {
+        Object.defineProperty(console, method, originalDescriptor)
+      }
+    } else if (nativeConsole[method]) {
+      ;(console as any)[method] = nativeConsole[method]
+    }
+  })
+
+  if (globalErrorHandler) {
+    window.removeEventListener("error", globalErrorHandler)
+    globalErrorHandler = null
+  }
+
+  if (globalRejectionHandler) {
+    window.removeEventListener("unhandledrejection", globalRejectionHandler)
+    globalRejectionHandler = null
+  }
+
+  isIntercepted = false
 }
 
 export function useConsoleCapture(
@@ -490,6 +518,9 @@ export function useConsoleCapture(
     return () => {
       sessions.delete(id)
       recomputeDerivedSessionState()
+      if (sessions.size === 0) {
+        teardownConsoleInterception()
+      }
     }
   }, [])
 

@@ -1,6 +1,8 @@
 import { act, renderHook } from "@testing-library/react"
 import { afterEach, describe, expect, it, vi } from "vitest"
 
+import { useSocket } from "../../registry/hooks/use-socket"
+
 const { handlers, socketInstance, ioMock } = vi.hoisted(() => {
   const handlers: Record<string, ((...args: any[]) => void) | undefined> = {}
   const socketInstance = {
@@ -24,8 +26,6 @@ const { handlers, socketInstance, ioMock } = vi.hoisted(() => {
 vi.mock("socket.io-client", () => ({
   io: ioMock,
 }))
-
-import { useSocket } from "../../registry/hooks/use-socket"
 
 describe("useSocket", () => {
   afterEach(() => {

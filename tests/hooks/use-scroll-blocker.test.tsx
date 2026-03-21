@@ -61,4 +61,23 @@ describe("useScrollBlocker", () => {
     expect(document.body.style.position).toBe("")
     expect(window.scrollTo).toHaveBeenCalledWith(0, 120)
   })
+
+  it("restores pre-existing body styles after unblocking", () => {
+    document.body.style.overflow = "clip"
+    document.body.style.position = "relative"
+    document.body.style.top = "12px"
+    document.body.style.width = "80%"
+
+    const { result } = renderHook(() => useScrollBlocker())
+
+    act(() => {
+      result.current.block()
+      result.current.unblock()
+    })
+
+    expect(document.body.style.overflow).toBe("clip")
+    expect(document.body.style.position).toBe("relative")
+    expect(document.body.style.top).toBe("12px")
+    expect(document.body.style.width).toBe("80%")
+  })
 })

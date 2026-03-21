@@ -1232,4 +1232,84 @@ export const hooksExamples: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "use-wake-lock-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/use-wake-lock-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-broadcast-channel-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/use-broadcast-channel-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-idle-callback-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/use-idle-callback-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-web-lock-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/use-web-lock-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-reduced-motion-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/use-reduced-motion-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-permission-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/use-permission-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-wordle-game-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/use-wordle-game-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "use-2048-game-demo",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/use-2048-game-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
 ]

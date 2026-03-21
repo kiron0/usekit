@@ -30,11 +30,7 @@ export function useMaskedInput(
   maskPattern: MaskPattern,
   options: UseMaskedInputOptions = {}
 ) {
-  const {
-    placeholderChar = "",
-    onAccept,
-    onComplete,
-  } = options
+  const { placeholderChar = "", onAccept, onComplete } = options
   const tokens = React.useMemo(
     () => normalizePattern(maskPattern),
     [maskPattern]

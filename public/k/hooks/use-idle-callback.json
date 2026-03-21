@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-idle-callback",
+  "type": "registry:hook",
+  "title": "Use Idle Callback",
+  "description": "Schedule low-priority work with requestIdleCallback and explicit start/cancel controls.",
+  "files": [
+    {
+      "path": "registry/hooks/use-idle-callback.ts",
+      "content": "import * as React from \"react\"\n\ninterface IdleDeadlineLike {\n  didTimeout: boolean\n  timeRemaining: () => number\n}\n\ninterface UseIdleCallbackOptions {\n  timeout?: number\n  autoStart?: boolean\n}\n\ninterface UseIdleCallbackResult {\n  isSupported: boolean\n  isPending: boolean\n  didTimeout: boolean\n  start: () => boolean\n  cancel: () => void\n}\n\ntype IdleCallbackHandle = number\n\nfunction isIdleCallbackSupported() {\n  if (typeof window === \"undefined\") return false\n  return (\n    typeof window.requestIdleCallback === \"function\" &&\n    typeof window.cancelIdleCallback === \"function\"\n  )\n}\n\nexport function useIdleCallback(\n  callback: (deadline: IdleDeadlineLike) => void,\n  options: UseIdleCallbackOptions = {}\n): UseIdleCallbackResult {\n  const { timeout, autoStart = true } = options\n  const callbackRef = React.useRef(callback)\n  const handleRef = React.useRef<IdleCallbackHandle | null>(null)\n  const [isPending, setIsPending] = React.useState(false)\n  const [didTimeout, setDidTimeout] = React.useState(false)\n  const isSupported = React.useMemo(() => isIdleCallbackSupported(), [])\n\n  React.useEffect(() => {\n    callbackRef.current = callback\n  }, [callback])\n\n  const cancel = React.useCallback(() => {\n    if (!isSupported) {\n      setIsPending(false)\n      return\n    }\n\n    if (handleRef.current !== null) {\n      window.cancelIdleCallback(handleRef.current)\n      handleRef.current = null\n    }\n\n    setIsPending(false)\n  }, [isSupported])\n\n  const start = React.useCallback(() => {\n    if (!isSupported) return false\n    if (handleRef.current !== null) return true\n\n    setDidTimeout(false)\n    setIsPending(true)\n\n    handleRef.current = window.requestIdleCallback(\n      (deadline) => {\n        handleRef.current = null\n        setIsPending(false)\n        setDidTimeout(deadline.didTimeout)\n        callbackRef.current(deadline)\n      },\n      timeout != null ? { timeout } : undefined\n    )\n\n    return true\n  }, [isSupported, timeout])\n\n  React.useEffect(() => {\n    if (autoStart) {\n      start()\n    }\n\n    return () => {\n      cancel()\n    }\n  }, [autoStart, cancel, start])\n\n  return {\n    isSupported,\n    isPending,\n    didTimeout,\n    start,\n    cancel,\n  }\n}\n",
+      "type": "registry:hook"
+    }
+  ]
+}

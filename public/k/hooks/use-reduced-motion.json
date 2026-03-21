@@ -1,0 +1,14 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-reduced-motion",
+  "type": "registry:hook",
+  "title": "Use Reduced Motion",
+  "description": "Track the user's reduced-motion preference for accessibility-aware UI behavior.",
+  "files": [
+    {
+      "path": "registry/hooks/use-reduced-motion.ts",
+      "content": "import * as React from \"react\"\n\nfunction getReducedMotionPreference() {\n  if (\n    typeof window === \"undefined\" ||\n    typeof window.matchMedia !== \"function\"\n  ) {\n    return false\n  }\n\n  return window.matchMedia(\"(prefers-reduced-motion: reduce)\").matches\n}\n\nexport function useReducedMotion(): boolean {\n  const [prefersReducedMotion, setPrefersReducedMotion] = React.useState(() =>\n    getReducedMotionPreference()\n  )\n\n  React.useEffect(() => {\n    if (\n      typeof window === \"undefined\" ||\n      typeof window.matchMedia !== \"function\"\n    ) {\n      return\n    }\n\n    const mediaQueryList = window.matchMedia(\"(prefers-reduced-motion: reduce)\")\n\n    const handleChange = () => {\n      setPrefersReducedMotion(mediaQueryList.matches)\n    }\n\n    handleChange()\n    mediaQueryList.addEventListener(\"change\", handleChange)\n\n    return () => {\n      mediaQueryList.removeEventListener(\"change\", handleChange)\n    }\n  }, [])\n\n  return prefersReducedMotion\n}\n",
+      "type": "registry:hook"
+    }
+  ]
+}

@@ -13,11 +13,5 @@
     "registry/**/*.ts",
     "registry/**/*.tsx"
   ],
-  "exclude": [
-    "node_modules",
-    ".next",
-    "tests",
-    "public",
-    "__registry__"
-  ]
+  "exclude": ["node_modules", ".next", "tests", "public", "__registry__"]
 }

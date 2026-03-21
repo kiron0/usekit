@@ -62,7 +62,9 @@ function Calendar({
       components={{
         Chevron: ({ className, orientation, ...props }) => {
           if (orientation === "left") {
-            return <ChevronLeft className={cn("size-4", className)} {...props} />
+            return (
+              <ChevronLeft className={cn("size-4", className)} {...props} />
+            )
           }
 
           if (orientation === "right") {
@@ -72,7 +74,9 @@ function Calendar({
           }
 
           if (orientation === "down") {
-            return <ChevronDown className={cn("size-4", className)} {...props} />
+            return (
+              <ChevronDown className={cn("size-4", className)} {...props} />
+            )
           }
 
           return <ChevronUp className={cn("size-4", className)} {...props} />

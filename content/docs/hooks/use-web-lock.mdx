@@ -1,0 +1,99 @@
+---
+title: useWebLock
+description: Coordinate exclusive or shared browser work across tabs with a React wrapper around the Web Locks API.
+---
+
+<ComponentPreview name="use-web-lock-demo" />
+
+## Installation
+
+<CodeTabs>
+  <TabsList>
+    <TabsTrigger value="cli">CLI</TabsTrigger>
+    <TabsTrigger value="manual">Manual</TabsTrigger>
+  </TabsList>
+
+  <TabsContent value="cli">
+
+```bash
+npx uselab@latest add use-web-lock
+```
+
+  </TabsContent>
+
+  <TabsContent value="manual">
+    <Steps>
+      <Step>Copy and paste the following code into your project.</Step>
+      <ComponentSource name="use-web-lock" />
+      <Step>Update the import paths to match your project.</Step>
+    </Steps>
+  </TabsContent>
+</CodeTabs>
+
+## Usage
+
+```tsx {1, 4}
+import { useWebLock } from "@/hooks/use-web-lock"
+
+export function SyncOwner() {
+  const { isLocked, acquire, release } = useWebLock("background-sync")
+
+  return (
+    <div className="space-y-2">
+      <button onClick={() => void acquire()} disabled={isLocked}>
+        Become sync owner
+      </button>
+      <button onClick={release} disabled={!isLocked}>
+        Release ownership
+      </button>
+    </div>
+  )
+}
+```
+
+## API Reference
+
+### `useWebLock(name, options?)`
+
+#### Parameters
+
+| Name      | Type                | Description                                                    | Optional |
+| --------- | ------------------- | -------------------------------------------------------------- | -------- |
+| `name`    | `string`            | Lock name shared by every tab competing for the same resource. | No       |
+| `options` | `UseWebLockOptions` | Lock acquisition behavior and lifecycle callbacks.             | Yes      |
+
+#### Return value
+
+The hook returns an object `{ isSupported, isLocked, error, acquire, release }`:
+
+| Name          | Type                     | Description                                                        |
+| ------------- | ------------------------ | ------------------------------------------------------------------ |
+| `isSupported` | `boolean`                | Whether the Web Locks API exists in the current browser.           |
+| `isLocked`    | `boolean`                | Whether this hook instance currently holds the lock.               |
+| `error`       | `Error \| null`          | Last lock acquisition error.                                       |
+| `acquire`     | `() => Promise<boolean>` | Attempts to acquire the lock and resolves to `true` when acquired. |
+| `release`     | `() => void`             | Releases the currently held lock.                                  |
+
+### Options
+
+```ts
+interface UseWebLockOptions {
+  mode?: "exclusive" | "shared"
+  ifAvailable?: boolean
+  steal?: boolean
+  onAcquire?: (lock: { name: string; mode: "exclusive" | "shared" }) => void
+  onRelease?: () => void
+}
+```
+
+- `mode`: Lock mode to request. Defaults to `"exclusive"`.
+- `ifAvailable`: Return immediately when the lock is not available instead of waiting.
+- `steal`: Request the lock aggressively when supported by the browser.
+- `onAcquire`: Runs when the lock is granted.
+- `onRelease`: Runs when the lock is released.
+
+## Notes
+
+- This hook is a strong fit for cross-tab leader election, single-writer background sync, and mutation coordination.
+- Lock support is not universal, so high-value workflows should still have a fallback strategy.
+- Use stable lock names that map cleanly to the shared resource you are protecting.

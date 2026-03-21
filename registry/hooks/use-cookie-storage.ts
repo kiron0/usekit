@@ -85,24 +85,31 @@ export function useCookieStorage<T>(
     const cookieValue = getCookie<T>(key)
     return cookieValue !== null ? cookieValue : initialValueRef.current
   })
+  const storedValueRef = React.useRef(storedValue)
 
   const updateCookie = React.useCallback(
     (value: T | ((prev: T) => T), overrideOptions?: CookieOptions) => {
       const mergedOptions = { ...options, ...overrideOptions }
       const newValue =
         typeof value === "function"
-          ? (value as (prev: T) => T)(storedValue)
+          ? (value as (prev: T) => T)(storedValueRef.current)
           : value
+      storedValueRef.current = newValue
       setCookie(key, newValue, mergedOptions)
       setStoredValue(newValue)
     },
-    [key, options, storedValue]
+    [key, options]
   )
 
   const removeCookie = React.useCallback(() => {
     setCookie(key, "", { ...options, expires: new Date(0) })
+    storedValueRef.current = initialValueRef.current
     setStoredValue(initialValueRef.current)
   }, [key, options])
+
+  React.useEffect(() => {
+    storedValueRef.current = storedValue
+  }, [storedValue])
 
   return [storedValue, updateCookie, removeCookie]
 }

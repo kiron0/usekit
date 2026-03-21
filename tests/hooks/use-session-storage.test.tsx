@@ -35,4 +35,16 @@ describe("useSessionStorage", () => {
 
     expect(result.current[0]).toBe("shared")
   })
+
+  it("applies back-to-back functional updates against the latest state", () => {
+    const { result } = renderHook(() => useSessionStorage("draft", "a"))
+
+    act(() => {
+      result.current[1]((prev) => `${prev}b`)
+      result.current[1]((prev) => `${prev}c`)
+    })
+
+    expect(result.current[0]).toBe("abc")
+    expect(window.sessionStorage.getItem("draft")).toBe(JSON.stringify("abc"))
+  })
 })
