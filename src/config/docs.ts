@@ -912,6 +912,18 @@ export const docsConfig: DocsConfig = {
           href: "/docs/hooks/use-rock-paper-scissors",
           items: [],
         },
+        {
+          title: "useWordleGame",
+          href: "/docs/hooks/use-wordle-game",
+          items: [],
+          label: "New",
+        },
+        {
+          title: "use2048Game",
+          href: "/docs/hooks/use-2048-game",
+          items: [],
+          label: "New",
+        },
       ],
     },
   ],

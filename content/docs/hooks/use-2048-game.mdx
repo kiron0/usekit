@@ -1,0 +1,70 @@
+---
+title: "use2048Game"
+description: "Manage a 2048-style grid with deterministic merges, score tracking, win detection, and reset behavior."
+---
+
+<ComponentPreview name="use-2048-game-demo" />
+
+## Installation
+
+<CodeTabs>
+  <TabsList>
+    <TabsTrigger value="cli">CLI</TabsTrigger>
+    <TabsTrigger value="manual">Manual</TabsTrigger>
+  </TabsList>
+
+  <TabsContent value="cli">
+
+```bash
+npx uselab@latest add use-2048-game
+```
+
+  </TabsContent>
+
+  <TabsContent value="manual">
+    <Steps>
+      <Step>Copy and paste the following code into your project.</Step>
+      <ComponentSource name="use-2048-game" />
+      <Step>Update the import paths to match your project.</Step>
+    </Steps>
+  </TabsContent>
+</CodeTabs>
+
+## Usage
+
+```tsx {1, 4}
+import { use2048Game } from "@/hooks/use-2048-game"
+
+export function PuzzleBoard() {
+  const { board, score, move } = use2048Game()
+
+  return (
+    <div>
+      <button onClick={() => move("left")}>Left</button>
+      <pre>{JSON.stringify({ board, score }, null, 2)}</pre>
+    </div>
+  )
+}
+```
+
+## API Reference
+
+### `use2048Game(options?)`
+
+The hook returns the board, score, movement helpers, and game-end state for 2048-style puzzle UIs.
+
+Useful return values:
+
+| Name        | Type                                                          | Description                                             |
+| ----------- | ------------------------------------------------------------- | ------------------------------------------------------- |
+| `board`     | `number[][]`                                                  | Current puzzle grid.                                    |
+| `score`     | `number`                                                      | Total merged score.                                     |
+| `bestTile`  | `number`                                                      | Highest tile currently on the board.                    |
+| `move`      | `(direction: "up" \| "down" \| "left" \| "right") => boolean` | Applies one move and returns whether the board changed. |
+| `resetGame` | `() => void`                                                  | Starts a new round.                                     |
+
+## Notes
+
+- This hook keeps the merge math out of the component, which is the messy part of 2048 implementations.
+- You can inject a deterministic board or random function for testing and replay systems.
+- It works well for swipe UIs, keyboard controls, and competitive score modes.
