@@ -16,7 +16,7 @@ export default function UseSwipeDemo() {
   return (
     <div
       {...handlers}
-      className="mx-auto flex aspect-video h-64 cursor-grab select-none items-center justify-center rounded-xl border text-lg"
+      className="mx-auto flex w-full h-96 cursor-grab select-none items-center justify-center rounded-xl border text-lg"
     >
       Swipe or Drag me 👆
     </div>
