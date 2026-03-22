@@ -2444,36 +2444,6 @@ export const Index: Record<string, any> = {
     ),
     source: "",
   },
-  "use-wordle-game": {
-    name: "use-wordle-game",
-    type: "registry:hook",
-    registryDependencies: undefined,
-    files: [
-      {
-        path: "registry/hooks/use-wordle-game.ts",
-        type: "registry:hook",
-        target: "",
-      },
-    ],
-    component: React.lazy(
-      () => import("registry/examples/use-wordle-game-demo")
-    ),
-    source: "",
-  },
-  "use-2048-game": {
-    name: "use-2048-game",
-    type: "registry:hook",
-    registryDependencies: undefined,
-    files: [
-      {
-        path: "registry/hooks/use-2048-game.ts",
-        type: "registry:hook",
-        target: "",
-      },
-    ],
-    component: React.lazy(() => import("registry/examples/use-2048-game-demo")),
-    source: "",
-  },
   "use-copy-to-clipboard-demo": {
     name: "use-copy-to-clipboard-demo",
     type: "registry:example",
@@ -4519,38 +4489,6 @@ export const Index: Record<string, any> = {
     ],
     component: React.lazy(
       () => import("registry/examples/use-permission-demo.tsx")
-    ),
-    source: "",
-  },
-  "use-wordle-game-demo": {
-    name: "use-wordle-game-demo",
-    type: "registry:example",
-    registryDependencies: undefined,
-    files: [
-      {
-        path: "registry/examples/use-wordle-game-demo.tsx",
-        type: "registry:example",
-        target: "",
-      },
-    ],
-    component: React.lazy(
-      () => import("registry/examples/use-wordle-game-demo.tsx")
-    ),
-    source: "",
-  },
-  "use-2048-game-demo": {
-    name: "use-2048-game-demo",
-    type: "registry:example",
-    registryDependencies: undefined,
-    files: [
-      {
-        path: "registry/examples/use-2048-game-demo.tsx",
-        type: "registry:example",
-        target: "",
-      },
-    ],
-    component: React.lazy(
-      () => import("registry/examples/use-2048-game-demo.tsx")
     ),
     source: "",
   },

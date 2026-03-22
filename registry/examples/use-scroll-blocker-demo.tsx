@@ -1,8 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { Lock, Unlock, X } from "lucide-react"
-import { createPortal } from "react-dom"
+import { Lock, Unlock } from "lucide-react"
 
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -13,27 +12,24 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
+import { DialogHelper } from "@/components/dialog-helper"
 import { useScrollBlocker } from "registry/hooks/use-scroll-blocker"
 
 export default function UseScrollBlockerDemo() {
   const [isOpen, setIsOpen] = React.useState(false)
-  const { block, unblock } = useScrollBlocker()
+  const { isBlocked, block, unblock, toggle } = useScrollBlocker()
 
-  const handleOpen = () => {
-    setIsOpen(true)
-    block()
-  }
-
-  const handleClose = () => {
-    setIsOpen(false)
-    unblock()
-  }
-
-  React.useEffect(() => {
-    if (!isOpen) {
-      unblock()
-    }
-  }, [isOpen, unblock])
+  const handleOpenChange = React.useCallback(
+    (next: boolean) => {
+      setIsOpen(next)
+      if (next) {
+        block()
+      } else {
+        unblock()
+      }
+    },
+    [block, unblock]
+  )
 
   return (
     <div className="w-full space-y-6">
@@ -47,8 +43,8 @@ export default function UseScrollBlockerDemo() {
             </CardDescription>
           </div>
           <div>
-            <Badge variant={isOpen ? "destructive" : "secondary"}>
-              {isOpen ? (
+            <Badge variant={isBlocked ? "destructive" : "secondary"}>
+              {isBlocked ? (
                 <>
                   <Lock className="mr-1 h-3 w-3" />
                   Blocked
@@ -64,61 +60,45 @@ export default function UseScrollBlockerDemo() {
         </CardHeader>
         <CardContent className="space-y-6 p-0">
           <div className="space-y-4">
-            <Button onClick={handleOpen}>Open Modal</Button>
+            <DialogHelper
+              modal={false}
+              open={isOpen}
+              setOpen={handleOpenChange}
+              trigger={<Button>Open Modal</Button>}
+              title="Modal with scroll blocking"
+              description={
+                <>
+                  Background scroll is handled by{" "}
+                  <code className="rounded bg-muted px-1">
+                    useScrollBlocker
+                  </code>{" "}
+                  (Radix <code className="rounded bg-muted px-1">modal</code> is
+                  off so it does not fight the hook). Try scrolling the page
+                  behind this dialog.
+                </>
+              }
+            >
+              <p className="text-sm text-muted-foreground">
+                Use <strong>Toggle scroll</strong> to temporarily allow
+                background scrolling while the dialog stays open.
+              </p>
+              <div className="mt-4 flex flex-wrap gap-2">
+                <Button
+                  variant="outline"
+                  onClick={() => handleOpenChange(false)}
+                >
+                  Close
+                </Button>
+                <Button onClick={() => toggle()}>
+                    {isBlocked ? "Unblock scroll" : "Block scroll"}
+                </Button>
+              </div>
+            </DialogHelper>
             <p className="text-sm text-muted-foreground">
               Click the button above to open a modal. Notice how the background
-              page cannot be scrolled while the modal is open.
+              page cannot be scrolled while scroll blocking is active.
             </p>
           </div>
-
-          {isOpen &&
-            typeof document !== "undefined" &&
-            createPortal(
-              <div
-                className="fixed inset-0 z-[48] bg-black/40 backdrop-blur-sm md:z-[998]"
-                onClick={handleClose}
-              >
-                <div
-                  className="fixed left-1/2 top-1/2 z-[49] grid h-80 w-[95%] max-w-lg -translate-x-1/2 -translate-y-1/2 rounded-xl border bg-background p-6 text-muted-foreground shadow-md md:z-[999] md:w-full"
-                  onClick={(e: React.MouseEvent) => e.stopPropagation()}
-                >
-                  <div className="relative flex h-full flex-col">
-                    <button
-                      onClick={handleClose}
-                      className="absolute right-2 top-2 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
-                      aria-label="Close modal"
-                    >
-                      <X size={18} />
-                    </button>
-                    <div className="flex flex-1 flex-col gap-4">
-                      <h3 className="text-lg font-semibold">
-                        Modal with Scroll Blocking
-                      </h3>
-                      <p className="text-sm">
-                        This modal blocks background scrolling. Try scrolling
-                        the page behind this modal — it won&apos;t work!
-                      </p>
-                      <div className="mt-auto flex gap-2">
-                        <Button variant="outline" onClick={handleClose}>
-                          Close
-                        </Button>
-                        <Button
-                          onClick={() => {
-                            unblock()
-                            setTimeout(() => {
-                              block()
-                            }, 100)
-                          }}
-                        >
-                          Toggle Scroll
-                        </Button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>,
-              document.body
-            )}
 
           <div className="rounded-xl border border-dashed border-muted-foreground/40 p-4">
             <h4 className="mb-2 text-sm font-semibold">How it works</h4>
