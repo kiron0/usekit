@@ -14,7 +14,7 @@
         },
         "js": {
           "path": "registry/hooks/use-click-away.js",
-          "content": "import * as React from \"react\"\nexport function useClickAway(callback) {\n  const ref = React.useRef(null)\n  const callbackRef = React.useRef(callback)\n  React.useEffect(() => {\n    callbackRef.current = callback\n  })\n  React.useEffect(() => {\n    const handleClickOutside = (event) => {\n      const element = ref.current\n      if (element && !element.contains(event.target)) {\n        callbackRef.current(event)\n      }\n    }\n    document.addEventListener(\"mousedown\", handleClickOutside)\n    document.addEventListener(\"touchstart\", handleClickOutside)\n    return () => {\n      document.removeEventListener(\"mousedown\", handleClickOutside)\n      document.removeEventListener(\"touchstart\", handleClickOutside)\n    }\n  }, [])\n  return ref\n}\n"
+          "content": "import * as React from \"react\"\n\nexport function useClickAway(\ncallback)\n{\n  const ref = React.useRef(null)\n  const callbackRef = React.useRef(callback)\n\n  React.useEffect(() => {\n    callbackRef.current = callback\n  })\n\n  React.useEffect(() => {\n    const handleClickOutside = (event) => {\n      const element = ref.current\n      if (element && !element.contains(event.target)) {\n        callbackRef.current(event)\n      }\n    }\n\n    document.addEventListener(\"mousedown\", handleClickOutside)\n    document.addEventListener(\"touchstart\", handleClickOutside)\n\n    return () => {\n      document.removeEventListener(\"mousedown\", handleClickOutside)\n      document.removeEventListener(\"touchstart\", handleClickOutside)\n    }\n  }, [])\n\n  return ref\n}\n"
         }
       }
     }

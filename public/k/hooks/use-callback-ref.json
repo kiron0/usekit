@@ -14,7 +14,7 @@
         },
         "js": {
           "path": "registry/hooks/use-callback-ref.js",
-          "content": "import * as React from \"react\"\nexport function useCallbackRef(callback) {\n  const callbackRef = React.useRef(callback)\n  React.useEffect(() => {\n    callbackRef.current = callback\n  })\n  return React.useMemo(\n    () =>\n      (...args) =>\n        callbackRef.current?.(...args),\n    [],\n  )\n}\n"
+          "content": "import * as React from \"react\"\n\nexport function useCallbackRef(\ncallback)\n{\n  const callbackRef = React.useRef(callback)\n\n  React.useEffect(() => {\n    callbackRef.current = callback\n  })\n\n  return React.useMemo(\n    () => (...args) => callbackRef.current?.(...args),\n    []\n  )\n}\n"
         }
       }
     }

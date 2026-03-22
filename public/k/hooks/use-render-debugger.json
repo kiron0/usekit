@@ -14,7 +14,7 @@
         },
         "js": {
           "path": "registry/hooks/use-render-debugger.js",
-          "content": "import * as React from \"react\"\nexport function useRenderDebugger(componentName, props, options) {\n  const previousProps = React.useRef(props)\n  React.useEffect(() => {\n    const { trackOnly, logger = console.log } = options || {}\n    const changedProps = Object.entries(props).reduce((acc, [key, value]) => {\n      if (trackOnly && !trackOnly.includes(key)) return acc\n      if (previousProps.current[key] !== value) {\n        acc[key] = { from: previousProps.current[key], to: value }\n      }\n      return acc\n    }, {})\n    if (Object.keys(changedProps).length > 0) {\n      logger(\n        `[RenderDebugger] ${componentName} re-rendered due to:`,\n        changedProps,\n      )\n    }\n    previousProps.current = props\n  }, [componentName, props, options])\n}\n"
+          "content": "import * as React from \"react\"\n\nexport function useRenderDebugger(\ncomponentName,\nprops,\noptions)\n\n{\n  const previousProps = React.useRef(props)\n\n  React.useEffect(() => {\n    const { trackOnly, logger = console.log } = options || {}\n\n    const changedProps = Object.entries(props).reduce(\n\n      (acc, [key, value]) => {\n        if (trackOnly && !trackOnly.includes(key)) return acc\n        if (previousProps.current[key] !== value) {\n          acc[key] = { from: previousProps.current[key], to: value }\n        }\n        return acc\n      }, {})\n\n    if (Object.keys(changedProps).length > 0) {\n      logger(\n        `[RenderDebugger] ${componentName} re-rendered due to:`,\n        changedProps\n      )\n    }\n\n    previousProps.current = props\n  }, [componentName, props, options])\n}\n"
         }
       }
     }

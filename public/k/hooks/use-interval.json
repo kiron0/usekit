@@ -14,7 +14,7 @@
         },
         "js": {
           "path": "registry/hooks/use-interval.js",
-          "content": "import * as React from \"react\"\nexport function useInterval(callback, delay) {\n  const savedCallback = React.useRef(callback)\n  React.useEffect(() => {\n    savedCallback.current = callback\n  }, [callback])\n  React.useEffect(() => {\n    if (delay === null || typeof delay !== \"number\") return\n    const tick = () => savedCallback.current()\n    const id = setInterval(tick, delay)\n    return () => clearInterval(id)\n  }, [delay])\n}\n"
+          "content": "import * as React from \"react\"\n\nexport function useInterval(callback, delay) {\n  const savedCallback = React.useRef(callback)\n\n  React.useEffect(() => {\n    savedCallback.current = callback\n  }, [callback])\n\n  React.useEffect(() => {\n    if (delay === null || typeof delay !== \"number\") return\n\n    const tick = () => savedCallback.current()\n\n    const id = setInterval(tick, delay)\n\n    return () => clearInterval(id)\n  }, [delay])\n}\n"
         }
       }
     }

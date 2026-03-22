@@ -14,7 +14,7 @@
         },
         "js": {
           "path": "registry/hooks/use-intersection-observer.js",
-          "content": "import * as React from \"react\"\nexport function useIntersectionObserver(\n  elementRef,\n  { threshold = 0, root = null, rootMargin = \"0%\" } = {},\n) {\n  const [entry, setEntry] = React.useState()\n  const updateEntry = ([entry]) => {\n    setEntry(entry)\n  }\n  React.useEffect(() => {\n    const node = elementRef.current\n    const isSupported = !!window.IntersectionObserver\n    if (!node || !isSupported) return\n    const observer = new IntersectionObserver(updateEntry, {\n      threshold,\n      root,\n      rootMargin,\n    })\n    observer.observe(node)\n    return () => observer.disconnect()\n  }, [elementRef, threshold, root, rootMargin])\n  return entry\n}\n"
+          "content": "import * as React from \"react\"\n\nexport function useIntersectionObserver(\nelementRef,\n{ threshold = 0, root = null, rootMargin = \"0%\" } = {})\n{\n  const [entry, setEntry] = React.useState()\n\n  const updateEntry = ([entry]) => {\n    setEntry(entry)\n  }\n\n  React.useEffect(() => {\n    const node = elementRef.current\n    const isSupported = !!window.IntersectionObserver\n\n    if (!node || !isSupported) return\n\n    const observer = new IntersectionObserver(updateEntry, {\n      threshold,\n      root,\n      rootMargin\n    })\n\n    observer.observe(node)\n\n    return () => observer.disconnect()\n  }, [elementRef, threshold, root, rootMargin])\n\n  return entry\n}\n"
         }
       }
     }

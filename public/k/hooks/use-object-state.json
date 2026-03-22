@@ -14,7 +14,7 @@
         },
         "js": {
           "path": "registry/hooks/use-object-state.js",
-          "content": "import * as React from \"react\"\nfunction isPlainObject(obj) {\n  return typeof obj === \"object\" && obj !== null && obj.constructor === Object\n}\nexport function useObjectState(initialValue) {\n  const [state, setState] = React.useState(initialValue)\n  const handleUpdate = React.useCallback((arg) => {\n    if (typeof arg === \"function\") {\n      setState((prev) => {\n        const update = arg(prev)\n        return isPlainObject(update) ? { ...prev, ...update } : prev\n      })\n    } else {\n      setState((prev) => ({ ...prev, ...arg }))\n    }\n  }, [])\n  return [state, handleUpdate]\n}\n"
+          "content": "import * as React from \"react\"\n\nfunction isPlainObject(obj) {\n  return typeof obj === \"object\" && obj !== null && obj.constructor === Object\n}\n\nexport function useObjectState(\ninitialValue)\n{\n  const [state, setState] = React.useState(initialValue)\n\n  const handleUpdate = React.useCallback(\n    (arg) => {\n      if (typeof arg === \"function\") {\n        setState((prev) => {\n          const update = arg(prev)\n          return isPlainObject(update) ? { ...prev, ...update } : prev\n        })\n      } else {\n        setState((prev) => ({ ...prev, ...arg }))\n      }\n    },\n    []\n  )\n\n  return [state, handleUpdate]\n}\n"
         }
       }
     }

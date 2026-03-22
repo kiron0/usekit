@@ -14,7 +14,7 @@
         },
         "js": {
           "path": "registry/hooks/use-in-view.js",
-          "content": "import * as React from \"react\"\nexport default function useInView(\n  ref,\n  { threshold = 0, rootMargin = \"0px\" } = {},\n) {\n  const [isInView, setIsInView] = React.useState(false)\n  React.useEffect(() => {\n    if (!ref.current) return\n    const currentElement = ref.current\n    const observer = new IntersectionObserver(\n      ([entry]) => setIsInView(entry.isIntersecting),\n      { threshold, rootMargin },\n    )\n    observer.observe(currentElement)\n    return () => observer.unobserve(currentElement)\n  }, [ref, threshold, rootMargin])\n  return isInView\n}\n"
+          "content": "import * as React from \"react\"\n\nexport default function useInView(\nref,\n{ threshold = 0, rootMargin = \"0px\" } = {})\n{\n  const [isInView, setIsInView] = React.useState(false)\n\n  React.useEffect(() => {\n    if (!ref.current) return\n\n    const currentElement = ref.current\n\n    const observer = new IntersectionObserver(\n      ([entry]) => setIsInView(entry.isIntersecting),\n      { threshold, rootMargin }\n    )\n\n    observer.observe(currentElement)\n    return () => observer.unobserve(currentElement)\n  }, [ref, threshold, rootMargin])\n\n  return isInView\n}\n"
         }
       }
     }

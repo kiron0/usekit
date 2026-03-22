@@ -14,7 +14,7 @@
         },
         "js": {
           "path": "registry/hooks/use-online-status.js",
-          "content": "import * as React from \"react\"\nexport function useOnlineStatus() {\n  const [isOnline, setIsOnline] = React.useState(() =>\n    typeof navigator !== \"undefined\" && typeof navigator.onLine === \"boolean\"\n      ? navigator.onLine\n      : true,\n  )\n  React.useEffect(() => {\n    const handleOnline = () => setIsOnline(true)\n    const handleOffline = () => setIsOnline(false)\n    window.addEventListener(\"online\", handleOnline)\n    window.addEventListener(\"offline\", handleOffline)\n    return () => {\n      window.removeEventListener(\"online\", handleOnline)\n      window.removeEventListener(\"offline\", handleOffline)\n    }\n  }, [])\n  return isOnline\n}\n"
+          "content": "import * as React from \"react\"\n\nexport function useOnlineStatus() {\n  const [isOnline, setIsOnline] = React.useState(() =>\n  typeof navigator !== \"undefined\" && typeof navigator.onLine === \"boolean\" ?\n  navigator.onLine :\n  true\n  )\n\n  React.useEffect(() => {\n    const handleOnline = () => setIsOnline(true)\n    const handleOffline = () => setIsOnline(false)\n\n    window.addEventListener(\"online\", handleOnline)\n    window.addEventListener(\"offline\", handleOffline)\n    return () => {\n      window.removeEventListener(\"online\", handleOnline)\n      window.removeEventListener(\"offline\", handleOffline)\n    }\n  }, [])\n\n  return isOnline\n}\n"
         }
       }
     }

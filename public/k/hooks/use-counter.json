@@ -14,7 +14,7 @@
         },
         "js": {
           "path": "registry/hooks/use-counter.js",
-          "content": "import * as React from \"react\"\nexport function useCounter(initialValue) {\n  const [count, setCount] = React.useState(initialValue ?? 0)\n  const increment = React.useCallback(() => {\n    setCount((x) => x + 1)\n  }, [])\n  const decrement = React.useCallback(() => {\n    setCount((x) => x - 1)\n  }, [])\n  const reset = React.useCallback(() => {\n    setCount(initialValue ?? 0)\n  }, [initialValue])\n  return {\n    count,\n    increment,\n    decrement,\n    reset,\n    setCount,\n  }\n}\n"
+          "content": "import * as React from \"react\"\n\nexport function useCounter(initialValue) {\n  const [count, setCount] = React.useState(initialValue ?? 0)\n\n  const increment = React.useCallback(() => {\n    setCount((x) => x + 1)\n  }, [])\n\n  const decrement = React.useCallback(() => {\n    setCount((x) => x - 1)\n  }, [])\n\n  const reset = React.useCallback(() => {\n    setCount(initialValue ?? 0)\n  }, [initialValue])\n\n  return {\n    count,\n    increment,\n    decrement,\n    reset,\n    setCount\n  }\n}\n"
         }
       }
     }

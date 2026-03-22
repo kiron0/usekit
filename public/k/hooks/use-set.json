@@ -14,7 +14,7 @@
         },
         "js": {
           "path": "registry/hooks/use-set.js",
-          "content": "import * as React from \"react\"\nexport function useSet(values) {\n  const setRef = React.useRef(new Set(values))\n  const [, reRender] = React.useReducer((x) => x + 1, 0)\n  setRef.current.add = (...args) => {\n    const res = Set.prototype.add.apply(setRef.current, args)\n    reRender()\n    return res\n  }\n  setRef.current.clear = (...args) => {\n    Set.prototype.clear.apply(setRef.current, args)\n    reRender()\n  }\n  setRef.current.delete = (...args) => {\n    const res = Set.prototype.delete.apply(setRef.current, args)\n    reRender()\n    return res\n  }\n  return setRef.current\n}\n"
+          "content": "import * as React from \"react\"\n\nexport function useSet(values) {\n  const setRef = React.useRef(new Set(values))\n  const [, reRender] = React.useReducer((x) => x + 1, 0)\n\n  setRef.current.add = (...args) => {\n    const res = Set.prototype.add.apply(setRef.current, args)\n    reRender()\n    return res\n  }\n\n  setRef.current.clear = (...args) => {\n    Set.prototype.clear.apply(setRef.current, args)\n    reRender()\n  }\n\n  setRef.current.delete = (...args) => {\n    const res = Set.prototype.delete.apply(setRef.current, args)\n    reRender()\n    return res\n  }\n\n  return setRef.current\n}\n"
         }
       }
     }

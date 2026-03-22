@@ -14,7 +14,7 @@
         },
         "js": {
           "path": "registry/hooks/use-previous.js",
-          "content": "import * as React from \"react\"\nexport function usePrevious(newValue, initialPreviousValue) {\n  const previousRef = React.useRef(initialPreviousValue ?? null)\n  React.useEffect(() => {\n    previousRef.current = newValue\n  }, [newValue])\n  return previousRef.current\n}\n"
+          "content": "import * as React from \"react\"\n\nexport function usePrevious(\nnewValue,\ninitialPreviousValue)\n{\n  const previousRef = React.useRef(\n    initialPreviousValue ?? null\n  )\n\n  React.useEffect(() => {\n    previousRef.current = newValue\n  }, [newValue])\n\n  return previousRef.current\n}\n"
         }
       }
     }

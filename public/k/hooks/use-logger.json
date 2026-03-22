@@ -14,7 +14,7 @@
         },
         "js": {
           "path": "registry/hooks/use-logger.js",
-          "content": "import * as React from \"react\"\nexport function useLogger(name, ...rest) {\n  const currentRestRef = React.useRef(rest)\n  currentRestRef.current = rest\n  React.useEffect(() => {\n    console.log(`${name} mounted`, ...currentRestRef.current)\n    return () => {\n      console.log(`${name} unmounted`, ...currentRestRef.current)\n    }\n  }, [name])\n  React.useEffect(() => {\n    console.log(`${name} updated`, ...rest)\n  }, [name, rest])\n}\n"
+          "content": "import * as React from \"react\"\n\nexport function useLogger(name, ...rest) {\n  const currentRestRef = React.useRef(rest)\n  currentRestRef.current = rest\n\n  React.useEffect(() => {\n    console.log(`${name} mounted`, ...currentRestRef.current)\n    return () => {\n      console.log(`${name} unmounted`, ...currentRestRef.current)\n    }\n  }, [name])\n\n  React.useEffect(() => {\n    console.log(`${name} updated`, ...rest)\n  }, [name, rest])\n}\n"
         }
       }
     }

@@ -14,7 +14,7 @@
         },
         "js": {
           "path": "registry/hooks/use-default.js",
-          "content": "import * as React from \"react\"\nexport function useDefault(initialState, defaultState) {\n  const [state, setState] = React.useState(initialState)\n  const setDefaultState = (newState) => {\n    if (newState === null || newState === undefined) {\n      setState(defaultState)\n    } else {\n      setState(newState)\n    }\n  }\n  return [state, setDefaultState]\n}\n"
+          "content": "import * as React from \"react\"\n\nexport function useDefault(initialState, defaultState) {\n  const [state, setState] = React.useState(initialState)\n\n  const setDefaultState = (newState) => {\n    if (newState === null || newState === undefined) {\n      setState(defaultState)\n    } else {\n      setState(newState)\n    }\n  }\n\n  return [state, setDefaultState]\n}\n"
         }
       }
     }

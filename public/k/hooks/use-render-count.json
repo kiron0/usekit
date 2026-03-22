@@ -14,7 +14,7 @@
         },
         "js": {
           "path": "registry/hooks/use-render-count.js",
-          "content": "import * as React from \"react\"\nexport function useRenderCount() {\n  const count = React.useRef(0)\n  count.current++\n  return count.current\n}\n"
+          "content": "import * as React from \"react\"\n\nexport function useRenderCount() {\n  const count = React.useRef(0)\n  count.current++\n  return count.current\n}\n"
         }
       }
     }

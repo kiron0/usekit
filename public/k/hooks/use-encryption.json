@@ -16,7 +16,7 @@
         },
         "js": {
           "path": "registry/hooks/use-encryption.js",
-          "content": "import CryptoJS from \"crypto-js\"\nconst encrypt = (data, secret) => {\n  try {\n    return CryptoJS.AES.encrypt(JSON.stringify(data), secret).toString()\n  } catch (err) {\n    console.error(err)\n    return false\n  }\n}\nconst decrypt = (cipherText, secret) => {\n  try {\n    const bytes = CryptoJS.AES.decrypt(cipherText, secret)\n    return JSON.parse(bytes.toString(CryptoJS.enc.Utf8))\n  } catch (err) {\n    console.error(err)\n    return false\n  }\n}\nexport const useEncryption = () => ({ encrypt, decrypt })\n"
+          "content": "import CryptoJS from \"crypto-js\"\n\nconst encrypt = (data, secret) => {\n  try {\n    return CryptoJS.AES.encrypt(JSON.stringify(data), secret).toString()\n  } catch (err) {\n    console.error(err)\n    return false\n  }\n}\n\nconst decrypt = (cipherText, secret) => {\n  try {\n    const bytes = CryptoJS.AES.decrypt(cipherText, secret)\n    return JSON.parse(bytes.toString(CryptoJS.enc.Utf8))\n  } catch (err) {\n    console.error(err)\n    return false\n  }\n}\n\nexport const useEncryption = () => ({ encrypt, decrypt });\n"
         }
       }
     }

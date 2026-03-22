@@ -14,7 +14,7 @@
         },
         "js": {
           "path": "registry/hooks/use-anchor-scroll.js",
-          "content": "import * as React from \"react\"\nexport function useAnchorScroll() {\n  const scrollToId = React.useCallback((id) => {\n    if (typeof window === \"undefined\") return\n    const element = document.getElementById(id)\n    if (!element) return\n    element.scrollIntoView({\n      behavior: \"smooth\",\n      block: \"start\",\n    })\n  }, [])\n  return { scrollToId }\n}\n"
+          "content": "import * as React from \"react\"\n\nexport function useAnchorScroll() {\n  const scrollToId = React.useCallback((id) => {\n    if (typeof window === \"undefined\") return\n\n    const element = document.getElementById(id)\n    if (!element) return\n\n    element.scrollIntoView({\n      behavior: \"smooth\",\n      block: \"start\"\n    })\n  }, [])\n\n  return { scrollToId }\n}\n"
         }
       }
     }
