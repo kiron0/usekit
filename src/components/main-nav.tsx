@@ -4,12 +4,16 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { useTheme } from "next-themes"
 
+import { docsConfig } from "@/config/docs"
 import { siteConfig } from "@/config/site"
 import { cn } from "@/lib/utils"
 
 export function MainNav() {
   const { theme } = useTheme()
   const pathname = usePathname()
+  const navItems = docsConfig.mainNav.filter(
+    (item) => item.href && item.href !== "/"
+  )
 
   return (
     <div className="mr-4 hidden md:flex">
@@ -28,15 +32,28 @@ export function MainNav() {
         </span>
       </Link>
       <nav className="flex items-center gap-4 text-sm xl:gap-6">
-        <Link
-          href="/docs"
-          className={cn(
-            "transition-colors hover:text-foreground/80",
-            pathname === "/docs" ? "text-foreground" : "text-foreground/80"
-          )}
-        >
-          Docs
-        </Link>
+        {navItems.map((item) => {
+          const href = item.href as string
+          const isActive =
+            href === "/docs"
+              ? pathname === "/docs"
+              : pathname === href || pathname.startsWith(`${href}/`)
+
+          return (
+            <Link
+              key={href}
+              href={href}
+              className={cn(
+                "transition-colors",
+                isActive
+                  ? "text-foreground"
+                  : "text-foreground/80 hover:text-foreground"
+              )}
+            >
+              {item.title}
+            </Link>
+          )
+        })}
       </nav>
     </div>
   )

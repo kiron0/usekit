@@ -3,9 +3,16 @@
 import * as React from "react"
 
 import { docsConfig } from "@/config/docs"
+import { cn } from "@/lib/utils"
 import { ScrambleText } from "@/components/scramble-text"
 
-export function ChangingScrambleText() {
+interface ChangingScrambleTextProps {
+  className?: string
+}
+
+export function ChangingScrambleText({
+  className,
+}: ChangingScrambleTextProps = {}) {
   const hooks = React.useMemo(() => {
     return docsConfig.sidebarNav
       .filter((nav) => nav.title.toLocaleLowerCase() === "hooks")[0]
@@ -35,7 +42,7 @@ export function ChangingScrambleText() {
   return (
     <ScrambleText
       text={text}
-      className="h-7 text-2xl font-bold md:h-10 md:text-4xl"
+      className={cn("h-7 text-2xl font-bold md:h-10 md:text-4xl", className)}
     />
   )
 }

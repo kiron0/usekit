@@ -17,6 +17,14 @@ export const docsConfig: DocsConfig = {
       title: "Docs",
       href: "/docs",
     },
+    {
+      title: "Hooks",
+      href: "/docs/hooks",
+    },
+    {
+      title: "CLI",
+      href: "/docs/cli",
+    },
   ],
   sidebarNav: [
     {
