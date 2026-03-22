@@ -14,7 +14,7 @@
         },
         "js": {
           "path": "registry/hooks/use-dev-flag.js",
-          "content": "import * as React from \"react\"\nexport function useDevFlag() {\n  return React.useMemo(() => {\n    return process.env.NODE_ENV === \"development\"\n  }, [])\n}\n"
+          "content": "import * as React from \"react\"\n\nexport function useDevFlag() {\n  return React.useMemo(() => {\n    return process.env.NODE_ENV === \"development\"\n  }, [])\n}\n"
         }
       }
     }

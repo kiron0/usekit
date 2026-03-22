@@ -14,7 +14,7 @@
         },
         "js": {
           "path": "registry/hooks/use-hover.js",
-          "content": "import * as React from \"react\"\nexport function useHover() {\n  const [element, setElement] = React.useState(null)\n  const [hovering, setHovering] = React.useState(false)\n  const ref = React.useCallback((node) => {\n    setElement(node)\n  }, [])\n  React.useEffect(() => {\n    if (!element) return\n    const handleMouseEnter = () => setHovering(true)\n    const handleMouseLeave = () => setHovering(false)\n    element.addEventListener(\"mouseenter\", handleMouseEnter)\n    element.addEventListener(\"mouseleave\", handleMouseLeave)\n    return () => {\n      element.removeEventListener(\"mouseenter\", handleMouseEnter)\n      element.removeEventListener(\"mouseleave\", handleMouseLeave)\n    }\n  }, [element])\n  return [ref, hovering]\n}\n"
+          "content": "import * as React from \"react\"\n\nexport function useHover() {\n  const [element, setElement] = React.useState(null)\n  const [hovering, setHovering] = React.useState(false)\n\n  const ref = React.useCallback((node) => {\n    setElement(node)\n  }, [])\n\n  React.useEffect(() => {\n    if (!element) return\n\n    const handleMouseEnter = () => setHovering(true)\n    const handleMouseLeave = () => setHovering(false)\n\n    element.addEventListener(\"mouseenter\", handleMouseEnter)\n    element.addEventListener(\"mouseleave\", handleMouseLeave)\n\n    return () => {\n      element.removeEventListener(\"mouseenter\", handleMouseEnter)\n      element.removeEventListener(\"mouseleave\", handleMouseLeave)\n    }\n  }, [element])\n\n  return [ref, hovering]\n}\n"
         }
       }
     }

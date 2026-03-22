@@ -14,7 +14,7 @@
         },
         "js": {
           "path": "registry/hooks/use-keyed-array.js",
-          "content": "import * as React from \"react\"\nexport function useKeyedArray(items, options) {\n  const { getKey } = options || {}\n  const keyMapRef = React.useRef(new WeakMap())\n  const counterRef = React.useRef(0)\n  return items.map((item, index) => {\n    let key\n    if (typeof item === \"object\" && item !== null) {\n      const existing = keyMapRef.current.get(item)\n      if (existing) {\n        key = existing\n      } else {\n        key = getKey?.(item, index) ?? `key-${counterRef.current++}`\n        keyMapRef.current.set(item, key)\n      }\n      return { ...item, _key: key }\n    } else {\n      key = getKey?.(item, index) ?? `key-${counterRef.current++}`\n      return { value: item, _key: key }\n    }\n  })\n}\n"
+          "content": "import * as React from \"react\"\n\nexport function useKeyedArray(items, options) {\n  const { getKey } = options || {}\n  const keyMapRef = React.useRef(new WeakMap())\n  const counterRef = React.useRef(0)\n\n  return items.map((item, index) => {\n    let key\n\n    if (typeof item === \"object\" && item !== null) {\n      const existing = keyMapRef.current.get(item)\n      if (existing) {\n        key = existing\n      } else {\n        key = getKey?.(item, index) ?? `key-${counterRef.current++}`\n        keyMapRef.current.set(item, key)\n      }\n      return { ...item, _key: key }\n    } else {\n      key = getKey?.(item, index) ?? `key-${counterRef.current++}`\n      return { value: item, _key: key }\n    }\n  })\n}\n"
         }
       }
     }

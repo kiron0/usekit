@@ -14,7 +14,7 @@
         },
         "js": {
           "path": "registry/hooks/use-time-of-day.js",
-          "content": "import * as React from \"react\"\nexport function useTimeOfDay() {\n  const getTimeOfDay = React.useCallback(() => {\n    const hour = new Date().getHours()\n    if (hour < 12) return \"morning\"\n    if (hour < 17) return \"afternoon\"\n    if (hour < 20) return \"evening\"\n    return \"night\"\n  }, [])\n  const [timeOfDay, setTimeOfDay] = React.useState(getTimeOfDay())\n  React.useEffect(() => {\n    const updateTimeOfDay = () => setTimeOfDay(getTimeOfDay())\n    const interval = setInterval(updateTimeOfDay, 60000)\n    return () => clearInterval(interval)\n  }, [getTimeOfDay])\n  return timeOfDay\n}\n"
+          "content": "import * as React from \"react\"\n\nexport function useTimeOfDay() {\n  const getTimeOfDay = React.useCallback(() => {\n    const hour = new Date().getHours()\n    if (hour < 12) return \"morning\"\n    if (hour < 17) return \"afternoon\"\n    if (hour < 20) return \"evening\"\n    return \"night\"\n  }, [])\n\n  const [timeOfDay, setTimeOfDay] = React.useState(getTimeOfDay())\n\n  React.useEffect(() => {\n    const updateTimeOfDay = () => setTimeOfDay(getTimeOfDay())\n    const interval = setInterval(updateTimeOfDay, 60000)\n    return () => clearInterval(interval)\n  }, [getTimeOfDay])\n\n  return timeOfDay\n}\n"
         }
       }
     }

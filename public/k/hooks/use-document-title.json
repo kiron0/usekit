@@ -14,7 +14,7 @@
         },
         "js": {
           "path": "registry/hooks/use-document-title.js",
-          "content": "import * as React from \"react\"\nexport function useDocumentTitle(title) {\n  const initial = React.useRef(\n    typeof document !== \"undefined\" ? document.title : \"\",\n  )\n  React.useEffect(() => {\n    const initialTitle = initial.current\n    document.title = title\n    return () => {\n      document.title = initialTitle\n    }\n  }, [title])\n}\n"
+          "content": "import * as React from \"react\"\n\nexport function useDocumentTitle(title) {\n  const initial = React.useRef(\n    typeof document !== \"undefined\" ? document.title : \"\"\n  )\n\n  React.useEffect(() => {\n    const initialTitle = initial.current\n    document.title = title\n\n    return () => {\n      document.title = initialTitle\n    }\n  }, [title])\n}\n"
         }
       }
     }

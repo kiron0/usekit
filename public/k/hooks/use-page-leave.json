@@ -14,7 +14,7 @@
         },
         "js": {
           "path": "registry/hooks/use-page-leave.js",
-          "content": "import * as React from \"react\"\nexport function usePageLeave(cb, ref) {\n  React.useEffect(() => {\n    const element = ref.current\n    if (!element) return\n    const handleMouseOut = (event) => {\n      const isLeavingElement =\n        event.relatedTarget === null || !element.contains(event.relatedTarget)\n      if (isLeavingElement) {\n        cb()\n      }\n    }\n    element.addEventListener(\"mouseout\", handleMouseOut)\n    return () => {\n      element.removeEventListener(\"mouseout\", handleMouseOut)\n    }\n  }, [cb, ref])\n}\n"
+          "content": "import * as React from \"react\"\n\nexport function usePageLeave(\ncb,\nref)\n{\n  React.useEffect(() => {\n    const element = ref.current\n    if (!element) return\n\n    const handleMouseOut = (event) => {\n      const isLeavingElement =\n      event.relatedTarget === null ||\n      !element.contains(event.relatedTarget)\n\n      if (isLeavingElement) {\n        cb()\n      }\n    }\n\n    element.addEventListener(\"mouseout\", handleMouseOut)\n\n    return () => {\n      element.removeEventListener(\"mouseout\", handleMouseOut)\n    }\n  }, [cb, ref])\n}\n"
         }
       }
     }

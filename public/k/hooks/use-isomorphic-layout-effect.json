@@ -14,7 +14,7 @@
         },
         "js": {
           "path": "registry/hooks/use-isomorphic-layout-effect.js",
-          "content": "import * as React from \"react\"\nexport const useIsomorphicLayoutEffect =\n  typeof window !== \"undefined\" ? React.useLayoutEffect : React.useEffect\n"
+          "content": "import * as React from \"react\"\n\nexport const useIsomorphicLayoutEffect =\ntypeof window !== \"undefined\" ? React.useLayoutEffect : React.useEffect;\n"
         }
       }
     }
