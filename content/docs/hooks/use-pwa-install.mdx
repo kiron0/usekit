@@ -73,9 +73,109 @@ export function InstallBanner() {
 | `promptCount`     | `number`                                                    | Number of times `promptInstall` has been triggered (stored in localStorage).  |
 | `promptInstall()` | `() => Promise<"accepted" \| "dismissed" \| "unavailable">` | Triggers the install prompt and resolves with the user's choice.              |
 
+## PWA Prerequisites
+
+This hook does **not** make your app installable by itself. It only listens for the browser's install events. If `canInstall` always stays `false`, your app is usually missing one of the requirements below.
+
+### What you need
+
+1. A valid web app manifest linked by your app.
+2. A service worker file such as `public/sw.js`.
+3. Client-side service worker registration.
+4. HTTPS in production.
+
+You do **not** need a dedicated `PWARegistration` component. You only need to register the service worker somewhere in your client app before expecting the browser to expose `beforeinstallprompt`.
+
+### Example manifest
+
+Make sure your app links a manifest and that it includes a usable name, icons, start URL, scope, and display mode.
+
+```json
+{
+  "name": "My App",
+  "short_name": "MyApp",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#0b0b0f",
+  "theme_color": "#ffffff",
+  "icons": [
+    {
+      "src": "/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
+```
+
+In Next.js, you can expose it with metadata or an `app/manifest.ts` file. Example:
+
+```ts
+export async function generateMetadata() {
+  return {
+    manifest: "/manifest.webmanifest",
+  }
+}
+```
+
+### Example service worker registration
+
+Register the worker from any client entry point in your app:
+
+```tsx
+"use client"
+
+import * as React from "react"
+
+export function PWARegistration() {
+  React.useEffect(() => {
+    if (
+      !("serviceWorker" in navigator) ||
+      (!window.isSecureContext && window.location.hostname !== "localhost")
+    ) {
+      return
+    }
+
+    navigator.serviceWorker
+      .register("/sw.js", { scope: "/" })
+      .catch((error) => {
+        console.warn("Service worker registration failed:", error)
+      })
+  }, [])
+
+  return null
+}
+```
+
+If you already register your service worker elsewhere, keep that setup. This hook only consumes the install event; it does not register anything for you.
+
+### Example `public/sw.js`
+
+```js
+self.addEventListener("install", () => {
+  self.skipWaiting()
+})
+
+self.addEventListener("activate", (event) => {
+  event.waitUntil(self.clients.claim())
+})
+
+self.addEventListener("fetch", (event) => {
+  event.respondWith(fetch(event.request))
+})
+```
+
+That example is intentionally minimal. It is enough for installability testing, but a real PWA usually adds caching, versioning, and update strategy on top.
+
 ## Notes
 
-- The browser only fires `beforeinstallprompt` when your PWA meets installability criteria (served over HTTPS, has manifest + service worker, etc.).
+- The browser only fires `beforeinstallprompt` when your PWA meets installability criteria and the service worker is actually registered.
 - `promptInstall` returns `"unavailable"` if the prompt event isn't ready—use `canInstall` to disable buttons.
 - Use `promptCount` to avoid nagging users repeatedly.
 - The hook automatically listens for the global `appinstalled` event to update `isInstalled`.

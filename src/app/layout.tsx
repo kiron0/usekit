@@ -50,6 +50,7 @@ export async function generateMetadata(): Promise<Metadata> {
       images: [new URL("/og.png", BASE_URL)],
       creator: siteConfig.links.twitter,
     },
+    manifest: "/manifest.webmanifest",
     icons: {
       icon: "/favicon.ico",
       shortcut: "/favicon-16x16.png",
