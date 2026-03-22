@@ -14,7 +14,7 @@
         },
         "js": {
           "path": "registry/hooks/use-toggle.js",
-          "content": "import * as React from \"react\";\nexport function useToggle(defaultValue) {\n    const [value, setValue] = React.useState(!!defaultValue);\n    const toggle = React.useCallback(() => {\n        setValue((x) => !x);\n    }, []);\n    return [value, toggle, setValue];\n}\n"
+          "content": "import * as React from \"react\"\nexport function useToggle(defaultValue) {\n  const [value, setValue] = React.useState(!!defaultValue)\n  const toggle = React.useCallback(() => {\n    setValue((x) => !x)\n  }, [])\n  return [value, toggle, setValue]\n}\n"
         }
       }
     }

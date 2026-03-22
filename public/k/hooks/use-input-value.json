@@ -14,7 +14,7 @@
         },
         "js": {
           "path": "registry/hooks/use-input-value.js",
-          "content": "import * as React from \"react\";\nexport function useInputValue(initialValue) {\n    const [value, setValue] = React.useState(initialValue);\n    function onChange(event) {\n        setValue(event.currentTarget.value);\n    }\n    return {\n        value,\n        onChange,\n    };\n}\n"
+          "content": "import * as React from \"react\"\nexport function useInputValue(initialValue) {\n  const [value, setValue] = React.useState(initialValue)\n  function onChange(event) {\n    setValue(event.currentTarget.value)\n  }\n  return {\n    value,\n    onChange,\n  }\n}\n"
         }
       }
     }

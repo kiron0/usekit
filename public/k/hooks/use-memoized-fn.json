@@ -14,7 +14,7 @@
         },
         "js": {
           "path": "registry/hooks/use-memoized-fn.js",
-          "content": "import * as React from \"react\";\nexport function useMemoizedFn(fn) {\n    const fnRef = React.useRef(fn);\n    const cleanupRef = React.useRef(null);\n    React.useEffect(() => {\n        fnRef.current = fn;\n    }, [fn]);\n    const memoizedFn = React.useCallback((...args) => {\n        cleanupRef.current?.();\n        cleanupRef.current = null;\n        const result = fnRef.current(...args);\n        if (typeof result === \"function\") {\n            cleanupRef.current = result;\n        }\n        return result;\n    }, []);\n    React.useEffect(() => {\n        return () => cleanupRef.current?.();\n    }, []);\n    return memoizedFn;\n}\n"
+          "content": "import * as React from \"react\"\nexport function useMemoizedFn(fn) {\n  const fnRef = React.useRef(fn)\n  const cleanupRef = React.useRef(null)\n  React.useEffect(() => {\n    fnRef.current = fn\n  }, [fn])\n  const memoizedFn = React.useCallback((...args) => {\n    cleanupRef.current?.()\n    cleanupRef.current = null\n    const result = fnRef.current(...args)\n    if (typeof result === \"function\") {\n      cleanupRef.current = result\n    }\n    return result\n  }, [])\n  React.useEffect(() => {\n    return () => cleanupRef.current?.()\n  }, [])\n  return memoizedFn\n}\n"
         }
       }
     }

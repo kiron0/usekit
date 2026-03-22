@@ -14,7 +14,7 @@
         },
         "js": {
           "path": "registry/hooks/use-portal.js",
-          "content": "import * as React from \"react\";\nimport * as ReactDOM from \"react-dom\";\nexport function usePortal() {\n    const [container, setContainer] = React.useState(null);\n    React.useEffect(() => {\n        const portalRoot = (() => {\n            const el = document.createElement(\"div\");\n            document.body.appendChild(el);\n            return el;\n        })();\n        setContainer(portalRoot);\n        return () => {\n            if (portalRoot.parentNode) {\n                portalRoot.parentNode.removeChild(portalRoot);\n            }\n        };\n    }, []);\n    const Portal = React.useCallback(({ children }) => container ? ReactDOM.createPortal(children, container) : null, [container]);\n    return { Portal, container };\n}\n"
+          "content": "import * as React from \"react\"\nimport * as ReactDOM from \"react-dom\"\nexport function usePortal() {\n  const [container, setContainer] = React.useState(null)\n  React.useEffect(() => {\n    const portalRoot = (() => {\n      const el = document.createElement(\"div\")\n      document.body.appendChild(el)\n      return el\n    })()\n    setContainer(portalRoot)\n    return () => {\n      if (portalRoot.parentNode) {\n        portalRoot.parentNode.removeChild(portalRoot)\n      }\n    }\n  }, [])\n  const Portal = React.useCallback(\n    ({ children }) =>\n      container ? ReactDOM.createPortal(children, container) : null,\n    [container],\n  )\n  return { Portal, container }\n}\n"
         }
       }
     }

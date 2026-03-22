@@ -14,7 +14,7 @@
         },
         "js": {
           "path": "registry/hooks/use-is-first-render.js",
-          "content": "import * as React from \"react\";\nexport function useIsFirstRender() {\n    const renderRef = React.useRef(true);\n    if (renderRef.current === true) {\n        renderRef.current = false;\n        return true;\n    }\n    return renderRef.current;\n}\n"
+          "content": "import * as React from \"react\"\nexport function useIsFirstRender() {\n  const renderRef = React.useRef(true)\n  if (renderRef.current === true) {\n    renderRef.current = false\n    return true\n  }\n  return renderRef.current\n}\n"
         }
       }
     }

@@ -14,7 +14,7 @@
         },
         "js": {
           "path": "registry/hooks/use-is-client.js",
-          "content": "import * as React from \"react\";\nexport function useIsClient() {\n    const [isClient, setIsClient] = React.useState(false);\n    React.useEffect(() => {\n        setIsClient(true);\n    }, []);\n    return isClient;\n}\n"
+          "content": "import * as React from \"react\"\nexport function useIsClient() {\n  const [isClient, setIsClient] = React.useState(false)\n  React.useEffect(() => {\n    setIsClient(true)\n  }, [])\n  return isClient\n}\n"
         }
       }
     }

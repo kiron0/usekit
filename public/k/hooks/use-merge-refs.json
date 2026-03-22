@@ -14,7 +14,7 @@
         },
         "js": {
           "path": "registry/hooks/use-merge-refs.js",
-          "content": "import * as React from \"react\";\nconst updateRef = (ref, value) => {\n    if (typeof ref === \"function\") {\n        ref(value);\n    }\n    else if (ref && \"current\" in ref) {\n        ;\n        ref.current = value;\n    }\n};\nexport function useMergeRefs(...refs) {\n    const refsRef = React.useRef(refs);\n    refsRef.current = refs;\n    return React.useCallback((node) => {\n        for (const ref of refsRef.current) {\n            updateRef(ref, node);\n        }\n    }, []);\n}\n"
+          "content": "import * as React from \"react\"\nconst updateRef = (ref, value) => {\n  if (typeof ref === \"function\") {\n    ref(value)\n  } else if (ref && \"current\" in ref) {\n    ref.current = value\n  }\n}\nexport function useMergeRefs(...refs) {\n  const refsRef = React.useRef(refs)\n  refsRef.current = refs\n  return React.useCallback((node) => {\n    for (const ref of refsRef.current) {\n      updateRef(ref, node)\n    }\n  }, [])\n}\n"
         }
       }
     }

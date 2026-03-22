@@ -14,7 +14,7 @@
         },
         "js": {
           "path": "registry/hooks/use-rerender.js",
-          "content": "import * as React from \"react\";\nexport function useRerender() {\n    const [, setCount] = React.useState(0);\n    return React.useCallback(() => setCount((prev) => prev + 1), []);\n}\n"
+          "content": "import * as React from \"react\"\nexport function useRerender() {\n  const [, setCount] = React.useState(0)\n  return React.useCallback(() => setCount((prev) => prev + 1), [])\n}\n"
         }
       }
     }

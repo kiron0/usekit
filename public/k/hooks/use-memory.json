@@ -14,7 +14,7 @@
         },
         "js": {
           "path": "registry/hooks/use-memory.js",
-          "content": "import * as React from \"react\";\nexport function useMemory({ interval = 1000, immediate = false, } = {}) {\n    const [memory, setMemory] = React.useState();\n    const isSupported = typeof performance !== \"undefined\" && \"memory\" in performance;\n    const updateMemory = React.useCallback(() => {\n        if (isSupported) {\n            setMemory(performance.memory);\n        }\n    }, [isSupported]);\n    React.useEffect(() => {\n        if (!isSupported)\n            return;\n        if (immediate)\n            updateMemory();\n        const intervalId = setInterval(updateMemory, interval);\n        return () => clearInterval(intervalId);\n    }, [isSupported, interval, immediate, updateMemory]);\n    return { isSupported, memory };\n}\n"
+          "content": "import * as React from \"react\"\nexport function useMemory({ interval = 1000, immediate = false } = {}) {\n  const [memory, setMemory] = React.useState()\n  const isSupported =\n    typeof performance !== \"undefined\" && \"memory\" in performance\n  const updateMemory = React.useCallback(() => {\n    if (isSupported) {\n      setMemory(performance.memory)\n    }\n  }, [isSupported])\n  React.useEffect(() => {\n    if (!isSupported) return\n    if (immediate) updateMemory()\n    const intervalId = setInterval(updateMemory, interval)\n    return () => clearInterval(intervalId)\n  }, [isSupported, interval, immediate, updateMemory])\n  return { isSupported, memory }\n}\n"
         }
       }
     }

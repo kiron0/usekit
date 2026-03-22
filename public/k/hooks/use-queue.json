@@ -14,7 +14,7 @@
         },
         "js": {
           "path": "registry/hooks/use-queue.js",
-          "content": "import * as React from \"react\";\nexport function useQueue(initialValue = []) {\n    const [queue, setQueue] = React.useState(initialValue);\n    const add = React.useCallback((element) => {\n        setQueue((q) => [...q, element]);\n    }, []);\n    const remove = React.useCallback(() => {\n        let removedElement;\n        setQueue(([first, ...rest]) => {\n            removedElement = first;\n            return rest;\n        });\n        return removedElement;\n    }, []);\n    const clear = React.useCallback(() => {\n        setQueue([]);\n    }, []);\n    return {\n        add,\n        remove,\n        clear,\n        first: queue[0],\n        last: queue[queue.length - 1],\n        size: queue.length,\n        queue,\n    };\n}\n"
+          "content": "import * as React from \"react\"\nexport function useQueue(initialValue = []) {\n  const [queue, setQueue] = React.useState(initialValue)\n  const add = React.useCallback((element) => {\n    setQueue((q) => [...q, element])\n  }, [])\n  const remove = React.useCallback(() => {\n    let removedElement\n    setQueue(([first, ...rest]) => {\n      removedElement = first\n      return rest\n    })\n    return removedElement\n  }, [])\n  const clear = React.useCallback(() => {\n    setQueue([])\n  }, [])\n  return {\n    add,\n    remove,\n    clear,\n    first: queue[0],\n    last: queue[queue.length - 1],\n    size: queue.length,\n    queue,\n  }\n}\n"
         }
       }
     }

@@ -14,7 +14,7 @@
         },
         "js": {
           "path": "registry/hooks/use-lock-body-scroll.js",
-          "content": "import * as React from \"react\";\nlet bodyScrollLockCount = 0;\nlet originalBodyOverflow = \"\";\nexport function useLockBodyScroll() {\n    React.useLayoutEffect(() => {\n        if (bodyScrollLockCount === 0) {\n            originalBodyOverflow = window.getComputedStyle(document.body).overflow;\n            document.body.style.overflow = \"hidden\";\n        }\n        bodyScrollLockCount += 1;\n        return () => {\n            bodyScrollLockCount = Math.max(bodyScrollLockCount - 1, 0);\n            if (bodyScrollLockCount === 0) {\n                document.body.style.overflow = originalBodyOverflow;\n            }\n        };\n    }, []);\n}\n"
+          "content": "import * as React from \"react\"\nlet bodyScrollLockCount = 0\nlet originalBodyOverflow = \"\"\nexport function useLockBodyScroll() {\n  React.useLayoutEffect(() => {\n    if (bodyScrollLockCount === 0) {\n      originalBodyOverflow = window.getComputedStyle(document.body).overflow\n      document.body.style.overflow = \"hidden\"\n    }\n    bodyScrollLockCount += 1\n    return () => {\n      bodyScrollLockCount = Math.max(bodyScrollLockCount - 1, 0)\n      if (bodyScrollLockCount === 0) {\n        document.body.style.overflow = originalBodyOverflow\n      }\n    }\n  }, [])\n}\n"
         }
       }
     }
