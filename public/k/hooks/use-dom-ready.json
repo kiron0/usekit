@@ -1,14 +1,22 @@
 {
-  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "$schema": "https://usekit.vercel.app/schema/registry-item.json",
   "name": "use-dom-ready",
   "type": "registry:hook",
   "title": "Use DOM Ready",
   "description": "Detect when the DOM is fully loaded and ready for manipulation with the useDomReady hook, providing a way to execute code after the DOM is ready.",
   "files": [
     {
-      "path": "registry/hooks/use-dom-ready.ts",
-      "content": "import * as React from \"react\"\n\nexport function useDomReady(callback: () => void): void {\n  React.useEffect(() => {\n    if (typeof document === \"undefined\") return\n\n    if (\n      document.readyState === \"interactive\" ||\n      document.readyState === \"complete\"\n    ) {\n      callback()\n      return\n    } else {\n      const handleReady = () => {\n        if (\n          document.readyState === \"interactive\" ||\n          document.readyState === \"complete\"\n        ) {\n          callback()\n          document.removeEventListener(\"DOMContentLoaded\", handleReady)\n        }\n      }\n\n      document.addEventListener(\"DOMContentLoaded\", handleReady)\n      return () => document.removeEventListener(\"DOMContentLoaded\", handleReady)\n    }\n  }, [callback])\n}\n",
-      "type": "registry:hook"
+      "type": "registry:hook",
+      "variants": {
+        "ts": {
+          "path": "registry/hooks/use-dom-ready.ts",
+          "content": "import * as React from \"react\"\n\nexport function useDomReady(callback: () => void): void {\n  React.useEffect(() => {\n    if (typeof document === \"undefined\") return\n\n    if (\n      document.readyState === \"interactive\" ||\n      document.readyState === \"complete\"\n    ) {\n      callback()\n      return\n    } else {\n      const handleReady = () => {\n        if (\n          document.readyState === \"interactive\" ||\n          document.readyState === \"complete\"\n        ) {\n          callback()\n          document.removeEventListener(\"DOMContentLoaded\", handleReady)\n        }\n      }\n\n      document.addEventListener(\"DOMContentLoaded\", handleReady)\n      return () => document.removeEventListener(\"DOMContentLoaded\", handleReady)\n    }\n  }, [callback])\n}\n"
+        },
+        "js": {
+          "path": "registry/hooks/use-dom-ready.js",
+          "content": "import * as React from \"react\";\nexport function useDomReady(callback) {\n    React.useEffect(() => {\n        if (typeof document === \"undefined\")\n            return;\n        if (document.readyState === \"interactive\" ||\n            document.readyState === \"complete\") {\n            callback();\n            return;\n        }\n        else {\n            const handleReady = () => {\n                if (document.readyState === \"interactive\" ||\n                    document.readyState === \"complete\") {\n                    callback();\n                    document.removeEventListener(\"DOMContentLoaded\", handleReady);\n                }\n            };\n            document.addEventListener(\"DOMContentLoaded\", handleReady);\n            return () => document.removeEventListener(\"DOMContentLoaded\", handleReady);\n        }\n    }, [callback]);\n}\n"
+        }
+      }
     }
   ]
 }

@@ -1,5 +1,5 @@
 {
-  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "$schema": "https://usekit.vercel.app/schema/registry-item.json",
   "name": "use-form-disable",
   "type": "registry:hook",
   "title": "Use Form Disable",
@@ -7,9 +7,17 @@
   "dependencies": ["react-hook-form"],
   "files": [
     {
-      "path": "registry/hooks/use-form-disable.ts",
-      "content": "import * as React from \"react\"\n\ninterface UseFormState {\n  isSubmitting?: boolean\n  isValidating?: boolean\n  isSubmitSuccessful?: boolean\n}\n\ninterface Options {\n  isSubmitting?: boolean\n  formState?: UseFormState\n}\n\ninterface Return {\n  disabled: boolean\n}\n\nexport function useFormDisable(options: Options = {}): Return {\n  const { isSubmitting, formState } = options\n\n  const formStateIsSubmitting = formState?.isSubmitting\n  const formStateIsValidating = formState?.isValidating\n\n  const disabled = React.useMemo(() => {\n    if (isSubmitting !== undefined) {\n      return isSubmitting\n    }\n    if (formState) {\n      return formStateIsSubmitting === true || formStateIsValidating === true\n    }\n    return false\n  }, [isSubmitting, formStateIsSubmitting, formStateIsValidating, formState])\n\n  return { disabled }\n}\n",
-      "type": "registry:hook"
+      "type": "registry:hook",
+      "variants": {
+        "ts": {
+          "path": "registry/hooks/use-form-disable.ts",
+          "content": "import * as React from \"react\"\n\ninterface UseFormState {\n  isSubmitting?: boolean\n  isValidating?: boolean\n  isSubmitSuccessful?: boolean\n}\n\ninterface Options {\n  isSubmitting?: boolean\n  formState?: UseFormState\n}\n\ninterface Return {\n  disabled: boolean\n}\n\nexport function useFormDisable(options: Options = {}): Return {\n  const { isSubmitting, formState } = options\n\n  const formStateIsSubmitting = formState?.isSubmitting\n  const formStateIsValidating = formState?.isValidating\n\n  const disabled = React.useMemo(() => {\n    if (isSubmitting !== undefined) {\n      return isSubmitting\n    }\n    if (formState) {\n      return formStateIsSubmitting === true || formStateIsValidating === true\n    }\n    return false\n  }, [isSubmitting, formStateIsSubmitting, formStateIsValidating, formState])\n\n  return { disabled }\n}\n"
+        },
+        "js": {
+          "path": "registry/hooks/use-form-disable.js",
+          "content": "import * as React from \"react\";\nexport function useFormDisable(options = {}) {\n    const { isSubmitting, formState } = options;\n    const formStateIsSubmitting = formState?.isSubmitting;\n    const formStateIsValidating = formState?.isValidating;\n    const disabled = React.useMemo(() => {\n        if (isSubmitting !== undefined) {\n            return isSubmitting;\n        }\n        if (formState) {\n            return formStateIsSubmitting === true || formStateIsValidating === true;\n        }\n        return false;\n    }, [isSubmitting, formStateIsSubmitting, formStateIsValidating, formState]);\n    return { disabled };\n}\n"
+        }
+      }
     }
   ]
 }

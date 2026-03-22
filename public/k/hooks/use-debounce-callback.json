@@ -1,5 +1,5 @@
 {
-  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "$schema": "https://usekit.vercel.app/schema/registry-item.json",
   "name": "use-debounce-callback",
   "type": "registry:hook",
   "title": "Use Debounce Callback",
@@ -9,9 +9,17 @@
   "registryDependencies": ["use-unmount"],
   "files": [
     {
-      "path": "registry/hooks/use-debounce-callback.ts",
-      "content": "import * as React from \"react\"\nimport debounce from \"lodash.debounce\"\n\nimport { useUnmount } from \"./use-unmount\"\n\ninterface DebounceOptions {\n  leading?: boolean\n  trailing?: boolean\n  maxWait?: number\n}\n\ninterface ControlFunctions {\n  cancel: () => void\n  flush: () => void\n  isPending: () => boolean\n}\n\nexport type DebouncedState<T extends (...args: any) => ReturnType<T>> = ((\n  ...args: Parameters<T>\n) => ReturnType<T> | undefined) &\n  ControlFunctions\n\nexport function useDebounceCallback<T extends (...args: any) => ReturnType<T>>(\n  func: T,\n  delay = 500,\n  options?: DebounceOptions\n): DebouncedState<T> {\n  const isPendingRef = React.useRef(false)\n\n  useUnmount(() => {\n    isPendingRef.current = false\n  })\n\n  const debounced = React.useMemo(() => {\n    const debouncedFuncInstance = debounce(\n      (...args: Parameters<T>) => {\n        isPendingRef.current = false\n        return func(...args)\n      },\n      delay,\n      options\n    )\n\n    const wrappedFunc: DebouncedState<T> = (...args: Parameters<T>) => {\n      isPendingRef.current = true\n      return debouncedFuncInstance(...args)\n    }\n\n    wrappedFunc.cancel = () => {\n      isPendingRef.current = false\n      debouncedFuncInstance.cancel()\n    }\n\n    wrappedFunc.isPending = () => {\n      return isPendingRef.current\n    }\n\n    wrappedFunc.flush = () => {\n      isPendingRef.current = false\n      return debouncedFuncInstance.flush()\n    }\n\n    return wrappedFunc\n  }, [func, delay, options])\n\n  React.useEffect(() => {\n    return () => {\n      debounced.cancel()\n    }\n  }, [debounced])\n\n  return debounced\n}\n",
-      "type": "registry:hook"
+      "type": "registry:hook",
+      "variants": {
+        "ts": {
+          "path": "registry/hooks/use-debounce-callback.ts",
+          "content": "import * as React from \"react\"\nimport debounce from \"lodash.debounce\"\n\nimport { useUnmount } from \"./use-unmount\"\n\ninterface DebounceOptions {\n  leading?: boolean\n  trailing?: boolean\n  maxWait?: number\n}\n\ninterface ControlFunctions {\n  cancel: () => void\n  flush: () => void\n  isPending: () => boolean\n}\n\nexport type DebouncedState<T extends (...args: any) => ReturnType<T>> = ((\n  ...args: Parameters<T>\n) => ReturnType<T> | undefined) &\n  ControlFunctions\n\nexport function useDebounceCallback<T extends (...args: any) => ReturnType<T>>(\n  func: T,\n  delay = 500,\n  options?: DebounceOptions\n): DebouncedState<T> {\n  const isPendingRef = React.useRef(false)\n\n  useUnmount(() => {\n    isPendingRef.current = false\n  })\n\n  const debounced = React.useMemo(() => {\n    const debouncedFuncInstance = debounce(\n      (...args: Parameters<T>) => {\n        isPendingRef.current = false\n        return func(...args)\n      },\n      delay,\n      options\n    )\n\n    const wrappedFunc: DebouncedState<T> = (...args: Parameters<T>) => {\n      isPendingRef.current = true\n      return debouncedFuncInstance(...args)\n    }\n\n    wrappedFunc.cancel = () => {\n      isPendingRef.current = false\n      debouncedFuncInstance.cancel()\n    }\n\n    wrappedFunc.isPending = () => {\n      return isPendingRef.current\n    }\n\n    wrappedFunc.flush = () => {\n      isPendingRef.current = false\n      return debouncedFuncInstance.flush()\n    }\n\n    return wrappedFunc\n  }, [func, delay, options])\n\n  React.useEffect(() => {\n    return () => {\n      debounced.cancel()\n    }\n  }, [debounced])\n\n  return debounced\n}\n"
+        },
+        "js": {
+          "path": "registry/hooks/use-debounce-callback.js",
+          "content": "import * as React from \"react\";\nimport debounce from \"lodash.debounce\";\nimport { useUnmount } from \"./use-unmount\";\nexport function useDebounceCallback(func, delay = 500, options) {\n    const isPendingRef = React.useRef(false);\n    useUnmount(() => {\n        isPendingRef.current = false;\n    });\n    const debounced = React.useMemo(() => {\n        const debouncedFuncInstance = debounce((...args) => {\n            isPendingRef.current = false;\n            return func(...args);\n        }, delay, options);\n        const wrappedFunc = (...args) => {\n            isPendingRef.current = true;\n            return debouncedFuncInstance(...args);\n        };\n        wrappedFunc.cancel = () => {\n            isPendingRef.current = false;\n            debouncedFuncInstance.cancel();\n        };\n        wrappedFunc.isPending = () => {\n            return isPendingRef.current;\n        };\n        wrappedFunc.flush = () => {\n            isPendingRef.current = false;\n            return debouncedFuncInstance.flush();\n        };\n        return wrappedFunc;\n    }, [func, delay, options]);\n    React.useEffect(() => {\n        return () => {\n            debounced.cancel();\n        };\n    }, [debounced]);\n    return debounced;\n}\n"
+        }
+      }
     }
   ]
 }

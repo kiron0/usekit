@@ -1,14 +1,22 @@
 {
-  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "$schema": "https://usekit.vercel.app/schema/registry-item.json",
   "name": "use-throttle",
   "type": "registry:hook",
   "title": "Use Throttle",
   "description": "Throttle computationally expensive operations with useThrottle.",
   "files": [
     {
-      "path": "registry/hooks/use-throttle.ts",
-      "content": "import * as React from \"react\"\n\nexport function useThrottle<T>(value: T, interval: number = 500): T {\n  const [throttledValue, setThrottledValue] = React.useState(value)\n  const lastUpdated = React.useRef<number | null>(null)\n  const timeoutId = React.useRef<ReturnType<typeof setTimeout> | null>(null)\n\n  React.useEffect(() => {\n    const now = Date.now()\n\n    if (lastUpdated.current === null || now >= lastUpdated.current + interval) {\n      lastUpdated.current = now\n      setThrottledValue(value)\n    } else {\n      const remainingTime = lastUpdated.current + interval - now\n\n      if (timeoutId.current) {\n        clearTimeout(timeoutId.current)\n      }\n\n      timeoutId.current = setTimeout(() => {\n        lastUpdated.current = Date.now()\n        setThrottledValue(value)\n      }, remainingTime)\n    }\n\n    return () => {\n      if (timeoutId.current) {\n        clearTimeout(timeoutId.current)\n        timeoutId.current = null\n      }\n    }\n  }, [value, interval])\n\n  return throttledValue\n}\n",
-      "type": "registry:hook"
+      "type": "registry:hook",
+      "variants": {
+        "ts": {
+          "path": "registry/hooks/use-throttle.ts",
+          "content": "import * as React from \"react\"\n\nexport function useThrottle<T>(value: T, interval: number = 500): T {\n  const [throttledValue, setThrottledValue] = React.useState(value)\n  const lastUpdated = React.useRef<number | null>(null)\n  const timeoutId = React.useRef<ReturnType<typeof setTimeout> | null>(null)\n\n  React.useEffect(() => {\n    const now = Date.now()\n\n    if (lastUpdated.current === null || now >= lastUpdated.current + interval) {\n      lastUpdated.current = now\n      setThrottledValue(value)\n    } else {\n      const remainingTime = lastUpdated.current + interval - now\n\n      if (timeoutId.current) {\n        clearTimeout(timeoutId.current)\n      }\n\n      timeoutId.current = setTimeout(() => {\n        lastUpdated.current = Date.now()\n        setThrottledValue(value)\n      }, remainingTime)\n    }\n\n    return () => {\n      if (timeoutId.current) {\n        clearTimeout(timeoutId.current)\n        timeoutId.current = null\n      }\n    }\n  }, [value, interval])\n\n  return throttledValue\n}\n"
+        },
+        "js": {
+          "path": "registry/hooks/use-throttle.js",
+          "content": "import * as React from \"react\";\nexport function useThrottle(value, interval = 500) {\n    const [throttledValue, setThrottledValue] = React.useState(value);\n    const lastUpdated = React.useRef(null);\n    const timeoutId = React.useRef(null);\n    React.useEffect(() => {\n        const now = Date.now();\n        if (lastUpdated.current === null || now >= lastUpdated.current + interval) {\n            lastUpdated.current = now;\n            setThrottledValue(value);\n        }\n        else {\n            const remainingTime = lastUpdated.current + interval - now;\n            if (timeoutId.current) {\n                clearTimeout(timeoutId.current);\n            }\n            timeoutId.current = setTimeout(() => {\n                lastUpdated.current = Date.now();\n                setThrottledValue(value);\n            }, remainingTime);\n        }\n        return () => {\n            if (timeoutId.current) {\n                clearTimeout(timeoutId.current);\n                timeoutId.current = null;\n            }\n        };\n    }, [value, interval]);\n    return throttledValue;\n}\n"
+        }
+      }
     }
   ]
 }

@@ -1,7 +1,7 @@
 {
-  "$schema": "https://usekit.kiron.dev/schema/registry.json",
+  "$schema": "https://usekit.vercel.app/schema/registry.json",
   "name": "useKit",
-  "homepage": "https://usekit.kiron.dev",
+  "homepage": "https://usekit.vercel.app",
   "items": [
     {
       "name": "use-boolean",

@@ -2,6 +2,10 @@
   "$schema": "https://json-schema.org/draft-07/schema#",
   "type": "object",
   "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "Optional schema reference for the generated registry item."
+    },
     "name": {
       "type": "string",
       "description": "The name of the hook. This is used to identify the hook in the registry. It should be unique for your registry."
@@ -42,27 +46,95 @@
     },
     "files": {
       "type": "array",
-      "description": "The main payload of the registry hook. This is an array of files that are part of the hook. Each file is an object with a path, content, and type.",
+      "description": "The main payload of the registry hook. Supports either a legacy single file entry or a dual-language variants entry.",
       "items": {
-        "type": "object",
-        "properties": {
-          "path": {
-            "type": "string",
-            "description": "The path to the file relative to the registry root."
+        "oneOf": [
+          {
+            "type": "object",
+            "properties": {
+              "path": {
+                "type": "string",
+                "description": "The path to the file relative to the registry root."
+              },
+              "content": {
+                "type": "string",
+                "description": "The content of the file."
+              },
+              "target": {
+                "type": "string",
+                "description": "Optional install target path inside the consumer project."
+              },
+              "type": {
+                "type": "string",
+                "enum": ["registry:hook"],
+                "description": "The type of the file. Must be 'registry:hook' for useKit hooks."
+              }
+            },
+            "required": ["path", "type"],
+            "additionalProperties": false
           },
-          "content": {
-            "type": "string",
-            "description": "The content of the file."
-          },
-          "type": {
-            "type": "string",
-            "enum": ["registry:hook"],
-            "description": "The type of the file. Must be 'registry:hook' for useKit hooks."
+          {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": ["registry:hook"],
+                "description": "The type of the file. Must be 'registry:hook' for useKit hooks."
+              },
+              "variants": {
+                "type": "object",
+                "description": "Language-specific file variants. Both ts and js must be provided.",
+                "properties": {
+                  "ts": {
+                    "type": "object",
+                    "properties": {
+                      "path": {
+                        "type": "string",
+                        "description": "The path to the TypeScript file relative to the registry root."
+                      },
+                      "content": {
+                        "type": "string",
+                        "description": "The TypeScript file content."
+                      },
+                      "target": {
+                        "type": "string",
+                        "description": "Optional TypeScript install target path inside the consumer project."
+                      }
+                    },
+                    "required": ["path"],
+                    "additionalProperties": false
+                  },
+                  "js": {
+                    "type": "object",
+                    "properties": {
+                      "path": {
+                        "type": "string",
+                        "description": "The path to the JavaScript file relative to the registry root."
+                      },
+                      "content": {
+                        "type": "string",
+                        "description": "The JavaScript file content."
+                      },
+                      "target": {
+                        "type": "string",
+                        "description": "Optional JavaScript install target path inside the consumer project."
+                      }
+                    },
+                    "required": ["path"],
+                    "additionalProperties": false
+                  }
+                },
+                "required": ["ts", "js"],
+                "additionalProperties": false
+              }
+            },
+            "required": ["type", "variants"],
+            "additionalProperties": false
           }
-        },
-        "required": ["path", "type"]
+        ]
       }
     }
   },
-  "required": ["name", "type"]
+  "required": ["name", "type"],
+  "additionalProperties": false
 }

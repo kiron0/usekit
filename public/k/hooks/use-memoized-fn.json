@@ -1,14 +1,22 @@
 {
-  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "$schema": "https://usekit.vercel.app/schema/registry-item.json",
   "name": "use-memoized-fn",
   "type": "registry:hook",
   "title": "Use Memoized Function",
   "description": "Memoize functions to prevent unnecessary re-computations with the useMemoizedFn hook, providing a way to optimize performance in React components.",
   "files": [
     {
-      "path": "registry/hooks/use-memoized-fn.ts",
-      "content": "import * as React from \"react\"\n\nexport function useMemoizedFn<T extends (...args: any[]) => any>(\n  fn: T\n): (...args: Parameters<T>) => ReturnType<T> {\n  const fnRef = React.useRef(fn)\n  const cleanupRef = React.useRef<(() => void) | null>(null)\n\n  React.useEffect(() => {\n    fnRef.current = fn\n  }, [fn])\n\n  const memoizedFn = React.useCallback(\n    (...args: Parameters<T>): ReturnType<T> => {\n      cleanupRef.current?.()\n      cleanupRef.current = null\n      const result = fnRef.current(...args)\n      if (typeof result === \"function\") {\n        cleanupRef.current = result as () => void\n      }\n      return result\n    },\n    []\n  )\n\n  React.useEffect(() => {\n    return () => cleanupRef.current?.()\n  }, [])\n\n  return memoizedFn\n}\n",
-      "type": "registry:hook"
+      "type": "registry:hook",
+      "variants": {
+        "ts": {
+          "path": "registry/hooks/use-memoized-fn.ts",
+          "content": "import * as React from \"react\"\n\nexport function useMemoizedFn<T extends (...args: any[]) => any>(\n  fn: T\n): (...args: Parameters<T>) => ReturnType<T> {\n  const fnRef = React.useRef(fn)\n  const cleanupRef = React.useRef<(() => void) | null>(null)\n\n  React.useEffect(() => {\n    fnRef.current = fn\n  }, [fn])\n\n  const memoizedFn = React.useCallback(\n    (...args: Parameters<T>): ReturnType<T> => {\n      cleanupRef.current?.()\n      cleanupRef.current = null\n      const result = fnRef.current(...args)\n      if (typeof result === \"function\") {\n        cleanupRef.current = result as () => void\n      }\n      return result\n    },\n    []\n  )\n\n  React.useEffect(() => {\n    return () => cleanupRef.current?.()\n  }, [])\n\n  return memoizedFn\n}\n"
+        },
+        "js": {
+          "path": "registry/hooks/use-memoized-fn.js",
+          "content": "import * as React from \"react\";\nexport function useMemoizedFn(fn) {\n    const fnRef = React.useRef(fn);\n    const cleanupRef = React.useRef(null);\n    React.useEffect(() => {\n        fnRef.current = fn;\n    }, [fn]);\n    const memoizedFn = React.useCallback((...args) => {\n        cleanupRef.current?.();\n        cleanupRef.current = null;\n        const result = fnRef.current(...args);\n        if (typeof result === \"function\") {\n            cleanupRef.current = result;\n        }\n        return result;\n    }, []);\n    React.useEffect(() => {\n        return () => cleanupRef.current?.();\n    }, []);\n    return memoizedFn;\n}\n"
+        }
+      }
     }
   ]
 }

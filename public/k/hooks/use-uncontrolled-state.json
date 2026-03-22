@@ -1,5 +1,5 @@
 {
-  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "$schema": "https://usekit.vercel.app/schema/registry-item.json",
   "name": "use-uncontrolled-state",
   "type": "registry:hook",
   "title": "Use Uncontrolled State",
@@ -7,9 +7,17 @@
   "registryDependencies": ["use-callback-ref"],
   "files": [
     {
-      "path": "registry/hooks/use-uncontrolled-state.ts",
-      "content": "import * as React from \"react\"\n\nimport { useCallbackRef } from \"./use-callback-ref\"\n\ninterface Props<T> {\n  defaultProp?: T\n  onChange?: (state: T) => void\n}\n\nexport function useUncontrolledState<T>({ defaultProp, onChange }: Props<T>) {\n  const [state, setState] = React.useState(defaultProp)\n  const prevStateRef = React.useRef(state)\n  const handleChange = useCallbackRef(onChange)\n\n  React.useEffect(() => {\n    if (prevStateRef.current !== state && state !== undefined) {\n      handleChange(state)\n      prevStateRef.current = state\n    }\n  }, [state, handleChange])\n\n  const setStateOptimized = React.useCallback(\n    (value: React.SetStateAction<T | undefined>) => {\n      setState((prev) => {\n        const nextValue =\n          typeof value === \"function\"\n            ? (value as (prevState: T | undefined) => T | undefined)(prev)\n            : value\n\n        if (Object.is(prev, nextValue)) {\n          return prev\n        }\n        return nextValue\n      })\n    },\n    []\n  )\n\n  return [state, setStateOptimized] as const\n}\n",
-      "type": "registry:hook"
+      "type": "registry:hook",
+      "variants": {
+        "ts": {
+          "path": "registry/hooks/use-uncontrolled-state.ts",
+          "content": "import * as React from \"react\"\n\nimport { useCallbackRef } from \"./use-callback-ref\"\n\ninterface Props<T> {\n  defaultProp?: T\n  onChange?: (state: T) => void\n}\n\nexport function useUncontrolledState<T>({ defaultProp, onChange }: Props<T>) {\n  const [state, setState] = React.useState(defaultProp)\n  const prevStateRef = React.useRef(state)\n  const handleChange = useCallbackRef(onChange)\n\n  React.useEffect(() => {\n    if (prevStateRef.current !== state && state !== undefined) {\n      handleChange(state)\n      prevStateRef.current = state\n    }\n  }, [state, handleChange])\n\n  const setStateOptimized = React.useCallback(\n    (value: React.SetStateAction<T | undefined>) => {\n      setState((prev) => {\n        const nextValue =\n          typeof value === \"function\"\n            ? (value as (prevState: T | undefined) => T | undefined)(prev)\n            : value\n\n        if (Object.is(prev, nextValue)) {\n          return prev\n        }\n        return nextValue\n      })\n    },\n    []\n  )\n\n  return [state, setStateOptimized] as const\n}\n"
+        },
+        "js": {
+          "path": "registry/hooks/use-uncontrolled-state.js",
+          "content": "import * as React from \"react\";\nimport { useCallbackRef } from \"./use-callback-ref\";\nexport function useUncontrolledState({ defaultProp, onChange }) {\n    const [state, setState] = React.useState(defaultProp);\n    const prevStateRef = React.useRef(state);\n    const handleChange = useCallbackRef(onChange);\n    React.useEffect(() => {\n        if (prevStateRef.current !== state && state !== undefined) {\n            handleChange(state);\n            prevStateRef.current = state;\n        }\n    }, [state, handleChange]);\n    const setStateOptimized = React.useCallback((value) => {\n        setState((prev) => {\n            const nextValue = typeof value === \"function\"\n                ? value(prev)\n                : value;\n            if (Object.is(prev, nextValue)) {\n                return prev;\n            }\n            return nextValue;\n        });\n    }, []);\n    return [state, setStateOptimized];\n}\n"
+        }
+      }
     }
   ]
 }

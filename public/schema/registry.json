@@ -4,19 +4,23 @@
   "type": "object",
   "properties": {
     "name": {
-      "type": "string"
+      "type": "string",
+      "description": "The name of the registry."
     },
     "homepage": {
-      "type": "string"
+      "type": "string",
+      "description": "The homepage URL for the registry."
     },
     "items": {
       "type": "array",
+      "description": "The registry items included in this registry.",
       "items": {
-        "$ref": "https://usekit.kiron.dev/schema/registry-item.json"
-      }
+        "$ref": "https://usekit.vercel.app/schema/registry-item.json"
+      },
+      "minItems": 1,
+      "uniqueItems": true
     }
   },
   "required": ["name", "homepage", "items"],
-  "uniqueItems": true,
-  "minItems": 1
+  "additionalProperties": false
 }
