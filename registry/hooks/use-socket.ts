@@ -5,9 +5,9 @@ interface Options {
   withCredentials?: boolean
   transports?: string[]
   reconnection?: boolean
-  reconnectionDelay?: number // in ms
+  reconnectionDelay?: number
   autoConnect?: boolean
-  timeout?: number // in ms
+  timeout?: number
 }
 
 interface Return {

@@ -75,7 +75,6 @@ function recomputeDerivedSessionState() {
   anySessionNeedsComponentInfo = false
   enabledLevelsSet = new Set<LogLevel>()
 
-  // To avoid dropping older logs too early, prefer the largest maxLogs across sessions.
   let computedMaxLogs = 0
 
   for (const session of sessions.values()) {
@@ -109,7 +108,6 @@ const originalConsoleDescriptors: Partial<
   Record<ConsoleMethodName, PropertyDescriptor | undefined>
 > = {}
 
-// The latest underlying console methods (can be updated if something overwrites console.*)
 const nativeConsole: Partial<
   Record<ConsoleMethodName, (...args: unknown[]) => void>
 > = {
@@ -236,12 +234,6 @@ function shouldCapture(
   }
 }
 
-/**
- * Returns whether any enabled session should record this log. `getCallerInfo` is
- * only invoked when at least one session needs caller file/name (not scope "all").
- * For global error/rejection handlers, pass a getter that returns fixed info from the
- * event — do not use the live stack from inside the hook.
- */
 function shouldStoreLog(
   logLevel: LogLevel,
   getCallerInfo: () => ComponentInfo
@@ -332,7 +324,6 @@ function flushListenersImpl() {
   }
 }
 
-/** Immediate notify; cancels any scheduled batched flush. */
 function notifyListenersSync() {
   if (
     notifyRafId != null &&
@@ -347,12 +338,6 @@ function notifyListenersSync() {
   listeners.forEach((listener) => listener())
 }
 
-/**
- * Coalesce subscriber updates: at most one flush per animation frame (when
- * available), so dev runtimes that log continuously cannot peg React to one
- * update per log line. Re-entrant console calls during a flush schedule a
- * follow-up flush safely.
- */
 function notifyListeners() {
   if (
     typeof window !== "undefined" &&
@@ -403,8 +388,6 @@ function serializeArgs(args: unknown[]): string {
 
 function createConsoleInterceptor(level: ConsoleMethodName) {
   const interceptor = function interceptedConsole(...args: unknown[]) {
-    // Capture first so a throwing native console implementation can't drop logs.
-    // (We still call native in a try/catch to preserve typical console behavior.)
     const logLevel = level as LogLevel
     let cachedInfo: ComponentInfo | undefined
     const getCallerInfo = (): ComponentInfo => {
@@ -417,15 +400,12 @@ function createConsoleInterceptor(level: ConsoleMethodName) {
       captureLog(logLevel, message, args, cachedInfo)
     }
 
-    // Always call the latest underlying implementation
     const native = nativeConsole[level]
-    // Guard against accidental self-reference (would cause infinite recursion)
+
     if (native && native !== interceptor) {
       try {
         native(...args)
-      } catch {
-        // Swallow to avoid breaking app code on custom/hostile console impls
-      }
+      } catch {}
     }
   }
   ;(interceptor as any)[CAPTURE_FLAG] = true
@@ -481,7 +461,6 @@ function setupConsoleInterception() {
         },
       })
     } catch {
-      // Fallback: direct assignment (less resilient to later overwrites)
       ;(console as any)[method] = interceptor
     }
   }
@@ -609,8 +588,6 @@ export function useConsoleCapture(
   levelsRef.current = new Set(levels)
   maxLogsRef.current = maxLogsOption
 
-  // Keep component path/name in sync with incoming props unless user overrides via setScope().
-  // We treat "override" as: componentPathRef/componentNameRef no longer equals the last provided props.
   const lastProvidedComponentPathRef = React.useRef<string | undefined>(
     componentPath
   )
@@ -706,12 +683,10 @@ export function useConsoleCapture(
       newScope: CaptureScope,
       options?: { componentPath?: string; componentName?: string }
     ) => {
-      // Update local state first; global session sync happens via effect.
       componentPathRef.current = options?.componentPath ?? componentPath
       componentNameRef.current = options?.componentName ?? componentName
       setCurrentScopeState(newScope)
 
-      // Ensure we don't miss logs if scope value stays the same (no state change => no effect run).
       const id = sessionIdRef.current
       if (!id) return
       const existing = sessions.get(id)

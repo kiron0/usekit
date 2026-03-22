@@ -1,11 +1,10 @@
 import * as React from "react"
 
 export interface UseScrollBlockerReturn {
-  /** Whether this hook instance currently holds an active scroll block. */
   isBlocked: boolean
   block: () => void
   unblock: () => void
-  /** Toggles scroll blocking for this instance (`block` / `unblock`). */
+
   toggle: () => void
 }
 

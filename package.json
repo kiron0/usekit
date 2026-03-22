@@ -14,7 +14,8 @@
     "format": "prettier --write --cache .",
     "pull": "git pull origin dev",
     "push": "git add . && git commit -m 'update' && git push",
-    "clear": "rm -rf .contentlayer .next bun.lock package-lock.json yarn.lock pnpm-lock.yaml node_modules .cache"
+    "clear": "rm -rf .contentlayer .next bun.lock package-lock.json yarn.lock pnpm-lock.yaml node_modules .cache",
+    "lines": "npx locio@latest --include-ext tsx,ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
@@ -31,6 +32,7 @@
     "jotai": "^2.15.1",
     "lodash.debounce": "^4.0.8",
     "lucide-react": "^0.554.0",
+    "moment": "^2.30.1",
     "next": "15.5.14",
     "next-contentlayer2": "0.5.4",
     "next-themes": "^0.4.6",

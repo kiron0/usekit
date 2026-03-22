@@ -44,7 +44,6 @@ export function useA11yAnnouncer(): A11yAnnouncer {
         politeness === "assertive" ? assertiveRef.current : politeRef.current
       if (!target) return
 
-      // Force a brief reset to ensure announcement is read.
       target.textContent = ""
       target.textContent = text
     },

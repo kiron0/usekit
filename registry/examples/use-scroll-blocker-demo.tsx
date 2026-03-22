@@ -90,7 +90,7 @@ export default function UseScrollBlockerDemo() {
                   Close
                 </Button>
                 <Button onClick={() => toggle()}>
-                    {isBlocked ? "Unblock scroll" : "Block scroll"}
+                  {isBlocked ? "Unblock scroll" : "Block scroll"}
                 </Button>
               </div>
             </DialogHelper>
