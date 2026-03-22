@@ -1,5 +1,5 @@
 {
-  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "$schema": "https://usekit.vercel.app/schema/registry-item.json",
   "name": "use-measure",
   "type": "registry:hook",
   "title": "Use Measure",
@@ -7,9 +7,17 @@
   "dependencies": ["lucide-react"],
   "files": [
     {
-      "path": "registry/hooks/use-measure.ts",
-      "content": "import * as React from \"react\"\n\ninterface Dimensions {\n  width: number | null\n  height: number | null\n}\n\nexport function useMeasure(): [(node: Element | null) => void, Dimensions] {\n  const [dimensions, setDimensions] = React.useState<Dimensions>({\n    width: null,\n    height: null,\n  })\n\n  const previousObserver = React.useRef<ResizeObserver | null>(null)\n\n  const customRef = React.useCallback((node: Element | null) => {\n    if (previousObserver.current) {\n      previousObserver.current.disconnect()\n      previousObserver.current = null\n    }\n\n    if (node) {\n      const observer = new ResizeObserver(([entry]) => {\n        if (entry?.borderBoxSize && entry.borderBoxSize.length > 0) {\n          const { inlineSize: width, blockSize: height } =\n            entry.borderBoxSize[0]\n          setDimensions({ width, height })\n        } else if (entry.contentRect) {\n          const { width, height } = entry.contentRect\n          setDimensions({ width, height })\n        }\n      })\n\n      observer.observe(node)\n      previousObserver.current = observer\n    }\n  }, [])\n\n  return [customRef, dimensions]\n}\n",
-      "type": "registry:hook"
+      "type": "registry:hook",
+      "variants": {
+        "ts": {
+          "path": "registry/hooks/use-measure.ts",
+          "content": "import * as React from \"react\"\n\ninterface Dimensions {\n  width: number | null\n  height: number | null\n}\n\nexport function useMeasure(): [(node: Element | null) => void, Dimensions] {\n  const [dimensions, setDimensions] = React.useState<Dimensions>({\n    width: null,\n    height: null,\n  })\n\n  const previousObserver = React.useRef<ResizeObserver | null>(null)\n\n  const customRef = React.useCallback((node: Element | null) => {\n    if (previousObserver.current) {\n      previousObserver.current.disconnect()\n      previousObserver.current = null\n    }\n\n    if (node) {\n      const observer = new ResizeObserver(([entry]) => {\n        if (entry?.borderBoxSize && entry.borderBoxSize.length > 0) {\n          const { inlineSize: width, blockSize: height } =\n            entry.borderBoxSize[0]\n          setDimensions({ width, height })\n        } else if (entry.contentRect) {\n          const { width, height } = entry.contentRect\n          setDimensions({ width, height })\n        }\n      })\n\n      observer.observe(node)\n      previousObserver.current = observer\n    }\n  }, [])\n\n  return [customRef, dimensions]\n}\n"
+        },
+        "js": {
+          "path": "registry/hooks/use-measure.js",
+          "content": "import * as React from \"react\";\nexport function useMeasure() {\n    const [dimensions, setDimensions] = React.useState({\n        width: null,\n        height: null,\n    });\n    const previousObserver = React.useRef(null);\n    const customRef = React.useCallback((node) => {\n        if (previousObserver.current) {\n            previousObserver.current.disconnect();\n            previousObserver.current = null;\n        }\n        if (node) {\n            const observer = new ResizeObserver(([entry]) => {\n                if (entry?.borderBoxSize && entry.borderBoxSize.length > 0) {\n                    const { inlineSize: width, blockSize: height } = entry.borderBoxSize[0];\n                    setDimensions({ width, height });\n                }\n                else if (entry.contentRect) {\n                    const { width, height } = entry.contentRect;\n                    setDimensions({ width, height });\n                }\n            });\n            observer.observe(node);\n            previousObserver.current = observer;\n        }\n    }, []);\n    return [customRef, dimensions];\n}\n"
+        }
+      }
     }
   ]
 }

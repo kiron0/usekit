@@ -1,14 +1,22 @@
 {
-  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "$schema": "https://usekit.vercel.app/schema/registry-item.json",
   "name": "use-error-boundary",
   "type": "registry:hook",
   "title": "Use Error Boundary",
   "description": "Handle errors in React components gracefully with the useErrorBoundary hook, providing a way to catch and display errors without crashing the application.",
   "files": [
     {
-      "path": "registry/hooks/use-error-boundary.tsx",
-      "content": "import * as React from \"react\"\n\ninterface Return {\n  hasError: boolean\n  error: Error | null\n  resetError: () => void\n  ErrorBoundary: React.ComponentType<{\n    children: React.ReactNode\n    fallback?: React.ReactNode\n  }>\n}\n\nclass ErrorBoundary extends React.Component<\n  {\n    children: React.ReactNode\n    fallback?: React.ReactNode\n    onError?: (error: Error) => void\n  },\n  { hasError: boolean; error: Error | null }\n> {\n  state = { hasError: false, error: null }\n\n  static getDerivedStateFromError(error: Error) {\n    return { hasError: true, error }\n  }\n\n  componentDidCatch(error: Error) {\n    this.props.onError?.(error)\n  }\n\n  render() {\n    if (this.state.hasError && this.props.fallback) return this.props.fallback\n    if (this.state.hasError) return null\n    return this.props.children\n  }\n}\n\nexport function useErrorBoundary(): Return {\n  const [hasError, setHasError] = React.useState(false)\n  const [error, setError] = React.useState<Error | null>(null)\n\n  const resetError = React.useCallback(() => {\n    setHasError(false)\n    setError(null)\n  }, [])\n\n  const handleError = React.useCallback((error: Error) => {\n    setHasError(true)\n    setError(error)\n  }, [])\n\n  const ErrorBoundaryComponent: React.ComponentType<{\n    children: React.ReactNode\n    fallback?: React.ReactNode\n  }> = ({ children, fallback }) => (\n    <ErrorBoundary onError={handleError} fallback={fallback}>\n      {children}\n    </ErrorBoundary>\n  )\n\n  return { hasError, error, resetError, ErrorBoundary: ErrorBoundaryComponent }\n}\n",
-      "type": "registry:hook"
+      "type": "registry:hook",
+      "variants": {
+        "ts": {
+          "path": "registry/hooks/use-error-boundary.tsx",
+          "content": "import * as React from \"react\"\n\ninterface Return {\n  hasError: boolean\n  error: Error | null\n  resetError: () => void\n  ErrorBoundary: React.ComponentType<{\n    children: React.ReactNode\n    fallback?: React.ReactNode\n  }>\n}\n\nclass ErrorBoundary extends React.Component<\n  {\n    children: React.ReactNode\n    fallback?: React.ReactNode\n    onError?: (error: Error) => void\n  },\n  { hasError: boolean; error: Error | null }\n> {\n  state = { hasError: false, error: null }\n\n  static getDerivedStateFromError(error: Error) {\n    return { hasError: true, error }\n  }\n\n  componentDidCatch(error: Error) {\n    this.props.onError?.(error)\n  }\n\n  render() {\n    if (this.state.hasError && this.props.fallback) return this.props.fallback\n    if (this.state.hasError) return null\n    return this.props.children\n  }\n}\n\nexport function useErrorBoundary(): Return {\n  const [hasError, setHasError] = React.useState(false)\n  const [error, setError] = React.useState<Error | null>(null)\n\n  const resetError = React.useCallback(() => {\n    setHasError(false)\n    setError(null)\n  }, [])\n\n  const handleError = React.useCallback((error: Error) => {\n    setHasError(true)\n    setError(error)\n  }, [])\n\n  const ErrorBoundaryComponent: React.ComponentType<{\n    children: React.ReactNode\n    fallback?: React.ReactNode\n  }> = ({ children, fallback }) => (\n    <ErrorBoundary onError={handleError} fallback={fallback}>\n      {children}\n    </ErrorBoundary>\n  )\n\n  return { hasError, error, resetError, ErrorBoundary: ErrorBoundaryComponent }\n}\n"
+        },
+        "js": {
+          "path": "registry/hooks/use-error-boundary.jsx",
+          "content": "import * as React from \"react\";\nclass ErrorBoundary extends React.Component {\n    constructor() {\n        super(...arguments);\n        this.state = { hasError: false, error: null };\n    }\n    static getDerivedStateFromError(error) {\n        return { hasError: true, error };\n    }\n    componentDidCatch(error) {\n        this.props.onError?.(error);\n    }\n    render() {\n        if (this.state.hasError && this.props.fallback)\n            return this.props.fallback;\n        if (this.state.hasError)\n            return null;\n        return this.props.children;\n    }\n}\nexport function useErrorBoundary() {\n    const [hasError, setHasError] = React.useState(false);\n    const [error, setError] = React.useState(null);\n    const resetError = React.useCallback(() => {\n        setHasError(false);\n        setError(null);\n    }, []);\n    const handleError = React.useCallback((error) => {\n        setHasError(true);\n        setError(error);\n    }, []);\n    const ErrorBoundaryComponent = ({ children, fallback }) => (<ErrorBoundary onError={handleError} fallback={fallback}>\n      {children}\n    </ErrorBoundary>);\n    return { hasError, error, resetError, ErrorBoundary: ErrorBoundaryComponent };\n}\n"
+        }
+      }
     }
   ]
 }

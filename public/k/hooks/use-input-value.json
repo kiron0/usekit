@@ -1,14 +1,22 @@
 {
-  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "$schema": "https://usekit.vercel.app/schema/registry-item.json",
   "name": "use-input-value",
   "type": "registry:hook",
   "title": "Use Input Value",
   "description": "A hook to manage input values with useInputValue.",
   "files": [
     {
-      "path": "registry/hooks/use-input-value.ts",
-      "content": "import * as React from \"react\"\n\nexport function useInputValue(initialValue: string) {\n  const [value, setValue] = React.useState(initialValue)\n\n  function onChange(event: React.ChangeEvent<HTMLInputElement>) {\n    setValue(event.currentTarget.value)\n  }\n\n  return {\n    value,\n    onChange,\n  }\n}\n",
-      "type": "registry:hook"
+      "type": "registry:hook",
+      "variants": {
+        "ts": {
+          "path": "registry/hooks/use-input-value.ts",
+          "content": "import * as React from \"react\"\n\nexport function useInputValue(initialValue: string) {\n  const [value, setValue] = React.useState(initialValue)\n\n  function onChange(event: React.ChangeEvent<HTMLInputElement>) {\n    setValue(event.currentTarget.value)\n  }\n\n  return {\n    value,\n    onChange,\n  }\n}\n"
+        },
+        "js": {
+          "path": "registry/hooks/use-input-value.js",
+          "content": "import * as React from \"react\";\nexport function useInputValue(initialValue) {\n    const [value, setValue] = React.useState(initialValue);\n    function onChange(event) {\n        setValue(event.currentTarget.value);\n    }\n    return {\n        value,\n        onChange,\n    };\n}\n"
+        }
+      }
     }
   ]
 }

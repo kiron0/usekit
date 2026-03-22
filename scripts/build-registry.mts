@@ -12,7 +12,7 @@ const REGISTRY_OUTPUT_PATH = "public/k/hooks"
 
 const registry: Registry = {
   name: "useKit",
-  homepage: "https://usekit.kiron.dev",
+  homepage: "https://usekit.vercel.app",
   // @ts-expect-error: registryItems might not match the expected type
   items: registryItems.registryItems,
 } satisfies Registry
@@ -91,7 +91,7 @@ async function buildRegistryJsonFile(): Promise<void> {
   await fs.unlink(REGISTRY_JSON_PATH).catch(() => {})
 
   const fixedRegistry = {
-    $schema: "https://usekit.kiron.dev/schema/registry.json",
+    $schema: "https://usekit.vercel.app/schema/registry.json",
     ...registry,
     // @ts-ignore
     items: registryItems.registryItems
@@ -116,7 +116,7 @@ async function buildRegistryJsonFile(): Promise<void> {
 async function buildRegistry(): Promise<void> {
   return new Promise((resolve, reject) => {
     const childProcess = spawn(
-      "bunx",
+      "npx",
       [
         "uselab@latest",
         "build",

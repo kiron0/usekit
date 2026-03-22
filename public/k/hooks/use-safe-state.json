@@ -1,14 +1,22 @@
 {
-  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "$schema": "https://usekit.vercel.app/schema/registry-item.json",
   "name": "use-safe-state",
   "type": "registry:hook",
   "title": "Use Safe State",
   "description": "Safely manage state updates in React components with the useSafeState hook, preventing memory leaks and ensuring state consistency.",
   "files": [
     {
-      "path": "registry/hooks/use-safe-state.ts",
-      "content": "import * as React from \"react\"\n\nexport function useSafeState<T>(\n  initialValue: T | (() => T),\n  logUnmountedUpdates: boolean = false\n): [T, React.Dispatch<React.SetStateAction<T>>] {\n  const [state, unsafeSetState] = React.useState<T>(initialValue)\n\n  const isMounted = React.useRef(true)\n\n  const componentName = React.useRef(\n    new Error().stack?.split(\"\\n\")[2]?.match(/at (\\w+)/)?.[1] ||\n      \"UnknownComponent\"\n  )\n\n  React.useEffect(() => {\n    isMounted.current = true\n    return () => {\n      isMounted.current = false\n    }\n  }, [])\n\n  const safeSetState = React.useCallback<\n    React.Dispatch<React.SetStateAction<T>>\n  >(\n    (value) => {\n      if (isMounted.current) {\n        unsafeSetState(value)\n      } else if (logUnmountedUpdates) {\n        console.warn(\n          `Attempted to update state on unmounted component ${componentName.current}. ` +\n            `This is a no-op, but indicates a memory leak in your application.`\n        )\n      }\n    },\n    [logUnmountedUpdates]\n  )\n\n  return [state, safeSetState]\n}\n",
-      "type": "registry:hook"
+      "type": "registry:hook",
+      "variants": {
+        "ts": {
+          "path": "registry/hooks/use-safe-state.ts",
+          "content": "import * as React from \"react\"\n\nexport function useSafeState<T>(\n  initialValue: T | (() => T),\n  logUnmountedUpdates: boolean = false\n): [T, React.Dispatch<React.SetStateAction<T>>] {\n  const [state, unsafeSetState] = React.useState<T>(initialValue)\n\n  const isMounted = React.useRef(true)\n\n  const componentName = React.useRef(\n    new Error().stack?.split(\"\\n\")[2]?.match(/at (\\w+)/)?.[1] ||\n      \"UnknownComponent\"\n  )\n\n  React.useEffect(() => {\n    isMounted.current = true\n    return () => {\n      isMounted.current = false\n    }\n  }, [])\n\n  const safeSetState = React.useCallback<\n    React.Dispatch<React.SetStateAction<T>>\n  >(\n    (value) => {\n      if (isMounted.current) {\n        unsafeSetState(value)\n      } else if (logUnmountedUpdates) {\n        console.warn(\n          `Attempted to update state on unmounted component ${componentName.current}. ` +\n            `This is a no-op, but indicates a memory leak in your application.`\n        )\n      }\n    },\n    [logUnmountedUpdates]\n  )\n\n  return [state, safeSetState]\n}\n"
+        },
+        "js": {
+          "path": "registry/hooks/use-safe-state.js",
+          "content": "import * as React from \"react\";\nexport function useSafeState(initialValue, logUnmountedUpdates = false) {\n    const [state, unsafeSetState] = React.useState(initialValue);\n    const isMounted = React.useRef(true);\n    const componentName = React.useRef(new Error().stack?.split(\"\\n\")[2]?.match(/at (\\w+)/)?.[1] ||\n        \"UnknownComponent\");\n    React.useEffect(() => {\n        isMounted.current = true;\n        return () => {\n            isMounted.current = false;\n        };\n    }, []);\n    const safeSetState = React.useCallback((value) => {\n        if (isMounted.current) {\n            unsafeSetState(value);\n        }\n        else if (logUnmountedUpdates) {\n            console.warn(`Attempted to update state on unmounted component ${componentName.current}. ` +\n                `This is a no-op, but indicates a memory leak in your application.`);\n        }\n    }, [logUnmountedUpdates]);\n    return [state, safeSetState];\n}\n"
+        }
+      }
     }
   ]
 }
