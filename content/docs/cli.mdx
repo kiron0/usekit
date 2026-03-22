@@ -1,9 +1,11 @@
 ---
 title: uselab
-description: A command-line tool for installing UseKit hooks into your React projects. Simplify your hook installation process with a simple command.
+description: Command-line tool for installing UseKit hooks into React projects, browsing the registry, and building hook JSON from a local registry file.
 ---
 
 ## Installation
+
+Requires **Node.js 20+** (see the [uselab](https://www.npmjs.com/package/uselab) package `engines` field).
 
 ```bash
 npm install -g uselab
@@ -35,6 +37,8 @@ npx uselab@latest --help
    npx uselab@latest list
    ```
 
+**Commands at a glance:** `add` (install hooks), `init` (project config), `view` (inspect before install), `list` / `search` (discover hooks), `build` (compile a local registry JSON into per-hook JSON files for publishing or tooling).
+
 ---
 
 ## Commands
@@ -63,12 +67,16 @@ npx uselab@latest add [options] [hooks...]
 
 #### Options
 
-| Option              | Description                                                       | Default           |
-| ------------------- | ----------------------------------------------------------------- | ----------------- |
-| `-y, --yes`         | Skip confirmation prompts. Implies `--overwrite` when files exist | `false`           |
-| `--overwrite`       | Overwrite existing hook files if they already exist               | `false`           |
-| `-c, --cwd <path>`  | Working directory for resolving package.json and hooks directory  | Current directory |
-| `-p, --path <path>` | Custom installation path (overrides hooks config)                 | Uses config       |
+| Option              | Description                                                         | Default           |
+| ------------------- | ------------------------------------------------------------------- | ----------------- |
+| `-y, --yes`         | Skip confirmation prompts. Implies `--overwrite` when files exist   | `false`           |
+| `--overwrite`       | Overwrite existing hook files if they already exist                 | `false`           |
+| `--js`              | Install the JavaScript variant when the hook defines TS/JS variants | Auto-detect       |
+| `--ts`              | Install the TypeScript variant                                      | Auto-detect       |
+| `-c, --cwd <path>`  | Working directory for resolving package.json and hooks directory    | Current directory |
+| `-p, --path <path>` | Custom installation path (overrides hooks config)                   | Uses config       |
+
+Do not pass `--js` and `--ts` together; the CLI will error if both are set.
 
 #### Examples
 
@@ -136,6 +144,16 @@ npx uselab@latest add use-counter --path src/custom/hooks
 npx uselab@latest add use-toggle -p lib/hooks
 ```
 
+**Force JavaScript or TypeScript variant** (when the registry item ships both):
+
+```bash
+npx uselab@latest add use-counter --js
+```
+
+```bash
+npx uselab@latest add use-counter --ts
+```
+
 **Install from URL:**
 
 ```bash
@@ -176,6 +194,7 @@ npx uselab@latest add use-network-status --overwrite --cwd ./project
 - Multiple hooks are installed sequentially with progress tracking
 - Running `add` without arguments displays usage instructions and examples
 - The `--yes` flag automatically overwrites existing files without prompting
+- For registry hooks with TypeScript and JavaScript variants, the CLI chooses a variant from your project by default; use `--js` or `--ts` to override
 
 ---
 
@@ -222,6 +241,8 @@ Creates a `uselab.json` file in your project root:
   "hooks": "src/hooks"
 }
 ```
+
+If the project is already initialized (`hooks` is already set in `uselab.json`), the CLI prints a short message and leaves the config unchanged.
 
 ---
 
@@ -295,7 +316,7 @@ npx uselab@latest view use-counter use-toggle --format json
 **Code format (default):**
 
 - Human-readable format with syntax highlighting
-- Shows code preview, dependencies, and file structure
+- Shows code preview, dependencies, dev dependencies, registry dependencies (when present), and file paths (including `[ts]` / `[js]` labels for variant hooks)
 - Displays installation instructions
 
 **JSON format:**
@@ -446,13 +467,17 @@ npx uselab@latest list -q counter --skip-limit --format json
 
 ### `search` - Search Hooks
 
-Search for hooks in the registry with query filtering and pagination support. Similar to `list` but optimized for searching.
+Search for hooks in the registry with the same filtering and pagination behavior as `list`, with an optional **positional** query for quick typing.
 
 #### Syntax
 
 ```bash
-npx uselab@latest search [options]
+npx uselab@latest search [options] [query]
 ```
+
+#### Arguments
+
+- `[query]` - Optional search string. Equivalent to `-q, --query` when used alone. If you pass both, the `--query` value takes precedence.
 
 #### Options
 
@@ -549,10 +574,45 @@ npx uselab@latest search -q counter --skip-limit
 
 #### Differences from `list`
 
-- `search` is optimized for finding hooks with queries
-- `list` supports JSON output format, `search` does not
-- Both support the same filtering and pagination options
-- `search` uses fuzzy matching for better discovery
+- Both match hooks by substring on name, title, and description; if nothing matches, both can show a short list of **similar** hook names (ranked for typos)
+- `list` supports `--format json`; `search` is interactive table output only
+- `search` accepts an optional positional query (`search network`) as well as `-q` / `--query`
+
+---
+
+### `build` - Build registry hook JSON
+
+For registry authors: read a **registry JSON** file (with an `items` array), load each hook’s source files from disk, embed file contents, and emit one JSON file per hook under an output directory. TypeScript sources are transpiled to JavaScript when building `ts`/`js` **variants** (using the TypeScript compiler API).
+
+#### Syntax
+
+```bash
+npx uselab@latest build [options]
+```
+
+#### Options
+
+| Option                  | Description                                                  | Required                        |
+| ----------------------- | ------------------------------------------------------------ | ------------------------------- |
+| `-r, --registry <path>` | Path to the registry JSON file (relative to cwd or absolute) | Yes                             |
+| `-o, --output <path>`   | Directory where `{hook-name}.json` files are written         | Yes                             |
+| `-c, --cwd <path>`      | Working directory for resolving paths                        | No (default: current directory) |
+
+#### Examples
+
+```bash
+npx uselab@latest build --registry registry.json --output dist/hooks
+```
+
+```bash
+npx uselab@latest build -r registry.json -o dist --cwd /path/to/project
+```
+
+#### Behavior
+
+- Skips items that have no `files` array (with a warning)
+- Writes each built hook as `{name}.json` with embedded `files` (including `variants` with `content` when applicable)
+- Sets `$schema` to `https://usekit.vercel.app/schema/registry-item.json` on each output file
 
 ---
 
@@ -581,6 +641,10 @@ npx uselab@latest add --help
 
 ```bash
 npx uselab@latest list --help
+```
+
+```bash
+npx uselab@latest build --help
 ```
 
 ---

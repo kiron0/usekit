@@ -14,7 +14,7 @@
         },
         "js": {
           "path": "registry/hooks/use-unmount.js",
-          "content": "import * as React from \"react\";\nexport function useUnmount(func) {\n    const funcRef = React.useRef(func);\n    funcRef.current = func;\n    React.useEffect(() => () => {\n        funcRef.current();\n    }, []);\n}\n"
+          "content": "import * as React from \"react\"\nexport function useUnmount(func) {\n  const funcRef = React.useRef(func)\n  funcRef.current = func\n  React.useEffect(\n    () => () => {\n      funcRef.current()\n    },\n    [],\n  )\n}\n"
         }
       }
     }

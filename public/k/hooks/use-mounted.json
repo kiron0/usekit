@@ -14,7 +14,7 @@
         },
         "js": {
           "path": "registry/hooks/use-mounted.js",
-          "content": "import * as React from \"react\";\nexport function useMounted() {\n    const [mounted, setMounted] = React.useState(false);\n    React.useEffect(() => {\n        setMounted(true);\n    }, []);\n    return mounted;\n}\n"
+          "content": "import * as React from \"react\"\nexport function useMounted() {\n  const [mounted, setMounted] = React.useState(false)\n  React.useEffect(() => {\n    setMounted(true)\n  }, [])\n  return mounted\n}\n"
         }
       }
     }

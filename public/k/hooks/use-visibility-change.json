@@ -14,7 +14,7 @@
         },
         "js": {
           "path": "registry/hooks/use-visibility-change.js",
-          "content": "import * as React from \"react\";\nexport function useVisibilityChange() {\n    const [isVisible, setIsVisible] = React.useState(() => {\n        if (typeof document === \"undefined\")\n            return true;\n        return document.visibilityState === \"visible\";\n    });\n    React.useEffect(() => {\n        if (typeof document === \"undefined\")\n            return;\n        const handleVisibilityChange = () => {\n            setIsVisible(document.visibilityState === \"visible\");\n        };\n        document.addEventListener(\"visibilitychange\", handleVisibilityChange);\n        return () => {\n            document.removeEventListener(\"visibilitychange\", handleVisibilityChange);\n        };\n    }, []);\n    return isVisible;\n}\n"
+          "content": "import * as React from \"react\"\nexport function useVisibilityChange() {\n  const [isVisible, setIsVisible] = React.useState(() => {\n    if (typeof document === \"undefined\") return true\n    return document.visibilityState === \"visible\"\n  })\n  React.useEffect(() => {\n    if (typeof document === \"undefined\") return\n    const handleVisibilityChange = () => {\n      setIsVisible(document.visibilityState === \"visible\")\n    }\n    document.addEventListener(\"visibilitychange\", handleVisibilityChange)\n    return () => {\n      document.removeEventListener(\"visibilitychange\", handleVisibilityChange)\n    }\n  }, [])\n  return isVisible\n}\n"
         }
       }
     }
