@@ -2073,32 +2073,6 @@ export const hooks: Registry["items"] = [
       },
     ],
   },
-  {
-    name: "use-wordle-game",
-    title: "Use Wordle Game",
-    description:
-      "Run a Wordle-style guessing game with duplicate-letter scoring and keyboard state.",
-    type: "registry:hook",
-    files: [
-      {
-        path: "registry/hooks/use-wordle-game.ts",
-        type: "registry:hook",
-      },
-    ],
-  },
-  {
-    name: "use-2048-game",
-    title: "Use 2048 Game",
-    description:
-      "Manage 2048-style board merging, score tracking, and game-over state in React.",
-    type: "registry:hook",
-    files: [
-      {
-        path: "registry/hooks/use-2048-game.ts",
-        type: "registry:hook",
-      },
-    ],
-  },
 ]
 
 export default hooks

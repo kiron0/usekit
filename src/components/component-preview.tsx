@@ -17,6 +17,7 @@ interface ComponentPreviewProps extends React.HTMLAttributes<HTMLDivElement> {
   extractedClassNames?: string
   align?: "center" | "start" | "end"
   hideCode?: boolean
+  showFullScreen?: boolean
 }
 
 export function ComponentPreview({
@@ -25,6 +26,7 @@ export function ComponentPreview({
   className,
   align = "center",
   hideCode = false,
+  showFullScreen = false,
   ...props
 }: ComponentPreviewProps) {
   const [key, setKey] = React.useState(0)
@@ -91,9 +93,11 @@ export function ComponentPreview({
           <div className="absolute right-4 top-4 space-x-2">
             <CopyButton value={codeString} />
             <RerenderComponent onClick={() => setKey((prev) => prev + 1)} />
-            <ComponentPreviewFull name={name} open={open} setOpen={setOpen}>
-              <PreviewComponent Preview={Preview} />
-            </ComponentPreviewFull>
+            {showFullScreen ? (
+              <ComponentPreviewFull name={name} open={open} setOpen={setOpen}>
+                <PreviewComponent Preview={Preview} />
+              </ComponentPreviewFull>
+            ) : null}
           </div>
           <div
             key={key}

@@ -21,6 +21,8 @@ interface DialogHelperProps {
   open?: boolean
   setOpen?: (value: boolean) => void
   disabled?: boolean
+  /** When false, Radix does not trap pointer/scroll on the document (use with manual scroll lock). */
+  modal?: boolean
 }
 
 export function DialogHelper({
@@ -32,9 +34,10 @@ export function DialogHelper({
   open,
   setOpen,
   disabled,
+  modal = true,
 }: DialogHelperProps) {
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
+    <Dialog open={open} onOpenChange={setOpen} modal={modal}>
       {trigger && (
         <DialogTrigger asChild disabled={disabled}>
           {trigger}

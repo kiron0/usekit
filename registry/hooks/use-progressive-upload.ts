@@ -30,9 +30,9 @@ interface UploadState {
   lastChunkIndex: number
 }
 
-const DEFAULT_CHUNK_SIZE = 256 * 1024 // 256KB
-const MIN_CHUNK_SIZE = 64 * 1024 // 64KB
-const MAX_CHUNK_SIZE = 2 * 1024 * 1024 // 2MB
+const DEFAULT_CHUNK_SIZE = 256 * 1024
+const MIN_CHUNK_SIZE = 64 * 1024
+const MAX_CHUNK_SIZE = 2 * 1024 * 1024
 const DEFAULT_MAX_RETRIES = 3
 const DEFAULT_RETRY_DELAY = 1000
 const DEFAULT_STORAGE_KEY = "usekit:upload-state"
@@ -125,15 +125,12 @@ export function useProgressiveUpload(
       const failureRate = failed / (successful + failed)
       const avgSpeed = totalBytes / Math.max(totalTime, 1)
 
-      // Decrease chunk size on high failure rate or slow speed
       if (failureRate > 0.3 || avgSpeed < 50 * 1024) {
         currentChunkSizeRef.current = Math.max(
           minChunkSize,
           Math.floor(currentChunkSizeRef.current * 0.75)
         )
-      }
-      // Increase chunk size on good performance
-      else if (failureRate < 0.1 && avgSpeed > 200 * 1024) {
+      } else if (failureRate < 0.1 && avgSpeed > 200 * 1024) {
         currentChunkSizeRef.current = Math.min(
           maxChunkSize,
           Math.floor(currentChunkSizeRef.current * 1.25)

@@ -70,12 +70,14 @@ The hook provides manual control over scroll blocking, allowing you to block and
 
 ### `useScrollBlocker()`
 
-Returns an object with two methods:
+Returns methods plus the active state for this hook instance:
 
-| Name      | Type         | Description                                       |
-| --------- | ------------ | ------------------------------------------------- |
-| `block`   | `() => void` | Block background scrolling and preserve position  |
-| `unblock` | `() => void` | Unblock background scrolling and restore position |
+| Name        | Type         | Description                                                     |
+| ----------- | ------------ | --------------------------------------------------------------- |
+| `isBlocked` | `boolean`    | Whether this instance currently holds an active scroll block    |
+| `block`     | `() => void` | Block background scrolling and preserve position                |
+| `unblock`   | `() => void` | Unblock background scrolling and restore position               |
+| `toggle`    | `() => void` | Calls `unblock` if blocked, otherwise `block` for this instance |
 
 ## Examples
 

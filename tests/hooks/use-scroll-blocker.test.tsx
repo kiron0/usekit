@@ -62,6 +62,28 @@ describe("useScrollBlocker", () => {
     expect(window.scrollTo).toHaveBeenCalledWith(0, 120)
   })
 
+  it("toggle alternates block and unblock for this instance", () => {
+    const { result } = renderHook(() => useScrollBlocker())
+
+    act(() => {
+      result.current.toggle()
+    })
+    expect(document.body.style.overflow).toBe("hidden")
+    expect(result.current.isBlocked).toBe(true)
+
+    act(() => {
+      result.current.toggle()
+    })
+    expect(document.body.style.overflow).toBe("")
+    expect(result.current.isBlocked).toBe(false)
+
+    act(() => {
+      result.current.toggle()
+    })
+    expect(document.body.style.overflow).toBe("hidden")
+    expect(result.current.isBlocked).toBe(true)
+  })
+
   it("restores pre-existing body styles after unblocking", () => {
     document.body.style.overflow = "clip"
     document.body.style.position = "relative"

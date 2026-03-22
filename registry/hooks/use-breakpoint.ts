@@ -46,7 +46,6 @@ export function useBreakpoint(
       setCurrentBreakpoint(bp)
     }
 
-    // Initialize and set up event listener
     updateBreakpoint()
     window.addEventListener("resize", updateBreakpoint)
 

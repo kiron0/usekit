@@ -63,9 +63,7 @@ export function useConsentGate(
           ...parsed,
         }
       }
-    } catch {
-      // ignore malformed storage values
-    }
+    } catch {}
 
     return getBaselineState()
   })
@@ -88,9 +86,7 @@ export function useConsentGate(
     try {
       const payload = serialize(consents)
       window.localStorage.setItem(storageKey, payload)
-    } catch {
-      // ignore storage failures (e.g., private mode)
-    }
+    } catch {}
   }, [consents, storageKey, persist, serialize])
 
   const allowed = React.useCallback(

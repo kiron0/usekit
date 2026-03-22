@@ -2,7 +2,7 @@ import * as React from "react"
 
 interface Options {
   target?: HTMLElement | Window | null
-  behavior?: ScrollBehavior // "auto" | "smooth"
+  behavior?: ScrollBehavior
 }
 
 export function useScrollToTop({

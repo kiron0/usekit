@@ -1,8 +1,11 @@
 import * as React from "react"
 
 export interface UseScrollBlockerReturn {
+  isBlocked: boolean
   block: () => void
   unblock: () => void
+
+  toggle: () => void
 }
 
 let scrollBlockCount = 0
@@ -46,11 +49,13 @@ function unblockScroll() {
 
 export function useScrollBlocker(): UseScrollBlockerReturn {
   const isBlockedRef = React.useRef(false)
+  const [isBlocked, setIsBlocked] = React.useState(false)
 
   const block = React.useCallback(() => {
     if (!isBlockedRef.current) {
       blockScroll()
       isBlockedRef.current = true
+      setIsBlocked(true)
     }
   }, [])
 
@@ -58,8 +63,17 @@ export function useScrollBlocker(): UseScrollBlockerReturn {
     if (isBlockedRef.current) {
       unblockScroll()
       isBlockedRef.current = false
+      setIsBlocked(false)
     }
   }, [])
+
+  const toggle = React.useCallback(() => {
+    if (isBlockedRef.current) {
+      unblock()
+    } else {
+      block()
+    }
+  }, [block, unblock])
 
   React.useEffect(() => {
     return () => {
@@ -70,5 +84,5 @@ export function useScrollBlocker(): UseScrollBlockerReturn {
     }
   }, [])
 
-  return { block, unblock }
+  return { isBlocked, block, unblock, toggle }
 }

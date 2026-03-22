@@ -49,10 +49,12 @@ export interface UseConsoleCaptureReturn {
   scope: CaptureScope
 }
 
+const DEFAULT_MAX_LOGS = 1000
+
 const logStore: ConsoleLog[] = []
 const listeners = new Set<() => void>()
 let logIdCounter = 0
-let maxLogs = 1000
+let maxLogs = DEFAULT_MAX_LOGS
 
 type CaptureSession = {
   enabled: boolean
@@ -73,19 +75,19 @@ function recomputeDerivedSessionState() {
   anySessionNeedsComponentInfo = false
   enabledLevelsSet = new Set<LogLevel>()
 
-  // To avoid dropping older logs too early, prefer the largest maxLogs across sessions.
   let computedMaxLogs = 0
 
   for (const session of sessions.values()) {
     if (!session.enabled) continue
     anySessionEnabled = true
-    if (session.scope !== "all") anySessionNeedsComponentInfo = true
+    if (session.scope !== "all" && session.scope !== "disabled") {
+      anySessionNeedsComponentInfo = true
+    }
     for (const lvl of session.levels) enabledLevelsSet.add(lvl)
     computedMaxLogs = Math.max(computedMaxLogs, session.maxLogs)
   }
 
-  // Keep existing default if no sessions are active
-  if (computedMaxLogs > 0) maxLogs = computedMaxLogs
+  maxLogs = computedMaxLogs > 0 ? computedMaxLogs : DEFAULT_MAX_LOGS
 }
 
 type ConsoleMethodName =
@@ -106,7 +108,6 @@ const originalConsoleDescriptors: Partial<
   Record<ConsoleMethodName, PropertyDescriptor | undefined>
 > = {}
 
-// The latest underlying console methods (can be updated if something overwrites console.*)
 const nativeConsole: Partial<
   Record<ConsoleMethodName, (...args: unknown[]) => void>
 > = {
@@ -130,17 +131,16 @@ let globalErrorHandler: ((event: ErrorEvent) => void) | null = null
 let globalRejectionHandler: ((event: PromiseRejectionEvent) => void) | null =
   null
 
-function getComponentInfo(): {
+type ComponentInfo = {
   componentPath?: string
   componentName?: string
   stack?: string
-} {
-  if (typeof window === "undefined") return {}
+}
+
+function parseStackToComponentInfo(stack: string | undefined): ComponentInfo {
+  if (!stack) return {}
 
   try {
-    const stack = new Error().stack
-    if (!stack) return {}
-
     const lines = stack.split("\n")
     const componentLine = lines.find(
       (line) =>
@@ -150,20 +150,53 @@ function getComponentInfo(): {
         !line.includes("Error")
     )
 
-    if (componentLine) {
-      const pathMatch = componentLine.match(/\((.+):(\d+):(\d+)\)/)
-      const nameMatch = componentLine.match(/at\s+(\w+)/)
+    if (!componentLine) return {}
 
-      return {
-        componentPath: pathMatch ? pathMatch[1] : undefined,
-        componentName: nameMatch ? nameMatch[1] : undefined,
-        stack: componentLine.trim(),
-      }
+    const pathMatch = componentLine.match(/\((.+):(\d+):(\d+)\)/)
+    const nameMatch = componentLine.match(/at\s+(\w+)/)
+
+    return {
+      componentPath: pathMatch ? pathMatch[1] : undefined,
+      componentName: nameMatch ? nameMatch[1] : undefined,
+      stack: componentLine.trim(),
     }
   } catch {
-    // Ignore errors
+    return {}
   }
+}
 
+function getComponentInfo(): ComponentInfo {
+  if (typeof window === "undefined") return {}
+  try {
+    return parseStackToComponentInfo(new Error().stack)
+  } catch {
+    return {}
+  }
+}
+
+function getComponentInfoFromErrorEvent(event: ErrorEvent): ComponentInfo {
+  const fromError =
+    event.error instanceof Error
+      ? parseStackToComponentInfo(event.error.stack)
+      : ({} as ComponentInfo)
+
+  const filename = event.filename?.trim()
+  return {
+    componentPath: filename || fromError.componentPath,
+    componentName: fromError.componentName,
+    stack:
+      fromError.stack ??
+      (event.error instanceof Error ? event.error.stack : undefined),
+  }
+}
+
+function getComponentInfoFromRejection(
+  event: PromiseRejectionEvent
+): ComponentInfo {
+  const reason = event.reason
+  if (reason instanceof Error && reason.stack) {
+    return parseStackToComponentInfo(reason.stack)
+  }
   return {}
 }
 
@@ -179,24 +212,72 @@ function shouldCapture(
       return false
     case "all":
       return true
-    case "current":
+    case "current": {
+      const wantPath = scopeComponentPath?.trim()
+      const wantName = scopeComponentName?.trim()
+      if (!wantPath && !wantName) return false
+      const gotPath = componentPath?.trim()
+      const gotName = componentName?.trim()
       return (
-        componentPath === scopeComponentPath ||
-        componentName === scopeComponentName
+        (!!wantPath && gotPath === wantPath) ||
+        (!!wantName && gotName === wantName)
       )
-    case "path":
-      if (!scopeComponentPath) return false
-      return componentPath?.includes(scopeComponentPath) ?? false
+    }
+    case "path": {
+      const needle = scopeComponentPath?.trim()
+      if (!needle) return false
+      const haystack = componentPath ?? ""
+      return haystack.includes(needle)
+    }
     default:
       return false
   }
+}
+
+function shouldStoreLog(
+  logLevel: LogLevel,
+  getCallerInfo: () => ComponentInfo
+): boolean {
+  if (!anySessionEnabled || !enabledLevelsSet.has(logLevel)) return false
+
+  for (const session of sessions.values()) {
+    if (!session.enabled) continue
+    if (!session.levels.has(logLevel)) continue
+    if (session.scope === "disabled") continue
+
+    if (session.scope === "all") return true
+
+    if (!anySessionNeedsComponentInfo) continue
+
+    const info = getCallerInfo()
+
+    if (session.scope === "path") {
+      if (!info.componentPath?.trim()) continue
+    } else if (session.scope === "current") {
+      if (!info.componentPath?.trim() && !info.componentName?.trim()) continue
+    }
+
+    if (
+      shouldCapture(
+        session.scope,
+        session.componentPath,
+        session.componentName,
+        info.componentPath,
+        info.componentName
+      )
+    ) {
+      return true
+    }
+  }
+
+  return false
 }
 
 function captureLog(
   level: LogLevel,
   message: string,
   args: unknown[],
-  info?: { componentPath?: string; componentName?: string; stack?: string }
+  info?: ComponentInfo
 ): void {
   if (!enabledLevelsSet.has(level)) return
 
@@ -220,8 +301,67 @@ function captureLog(
   notifyListeners()
 }
 
-function notifyListeners() {
+let notifyRafId: number | null = null
+let notifyMicrotaskPending = false
+let isDeliveringListeners = false
+let pendingFlushAfterDelivery = false
+
+function flushListenersImpl() {
+  if (isDeliveringListeners) {
+    pendingFlushAfterDelivery = true
+    return
+  }
+
+  isDeliveringListeners = true
+  try {
+    listeners.forEach((listener) => listener())
+  } finally {
+    isDeliveringListeners = false
+    if (pendingFlushAfterDelivery) {
+      pendingFlushAfterDelivery = false
+      notifyListeners()
+    }
+  }
+}
+
+function notifyListenersSync() {
+  if (
+    notifyRafId != null &&
+    typeof window !== "undefined" &&
+    typeof cancelAnimationFrame === "function"
+  ) {
+    cancelAnimationFrame(notifyRafId)
+    notifyRafId = null
+  }
+  notifyMicrotaskPending = false
+  pendingFlushAfterDelivery = false
   listeners.forEach((listener) => listener())
+}
+
+function notifyListeners() {
+  if (
+    typeof window !== "undefined" &&
+    typeof requestAnimationFrame === "function"
+  ) {
+    if (notifyRafId != null) return
+    notifyRafId = requestAnimationFrame(() => {
+      notifyRafId = null
+      flushListenersImpl()
+    })
+    return
+  }
+
+  if (notifyMicrotaskPending) return
+  notifyMicrotaskPending = true
+  const run = () => {
+    notifyMicrotaskPending = false
+    flushListenersImpl()
+  }
+  if (typeof queueMicrotask === "function") {
+    queueMicrotask(run)
+  } else {
+    Promise.resolve().then(run)
+  }
 }
 
 function serializeArgs(args: unknown[]): string {
@@ -248,62 +388,24 @@ function serializeArgs(args: unknown[]): string {
 
 function createConsoleInterceptor(level: ConsoleMethodName) {
   const interceptor = function interceptedConsole(...args: unknown[]) {
-    // Capture first so a throwing native console implementation can't drop logs.
-    // (We still call native in a try/catch to preserve typical console behavior.)
     const logLevel = level as LogLevel
-    if (anySessionEnabled && enabledLevelsSet.has(logLevel)) {
-      let info: ReturnType<typeof getComponentInfo> | undefined
-      let didComputeInfo = false
-
-      let shouldStore = false
-      for (const session of sessions.values()) {
-        if (!session.enabled) continue
-        if (!session.levels.has(logLevel)) continue
-
-        if (session.scope === "all") {
-          shouldStore = true
-          break
-        }
-
-        if (!anySessionNeedsComponentInfo) continue
-
-        if (!didComputeInfo) {
-          info = getComponentInfo()
-          didComputeInfo = true
-        }
-
-        // If we can't resolve component info, "current/path" can't match reliably.
-        if (!info) continue
-
-        if (
-          shouldCapture(
-            session.scope,
-            session.componentPath,
-            session.componentName,
-            info.componentPath,
-            info.componentName
-          )
-        ) {
-          shouldStore = true
-          break
-        }
-      }
-
-      if (shouldStore) {
-        const message = serializeArgs(args)
-        captureLog(logLevel, message, args, info)
-      }
+    let cachedInfo: ComponentInfo | undefined
+    const getCallerInfo = (): ComponentInfo => {
+      if (!cachedInfo) cachedInfo = getComponentInfo()
+      return cachedInfo
     }
 
-    // Always call the latest underlying implementation
+    if (shouldStoreLog(logLevel, getCallerInfo)) {
+      const message = serializeArgs(args)
+      captureLog(logLevel, message, args, cachedInfo)
+    }
+
     const native = nativeConsole[level]
-    // Guard against accidental self-reference (would cause infinite recursion)
+
     if (native && native !== interceptor) {
       try {
         native(...args)
-      } catch {
-        // Swallow to avoid breaking app code on custom/hostile console impls
-      }
+      } catch {}
     }
   }
   ;(interceptor as any)[CAPTURE_FLAG] = true
@@ -359,7 +461,6 @@ function setupConsoleInterception() {
         },
       })
     } catch {
-      // Fallback: direct assignment (less resilient to later overwrites)
       ;(console as any)[method] = interceptor
     }
   }
@@ -368,16 +469,28 @@ function setupConsoleInterception() {
   isIntercepted = true
 
   globalErrorHandler = (event: ErrorEvent) => {
-    if (anySessionEnabled && enabledLevelsSet.has("error")) {
-      captureLog("error", `Uncaught Error: ${event.message}`, [event.error])
+    const eventInfo = getComponentInfoFromErrorEvent(event)
+    const getCallerInfo = () => eventInfo
+    if (shouldStoreLog("error", getCallerInfo)) {
+      captureLog(
+        "error",
+        `Uncaught Error: ${event.message}`,
+        [event.error],
+        eventInfo
+      )
     }
   }
 
   globalRejectionHandler = (event: PromiseRejectionEvent) => {
-    if (anySessionEnabled && enabledLevelsSet.has("error")) {
-      captureLog("error", `Unhandled Promise Rejection: ${event.reason}`, [
-        event.reason,
-      ])
+    const eventInfo = getComponentInfoFromRejection(event)
+    const getCallerInfo = () => eventInfo
+    if (shouldStoreLog("error", getCallerInfo)) {
+      captureLog(
+        "error",
+        `Unhandled Promise Rejection: ${event.reason}`,
+        [event.reason],
+        eventInfo
+      )
     }
   }
 
@@ -475,8 +588,6 @@ export function useConsoleCapture(
   levelsRef.current = new Set(levels)
   maxLogsRef.current = maxLogsOption
 
-  // Keep component path/name in sync with incoming props unless user overrides via setScope().
-  // We treat "override" as: componentPathRef/componentNameRef no longer equals the last provided props.
   const lastProvidedComponentPathRef = React.useRef<string | undefined>(
     componentPath
   )
@@ -564,7 +675,7 @@ export function useConsoleCapture(
 
   const clear = React.useCallback(() => {
     logStore.length = 0
-    notifyListeners()
+    notifyListenersSync()
   }, [])
 
   const setScope = React.useCallback(
@@ -572,12 +683,10 @@ export function useConsoleCapture(
       newScope: CaptureScope,
       options?: { componentPath?: string; componentName?: string }
     ) => {
-      // Update local state first; global session sync happens via effect.
       componentPathRef.current = options?.componentPath ?? componentPath
       componentNameRef.current = options?.componentName ?? componentName
       setCurrentScopeState(newScope)
 
-      // Ensure we don't miss logs if scope value stays the same (no state change => no effect run).
       const id = sessionIdRef.current
       if (!id) return
       const existing = sessions.get(id)

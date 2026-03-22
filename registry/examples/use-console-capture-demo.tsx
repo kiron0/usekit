@@ -27,6 +27,10 @@ import {
   type LogLevel,
 } from "registry/hooks/use-console-capture"
 
+/** Matches bundled stack paths for this file (e.g. …/use-console-capture-demo.tsx). */
+const DEMO_PATH_TOKEN = "console-capture-demo"
+const DISPLAY_LOG_CAP = 120
+
 function TestComponent({ name }: { name: string }) {
   React.useEffect(() => {
     console.log(`[${name}] Component mounted`)
@@ -65,16 +69,27 @@ function TestComponent({ name }: { name: string }) {
 export default function UseConsoleCaptureDemo() {
   const { logs, clear, setScope, enable, disable, isEnabled, scope } =
     useConsoleCapture({
-      scope: "all",
-      enabled: true,
-      maxLogs: 1000,
+      scope: "path",
+      componentPath: DEMO_PATH_TOKEN,
+      enabled: false,
+      maxLogs: 150,
+      levels: ["log", "info", "warn", "error"],
     })
+
+  React.useEffect(() => {
+    if (!isEnabled) return
+    console.log(
+      `[${DEMO_PATH_TOKEN}] Capture on — use the cards above, or switch scope to “All logs” (can be heavy in dev).`
+    )
+  }, [isEnabled])
+
+  const deferredLogs = React.useDeferredValue(logs)
 
   const [filterLevel, setFilterLevel] = React.useState<LogLevel | "all">("all")
   const [pathFilter, setPathFilter] = React.useState("")
 
   const filteredLogs = React.useMemo(() => {
-    let filtered = logs
+    let filtered = deferredLogs
 
     if (filterLevel !== "all") {
       filtered = filtered.filter((log) => log.level === filterLevel)
@@ -89,7 +104,13 @@ export default function UseConsoleCaptureDemo() {
     }
 
     return filtered
-  }, [logs, filterLevel, pathFilter])
+  }, [deferredLogs, filterLevel, pathFilter])
+
+  const visibleLogs = React.useMemo(
+    () => filteredLogs.slice(0, DISPLAY_LOG_CAP),
+    [filteredLogs]
+  )
+  const hiddenLogCount = filteredLogs.length - visibleLogs.length
 
   const getLogIcon = (level: LogLevel) => {
     switch (level) {
@@ -126,8 +147,9 @@ export default function UseConsoleCaptureDemo() {
           <div>
             <CardTitle>Console Capture</CardTitle>
             <CardDescription>
-              Capture browser console logs and display them in the UI. Filter by
-              whole project, current component, specific path, or disable.
+              Capture starts scoped to this demo file only. Turn it on with the
+              switch; use &quot;All logs&quot; to capture the whole app (may lag
+              in development).
             </CardDescription>
           </div>
           <div className="flex flex-wrap items-center gap-2">
@@ -147,10 +169,14 @@ export default function UseConsoleCaptureDemo() {
             <Select
               value={scope}
               onValueChange={(value: CaptureScope) => {
-                setScope(value)
+                if (value === "path") {
+                  setScope("path", { componentPath: DEMO_PATH_TOKEN })
+                } else {
+                  setScope(value)
+                }
               }}
             >
-              <SelectTrigger className="w-40">
+              <SelectTrigger className="w-[11.5rem]">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
@@ -167,7 +193,10 @@ export default function UseConsoleCaptureDemo() {
           </div>
         </CardHeader>
         <CardContent className="space-y-6 p-0">
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+          <div
+            key={String(isEnabled)}
+            className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3"
+          >
             <TestComponent name="Component A" />
             <TestComponent name="Component B" />
             <TestComponent name="Component C" />
@@ -216,35 +245,43 @@ export default function UseConsoleCaptureDemo() {
                   check the scope settings.
                 </div>
               ) : (
-                filteredLogs.map((log) => (
-                  <div
-                    key={log.id}
-                    className="flex items-start gap-3 rounded-md border p-2 text-sm"
-                  >
-                    <div className="mt-0.5">{getLogIcon(log.level)}</div>
-                    <div className="flex-1 space-y-1">
-                      <div className="flex items-center gap-2">
-                        <Badge variant={getLogBadgeVariant(log.level)}>
-                          {log.level}
-                        </Badge>
-                        <span className="text-xs text-muted-foreground">
-                          {new Date(log.timestamp).toLocaleTimeString()}
-                        </span>
-                        {log.componentName && (
-                          <Badge variant="outline" className="text-xs">
-                            {log.componentName}
+                <>
+                  {visibleLogs.map((log) => (
+                    <div
+                      key={log.id}
+                      className="flex items-start gap-3 rounded-md border p-2 text-sm"
+                    >
+                      <div className="mt-0.5">{getLogIcon(log.level)}</div>
+                      <div className="flex-1 space-y-1">
+                        <div className="flex items-center gap-2">
+                          <Badge variant={getLogBadgeVariant(log.level)}>
+                            {log.level}
                           </Badge>
+                          <span className="text-xs text-muted-foreground">
+                            {new Date(log.timestamp).toLocaleTimeString()}
+                          </span>
+                          {log.componentName && (
+                            <Badge variant="outline" className="text-xs">
+                              {log.componentName}
+                            </Badge>
+                          )}
+                        </div>
+                        <div className="font-mono text-xs">{log.message}</div>
+                        {log.componentPath && (
+                          <div className="text-xs text-muted-foreground">
+                            {log.componentPath}
+                          </div>
                         )}
                       </div>
-                      <div className="font-mono text-xs">{log.message}</div>
-                      {log.componentPath && (
-                        <div className="text-xs text-muted-foreground">
-                          {log.componentPath}
-                        </div>
-                      )}
                     </div>
-                  </div>
-                ))
+                  ))}
+                  {hiddenLogCount > 0 ? (
+                    <p className="text-center text-xs text-muted-foreground">
+                      Showing {visibleLogs.length} of {filteredLogs.length} (cap{" "}
+                      {DISPLAY_LOG_CAP} per paint for performance)
+                    </p>
+                  ) : null}
+                </>
               )}
             </div>
           </div>

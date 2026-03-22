@@ -26,8 +26,8 @@ export default function UseMeasureDemo() {
   }
 
   return (
-    <div className="w-full space-y-8">
-      <div ref={ref} className="h-[60vh] w-full rounded-md border">
+    <div className="h-full w-full space-y-8">
+      <div ref={ref} className="h-[75vh] w-full rounded-md border">
         <MeasureComponent />
         <p className="pointer-events-none flex h-full items-center justify-center text-balance px-1 text-center text-muted-foreground">
           {isStarted

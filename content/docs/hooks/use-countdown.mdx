@@ -40,16 +40,16 @@ npx uselab@latest add use-countdown
 
 ## Usage
 
-```tsx {3, 9-14}
+```tsx {3, 9-15}
 import * as React from "react"
 
-import { useIntervalWhen } from "@/hooks/use-interval-when"
+import { useCountdown } from "@/hooks/use-countdown"
 
 export function Component() {
   const [endTime, setEndTime] = React.useState(new Date(Date.now() + 10000))
   const [complete, setComplete] = React.useState(false)
 
-  const count = useCountdown(endTime, {
+  const { remaining, isPaused, pause, resume } = useCountdown(endTime, {
     interval: 1000,
     onTick: (time) =>
       console.log(`Tick: ${Math.round(time / 1000)}s remaining`),
@@ -71,9 +71,18 @@ export function Component() {
     <section>
       <h1>Countdown Timer</h1>
       <div className="countdown">
-        {complete ? "Complete!" : formatTime(count)}
+        {complete ? "Complete!" : formatTime(remaining)}
       </div>
-      {!complete && (
+      <div className="controls">
+        <button
+          type="button"
+          disabled={complete}
+          onClick={() => (isPaused ? resume() : pause())}
+        >
+          {isPaused ? "Resume" : "Pause"}
+        </button>
+      </div>
+      {!complete && !isPaused && (
         <div className="controls">
           <button onClick={() => handleClick(5000)}>+5s</button>
           <button onClick={() => handleClick(10000)}>+10s</button>
@@ -99,6 +108,9 @@ export function Component() {
 
 ### Return Values
 
-| Name    | Type     | Description                         |
-| ------- | -------- | ----------------------------------- |
-| `count` | `number` | The current count of the countdown. |
+| Name        | Type         | Description                                                                           |
+| ----------- | ------------ | ------------------------------------------------------------------------------------- |
+| `remaining` | `number`     | Milliseconds until `endTime` (≤0 when finished). Unchanged while paused.              |
+| `isPaused`  | `boolean`    | Whether the countdown is paused.                                                      |
+| `pause`     | `() => void` | Stop ticking; `remaining` stays on screen.                                            |
+| `resume`    | `() => void` | Start ticking again; pause time does not reduce the countdown (effective end shifts). |

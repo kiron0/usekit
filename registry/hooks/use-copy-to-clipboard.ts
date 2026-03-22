@@ -42,7 +42,7 @@ export function useCopyToClipboard(delay = 2000): [CopyFn, boolean] {
       await navigator.clipboard.write([clipboardItem])
       setIsCopied(true)
     } catch (error) {
-      throw new Error(error instanceof Error ? error.message : "Copy failed") // Throw error instead of returning false
+      throw new Error(error instanceof Error ? error.message : "Copy failed")
     }
   }, [])
 

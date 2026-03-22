@@ -1292,24 +1292,4 @@ export const hooksExamples: Registry["items"] = [
       },
     ],
   },
-  {
-    name: "use-wordle-game-demo",
-    type: "registry:example",
-    files: [
-      {
-        path: "registry/examples/use-wordle-game-demo.tsx",
-        type: "registry:example",
-      },
-    ],
-  },
-  {
-    name: "use-2048-game-demo",
-    type: "registry:example",
-    files: [
-      {
-        path: "registry/examples/use-2048-game-demo.tsx",
-        type: "registry:example",
-      },
-    ],
-  },
 ]

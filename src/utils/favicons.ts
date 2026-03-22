@@ -1,9 +1,9 @@
 export const favicons = [
   {
-    name: "Toufiq Hasan Kiron",
-    url: "https://toufiqhasankiron.com/favicon.ico",
-    alt: "Toufiq Hasan Kiron logo",
-    title: "Set the favicon to Toufiq Hasan Kiron's logo",
+    name: "useKit",
+    url: "/favicon.ico",
+    alt: "useKit logo",
+    title: "Set the favicon to useKit's logo",
   },
   {
     name: "Next.js",

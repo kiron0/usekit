@@ -15,7 +15,7 @@ export function useQueryState<
   paramNames: T[],
   config: {
     defaults?: Partial<ParamRecord<T>>
-    validators?: Validators<T, V> // Fixed from Validators<T, any>
+    validators?: Validators<T, V>
     normalizeEmpty?: boolean
     suspense?: boolean
   } = {}
@@ -72,7 +72,7 @@ export function useQueryState<
 
   const setState = React.useCallback(
     (
-      updates: Partial<Record<T, string | null | undefined>>, // Fixed from Record<string, ...>
+      updates: Partial<Record<T, string | null | undefined>>,
       options: { replace?: boolean; skipTransition?: boolean } = {}
     ) => {
       const { replace = false, skipTransition = false } = options

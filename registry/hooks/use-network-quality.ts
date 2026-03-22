@@ -22,9 +22,9 @@ export interface UseNetworkQualityReturn {
   error: Error | null
 }
 
-const DEFAULT_SAMPLE_INTERVAL = 5000 // 5 seconds
+const DEFAULT_SAMPLE_INTERVAL = 5000
 const DEFAULT_TEST_ENDPOINT = "https://www.google.com/favicon.ico"
-const TEST_PAYLOAD_SIZE = 10 * 1024 // 10KB for throughput tests
+const TEST_PAYLOAD_SIZE = 10 * 1024
 
 function measureRTT(url: string): Promise<number> {
   return new Promise((resolve, reject) => {
@@ -62,9 +62,9 @@ function measureDownloadSpeed(url: string): Promise<number> {
       .then((response) => response.blob())
       .then((blob) => {
         const endTime = performance.now()
-        const duration = (endTime - startTime) / 1000 // Convert to seconds
+        const duration = (endTime - startTime) / 1000
         const sizeBytes = blob.size
-        const speedKbps = (sizeBytes * 8) / (duration * 1000) // Convert to Kbps
+        const speedKbps = (sizeBytes * 8) / (duration * 1000)
         resolve(speedKbps)
       })
       .catch(reject)
