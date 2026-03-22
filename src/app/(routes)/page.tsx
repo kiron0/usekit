@@ -203,13 +203,13 @@ export default function Home() {
 
             <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
               <Link
-                href="/docs/hooks"
+                href="/docs"
                 className={cn(
                   buttonVariants({ size: "lg" }),
                   "w-full rounded-full px-6 shadow-lg shadow-foreground/10 sm:w-auto"
                 )}
               >
-                Browse Hooks <ArrowRight className="size-4" />
+                Get started <ArrowRight className="size-4" />
               </Link>
               <Link
                 href="/docs/cli"
